@@ -1,0 +1,41 @@
+
+ DyneE5
+========
+
+DyneE5, a Newton PDA Emulator
+
+DyneE5 is an OpenSource approach at emulating the Newton, the 
+grandfather of all PDAs. To this day, the Newton is still one 
+of the best and most intuitive PDAs with a surprisingly big 
+following. DyneE5 is a purely educational project, helping to 
+get a deeper understanding of this fascinating machine.
+
+
+ Current Project State:
+------------------------
+
+Alpha, in every respect.
+
+
+ Help Needed:
+--------------
+
+If you know how to code, please go ahead and fix bugs, add code,
+add documentation. Heck, even replace ARMulator if you have 
+something better! Let's make this thing finally boot!
+
+
+ Developers:
+-------------
+
+You need to:
+- download and install FLTK 1.1.7 (http://www.fltk.org/)
+- download the Dyne sources
+- kick of you gcc environment or VC6 (or later)
+- DOWNLOAD THE ORIGINAL 8MB ROM CONTENTS FROM THE MP2100 
+  THAT YOU OWN AND THAT YOU WISH TO EMULATE. Dyne does not
+  contain any ROMs! Please don't ask us for the ROMs!
+- run and experiment
+
+The file dyne.fl contains the GUI. It should be edited using 
+the user interface design tool "Fluid" that comes with FLTK.

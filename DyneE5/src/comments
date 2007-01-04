@@ -1,0 +1,20 @@
+;
+; This file can contain code comment and other useful information
+;
+; The following commands are supported:
+;
+; 0xaaaaaaaa symbol     = add symbolic information at a
+; c aaaaaaaa comment    = add a comment at this address
+; p aaaaaaaa vvvvvvvv   = patch the ROM address a with the new value v
+; n aaaaaaaa id comment = call Dyne native code if reaching address a
+; b aaaaaaaa comment    = set a permanent breakpoint at the address a
+; bw aaaaaaaa comment   = break execution if the cpu accesses this address a
+;
+; Pressing the shortcut key '/' will add a new comment at the current PC
+;
+
+c 00018688 Initialize CPU and MMU
+c 00018694 Read the CPU ID number
+c 000186ac Write the very basic Cirrus flags without interfering with a warm boot
+c 00018720 This doesn't do anything on cold boot
+c 000188d8 call InitCirrusHW

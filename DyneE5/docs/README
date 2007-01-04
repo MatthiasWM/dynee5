@@ -1,0 +1,7 @@
+
+This folder should contain a collection of documentation about 
+various pieces of the MP2100. Since all files reached several
+MBs in size, I decided to not include them in this distribution.
+
+The "MP2100Image.sym" contains symbolic information of
+the ROM image, created with the included "mpdumper".
