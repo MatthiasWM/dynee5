@@ -1,4 +1,12 @@
 
+ CONTENTS:
+===========
+
+  - Proof of concept, partt 3
+  - How to Build
+
+---------------------------------------------------------------
+
 Proof of concept, part 3
 
 This version of the Dyne Toolkit can compile scripts, create
@@ -39,3 +47,33 @@ Enjoy...
 PS: my big warm thanks go to Newt/0, Makoto Nukui and Paul Guyot,
 with whom this would not have been possible. Also big thanks to
 Simon Bell whose code gave my gearbox the desperatly needed kick.
+
+---------------------------------------------------------------
+
+How to Build:
+
+DyneTK can be build on multiple platforms including MSWindows, 
+Linux, and OS X. Currently however I only include the build 
+environment for Microsoft VisualC 6. Contributions of other
+environments are very welcome.
+
+What we also need:
+
+- FLTK 1.1.8: download and build the latest release of FLTK from
+  their svn at http://www.fltk.org/. Move the libraries somewhere
+  where VC6 will be able to see them
+- NEWT/0: download the lastest release of Newt/0 from 
+  http://trac.so-kukan.com/newt next to Dyne; your file hierarchy
+  should be somwhat like this:
+    +- Dyne
+    |  +- DyneTK ...
+    +- newt0
+       +- src ...
+- Cygwin. Yes, you will need Bison and Flex to build Newt/0. No
+  other parts of Cygwin are needed.
+- Open the VC6 Workspace in DyneTK/VC6/DyneTK.dsw, compile
+  and run. This workspace will builr NEWT/0 for you as well
+  as DyneTK
+
+
+

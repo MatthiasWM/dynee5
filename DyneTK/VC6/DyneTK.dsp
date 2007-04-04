@@ -286,7 +286,15 @@ SOURCE=..\CHANGES
 # End Source File
 # Begin Source File
 
-SOURCE=..\TODO
+SOURCE=..\COPYING
+# End Source File
+# Begin Source File
+
+SOURCE=..\CREDITS
+# End Source File
+# Begin Source File
+
+SOURCE=..\README
 # End Source File
 # End Group
 # Begin Source File
