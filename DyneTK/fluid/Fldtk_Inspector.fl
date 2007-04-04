@@ -1,0 +1,121 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0108 
+header_name {.h} 
+code_name {.cxx}
+comment {//
+// DyneTK, The Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+} {in_source in_header
+} 
+
+decl {\#include "fltk/Flio_Inspector.h"} {public
+} 
+
+decl {\#include "fltk/Flmm_Console.h"} {public
+} 
+
+decl {\#include "main.h"} {public
+} 
+
+widget_class Fldtk_Inspector {open
+  xywh {623 293 775 139} type Double resizable visible position_relative
+} {
+  Fl_Group {} {open
+    xywh {0 0 775 35} box FLAT_BOX
+  } {
+    Fl_Button wConnect {
+      callback {InspectorConnect();} selected
+      tooltip {Connect/Disconnect} image {../images/toolbox_closed.xpm} deimage {../images/toolbox_inactive.xpm} xywh {5 5 25 25} labelsize 9 labelcolor 32
+      code0 {wInspectorConnect = wConnect;}
+    }
+    Fl_Button {} {
+      label Stop
+      tooltip {Stop on throws} xywh {30 5 25 25} labelsize 9 labelcolor 32 deactivate
+    }
+    Fl_Button {} {
+      label Troff
+      tooltip {Trace off} xywh {55 5 25 25} labelsize 9 labelcolor 32 deactivate
+    }
+    Fl_Button {} {
+      label bt
+      tooltip {Stack trace} xywh {80 5 25 25} labelsize 9 labelcolor 32 deactivate
+    }
+    Fl_Button {} {
+      label Exit
+      tooltip {Exit break loop} xywh {105 5 25 25} labelsize 9 labelcolor 32 deactivate
+    }
+    Fl_Choice {} {open
+      tooltip {Print Depth} xywh {135 6 50 23} down_box BORDER_BOX deactivate
+    } {
+      MenuItem {} {
+        label 1
+        xywh {10 10 100 20} labelsize 11
+      }
+      MenuItem {} {
+        label 2
+        xywh {10 10 100 20} labelsize 11
+      }
+      MenuItem {} {
+        label 3
+        xywh {10 10 100 20} labelsize 11
+      }
+      MenuItem {} {
+        label oo
+        xywh {10 10 100 20} labelsize 11
+      }
+    }
+    Fl_Box {} {
+      xywh {440 5 120 25} resizable
+    }
+    Fl_Box serial {
+      xywh {715 7 55 21} box DOWN_BOX
+      code0 {wInspectorSerial = serial;}
+      class Flio_Inspector
+    }
+    Fl_Button {} {
+      label {Test
+1}
+      callback {send_test(1);}
+      tooltip {Exit break loop} xywh {215 5 25 25} labelsize 9 labelcolor 32
+    }
+    Fl_Button {} {
+      label {Test
+2}
+      callback {send_test(2);}
+      tooltip {Exit break loop} xywh {240 5 25 25} labelsize 9 labelcolor 32
+    }
+    Fl_Button {} {
+      label {Test
+3}
+      callback {send_test(3);}
+      tooltip {Exit break loop} xywh {265 5 25 25} labelsize 9 labelcolor 32
+    }
+  }
+  Fl_Text_Editor console {
+    tooltip {Connect/Disconnect} xywh {0 35 775 104} when 10 textfont 4 textsize 12 resizable
+    code0 {o->buffer(new Fl_Text_Buffer);}
+    code1 {wConsole = console;}
+    class Flmm_Console
+  }
+} 
+
+comment {
+//
+// Copyright (C) 2007 Matthias Melcher
+//} {in_source in_header
+} 

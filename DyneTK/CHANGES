@@ -1,0 +1,19 @@
+
+
+Changes in DyneTK since V0.0.3 (April 4th, 2007)
+
+    - moved archive to code.google.com
+
+Changes in DyneTK since V0.0.2
+
+    - pretty stable Inspector
+    - now using NEWT/0 to compile and run scripts
+
+Changes in DyneTK since V0.0.1
+
+    - many improvements to the communication layer of the Inspector
+    - first rough GUI layout
+
+Initial release of DyneTK V0.0.1
+
+    - initial release providing basic Inspector functionality

@@ -1,0 +1,25 @@
+
+
+{
+	title: "Aloha DyneTK!",
+	viewBounds: { left: 40, top: 40, bottom: 324, right: 274 },
+	viewFormat: 83951953,
+	_proto: @157,
+	debug: "alohaDtk",
+	appSymbol: '|Aloha:DTK|,
+	stepChildren: [
+		{	
+			buttonClickScript: 
+				func() 
+				begin 
+					AlarmUser(
+						"Dyne Toolkit", 
+						"\r\r              P A N I C !  :-)");
+				end,
+			text: "Don't Panic!",
+			viewBounds: {left: 34, top: 64, bottom: 120, right: 210},
+			_proto: @226,
+		}
+	]
+}
+

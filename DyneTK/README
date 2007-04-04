@@ -1,0 +1,41 @@
+
+Proof of concept, part 3
+
+This version of the Dyne Toolkit can compile scripts, create
+a package, send it to the Newton and run it there. 
+
+This version WILL crash a lot! I also take no responsibility
+whatsoever to what may happen to your Newton or PC.
+
+This is how you can test it:
+
+- unpack this zip archive
+- run ntk2d.exe
+- click on the Inspector Toolbox in the bottom left and start
+  the toolkit on the Newton (default port if COM1:, but you 
+  can change that in the Toolkit settings). The connection
+  is established if both toolboxes on the Newton and in DyneTK 
+  remain open
+- in the main menu, click on Project->Load Project and choose 
+  "Aloha.ntk"
+- we have no layout editor yet, so you will get a text editor 
+  with "Aloha.txt" inside instead
+- Type Ctrl-1 to compile the code and build the package. This 
+  takes only a second, but no 'done' message is sent. If there
+  was a syntax error, you will get a very brief message in the 
+  terminal
+- Type Ctrl-2 to download you newly created package to the 
+  Newton. There are still flaws in the protocol and this download
+  may hickup, but if it doesn't, the red LED will revert to green
+  and continue flashing every 3 seconds. That's good. 
+- Type Ctrl-3 (or search for "Aloha" in the Extras folder). 
+  Instead of Hawaiian dancers, you will get some greetings from
+  the End of the Universe ;-)
+
+Enjoy... 
+
+ Matthias
+
+PS: my big warm thanks go to Newt/0, Makoto Nukui and Paul Guyot,
+with whom this would not have been possible. Also big thanks to
+Simon Bell whose code gave my gearbox the desperatly needed kick.

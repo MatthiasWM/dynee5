@@ -1,0 +1,745 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0108 
+header_name {.h} 
+code_name {.cxx}
+comment {//
+// DyneTK, The Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+} {in_source in_header
+} 
+
+decl {\#include "fltk/Flio_Inspector.h"} {public
+} 
+
+decl {\#include "fltk/Flmm_Console.h"} {public
+} 
+
+decl {\#include "fluid/Fldtk_Inspector.h"} {public
+} 
+
+decl {\#include "fltk/Fldtk_Document_Tabs.h"} {public
+} 
+
+decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
+} 
+
+decl {\#include <FL/fl_ask.h>} {public
+} 
+
+decl {\#include "main.h"} {public
+} 
+
+widget_class Fldtk_Main_Window {
+  label {Dyne Toolkit 2.0} open
+  xywh {670 176 785 595} type Double resizable
+  class Fl_Double_Window visible
+} {
+  Fl_Menu_Bar {} {open
+    xywh {0 0 785 25} box THIN_UP_BOX
+  } {
+    Submenu mFile {
+      label File
+      xywh {5 5 100 20} labelsize 12
+    } {
+      MenuItem {} {
+        label {New Layout}
+        xywh {5 5 100 20} shortcut 0x4006e labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {New Proto Template}
+        xywh {5 5 100 20} shortcut 0x40074 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem mFileNewText {
+        label {New Text File}
+        callback {NewTextFile();}
+        xywh {5 5 100 20} labelsize 12
+      }
+      MenuItem mFileOpen {
+        label {Open...}
+        callback {OpenDocument();}
+        xywh {5 5 100 20} shortcut 0x4006f labelsize 12 divider
+      }
+      MenuItem {} {
+        label {Link Layout...}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem mFileClose {
+        label Close
+        callback {CloseCurrentDocument();}
+        xywh {5 5 100 20} shortcut 0x40077 labelsize 12 deactivate
+      }
+      MenuItem mFileSave {
+        label Save
+        callback {SaveCurrentDocument();}
+        xywh {5 5 100 20} shortcut 0x40073 labelsize 12 deactivate
+      }
+      MenuItem mFileSaveAs {
+        label {Save As...}
+        callback {SaveCurrentDocumentAs();}
+        xywh {5 5 100 20} labelsize 12 deactivate
+      }
+      MenuItem {} {
+        label {Save All}
+        xywh {5 5 100 20} shortcut 0x4006d labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Revert
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Print Setup...}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Print One}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Print...}
+        xywh {5 5 100 20} shortcut 0x40070 labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {1: prev file}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {2: prev file}
+        xywh {15 15 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {3: prev file}
+        xywh {25 25 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {4: prev file}
+        xywh {35 35 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem mFileExit {
+        label Exit
+        callback {ExitApplication();}
+        xywh {5 5 100 20} shortcut 0x40071 labelsize 12
+      }
+    }
+    Submenu mEdit {
+      label Edit
+      xywh {5 5 100 20} labelsize 12
+    } {
+      MenuItem {} {
+        label Undo
+        xywh {5 5 100 20} shortcut 0x4007a labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Redo
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label Cut
+        xywh {5 5 100 20} shortcut 0x40078 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Copy
+        xywh {5 5 100 20} shortcut 0x40063 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Paste
+        xywh {5 5 100 20} shortcut 0x40076 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Clear
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label Duplicate
+        xywh {5 5 100 20} shortcut 0x40064 labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Shift Left}
+        xywh {5 5 100 20} shortcut 0x4005b labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Shift Right}
+        xywh {5 5 100 20} shortcut 0x4005d labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Select All}
+        xywh {5 5 100 20} shortcut 0x40061 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Select Hierarchy}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Select in Layout}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Search...}
+        xywh {5 5 100 20} shortcut 0x40072 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Find...}
+        xywh {5 5 100 20} shortcut 0x40066 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Find Next}
+        xywh {5 5 100 20} shortcut 0x40067 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Find Inherited}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Newt Screen Shot}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem mEditPreferences {
+        label {Toolkit Preferences...}
+        callback {EditPreferences();}
+        xywh {5 5 100 20} labelsize 12
+      }
+    }
+    Submenu mProject {
+      label Project
+      xywh {5 5 100 20} labelsize 12
+    } {
+      MenuItem mProjectNew {
+        label {New Project...}
+        callback {NewProject();}
+        xywh {5 5 100 20} labelsize 12
+      }
+      MenuItem mProjectOpen {
+        label {Open Project...}
+        callback {OpenProject();}
+        xywh {25 25 100 20} labelsize 12
+      }
+      MenuItem mProjectSave {
+        label {Save Project}
+        callback {SaveProject();}
+        xywh {5 5 100 20} labelsize 12 deactivate
+      }
+      MenuItem mProjectSaveAs {
+        label {Save Project As...}
+        callback {SaveProjectAs();}
+        xywh {15 15 100 20} labelsize 12 deactivate divider
+      }
+      MenuItem mProjectAddWindow {
+        label {Add Window}
+        callback {AddCurrentDocToProject();}
+        xywh {5 5 100 20} labelsize 12 deactivate
+      }
+      MenuItem mProjectAddFile {
+        label {Add File...}
+        callback {AddFileToProject();}
+        xywh {5 5 100 20} labelsize 12 deactivate
+      }
+      MenuItem mProjectRemoveFile {
+        label {Remove File}
+        callback {RemoveFileFromProject();}
+        xywh {5 5 100 20} labelsize 12 deactivate
+      }
+      MenuItem {} {
+        label {Update Files}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem mProjectBuild {
+        label {Build Package}
+        callback {BuildPackage();}
+        xywh {5 5 100 20} shortcut 0x40031 labelsize 12 deactivate
+      }
+      MenuItem mProjectDownload {
+        label {Download Package}
+        callback {DownloadPackage();}
+        xywh {5 5 100 20} shortcut 0x40032 labelsize 12 deactivate
+      }
+      MenuItem mProjectLaunch {
+        label {Launch Package}
+        callback {LaunchPackage();}
+        xywh {15 15 100 20} shortcut 0x40033 labelsize 12 deactivate
+      }
+      MenuItem {} {
+        label {Export Package to Text}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Install Toolkit App}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Mark as Main Layout}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Process Earlier}
+        xywh {5 5 100 20} shortcut 0x4ff52 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Process Later}
+        xywh {5 5 100 20} shortcut 0x4ff54 labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem mProjectSettings {
+        label {Settings...}
+        callback {ShowProjectSettings();}
+        xywh {5 5 100 20} labelsize 12 deactivate
+      }
+    }
+    Submenu mLayout {
+      label Layout
+      xywh {5 5 100 20} labelsize 12
+    } {
+      MenuItem {} {
+        label {Layout Size...}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Autogrid On}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Set Grid...}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Move to Front}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Move Forward}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Move to Back}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Move Backward}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Alignment...}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Align
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Preview
+        xywh {5 5 100 20} shortcut 0x40079 labelsize 12 labelcolor 176 deactivate
+      }
+    }
+    Submenu mBrowser {
+      label Browser
+      xywh {5 5 100 20} labelsize 12
+    } {
+      MenuItem {} {
+        label {Template Info}
+        xywh {5 5 100 20} shortcut 0x40069 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {New Slot...}
+        xywh {5 5 100 20} shortcut 0x5006e labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Rename Slot...}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {Templates by Type}
+        xywh {5 5 100 20} type Toggle labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Templates by Hierarchy}
+        xywh {15 15 100 20} type Toggle labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Slots by Name}
+        xywh {25 25 100 20} type Toggle labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Slots by Type}
+        xywh {35 35 100 20} type Toggle labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Show Slot Values}
+        xywh {45 45 100 20} type Toggle labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label Apply
+        xywh {5 5 100 20} shortcut 0x40065 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Revert
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+    }
+    Submenu mWindow {
+      label Window open
+      xywh {5 5 100 20} labelsize 12
+    } {
+      MenuItem {} {
+        label {Open Inspector}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 hide deactivate
+      }
+      MenuItem mWindowConnectInspector {
+        label {Connect Inspector}
+        callback {InspectorConnect();}
+        xywh {5 5 100 20} shortcut 0x4006b labelsize 12
+      }
+      MenuItem {} {
+        label {New Brower}
+        xywh {5 5 100 20} shortcut 0x40062 labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Open Layout}
+        xywh {5 5 100 20} shortcut 0x4006c labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label Cascade
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label Tile
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Arrange Icons}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Set Default WIndow Position}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem {} {
+        label {1: WIndow}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+    }
+    Submenu mHelp {
+      label Help
+      xywh {5 5 100 20} labelsize 12
+    } {
+      MenuItem {} {
+        label Contents
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Newton OS Error Codes}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Using Help}
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+      }
+      MenuItem mHelpAbout {
+        label {About Dyne Toolkit...}
+        callback {fl_message("Welcome to the Dyne Toolkit...");}
+        xywh {5 5 100 20} labelsize 12
+      }
+    }
+  }
+  Fl_Group {} {
+    xywh {0 25 785 35} box THIN_DOWN_BOX
+  } {
+    Fl_Button {} {
+      label {@filenew}
+      tooltip {New Layout} xywh {10 30 25 25} labelsize 11 labelcolor 32 deactivate
+    }
+    Fl_Button {} {
+      label {@filenew}
+      tooltip {New Proto Template} xywh {35 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label {@filenew}
+      tooltip {New Text File} xywh {60 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label {@fileopen}
+      tooltip Open xywh {90 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label {@filesave}
+      tooltip Save xywh {115 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label {@filesave}
+      tooltip {Save all open files} xywh {140 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label {@undo}
+      tooltip Undo xywh {170 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label {@redo}
+      tooltip Redo xywh {195 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label Cut
+      tooltip Cut xywh {225 30 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Copy
+      tooltip Copy xywh {250 30 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Paste
+      tooltip Paste xywh {275 30 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label {@fileprint}
+      tooltip Print xywh {305 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label {@search}
+      tooltip Find xywh {335 30 25 25} labelsize 11 deactivate
+    }
+    Fl_Button {} {
+      label Scr
+      tooltip {Newt Screen Shot} xywh {365 30 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Bld
+      tooltip {Build Package} xywh {395 30 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Dnl
+      tooltip {Download Package} xywh {420 30 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Lyt
+      tooltip {Open Layout} xywh {450 30 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Brsr
+      tooltip {Create New Browser} xywh {475 30 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label {?}
+      tooltip {Help Index} xywh {505 30 25 25} labelfont 1 labelsize 13 deactivate
+    }
+    Fl_Box {} {
+      xywh {535 30 15 25} deactivate resizable
+    }
+  }
+  Fl_Group {} {
+    xywh {0 60 785 35} box THIN_DOWN_BOX
+  } {
+    Fl_Button {} {
+      label Left
+      tooltip {Align Left} xywh {10 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Right
+      tooltip {Align Right} xywh {35 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Top
+      tooltip {Align Top} xywh {60 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Bot
+      tooltip {Align Bottom} xywh {85 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label {V.Ctr}
+      tooltip {Align Vertical Center} xywh {110 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label {H.Ctr}
+      tooltip {CreaAlign Horizontal Center} xywh {135 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label Mode
+      tooltip {Select Mode} xywh {165 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label {@-2plus}
+      tooltip {Create Proto} xywh {195 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {
+      label {@-2plus C}
+      tooltip {Create Proto} xywh {405 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Choice {} {open
+      xywh {225 66 175 23} down_box BORDER_BOX labelsize 11 textsize 11 deactivate
+    } {
+      MenuItem {} {
+        label newtApplication
+        xywh {5 5 100 20} labelsize 11
+      }
+    }
+    Fl_Choice {} {open
+      xywh {435 66 175 23} down_box BORDER_BOX labelsize 11 textsize 11 deactivate
+    } {
+      MenuItem {} {
+        label {No Custom Protos}
+        xywh {5 5 100 20} labelsize 11
+      }
+    }
+    Fl_Box {} {
+      xywh {615 65 15 25} deactivate resizable
+    }
+  }
+  Fl_Tile center {open
+    xywh {0 95 785 475} box FLAT_BOX labelsize 12 resizable
+  } {
+    Fl_Group {} {open
+      xywh {0 95 150 305} box FLAT_BOX
+    } {
+      Fl_Tabs browsers {open
+        xywh {3 98 144 299} box UP_BOX labelsize 12 resizable
+      } {
+        Fl_Browser documents {
+          label Files
+          xywh {3 118 144 279} labelsize 12 textsize 12 deactivate resizable
+          class Fldtk_Document_Browser
+        }
+      }
+    }
+    Fl_Group {} {open
+      xywh {150 95 635 305} box FLAT_BOX
+    } {
+      Fl_Tabs document_tabs {open
+        xywh {153 98 629 299} box UP_BOX labelsize 12 resizable
+        class Fldtk_Document_Tabs
+      } {}
+    }
+    Fl_Group {} {open
+      xywh {0 400 785 170} box FLAT_BOX
+    } {
+      Fl_Tabs consoles {open
+        xywh {3 403 779 164} box UP_BOX labelsize 12 resizable
+      } {
+        Fl_Group {} {
+          label Inspector open
+          xywh {3 423 779 144} labelsize 12 resizable
+        } {
+          Fl_Group inspector {open
+            xywh {5 425 775 139} labelsize 12 resizable
+            class Fldtk_Inspector
+          } {}
+        }
+      }
+    }
+    Fl_Box {} {
+      xywh {150 95 635 305} hide deactivate resizable
+    }
+  }
+  Fl_Group {} {
+    label {For Help, press F1}
+    xywh {0 570 785 25} box THIN_UP_BOX labelsize 11 align 20
+  } {
+    Fl_Group {} {open
+      xywh {605 570 165 25}
+    } {
+      Fl_Box {} {
+        label CAPS
+        xywh {620 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50
+      }
+      Fl_Box {} {
+        label NUM
+        xywh {665 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50
+      }
+      Fl_Box {} {
+        label SCRL
+        xywh {710 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50
+      }
+    }
+    Fl_Box {} {
+      xywh {590 570 15 25} resizable
+    }
+  }
+  Function {activate_menus(unsigned int mask)} {open return_type void
+  } {
+    code {// bits in the mask have the following meanings:
+//	bit 0: a project is loaded
+//	bit 1: a document is active for editing
+//	bit 2: the active document is part of the project
+
+// mFileNewTex is always active
+// mFileOpen is always active
+// mFileExit is always active
+
+// mEditPreferences is always active
+
+// mProjectNew is always active
+// mProjectOpen is always active
+
+if ( (mask & 0x00000001) == 0x00000001 ) {
+  mProjectSave->activate();
+  mProjectSaveAs->activate();
+  mProjectAddFile->activate();
+  mProjectBuild->activate();
+  mProjectDownload->activate(); // could depend on existing pkg
+  mProjectLaunch->activate(); // could depend on downloaded pkg
+  mProjectSettings->activate();
+} else {
+  mProjectSave->deactivate();
+  mProjectSaveAs->deactivate();
+  mProjectAddFile->deactivate();
+  mProjectBuild->deactivate();
+  mProjectDownload->deactivate(); // could depend on existing pkg
+  mProjectLaunch->deactivate(); // could depend on downloaded pkg
+  mProjectSettings->deactivate();
+}
+
+if ( (mask & 0x00000002) == 0x00000002 ) {
+  mFileClose->activate();
+  mFileSave->activate();
+  mFileSaveAs->activate();
+} else {
+  mFileClose->deactivate();
+  mFileSave->deactivate();
+  mFileSaveAs->deactivate();
+}
+
+if ( (mask & 0x00000007) == 0x00000007 ) {
+  mProjectRemoveFile->activate();
+} else {
+  mProjectRemoveFile->deactivate();
+}
+
+if ( (mask & 0x00000007) == 0x00000003 ) {
+  mProjectAddWindow->activate();
+} else {
+  mProjectAddWindow->deactivate();
+}} {}
+  }
+} 
+
+Function {create_connect_dialog()} {} {
+  Fl_Window {} {
+    label Progress open
+    xywh {524 192 225 116} type Double modal visible
+  } {
+    Fl_Box {} {
+      label {Tap the Toolkit icon on the Newton device, select "Connect via Serial", and tap Connect Inspector.}
+      xywh {15 8 195 65} labelsize 12 align 128
+    }
+    Fl_Button {} {
+      label Cancel
+      callback {InspectorCancelConnect();} selected
+      xywh {72 81 80 20} labelsize 12 hotspot
+    }
+  }
+} 
+
+comment {
+//
+// Copyright (C) 2007 Matthias Melcher
+//} {in_source in_header
+} 

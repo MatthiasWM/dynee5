@@ -1,0 +1,542 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0108 
+header_name {.h} 
+code_name {.cxx}
+comment {//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+} {in_source in_header
+} 
+
+decl {\#include "fltk/Flmm_Set_Input.h"} {public
+} 
+
+decl {\#include "fltk/Flmm_Set_Check_Button.h"} {public
+} 
+
+decl {\#include <string.h>} {} 
+
+decl {\#include <stdlib.h>} {} 
+
+decl {\#include <stdio.h>} {} 
+
+Function {set_changed_cb(Fl_Widget*w, void*)} {return_type void
+} {
+  code {Fldtk_Proj_Settings *dlg = (Fldtk_Proj_Settings*)(w->window());
+dlg->set_changed();} {}
+} 
+
+widget_class Fldtk_Proj_App {
+  label Application
+  xywh {563 223 380 245} type Double labelsize 12 visible position_relative
+} {
+  Fl_Input name {
+    label {Name:}
+    callback set_changed_cb
+    xywh {65 31 135 18} labelsize 12 when 1 textsize 12
+    class Flmm_Set_Input
+  }
+  Fl_Input symbol {
+    label {Symbol:}
+    callback set_changed_cb
+    xywh {65 62 135 18} labelsize 12 when 1 textsize 12
+    class Flmm_Set_Input
+  }
+  Fl_Check_Button auto_close {
+    label {&Auto Close}
+    callback set_changed_cb
+    xywh {210 60 80 20} down_box DOWN_BOX labelsize 12
+    class Flmm_Set_Check_Button
+  }
+  Function {updateData()} {return_type void
+  } {
+    code {name->update_data();
+symbol->update_data();
+auto_close->update_data();} {}
+  }
+  Function {updateDialog()} {return_type void
+  } {
+    code {name->update_widget();
+symbol->update_widget();
+auto_close->update_widget();} {}
+  }
+} 
+
+widget_class Fldtk_Proj_Icon {
+  label Icon
+  xywh {584 253 380 245} type Double labelsize 12 visible position_relative
+} {
+  Fl_Group {} {
+    xywh {5 25 50 195} deactivate
+  } {
+    Fl_Button {} {
+      label Browse
+      xywh {5 25 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label Default
+      xywh {5 55 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Button {} {
+      label Browse
+      xywh {5 200 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {5 140 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label {Black & White}
+      xywh {5 105 50 35} labelsize 12 align 128 deactivate
+    }
+  }
+  Fl_Group {} {
+    xywh {60 25 50 195} deactivate
+  } {
+    Fl_Button {} {
+      label Browse
+      xywh {60 25 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {60 55 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Button {} {
+      label Browse
+      xywh {60 200 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {60 140 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label {Four Grays}
+      xywh {60 105 50 35} labelsize 12 align 128 deactivate
+    }
+  }
+  Fl_Group {} {
+    xywh {115 25 50 195} deactivate
+  } {
+    Fl_Button {} {
+      label Browse
+      xywh {115 25 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {115 55 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Button {} {
+      label Browse
+      xywh {115 200 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {115 140 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label {Sixteen Grays}
+      xywh {115 105 50 35} labelsize 12 align 128 deactivate
+    }
+  }
+  Fl_Group {} {
+    xywh {170 25 50 195} deactivate
+  } {
+    Fl_Button {} {
+      label Browse
+      xywh {170 25 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {170 55 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Button {} {
+      label Browse
+      xywh {170 200 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {170 140 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label {256 Grays}
+      xywh {170 105 50 35} labelsize 12 align 128 deactivate
+    }
+  }
+  Fl_Group {} {
+    xywh {225 25 50 195} deactivate
+  } {
+    Fl_Button {} {
+      label Browse
+      xywh {225 25 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {225 55 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Button {} {
+      label Browse
+      xywh {225 200 50 20} labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label None
+      xywh {225 140 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+    }
+    Fl_Box {} {
+      label Mask
+      xywh {225 105 50 35} labelsize 12 align 128 deactivate
+    }
+  }
+  Fl_Group {} {
+    xywh {285 55 90 60} deactivate
+  } {
+    Fl_Round_Button {} {
+      label {No Mask}
+      xywh {285 55 90 15} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+    }
+    Fl_Round_Button {} {
+      label {Use Picture}
+      xywh {285 70 90 15} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+    }
+    Fl_Round_Button {} {
+      label {Use XOR}
+      xywh {285 85 90 15} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+    }
+    Fl_Round_Button {} {
+      label {Calc Mask}
+      xywh {285 100 90 15} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+    }
+  }
+  Fl_Group {} {
+    xywh {285 140 90 60} deactivate
+  } {
+    Fl_Round_Button {} {
+      label {No Mask}
+      xywh {285 140 90 15} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+    }
+    Fl_Round_Button {} {
+      label {Use Picture}
+      xywh {285 155 90 15} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+    }
+    Fl_Round_Button {} {
+      label {Use XOR}
+      xywh {285 170 90 15} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+    }
+    Fl_Round_Button {} {
+      label {Calc Mask}
+      xywh {285 185 90 15} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+    }
+  }
+  Fl_Box {} {
+    label Normal
+    xywh {5 0 85 25} labelsize 12 align 20 deactivate
+  }
+  Fl_Box {} {
+    label Highlighted
+    xywh {0 220 85 25} labelsize 12 align 20 deactivate
+  }
+  Fl_Value_Output {} {
+    label {W:}
+    xywh {300 5 65 20} box FLAT_BOX labelsize 12 textsize 12 deactivate
+  }
+  Fl_Value_Output {} {
+    label {H:}
+    xywh {300 25 65 20} box FLAT_BOX labelsize 12 textsize 12 deactivate
+  }
+  Function {updateData()} {open return_type void
+  } {
+    code {//setName(wName->value());} {}
+  }
+  Function {updateDialog()} {open return_type void
+  } {
+    code {//wName->value(name_);} {}
+  }
+} 
+
+widget_class Fldtk_Proj_Package {
+  label Package
+  xywh {612 281 380 245} type Double labelsize 12 visible position_relative
+} {
+  Fl_Input name {
+    label {Name:}
+    callback set_changed_cb
+    xywh {70 13 170 20} labelsize 12 when 1 textsize 12
+    class Flmm_Set_Input
+  }
+  Fl_Check_Button deleteOnDownload {
+    label {&Delete Old Package on Download}
+    callback set_changed_cb
+    xywh {70 40 210 20} down_box DOWN_BOX labelsize 12
+    class Flmm_Set_Check_Button
+  }
+  Fl_Check_Button {} {
+    label {C&opy Protected}
+    callback set_changed_cb
+    xywh {70 65 110 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Auto Remove Package}
+    callback set_changed_cb
+    xywh {70 90 145 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Use Compression}
+    callback set_changed_cb
+    xywh {70 115 125 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Faster Compression (Newton OS 2.0 only)}
+    callback set_changed_cb
+    xywh {70 140 250 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Input copyright {
+    label {Copyright:}
+    callback set_changed_cb
+    xywh {70 168 285 35} type Multiline labelsize 12 when 1 textsize 12
+    class Flmm_Set_Input
+  }
+  Fl_Input version {
+    label {Version:}
+    callback set_changed_cb
+    xywh {70 212 75 20} type Int labelsize 12 when 1 textsize 12
+    class Flmm_Set_Input
+  }
+  Function {updateData()} {return_type void
+  } {
+    code {name->update_data();
+copyright->update_data();
+version->update_data();
+deleteOnDownload->update_data();} {}
+  }
+  Function {updateDialog()} {return_type void
+  } {
+    code {name->update_widget();
+copyright->update_widget();
+version->update_widget();
+deleteOnDownload->update_widget();} {}
+  }
+} 
+
+widget_class Fldtk_Proj_Project {
+  label Project
+  xywh {649 311 380 245} type Double labelsize 12 visible position_relative
+} {
+  Fl_Choice {} {
+    label {&Platform:}
+    xywh {100 15 145 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+  } {
+    MenuItem {} {
+      label Msgpad
+      xywh {0 0 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label Newton20
+      xywh {0 0 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label Newton21
+      xywh {0 0 100 20} labelsize 12 deactivate
+    }
+  }
+  Fl_Input {} {
+    label {Language:}
+    xywh {100 45 145 20} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Compile for Debugging}
+    xywh {20 80 150 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Ignore Native Keyword}
+    xywh {20 105 145 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Check &Global Function Calls}
+    xywh {20 130 175 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&V1.0 Build Rules}
+    xywh {20 155 110 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Use stepChildren Slot}
+    xywh {20 180 140 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Suppress Byte Code}
+    xywh {20 205 135 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {C&ompile for Profiling}
+    xywh {200 80 130 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Profile Native &Functions}
+    xywh {200 105 150 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Newton OS &2.0 Only}
+    xywh {200 130 130 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Faster Functions (2.0 Only)}
+    xywh {200 155 165 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {&Tighter Packing (2.0 Only)}
+    xywh {200 180 160 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+} 
+
+widget_class Fldtk_Proj_Output {
+  label Output
+  xywh {685 340 380 245} type Double labelsize 12 visible position_relative
+} {
+  Fl_Box {} {
+    label {Output:}
+    xywh {10 10 55 20} labelsize 12 align 20 deactivate
+  }
+  Fl_Round_Button {} {
+    label {&Application}
+    xywh {25 30 80 20} down_box ROUND_DOWN_BOX value 1 labelsize 12 deactivate
+  }
+  Fl_Round_Button {} {
+    label {&Book}
+    xywh {25 55 50 20} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Round_Button {} {
+    label {Auto &Part}
+    xywh {25 80 70 20} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Round_Button {} {
+    label {&Store Part}
+    xywh {150 30 75 20} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Round_Button {} {
+    label {Sream &File}
+    xywh {150 55 80 20} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Round_Button {} {
+    label {&Custom Part:}
+    xywh {150 80 90 20} down_box ROUND_DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Input {} {
+    xywh {245 80 45 20} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Box {} {
+    label {Result:}
+    xywh {10 110 55 20} labelsize 12 align 20 deactivate
+  }
+  Fl_Text_Editor {} {
+    xywh {25 130 325 75} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {New-Style Stores (Newton OS 2.0 Only)}
+    xywh {25 210 235 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+} 
+
+widget_class Fldtk_Proj_Settings {
+  label {Dyne Toolkit Project Settings}
+  callback {Fldtk_Proj_Settings *w = (Fldtk_Proj_Settings*)o;
+w->hide();
+w->updateDialog();} selected
+  xywh {530 192 400 335} type Double
+  class Fl_Double_Window non_modal visible
+} {
+  Fl_Tabs {} {open
+    xywh {10 10 380 270} box UP_BOX
+  } {
+    Fl_Group app {
+      label Application open
+      xywh {10 35 380 245} labelsize 12
+      class Fldtk_Proj_App
+    } {}
+    Fl_Group icon {
+      label Icon open
+      xywh {10 35 380 245} labelsize 12 hide
+      class Fldtk_Proj_Icon
+    } {}
+    Fl_Group package {
+      label Package open
+      xywh {10 35 380 245} labelsize 12 hide
+      class Fldtk_Proj_Package
+    } {}
+    Fl_Group project {
+      label Project open
+      xywh {10 35 380 245} labelsize 12 hide
+      class Fldtk_Proj_Project
+    } {}
+    Fl_Group output {
+      label Output open
+      xywh {10 35 380 245} labelsize 12 hide
+      class Fldtk_Proj_Output
+    } {}
+  }
+  Fl_Button wOK {
+    label OK
+    callback {updateData();
+hide();
+updateDialog();}
+    xywh {55 295 80 25} labelsize 12
+  }
+  Fl_Button wCancel {
+    label Cancel
+    callback {hide();
+updateDialog();}
+    xywh {140 295 80 25} labelsize 12
+  }
+  Fl_Button wApply {
+    label {&Apply}
+    callback {updateData();
+updateDialog();}
+    xywh {225 295 80 25} labelsize 12
+  }
+  Fl_Button {} {
+    label {&Help}
+    xywh {310 295 80 25} labelsize 12 deactivate
+  }
+  Function {Fldtk_Proj_Settings(): Fl_Double_Window(400, 335)} {} {
+    code {_Fldtk_Proj_Settings();} {}
+  }
+  Function {updateData()} {open return_type void
+  } {
+    code {app->updateData();
+icon->updateData();
+package->updateData();} {}
+  }
+  Function {updateDialog()} {open return_type void
+  } {
+    code {app->updateDialog();
+icon->updateDialog();
+package->updateDialog();
+wOK->deactivate();
+wApply->deactivate();} {}
+  }
+  Function {set_changed()} {open return_type void
+  } {
+    code {wOK->activate();
+wApply->activate();} {}
+  }
+} 
+
+comment {
+//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//} {in_source in_header
+} 

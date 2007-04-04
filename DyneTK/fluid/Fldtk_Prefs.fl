@@ -1,0 +1,380 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0108 
+header_name {.h} 
+code_name {.cxx}
+comment {//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+} {in_source in_header
+} 
+
+decl {\#include <FL/Fl_Preferences.H>} {public
+} 
+
+widget_class Fldtk_Prefs_App {
+  label App
+  xywh {663 220 445 185} type Double labelsize 12 visible position_relative
+} {
+  Fl_Check_Button {} {
+    label {Show the &Standard Toolbar}
+    xywh {15 20 205 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Show the &Layout Toolbar}
+    xywh {15 45 205 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Show the &Inspector Toolbar}
+    xywh {15 70 205 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Show the S&tatus Toolbar}
+    xywh {15 95 205 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Box {} {
+    label {All Toolbars:}
+    xywh {230 20 155 25} labelsize 12 align 20 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Show Tooltips}
+    xywh {240 45 155 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+} 
+
+widget_class Fldtk_Prefs_Layout {
+  label Layout
+  xywh {681 251 445 185} type Double labelsize 12 visible position_relative
+} {
+  Fl_Check_Button {} {
+    label {&Grid On}
+    xywh {20 20 75 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Choice {} {
+    label {&Size:}
+    xywh {50 50 200 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+  } {
+    MenuItem {} {
+      label {Message Pad}
+      xywh {10 10 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label {Message Pad 110...130}
+      xywh {10 10 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label {Message Pad 2000}
+      xywh {10 10 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label {Message Pad 2000 Landscape}
+      xywh {10 10 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label Custom
+      xywh {10 10 100 20} labelsize 12 deactivate
+    }
+  }
+  Fl_Input {} {
+    label {Height:}
+    xywh {105 110 70 20} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Input {} {
+    label Width
+    xywh {260 110 70 20} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Input {} {
+    label {Arrow Keys Move By:}
+    xywh {375 20 45 20} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Input {} {
+    label {With Shift Key:}
+    xywh {375 50 45 20} labelsize 12 textsize 12 deactivate
+  }
+} 
+
+widget_class Fldtk_Prefs_Browser {
+  label Browser
+  xywh {705 281 445 185} type Double labelsize 12 visible position_relative
+} {
+  Fl_Box {} {
+    label {View List:}
+    xywh {20 15 140 25} labelsize 12 align 20 deactivate
+  }
+  Fl_Box {} {
+    label {Slot List:}
+    xywh {20 80 140 25} labelsize 12 align 20 deactivate
+  }
+  Fl_Choice {} {
+    label {&Sort By:} open
+    xywh {105 45 110 20} down_box BORDER_BOX labelsize 12 deactivate
+  } {
+    MenuItem {} {
+      label Hierarchy
+      xywh {20 20 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label Name
+      xywh {20 20 100 20} labelsize 12 deactivate
+    }
+  }
+  Fl_Choice {} {
+    label {&Sort By:} open
+    xywh {105 110 110 20} down_box BORDER_BOX labelsize 12 deactivate
+  } {
+    MenuItem {} {
+      label Name
+      xywh {30 30 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label Type
+      xywh {30 30 100 20} labelsize 12 deactivate
+    }
+  }
+  Fl_Button {} {
+    label {&Font...}
+    xywh {245 45 75 20} labelsize 12 deactivate
+  }
+  Fl_Button {} {
+    label {&Font...}
+    xywh {245 110 75 20} labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Show Slot &Value}
+    xywh {130 140 140 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+} 
+
+widget_class Fldtk_Prefs_Text {
+  label {Text Views}
+  xywh {735 309 445 185} type Double labelsize 12 visible position_relative
+} {
+  Fl_Check_Button {} {
+    label {Auto &Indent}
+    xywh {20 20 95 20} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Input {} {
+    label {Tabs:}
+    xywh {165 21 50 18} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Button {} {
+    label {&Font...}
+    xywh {245 20 75 20} labelsize 12 deactivate
+  }
+} 
+
+widget_class Fldtk_Prefs_Packages {
+  label Packages
+  xywh {760 340 445 185} type Double labelsize 12 visible position_relative
+} {
+  code {port_ = 0;} {}
+  Fl_Box {} {
+    label Connection
+    xywh {15 15 100 25} labelsize 12 align 20
+  }
+  Fl_Choice {} {
+    label {&Type}
+    xywh {85 50 100 20} down_box BORDER_BOX labelsize 12 deactivate
+  } {
+    MenuItem {} {
+      label Serial
+      xywh {5 5 100 20} labelsize 12 deactivate
+    }
+  }
+  Fl_Choice wPort {
+    label {&Port:}
+    callback {((Fldtk_Prefs*)(o->window()))->set_changed();}
+    xywh {240 50 100 20} down_box BORDER_BOX labelsize 12
+  } {
+    MenuItem {} {
+      label {Com1:}
+      xywh {15 15 100 20} labelsize 12
+    }
+    MenuItem {} {
+      label {Com2:}
+      xywh {25 25 100 20} labelsize 12
+    }
+    MenuItem {} {
+      label {Com3:}
+      xywh {35 35 100 20} labelsize 12
+    }
+    MenuItem {} {
+      label {Com4:}
+      xywh {45 45 100 20} labelsize 12
+    }
+  }
+  Fl_Check_Button {} {
+    label {Auto &Save Before Building Package}
+    xywh {20 90 280 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Fl_Check_Button {} {
+    label {Auto &Download After Building Package}
+    xywh {20 115 280 25} down_box DOWN_BOX labelsize 12 deactivate
+  }
+  Function {port()} {return_type int
+  } {
+    code {return port_;} {}
+  }
+  Function {get_prefs(Fl_Preferences &prefs)} {return_type void
+  } {
+    code {prefs.get("Port", port_, 0);} {}
+  }
+  Function {set_prefs(Fl_Preferences &prefs)} {return_type void
+  } {
+    code {prefs.set("Port", port_);} {}
+  }
+  Function {update_data()} {return_type void
+  } {
+    code {port_ = wPort->value();} {}
+  }
+  Function {update_dialog()} {return_type void
+  } {
+    code {wPort->value(port_);} {}
+  }
+  decl {int port_;} {}
+} 
+
+widget_class Fldtk_Prefs_Heaps {
+  label Heaps
+  xywh {792 369 445 185} type Double labelsize 12 visible position_relative
+} {
+  Fl_Box {} {
+    label {Size in KBytes}
+    xywh {100 15 105 25} labelsize 12 deactivate
+  }
+  Fl_Input {} {
+    label {Main Heap:}
+    xywh {90 55 90 20} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Input {} {
+    label {Build Heap:}
+    xywh {275 55 90 20} labelsize 12 textsize 12 deactivate
+  }
+  Fl_Box {} {
+    label {Changes to Main Heap take effect after relaunching}
+    xywh {35 90 280 25} labelsize 12 deactivate
+  }
+} 
+
+widget_class Fldtk_Prefs {
+  label {Dyne Toolkit Preferences}
+  user_data this
+  callback {Fldtk_Prefs *w = (Fldtk_Prefs*)o;
+w->hide();
+w->update_dialog();} open
+  xywh {1007 432 470 275} type Double
+  class Fl_Double_Window modal visible
+} {
+  Fl_Tabs {} {open
+    xywh {10 10 445 210} labelsize 12
+  } {
+    Fl_Group app {
+      label App open
+      xywh {10 35 445 185} labelsize 12 hide deactivate
+      class Fldtk_Prefs_App
+    } {}
+    Fl_Group layout {
+      label Layout open
+      xywh {10 35 445 185} labelsize 12 hide deactivate
+      class Fldtk_Prefs_Layout
+    } {}
+    Fl_Group browser {
+      label Browser open
+      xywh {10 35 445 185} labelsize 12 hide deactivate
+      class Fldtk_Prefs_Browser
+    } {}
+    Fl_Group text {
+      label {Text Views} open
+      xywh {10 35 445 185} labelsize 12 hide deactivate
+      class Fldtk_Prefs_Text
+    } {}
+    Fl_Group packages {
+      label Packages open
+      xywh {10 35 445 185} labelsize 12
+      class Fldtk_Prefs_Packages
+    } {}
+    Fl_Group heaps {
+      label Heaps open
+      xywh {10 35 445 185} labelsize 12 hide deactivate
+      class Fldtk_Prefs_Heaps
+    } {}
+  }
+  Fl_Button wOK {
+    label OK
+    callback {update_data();
+hide();
+update_dialog();
+set_prefs();}
+    xywh {120 235 80 25} labelsize 12
+  }
+  Fl_Button wCancel {
+    label Cancel
+    callback {hide();
+update_dialog();}
+    xywh {205 235 80 25} labelsize 12
+  }
+  Fl_Button wApply {
+    label {&Apply}
+    callback {update_data();
+update_dialog();
+set_prefs();}
+    xywh {290 235 80 25} labelsize 12
+  }
+  Fl_Button {} {
+    label {&Help}
+    xywh {375 235 80 25} labelsize 12 deactivate
+  }
+  code {get_prefs();
+update_dialog();} {}
+  Function {Fldtk_Prefs(): Fl_Double_Window(470, 275)} {} {
+    code {_Fldtk_Prefs();} {}
+  }
+  Function {get_prefs()} {return_type void
+  } {
+    code {Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
+Fl_Preferences pack(prefs, "Packages");
+packages->get_prefs(pack);} {}
+  }
+  Function {set_prefs()} {return_type void
+  } {
+    code {Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
+Fl_Preferences pack(prefs, "Packages");
+packages->set_prefs(pack);} {}
+  }
+  Function {update_data()} {return_type void
+  } {
+    code {packages->update_data();} {}
+  }
+  Function {update_dialog()} {return_type void
+  } {
+    code {packages->update_dialog();
+wOK->deactivate();
+wApply->deactivate();} {}
+  }
+  Function {set_changed()} {open selected return_type void
+  } {
+    code {wOK->activate();
+wApply->activate();} {}
+  }
+} 
+
+comment {
+//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//} {in_source in_header
+} 
