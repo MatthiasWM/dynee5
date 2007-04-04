@@ -26,10 +26,6 @@
 
 #include "Flio_Inspector.H"
 
-#include "NtkPipe.h"
-#include "NtkObject.h"
-#include "NtkObjectReader.h"
-
 #include <stdlib.h>
 #include <stdio.h>
 

@@ -44,10 +44,6 @@
 #include "dtk/Dtk_Document.H"
 #include "dtk/Dtk_Project.H"
 
-#include "NtkObject.h"
-#include "NtkObjectReader.h"
-#include "NtkPipe.h"
-
 #include "fluid/main_ui.h"
 #include "fltk/Flio_Serial_Port.h"
 
@@ -86,21 +82,6 @@ unsigned char data5413[147] = {
   // ._implementor......
 };
 
-void testNtkReader()
-{
-  NtkFilePipe pipe("minimal.ntk");
-  //NtkFilePipe pipe("my.lyt");
-  //NtkMemPipe pipe(data5413, sizeof(data5413));
-  //NtkObjectReader *reader = new NtkObjectReader("../minimal.ntk");
-  NtkObjectReader reader(pipe);
-  NtkObject *root = reader.read();
-
-  {
-    NtkFileWritePipe out("../test.ns");
-    root->print(out);
-  }
-}
-
 extern "C" int getNSO(const char *command, unsigned char **data, int *size);
 
 unsigned char *nso;
@@ -137,9 +118,6 @@ int getNSO(const char *command, unsigned char **data, int *size)
       s++;
     }
 
-    NtkMemPipe pipe(*data, sizeof(*size));
-    NtkObjectReader reader(pipe);
-    NtkObject *root = reader.read();
   } else {
     printf("*** ERROR *** creating NSOF\n");
   }
