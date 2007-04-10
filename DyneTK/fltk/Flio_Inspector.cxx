@@ -216,7 +216,7 @@ int Flio_Inspector::wait_for_more(int n, Call received, Call error, double timeo
 
 
 void Flio_Inspector::waitForCommand() {
-  scan_for((unsigned char*)"newtntp ", 8, gotNewtNtk, gotErr);
+  scan_for((unsigned char*)"newtntp ", 8, &Flio_Inspector::gotNewtNtk, &Flio_Inspector::gotErr);
 }
 
 void Flio_Inspector::gotErr() {
@@ -224,29 +224,29 @@ void Flio_Inspector::gotErr() {
 }
 
 void Flio_Inspector::gotNewtNtk() {
-  wait_for_more(4, gotNewtNtk4, gotErr);
+  wait_for_more(4, &Flio_Inspector::gotNewtNtk4, &Flio_Inspector::gotErr);
 }
 
 void Flio_Inspector::gotNewtNtk4() {
   //printf("gotNewtNtk4 '%.4s'\n", buffer_+8);
   if (memcmp(buffer_+8, "cnnt", 4)==0)
     // cnnt: wait for a size and unknown block. Send connection ack
-    wait_for_more(4, gotNewtNtkCnnt, gotErr);
+    wait_for_more(4, &Flio_Inspector::gotNewtNtkCnnt, &Flio_Inspector::gotErr);
   else if (memcmp(buffer_+8, "fobj", 4)==0)
     // fobj: size, NSOF
-    wait_for_more(4, gotNewtNtkFobj, gotErr);
+    wait_for_more(4, &Flio_Inspector::gotNewtNtkFobj, &Flio_Inspector::gotErr);
   else if (memcmp(buffer_+8, "rslt", 4)==0)
     // rslt: wait for size and a result code identifier
-    wait_for_more(4, gotNewtNtkRslt, gotErr);
+    wait_for_more(4, &Flio_Inspector::gotNewtNtkRslt, &Flio_Inspector::gotErr);
   else if (memcmp(buffer_+8, "text", 4)==0)
     // text: wait for size, then text block, then dump to console
-    wait_for_more(4, gotNewtNtkText, gotErr);
+    wait_for_more(4, &Flio_Inspector::gotNewtNtkText, &Flio_Inspector::gotErr);
   else if (memcmp(buffer_+8, "eerr", 4)==0)
     // eerr: exception, size, text
-    wait_for_more(8, gotNewtNtkEerr, gotErr);
+    wait_for_more(8, &Flio_Inspector::gotNewtNtkEerr, &Flio_Inspector::gotErr);
   else if (memcmp(buffer_+8, "eref", 4)==0)
     // eerr: size, text, text, errno, garble
-    wait_for_more(4, gotNewtNtkEref, gotErr);
+    wait_for_more(4, &Flio_Inspector::gotNewtNtkEref, &Flio_Inspector::gotErr);
   else {
     printf("*** ERROR *** unknown command %.4s\n", buffer_+8);
     waitForCommand();
@@ -258,22 +258,22 @@ void Flio_Inspector::gotNewtNtkCnnt() {
   send_data_block(send_okln2, sizeof(send_okln2));
   send_data_block(send_okln3, sizeof(send_okln3));
   unsigned int n = get_uint(buffer_+12);
-  wait_for_more(n, waitForCommand, gotErr);
+  wait_for_more(n, &Flio_Inspector::waitForCommand, &Flio_Inspector::gotErr);
 }
 
 void Flio_Inspector::gotNewtNtkRslt() {
   unsigned int n = get_uint(buffer_+12);
-  wait_for_more(n, waitForCommand, gotErr);
+  wait_for_more(n, &Flio_Inspector::waitForCommand, &Flio_Inspector::gotErr);
 }
 
 void Flio_Inspector::gotNewtNtkFobj() {
   unsigned int n = get_uint(buffer_+12);
-  wait_for_more(n, waitForCommand, gotErr);
+  wait_for_more(n, &Flio_Inspector::waitForCommand, &Flio_Inspector::gotErr);
 }
 
 void Flio_Inspector::gotNewtNtkText() {
   unsigned int n = get_uint(buffer_+12);
-  wait_for_more(n, gotNewtNtkTextSize, gotErr);
+  wait_for_more(n, &Flio_Inspector::gotNewtNtkTextSize, &Flio_Inspector::gotErr);
 }
 
 void Flio_Inspector::gotNewtNtkTextSize() {
@@ -290,7 +290,7 @@ void Flio_Inspector::gotNewtNtkTextSize() {
 
 void Flio_Inspector::gotNewtNtkEerr() {
   unsigned int n = get_uint(buffer_+16);
-  wait_for_more(n, gotNewtNtkEerrSize, gotErr);
+  wait_for_more(n, &Flio_Inspector::gotNewtNtkEerrSize, &Flio_Inspector::gotErr);
 }
 
 void Flio_Inspector::gotNewtNtkEerrSize() {
@@ -308,7 +308,7 @@ void Flio_Inspector::gotNewtNtkEerrSize() {
 
 void Flio_Inspector::gotNewtNtkEref() {
   unsigned int n = get_uint(buffer_+12);
-  wait_for_more(n+8, gotNewtNtkErefSize, gotErr);
+  wait_for_more(n+8, &Flio_Inspector::gotNewtNtkErefSize, &Flio_Inspector::gotErr);
 }
 
 void Flio_Inspector::gotNewtNtkErefSize() {
@@ -376,7 +376,7 @@ unsigned char dataX0141[148] = {
   0x07, 0x0c, 0x5f, 0x69, 0x6d, 0x70, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x6f, 0x72, 0x0a, 0x0a, 
   0x0a, 0x00, 0x00, 0x0a, 
   // .....class..instructions..literals..argFrame..numArgs..DebuggerI
-  // nfo..CodeBlock.... ¨p.......printDepth...._nextArgFrame.._parent
+  // nfo..CodeBlock.... Â®p.......printDepth...._nextArgFrame.._parent
   // .._implementor......
 };
 
@@ -392,7 +392,7 @@ unsigned char dataX0068[143] = {
   0x6d, 0x65, 0x07, 0x07, 0x5f, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x07, 0x0c, 0x5f, 0x69, 0x6d, 
   0x70, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x6f, 0x72, 0x0a, 0x0a, 0x0a, 0x00, 0x00, 0x0a, 
   // .....class..instructions..literals..argFrame..numArgs..DebuggerI
-  // nfo..CodeBlock...."¨p.......trace...._nextArgFrame.._parent.._im
+  // nfo..CodeBlock...."Â®p.......trace...._nextArgFrame.._parent.._im
   // plementor......
 };
 
@@ -409,7 +409,7 @@ unsigned char dataX0018[153] = {
   0x61, 0x72, 0x65, 0x6e, 0x74, 0x07, 0x0c, 0x5f, 0x69, 0x6d, 0x70, 0x6c, 0x65, 0x6d, 0x65, 0x6e, 
   0x74, 0x6f, 0x72, 0x0a, 0x0a, 0x0a, 0x00, 0x00, 0x0a, 
   // .....class..instructions..literals..argFrame..numArgs..DebuggerI
-  // nfo..CodeBlock....'..¨p.......breakOnThrows...._nextArgFrame.._p
+  // nfo..CodeBlock....'..Â®p.......breakOnThrows...._nextArgFrame.._p
   // arent.._implementor......
 };
 

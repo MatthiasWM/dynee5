@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
+		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
+		C9FF05B80BC6264A008673DF /* globals.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05B20BC6264A008673DF /* globals.cxx */; };
+		C9FF05B90BC6264A008673DF /* main.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05B40BC6264A008673DF /* main.cxx */; };
+		C9FF05BA0BC6264A008673DF /* sandbox.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05B70BC6264A008673DF /* sandbox.cxx */; };
+		C9FF05EE0BC6267E008673DF /* toolbox_closed.xpm in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05BC0BC6267E008673DF /* toolbox_closed.xpm */; };
+		C9FF05EF0BC6267E008673DF /* toolbox_inactive.xpm in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05BD0BC6267E008673DF /* toolbox_inactive.xpm */; };
+		C9FF05F00BC6267E008673DF /* toolbox_open.xpm in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05BE0BC6267E008673DF /* toolbox_open.xpm */; };
+		C9FF05F10BC6267E008673DF /* Fldtk_Document_Browser.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C00BC6267E008673DF /* Fldtk_Document_Browser.cxx */; };
+		C9FF05F20BC6267E008673DF /* Fldtk_Document_Tabs.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C20BC6267E008673DF /* Fldtk_Document_Tabs.cxx */; };
+		C9FF05F30BC6267E008673DF /* Fldtk_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C40BC6267E008673DF /* Fldtk_Editor.cxx */; };
+		C9FF05F40BC6267E008673DF /* Fldtk_Layout_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C60BC6267E008673DF /* Fldtk_Layout_Editor.cxx */; };
+		C9FF05F50BC6267E008673DF /* Fldtk_Script_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C80BC6267E008673DF /* Fldtk_Script_Editor.cxx */; };
+		C9FF05F60BC6267E008673DF /* Flio_Inspector.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05CA0BC6267E008673DF /* Flio_Inspector.cxx */; };
+		C9FF05F70BC6267E008673DF /* Flio_MNP4_Serial.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05CC0BC6267E008673DF /* Flio_MNP4_Serial.cxx */; };
+		C9FF05F80BC6267E008673DF /* Flio_Serial_Port.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05CE0BC6267E008673DF /* Flio_Serial_Port.cxx */; };
+		C9FF05F90BC6267E008673DF /* Flmm_Console.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D00BC6267E008673DF /* Flmm_Console.cxx */; };
+		C9FF05FA0BC6267E008673DF /* Flmm_Set_Check_Button.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D20BC6267E008673DF /* Flmm_Set_Check_Button.cxx */; };
+		C9FF05FB0BC6267E008673DF /* Flmm_Set_Input.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D40BC6267E008673DF /* Flmm_Set_Input.cxx */; };
+		C9FF05FC0BC6267E008673DF /* Dtk_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D70BC6267E008673DF /* Dtk_Document.cxx */; };
+		C9FF05FD0BC6267E008673DF /* Dtk_Document_Manager.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D90BC6267E008673DF /* Dtk_Document_Manager.cxx */; };
+		C9FF05FE0BC6267E008673DF /* Dtk_Layout_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05DB0BC6267E008673DF /* Dtk_Layout_Document.cxx */; };
+		C9FF05FF0BC6267E008673DF /* Dtk_Project.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05DD0BC6267E008673DF /* Dtk_Project.cxx */; };
+		C9FF06000BC6267E008673DF /* Dtk_Script_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05DF0BC6267E008673DF /* Dtk_Script_Document.cxx */; };
+		C9FF06010BC6267E008673DF /* Fldtk_Inspector.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05E20BC6267E008673DF /* Fldtk_Inspector.cxx */; };
+		C9FF06020BC6267E008673DF /* Fldtk_Inspector.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05E30BC6267E008673DF /* Fldtk_Inspector.fl */; };
+		C9FF06030BC6267E008673DF /* Fldtk_Prefs.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05E50BC6267E008673DF /* Fldtk_Prefs.cxx */; };
+		C9FF06040BC6267E008673DF /* Fldtk_Prefs.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05E60BC6267E008673DF /* Fldtk_Prefs.fl */; };
+		C9FF06050BC6267E008673DF /* Fldtk_Proj_Settings.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05E80BC6267E008673DF /* Fldtk_Proj_Settings.cxx */; };
+		C9FF06060BC6267E008673DF /* Fldtk_Proj_Settings.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05E90BC6267E008673DF /* Fldtk_Proj_Settings.fl */; };
+		C9FF06070BC6267E008673DF /* main_ui.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05EB0BC6267E008673DF /* main_ui.cxx */; };
+		C9FF06080BC6267E008673DF /* main_ui.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05EC0BC6267E008673DF /* main_ui.fl */; };
+		C9FF06B10BC63F87008673DF /* newt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FF06B00BC63F87008673DF /* newt.a */; };
+		C9FF06B50BC64075008673DF /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FF06B40BC64075008673DF /* libiconv.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		5FD914BF095F51EE00976476 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.fl";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"$(INPUT_FILE_DIR)/$(INPUT_FILE_BASE).h",
+				"$(INPUT_FILE_DIR)/$(INPUT_FILE_BASE).cxx",
+			);
+			script = "flc ${INPUT_FILE_PATH}";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		20286C33FDCF999611CA2CEA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		32DBCF6D0370B57F00C91783 /* FltkTpl_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FltkTpl_Prefix.pch; sourceTree = "<group>"; };
+		4A9504C8FFE6A3BC11CA0CBA /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
+		4A9504CAFFE6A41611CA0CBA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
+		5FD9149C095F515300976476 /* mac.r */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.rez; name = mac.r; path = Resource/mac.r; sourceTree = "<group>"; };
+		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D0C4E970486CD37000505A6 /* DyneTK.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DyneTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FF05B20BC6264A008673DF /* globals.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = globals.cxx; path = ../globals.cxx; sourceTree = SOURCE_ROOT; };
+		C9FF05B30BC6264A008673DF /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = globals.h; path = ../globals.h; sourceTree = SOURCE_ROOT; };
+		C9FF05B40BC6264A008673DF /* main.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cxx; path = ../main.cxx; sourceTree = SOURCE_ROOT; };
+		C9FF05B50BC6264A008673DF /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../main.h; sourceTree = SOURCE_ROOT; };
+		C9FF05B60BC6264A008673DF /* sandbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sandbox.h; path = ../sandbox.h; sourceTree = SOURCE_ROOT; };
+		C9FF05B70BC6264A008673DF /* sandbox.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sandbox.cxx; path = ../sandbox.cxx; sourceTree = SOURCE_ROOT; };
+		C9FF05BC0BC6267E008673DF /* toolbox_closed.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_closed.xpm; sourceTree = "<group>"; };
+		C9FF05BD0BC6267E008673DF /* toolbox_inactive.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_inactive.xpm; sourceTree = "<group>"; };
+		C9FF05BE0BC6267E008673DF /* toolbox_open.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_open.xpm; sourceTree = "<group>"; };
+		C9FF05C00BC6267E008673DF /* Fldtk_Document_Browser.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Document_Browser.cxx; sourceTree = "<group>"; };
+		C9FF05C10BC6267E008673DF /* Fldtk_Document_Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Document_Browser.h; sourceTree = "<group>"; };
+		C9FF05C20BC6267E008673DF /* Fldtk_Document_Tabs.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Document_Tabs.cxx; sourceTree = "<group>"; };
+		C9FF05C30BC6267E008673DF /* Fldtk_Document_Tabs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Document_Tabs.h; sourceTree = "<group>"; };
+		C9FF05C40BC6267E008673DF /* Fldtk_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Editor.cxx; sourceTree = "<group>"; };
+		C9FF05C50BC6267E008673DF /* Fldtk_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Editor.h; sourceTree = "<group>"; };
+		C9FF05C60BC6267E008673DF /* Fldtk_Layout_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Layout_Editor.cxx; sourceTree = "<group>"; };
+		C9FF05C70BC6267E008673DF /* Fldtk_Layout_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Layout_Editor.h; sourceTree = "<group>"; };
+		C9FF05C80BC6267E008673DF /* Fldtk_Script_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Script_Editor.cxx; sourceTree = "<group>"; };
+		C9FF05C90BC6267E008673DF /* Fldtk_Script_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Script_Editor.h; sourceTree = "<group>"; };
+		C9FF05CA0BC6267E008673DF /* Flio_Inspector.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_Inspector.cxx; sourceTree = "<group>"; };
+		C9FF05CB0BC6267E008673DF /* Flio_Inspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_Inspector.h; sourceTree = "<group>"; };
+		C9FF05CC0BC6267E008673DF /* Flio_MNP4_Serial.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_MNP4_Serial.cxx; sourceTree = "<group>"; };
+		C9FF05CD0BC6267E008673DF /* Flio_MNP4_Serial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_MNP4_Serial.h; sourceTree = "<group>"; };
+		C9FF05CE0BC6267E008673DF /* Flio_Serial_Port.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_Serial_Port.cxx; sourceTree = "<group>"; };
+		C9FF05CF0BC6267E008673DF /* Flio_Serial_Port.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_Serial_Port.h; sourceTree = "<group>"; };
+		C9FF05D00BC6267E008673DF /* Flmm_Console.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Console.cxx; sourceTree = "<group>"; };
+		C9FF05D10BC6267E008673DF /* Flmm_Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Console.h; sourceTree = "<group>"; };
+		C9FF05D20BC6267E008673DF /* Flmm_Set_Check_Button.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Set_Check_Button.cxx; sourceTree = "<group>"; };
+		C9FF05D30BC6267E008673DF /* Flmm_Set_Check_Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Set_Check_Button.h; sourceTree = "<group>"; };
+		C9FF05D40BC6267E008673DF /* Flmm_Set_Input.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Set_Input.cxx; sourceTree = "<group>"; };
+		C9FF05D50BC6267E008673DF /* Flmm_Set_Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Set_Input.h; sourceTree = "<group>"; };
+		C9FF05D70BC6267E008673DF /* Dtk_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Document.cxx; sourceTree = "<group>"; };
+		C9FF05D80BC6267E008673DF /* Dtk_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Document.h; sourceTree = "<group>"; };
+		C9FF05D90BC6267E008673DF /* Dtk_Document_Manager.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Document_Manager.cxx; sourceTree = "<group>"; };
+		C9FF05DA0BC6267E008673DF /* Dtk_Document_Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Document_Manager.h; sourceTree = "<group>"; };
+		C9FF05DB0BC6267E008673DF /* Dtk_Layout_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Layout_Document.cxx; sourceTree = "<group>"; };
+		C9FF05DC0BC6267E008673DF /* Dtk_Layout_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Layout_Document.h; sourceTree = "<group>"; };
+		C9FF05DD0BC6267E008673DF /* Dtk_Project.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Project.cxx; sourceTree = "<group>"; };
+		C9FF05DE0BC6267E008673DF /* Dtk_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Project.h; sourceTree = "<group>"; };
+		C9FF05DF0BC6267E008673DF /* Dtk_Script_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Script_Document.cxx; sourceTree = "<group>"; };
+		C9FF05E00BC6267E008673DF /* Dtk_Script_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Script_Document.h; sourceTree = "<group>"; };
+		C9FF05E20BC6267E008673DF /* Fldtk_Inspector.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Inspector.cxx; sourceTree = "<group>"; };
+		C9FF05E30BC6267E008673DF /* Fldtk_Inspector.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fldtk_Inspector.fl; sourceTree = "<group>"; };
+		C9FF05E40BC6267E008673DF /* Fldtk_Inspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Inspector.h; sourceTree = "<group>"; };
+		C9FF05E50BC6267E008673DF /* Fldtk_Prefs.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Prefs.cxx; sourceTree = "<group>"; };
+		C9FF05E60BC6267E008673DF /* Fldtk_Prefs.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fldtk_Prefs.fl; sourceTree = "<group>"; };
+		C9FF05E70BC6267E008673DF /* Fldtk_Prefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Prefs.h; sourceTree = "<group>"; };
+		C9FF05E80BC6267E008673DF /* Fldtk_Proj_Settings.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Proj_Settings.cxx; sourceTree = "<group>"; };
+		C9FF05E90BC6267E008673DF /* Fldtk_Proj_Settings.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fldtk_Proj_Settings.fl; sourceTree = "<group>"; };
+		C9FF05EA0BC6267E008673DF /* Fldtk_Proj_Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Proj_Settings.h; sourceTree = "<group>"; };
+		C9FF05EB0BC6267E008673DF /* main_ui.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main_ui.cxx; sourceTree = "<group>"; };
+		C9FF05EC0BC6267E008673DF /* main_ui.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main_ui.fl; sourceTree = "<group>"; };
+		C9FF05ED0BC6267E008673DF /* main_ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main_ui.h; sourceTree = "<group>"; };
+		C9FF06B00BC63F87008673DF /* newt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = newt.a; path = ../../../newt0/build/newt.a; sourceTree = SOURCE_ROOT; };
+		C9FF06B40BC64075008673DF /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = /usr/lib/libiconv.dylib; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D0C4E910486CD37000505A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */,
+				C9FF06B10BC63F87008673DF /* newt.a in Frameworks */,
+				C9FF06B50BC64075008673DF /* libiconv.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		195DF8CFFE9D517E11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D0C4E970486CD37000505A6 /* DyneTK.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		20286C29FDCF999611CA2CEA /* FltkTpl */ = {
+			isa = PBXGroup;
+			children = (
+				20286C2AFDCF999611CA2CEA /* Sources */,
+				20286C2CFDCF999611CA2CEA /* Resources */,
+				20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */,
+				195DF8CFFE9D517E11CA2CBB /* Products */,
+			);
+			name = FltkTpl;
+			sourceTree = "<group>";
+		};
+		20286C2AFDCF999611CA2CEA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C9FF05BB0BC6267E008673DF /* images */,
+				C9FF05BF0BC6267E008673DF /* fltk */,
+				C9FF05D60BC6267E008673DF /* dtk */,
+				C9FF05E10BC6267E008673DF /* fluid */,
+				C9FF05B20BC6264A008673DF /* globals.cxx */,
+				C9FF05B30BC6264A008673DF /* globals.h */,
+				C9FF05B40BC6264A008673DF /* main.cxx */,
+				C9FF05B50BC6264A008673DF /* main.h */,
+				C9FF05B60BC6264A008673DF /* sandbox.h */,
+				C9FF05B70BC6264A008673DF /* sandbox.cxx */,
+				5FD9149C095F515300976476 /* mac.r */,
+				32DBCF6D0370B57F00C91783 /* FltkTpl_Prefix.pch */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		20286C2CFDCF999611CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D0C4E960486CD37000505A6 /* Info.plist */,
+				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				C9FF06B40BC64075008673DF /* libiconv.dylib */,
+				C9FF06B00BC63F87008673DF /* newt.a */,
+				20286C33FDCF999611CA2CEA /* Carbon.framework */,
+				4A9504CAFFE6A41611CA0CBA /* CoreServices.framework */,
+				4A9504C8FFE6A3BC11CA0CBA /* ApplicationServices.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		C9FF05BB0BC6267E008673DF /* images */ = {
+			isa = PBXGroup;
+			children = (
+				C9FF05BC0BC6267E008673DF /* toolbox_closed.xpm */,
+				C9FF05BD0BC6267E008673DF /* toolbox_inactive.xpm */,
+				C9FF05BE0BC6267E008673DF /* toolbox_open.xpm */,
+			);
+			name = images;
+			path = ../images;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9FF05BF0BC6267E008673DF /* fltk */ = {
+			isa = PBXGroup;
+			children = (
+				C9FF05C00BC6267E008673DF /* Fldtk_Document_Browser.cxx */,
+				C9FF05C10BC6267E008673DF /* Fldtk_Document_Browser.h */,
+				C9FF05C20BC6267E008673DF /* Fldtk_Document_Tabs.cxx */,
+				C9FF05C30BC6267E008673DF /* Fldtk_Document_Tabs.h */,
+				C9FF05C40BC6267E008673DF /* Fldtk_Editor.cxx */,
+				C9FF05C50BC6267E008673DF /* Fldtk_Editor.h */,
+				C9FF05C60BC6267E008673DF /* Fldtk_Layout_Editor.cxx */,
+				C9FF05C70BC6267E008673DF /* Fldtk_Layout_Editor.h */,
+				C9FF05C80BC6267E008673DF /* Fldtk_Script_Editor.cxx */,
+				C9FF05C90BC6267E008673DF /* Fldtk_Script_Editor.h */,
+				C9FF05CA0BC6267E008673DF /* Flio_Inspector.cxx */,
+				C9FF05CB0BC6267E008673DF /* Flio_Inspector.h */,
+				C9FF05CC0BC6267E008673DF /* Flio_MNP4_Serial.cxx */,
+				C9FF05CD0BC6267E008673DF /* Flio_MNP4_Serial.h */,
+				C9FF05CE0BC6267E008673DF /* Flio_Serial_Port.cxx */,
+				C9FF05CF0BC6267E008673DF /* Flio_Serial_Port.h */,
+				C9FF05D00BC6267E008673DF /* Flmm_Console.cxx */,
+				C9FF05D10BC6267E008673DF /* Flmm_Console.h */,
+				C9FF05D20BC6267E008673DF /* Flmm_Set_Check_Button.cxx */,
+				C9FF05D30BC6267E008673DF /* Flmm_Set_Check_Button.h */,
+				C9FF05D40BC6267E008673DF /* Flmm_Set_Input.cxx */,
+				C9FF05D50BC6267E008673DF /* Flmm_Set_Input.h */,
+			);
+			name = fltk;
+			path = ../fltk;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9FF05D60BC6267E008673DF /* dtk */ = {
+			isa = PBXGroup;
+			children = (
+				C9FF05D70BC6267E008673DF /* Dtk_Document.cxx */,
+				C9FF05D80BC6267E008673DF /* Dtk_Document.h */,
+				C9FF05D90BC6267E008673DF /* Dtk_Document_Manager.cxx */,
+				C9FF05DA0BC6267E008673DF /* Dtk_Document_Manager.h */,
+				C9FF05DB0BC6267E008673DF /* Dtk_Layout_Document.cxx */,
+				C9FF05DC0BC6267E008673DF /* Dtk_Layout_Document.h */,
+				C9FF05DD0BC6267E008673DF /* Dtk_Project.cxx */,
+				C9FF05DE0BC6267E008673DF /* Dtk_Project.h */,
+				C9FF05DF0BC6267E008673DF /* Dtk_Script_Document.cxx */,
+				C9FF05E00BC6267E008673DF /* Dtk_Script_Document.h */,
+			);
+			name = dtk;
+			path = ../dtk;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9FF05E10BC6267E008673DF /* fluid */ = {
+			isa = PBXGroup;
+			children = (
+				C9FF05E20BC6267E008673DF /* Fldtk_Inspector.cxx */,
+				C9FF05E30BC6267E008673DF /* Fldtk_Inspector.fl */,
+				C9FF05E40BC6267E008673DF /* Fldtk_Inspector.h */,
+				C9FF05E50BC6267E008673DF /* Fldtk_Prefs.cxx */,
+				C9FF05E60BC6267E008673DF /* Fldtk_Prefs.fl */,
+				C9FF05E70BC6267E008673DF /* Fldtk_Prefs.h */,
+				C9FF05E80BC6267E008673DF /* Fldtk_Proj_Settings.cxx */,
+				C9FF05E90BC6267E008673DF /* Fldtk_Proj_Settings.fl */,
+				C9FF05EA0BC6267E008673DF /* Fldtk_Proj_Settings.h */,
+				C9FF05EB0BC6267E008673DF /* main_ui.cxx */,
+				C9FF05EC0BC6267E008673DF /* main_ui.fl */,
+				C9FF05ED0BC6267E008673DF /* main_ui.h */,
+			);
+			name = fluid;
+			path = ../fluid;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D0C4E890486CD37000505A6 /* DyneTK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "DyneTK" */;
+			buildPhases = (
+				8D0C4E8C0486CD37000505A6 /* Resources */,
+				8D0C4E8F0486CD37000505A6 /* Sources */,
+				8D0C4E910486CD37000505A6 /* Frameworks */,
+			);
+			buildRules = (
+				5FD914BF095F51EE00976476 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = DyneTK;
+			productInstallPath = "$(HOME)/Applications";
+			productName = FltkTpl;
+			productReference = 8D0C4E970486CD37000505A6 /* DyneTK.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		20286C28FDCF999611CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "DyneTK" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 20286C29FDCF999611CA2CEA /* FltkTpl */;
+			projectDirPath = "";
+			targets = (
+				8D0C4E890486CD37000505A6 /* DyneTK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D0C4E8C0486CD37000505A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */,
+				C9FF05EE0BC6267E008673DF /* toolbox_closed.xpm in Resources */,
+				C9FF05EF0BC6267E008673DF /* toolbox_inactive.xpm in Resources */,
+				C9FF05F00BC6267E008673DF /* toolbox_open.xpm in Resources */,
+				C9FF06020BC6267E008673DF /* Fldtk_Inspector.fl in Resources */,
+				C9FF06040BC6267E008673DF /* Fldtk_Prefs.fl in Resources */,
+				C9FF06060BC6267E008673DF /* Fldtk_Proj_Settings.fl in Resources */,
+				C9FF06080BC6267E008673DF /* main_ui.fl in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D0C4E8F0486CD37000505A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9FF05B80BC6264A008673DF /* globals.cxx in Sources */,
+				C9FF05B90BC6264A008673DF /* main.cxx in Sources */,
+				C9FF05BA0BC6264A008673DF /* sandbox.cxx in Sources */,
+				C9FF05F10BC6267E008673DF /* Fldtk_Document_Browser.cxx in Sources */,
+				C9FF05F20BC6267E008673DF /* Fldtk_Document_Tabs.cxx in Sources */,
+				C9FF05F30BC6267E008673DF /* Fldtk_Editor.cxx in Sources */,
+				C9FF05F40BC6267E008673DF /* Fldtk_Layout_Editor.cxx in Sources */,
+				C9FF05F50BC6267E008673DF /* Fldtk_Script_Editor.cxx in Sources */,
+				C9FF05F60BC6267E008673DF /* Flio_Inspector.cxx in Sources */,
+				C9FF05F70BC6267E008673DF /* Flio_MNP4_Serial.cxx in Sources */,
+				C9FF05F80BC6267E008673DF /* Flio_Serial_Port.cxx in Sources */,
+				C9FF05F90BC6267E008673DF /* Flmm_Console.cxx in Sources */,
+				C9FF05FA0BC6267E008673DF /* Flmm_Set_Check_Button.cxx in Sources */,
+				C9FF05FB0BC6267E008673DF /* Flmm_Set_Input.cxx in Sources */,
+				C9FF05FC0BC6267E008673DF /* Dtk_Document.cxx in Sources */,
+				C9FF05FD0BC6267E008673DF /* Dtk_Document_Manager.cxx in Sources */,
+				C9FF05FE0BC6267E008673DF /* Dtk_Layout_Document.cxx in Sources */,
+				C9FF05FF0BC6267E008673DF /* Dtk_Project.cxx in Sources */,
+				C9FF06000BC6267E008673DF /* Dtk_Script_Document.cxx in Sources */,
+				C9FF06010BC6267E008673DF /* Fldtk_Inspector.cxx in Sources */,
+				C9FF06030BC6267E008673DF /* Fldtk_Prefs.cxx in Sources */,
+				C9FF06050BC6267E008673DF /* Fldtk_Proj_Settings.cxx in Sources */,
+				C9FF06070BC6267E008673DF /* main_ui.cxx in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0867D6ABFE840B52C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C0E91AC608A95435008D54AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FltkTpl_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(LIBRARY_SEARCH_PATHS)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../../../newt0/build\"";
+				OTHER_LDFLAGS = (
+					"-lfltk",
+					"$(OTHER_LDFLAGS)",
+				);
+				PRODUCT_NAME = DyneTK;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		C0E91AC708A95435008D54AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FltkTpl_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(LIBRARY_SEARCH_PATHS)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../../../newt0/build\"";
+				OTHER_LDFLAGS = (
+					"-lfltk",
+					"$(OTHER_LDFLAGS)",
+				);
+				PRODUCT_NAME = FltkTpl;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C0E91ACA08A95435008D54AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					..,
+					../../../newt0/src/newt_core/incs/darwin/,
+					../../../newt0/src/newt_core/incs,
+				);
+				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		C0E91ACB08A95435008D54AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "$(LIBRARY_SEARCH_PATHS)";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C0E91AC508A95435008D54AB /* Build configuration list for PBXNativeTarget "DyneTK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0E91AC608A95435008D54AB /* Debug */,
+				C0E91AC708A95435008D54AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "DyneTK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0E91ACA08A95435008D54AB /* Debug */,
+				C0E91ACB08A95435008D54AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 20286C28FDCF999611CA2CEA /* Project object */;
+}

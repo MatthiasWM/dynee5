@@ -36,7 +36,10 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <process.h>
+
+#ifdef WIN32
+# include <process.h>
+#endif
 
 
 Flio_Serial_Port::Flio_Serial_Port(int X, int Y, int W, int H, const char *L)
@@ -49,9 +52,11 @@ Flio_Serial_Port::Flio_Serial_Port(int X, int Y, int W, int H, const char *L)
   rxActive_(0),
   txActive_(0),
   pRxActive_(0),
-  pTxActive_(0),
-  port_(INVALID_HANDLE_VALUE),
+  pTxActive_(0)
+#ifdef WIN32
+, port_(INVALID_HANDLE_VALUE),
   thread_(0)
+#endif
 {
   NRing_ = 2048;
   ring_ = (unsigned char *)malloc(NRing_);
@@ -81,6 +86,8 @@ int Flio_Serial_Port::open(const char *portname, int bps)
     return -1;
 
   portname_ = strdup(portname);
+  
+#ifdef WIN32
   port_ = CreateFile(portname, GENERIC_READ|GENERIC_WRITE, 
     0, 0L, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, 0L ); 
   if (port_ == INVALID_HANDLE_VALUE) {
@@ -146,7 +153,8 @@ int Flio_Serial_Port::open(const char *portname, int bps)
 
   if (!thread_)
     _beginthread(reader_thread_, 0, this);
-
+#endif
+  
   redraw();
 
   return 0;
@@ -178,6 +186,7 @@ void Flio_Serial_Port::lights_cb(void *u)
 
 int Flio_Serial_Port::write(const unsigned char *data, int n)
 {
+#ifdef WIN32
   DWORD result;
   txActive_ = 1;
   BOOL ret = WriteFile( port_, data, n, &result, &overlapped_ );
@@ -186,6 +195,9 @@ int Flio_Serial_Port::write(const unsigned char *data, int n)
   } else {
     return -1;
   }
+#else
+  return -1;
+#endif
 }
 
 
@@ -231,10 +243,13 @@ int Flio_Serial_Port::available_to_end()
 void Flio_Serial_Port::close()
 {
   Fl::remove_timeout(lights_cb, this);
+#ifdef WIN32
   if (port_ != INVALID_HANDLE_VALUE) {
     CloseHandle(port_);
     port_ = INVALID_HANDLE_VALUE;
   }
+#else
+#endif
   redraw();
 }
 
@@ -248,6 +263,7 @@ int Flio_Serial_Port::free_to_end()
   }
 }
 
+#ifdef WIN32
 
 void Flio_Serial_Port::reader_thread() 
 {
@@ -282,10 +298,12 @@ void Flio_Serial_Port::reader_thread_(void *u)
   This->reader_thread();
 }
 
+#endif
 
 void Flio_Serial_Port::draw()
 {
   Fl_Box::draw();
+#ifdef WIN32
   int r = (h()+2)/4, cx = x()+w()/2, cy = y()+h()/2;
   Fl_Color rxd, txd;
   if (port_!=INVALID_HANDLE_VALUE) {
@@ -296,6 +314,7 @@ void Flio_Serial_Port::draw()
   }
   fl_draw_symbol("@circle", cx-2*r-2, cy-r, 2*r+1, 2*r+1, rxd);
   fl_draw_symbol("@circle", cx+0*r+2, cy-r, 2*r+1, 2*r+1, txd);
+#endif
 }
 
 
@@ -319,7 +338,11 @@ void Flio_Serial_Port::on_read_cb(void *u) {
 
 int Flio_Serial_Port::is_open() 
 {
+#ifdef WIN32
   return (port_!=INVALID_HANDLE_VALUE);
+#else
+  return -1;
+#endif
 }
 
 

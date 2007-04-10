@@ -280,7 +280,7 @@ void Flio_Mnp4_Serial::send_block(unsigned char *data, int size)
 
 void Flio_Mnp4_Serial::send_data_block(unsigned char *data, int size)
 {
-  const max_block = 250;
+  const int max_block = 250;
   int i;
   unsigned char *src = data;
   while (size>max_block) {

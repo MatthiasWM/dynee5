@@ -51,7 +51,7 @@ Fldtk_Editor::Fldtk_Editor(const char *L)
 }
 
 
-Fldtk_Editor::Fldtk_Editor_(const char *L)
+void Fldtk_Editor::Fldtk_Editor_(const char *L)
 {
 	if (L)
 		copy_label(L);

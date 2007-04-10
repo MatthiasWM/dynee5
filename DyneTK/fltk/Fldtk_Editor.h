@@ -41,7 +41,7 @@ class Fldtk_Editor : public Fl_Group
 public:
 	Fldtk_Editor(int X, int Y, int W, int H, const char *L=0L);
 	Fldtk_Editor(const char *L=0L);
-	Fldtk_Editor_(const char *L=0L);
+	void Fldtk_Editor_(const char *L=0L);
 	virtual ~Fldtk_Editor();
 
 	int		loadFile(const char *filename);

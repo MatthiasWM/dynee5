@@ -153,15 +153,17 @@ private:
   char rxActive_, pRxActive_;
   char txActive_, pTxActive_;
 
-  void reader_thread();
-  static void __cdecl reader_thread_(void*);
   int available_to_end();
   int free_to_end();
-
+  
+#ifdef WIN32
+  void reader_thread();
+  static void __cdecl reader_thread_(void*);
   HANDLE port_;
   HANDLE event_;
   unsigned long thread_;
   OVERLAPPED overlapped_;
+#endif
 };
 
 

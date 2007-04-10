@@ -49,7 +49,10 @@ extern "C" {
 }
 
 #include <assert.h>
-#include <winsock.h>
+
+#ifndef WIN32
+# define Sleep(a) sleep((a)/1000)
+#endif
 
 extern Fl_Window *wConnect;
 
@@ -459,12 +462,12 @@ int InspectorSendPackage(const char *filename, const char *symbol)
 	}
 
 	// read the package itself from disk
-	unsigned __int8 *buffer;
+	uint8_t *buffer;
 	FILE *f = fopen(filename, "rb");
 	fseek(f, 0, SEEK_END);
 	int nn = ftell(f);
 	fseek(f, 0, SEEK_SET);
-	buffer = (unsigned __int8 *)malloc(nn);
+	buffer = (uint8_t*)malloc(nn);
 	int n = fread(buffer, 1, nn, f);
 	fclose(f);
 

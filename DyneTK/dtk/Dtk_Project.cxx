@@ -41,7 +41,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <direct.h>
+#ifdef WIN32
+# include <direct.h>
+#endif
 
 extern "C" {
 #include "NewtCore.h"
@@ -188,7 +190,7 @@ RWDU		autoClose: TRUE,  // I can not find the corresponding flag in the Package 
 		packageSettings: {
 RWDX		packageName: "Minimal:SIG", 
 RWDX		version: "1", 
-RWDX		copyright: "®1997 Apple Computer, Inc. All rights reserved.", 
+RWDX		copyright: "Ã†1997 Apple Computer, Inc. All rights reserved.", 
 			optimizeSpeed: TRUE, 
 			copyProtected: NIL, 
 RWDX		deleteOnDownload: TRUE, 
@@ -233,6 +235,18 @@ int Dtk_Project::load()
 
 	NewtPrintObject(stdout, p);
 
+		char projPath[FL_PATH_MAX];
+		char currPath[FL_PATH_MAX];
+		strcpy(projPath, filename_);
+		char *name = (char*)fl_filename_name(projPath);
+		if (name) *name = 0;
+
+		const char *here = getcwd(currPath, FL_PATH_MAX);
+		if (here) {
+			chdir(projPath);
+		}
+    
+  
 	// now extract all supported settings and write them into their locations
 	if (NewtRefIsFrame(p)) {
 		int32_t ix;
@@ -330,7 +344,11 @@ int Dtk_Project::load()
 		}
 	}
 	dtkProjSettings->updateDialog();
-
+    
+		if (here) {
+			chdir(currPath);
+		}
+      
 	return 0;
 }
 
@@ -350,7 +368,7 @@ void Dtk_Project::setDefaults()
 
 	sprintf(buf, "%s:SIG", shortname_);
 	dtkProjSettings->package->name->set(buf);
-	dtkProjSettings->package->copyright->set("©2007. All rights reserved.");
+	dtkProjSettings->package->copyright->set("Â©2007. All rights reserved.");
 	dtkProjSettings->package->version->set("1");
 	dtkProjSettings->package->deleteOnDownload->set(1);
 }

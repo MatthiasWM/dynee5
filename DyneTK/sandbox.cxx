@@ -51,7 +51,6 @@
 #include "images/toolbox_closed.xpm"
 
 #include <assert.h>
-#include <winsock.h>
 
 extern "C" {
 #include "NewtCore.h"
@@ -274,12 +273,12 @@ void testPkgReader(const char *filename)
 	filename = fl_file_chooser("Load Package", "*.pkg", "E:/Azureus/unna");
 	if (!filename) return;
 */
-	unsigned __int8 *buffer;
+	uint8_t *buffer;
 	FILE *f = fopen(filename, "rb");
 	fseek(f, 0, SEEK_END);
 	int nn = ftell(f);
 	fseek(f, 0, SEEK_SET);
-	buffer = (unsigned __int8 *)malloc(nn);
+	buffer = (uint8_t*)malloc(nn);
 	int n = fread(buffer, 1, nn, f);
 	fclose(f);
 	if (n) {
@@ -368,6 +367,67 @@ void testPkgReader(const char *filename)
 	//project->buildPackage();
 	//project->savePackage();
 
+/** Some layout file...
+
+layoutsettings: {
+  ntkplatform: 1, 
+  fileversion: 2, 
+  windowrect: {left: 49, top: 350, right: 336, bottom: 716}, 
+  layoutname: "Main.t", 
+  layouttype: 0, 
+  layoutsize: {h: 240, v: 320}, 
+  gridsize: {h: 4, v: 4}, 
+  gridstate: TRUE, 
+  gridsnap: NIL}, 
+templatehierarchy: {
+  value: {
+    __nttemplate: {
+      value: 157, 
+      __ntdatatype: "PROT", 
+      __ntFlags: 16}, 
+    title: {
+      __ntdatatype: "EVAL", 
+      value: "kAppName", 
+      __ntFlags: 0}, 
+    viewBounds: {
+      __ntdatatype: "RECT", 
+      value: {#01107511}, 
+      __ntFlags: 0}, 
+    viewFormat: {
+      __ntdatatype: "NUMB", 
+      value: 83951953, 
+      __ntFlags: 0}, 
+    stepchildren: {
+      __ntdatatype: "ARAY", 
+      value: [stepchildren: #011077d1], 
+      __ntFlags: 64}, 
+    FSM: {  
+      value: "nil", 
+      __ntdatatype: "EVAL", 
+      __ntFlags: 0}, 
+    viewQuitScript: {
+      value: 
+        "// must return the value of inherited:?viewQuitScript();\r
+        func()\r
+        begin\r
+          \tFSM:DoEvent('Cancel, nil);\r\tFSM:DoEvent('Disconnect, nil);\r
+          \tFSM:WaitForTerminal(\t// this function returns NIL if FSM terminal 
+          state reached normally, TRUE if user aborted\r\t\t\t\t\t\t\t\t\t\t{
+          \tstatusText:\t\t\t\t\t\t\"Please wait...\",\t\t\t\t\t\t\t\t\t\t\t
+          // message at top of status dialog\r\t\t\t\t\t\t\t\t\t\t\ttitleText:
+          \t\t\t\t\t\t\t\"FSM is executing toward terminal state.\",\t
+          // message at bottom of status dialog\r\t\t\t\t\t\t\t\t\t\t\tdelayUntilStatusVisible:\t2000,\t\t\t\t\t\t// show status slip 2 seconds after entering WaitForTerminal\r\t\t\t\t\t\t\t\t\t\t\tdelayUntilAbortVisible:\t\t8000,\t\t\t\t\t\t// show abort button 8 seconds after status dialog opens\r\t\t\t\t\t\t\t\t\t\t\tabortButtonText:\t\t\t\t\"Go Away!\",\t}\t);\t\t// text inside abort button\r\tFSM := FSM:Dispose();\r\tinherited:?viewQuitScript();\t\t// this method is defined internally\rend", __ntdatatype: "SCPT", __ntFlags: 0}, viewSetupFormScript: {value: "func()\rbegin\r\t// resize to fit on all \"small\" newtons.\r\tconstant kMaxWidth := 240;\r\tconstant kMaxHeight := 336;\r\t\r\tlocal b := GetAppParams();\r\tself.viewBounds := RelBounds(b.appAreaLeft, b.appAreaTop,\r\t\t\t\t\t\t\t\t\t\t  MIN(b.appAreaWidth, kMaxWidth),\r\t\t\t\t\t\t\t\t\t\t  MIN(b.appAreaHeight, kMaxHeight));\r\t\r\tFSM := GetLayout(\"CommsFSM\"):Instantiate();\rend", 
+      __ntdatatype: "SCPT", 
+      __ntFlags: 0}, 
+    ReorientToScreen: {
+      value: "ROM_DefRotateFunc", 
+      __ntdatatype: "SCPT", __ntFlags: 0}
+    }, 
+  __ntid: 'protoApp, 
+  __ntName: "vMain"}
+}
+
+**/
 
 //
 // End of "$Id$".
