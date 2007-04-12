@@ -154,6 +154,14 @@ SOURCE=..\fltk\Fldtk_Editor.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Fldtk_Layout_Drop_Box.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Layout_Drop_Box.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Fldtk_Layout_Editor.cxx
 # End Source File
 # Begin Source File
@@ -295,6 +303,18 @@ SOURCE=..\CREDITS
 # Begin Source File
 
 SOURCE=..\README
+# End Source File
+# End Group
+# Begin Group "nt"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\nt\Nt_Group.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\nt\Nt_Group.h
 # End Source File
 # End Group
 # Begin Source File

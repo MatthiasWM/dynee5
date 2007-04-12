@@ -38,6 +38,9 @@ decl {\#include "fltk/Fldtk_Document_Tabs.h"} {public
 decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
 } 
 
+decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {public
+} 
+
 decl {\#include <FL/fl_ask.h>} {public
 } 
 
@@ -49,7 +52,7 @@ widget_class Fldtk_Main_Window {
   xywh {670 176 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {open
+  Fl_Menu_Bar {} {
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
@@ -452,7 +455,7 @@ widget_class Fldtk_Main_Window {
       }
     }
   }
-  Fl_Group {} {
+  Fl_Group {} {open
     xywh {0 25 785 35} box THIN_DOWN_BOX
   } {
     Fl_Button {} {
@@ -532,7 +535,12 @@ widget_class Fldtk_Main_Window {
       tooltip {Help Index} xywh {505 30 25 25} labelfont 1 labelsize 13 deactivate
     }
     Fl_Box {} {
-      xywh {535 30 15 25} deactivate resizable
+      xywh {760 30 15 25} deactivate resizable
+    }
+    Fl_Button {} {
+      label {.lyt} selected
+      tooltip {Layout Drop Box} xywh {545 30 25 25} labelsize 11
+      class Fldtk_Layout_Drop_Box
     }
   }
   Fl_Group {} {
@@ -732,7 +740,7 @@ Function {create_connect_dialog()} {} {
     }
     Fl_Button {} {
       label Cancel
-      callback {InspectorCancelConnect();} selected
+      callback {InspectorCancelConnect();}
       xywh {72 81 80 20} labelsize 12 hotspot
     }
   }

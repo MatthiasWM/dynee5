@@ -52,6 +52,8 @@ extern "C" {
 
 #ifndef WIN32
 # define Sleep(a) sleep((a)/1000)
+#else
+# include <winsock2.h>
 #endif
 
 extern Fl_Window *wConnect;

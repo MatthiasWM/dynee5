@@ -429,6 +429,27 @@ templatehierarchy: {
 
 **/
 
+/*
+	NewtInit(argc, (const char**)argv, 0);
+//	NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
+	NcSetGlobalVar(NSSYM(printDepth), NSINT(10));
+	NEWT_INDENT = 1;
+    uint8_t *buffer;
+    FILE *f = fopen("../test/main.lyt", "rb");
+	FILE *o = fopen("../test/main.cxx", "wb");
+    fseek(f, 0, SEEK_END);
+    int nn = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    buffer = (uint8_t*)malloc(nn);
+    int n = fread(buffer, 1, nn, f);
+    fclose(f);
+    if (n) {
+      newtRef obj = NewtReadNSOF(buffer, n);
+      NewtPrintObject(o, obj);
+    }
+	fclose(o);
+*/  
+
 //
 // End of "$Id$".
 //

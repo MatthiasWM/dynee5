@@ -95,21 +95,6 @@ extern "C" void yyerror(char * s)
  * \retval	0
  */
 int main(int argc, char **argv) {
-
-  NewtInit(argc, (const char**)argv, 0);
-    uint8_t *buffer;
-    FILE *f = fopen("../../../test/main.lyt", "rb");
-    fseek(f, 0, SEEK_END);
-    int nn = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    buffer = (uint8_t*)malloc(nn);
-    int n = fread(buffer, 1, nn, f);
-    fclose(f);
-    if (n) {
-      newtRef o = NewtReadNSOF(buffer, n);
-      NewtPrintObject(stdout, o);
-    }
-  
   
 	// initialize our GUI library
 	Fl::lock();
