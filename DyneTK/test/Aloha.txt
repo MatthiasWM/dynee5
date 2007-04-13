@@ -1,5 +1,8 @@
 
 
+
+
+_view000 :=
 {
 	title: "Aloha DyneTK!",
 	viewBounds: { left: 40, top: 40, bottom: 324, right: 274 },
@@ -7,6 +10,7 @@
 	_proto: @157,
 	debug: "alohaDtk",
 	appSymbol: '|Aloha:DTK|,
+/*
 	stepChildren: [
 		{	
 			buttonClickScript: 
@@ -21,5 +25,18 @@
 			_proto: @226,
 		}
 	]
-}
+*/
+};
 
+_view001 :=
+{	
+	text: "Don't Panic!",
+	viewBounds: {left: 34, top: 64, bottom: 120, right: 210},
+	_proto: @226
+};
+
+//AddStepForm(_view000, _view001);
+
+x := func(a) return a*a;
+call x with (2);
+_view000;

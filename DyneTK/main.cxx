@@ -106,8 +106,8 @@ int main(int argc, char **argv) {
 
 	// initialize the local interpreter and compiler
 	NewtInit(argc, (const char**)argv, 0);
-	NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
-	NcSetGlobalVar(NSSYM(printDepth), NSINT(9999));
+	//NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
+	//NcSetGlobalVar(NSSYM(printDepth), NSINT(9999));
 
 	// create some global classes 
 	documents = new Dtk_Document_Manager();

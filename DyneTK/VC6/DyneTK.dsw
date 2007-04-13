@@ -3,7 +3,7 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "newt_lib"=..\..\NEWT0\PLATFORM\VISUALC6\newt_lib.dsp - Package Owner=<4>
+Project: "DyneMP"=..\..\DyneMP\VC6\DyneMP.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -26,6 +26,18 @@ Package=<4>
     Begin Project Dependency
     Project_Dep_Name newt_lib
     End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "newt_lib"=..\..\..\newt0\platform\VisualC6\newt_lib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
 }}}
 
 ###############################################################################
