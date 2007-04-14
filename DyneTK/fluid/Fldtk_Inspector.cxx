@@ -81,11 +81,115 @@ static const char *idata_toolbox_inactive[] = {
 };
 static Fl_Pixmap image_toolbox_inactive(idata_toolbox_inactive);
 
+void Fldtk_Inspector::cb_Stop_i(Fl_Button*, void*) {
+  InspectorStopOnThrows();
+}
+void Fldtk_Inspector::cb_Stop(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_Stop_i(o,v);
+}
+
+void Fldtk_Inspector::cb_Troff_i(Fl_Button*, void*) {
+  InspectorTraceOff();
+}
+void Fldtk_Inspector::cb_Troff(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_Troff_i(o,v);
+}
+
+void Fldtk_Inspector::cb_bt_i(Fl_Button*, void*) {
+  InspectorStackTrace();
+}
+void Fldtk_Inspector::cb_bt(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_bt_i(o,v);
+}
+
+void Fldtk_Inspector::cb_Exit_i(Fl_Button*, void*) {
+  InspectorExitBreakLoop();
+}
+void Fldtk_Inspector::cb_Exit(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_Exit_i(o,v);
+}
+
+void Fldtk_Inspector::cb_0_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(0);
+}
+void Fldtk_Inspector::cb_0(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_0_i(o,v);
+}
+
+void Fldtk_Inspector::cb_1_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(1);
+}
+void Fldtk_Inspector::cb_1(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_1_i(o,v);
+}
+
+void Fldtk_Inspector::cb_2_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(2);
+}
+void Fldtk_Inspector::cb_2(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_2_i(o,v);
+}
+
+void Fldtk_Inspector::cb_3_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(3);
+}
+void Fldtk_Inspector::cb_3(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_3_i(o,v);
+}
+
+void Fldtk_Inspector::cb_4_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(4);
+}
+void Fldtk_Inspector::cb_4(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_4_i(o,v);
+}
+
+void Fldtk_Inspector::cb_5_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(5);
+}
+void Fldtk_Inspector::cb_5(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_5_i(o,v);
+}
+
+void Fldtk_Inspector::cb_6_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(6);
+}
+void Fldtk_Inspector::cb_6(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_6_i(o,v);
+}
+
+void Fldtk_Inspector::cb_7_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(7);
+}
+void Fldtk_Inspector::cb_7(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_7_i(o,v);
+}
+
+void Fldtk_Inspector::cb_8_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(8);
+}
+void Fldtk_Inspector::cb_8(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_8_i(o,v);
+}
+
+void Fldtk_Inspector::cb_9_i(Fl_Menu_*, void*) {
+  InspectorPrintDepth(9);
+}
+void Fldtk_Inspector::cb_9(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_9_i(o,v);
+}
+
 Fl_Menu_Item Fldtk_Inspector::menu_[] = {
- {"1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
- {"2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
- {"3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
- {"oo", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"0", 0,  (Fl_Callback*)Fldtk_Inspector::cb_0, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"1", 0,  (Fl_Callback*)Fldtk_Inspector::cb_1, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"2", 0,  (Fl_Callback*)Fldtk_Inspector::cb_2, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"3", 0,  (Fl_Callback*)Fldtk_Inspector::cb_3, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"4", 0,  (Fl_Callback*)Fldtk_Inspector::cb_4, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"5", 0,  (Fl_Callback*)Fldtk_Inspector::cb_5, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"6", 0,  (Fl_Callback*)Fldtk_Inspector::cb_6, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"7", 0,  (Fl_Callback*)Fldtk_Inspector::cb_7, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"8", 0,  (Fl_Callback*)Fldtk_Inspector::cb_8, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"9", 0,  (Fl_Callback*)Fldtk_Inspector::cb_9, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -126,30 +230,29 @@ Fldtk_Inspector::Fldtk_Inspector(int X, int Y, int W, int H, const char *L)
     o->tooltip("Stop on throws");
     o->labelsize(9);
     o->labelcolor(FL_GRAY0);
-    o->deactivate();
+    o->callback((Fl_Callback*)cb_Stop);
   } // Fl_Button* o
   { Fl_Button* o = new Fl_Button(55, 5, 25, 25, "Troff");
     o->tooltip("Trace off");
     o->labelsize(9);
     o->labelcolor(FL_GRAY0);
-    o->deactivate();
+    o->callback((Fl_Callback*)cb_Troff);
   } // Fl_Button* o
   { Fl_Button* o = new Fl_Button(80, 5, 25, 25, "bt");
     o->tooltip("Stack trace");
     o->labelsize(9);
     o->labelcolor(FL_GRAY0);
-    o->deactivate();
+    o->callback((Fl_Callback*)cb_bt);
   } // Fl_Button* o
   { Fl_Button* o = new Fl_Button(105, 5, 25, 25, "Exit");
     o->tooltip("Exit break loop");
     o->labelsize(9);
     o->labelcolor(FL_GRAY0);
-    o->deactivate();
+    o->callback((Fl_Callback*)cb_Exit);
   } // Fl_Button* o
   { Fl_Choice* o = new Fl_Choice(135, 6, 50, 23);
     o->tooltip("Print Depth");
     o->down_box(FL_BORDER_BOX);
-    o->deactivate();
     o->menu(menu_);
   } // Fl_Choice* o
   { Fl_Box* o = new Fl_Box(440, 5, 120, 25);
@@ -168,22 +271,22 @@ Fldtk_Inspector::Fldtk_Inspector(int X, int Y, int W, int H, const char *L)
     wInspectorSerial = serial;
   } // Flio_Inspector* serial
   { Fl_Button* o = new Fl_Button(215, 5, 25, 25, "Test\n1");
-    o->tooltip("Exit break loop");
     o->labelsize(9);
     o->labelcolor(FL_GRAY0);
     o->callback((Fl_Callback*)cb_Test);
+    o->hide();
   } // Fl_Button* o
   { Fl_Button* o = new Fl_Button(240, 5, 25, 25, "Test\n2");
-    o->tooltip("Exit break loop");
     o->labelsize(9);
     o->labelcolor(FL_GRAY0);
     o->callback((Fl_Callback*)cb_Test1);
+    o->hide();
   } // Fl_Button* o
   { Fl_Button* o = new Fl_Button(265, 5, 25, 25, "Test\n3");
-    o->tooltip("Exit break loop");
     o->labelsize(9);
     o->labelcolor(FL_GRAY0);
     o->callback((Fl_Callback*)cb_Test2);
+    o->hide();
   } // Fl_Button* o
   o->end();
 } // Fl_Group* o

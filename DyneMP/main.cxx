@@ -68,8 +68,8 @@ int main(int argc, char **argv) {
 	// initialize the local interpreter and compiler
 	NewtInit(argc, (const char**)argv, 0);
 	// set up all the Newt stuff!
-	NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
-	NcSetGlobalVar(NSSYM(printDepth), NSINT(9999));
+	NcSetGlobalVar(NSSYM(printLength), NSINT(20));
+	NcSetGlobalVar(NSSYM(printDepth), NSINT(5));
 	// load packages from a directory?
 	// if we have the optional pipe argument, open an inspector connection to DTK
 

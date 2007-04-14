@@ -139,7 +139,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mEdit {
-      label Edit
+      label Edit open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -391,7 +391,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mWindow {
-      label Window open
+      label Window
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -510,9 +510,9 @@ widget_class Fldtk_Main_Window {
       label {@search}
       tooltip Find xywh {335 30 25 25} labelsize 11 deactivate
     }
-    Fl_Button {} {
-      label Scr
-      tooltip {Newt Screen Shot} xywh {365 30 25 25} labelsize 9 deactivate
+    Fl_Button tSnapshot {
+      callback {InspectorSnapshot();} selected
+      tooltip {Newt Screen Shot} image {../images/camera.png} xywh {365 30 25 25} labelsize 9
     }
     Fl_Button {} {
       label Bld
@@ -538,7 +538,7 @@ widget_class Fldtk_Main_Window {
       xywh {760 30 15 25} deactivate resizable
     }
     Fl_Button {} {
-      label {.lyt} selected
+      label {.lyt}
       tooltip {Layout Drop Box} xywh {545 30 25 25} labelsize 11
       class Fldtk_Layout_Drop_Box
     }

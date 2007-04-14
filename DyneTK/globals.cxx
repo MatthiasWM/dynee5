@@ -579,6 +579,41 @@ void UpdateMainMenu()
 	dtkMain->activate_menus(mask);
 }
 
+// FIXME should be a toggle
+void InspectorStopOnThrows()
+{
+	InspectorSendScript("breakOnThrows := 1");
+}
+
+// FIXME should be a toggle
+void InspectorTraceOff()
+{
+	InspectorSendScript("trace := 1");
+}
+
+void InspectorStackTrace()
+{
+	InspectorSendScript("StackTrace()");
+}
+
+void InspectorExitBreakLoop()
+{
+	InspectorSendScript("ExitBreakLoop()");
+}
+
+void InspectorPrintDepth(int d)
+{
+	char buf[80];
+	sprintf(buf, "printDepth := %d", d);
+	InspectorSendScript(buf);
+}
+
+void InspectorSnapshot()
+{
+	fl_message("Snapshot is not yet implemented");
+}
+
+
 //
 // End of "$Id$".
 //

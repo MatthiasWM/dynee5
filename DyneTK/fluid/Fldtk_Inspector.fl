@@ -33,50 +33,88 @@ decl {\#include "main.h"} {public
 } 
 
 widget_class Fldtk_Inspector {open
-  xywh {623 293 775 139} type Double resizable visible position_relative
+  xywh {476 216 775 139} type Double resizable visible position_relative
 } {
   Fl_Group {} {open
     xywh {0 0 775 35} box FLAT_BOX
   } {
     Fl_Button wConnect {
-      callback {InspectorConnect();} selected
+      callback {InspectorConnect();}
       tooltip {Connect/Disconnect} image {../images/toolbox_closed.xpm} deimage {../images/toolbox_inactive.xpm} xywh {5 5 25 25} labelsize 9 labelcolor 32
       code0 {wInspectorConnect = wConnect;}
     }
     Fl_Button {} {
       label Stop
-      tooltip {Stop on throws} xywh {30 5 25 25} labelsize 9 labelcolor 32 deactivate
+      callback {InspectorStopOnThrows();}
+      tooltip {Stop on throws} xywh {30 5 25 25} labelsize 9 labelcolor 32
     }
     Fl_Button {} {
       label Troff
-      tooltip {Trace off} xywh {55 5 25 25} labelsize 9 labelcolor 32 deactivate
+      callback {InspectorTraceOff();}
+      tooltip {Trace off} xywh {55 5 25 25} labelsize 9 labelcolor 32
     }
     Fl_Button {} {
       label bt
-      tooltip {Stack trace} xywh {80 5 25 25} labelsize 9 labelcolor 32 deactivate
+      callback {InspectorStackTrace();}
+      tooltip {Stack trace} xywh {80 5 25 25} labelsize 9 labelcolor 32
     }
     Fl_Button {} {
       label Exit
-      tooltip {Exit break loop} xywh {105 5 25 25} labelsize 9 labelcolor 32 deactivate
+      callback {InspectorExitBreakLoop();}
+      tooltip {Exit break loop} xywh {105 5 25 25} labelsize 9 labelcolor 32
     }
-    Fl_Choice {} {open
-      tooltip {Print Depth} xywh {135 6 50 23} down_box BORDER_BOX deactivate
+    Fl_Choice {} {
+      tooltip {Print Depth} xywh {135 6 50 23} down_box BORDER_BOX
     } {
       MenuItem {} {
+        label 0
+        callback {InspectorPrintDepth(0);}
+        xywh {10 10 100 20} labelsize 11
+      }
+      MenuItem {} {
         label 1
+        callback {InspectorPrintDepth(1);}
         xywh {10 10 100 20} labelsize 11
       }
       MenuItem {} {
         label 2
+        callback {InspectorPrintDepth(2);}
         xywh {10 10 100 20} labelsize 11
       }
       MenuItem {} {
         label 3
-        xywh {10 10 100 20} labelsize 11
+        callback {InspectorPrintDepth(3);}
+        xywh {20 20 100 20} labelsize 11
       }
       MenuItem {} {
-        label oo
-        xywh {10 10 100 20} labelsize 11
+        label 4
+        callback {InspectorPrintDepth(4);}
+        xywh {20 20 100 20} labelsize 11
+      }
+      MenuItem {} {
+        label 5
+        callback {InspectorPrintDepth(5);}
+        xywh {20 20 100 20} labelsize 11
+      }
+      MenuItem {} {
+        label 6
+        callback {InspectorPrintDepth(6);}
+        xywh {30 30 100 20} labelsize 11
+      }
+      MenuItem {} {
+        label 7
+        callback {InspectorPrintDepth(7);}
+        xywh {30 30 100 20} labelsize 11
+      }
+      MenuItem {} {
+        label 8
+        callback {InspectorPrintDepth(8);}
+        xywh {30 30 100 20} labelsize 11
+      }
+      MenuItem {} {
+        label 9
+        callback {InspectorPrintDepth(9);}
+        xywh {20 20 100 20} labelsize 11
       }
     }
     Fl_Box {} {
@@ -91,19 +129,19 @@ widget_class Fldtk_Inspector {open
       label {Test
 1}
       callback {send_test(1);}
-      tooltip {Exit break loop} xywh {215 5 25 25} labelsize 9 labelcolor 32
+      xywh {215 5 25 25} labelsize 9 labelcolor 32 hide
     }
     Fl_Button {} {
       label {Test
 2}
       callback {send_test(2);}
-      tooltip {Exit break loop} xywh {240 5 25 25} labelsize 9 labelcolor 32
+      xywh {240 5 25 25} labelsize 9 labelcolor 32 hide
     }
     Fl_Button {} {
       label {Test
 3}
       callback {send_test(3);}
-      tooltip {Exit break loop} xywh {265 5 25 25} labelsize 9 labelcolor 32
+      xywh {265 5 25 25} labelsize 9 labelcolor 32 hide
     }
   }
   Fl_Text_Editor console {

@@ -111,6 +111,8 @@ protected:
    * 'fobj' we received a NSOF object.
    */
   void gotNewtNtkFobj();
+  void gotNewtNtkFobjSize();
+
   void gotNewtNtkText();
 
   /**
@@ -126,6 +128,12 @@ protected:
   void gotNewtNtkEref();
 
   /**
+   * 'fstk' unknown.
+   */
+  void gotNewtNtkFstkSize();
+  void gotNewtNtkFstk();
+
+  /**
    * 'eref' exception, not entirely implemented yet.
    */
   void gotNewtNtkErefSize();
@@ -139,6 +147,7 @@ protected:
   virtual int on_receive();
 
 private:
+	void dumpBuffer();
   int consume_block(unsigned char *&buf, int &n);
   unsigned int get_uint(const unsigned char *src);
 

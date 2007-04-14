@@ -247,8 +247,14 @@ void Flio_Inspector::gotNewtNtk4() {
   else if (memcmp(buffer_+8, "eref", 4)==0)
     // eerr: size, text, text, errno, garble
     wait_for_more(4, &Flio_Inspector::gotNewtNtkEref, &Flio_Inspector::gotErr);
+  else if (memcmp(buffer_+8, "fstk", 4)==0)
+    // fstk: size, stack dump in NSOF format
+    wait_for_more(4, &Flio_Inspector::gotNewtNtkFstk, &Flio_Inspector::gotErr);
+  else if (memcmp(buffer_+8, "eext", 4)==0)
+    // eext: ?? just dump
+    wait_for_more(4, &Flio_Inspector::gotNewtNtkFstk, &Flio_Inspector::gotErr);
   else {
-    printf("*** ERROR *** unknown command %.4s\n", buffer_+8);
+    printf("*** ERROR *** Inspector received unknown command %.4s\n", buffer_+8);
     waitForCommand();
   }
 }
@@ -268,7 +274,12 @@ void Flio_Inspector::gotNewtNtkRslt() {
 
 void Flio_Inspector::gotNewtNtkFobj() {
   unsigned int n = get_uint(buffer_+12);
-  wait_for_more(n, &Flio_Inspector::waitForCommand, &Flio_Inspector::gotErr);
+  wait_for_more(n, &Flio_Inspector::gotNewtNtkFobjSize, &Flio_Inspector::gotErr);
+}
+
+void Flio_Inspector::gotNewtNtkFobjSize() {
+  dumpBuffer();
+  waitForCommand();
 }
 
 void Flio_Inspector::gotNewtNtkText() {
@@ -327,6 +338,37 @@ void Flio_Inspector::gotNewtNtkErefSize() {
   wConsole->insert("\n");
   // at n2, we have an NSOF containing errorCode and symbol
   waitForCommand();
+}
+
+void Flio_Inspector::gotNewtNtkFstk() {
+  unsigned int n = get_uint(buffer_+12);
+  wait_for_more(n, &Flio_Inspector::gotNewtNtkFstkSize, &Flio_Inspector::gotErr);
+}
+
+void Flio_Inspector::gotNewtNtkFstkSize() {
+  wConsole->insert("Unhandled fstk chunk\n");
+  dumpBuffer();
+  waitForCommand();
+}
+
+
+void Flio_Inspector::dumpBuffer()
+{
+	int i, j, nLine = nBuffer_/16;
+	for (i=0; i<nBuffer_; i+=16) {
+		char buf[78];
+		memset(buf, 32, 78); buf[76] = '\n'; buf[77] = 0;
+		sprintf(buf, "%08x", i); buf[8] = ' ';
+		for (j=i; (j<i+16) && (j<nBuffer_); j++) {
+			unsigned char c = buffer_[j];
+			sprintf(buf+10+3*(j-i), "%02x", c); buf[12+3*(j-i)] = ' ';
+			if (isprint(c)) 
+				buf[59+j-i] = c;
+			else
+				buf[59+j-i] = '.';
+		}
+		wConsole->insert(buf);
+	}
 }
 
 // This happens when we press "EXIT": newtntp code

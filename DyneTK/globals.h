@@ -58,6 +58,12 @@ int		InspectorSendPackage(const char *filename, const char *symbol);
 int		InspectorLaunchPackage(const char *symbol);
 void	InspectorConnect();
 void	InspectorCancelConnect();
+void	InspectorStopOnThrows();
+void	InspectorTraceOff();
+void	InspectorStackTrace();
+void	InspectorExitBreakLoop();
+void	InspectorPrintDepth(int);
+void	InspectorSnapshot();
 
 void	UpdateMainMenu();
 

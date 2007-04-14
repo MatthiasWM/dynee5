@@ -151,6 +151,11 @@ public:
 private:
   void cb_mHelpAbout_i(Fl_Menu_*, void*);
   static void cb_mHelpAbout(Fl_Menu_*, void*);
+public:
+  Fl_Button *tSnapshot;
+private:
+  void cb_tSnapshot_i(Fl_Button*, void*);
+  static void cb_tSnapshot(Fl_Button*, void*);
   static Fl_Menu_Item menu_1[];
   static Fl_Menu_Item menu_2[];
 public:

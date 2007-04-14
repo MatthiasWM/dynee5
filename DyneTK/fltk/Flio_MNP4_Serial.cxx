@@ -146,7 +146,8 @@ block_data:
         // verify the calculated and the received checksum
         if (crc_ != crcIn_) {
           printf("Checksum error! Please resend everything after last correct block.\n");
-          // FIXME  send a NACK and the number of the last correct block
+          send_LT_ack_();	// send the ack for the last block we understood
+		  start_keep_alive_(); // delay the next keep-alive
         }
         // now the block is complete and we can call the callback
         handle_block_();

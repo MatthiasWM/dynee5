@@ -37,7 +37,35 @@ public:
 private:
   void cb_wConnect_i(Fl_Button*, void*);
   static void cb_wConnect(Fl_Button*, void*);
+  void cb_Stop_i(Fl_Button*, void*);
+  static void cb_Stop(Fl_Button*, void*);
+  void cb_Troff_i(Fl_Button*, void*);
+  static void cb_Troff(Fl_Button*, void*);
+  void cb_bt_i(Fl_Button*, void*);
+  static void cb_bt(Fl_Button*, void*);
+  void cb_Exit_i(Fl_Button*, void*);
+  static void cb_Exit(Fl_Button*, void*);
   static Fl_Menu_Item menu_[];
+  void cb_0_i(Fl_Menu_*, void*);
+  static void cb_0(Fl_Menu_*, void*);
+  void cb_1_i(Fl_Menu_*, void*);
+  static void cb_1(Fl_Menu_*, void*);
+  void cb_2_i(Fl_Menu_*, void*);
+  static void cb_2(Fl_Menu_*, void*);
+  void cb_3_i(Fl_Menu_*, void*);
+  static void cb_3(Fl_Menu_*, void*);
+  void cb_4_i(Fl_Menu_*, void*);
+  static void cb_4(Fl_Menu_*, void*);
+  void cb_5_i(Fl_Menu_*, void*);
+  static void cb_5(Fl_Menu_*, void*);
+  void cb_6_i(Fl_Menu_*, void*);
+  static void cb_6(Fl_Menu_*, void*);
+  void cb_7_i(Fl_Menu_*, void*);
+  static void cb_7(Fl_Menu_*, void*);
+  void cb_8_i(Fl_Menu_*, void*);
+  static void cb_8(Fl_Menu_*, void*);
+  void cb_9_i(Fl_Menu_*, void*);
+  static void cb_9(Fl_Menu_*, void*);
 public:
   Flio_Inspector *serial;
 private:
