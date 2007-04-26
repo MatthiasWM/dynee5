@@ -579,28 +579,49 @@ void UpdateMainMenu()
 	dtkMain->activate_menus(mask);
 }
 
-// FIXME should be a toggle
+/*---------------------------------------------------------------------------*/
+/**
+ * Toggle the 'breakOnThrows' flag on and off.
+ * \todo should be a toggle
+ */
 void InspectorStopOnThrows()
 {
 	InspectorSendScript("breakOnThrows := 1");
 }
 
-// FIXME should be a toggle
+/*---------------------------------------------------------------------------*/
+/**
+ * Toggle the 'trace' flag on and off.
+ * \todo should be a toggle
+ */
 void InspectorTraceOff()
 {
 	InspectorSendScript("trace := 1");
 }
 
+/*---------------------------------------------------------------------------*/
+/**
+ * Print the contents of the stack.
+ */
 void InspectorStackTrace()
 {
 	InspectorSendScript("StackTrace()");
 }
 
+/*---------------------------------------------------------------------------*/
+/**
+ * Leave this level in the break loop.
+ * \todo How can we know how deep we are in the break loop?
+ */
 void InspectorExitBreakLoop()
 {
 	InspectorSendScript("ExitBreakLoop()");
 }
 
+/*---------------------------------------------------------------------------*/
+/**
+ * Change the depth for printing all kinds of frames.
+ */
 void InspectorPrintDepth(int d)
 {
 	char buf[80];
@@ -608,6 +629,10 @@ void InspectorPrintDepth(int d)
 	InspectorSendScript(buf);
 }
 
+/*---------------------------------------------------------------------------*/
+/**
+ * Take a snapshot from the current screen content and send it to the Inspector.
+ */
 void InspectorSnapshot()
 {
 	fl_message("Snapshot is not yet implemented");
