@@ -44,8 +44,7 @@
  *       of the stack as well.
  */
 
-#include "../FL/Flmm_Message.H"
-#include "../FL/Flmm.H"
+#include "Flmm_Message.H"
 
 #include <stdlib.h>
 #include <stdarg.h>
@@ -480,6 +479,7 @@ void Flmm_Message::make_form()
   //w->resizable(new Fl_Box(60,10,110-60,27));
   w->end();
   w->set_modal();
+  /*
   if (Flmm::is_plastic_scheme()) {
     message_box->box(FL_PLASTIC_THIN_DOWN_BOX);
     input->box(FL_PLASTIC_DOWN_BOX);
@@ -489,6 +489,7 @@ void Flmm_Message::make_form()
     button[2]->box(FL_PLASTIC_UP_BOX);
     browser->box(FL_PLASTIC_THIN_DOWN_BOX);
   }
+  */
 }
 
 /**

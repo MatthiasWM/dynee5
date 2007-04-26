@@ -635,7 +635,9 @@ void InspectorPrintDepth(int d)
  */
 void InspectorSnapshot()
 {
+	InspectorSendScript("|Screenshot:ntk|()");
 	fl_message("Snapshot is not yet implemented");
+	// |Screenshot:ntk|()
 }
 
 

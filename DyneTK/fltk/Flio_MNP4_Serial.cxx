@@ -220,6 +220,7 @@ int Flio_Mnp4_Serial::handle_block_()
       break;
     case 4: // LT - Link Transfer
       // FIXME we will not catch out-of-sequence blocks this way!
+      //printf("rxcnt vs rxblock: %d %d\n", rxCnt_, buffer_[2]);
       rxCnt_ = buffer_[2];
       send_LT_ack_();
       start_keep_alive_(); // restart the timer

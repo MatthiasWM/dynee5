@@ -210,6 +210,14 @@ SOURCE=..\fltk\Flmm_Console.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Flmm_Message.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmm_Message.H
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Flmm_Set_Check_Button.cxx
 # End Source File
 # Begin Source File
