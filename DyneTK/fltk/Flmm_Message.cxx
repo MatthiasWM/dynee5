@@ -751,7 +751,13 @@ const char *Flmm_Message::system_message(int err)
     if (sys_msg)
       free(sys_msg);
     sys_msg = strdup(szMsgBuf);
-	  LocalFree( szMsgBuf );
+	char *s = sys_msg, *d = s;
+	while (*s) {
+		if (*s!='\r') 
+			*d++ = *s;
+		s++;
+	}
+	LocalFree( szMsgBuf );
     return sys_msg;
   }
 #else

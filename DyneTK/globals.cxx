@@ -31,12 +31,14 @@
 
 #include "fluid/Fldtk_Prefs.H"
 #include "fluid/Fldtk_Proj_Settings.H"
+#include "fluid/main_ui.h"
 
 #include "dtk/Dtk_Document_Manager.H"
 #include "dtk/Dtk_Document.H"
 #include "dtk/Dtk_Project.H"
+#include "dtk/Dtk_Error.H"
 
-#include "fluid/main_ui.h"
+#include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
 
 extern "C" {
@@ -514,8 +516,9 @@ void InspectorConnect()
 		wInspectorSerial->open(buf, 38400);
 		if (!wInspectorSerial->is_open()) {
 			wInspectorSerial->close();
-			wConnect->hide();
-			fl_alert("Can't open serial port");
+			if (wConnect)
+				wConnect->hide();
+			SystemAlert("Can't open serial port");
 			return;
 		}
 		if (!wConnect) {
@@ -638,6 +641,24 @@ void InspectorSnapshot()
 	InspectorSendScript("|Screenshot:ntk|()");
 	fl_message("Snapshot is not yet implemented");
 	// |Screenshot:ntk|()
+}
+
+/*---------------------------------------------------------------------------*/
+/**
+ * Show a dialog box with the text for the given NewtonOS error code.
+ */
+void NewtAlert(int err)
+{
+	newt_alert(err);
+}
+
+/*---------------------------------------------------------------------------*/
+/**
+ * Show a dialog box with the text for the given operrating system error code.
+ */
+void SystemAlert(const char *msg, int err)
+{
+	Flmm_Message::alert("%s\n\n%s", msg, Flmm_Message::system_message(err));
 }
 
 

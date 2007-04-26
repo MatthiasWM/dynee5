@@ -100,6 +100,7 @@ int main(int argc, char **argv) {
 	Fl::lock();
 	Fl::scheme("GTK+");
 	Fl_Tooltip::size(11);
+	fl_message_font(FL_HELVETICA, 12);
 
 	toolbox_open_pixmap = new Fl_Pixmap(toolbox_open_xpm);
 	toolbox_closed_pixmap = new Fl_Pixmap(toolbox_closed_xpm);

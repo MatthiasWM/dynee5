@@ -511,7 +511,7 @@ widget_class Fldtk_Main_Window {
       tooltip Find xywh {335 30 25 25} labelsize 11 deactivate
     }
     Fl_Button tSnapshot {
-      callback {InspectorSnapshot();} selected
+      callback {InspectorSnapshot();}
       tooltip {Newt Screen Shot} image {../images/camera.png} xywh {365 30 25 25} labelsize 9
     }
     Fl_Button {} {
@@ -534,13 +534,18 @@ widget_class Fldtk_Main_Window {
       label {?}
       tooltip {Help Index} xywh {505 30 25 25} labelfont 1 labelsize 13 deactivate
     }
-    Fl_Box {} {
-      xywh {760 30 15 25} deactivate resizable
-    }
     Fl_Button {} {
       label {.lyt}
       tooltip {Layout Drop Box} xywh {545 30 25 25} labelsize 11
       class Fldtk_Layout_Drop_Box
+    }
+    Fl_Input {} {
+      label Err
+      callback {NewtAlert(atoi(o->value()));} selected
+      xywh {595 31 45 23} type Int labelsize 11 textsize 12
+    }
+    Fl_Box {} {
+      xywh {760 30 15 25} deactivate resizable
     }
   }
   Fl_Group {} {

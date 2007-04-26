@@ -347,6 +347,13 @@ static unsigned char idata_camera[] =
 0,0,0,0,0,0,0,0,0,0,0};
 static Fl_RGB_Image image_camera(idata_camera, 16, 16, 4, 0);
 
+void Fldtk_Main_Window::cb_Err_i(Fl_Input* o, void*) {
+  NewtAlert(atoi(o->value()));
+}
+void Fldtk_Main_Window::cb_Err(Fl_Input* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_Err_i(o,v);
+}
+
 Fl_Menu_Item Fldtk_Main_Window::menu_1[] = {
  {"newtApplication", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
  {0,0,0,0,0,0,0,0,0}
@@ -481,10 +488,6 @@ this->when(FL_WHEN_RELEASE);
     o->labelsize(13);
     o->deactivate();
   } // Fl_Button* o
-  { Fl_Box* o = new Fl_Box(760, 30, 15, 25);
-    o->deactivate();
-    Fl_Group::current()->resizable(o);
-  } // Fl_Box* o
   { Fldtk_Layout_Drop_Box* o = new Fldtk_Layout_Drop_Box(545, 30, 25, 25, ".lyt");
     o->tooltip("Layout Drop Box");
     o->box(FL_UP_BOX);
@@ -497,6 +500,16 @@ this->when(FL_WHEN_RELEASE);
     o->align(FL_ALIGN_CENTER);
     o->when(FL_WHEN_RELEASE);
   } // Fldtk_Layout_Drop_Box* o
+  { Fl_Input* o = new Fl_Input(595, 31, 45, 23, "Err");
+    o->type(2);
+    o->labelsize(11);
+    o->textsize(12);
+    o->callback((Fl_Callback*)cb_Err);
+  } // Fl_Input* o
+  { Fl_Box* o = new Fl_Box(760, 30, 15, 25);
+    o->deactivate();
+    Fl_Group::current()->resizable(o);
+  } // Fl_Box* o
   o->end();
 } // Fl_Group* o
 { Fl_Group* o = new Fl_Group(0, 60, 785, 35);

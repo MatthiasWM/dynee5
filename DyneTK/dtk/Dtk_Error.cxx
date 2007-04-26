@@ -26,7 +26,7 @@
 
 #include "Dtk_Error.h"
 
-#include <FL/fl_ask.h>
+#include "fltk/Flmm_Message.H"
 
 #include <stdio.h>
 
@@ -809,14 +809,21 @@ const char *newt_error(int err)
 {
 	static char buf[64];
 	int i, n = sizeof(newtError)/sizeof(NewtError);
+
+	if (err>0)
+		err = -err;
+
 	for (i=0; i<n; i++) {
 		int e = newtError[i].err;
-		if (e==err)
-			return newtError[i].msg;
+		if (e==err) {
+			const char *ret = newtError[i].msg;
+			if (ret[0]!='@') 
+				return ret;
+		}
 		if (e<err)
 			break;
 	}
-	sprintf(buf, "Unknown error code %d.", err);
+	sprintf(buf, "Unknown error code: %d.", err);
 	return buf;
 }
 
@@ -825,6 +832,10 @@ const char *newt_error_class(int err)
 {
 	int i, n = sizeof(newtError)/sizeof(NewtError);
 	const char *ret = newtError[0].msg + 1;
+
+	if (err>0)
+		err = -err;
+
 	for (i=0; i<n; i++) {
 		const char *msg = newtError[i].msg;
 		if (msg[0]=='@') {
@@ -840,7 +851,7 @@ const char *newt_error_class(int err)
 
 
 void newt_alert(int err) {
-	fl_alert("%s:\n\n%s", newt_error_class(err), newt_error(err));
+	Flmm_Message::alert("%s:\n\n%s", newt_error_class(err), newt_error(err));
 }
 
 

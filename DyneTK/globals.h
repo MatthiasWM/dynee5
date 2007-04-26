@@ -67,6 +67,9 @@ void	InspectorSnapshot();
 
 void	UpdateMainMenu();
 
+void	NewtAlert(int err);
+void	SystemAlert(const char *msg, int err=0xdecaff);
+
 #endif
 
 

@@ -270,6 +270,14 @@ SOURCE=..\Dtk\Dtk_Document_Manager.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\dtk\Dtk_Error.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Error.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\dtk\Dtk_Layout_Document.cxx
 # End Source File
 # Begin Source File

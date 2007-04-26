@@ -28,6 +28,7 @@
 #endif
 
 #include "Fldtk_Layout_Drop_Box.H"
+#include "globals.h"
 
 #include <FL/Fl.H>
 #include <FL/names.h>
@@ -88,7 +89,7 @@ void Fldtk_Layout_Drop_Box::open(const char *filename)
 			return;
 		f = fopen(filename, "rb");
 		if (!f) {
-			fl_alert("Can't open file");
+			SystemAlert("Can't open file");
 			return;
 		}
 	}
@@ -122,7 +123,7 @@ void Fldtk_Layout_Drop_Box::open(const char *filename)
 		win->non_modal();
 		win->show();
     } else {
-		fl_alert("Can't read file");
+		SystemAlert("Can't read file");
 	}
 
 

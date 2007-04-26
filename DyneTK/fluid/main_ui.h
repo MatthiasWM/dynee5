@@ -34,6 +34,7 @@
 #include <FL/Fl_Menu_Bar.H>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Button.H>
+#include <FL/Fl_Input.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Tile.H>
@@ -156,6 +157,8 @@ public:
 private:
   void cb_tSnapshot_i(Fl_Button*, void*);
   static void cb_tSnapshot(Fl_Button*, void*);
+  void cb_Err_i(Fl_Input*, void*);
+  static void cb_Err(Fl_Input*, void*);
   static Fl_Menu_Item menu_1[];
   static Fl_Menu_Item menu_2[];
 public:

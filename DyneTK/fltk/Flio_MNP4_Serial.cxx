@@ -148,9 +148,11 @@ block_data:
           printf("Checksum error! Please resend everything after last correct block.\n");
           send_LT_ack_();	// send the ack for the last block we understood
 		  start_keep_alive_(); // delay the next keep-alive
-        }
-        // now the block is complete and we can call the callback
-        handle_block_();
+		  state_ = 0;
+        } else {
+		  // now the block is complete and we can call the callback
+		  handle_block_();
+		}
         break;
     }
   }
@@ -219,13 +221,19 @@ int Flio_Mnp4_Serial::handle_block_()
       Flio_Mnp4_Serial::close();
       break;
     case 4: // LT - Link Transfer
-      // FIXME we will not catch out-of-sequence blocks this way!
-      //printf("rxcnt vs rxblock: %d %d\n", rxCnt_, buffer_[2]);
-      rxCnt_ = buffer_[2];
-      send_LT_ack_();
-      start_keep_alive_(); // restart the timer
-      if (!on_receive() && callback())
-        do_callback();
+//printf("rxcnt vs rxblock: %d %d\n", rxCnt_, buffer_[2]);
+      if ( ((rxCnt_+1)&0xff)!=buffer_[2]) {
+		// we received an out-of-order block! 
+		// Tell Newton which last correct block we received.
+printf("ASK FOR A RESEND OF %d\n", rxCnt_+1);
+		send_LT_ack_();
+	  } else {
+        rxCnt_ = buffer_[2];
+        send_LT_ack_();
+        start_keep_alive_(); // restart the timer
+        if (!on_receive() && callback())
+          do_callback();
+	  }
       release_block();
       break;
     case 5: // LA - Link Acknowledge
@@ -268,7 +276,8 @@ void Flio_Mnp4_Serial::send_block(unsigned char *data, int size)
     if (c==esc_) {
       *d++ = 1;
       crc16(crc, 1);
-      esc_ += 51;
+	  printf("--- CONTROL BLOCK *NOT* changing esc from 0x%02x to 0x%02x\n", esc_, esc_+51);
+      //esc_ += 51;
     }
   }
   *d++ = ftr[0];
@@ -319,6 +328,7 @@ void Flio_Mnp4_Serial::send_data_block2(unsigned char *data, int size)
     if (c==esc_) {
       *d++ = 1;
       crc16(crc, 1);
+	  printf("--- DATA BLOCK: changing esc from 0x%02x to 0x%02x\n", esc_, esc_+51);
       esc_ += 51;
     }
   }
