@@ -459,80 +459,62 @@ widget_class Fldtk_Main_Window {
     xywh {0 25 785 35} box THIN_DOWN_BOX
   } {
     Fl_Button {} {
-      label {@filenew}
-      tooltip {New Layout} xywh {10 30 25 25} labelsize 11 labelcolor 32 deactivate
+      tooltip {New Layout} image {../images/table.png} xywh {10 30 25 25} labelsize 11 labelcolor 32 deactivate
     }
     Fl_Button {} {
-      label {@filenew}
-      tooltip {New Proto Template} xywh {35 30 25 25} labelsize 11 deactivate
+      tooltip {New Proto Template} image {../images/plugin.png} xywh {35 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
-      label {@filenew}
-      tooltip {New Text File} xywh {60 30 25 25} labelsize 11 deactivate
+      tooltip {New Text File} image {../images/page.png} xywh {60 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
-      label {@fileopen}
-      tooltip Open xywh {90 30 25 25} labelsize 11 deactivate
+      tooltip Open image {../images/folder.png} xywh {90 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
-      label {@filesave}
-      tooltip Save xywh {115 30 25 25} labelsize 11 deactivate
+      tooltip Save image {../images/disk.png} xywh {115 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
-      label {@filesave}
-      tooltip {Save all open files} xywh {140 30 25 25} labelsize 11 deactivate
+      tooltip {Save all open files} image {../images/disk_multiple.png} xywh {140 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
-      label {@undo}
-      tooltip Undo xywh {170 30 25 25} labelsize 11 deactivate
+      tooltip Undo image {../images/arrow_undo.png} xywh {170 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
-      label {@redo}
-      tooltip Redo xywh {195 30 25 25} labelsize 11 deactivate
+      tooltip Redo image {../images/arrow_redo.png} xywh {195 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
-      label Cut
-      tooltip Cut xywh {225 30 25 25} labelsize 9 deactivate
+      tooltip Cut image {../images/cut.png} xywh {225 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Copy
-      tooltip Copy xywh {250 30 25 25} labelsize 9 deactivate
+      tooltip Copy image {../images/page_copy.png} xywh {250 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Paste
-      tooltip Paste xywh {275 30 25 25} labelsize 9 deactivate
+      tooltip Paste image {../images/page_paste.png} xywh {275 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label {@fileprint}
-      tooltip Print xywh {305 30 25 25} labelsize 11 deactivate
+      tooltip Print image {../images/printer.png} xywh {305 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
-      label {@search}
-      tooltip Find xywh {335 30 25 25} labelsize 11 deactivate
+      tooltip Find image {../images/find.png} xywh {335 30 25 25} labelsize 11 deactivate
     }
     Fl_Button tSnapshot {
       callback {InspectorSnapshot();}
       tooltip {Newt Screen Shot} image {../images/camera.png} xywh {365 30 25 25} labelsize 9
     }
     Fl_Button {} {
-      label Bld
-      tooltip {Build Package} xywh {395 30 25 25} labelsize 9 deactivate
+      tooltip {Build Package} image {../images/wrench_orange.png} xywh {395 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Dnl
-      tooltip {Download Package} xywh {420 30 25 25} labelsize 9 deactivate
+      tooltip {Download Package} image {../images/package_go.png} xywh {420 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Lyt
-      tooltip {Open Layout} xywh {450 30 25 25} labelsize 9 deactivate
+      tooltip {Open Layout} image {../images/shape_group.png} xywh {450 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Brsr
-      tooltip {Create New Browser} xywh {475 30 25 25} labelsize 9 deactivate
+      tooltip {Create New Browser} image {../images/table_edit.png} xywh {475 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label {?}
-      tooltip {Help Index} xywh {505 30 25 25} labelfont 1 labelsize 13 deactivate
+      tooltip {Help Index} image {../images/help.png} xywh {505 30 25 25} labelfont 1 labelsize 13 deactivate
     }
     Fl_Button {} {
       label {.lyt}
@@ -540,9 +522,8 @@ widget_class Fldtk_Main_Window {
       class Fldtk_Layout_Drop_Box
     }
     Fl_Input {} {
-      label Err
-      callback {NewtAlert(atoi(o->value()));} selected
-      xywh {595 31 45 23} type Int labelsize 11 textsize 12
+      callback {NewtAlert(atoi(o->value()));}
+      image {../images/bug.png} xywh {600 31 45 23} type Int labelsize 11 textsize 12
     }
     Fl_Box {} {
       xywh {760 30 15 25} deactivate resizable
@@ -552,40 +533,31 @@ widget_class Fldtk_Main_Window {
     xywh {0 60 785 35} box THIN_DOWN_BOX
   } {
     Fl_Button {} {
-      label Left
-      tooltip {Align Left} xywh {10 65 25 25} labelsize 9 deactivate
+      tooltip {Align Left} image {../images/shape_align_left.png} xywh {10 65 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Right
-      tooltip {Align Right} xywh {35 65 25 25} labelsize 9 deactivate
+      tooltip {Align Right} image {../images/shape_align_right.png} xywh {35 65 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Top
-      tooltip {Align Top} xywh {60 65 25 25} labelsize 9 deactivate
+      tooltip {Align Top} image {../images/shape_align_top.png} xywh {60 65 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Bot
-      tooltip {Align Bottom} xywh {85 65 25 25} labelsize 9 deactivate
+      tooltip {Align Bottom} image {../images/shape_align_bottom.png} xywh {85 65 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label {V.Ctr}
-      tooltip {Align Vertical Center} xywh {110 65 25 25} labelsize 9 deactivate
+      tooltip {Align Vertical Center} image {../images/shape_align_middle.png} xywh {110 65 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label {H.Ctr}
-      tooltip {CreaAlign Horizontal Center} xywh {135 65 25 25} labelsize 9 deactivate
+      tooltip {CreaAlign Horizontal Center} image {../images/shape_align_center.png} xywh {135 65 25 25} labelsize 9 deactivate
+    }
+    Fl_Button {} {selected
+      tooltip {Select Mode} image {../images/arrow_out.png} xywh {165 65 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label Mode
-      tooltip {Select Mode} xywh {165 65 25 25} labelsize 9 deactivate
+      tooltip {Create Proto} image {../images/add.png} xywh {195 65 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      label {@-2plus}
-      tooltip {Create Proto} xywh {195 65 25 25} labelsize 9 deactivate
-    }
-    Fl_Button {} {
-      label {@-2plus C}
-      tooltip {Create Proto} xywh {405 65 25 25} labelsize 9 deactivate
+      tooltip {Create Proto} image {../images/plugin_add.png} xywh {405 65 25 25} labelsize 9 deactivate
     }
     Fl_Choice {} {open
       xywh {225 66 175 23} down_box BORDER_BOX labelsize 11 textsize 11 deactivate

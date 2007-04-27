@@ -157,8 +157,8 @@ public:
 private:
   void cb_tSnapshot_i(Fl_Button*, void*);
   static void cb_tSnapshot(Fl_Button*, void*);
-  void cb_Err_i(Fl_Input*, void*);
-  static void cb_Err(Fl_Input*, void*);
+  void cb__i(Fl_Input*, void*);
+  static void cb_(Fl_Input*, void*);
   static Fl_Menu_Item menu_1[];
   static Fl_Menu_Item menu_2[];
 public:
