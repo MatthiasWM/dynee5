@@ -4,6 +4,7 @@
 # include <windows.h>
 # include <winsock2.h>
 #else
+# include <arpa/inet.h>
 #endif
 
 #include "memory.h"

@@ -1,6 +1,8 @@
 
 #ifdef WIN32
 # include <winsock2.h>
+#else
+# include <arpa/inet.h>
 #endif
 
 #include "symbols.h"

@@ -7,7 +7,7 @@
 
 #include <FL/fl_draw.H>
 #include <FL/Fl.H>
-#include <FL/enumerations.H>
+#include <FL/Enumerations.H>
 
 #include <stdlib.h>
 #include <stdio.h>

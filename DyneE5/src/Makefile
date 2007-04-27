@@ -49,15 +49,15 @@ CFLAGS = -g $(PREDEFS) -I/usr/local/include -I/usr/local/include/FL/images -c
 CXX = g++
 CXXFLAGS = -g $(PREDEFS) -I/usr/local/include -I/usr/local/include/FL/images -c
 
-LDFLAGS = -g -L/usr/local/lib -lfltk -lpthread -framework Carbon -framework ApplicationServices
+LDFLAGS = -g $(shell fltk-config --ldflags)
 
-LDLIBS = -lfltk
+LDLIBS =  $(shell fltk-config --libs)
 
-POSTBUILD = /Developer/Tools/Rez -t APPL -o
+POSTBUILD = fltk-config --post
 
 dyne: $(OBJECTS)
 	$(CXX) $(LDFLAGS) -o $@ $(OBJECTS) $(LDLIBS)
-	$(POSTBUILD) $@ /usr/local/include/FL/mac.r
+	$(POSTBUILD) $@
 
 clean:
 	rm *.o
