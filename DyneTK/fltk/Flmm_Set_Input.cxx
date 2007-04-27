@@ -28,7 +28,7 @@
 #endif
 
 
-#include "Flmm_Set_Input.H"
+#include "Flmm_Set_Input.h"
 
 
 #include <stdlib.h>

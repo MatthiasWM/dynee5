@@ -30,7 +30,7 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Window.H>
 
-#include "Nt/Nt_Group.H"
+#include "nt/Nt_Group.h"
 
 extern "C" {
 #include "NewtCore.h"

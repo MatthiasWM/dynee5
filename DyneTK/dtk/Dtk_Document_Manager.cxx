@@ -34,12 +34,12 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Dtk_Document_Manager.H"
-#include "Dtk_Document.H"
-#include "Dtk_Layout_Document.H"
-#include "Dtk_Script_Document.H"
+#include "Dtk_Document_Manager.h"
+#include "Dtk_Document.h"
+#include "Dtk_Layout_Document.h"
+#include "Dtk_Script_Document.h"
 
-#include "fltk/Fldtk_Document_Browser.H"
+#include "fltk/Fldtk_Document_Browser.h"
 
 #include "fluid/main_ui.h"
 #include "main.h"

@@ -24,10 +24,12 @@
 //
 
 
-#include "Flio_Inspector.H"
+#include "Flio_Inspector.h"
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 
 #include <FL/Fl_Button.H>

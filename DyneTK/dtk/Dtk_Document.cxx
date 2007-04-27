@@ -27,11 +27,11 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Dtk_Document.H"
-#include "Dtk_Document_Manager.H"
-#include "Dtk_Project.H"
-#include "fltk/Fldtk_Editor.H"
-#include "fltk/Fldtk_Document_Tabs.H"
+#include "Dtk_Document.h"
+#include "Dtk_Document_Manager.h"
+#include "Dtk_Project.h"
+#include "fltk/Fldtk_Editor.h"
+#include "fltk/Fldtk_Document_Tabs.h"
 #include "fluid/main_ui.h"
 #include "main.h"
 

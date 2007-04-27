@@ -28,7 +28,7 @@
 #endif
 
 
-#include "Fldtk_Document_Browser.H"
+#include "Fldtk_Document_Browser.h"
 
 
 #include <stdlib.h>

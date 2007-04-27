@@ -27,16 +27,16 @@
 
 #include <FL/x.H>
 #include <FL/Fl.H>
-#include <FL/Fl_file_chooser.H>
+#include <FL/fl_file_chooser.h>
 
-#include "fluid/Fldtk_Prefs.H"
-#include "fluid/Fldtk_Proj_Settings.H"
+#include "fluid/Fldtk_Prefs.h"
+#include "fluid/Fldtk_Proj_Settings.h"
 #include "fluid/main_ui.h"
 
-#include "dtk/Dtk_Document_Manager.H"
-#include "dtk/Dtk_Document.H"
-#include "dtk/Dtk_Project.H"
-#include "dtk/Dtk_Error.H"
+#include "dtk/Dtk_Document_Manager.h"
+#include "dtk/Dtk_Document.h"
+#include "dtk/Dtk_Project.h"
+#include "dtk/Dtk_Error.h"
 
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
@@ -54,6 +54,7 @@ extern "C" {
 
 #ifndef WIN32
 # define Sleep(a) sleep((a)/1000)
+# include <arpa/inet.h>
 #else
 # include <winsock2.h>
 #endif

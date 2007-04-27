@@ -27,9 +27,9 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Dtk_Script_Document.H"
-#include "fltk/Fldtk_Script_Editor.H"
-#include "fltk/Fldtk_Document_Tabs.H"
+#include "Dtk_Script_Document.h"
+#include "fltk/Fldtk_Script_Editor.h"
+#include "fltk/Fldtk_Document_Tabs.h"
 #include "fluid/main_ui.h"
 #include "main.h"
 

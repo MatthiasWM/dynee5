@@ -27,7 +27,7 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Fldtk_Layout_Editor.H"
+#include "Fldtk_Layout_Editor.h"
 
 #include <FL/Fl.H>
 #include <FL/Fl_Text_Editor.H>

@@ -25,7 +25,7 @@
 
 
 
-#include "Flio_Mnp4_Serial.H"
+#include "Flio_MNP4_Serial.h"
 
 #include <FL/Fl.H>
 

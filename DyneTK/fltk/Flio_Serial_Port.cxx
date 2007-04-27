@@ -29,13 +29,14 @@
 #endif
 
 
-#include "Flio_Serial_Port.H"
+#include "Flio_Serial_Port.h"
 
 #include <FL/Fl.H>
 #include <FL/fl_draw.h>
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #ifdef WIN32
 # include <process.h>

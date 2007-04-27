@@ -761,7 +761,7 @@ const char *Flmm_Message::system_message(int err)
     return sys_msg;
   }
 #else
-  return strerror();
+  return strerror(err);
 #endif
 }
 

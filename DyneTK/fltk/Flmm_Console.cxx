@@ -27,7 +27,7 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Flmm_Console.H"
+#include "Flmm_Console.h"
 
 #include <FL/Fl.H>
 #include <FL/fl_draw.h>

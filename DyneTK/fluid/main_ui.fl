@@ -49,10 +49,10 @@ decl {\#include "main.h"} {public
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
-  xywh {670 176 785 595} type Double resizable
+  xywh {490 176 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {
+  Fl_Menu_Bar {} {open
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
@@ -139,7 +139,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mEdit {
-      label Edit open
+      label Edit
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -217,7 +217,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project
+      label Project open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -501,10 +501,12 @@ widget_class Fldtk_Main_Window {
       callback {InspectorSnapshot();}
       tooltip {Newt Screen Shot} image {../images/camera.png} xywh {365 30 25 25} labelsize 9
     }
-    Fl_Button {} {
+    Fl_Button tProjectBuild {
+      callback {BuildPackage();}
       tooltip {Build Package} image {../images/wrench_orange.png} xywh {395 30 25 25} labelsize 9 deactivate
     }
-    Fl_Button {} {
+    Fl_Button tProjectDownload {
+      callback {DownloadPackage();} selected
       tooltip {Download Package} image {../images/package_go.png} xywh {420 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
@@ -550,7 +552,7 @@ widget_class Fldtk_Main_Window {
     Fl_Button {} {
       tooltip {CreaAlign Horizontal Center} image {../images/shape_align_center.png} xywh {135 65 25 25} labelsize 9 deactivate
     }
-    Fl_Button {} {selected
+    Fl_Button {} {
       tooltip {Select Mode} image {../images/arrow_out.png} xywh {165 65 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
@@ -669,7 +671,9 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectSaveAs->activate();
   mProjectAddFile->activate();
   mProjectBuild->activate();
+  tProjectBuild->activate();
   mProjectDownload->activate(); // could depend on existing pkg
+  tProjectDownload->activate(); // could depend on existing pkg
   mProjectLaunch->activate(); // could depend on downloaded pkg
   mProjectSettings->activate();
 } else {
@@ -677,7 +681,9 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectSaveAs->deactivate();
   mProjectAddFile->deactivate();
   mProjectBuild->deactivate();
+  tProjectBuild->deactivate();
   mProjectDownload->deactivate(); // could depend on existing pkg
+  tProjectDownload->deactivate(); // could depend on existing pkg
   mProjectLaunch->deactivate(); // could depend on downloaded pkg
   mProjectSettings->deactivate();
 }
@@ -709,7 +715,7 @@ if ( (mask & 0x00000007) == 0x00000003 ) {
 Function {create_connect_dialog()} {} {
   Fl_Window {} {
     label Progress open
-    xywh {524 192 225 116} type Double modal visible
+    xywh {237 236 225 115} type Double modal visible
   } {
     Fl_Box {} {
       label {Tap the Toolkit icon on the Newton device, select "Connect via Serial", and tap Connect Inspector.}

@@ -28,7 +28,7 @@
 #endif
 
 
-#include "Nt_Group.H"
+#include "nt/Nt_Group.h"
 
 
 #include <stdio.h>

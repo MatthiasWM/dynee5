@@ -27,7 +27,7 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Fldtk_Layout_Drop_Box.H"
+#include "Fldtk_Layout_Drop_Box.h"
 #include "globals.h"
 
 #include <FL/Fl.H>

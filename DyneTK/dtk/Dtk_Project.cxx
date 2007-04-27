@@ -27,9 +27,9 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Dtk_Project.H"
-#include "Dtk_Document.H"
-#include "Dtk_Document_Manager.H"
+#include "Dtk_Project.h"
+#include "Dtk_Document.h"
+#include "Dtk_Document_Manager.h"
 
 #include "fluid/Fldtk_Proj_Settings.h"
 #include "fluid/main_ui.h"

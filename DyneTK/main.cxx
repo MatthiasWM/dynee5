@@ -32,14 +32,14 @@
 
 #include "fltk/Flio_Serial_Port.h"
 
-#include "fluid/Fldtk_Prefs.H"
-#include "fluid/Fldtk_Proj_Settings.H"
+#include "fluid/Fldtk_Prefs.h"
+#include "fluid/Fldtk_Proj_Settings.h"
 #include "fluid/main_ui.h"
 
 #include "images/toolbox_open.xpm"
 #include "images/toolbox_closed.xpm"
 
-#include "dtk/Dtk_Document_Manager.H"
+#include "dtk/Dtk_Document_Manager.h"
 
 extern "C" {
 #include "NewtCore.h"

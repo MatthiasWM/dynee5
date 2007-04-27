@@ -157,6 +157,16 @@ public:
 private:
   void cb_tSnapshot_i(Fl_Button*, void*);
   static void cb_tSnapshot(Fl_Button*, void*);
+public:
+  Fl_Button *tProjectBuild;
+private:
+  void cb_tProjectBuild_i(Fl_Button*, void*);
+  static void cb_tProjectBuild(Fl_Button*, void*);
+public:
+  Fl_Button *tProjectDownload;
+private:
+  void cb_tProjectDownload_i(Fl_Button*, void*);
+  static void cb_tProjectDownload(Fl_Button*, void*);
   void cb__i(Fl_Input*, void*);
   static void cb_(Fl_Input*, void*);
   static Fl_Menu_Item menu_1[];

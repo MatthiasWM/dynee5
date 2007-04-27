@@ -27,8 +27,8 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Fldtk_Document_Tabs.H"
-#include "Fldtk_Editor.H"
+#include "Fldtk_Document_Tabs.h"
+#include "Fldtk_Editor.h"
 
 #include <FL/Fl.H>
 #include <FL/fl_draw.h>
