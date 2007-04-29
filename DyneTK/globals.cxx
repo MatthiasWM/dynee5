@@ -580,7 +580,11 @@ void UpdateMainMenu()
 		if (doc->isInProject())
 			mask |= 4;
 	}
+	if (wInspectorSerial->is_open()) {
+		mask |= 8;
+	}
 	dtkMain->activate_menus(mask);
+	dtkMain->inspector->activate_menus(mask);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -641,7 +645,6 @@ void InspectorSnapshot()
 {
 	InspectorSendScript("|Screenshot:ntk|()");
 	fl_message("Snapshot is not yet implemented");
-	// |Screenshot:ntk|()
 }
 
 /*---------------------------------------------------------------------------*/

@@ -153,6 +153,21 @@ private:
   void cb_mHelpAbout_i(Fl_Menu_*, void*);
   static void cb_mHelpAbout(Fl_Menu_*, void*);
 public:
+  Fl_Button *tFileNewText;
+private:
+  void cb_tFileNewText_i(Fl_Button*, void*);
+  static void cb_tFileNewText(Fl_Button*, void*);
+public:
+  Fl_Button *tFileOpen;
+private:
+  void cb_tFileOpen_i(Fl_Button*, void*);
+  static void cb_tFileOpen(Fl_Button*, void*);
+public:
+  Fl_Button *tFileSave;
+private:
+  void cb_tFileSave_i(Fl_Button*, void*);
+  static void cb_tFileSave(Fl_Button*, void*);
+public:
   Fl_Button *tSnapshot;
 private:
   void cb_tSnapshot_i(Fl_Button*, void*);

@@ -720,6 +720,9 @@ int Dtk_Project::buildPackage()
 	if (doc) {
 		theForm = doc->compile();
 	}
+	if (theForm==kNewtRefUnbind) {
+		return -1;
+	}
 	NewtPrintObject(stdout, theForm);
 
 	newtRefVar iconBoundsA[] = {
@@ -772,9 +775,9 @@ int Dtk_Project::buildPackage()
 	newtRef package = NewtMakeFrame2(sizeof(packageA) / (sizeof(newtRefVar) * 2), packageA);
 
 	newtRef rcvr = kNewtRefNIL;
-	package_ = NsMakePkg(rcvr, package);
 
 	NewtPrintObject(stdout, package);
+	package_ = NsMakePkg(rcvr, package);
 	NewtPrintObject(stdout, package_);
 
 	return 0;

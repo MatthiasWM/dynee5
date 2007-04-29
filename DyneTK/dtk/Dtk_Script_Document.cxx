@@ -28,6 +28,7 @@
 #endif
 
 #include "Dtk_Script_Document.h"
+#include "Dtk_Error.h"
 #include "fltk/Fldtk_Script_Editor.h"
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fluid/main_ui.h"
@@ -178,9 +179,11 @@ newtRef Dtk_Script_Document::compile()
     newtErr	err;
     newtRef form = NVMInterpretStr(script, &err);
 	//NewtPrintObject(stdout, form);
-	if (NewtRefIsFrame(form)) {
+	if (form==kNewtRefUnbind) {
+		printf("**** ERROR while compiling or interpreting\n");
+		printf("**** %s: %s\n", newt_error_class(err), newt_error(err));
+		return kNewtRefUnbind;
 	} else {
-		printf("***** Syntax error!\n");
 	}
 #endif
 

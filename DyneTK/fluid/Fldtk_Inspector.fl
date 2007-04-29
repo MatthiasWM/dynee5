@@ -43,24 +43,24 @@ widget_class Fldtk_Inspector {open
       tooltip {Connect/Disconnect} image {../images/toolbox_closed.xpm} deimage {../images/toolbox_inactive.xpm} xywh {5 5 25 25} labelsize 9 labelcolor 32
       code0 {wInspectorConnect = wConnect;}
     }
-    Fl_Button {} {
+    Fl_Button tStopOnThrows {
       callback {InspectorStopOnThrows();}
-      tooltip {Stop on throws} image {../images/stop.png} deimage {../images/stop_da.png} xywh {30 5 25 25} labelsize 9 labelcolor 32
+      tooltip {Stop on throws} image {../images/stop.png} deimage {../images/stop_da.png} xywh {30 5 25 25} labelsize 9 labelcolor 32 deactivate
     }
-    Fl_Button {} {
+    Fl_Button tTraceOff {
       callback {InspectorTraceOff();}
-      tooltip {Trace off} image {../images/pencil.png} deimage {../images/pencil_da.png} xywh {55 5 25 25} labelsize 9 labelcolor 32
+      tooltip {Trace off} image {../images/pencil.png} deimage {../images/pencil_da.png} xywh {55 5 25 25} labelsize 9 labelcolor 32 deactivate
     }
-    Fl_Button {} {
+    Fl_Button tStackTrace {
       callback {InspectorStackTrace();}
-      tooltip {Stack trace} image {../images/layers.png} deimage {../images/layers_da.png} xywh {80 5 25 25} labelsize 9 labelcolor 32
+      tooltip {Stack trace} image {../images/layers.png} deimage {../images/layers_da.png} xywh {80 5 25 25} labelsize 9 labelcolor 32 deactivate
     }
-    Fl_Button {} {
-      callback {InspectorExitBreakLoop();} selected
-      tooltip {Exit break loop} image {../images/door_in.png} deimage {../images/door_in_da.png} xywh {105 5 25 25} labelsize 9 labelcolor 32
+    Fl_Button tExitBreakLoop {
+      callback {InspectorExitBreakLoop();}
+      tooltip {Exit break loop} image {../images/door_in.png} deimage {../images/door_in_da.png} xywh {105 5 25 25} labelsize 9 labelcolor 32 deactivate
     }
-    Fl_Choice {} {
-      tooltip {Print Depth} xywh {135 6 50 23} down_box BORDER_BOX
+    Fl_Choice tPrintDepth {
+      tooltip {Print Depth} xywh {135 6 50 23} down_box BORDER_BOX deactivate
     } {
       MenuItem {} {
         label 0
@@ -145,6 +145,25 @@ widget_class Fldtk_Inspector {open
     code0 {o->buffer(new Fl_Text_Buffer);}
     code1 {wConsole = console;}
     class Flmm_Console
+  }
+  Function {activate_menus(unsigned int mask)} {open return_type void
+  } {
+    code {// bits in the mask have the following meanings:
+//      bit 3: Inspector is connected to a Newton device
+
+if ( (mask & 0x00000008) == 0x00000008 ) {
+  tStopOnThrows->activate();
+  tTraceOff->activate();
+  tStackTrace->activate();
+  tExitBreakLoop->activate();
+  tPrintDepth->activate();
+} else {
+  tStopOnThrows->deactivate();
+  tTraceOff->deactivate();
+  tStackTrace->deactivate();
+  tExitBreakLoop->deactivate();
+  tPrintDepth->deactivate();
+}} {}
   }
 } 
 

@@ -26,6 +26,8 @@
 
 #include "Flio_Inspector.h"
 
+#include "globals.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -100,19 +102,22 @@ void Flio_Inspector::close()
 
 int Flio_Inspector::on_connect()
 {
-  wInspectorConnect->image(toolbox_open_pixmap);
-  if (wConnect)
-    wConnect->hide();
-  return 1;
+	wInspectorConnect->image(toolbox_open_pixmap);
+	UpdateMainMenu();
+	if (wConnect)
+		wConnect->hide();
+	return 1;
 }
 
 
 int Flio_Inspector::on_disconnect()
 {
-  wInspectorConnect->image(toolbox_closed_pixmap);
-  wInspectorConnect->redraw();
-  return 1;
+	wInspectorConnect->image(toolbox_closed_pixmap);
+	wInspectorConnect->redraw();
+	UpdateMainMenu();
+	return 1;
 }
+
 
 static unsigned char send_okln1[] = { 0x6E, 0x65, 0x77, 0x74, 0x6E, 0x74, 0x70, 0x20, };
 static unsigned char send_okln2[] = { 0x6F, 0x6B, 0x6C, 0x6E, };

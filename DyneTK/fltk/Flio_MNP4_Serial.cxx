@@ -217,8 +217,8 @@ int Flio_Mnp4_Serial::handle_block_()
       stop_keep_alive_();
       //send_block(LD_ack, sizeof(LD_ack));
       //Sleep(300);
-      on_disconnect();
       Flio_Mnp4_Serial::close();
+      on_disconnect();
       break;
     case 4: // LT - Link Transfer
 //printf("rxcnt vs rxblock: %d %d\n", rxCnt_, buffer_[2]);

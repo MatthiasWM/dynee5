@@ -269,10 +269,11 @@ void send_test(int ix) {
 
 void testPkgReader(const char *filename) 
 {
-/*
-	filename = fl_file_chooser("Load Package", "*.pkg", "E:/Azureus/unna");
+
+	if (!filename)
+		filename = fl_file_chooser("Load Package", "*.pkg", 0L);
 	if (!filename) return;
-*/
+
 	uint8_t *buffer;
 	FILE *f = fopen(filename, "rb");
 	fseek(f, 0, SEEK_END);
@@ -287,7 +288,7 @@ void testPkgReader(const char *filename)
 
 		NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
 		NcSetGlobalVar(NSSYM(printDepth), NSINT(9999));
-		//NEWT_DUMPBC = 1;
+		NEWT_DUMPBC = 1;
 
 		newtRef pkg = NewtReadPkg(buffer, n);
 		printf("Begin Package:\n");
@@ -333,6 +334,7 @@ void testPkgReader(const char *filename)
 		// */
 
 		//project->package_ = pkg;
+		/*
 		{
 			printf("Writing Package\n");
 			newtRef pkg_bin = NewtWritePkg(pkg);
@@ -345,7 +347,7 @@ void testPkgReader(const char *filename)
 		}
 
 		printf("Done\n");
-		
+		*/
 		//NewtCleanup();
 	}
 }

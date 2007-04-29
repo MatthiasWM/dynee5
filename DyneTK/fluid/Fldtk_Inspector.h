@@ -37,23 +37,38 @@ public:
 private:
   void cb_wConnect_i(Fl_Button*, void*);
   static void cb_wConnect(Fl_Button*, void*);
-  void cb__i(Fl_Button*, void*);
-  static void cb_(Fl_Button*, void*);
-  void cb_1_i(Fl_Button*, void*);
-  static void cb_1(Fl_Button*, void*);
-  void cb_2_i(Fl_Button*, void*);
-  static void cb_2(Fl_Button*, void*);
-  void cb_3_i(Fl_Button*, void*);
-  static void cb_3(Fl_Button*, void*);
-  static Fl_Menu_Item menu_[];
+public:
+  Fl_Button *tStopOnThrows;
+private:
+  void cb_tStopOnThrows_i(Fl_Button*, void*);
+  static void cb_tStopOnThrows(Fl_Button*, void*);
+public:
+  Fl_Button *tTraceOff;
+private:
+  void cb_tTraceOff_i(Fl_Button*, void*);
+  static void cb_tTraceOff(Fl_Button*, void*);
+public:
+  Fl_Button *tStackTrace;
+private:
+  void cb_tStackTrace_i(Fl_Button*, void*);
+  static void cb_tStackTrace(Fl_Button*, void*);
+public:
+  Fl_Button *tExitBreakLoop;
+private:
+  void cb_tExitBreakLoop_i(Fl_Button*, void*);
+  static void cb_tExitBreakLoop(Fl_Button*, void*);
+public:
+  Fl_Choice *tPrintDepth;
+  static Fl_Menu_Item menu_tPrintDepth[];
+private:
   void cb_0_i(Fl_Menu_*, void*);
   static void cb_0(Fl_Menu_*, void*);
-  void cb_11_i(Fl_Menu_*, void*);
-  static void cb_11(Fl_Menu_*, void*);
-  void cb_21_i(Fl_Menu_*, void*);
-  static void cb_21(Fl_Menu_*, void*);
-  void cb_31_i(Fl_Menu_*, void*);
-  static void cb_31(Fl_Menu_*, void*);
+  void cb_1_i(Fl_Menu_*, void*);
+  static void cb_1(Fl_Menu_*, void*);
+  void cb_2_i(Fl_Menu_*, void*);
+  static void cb_2(Fl_Menu_*, void*);
+  void cb_3_i(Fl_Menu_*, void*);
+  static void cb_3(Fl_Menu_*, void*);
   void cb_4_i(Fl_Menu_*, void*);
   static void cb_4(Fl_Menu_*, void*);
   void cb_5_i(Fl_Menu_*, void*);
@@ -77,6 +92,7 @@ private:
   static void cb_Test2(Fl_Button*, void*);
 public:
   Flmm_Console *console;
+  void activate_menus(unsigned int mask);
 };
 #endif
 

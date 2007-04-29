@@ -85,6 +85,7 @@ extern "C" void yyerror(char * s)
 	wConsole->insert("\n");
 }
 
+extern void testPkgReader(const char *filename);
 
 /*---------------------------------------------------------------------------*/
 /**
@@ -95,7 +96,7 @@ extern "C" void yyerror(char * s)
  * \retval	0
  */
 int main(int argc, char **argv) {
-  
+
 	// initialize our GUI library
 	Fl::lock();
 	Fl::scheme("GTK+");
@@ -107,8 +108,13 @@ int main(int argc, char **argv) {
 
 	// initialize the local interpreter and compiler
 	NewtInit(argc, (const char**)argv, 0);
-	//NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
-	//NcSetGlobalVar(NSSYM(printDepth), NSINT(9999));
+
+	// FIXME: test code
+	NcSetGlobalVar(NSSYM(printLength), NSINT(100));
+	NcSetGlobalVar(NSSYM(printDepth), NSINT(20));
+	NEWT_INDENT = 1;
+	NEWT_DUMPBC = 1;
+	//testPkgReader(0);
 
 	// create some global classes 
 	documents = new Dtk_Document_Manager();

@@ -476,6 +476,13 @@ static unsigned char idata_plugin_da[] =
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static Fl_RGB_Image image_plugin_da(idata_plugin_da, 16, 16, 4, 0);
 
+void Fldtk_Main_Window::cb_tFileNewText_i(Fl_Button*, void*) {
+  NewTextFile();
+}
+void Fldtk_Main_Window::cb_tFileNewText(Fl_Button* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_tFileNewText_i(o,v);
+}
+
 static unsigned char idata_page[] =
 {0,0,0,0,68,125,193,96,77,139,200,187,79,140,200,238,79,140,200,246,79,140,
 200,247,79,140,200,247,79,141,200,247,79,140,201,247,79,139,199,247,75,137,197,
@@ -578,6 +585,13 @@ static unsigned char idata_page_da[] =
 247,185,185,185,239,184,184,184,189,184,184,184,99,0,0,0,0};
 static Fl_RGB_Image image_page_da(idata_page_da, 16, 16, 4, 0);
 
+void Fldtk_Main_Window::cb_tFileOpen_i(Fl_Button*, void*) {
+  OpenDocument();
+}
+void Fldtk_Main_Window::cb_tFileOpen(Fl_Button* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_tFileOpen_i(o,v);
+}
+
 static unsigned char idata_folder[] =
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -666,6 +680,13 @@ static unsigned char idata_folder_da[] =
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static Fl_RGB_Image image_folder_da(idata_folder_da, 16, 16, 4, 0);
+
+void Fldtk_Main_Window::cb_tFileSave_i(Fl_Button*, void*) {
+  SaveCurrentDocument();
+}
+void Fldtk_Main_Window::cb_tFileSave(Fl_Button* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_tFileSave_i(o,v);
+}
 
 static unsigned char idata_disk[] =
 {54,107,188,113,54,107,188,144,54,107,188,204,54,107,188,238,54,107,188,250,
@@ -2986,27 +3007,28 @@ this->when(FL_WHEN_RELEASE);
     o->labelsize(11);
     o->deactivate();
   } // Fl_Button* o
-  { Fl_Button* o = new Fl_Button(60, 30, 25, 25);
-    o->tooltip("New Text File");
-    o->image(image_page);
-    o->deimage(image_page_da);
-    o->labelsize(11);
-    o->deactivate();
-  } // Fl_Button* o
-  { Fl_Button* o = new Fl_Button(90, 30, 25, 25);
-    o->tooltip("Open");
-    o->image(image_folder);
-    o->deimage(image_folder_da);
-    o->labelsize(11);
-    o->deactivate();
-  } // Fl_Button* o
-  { Fl_Button* o = new Fl_Button(115, 30, 25, 25);
-    o->tooltip("Save");
-    o->image(image_disk);
-    o->deimage(image_disk_da);
-    o->labelsize(11);
-    o->deactivate();
-  } // Fl_Button* o
+  { tFileNewText = new Fl_Button(60, 30, 25, 25);
+    tFileNewText->tooltip("New Text File");
+    tFileNewText->image(image_page);
+    tFileNewText->deimage(image_page_da);
+    tFileNewText->labelsize(11);
+    tFileNewText->callback((Fl_Callback*)cb_tFileNewText);
+  } // Fl_Button* tFileNewText
+  { tFileOpen = new Fl_Button(90, 30, 25, 25);
+    tFileOpen->tooltip("Open");
+    tFileOpen->image(image_folder);
+    tFileOpen->deimage(image_folder_da);
+    tFileOpen->labelsize(11);
+    tFileOpen->callback((Fl_Callback*)cb_tFileOpen);
+  } // Fl_Button* tFileOpen
+  { tFileSave = new Fl_Button(115, 30, 25, 25);
+    tFileSave->tooltip("Save");
+    tFileSave->image(image_disk);
+    tFileSave->deimage(image_disk_da);
+    tFileSave->labelsize(11);
+    tFileSave->callback((Fl_Callback*)cb_tFileSave);
+    tFileSave->deactivate();
+  } // Fl_Button* tFileSave
   { Fl_Button* o = new Fl_Button(140, 30, 25, 25);
     o->tooltip("Save all open files");
     o->image(image_disk_multiple);
@@ -3069,6 +3091,7 @@ this->when(FL_WHEN_RELEASE);
     tSnapshot->deimage(image_camera_da);
     tSnapshot->labelsize(9);
     tSnapshot->callback((Fl_Callback*)cb_tSnapshot);
+    tSnapshot->deactivate();
   } // Fl_Button* tSnapshot
   { tProjectBuild = new Fl_Button(395, 30, 25, 25);
     tProjectBuild->tooltip("Build Package");
@@ -3334,6 +3357,7 @@ void Fldtk_Main_Window::activate_menus(unsigned int mask) {
 //	bit 0: a project is loaded
 //	bit 1: a document is active for editing
 //	bit 2: the active document is part of the project
+//      bit 3: Inspector is connected to a Newton device
 
 // mFileNewTex is always active
 // mFileOpen is always active
@@ -3369,10 +3393,12 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
 if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileClose->activate();
   mFileSave->activate();
+  tFileSave->activate();
   mFileSaveAs->activate();
 } else {
   mFileClose->deactivate();
   mFileSave->deactivate();
+  tFileSave->deactivate();
   mFileSaveAs->deactivate();
 }
 
@@ -3386,6 +3412,12 @@ if ( (mask & 0x00000007) == 0x00000003 ) {
   mProjectAddWindow->activate();
 } else {
   mProjectAddWindow->deactivate();
+}
+
+if ( (mask & 0x00000008) == 0x00000008 ) {
+  tSnapshot->activate();
+} else {
+  tSnapshot->deactivate();
 }
 }
 

@@ -81,11 +81,11 @@ static const char *idata_toolbox_inactive[] = {
 };
 static Fl_Pixmap image_toolbox_inactive(idata_toolbox_inactive);
 
-void Fldtk_Inspector::cb__i(Fl_Button*, void*) {
+void Fldtk_Inspector::cb_tStopOnThrows_i(Fl_Button*, void*) {
   InspectorStopOnThrows();
 }
-void Fldtk_Inspector::cb_(Fl_Button* o, void* v) {
-  ((Fldtk_Inspector*)(o->parent()->parent()))->cb__i(o,v);
+void Fldtk_Inspector::cb_tStopOnThrows(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_tStopOnThrows_i(o,v);
 }
 
 #include <FL/Fl_Image.H>
@@ -182,11 +182,11 @@ static unsigned char idata_stop_da[] =
 0,0,0,0,0,0,0,0,0,0};
 static Fl_RGB_Image image_stop_da(idata_stop_da, 16, 16, 4, 0);
 
-void Fldtk_Inspector::cb_1_i(Fl_Button*, void*) {
+void Fldtk_Inspector::cb_tTraceOff_i(Fl_Button*, void*) {
   InspectorTraceOff();
 }
-void Fldtk_Inspector::cb_1(Fl_Button* o, void* v) {
-  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_1_i(o,v);
+void Fldtk_Inspector::cb_tTraceOff(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_tTraceOff_i(o,v);
 }
 
 static unsigned char idata_pencil[] =
@@ -268,11 +268,11 @@ static unsigned char idata_pencil_da[] =
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static Fl_RGB_Image image_pencil_da(idata_pencil_da, 16, 16, 4, 0);
 
-void Fldtk_Inspector::cb_2_i(Fl_Button*, void*) {
+void Fldtk_Inspector::cb_tStackTrace_i(Fl_Button*, void*) {
   InspectorStackTrace();
 }
-void Fldtk_Inspector::cb_2(Fl_Button* o, void* v) {
-  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_2_i(o,v);
+void Fldtk_Inspector::cb_tStackTrace(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_tStackTrace_i(o,v);
 }
 
 static unsigned char idata_layers[] =
@@ -366,11 +366,11 @@ static unsigned char idata_layers_da[] =
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static Fl_RGB_Image image_layers_da(idata_layers_da, 16, 16, 4, 0);
 
-void Fldtk_Inspector::cb_3_i(Fl_Button*, void*) {
+void Fldtk_Inspector::cb_tExitBreakLoop_i(Fl_Button*, void*) {
   InspectorExitBreakLoop();
 }
-void Fldtk_Inspector::cb_3(Fl_Button* o, void* v) {
-  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_3_i(o,v);
+void Fldtk_Inspector::cb_tExitBreakLoop(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_tExitBreakLoop_i(o,v);
 }
 
 static unsigned char idata_door_in[] =
@@ -479,25 +479,25 @@ void Fldtk_Inspector::cb_0(Fl_Menu_* o, void* v) {
   ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_0_i(o,v);
 }
 
-void Fldtk_Inspector::cb_11_i(Fl_Menu_*, void*) {
+void Fldtk_Inspector::cb_1_i(Fl_Menu_*, void*) {
   InspectorPrintDepth(1);
 }
-void Fldtk_Inspector::cb_11(Fl_Menu_* o, void* v) {
-  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_11_i(o,v);
+void Fldtk_Inspector::cb_1(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_1_i(o,v);
 }
 
-void Fldtk_Inspector::cb_21_i(Fl_Menu_*, void*) {
+void Fldtk_Inspector::cb_2_i(Fl_Menu_*, void*) {
   InspectorPrintDepth(2);
 }
-void Fldtk_Inspector::cb_21(Fl_Menu_* o, void* v) {
-  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_21_i(o,v);
+void Fldtk_Inspector::cb_2(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_2_i(o,v);
 }
 
-void Fldtk_Inspector::cb_31_i(Fl_Menu_*, void*) {
+void Fldtk_Inspector::cb_3_i(Fl_Menu_*, void*) {
   InspectorPrintDepth(3);
 }
-void Fldtk_Inspector::cb_31(Fl_Menu_* o, void* v) {
-  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_31_i(o,v);
+void Fldtk_Inspector::cb_3(Fl_Menu_* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_3_i(o,v);
 }
 
 void Fldtk_Inspector::cb_4_i(Fl_Menu_*, void*) {
@@ -542,11 +542,11 @@ void Fldtk_Inspector::cb_9(Fl_Menu_* o, void* v) {
   ((Fldtk_Inspector*)(o->parent()->parent()->user_data()))->cb_9_i(o,v);
 }
 
-Fl_Menu_Item Fldtk_Inspector::menu_[] = {
+Fl_Menu_Item Fldtk_Inspector::menu_tPrintDepth[] = {
  {"0", 0,  (Fl_Callback*)Fldtk_Inspector::cb_0, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
- {"1", 0,  (Fl_Callback*)Fldtk_Inspector::cb_11, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
- {"2", 0,  (Fl_Callback*)Fldtk_Inspector::cb_21, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
- {"3", 0,  (Fl_Callback*)Fldtk_Inspector::cb_31, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"1", 0,  (Fl_Callback*)Fldtk_Inspector::cb_1, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"2", 0,  (Fl_Callback*)Fldtk_Inspector::cb_2, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
+ {"3", 0,  (Fl_Callback*)Fldtk_Inspector::cb_3, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
  {"4", 0,  (Fl_Callback*)Fldtk_Inspector::cb_4, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
  {"5", 0,  (Fl_Callback*)Fldtk_Inspector::cb_5, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
  {"6", 0,  (Fl_Callback*)Fldtk_Inspector::cb_6, 0, 0, FL_NORMAL_LABEL, 0, 11, 0},
@@ -589,43 +589,48 @@ Fldtk_Inspector::Fldtk_Inspector(int X, int Y, int W, int H, const char *L)
     wConnect->callback((Fl_Callback*)cb_wConnect);
     wInspectorConnect = wConnect;
   } // Fl_Button* wConnect
-  { Fl_Button* o = new Fl_Button(30, 5, 25, 25);
-    o->tooltip("Stop on throws");
-    o->image(image_stop);
-    o->deimage(image_stop_da);
-    o->labelsize(9);
-    o->labelcolor(FL_GRAY0);
-    o->callback((Fl_Callback*)cb_);
-  } // Fl_Button* o
-  { Fl_Button* o = new Fl_Button(55, 5, 25, 25);
-    o->tooltip("Trace off");
-    o->image(image_pencil);
-    o->deimage(image_pencil_da);
-    o->labelsize(9);
-    o->labelcolor(FL_GRAY0);
-    o->callback((Fl_Callback*)cb_1);
-  } // Fl_Button* o
-  { Fl_Button* o = new Fl_Button(80, 5, 25, 25);
-    o->tooltip("Stack trace");
-    o->image(image_layers);
-    o->deimage(image_layers_da);
-    o->labelsize(9);
-    o->labelcolor(FL_GRAY0);
-    o->callback((Fl_Callback*)cb_2);
-  } // Fl_Button* o
-  { Fl_Button* o = new Fl_Button(105, 5, 25, 25);
-    o->tooltip("Exit break loop");
-    o->image(image_door_in);
-    o->deimage(image_door_in_da);
-    o->labelsize(9);
-    o->labelcolor(FL_GRAY0);
-    o->callback((Fl_Callback*)cb_3);
-  } // Fl_Button* o
-  { Fl_Choice* o = new Fl_Choice(135, 6, 50, 23);
-    o->tooltip("Print Depth");
-    o->down_box(FL_BORDER_BOX);
-    o->menu(menu_);
-  } // Fl_Choice* o
+  { tStopOnThrows = new Fl_Button(30, 5, 25, 25);
+    tStopOnThrows->tooltip("Stop on throws");
+    tStopOnThrows->image(image_stop);
+    tStopOnThrows->deimage(image_stop_da);
+    tStopOnThrows->labelsize(9);
+    tStopOnThrows->labelcolor(FL_GRAY0);
+    tStopOnThrows->callback((Fl_Callback*)cb_tStopOnThrows);
+    tStopOnThrows->deactivate();
+  } // Fl_Button* tStopOnThrows
+  { tTraceOff = new Fl_Button(55, 5, 25, 25);
+    tTraceOff->tooltip("Trace off");
+    tTraceOff->image(image_pencil);
+    tTraceOff->deimage(image_pencil_da);
+    tTraceOff->labelsize(9);
+    tTraceOff->labelcolor(FL_GRAY0);
+    tTraceOff->callback((Fl_Callback*)cb_tTraceOff);
+    tTraceOff->deactivate();
+  } // Fl_Button* tTraceOff
+  { tStackTrace = new Fl_Button(80, 5, 25, 25);
+    tStackTrace->tooltip("Stack trace");
+    tStackTrace->image(image_layers);
+    tStackTrace->deimage(image_layers_da);
+    tStackTrace->labelsize(9);
+    tStackTrace->labelcolor(FL_GRAY0);
+    tStackTrace->callback((Fl_Callback*)cb_tStackTrace);
+    tStackTrace->deactivate();
+  } // Fl_Button* tStackTrace
+  { tExitBreakLoop = new Fl_Button(105, 5, 25, 25);
+    tExitBreakLoop->tooltip("Exit break loop");
+    tExitBreakLoop->image(image_door_in);
+    tExitBreakLoop->deimage(image_door_in_da);
+    tExitBreakLoop->labelsize(9);
+    tExitBreakLoop->labelcolor(FL_GRAY0);
+    tExitBreakLoop->callback((Fl_Callback*)cb_tExitBreakLoop);
+    tExitBreakLoop->deactivate();
+  } // Fl_Button* tExitBreakLoop
+  { tPrintDepth = new Fl_Choice(135, 6, 50, 23);
+    tPrintDepth->tooltip("Print Depth");
+    tPrintDepth->down_box(FL_BORDER_BOX);
+    tPrintDepth->deactivate();
+    tPrintDepth->menu(menu_tPrintDepth);
+  } // Fl_Choice* tPrintDepth
   { Fl_Box* o = new Fl_Box(440, 5, 120, 25);
     Fl_Group::current()->resizable(o);
   } // Fl_Box* o
@@ -680,6 +685,25 @@ Fldtk_Inspector::Fldtk_Inspector(int X, int Y, int W, int H, const char *L)
 } // Flmm_Console* console
 position(X, Y);
 end();
+}
+
+void Fldtk_Inspector::activate_menus(unsigned int mask) {
+  // bits in the mask have the following meanings:
+//      bit 3: Inspector is connected to a Newton device
+
+if ( (mask & 0x00000008) == 0x00000008 ) {
+  tStopOnThrows->activate();
+  tTraceOff->activate();
+  tStackTrace->activate();
+  tExitBreakLoop->activate();
+  tPrintDepth->activate();
+} else {
+  tStopOnThrows->deactivate();
+  tTraceOff->deactivate();
+  tStackTrace->deactivate();
+  tExitBreakLoop->deactivate();
+  tPrintDepth->deactivate();
+}
 }
 
 //

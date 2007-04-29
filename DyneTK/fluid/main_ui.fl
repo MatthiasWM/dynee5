@@ -52,11 +52,11 @@ widget_class Fldtk_Main_Window {
   xywh {490 176 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {open
+  Fl_Menu_Bar {} {open selected
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File
+      label File open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -217,7 +217,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project open
+      label Project
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -458,19 +458,22 @@ widget_class Fldtk_Main_Window {
   Fl_Group {} {open
     xywh {0 25 785 35} box THIN_DOWN_BOX
   } {
-    Fl_Button {} {selected
+    Fl_Button {} {
       tooltip {New Layout} image {../images/table.png} deimage {../images/table_da.png} xywh {10 30 25 25} labelsize 11 labelcolor 32 deactivate
     }
     Fl_Button {} {
       tooltip {New Proto Template} image {../images/plugin.png} deimage {../images/plugin_da.png} xywh {35 30 25 25} labelsize 11 deactivate
     }
-    Fl_Button {} {
-      tooltip {New Text File} image {../images/page.png} deimage {../images/page_da.png} xywh {60 30 25 25} labelsize 11 deactivate
+    Fl_Button tFileNewText {
+      callback {NewTextFile();}
+      tooltip {New Text File} image {../images/page.png} deimage {../images/page_da.png} xywh {60 30 25 25} labelsize 11
     }
-    Fl_Button {} {
-      tooltip Open image {../images/folder.png} deimage {../images/folder_da.png} xywh {90 30 25 25} labelsize 11 deactivate
+    Fl_Button tFileOpen {
+      callback {OpenDocument();}
+      tooltip Open image {../images/folder.png} deimage {../images/folder_da.png} xywh {90 30 25 25} labelsize 11
     }
-    Fl_Button {} {
+    Fl_Button tFileSave {
+      callback {SaveCurrentDocument();}
       tooltip Save image {../images/disk.png} deimage {../images/disk_da.png} xywh {115 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
@@ -499,7 +502,7 @@ widget_class Fldtk_Main_Window {
     }
     Fl_Button tSnapshot {
       callback {InspectorSnapshot();}
-      tooltip {Newt Screen Shot} image {../images/camera.png} deimage {../images/camera_da.png} xywh {365 30 25 25} labelsize 9
+      tooltip {Newt Screen Shot} image {../images/camera.png} deimage {../images/camera_da.png} xywh {365 30 25 25} labelsize 9 deactivate
     }
     Fl_Button tProjectBuild {
       callback {BuildPackage();}
@@ -656,6 +659,7 @@ widget_class Fldtk_Main_Window {
 //	bit 0: a project is loaded
 //	bit 1: a document is active for editing
 //	bit 2: the active document is part of the project
+//      bit 3: Inspector is connected to a Newton device
 
 // mFileNewTex is always active
 // mFileOpen is always active
@@ -691,10 +695,12 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
 if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileClose->activate();
   mFileSave->activate();
+  tFileSave->activate();
   mFileSaveAs->activate();
 } else {
   mFileClose->deactivate();
   mFileSave->deactivate();
+  tFileSave->deactivate();
   mFileSaveAs->deactivate();
 }
 
@@ -708,6 +714,12 @@ if ( (mask & 0x00000007) == 0x00000003 ) {
   mProjectAddWindow->activate();
 } else {
   mProjectAddWindow->deactivate();
+}
+
+if ( (mask & 0x00000008) == 0x00000008 ) {
+  tSnapshot->activate();
+} else {
+  tSnapshot->deactivate();
 }} {}
   }
 } 
