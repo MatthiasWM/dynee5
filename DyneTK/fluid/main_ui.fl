@@ -238,7 +238,12 @@ widget_class Fldtk_Main_Window {
       MenuItem mProjectSaveAs {
         label {Save Project As...}
         callback {SaveProjectAs();}
-        xywh {15 15 100 20} labelsize 12 deactivate divider
+        xywh {15 15 100 20} labelsize 12 deactivate
+      }
+      MenuItem mProjectClose {
+        label {Close Project}
+        callback {CloseProject();}
+        xywh {25 25 100 20} labelsize 12 deactivate divider
       }
       MenuItem mProjectAddWindow {
         label {Add Window}
@@ -635,7 +640,7 @@ widget_class Fldtk_Main_Window {
     }
   }
   Fl_Group {} {
-    label {For Help, press F1} selected
+    label {For Help, press F1}
     xywh {0 570 785 25} box THIN_UP_BOX labelsize 11 align 20 deactivate
   } {
     Fl_Group {} {open
@@ -675,28 +680,30 @@ widget_class Fldtk_Main_Window {
 // mProjectNew is always active
 // mProjectOpen is always active
 
+// if a project is loaded...
 if ( (mask & 0x00000001) == 0x00000001 ) {
+  mProjectNew->deactivate();
+  mProjectOpen->deactivate();
   mProjectSave->activate();
   mProjectSaveAs->activate();
+  mProjectClose->activate();
   mProjectAddFile->activate();
   mProjectBuild->activate();
   tProjectBuild->activate();
-  mProjectDownload->activate(); // could depend on existing pkg
-  tProjectDownload->activate(); // could depend on existing pkg
-  mProjectLaunch->activate(); // could depend on downloaded pkg
   mProjectSettings->activate();
 } else {
+  mProjectNew->activate();
+  mProjectOpen->activate();
   mProjectSave->deactivate();
   mProjectSaveAs->deactivate();
+  mProjectClose->deactivate();
   mProjectAddFile->deactivate();
   mProjectBuild->deactivate();
   tProjectBuild->deactivate();
-  mProjectDownload->deactivate(); // could depend on existing pkg
-  tProjectDownload->deactivate(); // could depend on existing pkg
-  mProjectLaunch->deactivate(); // could depend on downloaded pkg
   mProjectSettings->deactivate();
 }
 
+// if there is a document active for editing
 if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileClose->activate();
   mFileSave->activate();
@@ -709,23 +716,38 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->deactivate();
 }
 
+// if a project is loaded, a document is active, and the document is part of the project
 if ( (mask & 0x00000007) == 0x00000007 ) {
   mProjectRemoveFile->activate();
 } else {
   mProjectRemoveFile->deactivate();
 }
 
+// if a project is loaded, a document is active, and the document is NOT part of the project
 if ( (mask & 0x00000007) == 0x00000003 ) {
   mProjectAddWindow->activate();
 } else {
   mProjectAddWindow->deactivate();
 }
 
+// if the Inspector is connected...
 if ( (mask & 0x00000008) == 0x00000008 ) {
   tSnapshot->activate();
 } else {
   tSnapshot->deactivate();
-}} {}
+}
+
+// if a project is loaded and the Inspector is connected
+if ( (mask & 0x00000009) == 0x00000009 ) {
+  mProjectDownload->activate(); // could depend on existing pkg
+  tProjectDownload->activate(); // could depend on existing pkg
+  mProjectLaunch->activate(); // could depend on downloaded pkg
+} else {
+  mProjectDownload->deactivate(); // could depend on existing pkg
+  tProjectDownload->deactivate(); // could depend on existing pkg
+  mProjectLaunch->deactivate(); // could depend on downloaded pkg
+}} {selected
+    }
   }
 } 
 

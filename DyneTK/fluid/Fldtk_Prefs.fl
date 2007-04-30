@@ -276,10 +276,10 @@ widget_class Fldtk_Prefs {
   callback {Fldtk_Prefs *w = (Fldtk_Prefs*)o;
 w->hide();
 w->update_dialog();} open
-  xywh {1007 432 470 275} type Double
+  xywh {805 432 470 275} type Double
   class Fl_Double_Window modal visible
 } {
-  Fl_Tabs {} {open
+  Fl_Tabs {} {
     xywh {10 10 445 210} labelsize 12
   } {
     Fl_Group app {
@@ -343,17 +343,31 @@ update_dialog();} {}
   Function {Fldtk_Prefs(): Fl_Double_Window(470, 275)} {} {
     code {_Fldtk_Prefs();} {}
   }
-  Function {get_prefs()} {return_type void
+  Function {get_prefs()} {open return_type void
   } {
     code {Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
+
 Fl_Preferences pack(prefs, "Packages");
-packages->get_prefs(pack);} {}
+packages->get_prefs(pack);
+
+Fl_Preferences app(prefs, "Application");
+app.get("win_x", win_x, 0xDECAFF);
+app.get("win_y", win_y, 0xDECAFF);
+app.get("win_w", win_w, 0xDECAFF);
+app.get("win_h", win_h, 0xDECAFF);} {}
   }
-  Function {set_prefs()} {return_type void
+  Function {set_prefs()} {open return_type void
   } {
     code {Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
 Fl_Preferences pack(prefs, "Packages");
-packages->set_prefs(pack);} {}
+packages->set_prefs(pack);
+
+Fl_Preferences app(prefs, "Application");
+app.set("win_x", win_x);
+app.set("win_y", win_y);
+app.set("win_w", win_w);
+app.set("win_h", win_h);} {selected
+    }
   }
   Function {update_data()} {return_type void
   } {
@@ -365,10 +379,12 @@ packages->set_prefs(pack);} {}
 wOK->deactivate();
 wApply->deactivate();} {}
   }
-  Function {set_changed()} {open selected return_type void
+  Function {set_changed()} {return_type void
   } {
     code {wOK->activate();
 wApply->activate();} {}
+  }
+  decl {int win_x, win_y, win_w, win_h;} {public
   }
 } 
 

@@ -45,6 +45,7 @@ int		NewProject(const char *filename=0L);
 int		OpenProject(const char *filename=0L);
 int		SaveProject();
 int		SaveProjectAs();
+void	CloseProject();
 void	ShowProjectSettings();
 int		AddCurrentDocToProject();
 int		AddFileToProject(const char *filename=0L);

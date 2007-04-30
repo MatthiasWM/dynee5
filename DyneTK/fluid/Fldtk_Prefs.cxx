@@ -22,6 +22,7 @@
 #include "Fldtk_Prefs.h"
 Fldtk_Prefs_App::Fldtk_Prefs_App(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
+this->labelsize(12);
 { Fl_Check_Button* o = new Fl_Check_Button(15, 20, 205, 25, "Show the &Standard Toolbar");
   o->down_box(FL_DOWN_BOX);
   o->labelsize(12);
@@ -66,6 +67,7 @@ Fl_Menu_Item Fldtk_Prefs_Layout::menu_Size[] = {
 };
 Fldtk_Prefs_Layout::Fldtk_Prefs_Layout(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
+this->labelsize(12);
 { Fl_Check_Button* o = new Fl_Check_Button(20, 20, 75, 25, "&Grid On");
   o->down_box(FL_DOWN_BOX);
   o->labelsize(12);
@@ -115,6 +117,7 @@ Fl_Menu_Item Fldtk_Prefs_Browser::menu_Sort1[] = {
 };
 Fldtk_Prefs_Browser::Fldtk_Prefs_Browser(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
+this->labelsize(12);
 { Fl_Box* o = new Fl_Box(20, 15, 140, 25, "View List:");
   o->labelsize(12);
   o->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
@@ -155,6 +158,7 @@ end();
 }
 Fldtk_Prefs_Text::Fldtk_Prefs_Text(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
+this->labelsize(12);
 { Fl_Check_Button* o = new Fl_Check_Button(20, 20, 95, 20, "Auto &Indent");
   o->down_box(FL_DOWN_BOX);
   o->labelsize(12);
@@ -194,6 +198,7 @@ Fl_Menu_Item Fldtk_Prefs_Packages::menu_wPort[] = {
 };
 Fldtk_Prefs_Packages::Fldtk_Prefs_Packages(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
+this->labelsize(12);
 port_ = 0;
 { Fl_Box* o = new Fl_Box(15, 15, 100, 25, "Connection");
   o->labelsize(12);
@@ -246,6 +251,7 @@ void Fldtk_Prefs_Packages::update_dialog() {
 }
 Fldtk_Prefs_Heaps::Fldtk_Prefs_Heaps(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
+this->labelsize(12);
 { Fl_Box* o = new Fl_Box(100, 15, 105, 25, "Size in KBytes");
   o->labelsize(12);
   o->deactivate();
@@ -426,6 +432,7 @@ this->when(FL_WHEN_RELEASE);
 } // Fl_Button* o
 get_prefs();
 update_dialog();
+set_modal();
 end();
 }
 
@@ -435,14 +442,27 @@ Fldtk_Prefs::Fldtk_Prefs(): Fl_Double_Window(470, 275) {
 
 void Fldtk_Prefs::get_prefs() {
   Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
+
 Fl_Preferences pack(prefs, "Packages");
 packages->get_prefs(pack);
+
+Fl_Preferences app(prefs, "Application");
+app.get("win_x", win_x, 0xDECAFF);
+app.get("win_y", win_y, 0xDECAFF);
+app.get("win_w", win_w, 0xDECAFF);
+app.get("win_h", win_h, 0xDECAFF);
 }
 
 void Fldtk_Prefs::set_prefs() {
   Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
 Fl_Preferences pack(prefs, "Packages");
 packages->set_prefs(pack);
+
+Fl_Preferences app(prefs, "Application");
+app.set("win_x", win_x);
+app.set("win_y", win_y);
+app.set("win_w", win_w);
+app.set("win_h", win_h);
 }
 
 void Fldtk_Prefs::update_data() {

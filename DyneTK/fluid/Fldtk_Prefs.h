@@ -104,6 +104,7 @@ private:
   void cb_wApply_i(Fl_Button*, void*);
   static void cb_wApply(Fl_Button*, void*);
 public:
+  int win_x, win_y, win_w, win_h; 
   Fldtk_Prefs();
   void get_prefs();
   void set_prefs();

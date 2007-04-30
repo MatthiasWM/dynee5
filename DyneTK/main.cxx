@@ -117,6 +117,12 @@ int main(int argc, char **argv) {
 
 	// create the main window
 	dtkMain = new Fldtk_Main_Window(785, 595);
+	int w = dtkPrefs->win_w, h = dtkPrefs->win_h;
+	int x = dtkPrefs->win_x, y = dtkPrefs->win_y;
+	if (x!=0xDECAFF && y!=0xDECAFF)
+		dtkMain->position(x, y);
+	if (w!=0xDECAFF && h!=0xDECAFF)
+		dtkMain->size(w, h);
 
 	// link the functional elements to the visual elements
 	documents->setBrowser(dtkMain->documents);
@@ -127,6 +133,12 @@ int main(int argc, char **argv) {
 
 	// clean the virtual machine
 	NewtCleanup();
+
+	dtkPrefs->win_x = dtkMain->x();
+	dtkPrefs->win_y = dtkMain->y();
+	dtkPrefs->win_w = dtkMain->w();
+	dtkPrefs->win_h = dtkMain->h();
+	dtkPrefs->set_prefs();
 
 	return 0;
 }

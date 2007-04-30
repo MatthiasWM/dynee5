@@ -114,12 +114,12 @@ int NewTextFile(const char *filename) {
 void CloseCurrentDocument()
 {
 	Dtk_Document *doc = documents->getCurrentDoc();
-	if (doc)
-		documents->removeVisibleDoc(doc);
-	if (!doc->isInProject())
-		delete doc;
-
-	UpdateMainMenu();
+	if (doc) {
+                documents->removeVisibleDoc(doc);
+                if (!doc->isInProject())
+                        delete doc;
+		UpdateMainMenu();
+	}
 }
 
 
@@ -249,16 +249,29 @@ int NewProject(const char *filename)
 		if (!filename) 
 			return 0;
 	}
-	if (project) {
-		delete project;
-		project = 0L;
-	}
+	CloseProject();
 	project = new Dtk_Project();
 	project->setFilename(filename);
 	project->setDefaults();
 
 	UpdateMainMenu();
 	return 0;
+}
+
+
+/*---------------------------------------------------------------------------*/
+/**
+ * Close the current project and all associted documents.
+ */
+void CloseProject()
+{
+	if (!project)
+		return;
+	// FIXME empty project browser
+	// FIXME save and close all open documentsOA
+	delete project;
+	project = 0L;
+	UpdateMainMenu();
 }
 
 

@@ -342,7 +342,7 @@ int Flio_Serial_Port::is_open()
 #ifdef WIN32
   return (port_!=INVALID_HANDLE_VALUE);
 #else
-  return -1;
+  return 0;
 #endif
 }
 

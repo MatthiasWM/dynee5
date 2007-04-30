@@ -104,6 +104,11 @@ private:
   void cb_mProjectSaveAs_i(Fl_Menu_*, void*);
   static void cb_mProjectSaveAs(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *mProjectClose;
+private:
+  void cb_mProjectClose_i(Fl_Menu_*, void*);
+  static void cb_mProjectClose(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *mProjectAddWindow;
 private:
   void cb_mProjectAddWindow_i(Fl_Menu_*, void*);
