@@ -1,15 +1,17 @@
 
+_view000 :=
+    {appSymbol: '|Aloha:DTK|,
+     title: "Aloha",
+     viewBounds: {left: 0, top: 60, bottom: 274, right: 134},
+     viewFlags: 5,
+     viewFormat: 83951953,
+     test: func() begin end,
+     _proto: @157
+    };
 
-view := {
-  harold: "guy",
-  maude: "girl",
-  test: func(x, y)
-	begin
-		local z;
-	end
-};
 
+constant |layout_test.lyt| :=  _view000;
+// End of file test.lyt
 
-constant a:=view;
+|layout_test.lyt|
 
-a;

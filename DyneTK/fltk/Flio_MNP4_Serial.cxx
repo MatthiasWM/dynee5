@@ -221,7 +221,7 @@ int Flio_Mnp4_Serial::handle_block_()
       on_disconnect();
       break;
     case 4: // LT - Link Transfer
-//printf("rxcnt vs rxblock: %d %d\n", rxCnt_, buffer_[2]);
+printf("rxcnt vs rxblock: %d %d\n", rxCnt_, buffer_[2]);
       if ( ((rxCnt_+1)&0xff)!=buffer_[2]) {
 		// we received an out-of-order block! 
 		// Tell Newton which last correct block we received.

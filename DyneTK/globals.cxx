@@ -594,17 +594,17 @@ void UpdateMainMenu()
  */
 void InspectorStopOnThrows()
 {
-	InspectorSendScript("breakOnThrows := 1");
+	InspectorSendScript("breakOnThrows := 1"); // TRUE or NIL
 }
 
 /*---------------------------------------------------------------------------*/
 /**
- * Toggle the 'trace' flag on and off.
- * \todo should be a toggle
+ * Set the 'trace' flag to "off".
  */
 void InspectorTraceOff()
 {
-	InspectorSendScript("trace := 1");
+	InspectorSendScript("trace := nil");
+	// user may have set it to 'functions or true
 }
 
 /*---------------------------------------------------------------------------*/
@@ -629,6 +629,7 @@ void InspectorExitBreakLoop()
 /*---------------------------------------------------------------------------*/
 /**
  * Change the depth for printing all kinds of frames.
+ * nil shows all levels
  */
 void InspectorPrintDepth(int d)
 {
@@ -665,6 +666,15 @@ void SystemAlert(const char *msg, int err)
 	Flmm_Message::alert("%s\n\n%s", msg, Flmm_Message::system_message(err));
 }
 
+
+extern void testPkgReader(const char *filename);
+void DebugDumpPackage() {
+	NcSetGlobalVar(NSSYM(printLength), NSINT(100));
+	NcSetGlobalVar(NSSYM(printDepth), NSINT(20));
+	NEWT_INDENT = 1;
+	NEWT_DUMPBC = 1;
+	testPkgReader(0);
+}
 
 //
 // End of "$Id$".

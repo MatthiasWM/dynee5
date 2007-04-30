@@ -140,6 +140,13 @@ void Fldtk_Main_Window::cb_mProjectLaunch(Fl_Menu_* o, void* v) {
   ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mProjectLaunch_i(o,v);
 }
 
+void Fldtk_Main_Window::cb_Dump_i(Fl_Menu_*, void*) {
+  DebugDumpPackage();
+}
+void Fldtk_Main_Window::cb_Dump(Fl_Menu_* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_Dump_i(o,v);
+}
+
 void Fldtk_Main_Window::cb_mProjectSettings_i(Fl_Menu_*, void*) {
   ShowProjectSettings();
 }
@@ -215,6 +222,7 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Download Package", 0x40032,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectDownload, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Launch Package", 0x40033,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectLaunch, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Export Package to Text", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
+ {"Dump Package Contents...", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_Dump, 0, 0, FL_NORMAL_LABEL, 0, 12, 59},
  {"Install Toolkit App", 0,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
  {"Mark as Main Layout", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Process Earlier", 0x4ff52,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
@@ -284,13 +292,13 @@ Fl_Menu_Item* Fldtk_Main_Window::mProjectRemoveFile = Fldtk_Main_Window::menu_ +
 Fl_Menu_Item* Fldtk_Main_Window::mProjectBuild = Fldtk_Main_Window::menu_ + 49;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectDownload = Fldtk_Main_Window::menu_ + 50;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectLaunch = Fldtk_Main_Window::menu_ + 51;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectSettings = Fldtk_Main_Window::menu_ + 57;
-Fl_Menu_Item* Fldtk_Main_Window::mLayout = Fldtk_Main_Window::menu_ + 59;
-Fl_Menu_Item* Fldtk_Main_Window::mBrowser = Fldtk_Main_Window::menu_ + 71;
-Fl_Menu_Item* Fldtk_Main_Window::mWindow = Fldtk_Main_Window::menu_ + 83;
-Fl_Menu_Item* Fldtk_Main_Window::mWindowConnectInspector = Fldtk_Main_Window::menu_ + 85;
-Fl_Menu_Item* Fldtk_Main_Window::mHelp = Fldtk_Main_Window::menu_ + 94;
-Fl_Menu_Item* Fldtk_Main_Window::mHelpAbout = Fldtk_Main_Window::menu_ + 98;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectSettings = Fldtk_Main_Window::menu_ + 58;
+Fl_Menu_Item* Fldtk_Main_Window::mLayout = Fldtk_Main_Window::menu_ + 60;
+Fl_Menu_Item* Fldtk_Main_Window::mBrowser = Fldtk_Main_Window::menu_ + 72;
+Fl_Menu_Item* Fldtk_Main_Window::mWindow = Fldtk_Main_Window::menu_ + 84;
+Fl_Menu_Item* Fldtk_Main_Window::mWindowConnectInspector = Fldtk_Main_Window::menu_ + 86;
+Fl_Menu_Item* Fldtk_Main_Window::mHelp = Fldtk_Main_Window::menu_ + 95;
+Fl_Menu_Item* Fldtk_Main_Window::mHelpAbout = Fldtk_Main_Window::menu_ + 99;
 
 #include <FL/Fl_Image.H>
 static unsigned char idata_table[] =
@@ -3326,6 +3334,7 @@ this->when(FL_WHEN_RELEASE);
   o->box(FL_THIN_UP_BOX);
   o->labelsize(11);
   o->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
+  o->deactivate();
   { Fl_Group* o = new Fl_Group(605, 570, 165, 25);
     { Fl_Box* o = new Fl_Box(620, 573, 40, 19, "CAPS");
       o->box(FL_DOWN_BOX);

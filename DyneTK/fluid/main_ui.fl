@@ -52,11 +52,11 @@ widget_class Fldtk_Main_Window {
   xywh {490 176 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {open selected
+  Fl_Menu_Bar {} {open
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File open
+      label File
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -217,7 +217,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project
+      label Project open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -277,6 +277,11 @@ widget_class Fldtk_Main_Window {
       MenuItem {} {
         label {Export Package to Text}
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem {} {
+        label {Dump Package Contents...}
+        callback {DebugDumpPackage();}
+        xywh {15 15 100 20} labelsize 12 labelcolor 59
       }
       MenuItem {} {
         label {Install Toolkit App}
@@ -630,8 +635,8 @@ widget_class Fldtk_Main_Window {
     }
   }
   Fl_Group {} {
-    label {For Help, press F1}
-    xywh {0 570 785 25} box THIN_UP_BOX labelsize 11 align 20
+    label {For Help, press F1} selected
+    xywh {0 570 785 25} box THIN_UP_BOX labelsize 11 align 20 deactivate
   } {
     Fl_Group {} {open
       xywh {605 570 165 25}

@@ -133,6 +133,8 @@ public:
 private:
   void cb_mProjectLaunch_i(Fl_Menu_*, void*);
   static void cb_mProjectLaunch(Fl_Menu_*, void*);
+  void cb_Dump_i(Fl_Menu_*, void*);
+  static void cb_Dump(Fl_Menu_*, void*);
 public:
   static Fl_Menu_Item *mProjectSettings;
 private:
