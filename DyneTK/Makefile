@@ -55,3 +55,4 @@ dynetk: $(OBJFILES)
 .cxx.o:
 	echo Compiling $<...
 	$(CXX) -c -g $(CXXFLAGS) $(INCLUDES) $(NEWTINCLUDES) -o $@ $<
+# DO NOT DELETE

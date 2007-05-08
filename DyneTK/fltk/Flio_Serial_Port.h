@@ -163,6 +163,10 @@ private:
   HANDLE event_;
   unsigned long thread_;
   OVERLAPPED overlapped_;
+#else
+  int port_;
+  static void reader_cb(int, void*);
+  void reader();
 #endif
 };
 
