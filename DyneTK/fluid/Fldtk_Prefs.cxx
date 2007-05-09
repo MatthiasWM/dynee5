@@ -226,12 +226,14 @@ portname_ = 0L;
 { wPortnameWin32 = new Fl_Choice(240, 70, 100, 20);
   wPortnameWin32->down_box(FL_BORDER_BOX);
   wPortnameWin32->labelsize(12);
+  wPortnameWin32->hide();
   wPortnameWin32->deactivate();
   wPortnameWin32->menu(menu_wPortnameWin32);
 } // Fl_Choice* wPortnameWin32
 { wPortnameUnix = new Fl_Choice(240, 90, 100, 20);
   wPortnameUnix->down_box(FL_BORDER_BOX);
   wPortnameUnix->labelsize(12);
+  wPortnameUnix->hide();
   wPortnameUnix->deactivate();
   wPortnameUnix->menu(menu_wPortnameUnix);
 } // Fl_Choice* wPortnameUnix

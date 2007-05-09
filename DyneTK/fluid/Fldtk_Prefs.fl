@@ -181,8 +181,8 @@ widget_class Fldtk_Prefs_Text {
 } 
 
 widget_class Fldtk_Prefs_Packages {
-  label Packages
-  xywh {456 229 445 185} type Double labelsize 12 visible position_relative
+  label Packages selected
+  xywh {762 337 445 185} type Double labelsize 12 visible position_relative
 } {
   code {portname_ = 0L;} {}
   Fl_Box {} {
@@ -204,7 +204,7 @@ widget_class Fldtk_Prefs_Packages {
     xywh {240 50 165 20} labelsize 12 textsize 12
   } {}
   Fl_Choice wPortnameWin32 {open
-    xywh {240 70 100 20} down_box BORDER_BOX labelsize 12 deactivate
+    xywh {240 70 100 20} down_box BORDER_BOX labelsize 12 hide deactivate
   } {
     MenuItem {} {
       label {\\\\.\\COM1}
@@ -224,7 +224,7 @@ widget_class Fldtk_Prefs_Packages {
     }
   }
   Fl_Choice wPortnameUnix {open
-    xywh {240 90 100 20} down_box BORDER_BOX labelsize 12 deactivate
+    xywh {240 90 100 20} down_box BORDER_BOX labelsize 12 hide deactivate
   } {
     MenuItem {} {
       label {/dev/ttyS0}
@@ -359,7 +359,7 @@ w->update_dialog();} open
     callback {update_data();
 hide();
 update_dialog();
-set_prefs();} selected
+set_prefs();}
     xywh {120 235 80 25} labelsize 12
   }
   Fl_Button wCancel {
