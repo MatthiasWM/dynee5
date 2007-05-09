@@ -2,7 +2,7 @@
  CONTENTS:
 ===========
 
-  - Proof of concept, partt 3
+  - Proof of concept, part 3
   - How to Build
 
 ---------------------------------------------------------------
@@ -52,10 +52,10 @@ Simon Bell whose code gave my gearbox the desperatly needed kick.
 
 How to Build:
 
-DyneTK can be build on multiple platforms including MSWindows, 
-Linux, and OS X. Currently however I only include the build 
-environment for Microsoft VisualC 6. Contributions of other
-environments are very welcome.
+DyneTK can be built on multiple platforms including MSWindows, 
+Linux, and OS X. Linux and OS X builds use a standard Makefile
+that will work in bothe environments. Contributions for IDEs
+on either platform (XCode, Anjuta, etc.) are welcome.
 
 What we also need:
 
@@ -72,7 +72,7 @@ What we also need:
 - Cygwin. Yes, you will need Bison and Flex to build Newt/0. No
   other parts of Cygwin are needed.
 - Open the VC6 Workspace in DyneTK/VC6/DyneTK.dsw, compile
-  and run. This workspace will builr NEWT/0 for you as well
+  and run. This workspace will build NEWT/0 for you as well
   as DyneTK
 
 
