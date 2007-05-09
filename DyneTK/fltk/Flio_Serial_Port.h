@@ -137,9 +137,11 @@ public:
 
   //virtual int on_error();
 
+  virtual void draw();
+	void redraw();
+
 protected:
 
-  virtual void draw();
   virtual int on_read_();
   //virtual int on_error_();
 

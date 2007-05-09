@@ -115,6 +115,8 @@ public:
    */
   virtual int on_read();
 
+	virtual void draw() { Fl_Box::draw(); }
+
 protected:
 
 	Flio_Stream *super_;

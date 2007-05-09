@@ -391,6 +391,16 @@ void Flio_Mnp4_Protocol::crc16(unsigned short &crc, unsigned char d)
   crc = ((crc>>8)&0x00ff)^crctab[(crc&0xff)^d];
 }
 
+void Flio_Mnp4_Protocol::draw() 
+{
+	if (stream_) {
+		stream_->resize(x(), y(), w(), h());
+		stream_->draw();
+	} else {
+		Flio_Stream::draw();
+	}
+}
+
 //
 // End of "$Id$".
 //

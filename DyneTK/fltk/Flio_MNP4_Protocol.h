@@ -182,6 +182,7 @@ protected:
   void start_keep_alive_();
   void send_data_block2(unsigned char *data, int size);
   static void keep_alive_(void*);
+	void draw();
 
 private:
 	Flio_Stream *stream_;

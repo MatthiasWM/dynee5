@@ -179,7 +179,7 @@ int Flio_Serial_Port::open(const char *portname, int bps)
 
   rxActive_ = txActive_ = 0;
   pRxActive_ = pTxActive_ = 0;
-  redraw();
+	redraw();
   Fl::add_timeout(0.2, lights_cb, this);
 
   memset(&overlapped_, 0, sizeof(overlapped_));
@@ -437,6 +437,15 @@ int Flio_Serial_Port::is_open()
 #else
   return (port_!=-1);
 #endif
+}
+
+
+void Flio_Serial_Port::redraw() 
+{
+	if (super_)
+		super_->redraw();
+	else 
+		Flio_Stream::redraw();
 }
 
 
