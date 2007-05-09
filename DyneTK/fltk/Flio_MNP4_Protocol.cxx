@@ -27,6 +27,8 @@
 
 #include "Flio_MNP4_Protocol.h"
 
+#include "Flio_Serial_Port.h"
+
 #include <FL/Fl.H>
 
 #include <stdlib.h>
@@ -34,7 +36,8 @@
 
 
 Flio_Mnp4_Protocol::Flio_Mnp4_Protocol(int X, int Y, int W, int H, const char *L)
-: Flio_Serial_Port(X, Y, W, H, L),
+: Flio_Stream(X, Y, W, H, L),
+	stream_(0L),
   state_(0),
   index_(0),
   rxCnt_(0),
@@ -51,12 +54,19 @@ Flio_Mnp4_Protocol::~Flio_Mnp4_Protocol()
   stop_keep_alive_();
   if (buffer_)
     free(buffer_);
+	delete stream_;
 }
 
 
 int Flio_Mnp4_Protocol::open(const char *port, int bps)
 {
-  return Flio_Serial_Port::open(port, bps);
+	if (!stream_) {
+		Fl_Group *pg = Fl_Group::current();
+		Fl_Group::current(0L);
+		stream_ = new Flio_Serial_Port(this);
+		Fl_Group::current(pg);
+	}
+  return stream_->open(port, bps);
 }
 
 
@@ -66,7 +76,7 @@ void Flio_Mnp4_Protocol::close()
   // FIXME: send close block
   if (!on_disconnect() && callback())
     do_callback();
-  Flio_Serial_Port::close();
+  stream_->close();
 }
 
 
@@ -89,7 +99,7 @@ unsigned char *Flio_Mnp4_Protocol::get_block()
 
 
 
-int Flio_Mnp4_Protocol::on_read_()
+int Flio_Mnp4_Protocol::on_read()
 {
   for (;;) {
     if (state_==7) 

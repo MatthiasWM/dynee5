@@ -62,6 +62,11 @@ public:
   Flio_Serial_Port(int X, int Y, int W, int H, const char *L=0L);
 
   /**
+   * Constructor for superwidgets.
+   */
+  Flio_Serial_Port(Flio_Stream *super);
+
+  /**
    * The destructor closes any open connections.
    */
   virtual ~Flio_Serial_Port();

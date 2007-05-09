@@ -44,6 +44,11 @@ public:
   Flio_Stream(int X, int Y, int W, int H, const char *L=0L);
 
   /**
+   * Constructor for superwidgets.
+   */
+  Flio_Stream(Flio_Stream *super);
+
+  /**
    * The destructor closes any open connections.
    */
   virtual ~Flio_Stream();
@@ -109,6 +114,10 @@ public:
    * \return return 1, if callback should not be called anymore
    */
   virtual int on_read();
+
+protected:
+
+	Flio_Stream *super_;
 
 };
 

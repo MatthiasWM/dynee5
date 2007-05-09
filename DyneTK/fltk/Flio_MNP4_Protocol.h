@@ -27,7 +27,7 @@
 #define FLIO_MNP4_PROTOCOL
 
 
-#include "Flio_Serial_Port.h"
+#include "Flio_Stream.h"
 
 
 /**
@@ -46,7 +46,7 @@
  *
  * \todo Implement the actual error correction (right now we only detect errors)
  */
-class Flio_Mnp4_Protocol : public Flio_Serial_Port
+class Flio_Mnp4_Protocol : public Flio_Stream
 {
 public:
 
@@ -63,7 +63,7 @@ public:
   /**
    * Open a connection.
    *
-   * All connections are opened with 8N1 for simpluicity.
+   * All connections are opened with 8N1 for simplicity.
    *
    * \param[in] OS-specific port name, for example "\\.\COM1", or "/dev/ttyS0"
    * \param[in] transfer rate in bits per second (38400bps)
@@ -158,11 +158,24 @@ public:
    */
   virtual int on_receive() { return 0; }
 
+  virtual int write(const unsigned char *data, int n) {
+		return stream_->write(data, n);
+	}
+  virtual int available() {
+		return stream_->available();
+	}
+  virtual int read(unsigned char *dest, int n) {
+		return stream_->read(dest, n);
+	}
+  virtual int is_open() {
+		return stream_ ? stream_->is_open() : 0;
+	}
+
 protected:
 
   static void crc16(unsigned short &crc, unsigned char d);
 
-  virtual int on_read_();
+  virtual int on_read();
   int handle_block_();
   void send_LT_ack_();
   void stop_keep_alive_();
@@ -171,6 +184,7 @@ protected:
   static void keep_alive_(void*);
 
 private:
+	Flio_Stream *stream_;
   int state_;
   int index_;
   int rxCnt_;

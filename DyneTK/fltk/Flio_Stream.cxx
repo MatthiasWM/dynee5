@@ -40,7 +40,15 @@
 
 
 Flio_Stream::Flio_Stream(int X, int Y, int W, int H, const char *L)
-: Fl_Box(X, Y, W, H, L)
+: Fl_Box(X, Y, W, H, L),
+  super_(0L)
+{
+}
+
+
+Flio_Stream::Flio_Stream(Flio_Stream *super)
+: Fl_Box(0, 0, 0, 0),
+  super_(super)
 {
 }
 
@@ -80,7 +88,7 @@ int Flio_Stream::is_open()
 
 int Flio_Stream::on_read()
 {
-	return -1;
+	return 0;
 }
 
 //

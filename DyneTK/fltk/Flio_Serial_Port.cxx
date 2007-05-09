@@ -75,6 +75,29 @@ Flio_Serial_Port::Flio_Serial_Port(int X, int Y, int W, int H, const char *L)
 }
 
 
+Flio_Serial_Port::Flio_Serial_Port(Flio_Stream *super)
+: Flio_Stream(super),
+  ring_(0L),
+  NRing_(0),
+  ringHead_(0),
+  ringTail_(0),
+  portname_(0L),
+  rxActive_(0),
+  txActive_(0),
+  pRxActive_(0),
+  pTxActive_(0)
+#ifdef WIN32
+, port_(INVALID_HANDLE_VALUE),
+  thread_(0)
+#else
+, port_(-1)
+#endif
+{
+  NRing_ = 2048;
+  ring_ = (unsigned char *)malloc(NRing_);
+}
+
+
 Flio_Serial_Port::~Flio_Serial_Port()
 {
   close();
@@ -387,12 +410,15 @@ void Flio_Serial_Port::draw()
 
 
 int Flio_Serial_Port::on_read() {
-  return 0;
+	if (super_)
+		return super_->on_read();
+	else
+		return 0;
 }
 
 
 int Flio_Serial_Port::on_read_() {
-  return on_read();
+	return on_read();
 }
 
 
