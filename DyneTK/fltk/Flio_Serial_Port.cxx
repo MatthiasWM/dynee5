@@ -166,14 +166,23 @@ int Flio_Serial_Port::open(const char *portname, int bps)
   if (!thread_)
     _beginthread(reader_thread_, 0, this);
 #else
-  port_ = ::open(portname, O_RDWR|O_NOCTTY|O_NONBLOCK);
+  port_ = ::open(portname, O_RDWR|O_NOCTTY|O_NONBLOCK|O_NDELAY);
   if (port_==-1)
     return -1;
+  fcntl(port_, F_SETFL, FNDELAY);
   struct termios tio = { 0 };
-  cfmakeraw(&tio);
-  cfsetspeed(&tio, bps);
-  //tio.c_cc[VMIN] = 0;
-  //tio.c_cc[VTIME] = 2;
+  //tcgetattr(port_, &tio);
+  //cfmakeraw(&tio);
+  //cfsetspeed(&tio, bps);
+  //tio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL | CREAD;
+  tio.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
+  tio.c_iflag = IGNPAR | IGNBRK;
+  tio.c_oflag = 0;
+  tio.c_lflag = 0;
+  tio.c_cc[VMIN] = 1;
+  tio.c_cc[VTIME] = 0;
+  cfsetspeed(&tio, B38400);
+  tcflush(port_, TCIFLUSH);
   int ret = tcsetattr(port_, TCSANOW, &tio);
   if (ret==-1)
     return -1;
@@ -343,7 +352,7 @@ void Flio_Serial_Port::reader()
   printf("Serial Reader called\n");
   int nc = 0;
   for (;;) {
-    int n = free_to_end();
+    int n = free_to_end(); 
     int na = ::read(port_, ring_+ringHead_, n);
     if (na<=0)
       break;
@@ -355,7 +364,7 @@ void Flio_Serial_Port::reader()
   }
   if (nc) {
     rxActive_ = 1;
-    redraw();
+    on_read_cb(this);
   }
 }
 
