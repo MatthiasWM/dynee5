@@ -554,7 +554,7 @@ void InspectorConnect()
 void InspectorCancelConnect()
 {
 	wInspectorSerial->close();
-	wInspectorSerial->Flio_Mnp4_Serial::close();
+	wInspectorSerial->Flio_Mnp4_Protocol::close();
 	wConnect->hide();
 }
 

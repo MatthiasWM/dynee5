@@ -53,7 +53,7 @@
 
 
 Flio_Serial_Port::Flio_Serial_Port(int X, int Y, int W, int H, const char *L)
-: Fl_Box(X, Y, W, H, L),
+: Flio_Stream(X, Y, W, H, L),
   ring_(0L),
   NRing_(0),
   ringHead_(0),

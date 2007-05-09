@@ -26,7 +26,7 @@
 #ifndef FLIO_INSPECTOR
 #define FLIO_INSPECTOR
 
-#include "Flio_MNP4_Serial.h"
+#include "Flio_MNP4_Protocol.h"
 
 
 /**
@@ -52,7 +52,7 @@
  *        object containing error code and symbol information
  * \todo 'code', 0xffffffff, len - ??
  */
-class Flio_Inspector : public Flio_Mnp4_Serial
+class Flio_Inspector : public Flio_Mnp4_Protocol
 {
   typedef void (Flio_Inspector::*Call)();
 public:

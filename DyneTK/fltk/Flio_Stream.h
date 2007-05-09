@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Flio_Serial_Port header file for the FLIO extension to FLTK.
+// Flio_Stream header file for the FLIO extension to FLTK.
 //
 // Copyright 2002-2007 by Matthias Melcher.
 //
@@ -23,53 +23,33 @@
 // Please report all bugs and problems to "flio@matthiasm.com".
 //
 
-#ifndef FLIO_SERIAL_PORT
-#define FLIO_SERIAL_PORT
+#ifndef FLIO_STREAM
+#define FLIO_STREAM
 
 
-#include "fltk/Flio_Stream.h"
+#include <FL/x.H>
+#include <FL/Fl_Box.H>
+
 
 /**
- * A serial port communication widget for FLTK1.
- *
- * This widget manages communication over a serial port 
- * by providing a send and receive callback mechanism.
- * It draws indicators of the connection state, but the
- * Widget may as well stay hidden or not be part of a widget
- * tree at all.
- *
- * Line indicators are two LED-style circles tat are gray 
- * if the connection is closed, green if there is no data
- * sent or received, and red if there is traffic.
- *
- * We are using a 2kByte ring buffer to implement buffering.
- * If that seems to be too little, NRing in the constructor
- * can be changed accordingly.
- *
- * \todo We have yet to stress test the threading mechanism for multiple open/close operations!
- * \todo No buffer should be allocated until we actually open the line
- * \todo We should implement some better error handling
- * \todo We should provide an error message
- * \todo We could provide a tooltip indicating the number of bytes transmitted
+ * A streaming data communication widget for FLTK1.
  */
-class Flio_Serial_Port : public Flio_Stream
+class Flio_Stream : public Fl_Box
 {
 public:
 
   /**
    * Standard widget interface constructor.
    */
-  Flio_Serial_Port(int X, int Y, int W, int H, const char *L=0L);
+  Flio_Stream(int X, int Y, int W, int H, const char *L=0L);
 
   /**
    * The destructor closes any open connections.
    */
-  virtual ~Flio_Serial_Port();
+  virtual ~Flio_Stream();
 
   /**
    * Open a connection.
-   *
-   * All connections are opened with 8N1 for simplicity.
    *
    * \param[in] OS-specific port name, for example "\\.\COM1", or "/dev/ttyS0"
    * \param[in] transfer rate in bits per second (38400bps)
@@ -86,14 +66,14 @@ public:
    * \param n[in] size of data block
    * \return -1 if failed
    */
-  int write(const unsigned char *data, int n);
+  virtual int write(const unsigned char *data, int n);
 
   /**
    * Return the number of bytes available.
    *
    * \return number of bytes available in the buffer
    */
-  int available();
+  virtual int available();
 
   /**
    * Read bytes from the buffer.
@@ -105,19 +85,19 @@ public:
    * \param n[in] number of bytes to read at max
    * \return number of bytes actually read
    */
-  int read(unsigned char *dest, int n);
+  virtual int read(unsigned char *dest, int n);
 
   /**
-   * Close the serial connection.
+   * Close the connection.
    */
   virtual void close();
 
   /**
-   * Check if the serial line is open.
+   * Check if the connection is open.
    *
    * \return 0 if the connection is closed
    */
-  int is_open();
+  virtual int is_open();
 
   /**
    * This will be called whenever data arrives.
@@ -130,43 +110,6 @@ public:
    */
   virtual int on_read();
 
-  //virtual int on_error();
-
-protected:
-
-  virtual void draw();
-  virtual int on_read_();
-  //virtual int on_error_();
-
-private:
-
-  static void on_read_cb(void *);
-  //static void on_error_cb(void *);
-  static void lights_cb(void *);
-
-  unsigned char *ring_;
-  int NRing_;
-  int ringHead_;
-  int ringTail_;
-  char *portname_;
-  char rxActive_, pRxActive_;
-  char txActive_, pTxActive_;
-
-  int available_to_end();
-  int free_to_end();
-  
-#ifdef WIN32
-  void reader_thread();
-  static void __cdecl reader_thread_(void*);
-  HANDLE port_;
-  HANDLE event_;
-  unsigned long thread_;
-  OVERLAPPED overlapped_;
-#else
-  int port_;
-  static void reader_cb(int, void*);
-  void reader();
-#endif
 };
 
 

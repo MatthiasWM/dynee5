@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Flio_Mnp4_Serial header file for the FLIO extension to FLTK.
+// Flio_Mnp4_Protocol header file for the FLIO extension to FLTK.
 //
 // Copyright 2002-2007 by Matthias Melcher.
 //
@@ -23,8 +23,8 @@
 // Please report all bugs and problems to "flio@matthiasm.com".
 //
 
-#ifndef FLIO_MNP4_SERIAL
-#define FLIO_MNP4_SERIAL
+#ifndef FLIO_MNP4_PROTOCOL
+#define FLIO_MNP4_PROTOCOL
 
 
 #include "Flio_Serial_Port.h"
@@ -46,19 +46,19 @@
  *
  * \todo Implement the actual error correction (right now we only detect errors)
  */
-class Flio_Mnp4_Serial : public Flio_Serial_Port
+class Flio_Mnp4_Protocol : public Flio_Serial_Port
 {
 public:
 
   /** 
    * Standard widget constructor.
    */
-  Flio_Mnp4_Serial(int X, int Y, int W, int H, const char *L=0L);
+  Flio_Mnp4_Protocol(int X, int Y, int W, int H, const char *L=0L);
 
   /**
    * Close device and return all buffers.
    */
-  virtual ~Flio_Mnp4_Serial();
+  virtual ~Flio_Mnp4_Protocol();
 
   /**
    * Open a connection.

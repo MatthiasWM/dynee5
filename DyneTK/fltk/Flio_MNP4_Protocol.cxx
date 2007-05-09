@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Flio_Mnp4_Serial implementation for the FLIO extension to FLTK.
+// Flio_Mnp4_Protocol implementation for the FLIO extension to FLTK.
 //
 // Copyright 2002-2007 by Matthias Melcher.
 //
@@ -25,7 +25,7 @@
 
 
 
-#include "Flio_MNP4_Serial.h"
+#include "Flio_MNP4_Protocol.h"
 
 #include <FL/Fl.H>
 
@@ -33,7 +33,7 @@
 #include <stdio.h>
 
 
-Flio_Mnp4_Serial::Flio_Mnp4_Serial(int X, int Y, int W, int H, const char *L)
+Flio_Mnp4_Protocol::Flio_Mnp4_Protocol(int X, int Y, int W, int H, const char *L)
 : Flio_Serial_Port(X, Y, W, H, L),
   state_(0),
   index_(0),
@@ -46,7 +46,7 @@ Flio_Mnp4_Serial::Flio_Mnp4_Serial(int X, int Y, int W, int H, const char *L)
 }
 
 
-Flio_Mnp4_Serial::~Flio_Mnp4_Serial()
+Flio_Mnp4_Protocol::~Flio_Mnp4_Protocol()
 {
   stop_keep_alive_();
   if (buffer_)
@@ -54,13 +54,13 @@ Flio_Mnp4_Serial::~Flio_Mnp4_Serial()
 }
 
 
-int Flio_Mnp4_Serial::open(const char *port, int bps)
+int Flio_Mnp4_Protocol::open(const char *port, int bps)
 {
   return Flio_Serial_Port::open(port, bps);
 }
 
 
-void Flio_Mnp4_Serial::close()
+void Flio_Mnp4_Protocol::close()
 {
   stop_keep_alive_();
   // FIXME: send close block
@@ -70,26 +70,26 @@ void Flio_Mnp4_Serial::close()
 }
 
 
-void Flio_Mnp4_Serial::release_block()
+void Flio_Mnp4_Protocol::release_block()
 {
   state_ = 0;
 }
 
 
-int Flio_Mnp4_Serial::get_block_size() 
+int Flio_Mnp4_Protocol::get_block_size() 
 {
   return index_;
 }
 
 
-unsigned char *Flio_Mnp4_Serial::get_block() 
+unsigned char *Flio_Mnp4_Protocol::get_block() 
 {
   return buffer_;
 }
 
 
 
-int Flio_Mnp4_Serial::on_read_()
+int Flio_Mnp4_Protocol::on_read_()
 {
   for (;;) {
     if (state_==7) 
@@ -164,7 +164,7 @@ static unsigned char LR_ack[] = {
   0x08, 0x04, 0x02, 0x40, 0x00, 0x08, 0x01, 0x03, 0x0E, 0x04, 0x02, 0x04, 0x00, 0xFA,
 };
 
-void Flio_Mnp4_Serial::send_LT_ack_()
+void Flio_Mnp4_Protocol::send_LT_ack_()
 {
   unsigned char LT_ack[] = { 3, 5, 0, 8 };
   LT_ack[2] = rxCnt_;
@@ -172,20 +172,20 @@ void Flio_Mnp4_Serial::send_LT_ack_()
 }
 
 
-void Flio_Mnp4_Serial::stop_keep_alive_()
+void Flio_Mnp4_Protocol::stop_keep_alive_()
 {
   Fl::remove_timeout(keep_alive_, this);
 }
 
-void Flio_Mnp4_Serial::start_keep_alive_()
+void Flio_Mnp4_Protocol::start_keep_alive_()
 {
   Fl::remove_timeout(keep_alive_, this);
   Fl::add_timeout(3.0, keep_alive_, this);
 }
 
-void Flio_Mnp4_Serial::keep_alive_(void *t)
+void Flio_Mnp4_Protocol::keep_alive_(void *t)
 {
-  Flio_Mnp4_Serial *This = (Flio_Mnp4_Serial*)t;
+  Flio_Mnp4_Protocol *This = (Flio_Mnp4_Protocol*)t;
   This->send_LT_ack_();
   Fl::repeat_timeout(3.0, keep_alive_, This);
 }
@@ -198,7 +198,7 @@ void Flio_Mnp4_Serial::keep_alive_(void *t)
  * Protocol based blocks will all be handled here. Data blocks will
  * be sent on to on_block_receive() and then to the callback.
  */
-int Flio_Mnp4_Serial::handle_block_()
+int Flio_Mnp4_Protocol::handle_block_()
 {
   if (index_<2) // minimum header length
     return -1;
@@ -217,7 +217,7 @@ int Flio_Mnp4_Serial::handle_block_()
       stop_keep_alive_();
       //send_block(LD_ack, sizeof(LD_ack));
       //Sleep(300);
-      Flio_Mnp4_Serial::close();
+      Flio_Mnp4_Protocol::close();
       on_disconnect();
       break;
     case 4: // LT - Link Transfer
@@ -245,14 +245,14 @@ printf("ASK FOR A RESEND OF %d\n", rxCnt_+1);
     case 7: // LNA - Link Attention Acknowledge
     default:
       release_block();
-      printf("Flio_Mnp4_Serial: unsupported block type %d\n", buffer_[1]);
+      printf("Flio_Mnp4_Protocol: unsupported block type %d\n", buffer_[1]);
       return -1;
   }
   return 0;
 }
 
 
-void Flio_Mnp4_Serial::send_block(unsigned char *data, int size)
+void Flio_Mnp4_Protocol::send_block(unsigned char *data, int size)
 {
   static unsigned char hdr[] = { 0x16, 0x10, 0x02 };
   static unsigned char ftr[] = { 0x10, 0x03 };
@@ -289,7 +289,7 @@ void Flio_Mnp4_Serial::send_block(unsigned char *data, int size)
 }
 
 
-void Flio_Mnp4_Serial::send_data_block(unsigned char *data, int size)
+void Flio_Mnp4_Protocol::send_data_block(unsigned char *data, int size)
 {
   const int max_block = 250;
   int i;
@@ -303,7 +303,7 @@ void Flio_Mnp4_Serial::send_data_block(unsigned char *data, int size)
 }
 
 
-void Flio_Mnp4_Serial::send_data_block2(unsigned char *data, int size)
+void Flio_Mnp4_Protocol::send_data_block2(unsigned char *data, int size)
 {
   unsigned char buf[1024];
   unsigned char *d = buf;
@@ -341,7 +341,7 @@ void Flio_Mnp4_Serial::send_data_block2(unsigned char *data, int size)
 }
 
 
-void Flio_Mnp4_Serial::crc16(unsigned short &crc, unsigned char d) 
+void Flio_Mnp4_Protocol::crc16(unsigned short &crc, unsigned char d) 
 {
   static unsigned short crctab[256] = {
     0x0000, 0xc0c1, 0xc181, 0x0140, 0xc301, 0x03c0, 0x0280, 0xc241,

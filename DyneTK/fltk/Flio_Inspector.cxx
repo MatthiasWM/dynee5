@@ -44,7 +44,7 @@ extern Fl_Window *wConnect;
 
 
 Flio_Inspector::Flio_Inspector(int X, int Y, int W, int H, const char *L)
-: Flio_Mnp4_Serial(X, Y, W, H, L),
+: Flio_Mnp4_Protocol(X, Y, W, H, L),
   pattern_(0L),
   nPattern_(0),
   NPattern_(0),
@@ -66,7 +66,7 @@ Flio_Inspector::~Flio_Inspector()
 
 int Flio_Inspector::open(const char *port, int bps)
 {
-  int err = Flio_Mnp4_Serial::open(port, bps);
+  int err = Flio_Mnp4_Protocol::open(port, bps);
   waitForCommand();
   return err;
 }
