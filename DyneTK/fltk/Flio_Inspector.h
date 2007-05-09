@@ -147,7 +147,7 @@ protected:
   virtual int on_receive();
 
 private:
-	void dumpBuffer();
+  void dumpBuffer();
   int consume_block(unsigned char *&buf, int &n);
   unsigned int get_uint(const unsigned char *src);
 
