@@ -72,6 +72,7 @@ void	NewtAlert(int err);
 void	SystemAlert(const char *msg, int err=0xdecaff);
 
 void	DebugDumpPackage();
+void	DebugDumpNSOF();
 
 #endif
 

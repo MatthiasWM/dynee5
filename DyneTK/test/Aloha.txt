@@ -1,17 +1,39 @@
 
-_view000 :=
+v0 := 3;
+
+|abc.def| := 33;
+
+v1 :=
     {appSymbol: '|Aloha:DTK|,
      title: "Aloha",
      viewBounds: {left: 0, top: 60, bottom: 274, right: 134},
      viewFlags: 5,
      viewFormat: 83951953,
      test: func() begin end,
+     rast: func() begin end,
      _proto: @157
     };
 
+v2 := { ju: "HU", jo: func(a) begin end };
 
-constant |layout_test.lyt| :=  _view000;
-// End of file test.lyt
+DefGlobalVar('theForm, v1);
 
-|layout_test.lyt|
+vv := func() begin end;
+DefGlobalVar('theBase, v1.test.argFrame._nextArgFrame);
 
+//foreach slot in vv.argFrame._nextArgFrame do
+//  slot;
+
+//p("A");
+//foreach slot, value in v1.test.argFrame._nextArgFrame do
+//  p(slot);
+//p("B");
+
+//RemoveSlot( vv.argFrame._nextArgFrame, 'v0);
+//RemoveSlot( vv.argFrame._nextArgFrame, 'v1);
+//RemoveSlot( vv.argFrame._nextArgFrame, 'v2);
+//RemoveSlot( vv.argFrame._nextArgFrame, 'vv);
+//SetLength( vv.argFrame._nextArgFrame, 5);
+
+//return v1.test.argFrame._nextArgFrame;
+return "OK";

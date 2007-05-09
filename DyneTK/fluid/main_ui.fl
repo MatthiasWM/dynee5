@@ -284,11 +284,6 @@ widget_class Fldtk_Main_Window {
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
       }
       MenuItem {} {
-        label {Dump Package Contents...}
-        callback {DebugDumpPackage();}
-        xywh {15 15 100 20} labelsize 12 labelcolor 59
-      }
-      MenuItem {} {
         label {Install Toolkit App}
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
       }
@@ -307,7 +302,17 @@ widget_class Fldtk_Main_Window {
       MenuItem mProjectSettings {
         label {Settings...}
         callback {ShowProjectSettings();}
-        xywh {5 5 100 20} labelsize 12 deactivate
+        xywh {5 5 100 20} labelsize 12 deactivate divider
+      }
+      MenuItem {} {
+        label {Dump Package Contents...}
+        callback {DebugDumpPackage();}
+        xywh {15 15 100 20} labelsize 12 labelcolor 59
+      }
+      MenuItem {} {
+        label {Dump NSOF Contents...}
+        callback {DebugDumpNSOF();} selected
+        xywh {25 25 100 20} labelsize 12 labelcolor 59
       }
     }
     Submenu mLayout {
@@ -746,8 +751,7 @@ if ( (mask & 0x00000009) == 0x00000009 ) {
   mProjectDownload->deactivate(); // could depend on existing pkg
   tProjectDownload->deactivate(); // could depend on existing pkg
   mProjectLaunch->deactivate(); // could depend on downloaded pkg
-}} {selected
-    }
+}} {}
   }
 } 
 

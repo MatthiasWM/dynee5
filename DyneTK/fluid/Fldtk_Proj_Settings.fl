@@ -301,7 +301,7 @@ widget_class Fldtk_Proj_Package {
   Fl_Check_Button {} {
     label {&Faster Compression (Newton OS 2.0 only)}
     callback set_changed_cb
-    xywh {70 140 250 20} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {70 140 250 20} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Input copyright {
     label {Copyright:}
@@ -355,10 +355,11 @@ widget_class Fldtk_Proj_Project {
   Fl_Input {} {
     label {Language:}
     xywh {100 45 145 20} labelsize 12 textsize 12 deactivate
+    code0 {o->value("English");}
   }
   Fl_Check_Button {} {
     label {&Compile for Debugging}
-    xywh {20 80 150 20} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {20 80 150 20} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Check_Button {} {
     label {&Ignore Native Keyword}
@@ -366,7 +367,7 @@ widget_class Fldtk_Proj_Project {
   }
   Fl_Check_Button {} {
     label {Check &Global Function Calls}
-    xywh {20 130 175 20} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {20 130 175 20} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Check_Button {} {
     label {&V1.0 Build Rules}
@@ -374,7 +375,7 @@ widget_class Fldtk_Proj_Project {
   }
   Fl_Check_Button {} {
     label {&Use stepChildren Slot}
-    xywh {20 180 140 20} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {20 180 140 20} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Check_Button {} {
     label {&Suppress Byte Code}
@@ -394,11 +395,11 @@ widget_class Fldtk_Proj_Project {
   }
   Fl_Check_Button {} {
     label {&Faster Functions (2.0 Only)}
-    xywh {200 155 165 20} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {200 155 165 20} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Check_Button {} {
     label {&Tighter Packing (2.0 Only)}
-    xywh {200 180 160 20} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {200 180 160 20} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
 } 
 
@@ -436,6 +437,7 @@ widget_class Fldtk_Proj_Output {
   }
   Fl_Input {} {
     xywh {245 80 45 20} labelsize 12 textsize 12 deactivate
+    code0 {o->value("UNKN");}
   }
   Fl_Box {} {
     label {Result:}
@@ -451,11 +453,11 @@ widget_class Fldtk_Proj_Output {
 } 
 
 widget_class Fldtk_Proj_Settings {
-  label {Dyne Toolkit Project Settings}
   callback {Fldtk_Proj_Settings *w = (Fldtk_Proj_Settings*)o;
 w->hide();
 w->updateDialog();} selected
   xywh {530 192 400 335} type Double
+  code0 {this->label("Dyne Toolkit Project Settings");}
   class Fl_Double_Window non_modal visible
 } {
   Fl_Tabs {} {open

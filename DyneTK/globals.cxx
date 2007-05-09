@@ -693,6 +693,11 @@ void DebugDumpPackage() {
 	testPkgReader(0);
 }
 
+extern void testNSOFReader(const char *filename);
+void DebugDumpNSOF() {
+	testNSOFReader(0);
+}
+
 //
 // End of "$Id$".
 //

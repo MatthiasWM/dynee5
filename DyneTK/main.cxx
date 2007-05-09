@@ -108,6 +108,12 @@ int main(int argc, char **argv) {
 	// initialize the local interpreter and compiler
 	NewtInit(argc, (const char**)argv, 0);
 
+	NewtInit(argc, (const char**)argv, 0);
+	NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
+	NcSetGlobalVar(NSSYM(printDepth), NSINT(30));
+	NEWT_INDENT = 1;
+	NEWT_DUMPBC = 1;
+
 	// create some global classes 
 	documents = new Dtk_Document_Manager();
 
@@ -143,6 +149,13 @@ int main(int argc, char **argv) {
 	return 0;
 }
 
+
+// TODOs
+// Download Pkg is active even if no project is loaded:
+//   When clicked, it gives the user a file chooser to select any package
+// Download Pkg is active even if there is no inspector connection. 
+//   If clicked, it pops up the Inspector dialog
+// When creating a new project, after choosing a filename, the project is saved immediately.
 
 //
 // End of "$Id$".

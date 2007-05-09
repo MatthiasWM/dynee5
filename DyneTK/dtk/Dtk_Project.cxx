@@ -368,7 +368,7 @@ void Dtk_Project::setDefaults()
 
 	sprintf(buf, "%s:SIG", shortname_);
 	dtkProjSettings->package->name->set(buf);
-	dtkProjSettings->package->copyright->set("Â©2007. All rights reserved.");
+	dtkProjSettings->package->copyright->set("©1997 Apple Computer, Inc. All rights reserved.");
 	dtkProjSettings->package->version->set("1");
 	dtkProjSettings->package->deleteOnDownload->set(1);
 }
@@ -715,7 +715,8 @@ int Dtk_Project::buildPackage()
 	int32_t ix;
 
 	// FIXME: this only supports a single document per project
-	newtRef theForm = kNewtRefNIL;
+	newtRefVar theForm = kNewtRefNIL;
+	newtRefVar theBase = kNewtRefNIL;
 	Dtk_Document *doc = documents->getProjectDoc(0);
 	if (doc) {
 		theForm = doc->compile();
@@ -723,8 +724,27 @@ int Dtk_Project::buildPackage()
 	if (theForm==kNewtRefUnbind) {
 		return -1;
 	}
+
 	NewtPrintObject(stdout, theForm);
 
+	theForm = kNewtRefUnbind;
+	theForm = NcGetGlobalVar(NSSYM(theForm));
+	theBase = NcGetGlobalVar(NSSYM(theBase));
+
+	// the following little hack removes all local variables from the 
+	// base object to avoid a recursion when writing the package
+	newtObjRef obj = NewtRefToPointer(theBase);
+	uint32_t i, index, len = NewtObjSlotsLength(obj);
+	for (i=len-1; i>2; i--) {
+		newtRefVar slot = NewtGetMapIndex(obj->as.map, i, &index);	
+		//printf("Slot %d = <%s>\n", i, NewtRefToSymbol(slot)->name);
+		NcRemoveSlot(theBase, slot);
+	}
+
+	NewtPrintObject(stdout, theForm);
+	NewtPrintObject(stdout, theBase);
+
+	// create the package
 	newtRefVar iconBoundsA[] = {
 		NSSYM(left),			NewtMakeInt30(0),
 		NSSYM(top),				NewtMakeInt30(0),
@@ -803,6 +823,31 @@ int Dtk_Project::savePackage()
 
 	return -1;
 }
+
+/* Prologue:
+	home			The path name of the folder containing the open project file
+	kAppName		The application name you specify through the Output section 
+					of the Application tab of the Settings dialog box
+	kAppString		The application symbol, which you specify through the Output
+					section of the Application tab of the Settings dialog box 
+					stored as a string instead of as a symbol
+	kAppSymbol		The application symbol you specify through the Output 
+					section of the Application tab of the Settings dialog box 
+	kDebugOn		True if Compile for Debugging is checked in the Project 
+					tab of the Settings dialog box
+	kIgnoreNativeKeyword	True if Ignore Native Keyword is checked in the 
+					Project tab of the Settings dialog box
+	kPackageName	The package name you specify through the Package tab of 
+					the Settings dialog box
+	kProfileOn		True if Compile for Profiling is checked in the Project 
+					tab of the Settings dialog box
+	language		The Language string specified through the Project tab of 
+					the Settings dialog box
+	layout_filename	A reference to the view hierarchy of the processed layout
+					file named filename
+	streamFile_filename	A reference to the contents of a processed stream 
+					file named filename
+*/
 
 //
 // End of "$Id$".

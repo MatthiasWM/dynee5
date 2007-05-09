@@ -363,6 +363,7 @@ this->labelsize(12);
 } // Fl_Check_Button* o
 { Fl_Check_Button* o = new Fl_Check_Button(70, 140, 250, 20, "&Faster Compression (Newton OS 2.0 only)");
   o->down_box(FL_DOWN_BOX);
+  o->value(1);
   o->labelsize(12);
   o->callback((Fl_Callback*)set_changed_cb);
   o->deactivate();
@@ -433,9 +434,11 @@ this->labelsize(12);
   o->labelsize(12);
   o->textsize(12);
   o->deactivate();
+  o->value("English");
 } // Fl_Input* o
 { Fl_Check_Button* o = new Fl_Check_Button(20, 80, 150, 20, "&Compile for Debugging");
   o->down_box(FL_DOWN_BOX);
+  o->value(1);
   o->labelsize(12);
   o->deactivate();
 } // Fl_Check_Button* o
@@ -446,6 +449,7 @@ this->labelsize(12);
 } // Fl_Check_Button* o
 { Fl_Check_Button* o = new Fl_Check_Button(20, 130, 175, 20, "Check &Global Function Calls");
   o->down_box(FL_DOWN_BOX);
+  o->value(1);
   o->labelsize(12);
   o->deactivate();
 } // Fl_Check_Button* o
@@ -456,6 +460,7 @@ this->labelsize(12);
 } // Fl_Check_Button* o
 { Fl_Check_Button* o = new Fl_Check_Button(20, 180, 140, 20, "&Use stepChildren Slot");
   o->down_box(FL_DOWN_BOX);
+  o->value(1);
   o->labelsize(12);
   o->deactivate();
 } // Fl_Check_Button* o
@@ -481,11 +486,13 @@ this->labelsize(12);
 } // Fl_Check_Button* o
 { Fl_Check_Button* o = new Fl_Check_Button(200, 155, 165, 20, "&Faster Functions (2.0 Only)");
   o->down_box(FL_DOWN_BOX);
+  o->value(1);
   o->labelsize(12);
   o->deactivate();
 } // Fl_Check_Button* o
 { Fl_Check_Button* o = new Fl_Check_Button(200, 180, 160, 20, "&Tighter Packing (2.0 Only)");
   o->down_box(FL_DOWN_BOX);
+  o->value(1);
   o->labelsize(12);
   o->deactivate();
 } // Fl_Check_Button* o
@@ -535,6 +542,7 @@ this->labelsize(12);
   o->labelsize(12);
   o->textsize(12);
   o->deactivate();
+  o->value("UNKN");
 } // Fl_Input* o
 { Fl_Box* o = new Fl_Box(10, 110, 55, 20, "Result:");
   o->labelsize(12);
@@ -691,6 +699,7 @@ this->when(FL_WHEN_RELEASE);
   o->labelsize(12);
   o->deactivate();
 } // Fl_Button* o
+this->label("Dyne Toolkit Project Settings");
 set_non_modal();
 end();
 }

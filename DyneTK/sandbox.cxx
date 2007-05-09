@@ -267,6 +267,34 @@ void send_test(int ix) {
   }
 }
 
+void testNSOFReader(const char *filename) 
+{
+	if (!filename)
+		filename = fl_file_chooser("Load NSOF File", "*", 0L);
+	if (!filename) return;
+
+	uint8_t *buffer;
+	FILE *f = fopen(filename, "rb");
+	fseek(f, 0, SEEK_END);
+	int nn = ftell(f);
+	fseek(f, 0, SEEK_SET);
+	buffer = (uint8_t*)malloc(nn);
+	int n = fread(buffer, 1, nn, f);
+	fclose(f);
+	if (n) {
+		NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
+		NcSetGlobalVar(NSSYM(printDepth), NSINT(30));
+		NEWT_DUMPBC = 0;
+		NEWT_INDENT = -2;
+
+		FILE *f = fopen("dump_nsof.txt", "wb");
+		newtRef pkg = NewtReadNSOF(buffer, n);
+		NewtPrintObject(f, pkg);
+		fclose(f);
+
+	}
+}
+
 void testPkgReader(const char *filename) 
 {
 
