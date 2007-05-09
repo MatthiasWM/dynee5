@@ -13,6 +13,7 @@ SRCFILES = \
   fltk/Flmm_Set_Input.cxx \
   fltk/Flio_MNP4_Protocol.cxx \
   fltk/Flio_Stream.cxx \
+  fltk/Flio_Pipe.cxx \
   fltk/Flio_Serial_Port.cxx \
   fltk/Flmm_Set_Check_Button.cxx \
   fltk/Fldtk_Script_Editor.cxx \

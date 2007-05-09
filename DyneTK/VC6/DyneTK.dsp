@@ -186,11 +186,19 @@ SOURCE=..\fltk\Flio_Inspector.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Flio_MNP4_Serial.cxx
+SOURCE=..\fltk\Flio_MNP4_Protocol.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Flio_MNP4_Serial.h
+SOURCE=..\fltk\Flio_MNP4_Protocol.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_Pipe.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_Pipe.h
 # End Source File
 # Begin Source File
 
@@ -199,6 +207,14 @@ SOURCE=..\fltk\Flio_Serial_Port.cxx
 # Begin Source File
 
 SOURCE=..\fltk\Flio_Serial_Port.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_Stream.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_Stream.h
 # End Source File
 # Begin Source File
 

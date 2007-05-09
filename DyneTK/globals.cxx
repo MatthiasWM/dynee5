@@ -525,13 +525,7 @@ void InspectorConnect()
 	if (wInspectorSerial->is_open()) {
 		wInspectorSerial->close();
 	} else {
-		char buf[32];
-#ifdef WIN32
-		sprintf(buf, "\\\\.\\COM%d", dtkPrefs->packages->port()+1);
-#else
-		sprintf(buf, "/dev/ttyS%d", dtkPrefs->packages->port());
-#endif
-		wInspectorSerial->open(buf, 38400);
+		wInspectorSerial->open(dtkPrefs->packages->port(), 38400);
 		if (!wInspectorSerial->is_open()) {
 			wInspectorSerial->close();
 			if (wConnect)

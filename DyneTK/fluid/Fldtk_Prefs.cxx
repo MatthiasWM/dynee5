@@ -182,24 +182,32 @@ Fl_Menu_Item Fldtk_Prefs_Packages::menu_Type[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void Fldtk_Prefs_Packages::cb_wPort_i(Fl_Choice* o, void*) {
+void Fldtk_Prefs_Packages::cb_wPortname_i(Fl_Input_Choice* o, void*) {
   ((Fldtk_Prefs*)(o->window()))->set_changed();
 }
-void Fldtk_Prefs_Packages::cb_wPort(Fl_Choice* o, void* v) {
-  ((Fldtk_Prefs_Packages*)(o->parent()))->cb_wPort_i(o,v);
+void Fldtk_Prefs_Packages::cb_wPortname(Fl_Input_Choice* o, void* v) {
+  ((Fldtk_Prefs_Packages*)(o->parent()))->cb_wPortname_i(o,v);
 }
 
-Fl_Menu_Item Fldtk_Prefs_Packages::menu_wPort[] = {
- {"Com1:", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {"Com2:", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {"Com3:", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {"Com4:", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+Fl_Menu_Item Fldtk_Prefs_Packages::menu_wPortnameWin32[] = {
+ {"\\\\.\\COM1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"\\\\.\\COM2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"\\\\.\\COM3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"\\\\.\\COM4", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+Fl_Menu_Item Fldtk_Prefs_Packages::menu_wPortnameUnix[] = {
+ {"/dev/ttyS0", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"/dev/ttyS1", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"/dev/ttyS2", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"/dev/ttyS3", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 Fldtk_Prefs_Packages::Fldtk_Prefs_Packages(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->labelsize(12);
-port_ = 0;
+portname_ = 0L;
 { Fl_Box* o = new Fl_Box(15, 15, 100, 25, "Connection");
   o->labelsize(12);
   o->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
@@ -210,12 +218,29 @@ port_ = 0;
   o->deactivate();
   o->menu(menu_Type);
 } // Fl_Choice* o
-{ wPort = new Fl_Choice(240, 50, 100, 20, "&Port:");
-  wPort->down_box(FL_BORDER_BOX);
-  wPort->labelsize(12);
-  wPort->callback((Fl_Callback*)cb_wPort);
-  wPort->menu(menu_wPort);
-} // Fl_Choice* wPort
+{ wPortname = new Fl_Input_Choice(240, 50, 165, 20, "Port:");
+  wPortname->labelsize(12);
+  wPortname->textsize(12);
+  wPortname->callback((Fl_Callback*)cb_wPortname);
+} // Fl_Input_Choice* wPortname
+{ wPortnameWin32 = new Fl_Choice(240, 70, 100, 20);
+  wPortnameWin32->down_box(FL_BORDER_BOX);
+  wPortnameWin32->labelsize(12);
+  wPortnameWin32->deactivate();
+  wPortnameWin32->menu(menu_wPortnameWin32);
+} // Fl_Choice* wPortnameWin32
+{ wPortnameUnix = new Fl_Choice(240, 90, 100, 20);
+  wPortnameUnix->down_box(FL_BORDER_BOX);
+  wPortnameUnix->labelsize(12);
+  wPortnameUnix->deactivate();
+  wPortnameUnix->menu(menu_wPortnameUnix);
+} // Fl_Choice* wPortnameUnix
+// add the corrct pulldown menu
+#ifdef WIN32
+wPortname->menu(wPortnameWin32->menu());
+#else
+wPortname->menu(wPortnameUnix->menu());
+#endif
 { Fl_Check_Button* o = new Fl_Check_Button(20, 90, 280, 25, "Auto &Save Before Building Package");
   o->down_box(FL_DOWN_BOX);
   o->labelsize(12);
@@ -230,24 +255,33 @@ position(X, Y);
 end();
 }
 
-int Fldtk_Prefs_Packages::port() {
-  return port_;
+char * Fldtk_Prefs_Packages::port() {
+  return portname_;
 }
 
 void Fldtk_Prefs_Packages::get_prefs(Fl_Preferences &prefs) {
-  prefs.get("Port", port_, 0);
+  if (portname_)
+  free(portname_);
+  
+#ifdef WIN32
+  prefs.get("Portname", portname_, "\\\\.\\COM1");
+#else
+  prefs.get("Portname", portname_, "/dev/ttyS0");
+#endif
 }
 
 void Fldtk_Prefs_Packages::set_prefs(Fl_Preferences &prefs) {
-  prefs.set("Port", port_);
+  prefs.set("Portname", portname_);
 }
 
 void Fldtk_Prefs_Packages::update_data() {
-  port_ = wPort->value();
+  if (portname_)
+  free(portname_);
+portname_ = strdup(wPortname->value());
 }
 
 void Fldtk_Prefs_Packages::update_dialog() {
-  wPort->value(port_);
+  wPortname->value(portname_);
 }
 Fldtk_Prefs_Heaps::Fldtk_Prefs_Heaps(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {

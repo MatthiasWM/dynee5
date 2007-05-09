@@ -26,6 +26,9 @@ comment {//
 decl {\#include <FL/Fl_Preferences.H>} {public
 } 
 
+decl {\#include <stdlib.h>} {public
+} 
+
 widget_class Fldtk_Prefs_App {
   label App
   xywh {663 220 445 185} type Double labelsize 12 visible position_relative
@@ -179,9 +182,9 @@ widget_class Fldtk_Prefs_Text {
 
 widget_class Fldtk_Prefs_Packages {
   label Packages
-  xywh {760 340 445 185} type Double labelsize 12 visible position_relative
+  xywh {456 229 445 185} type Double labelsize 12 visible position_relative
 } {
-  code {port_ = 0;} {}
+  code {portname_ = 0L;} {}
   Fl_Box {} {
     label Connection
     xywh {15 15 100 25} labelsize 12 align 20
@@ -195,28 +198,57 @@ widget_class Fldtk_Prefs_Packages {
       xywh {5 5 100 20} labelsize 12 deactivate
     }
   }
-  Fl_Choice wPort {
-    label {&Port:}
+  Fl_Input_Choice wPortname {
+    label {Port:}
     callback {((Fldtk_Prefs*)(o->window()))->set_changed();}
-    xywh {240 50 100 20} down_box BORDER_BOX labelsize 12
+    xywh {240 50 165 20} labelsize 12 textsize 12
+  } {}
+  Fl_Choice wPortnameWin32 {open
+    xywh {240 70 100 20} down_box BORDER_BOX labelsize 12 deactivate
   } {
     MenuItem {} {
-      label {Com1:}
+      label {\\\\.\\COM1}
       xywh {15 15 100 20} labelsize 12
     }
     MenuItem {} {
-      label {Com2:}
+      label {\\\\.\\COM2}
       xywh {25 25 100 20} labelsize 12
     }
     MenuItem {} {
-      label {Com3:}
+      label {\\\\.\\COM3}
       xywh {35 35 100 20} labelsize 12
     }
     MenuItem {} {
-      label {Com4:}
+      label {\\\\.\\COM4}
       xywh {45 45 100 20} labelsize 12
     }
   }
+  Fl_Choice wPortnameUnix {open
+    xywh {240 90 100 20} down_box BORDER_BOX labelsize 12 deactivate
+  } {
+    MenuItem {} {
+      label {/dev/ttyS0}
+      xywh {25 25 100 20} labelsize 12
+    }
+    MenuItem {} {
+      label {/dev/ttyS1}
+      xywh {35 35 100 20} labelsize 12
+    }
+    MenuItem {} {
+      label {/dev/ttyS2}
+      xywh {45 45 100 20} labelsize 12
+    }
+    MenuItem {} {
+      label {/dev/ttyS3}
+      xywh {55 55 100 20} labelsize 12
+    }
+  }
+  code {// add the corrct pulldown menu
+\#ifdef WIN32
+wPortname->menu(wPortnameWin32->menu());
+\#else
+wPortname->menu(wPortnameUnix->menu());
+\#endif} {}
   Fl_Check_Button {} {
     label {Auto &Save Before Building Package}
     xywh {20 90 280 25} down_box DOWN_BOX labelsize 12 deactivate
@@ -225,27 +257,36 @@ widget_class Fldtk_Prefs_Packages {
     label {Auto &Download After Building Package}
     xywh {20 115 280 25} down_box DOWN_BOX labelsize 12 deactivate
   }
-  Function {port()} {return_type int
+  Function {port()} {open return_type {char *}
   } {
-    code {return port_;} {}
+    code {return portname_;} {}
   }
-  Function {get_prefs(Fl_Preferences &prefs)} {return_type void
+  Function {get_prefs(Fl_Preferences &prefs)} {open return_type void
   } {
-    code {prefs.get("Port", port_, 0);} {}
+    code {if (portname_)
+  free(portname_);
+  
+\#ifdef WIN32
+  prefs.get("Portname", portname_, "\\\\\\\\.\\\\COM1");
+\#else
+  prefs.get("Portname", portname_, "/dev/ttyS0");
+\#endif} {}
   }
-  Function {set_prefs(Fl_Preferences &prefs)} {return_type void
+  Function {set_prefs(Fl_Preferences &prefs)} {open return_type void
   } {
-    code {prefs.set("Port", port_);} {}
+    code {prefs.set("Portname", portname_);} {}
   }
-  Function {update_data()} {return_type void
+  Function {update_data()} {open return_type void
   } {
-    code {port_ = wPort->value();} {}
+    code {if (portname_)
+  free(portname_);
+portname_ = strdup(wPortname->value());} {}
   }
-  Function {update_dialog()} {return_type void
+  Function {update_dialog()} {open return_type void
   } {
-    code {wPort->value(port_);} {}
+    code {wPortname->value(portname_);} {}
   }
-  decl {int port_;} {}
+  decl {char *portname_;} {}
 } 
 
 widget_class Fldtk_Prefs_Heaps {
@@ -318,7 +359,7 @@ w->update_dialog();} open
     callback {update_data();
 hide();
 update_dialog();
-set_prefs();}
+set_prefs();} selected
     xywh {120 235 80 25} labelsize 12
   }
   Fl_Button wCancel {
@@ -366,8 +407,7 @@ Fl_Preferences app(prefs, "Application");
 app.set("win_x", win_x);
 app.set("win_y", win_y);
 app.set("win_w", win_w);
-app.set("win_h", win_h);} {selected
-    }
+app.set("win_h", win_h);} {}
   }
   Function {update_data()} {return_type void
   } {

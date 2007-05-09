@@ -23,6 +23,7 @@
 #define Fldtk_Prefs_h
 #include <FL/Fl.H>
 #include <FL/Fl_Preferences.H>
+#include <stdlib.h>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Box.H>
@@ -52,19 +53,25 @@ class Fldtk_Prefs_Text : public Fl_Group {
 public:
   Fldtk_Prefs_Text(int X, int Y, int W, int H, const char *L = 0);
 };
+#include <FL/Fl_Input_Choice.H>
 
 class Fldtk_Prefs_Packages : public Fl_Group {
 public:
   Fldtk_Prefs_Packages(int X, int Y, int W, int H, const char *L = 0);
   static Fl_Menu_Item menu_Type[];
-  Fl_Choice *wPort;
+  Fl_Input_Choice *wPortname;
 private:
-  void cb_wPort_i(Fl_Choice*, void*);
-  static void cb_wPort(Fl_Choice*, void*);
-  static Fl_Menu_Item menu_wPort[];
-  int port_; 
+  void cb_wPortname_i(Fl_Input_Choice*, void*);
+  static void cb_wPortname(Fl_Input_Choice*, void*);
 public:
-  int port();
+  Fl_Choice *wPortnameWin32;
+  static Fl_Menu_Item menu_wPortnameWin32[];
+  Fl_Choice *wPortnameUnix;
+  static Fl_Menu_Item menu_wPortnameUnix[];
+private:
+  char *portname_; 
+public:
+  char * port();
   void get_prefs(Fl_Preferences &prefs);
   void set_prefs(Fl_Preferences &prefs);
   void update_data();
