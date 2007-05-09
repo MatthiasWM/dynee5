@@ -27,12 +27,12 @@
 #include "Flio_Inspector.h"
 
 #include "globals.h"
+#include "allNewt.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-
 
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Image.H>
@@ -286,6 +286,44 @@ void Flio_Inspector::gotNewtNtkFobj() {
 
 void Flio_Inspector::gotNewtNtkFobjSize() {
   dumpBuffer();
+
+		
+		newtRef obj = NewtReadNSOF((uint8_t*)(buffer_+0x10), nBuffer_-0x10);
+		NewtPrintObject(stdout, obj);
+/*
+{
+        interpretation: 'screenshot,
+        data: {
+                machineInfo: {
+                        manufacturer: 16777216,
+                        machineType: 268447744,
+                        ROMStage: 32768,
+                        ROMVersion: 131074,
+                        RAMSize: 4079616,
+                        screenwidth: 320,
+                        screenheight: 480,
+                        screenresolutionx: 100,
+                        screenresolutiony: 100,
+                        screendepth: 4,
+                        patchVersion: 1,
+                        tabletresolutionx: 800,
+                        tabletresolutiony: 800,
+                        cputype: 'strongarm,
+                        cpuspeed: 162.184006,
+                        manufacturedate: 49309306,
+                        ROMversionstring: "2.1 (717260)"
+                },
+                rowbytes: 160,
+                top: 0,
+                left: 0,
+                bottom: 480,
+                right: 320,
+                depth: 4,
+                theBits: <Binary, class "binary", length 76800>
+        }
+}
+*/
+
   waitForCommand();
 }
 

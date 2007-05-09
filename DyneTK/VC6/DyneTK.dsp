@@ -178,6 +178,14 @@ SOURCE=..\fltk\Fldtk_Script_Editor.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fluid\Fldtk_Snapshot.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fluid\Fldtk_Snapshot.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Flio_Inspector.cxx
 # End Source File
 # Begin Source File

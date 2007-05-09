@@ -1,0 +1,47 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0108 
+header_name {.h} 
+code_name {.cxx}
+comment {//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+} {in_source in_header
+} 
+
+decl {\#include "allNewt.h"} {public
+} 
+
+Function {show_snapshot(newtRef snap)} {open return_type void
+} {
+  Fl_Window {} {
+    label {Snapshot Manager} open
+    xywh {207 400 337 139} type Double visible
+  } {
+    Fl_Box {} {
+      label {Snapshot will be here.} selected
+      xywh {25 25 290 85}
+    }
+  }
+} 
+
+comment {
+//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//} {in_source in_header
+} 

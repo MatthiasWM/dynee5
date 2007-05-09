@@ -27,6 +27,7 @@ SRCFILES = \
   fluid/main_ui.cxx \
   fluid/Fldtk_Prefs.cxx \
   fluid/Fldtk_Inspector.cxx \
+  fluid/Fldtk_Snapshot.cxx \
   globals.cxx \
   main.cxx \
   sandbox.cxx \
