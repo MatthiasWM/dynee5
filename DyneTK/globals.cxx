@@ -719,7 +719,7 @@ void InspectorSnapshotUpdate(newtRef snapshot)
           *dst++ = ((d<<4)|(d&0x0f))^0xff;
         }
       }
-      Fl_RGB_Image *img = new Fl_RGB_Image(imgData, wdt, hgt, 1);
+      Flmp_Image *img = (Flmp_Image*)new Fl_RGB_Image(imgData, wdt, hgt, 1);
       img->alloc_array = 1;
       update_snapshot_window(img);
       //free(imgData);

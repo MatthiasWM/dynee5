@@ -26,7 +26,13 @@ comment {//
 decl {\#include "allNewt.h"} {public
 } 
 
+decl {\#include "fltk/Flmp_Image.H"} {public
+} 
+
 decl {\#include <FL/Fl_RGB_Image.H>} {public
+} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {selected public
 } 
 
 Function {show_snapshot_window()} {open return_type void
@@ -35,11 +41,23 @@ Function {show_snapshot_window()} {open return_type void
   } {
     Fl_Window snapshot {
       label {Snapshot Manager} open
-      xywh {529 326 350 510} type Double visible
+      xywh {529 326 350 547} type Double visible
     } {
       Fl_Box wImage {
         label {Loading Snapshot...}
         xywh {10 10 330 490} box THIN_DOWN_BOX
+      }
+      Fl_Button {} {
+        label {Save As JPEG...}
+        callback {Flmp_Image *img = (Flmp_Image*)wImage->image();
+if (!img) 
+  return;
+  
+const char *filename = fl_file_chooser("Save As JPEG", "*.jpg", 0);
+if (filename) {
+  img->save_jpeg(filename, 90);
+}}
+        xywh {230 510 110 25} labelsize 12
       }
     }
   }
@@ -52,7 +70,7 @@ wImage->label("Loading Snapshot...");
 snapshot->show();} {}
 } 
 
-Function {update_snapshot_window(Fl_RGB_Image *img)} {open return_type void
+Function {update_snapshot_window(Flmp_Image *img)} {open return_type void
 } {
   code {// replace label with snapshot image
 if (!snapshot)
@@ -70,8 +88,7 @@ delete oldImg;
 wImage->image(img);
 wImage->redraw();
   
-snapshot->show();} {selected
-  }
+snapshot->show();} {}
 } 
 
 comment {

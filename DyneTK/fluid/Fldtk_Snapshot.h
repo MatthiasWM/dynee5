@@ -23,13 +23,16 @@
 #define Fldtk_Snapshot_h
 #include <FL/Fl.H>
 #include "allNewt.h"
+#include "fltk/Flmp_Image.H"
 #include <FL/Fl_RGB_Image.H>
+#include <FL/Fl_File_Chooser.H>
 #include <FL/Fl_Double_Window.H>
 extern Fl_Double_Window *snapshot;
 #include <FL/Fl_Box.H>
 extern Fl_Box *wImage;
+#include <FL/Fl_Button.H>
 void show_snapshot_window();
-void update_snapshot_window(Fl_RGB_Image *img);
+void update_snapshot_window(Flmp_Image *img);
 #endif
 
 //

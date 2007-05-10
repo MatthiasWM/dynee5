@@ -53,8 +53,8 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
-# ADD LINK32 newt.lib fltk.lib wsock32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /machine:I386 /out:"../test/DyneTK.exe" /libpath:"..\lib" /libpath:"..\..\..\NEWT0\build"
-# SUBTRACT LINK32 /pdb:none /incremental:yes
+# ADD LINK32 newt.lib fltkimages.lib fltkjpegd.lib fltk.lib wsock32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /machine:I386 /out:"../test/DyneTK.exe" /libpath:"..\lib" /libpath:"..\..\..\NEWT0\build"
+# SUBTRACT LINK32 /pdb:none /incremental:yes /nodefaultlib
 
 !ELSEIF  "$(CFG)" == "DyneTK - Win32 Debug"
 
@@ -80,8 +80,8 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 newtd.lib fltkd.lib wsock32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /debug /machine:I386 /nodefaultlib:"libcd" /out:"../test/DyneTKd.exe" /pdbtype:sept /libpath:"..\lib" /libpath:"..\..\..\NEWT0\build"
-# SUBTRACT LINK32 /pdb:none /incremental:no
+# ADD LINK32 newtd.lib fltkd.lib fltkimagesd.lib fltkjpeg.lib wsock32.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /debug /machine:I386 /nodefaultlib:"libcd" /out:"../test/DyneTKd.exe" /pdbtype:sept /libpath:"..\lib" /libpath:"..\..\..\NEWT0\build"
+# SUBTRACT LINK32 /pdb:none /incremental:no /nodefaultlib
 
 !ENDIF 
 
@@ -255,6 +255,14 @@ SOURCE=..\fltk\Flmm_Set_Input.cxx
 # Begin Source File
 
 SOURCE=..\fltk\Flmm_Set_Input.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmp_Image.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmp_Image.H
 # End Source File
 # End Group
 # Begin Group "Images"

@@ -25,12 +25,27 @@ Fl_Double_Window *snapshot=(Fl_Double_Window *)0;
 
 Fl_Box *wImage=(Fl_Box *)0;
 
+static void cb_Save(Fl_Button*, void*) {
+  Flmp_Image *img = (Flmp_Image*)wImage->image();
+if (!img) 
+  return;
+  
+const char *filename = fl_file_chooser("Save As JPEG", "*.jpg", 0);
+if (filename) {
+  img->save_jpeg(filename, 90);
+};
+}
+
 void show_snapshot_window() {
   if (!snapshot) {
-    { snapshot = new Fl_Double_Window(350, 510, "Snapshot Manager");
+    { snapshot = new Fl_Double_Window(350, 547, "Snapshot Manager");
       { wImage = new Fl_Box(10, 10, 330, 490, "Loading Snapshot...");
         wImage->box(FL_THIN_DOWN_BOX);
       } // Fl_Box* wImage
+      { Fl_Button* o = new Fl_Button(230, 510, 110, 25, "Save As JPEG...");
+        o->labelsize(12);
+        o->callback((Fl_Callback*)cb_Save);
+      } // Fl_Button* o
       snapshot->end();
     } // Fl_Double_Window* snapshot
       }
@@ -43,7 +58,7 @@ wImage->label("Loading Snapshot...");
 snapshot->show();
 }
 
-void update_snapshot_window(Fl_RGB_Image *img) {
+void update_snapshot_window(Flmp_Image *img) {
   // replace label with snapshot image
 if (!snapshot)
   show_snapshot_window();
