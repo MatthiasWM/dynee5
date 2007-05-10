@@ -104,10 +104,12 @@ int Flio_Pipe::read(unsigned char *dest, int n)
 
 void Flio_Pipe::close()
 {
+	/*
   if (send_fd_!=-1)
     ::close(send_fd_);
   if (recv_fd_!=-1)
     ::close(recv_fd_);
+  */
 }
 
 int Flio_Pipe::is_open()
