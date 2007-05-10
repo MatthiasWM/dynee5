@@ -1,5 +1,6 @@
 # data file for the Fltk User Interface Designer (fluid)
 version 1.0108 
+use_FL_COMMAND 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -49,7 +50,7 @@ decl {\#include "main.h"} {public
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
-  xywh {490 176 785 595} type Double resizable
+  xywh {113 392 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
   Fl_Menu_Bar {} {open
@@ -311,7 +312,7 @@ widget_class Fldtk_Main_Window {
       }
       MenuItem {} {
         label {Dump NSOF Contents...}
-        callback {DebugDumpNSOF();} selected
+        callback {DebugDumpNSOF();}
         xywh {25 25 100 20} labelsize 12 labelcolor 59
       }
     }
@@ -484,7 +485,7 @@ widget_class Fldtk_Main_Window {
       tooltip {New Text File} image {../images/page.png} deimage {../images/page_da.png} xywh {60 30 25 25} labelsize 11
     }
     Fl_Button tFileOpen {
-      callback {OpenDocument();}
+      callback {OpenDocument();} selected
       tooltip Open image {../images/folder.png} deimage {../images/folder_da.png} xywh {90 30 25 25} labelsize 11
     }
     Fl_Button tFileSave {
