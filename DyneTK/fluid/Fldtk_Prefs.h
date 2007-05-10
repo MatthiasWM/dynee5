@@ -24,6 +24,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Preferences.H>
 #include <stdlib.h>
+#include <string.h>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Box.H>

@@ -23,6 +23,7 @@
 Fldtk_Prefs_App::Fldtk_Prefs_App(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->labelsize(12);
+this->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
 { Fl_Check_Button* o = new Fl_Check_Button(15, 20, 205, 25, "Show the &Standard Toolbar");
   o->down_box(FL_DOWN_BOX);
   o->labelsize(12);
@@ -68,6 +69,7 @@ Fl_Menu_Item Fldtk_Prefs_Layout::menu_Size[] = {
 Fldtk_Prefs_Layout::Fldtk_Prefs_Layout(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->labelsize(12);
+this->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
 { Fl_Check_Button* o = new Fl_Check_Button(20, 20, 75, 25, "&Grid On");
   o->down_box(FL_DOWN_BOX);
   o->labelsize(12);
@@ -118,6 +120,7 @@ Fl_Menu_Item Fldtk_Prefs_Browser::menu_Sort1[] = {
 Fldtk_Prefs_Browser::Fldtk_Prefs_Browser(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->labelsize(12);
+this->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
 { Fl_Box* o = new Fl_Box(20, 15, 140, 25, "View List:");
   o->labelsize(12);
   o->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
@@ -159,6 +162,7 @@ end();
 Fldtk_Prefs_Text::Fldtk_Prefs_Text(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->labelsize(12);
+this->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
 { Fl_Check_Button* o = new Fl_Check_Button(20, 20, 95, 20, "Auto &Indent");
   o->down_box(FL_DOWN_BOX);
   o->labelsize(12);
@@ -207,6 +211,7 @@ Fl_Menu_Item Fldtk_Prefs_Packages::menu_wPortnameUnix[] = {
 Fldtk_Prefs_Packages::Fldtk_Prefs_Packages(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->labelsize(12);
+this->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
 portname_ = 0L;
 { Fl_Box* o = new Fl_Box(15, 15, 100, 25, "Connection");
   o->labelsize(12);
@@ -288,6 +293,7 @@ void Fldtk_Prefs_Packages::update_dialog() {
 Fldtk_Prefs_Heaps::Fldtk_Prefs_Heaps(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->labelsize(12);
+this->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
 { Fl_Box* o = new Fl_Box(100, 15, 105, 25, "Size in KBytes");
   o->labelsize(12);
   o->deactivate();
@@ -362,7 +368,7 @@ this->labelfont(0);
 this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
 this->callback((Fl_Callback*)cb_Fldtk_Prefs, (void*)(this));
-this->align(FL_ALIGN_TOP);
+this->align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE);
 this->when(FL_WHEN_RELEASE);
 { Fl_Tabs* o = new Fl_Tabs(10, 10, 445, 210);
   o->labelsize(12);

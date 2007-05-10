@@ -93,7 +93,7 @@ dtk/Dtk_Document.o: fltk/Fldtk_Document_Tabs.h
 dtk/Dtk_Document.o: /usr/local/include/FL/Fl_Tabs.H
 dtk/Dtk_Document.o: /usr/local/include/FL/Fl_Group.H fluid/main_ui.h
 dtk/Dtk_Document.o: /usr/local/include/FL/Fl.H fltk/Flio_Inspector.h
-dtk/Dtk_Document.o: fltk/Flio_MNP4_Serial.h fltk/Flio_Serial_Port.h
+dtk/Dtk_Document.o: fltk/Flio_MNP4_Protocol.h fltk/Flio_Stream.h
 dtk/Dtk_Document.o: /usr/local/include/FL/x.H /usr/include/X11/Xlib.h
 dtk/Dtk_Document.o: /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h
 dtk/Dtk_Document.o: /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h
@@ -174,7 +174,7 @@ dtk/Dtk_Script_Document.o: fltk/Fldtk_Document_Tabs.h
 dtk/Dtk_Script_Document.o: /usr/local/include/FL/Fl_Tabs.H
 dtk/Dtk_Script_Document.o: /usr/local/include/FL/Fl_Group.H fluid/main_ui.h
 dtk/Dtk_Script_Document.o: /usr/local/include/FL/Fl.H fltk/Flio_Inspector.h
-dtk/Dtk_Script_Document.o: fltk/Flio_MNP4_Serial.h fltk/Flio_Serial_Port.h
+dtk/Dtk_Script_Document.o: fltk/Flio_MNP4_Protocol.h fltk/Flio_Stream.h
 dtk/Dtk_Script_Document.o: /usr/local/include/FL/x.H /usr/include/X11/Xlib.h
 dtk/Dtk_Script_Document.o: /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h
 dtk/Dtk_Script_Document.o: /usr/include/X11/Xosdefs.h
@@ -289,8 +289,8 @@ dtk/Dtk_Project.o: /usr/local/include/FL/Fl_Text_Buffer.H
 dtk/Dtk_Project.o: /usr/local/include/FL/Fl_Double_Window.H
 dtk/Dtk_Project.o: /usr/local/include/FL/Fl_Window.H
 dtk/Dtk_Project.o: /usr/local/include/FL/Fl_Tabs.H fluid/main_ui.h
-dtk/Dtk_Project.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Serial.h
-dtk/Dtk_Project.o: fltk/Flio_Serial_Port.h /usr/local/include/FL/x.H
+dtk/Dtk_Project.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Protocol.h
+dtk/Dtk_Project.o: fltk/Flio_Stream.h /usr/local/include/FL/x.H
 dtk/Dtk_Project.o: /usr/include/X11/Xlib.h /usr/include/X11/X.h
 dtk/Dtk_Project.o: /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h
 dtk/Dtk_Project.o: /usr/include/X11/Xutil.h /usr/include/X11/keysym.h
@@ -358,8 +358,8 @@ dtk/Dtk_Document_Manager.o: /usr/local/include/FL/Fl_Valuator.H
 dtk/Dtk_Document_Manager.o: fluid/main_ui.h /usr/local/include/FL/Fl.H
 dtk/Dtk_Document_Manager.o: /usr/local/include/FL/Enumerations.H
 dtk/Dtk_Document_Manager.o: /usr/local/include/FL/Fl_Export.H
-dtk/Dtk_Document_Manager.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Serial.h
-dtk/Dtk_Document_Manager.o: fltk/Flio_Serial_Port.h /usr/local/include/FL/x.H
+dtk/Dtk_Document_Manager.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Protocol.h
+dtk/Dtk_Document_Manager.o: fltk/Flio_Stream.h /usr/local/include/FL/x.H
 dtk/Dtk_Document_Manager.o: /usr/include/X11/Xlib.h /usr/include/X11/X.h
 dtk/Dtk_Document_Manager.o: /usr/include/X11/Xfuncproto.h
 dtk/Dtk_Document_Manager.o: /usr/include/X11/Xosdefs.h
@@ -447,7 +447,7 @@ dtk/Dtk_Layout_Document.o: fltk/Fldtk_Document_Tabs.h
 dtk/Dtk_Layout_Document.o: /usr/local/include/FL/Fl_Tabs.H
 dtk/Dtk_Layout_Document.o: /usr/local/include/FL/Fl_Group.H fluid/main_ui.h
 dtk/Dtk_Layout_Document.o: /usr/local/include/FL/Fl.H fltk/Flio_Inspector.h
-dtk/Dtk_Layout_Document.o: fltk/Flio_MNP4_Serial.h fltk/Flio_Serial_Port.h
+dtk/Dtk_Layout_Document.o: fltk/Flio_MNP4_Protocol.h fltk/Flio_Stream.h
 dtk/Dtk_Layout_Document.o: /usr/local/include/FL/x.H /usr/include/X11/Xlib.h
 dtk/Dtk_Layout_Document.o: /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h
 dtk/Dtk_Layout_Document.o: /usr/include/X11/Xosdefs.h
@@ -510,8 +510,8 @@ dtk/Dtk_Layout_Document.o: /usr/local/include/FL/Fl_Button.H
 dtk/Dtk_Layout_Document.o: /usr/local/include/FL/Fl_File_Input.H
 dtk/Dtk_Layout_Document.o: /usr/local/include/FL/Fl_Return_Button.H
 dtk/Dtk_Layout_Document.o: /usr/local/include/FL/fl_ask.H
-fltk/Flio_Inspector.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Serial.h
-fltk/Flio_Inspector.o: fltk/Flio_Serial_Port.h /usr/local/include/FL/x.H
+fltk/Flio_Inspector.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Protocol.h
+fltk/Flio_Inspector.o: fltk/Flio_Stream.h /usr/local/include/FL/x.H
 fltk/Flio_Inspector.o: /usr/local/include/FL/Enumerations.H
 fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Export.H
 fltk/Flio_Inspector.o: /usr/include/X11/Xlib.h /usr/include/sys/types.h
@@ -530,14 +530,30 @@ fltk/Flio_Inspector.o: /usr/include/X11/keysym.h /usr/include/X11/keysymdef.h
 fltk/Flio_Inspector.o: /usr/include/X11/Xatom.h
 fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Window.H
 fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Group.H
-fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Box.H globals.h
-fltk/Flio_Inspector.o: /usr/include/stdlib.h /usr/include/alloca.h
+fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Box.H globals.h allNewt.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtCore.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtType.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/platform.h
+fltk/Flio_Inspector.o: ../../newt0/src/config.h /usr/include/stdint.h
+fltk/Flio_Inspector.o: /usr/include/bits/wchar.h /usr/include/stdlib.h
+fltk/Flio_Inspector.o: /usr/include/alloca.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtConf.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtErrs.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtFns.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtEnv.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtMem.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtObj.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtBC.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtParser.h
 fltk/Flio_Inspector.o: /usr/include/stdio.h /usr/include/libio.h
 fltk/Flio_Inspector.o: /usr/include/_G_config.h /usr/include/wchar.h
-fltk/Flio_Inspector.o: /usr/include/bits/wchar.h /usr/include/gconv.h
-fltk/Flio_Inspector.o: /usr/include/bits/stdio_lim.h
-fltk/Flio_Inspector.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
-fltk/Flio_Inspector.o: /usr/include/ctype.h /usr/local/include/FL/Fl_Button.H
+fltk/Flio_Inspector.o: /usr/include/gconv.h /usr/include/bits/stdio_lim.h
+fltk/Flio_Inspector.o: /usr/include/bits/sys_errlist.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtNSOF.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtPkg.h
+fltk/Flio_Inspector.o: ../../newt0/src/newt_core/incs/NewtPrint.h
+fltk/Flio_Inspector.o: /usr/include/string.h /usr/include/ctype.h
+fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Button.H
 fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Image.H fltk/Flmm_Console.h
 fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Text_Editor.H
 fltk/Flio_Inspector.o: /usr/local/include/FL/Fl_Text_Display.H
@@ -637,64 +653,101 @@ fltk/Flmm_Set_Input.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
 fltk/Flmm_Set_Input.o: /usr/include/sys/sysmacros.h
 fltk/Flmm_Set_Input.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
 fltk/Flmm_Set_Input.o: /usr/include/string.h
-fltk/Flio_MNP4_Serial.o: fltk/Flio_MNP4_Serial.h fltk/Flio_Serial_Port.h
-fltk/Flio_MNP4_Serial.o: /usr/local/include/FL/x.H
-fltk/Flio_MNP4_Serial.o: /usr/local/include/FL/Enumerations.H
-fltk/Flio_MNP4_Serial.o: /usr/local/include/FL/Fl_Export.H
-fltk/Flio_MNP4_Serial.o: /usr/include/X11/Xlib.h /usr/include/sys/types.h
-fltk/Flio_MNP4_Serial.o: /usr/include/features.h /usr/include/sys/cdefs.h
-fltk/Flio_MNP4_Serial.o: /usr/include/bits/wordsize.h
-fltk/Flio_MNP4_Serial.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h
-fltk/Flio_MNP4_Serial.o: /usr/include/bits/types.h
-fltk/Flio_MNP4_Serial.o: /usr/include/bits/typesizes.h /usr/include/time.h
-fltk/Flio_MNP4_Serial.o: /usr/include/endian.h /usr/include/bits/endian.h
-fltk/Flio_MNP4_Serial.o: /usr/include/sys/select.h /usr/include/bits/select.h
-fltk/Flio_MNP4_Serial.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
-fltk/Flio_MNP4_Serial.o: /usr/include/sys/sysmacros.h
-fltk/Flio_MNP4_Serial.o: /usr/include/bits/pthreadtypes.h
-fltk/Flio_MNP4_Serial.o: /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h
-fltk/Flio_MNP4_Serial.o: /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h
-fltk/Flio_MNP4_Serial.o: /usr/include/X11/keysym.h
-fltk/Flio_MNP4_Serial.o: /usr/include/X11/keysymdef.h
-fltk/Flio_MNP4_Serial.o: /usr/include/X11/Xatom.h
-fltk/Flio_MNP4_Serial.o: /usr/local/include/FL/Fl_Window.H
-fltk/Flio_MNP4_Serial.o: /usr/local/include/FL/Fl_Group.H
-fltk/Flio_MNP4_Serial.o: /usr/local/include/FL/Fl_Box.H
-fltk/Flio_MNP4_Serial.o: /usr/local/include/FL/Fl.H /usr/include/stdlib.h
-fltk/Flio_MNP4_Serial.o: /usr/include/alloca.h /usr/include/stdio.h
-fltk/Flio_MNP4_Serial.o: /usr/include/libio.h /usr/include/_G_config.h
-fltk/Flio_MNP4_Serial.o: /usr/include/wchar.h /usr/include/bits/wchar.h
-fltk/Flio_MNP4_Serial.o: /usr/include/gconv.h /usr/include/bits/stdio_lim.h
-fltk/Flio_MNP4_Serial.o: /usr/include/bits/sys_errlist.h
-fltk/Flio_Serial_Port.o: fltk/Flio_Serial_Port.h /usr/local/include/FL/x.H
+fltk/Flio_MNP4_Protocol.o: fltk/Flio_MNP4_Protocol.h fltk/Flio_Stream.h
+fltk/Flio_MNP4_Protocol.o: /usr/local/include/FL/x.H
+fltk/Flio_MNP4_Protocol.o: /usr/local/include/FL/Enumerations.H
+fltk/Flio_MNP4_Protocol.o: /usr/local/include/FL/Fl_Export.H
+fltk/Flio_MNP4_Protocol.o: /usr/include/X11/Xlib.h /usr/include/sys/types.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/features.h /usr/include/sys/cdefs.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/bits/wordsize.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/gnu/stubs.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/gnu/stubs-32.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/bits/types.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/bits/typesizes.h /usr/include/time.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/endian.h /usr/include/bits/endian.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/sys/select.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/bits/select.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/bits/sigset.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/bits/time.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/sys/sysmacros.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/bits/pthreadtypes.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/X11/Xosdefs.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/X11/Xutil.h /usr/include/X11/keysym.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/X11/keysymdef.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/X11/Xatom.h
+fltk/Flio_MNP4_Protocol.o: /usr/local/include/FL/Fl_Window.H
+fltk/Flio_MNP4_Protocol.o: /usr/local/include/FL/Fl_Group.H
+fltk/Flio_MNP4_Protocol.o: /usr/local/include/FL/Fl_Box.H
+fltk/Flio_MNP4_Protocol.o: fltk/Flio_Serial_Port.h fltk/Flio_Stream.h
+fltk/Flio_MNP4_Protocol.o: /usr/local/include/FL/Fl.H /usr/include/stdlib.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/alloca.h /usr/include/stdio.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/libio.h /usr/include/_G_config.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/wchar.h /usr/include/bits/wchar.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/gconv.h /usr/include/bits/stdio_lim.h
+fltk/Flio_MNP4_Protocol.o: /usr/include/bits/sys_errlist.h
+fltk/Flio_Stream.o: fltk/Flio_Stream.h /usr/local/include/FL/x.H
+fltk/Flio_Stream.o: /usr/local/include/FL/Enumerations.H
+fltk/Flio_Stream.o: /usr/local/include/FL/Fl_Export.H /usr/include/X11/Xlib.h
+fltk/Flio_Stream.o: /usr/include/sys/types.h /usr/include/features.h
+fltk/Flio_Stream.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+fltk/Flio_Stream.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h
+fltk/Flio_Stream.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+fltk/Flio_Stream.o: /usr/include/time.h /usr/include/endian.h
+fltk/Flio_Stream.o: /usr/include/bits/endian.h /usr/include/sys/select.h
+fltk/Flio_Stream.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+fltk/Flio_Stream.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+fltk/Flio_Stream.o: /usr/include/bits/pthreadtypes.h /usr/include/X11/X.h
+fltk/Flio_Stream.o: /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h
+fltk/Flio_Stream.o: /usr/include/X11/Xutil.h /usr/include/X11/keysym.h
+fltk/Flio_Stream.o: /usr/include/X11/keysymdef.h /usr/include/X11/Xatom.h
+fltk/Flio_Stream.o: /usr/local/include/FL/Fl_Window.H
+fltk/Flio_Stream.o: /usr/local/include/FL/Fl_Group.H
+fltk/Flio_Stream.o: /usr/local/include/FL/Fl_Box.H /usr/local/include/FL/Fl.H
+fltk/Flio_Stream.o: /usr/local/include/FL/fl_draw.h /usr/include/stdlib.h
+fltk/Flio_Stream.o: /usr/include/alloca.h /usr/include/stdio.h
+fltk/Flio_Stream.o: /usr/include/libio.h /usr/include/_G_config.h
+fltk/Flio_Stream.o: /usr/include/wchar.h /usr/include/bits/wchar.h
+fltk/Flio_Stream.o: /usr/include/gconv.h /usr/include/bits/stdio_lim.h
+fltk/Flio_Stream.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
+fltk/Flio_Pipe.o: fltk/Flio_Pipe.h /usr/local/include/FL/Fl.H
+fltk/Flio_Pipe.o: /usr/local/include/FL/Enumerations.H
+fltk/Flio_Pipe.o: /usr/local/include/FL/Fl_Export.H
+fltk/Flio_Pipe.o: /usr/local/include/FL/fl_draw.h /usr/include/stdlib.h
+fltk/Flio_Pipe.o: /usr/include/features.h /usr/include/sys/cdefs.h
+fltk/Flio_Pipe.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+fltk/Flio_Pipe.o: /usr/include/gnu/stubs-32.h /usr/include/sys/types.h
+fltk/Flio_Pipe.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+fltk/Flio_Pipe.o: /usr/include/time.h /usr/include/endian.h
+fltk/Flio_Pipe.o: /usr/include/bits/endian.h /usr/include/sys/select.h
+fltk/Flio_Pipe.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+fltk/Flio_Pipe.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+fltk/Flio_Pipe.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+fltk/Flio_Pipe.o: /usr/include/stdio.h /usr/include/libio.h
+fltk/Flio_Pipe.o: /usr/include/_G_config.h /usr/include/wchar.h
+fltk/Flio_Pipe.o: /usr/include/bits/wchar.h /usr/include/gconv.h
+fltk/Flio_Pipe.o: /usr/include/bits/stdio_lim.h
+fltk/Flio_Pipe.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
+fltk/Flio_Serial_Port.o: fltk/Flio_Serial_Port.h fltk/Flio_Stream.h
+fltk/Flio_Serial_Port.o: /usr/local/include/FL/Fl.H
 fltk/Flio_Serial_Port.o: /usr/local/include/FL/Enumerations.H
 fltk/Flio_Serial_Port.o: /usr/local/include/FL/Fl_Export.H
-fltk/Flio_Serial_Port.o: /usr/include/X11/Xlib.h /usr/include/sys/types.h
-fltk/Flio_Serial_Port.o: /usr/include/features.h /usr/include/sys/cdefs.h
+fltk/Flio_Serial_Port.o: /usr/local/include/FL/fl_draw.h
+fltk/Flio_Serial_Port.o: /usr/include/stdlib.h /usr/include/features.h
+fltk/Flio_Serial_Port.o: /usr/include/sys/cdefs.h
 fltk/Flio_Serial_Port.o: /usr/include/bits/wordsize.h
 fltk/Flio_Serial_Port.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h
-fltk/Flio_Serial_Port.o: /usr/include/bits/types.h
+fltk/Flio_Serial_Port.o: /usr/include/sys/types.h /usr/include/bits/types.h
 fltk/Flio_Serial_Port.o: /usr/include/bits/typesizes.h /usr/include/time.h
 fltk/Flio_Serial_Port.o: /usr/include/endian.h /usr/include/bits/endian.h
 fltk/Flio_Serial_Port.o: /usr/include/sys/select.h /usr/include/bits/select.h
 fltk/Flio_Serial_Port.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
 fltk/Flio_Serial_Port.o: /usr/include/sys/sysmacros.h
 fltk/Flio_Serial_Port.o: /usr/include/bits/pthreadtypes.h
-fltk/Flio_Serial_Port.o: /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h
-fltk/Flio_Serial_Port.o: /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h
-fltk/Flio_Serial_Port.o: /usr/include/X11/keysym.h
-fltk/Flio_Serial_Port.o: /usr/include/X11/keysymdef.h
-fltk/Flio_Serial_Port.o: /usr/include/X11/Xatom.h
-fltk/Flio_Serial_Port.o: /usr/local/include/FL/Fl_Window.H
-fltk/Flio_Serial_Port.o: /usr/local/include/FL/Fl_Group.H
-fltk/Flio_Serial_Port.o: /usr/local/include/FL/Fl_Box.H
-fltk/Flio_Serial_Port.o: /usr/local/include/FL/Fl.H
-fltk/Flio_Serial_Port.o: /usr/local/include/FL/fl_draw.h
-fltk/Flio_Serial_Port.o: /usr/include/stdlib.h /usr/include/alloca.h
-fltk/Flio_Serial_Port.o: /usr/include/stdio.h /usr/include/libio.h
-fltk/Flio_Serial_Port.o: /usr/include/_G_config.h /usr/include/wchar.h
-fltk/Flio_Serial_Port.o: /usr/include/bits/wchar.h /usr/include/gconv.h
-fltk/Flio_Serial_Port.o: /usr/include/bits/stdio_lim.h
+fltk/Flio_Serial_Port.o: /usr/include/alloca.h /usr/include/stdio.h
+fltk/Flio_Serial_Port.o: /usr/include/libio.h /usr/include/_G_config.h
+fltk/Flio_Serial_Port.o: /usr/include/wchar.h /usr/include/bits/wchar.h
+fltk/Flio_Serial_Port.o: /usr/include/gconv.h /usr/include/bits/stdio_lim.h
 fltk/Flio_Serial_Port.o: /usr/include/bits/sys_errlist.h
 fltk/Flio_Serial_Port.o: /usr/include/string.h /usr/include/sys/uio.h
 fltk/Flio_Serial_Port.o: /usr/include/bits/uio.h /usr/include/sys/ioctl.h
@@ -1027,7 +1080,7 @@ fluid/Fldtk_Proj_Settings.o: /usr/include/bits/sys_errlist.h
 fluid/main_ui.o: fluid/main_ui.h /usr/local/include/FL/Fl.H
 fluid/main_ui.o: /usr/local/include/FL/Enumerations.H
 fluid/main_ui.o: /usr/local/include/FL/Fl_Export.H fltk/Flio_Inspector.h
-fluid/main_ui.o: fltk/Flio_MNP4_Serial.h fltk/Flio_Serial_Port.h
+fluid/main_ui.o: fltk/Flio_MNP4_Protocol.h fltk/Flio_Stream.h
 fluid/main_ui.o: /usr/local/include/FL/x.H /usr/include/X11/Xlib.h
 fluid/main_ui.o: /usr/include/sys/types.h /usr/include/features.h
 fluid/main_ui.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
@@ -1096,7 +1149,13 @@ fluid/Fldtk_Prefs.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
 fluid/Fldtk_Prefs.o: /usr/include/libio.h /usr/include/_G_config.h
 fluid/Fldtk_Prefs.o: /usr/include/wchar.h /usr/include/bits/wchar.h
 fluid/Fldtk_Prefs.o: /usr/include/gconv.h /usr/include/bits/stdio_lim.h
-fluid/Fldtk_Prefs.o: /usr/include/bits/sys_errlist.h
+fluid/Fldtk_Prefs.o: /usr/include/bits/sys_errlist.h /usr/include/stdlib.h
+fluid/Fldtk_Prefs.o: /usr/include/sys/types.h /usr/include/time.h
+fluid/Fldtk_Prefs.o: /usr/include/endian.h /usr/include/bits/endian.h
+fluid/Fldtk_Prefs.o: /usr/include/sys/select.h /usr/include/bits/select.h
+fluid/Fldtk_Prefs.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+fluid/Fldtk_Prefs.o: /usr/include/sys/sysmacros.h
+fluid/Fldtk_Prefs.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Group.H
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Widget.H
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Check_Button.H
@@ -1110,6 +1169,9 @@ fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Image.H
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Input.H
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Input_.H
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Button.H
+fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Input_Choice.H
+fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Menu_Button.H
+fluid/Fldtk_Prefs.o: /usr/local/include/FL/fl_draw.H
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Double_Window.H
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Window.H
 fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Group.H
@@ -1117,8 +1179,8 @@ fluid/Fldtk_Prefs.o: /usr/local/include/FL/Fl_Tabs.H
 fluid/Fldtk_Inspector.o: fluid/Fldtk_Inspector.h /usr/local/include/FL/Fl.H
 fluid/Fldtk_Inspector.o: /usr/local/include/FL/Enumerations.H
 fluid/Fldtk_Inspector.o: /usr/local/include/FL/Fl_Export.H
-fluid/Fldtk_Inspector.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Serial.h
-fluid/Fldtk_Inspector.o: fltk/Flio_Serial_Port.h /usr/local/include/FL/x.H
+fluid/Fldtk_Inspector.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Protocol.h
+fluid/Fldtk_Inspector.o: fltk/Flio_Stream.h /usr/local/include/FL/x.H
 fluid/Fldtk_Inspector.o: /usr/include/X11/Xlib.h /usr/include/sys/types.h
 fluid/Fldtk_Inspector.o: /usr/include/features.h /usr/include/sys/cdefs.h
 fluid/Fldtk_Inspector.o: /usr/include/bits/wordsize.h
@@ -1154,6 +1216,44 @@ fluid/Fldtk_Inspector.o: /usr/local/include/FL/Fl_Menu_Item.H
 fluid/Fldtk_Inspector.o: /usr/local/include/FL/Fl_Image.H
 fluid/Fldtk_Inspector.o: /usr/local/include/FL/Fl_Pixmap.H
 fluid/Fldtk_Inspector.o: /usr/local/include/FL/Fl_Image.H
+fluid/Fldtk_Snapshot.o: fluid/Fldtk_Snapshot.h /usr/local/include/FL/Fl.H
+fluid/Fldtk_Snapshot.o: /usr/local/include/FL/Enumerations.H
+fluid/Fldtk_Snapshot.o: /usr/local/include/FL/Fl_Export.H allNewt.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtCore.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtType.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/platform.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/config.h /usr/include/stdint.h
+fluid/Fldtk_Snapshot.o: /usr/include/features.h /usr/include/sys/cdefs.h
+fluid/Fldtk_Snapshot.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+fluid/Fldtk_Snapshot.o: /usr/include/gnu/stubs-32.h /usr/include/bits/wchar.h
+fluid/Fldtk_Snapshot.o: /usr/include/stdlib.h /usr/include/sys/types.h
+fluid/Fldtk_Snapshot.o: /usr/include/bits/types.h
+fluid/Fldtk_Snapshot.o: /usr/include/bits/typesizes.h /usr/include/time.h
+fluid/Fldtk_Snapshot.o: /usr/include/endian.h /usr/include/bits/endian.h
+fluid/Fldtk_Snapshot.o: /usr/include/sys/select.h /usr/include/bits/select.h
+fluid/Fldtk_Snapshot.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+fluid/Fldtk_Snapshot.o: /usr/include/sys/sysmacros.h
+fluid/Fldtk_Snapshot.o: /usr/include/bits/pthreadtypes.h
+fluid/Fldtk_Snapshot.o: /usr/include/alloca.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtConf.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtErrs.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtFns.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtEnv.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtMem.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtObj.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtBC.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtParser.h
+fluid/Fldtk_Snapshot.o: /usr/include/stdio.h /usr/include/libio.h
+fluid/Fldtk_Snapshot.o: /usr/include/_G_config.h /usr/include/wchar.h
+fluid/Fldtk_Snapshot.o: /usr/include/gconv.h /usr/include/bits/stdio_lim.h
+fluid/Fldtk_Snapshot.o: /usr/include/bits/sys_errlist.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtNSOF.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtPkg.h
+fluid/Fldtk_Snapshot.o: ../../newt0/src/newt_core/incs/NewtPrint.h
+fluid/Fldtk_Snapshot.o: /usr/local/include/FL/Fl_Double_Window.H
+fluid/Fldtk_Snapshot.o: /usr/local/include/FL/Fl_Window.H
+fluid/Fldtk_Snapshot.o: /usr/local/include/FL/Fl_Group.H
+fluid/Fldtk_Snapshot.o: /usr/local/include/FL/Fl_Box.H
 globals.o: main.h globals.h /usr/local/include/FL/x.H
 globals.o: /usr/local/include/FL/Enumerations.H
 globals.o: /usr/local/include/FL/Fl_Export.H /usr/include/X11/Xlib.h
@@ -1199,18 +1299,19 @@ globals.o: /usr/local/include/FL/Fl_File_Input.H
 globals.o: /usr/local/include/FL/Fl_Input.H /usr/local/include/FL/Fl_Input_.H
 globals.o: /usr/local/include/FL/Fl_Return_Button.H
 globals.o: /usr/local/include/FL/fl_ask.H fluid/Fldtk_Prefs.h
-globals.o: /usr/local/include/FL/Fl_Tabs.H fluid/Fldtk_Proj_Settings.h
-globals.o: fltk/Flmm_Set_Input.h fltk/Flmm_Set_Check_Button.h
+globals.o: /usr/local/include/FL/Fl_Input_Choice.H
+globals.o: /usr/local/include/FL/fl_draw.H /usr/local/include/FL/Fl_Tabs.H
+globals.o: fluid/Fldtk_Proj_Settings.h fltk/Flmm_Set_Input.h
+globals.o: fltk/Flmm_Set_Check_Button.h
 globals.o: /usr/local/include/FL/Fl_Round_Button.H
 globals.o: /usr/local/include/FL/Fl_Value_Output.H
 globals.o: /usr/local/include/FL/Fl_Text_Editor.H
 globals.o: /usr/local/include/FL/Fl_Text_Display.H
 globals.o: /usr/local/include/FL/fl_draw.H
 globals.o: /usr/local/include/FL/Fl_Text_Buffer.H fluid/main_ui.h
-globals.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Serial.h
-globals.o: fltk/Flio_Serial_Port.h fltk/Flmm_Console.h
-globals.o: fluid/Fldtk_Inspector.h fltk/Fldtk_Document_Tabs.h
-globals.o: fltk/Fldtk_Document_Browser.h
+globals.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Protocol.h fltk/Flio_Stream.h
+globals.o: fltk/Flmm_Console.h fluid/Fldtk_Inspector.h
+globals.o: fltk/Fldtk_Document_Tabs.h fltk/Fldtk_Document_Browser.h
 globals.o: /usr/local/include/FL/Fl_Select_Browser.H
 globals.o: fltk/Fldtk_Layout_Drop_Box.h /usr/local/include/FL/Fl_Window.H
 globals.o: nt/Nt_Group.h ../../newt0/src/newt_core/incs/NewtCore.h
@@ -1225,7 +1326,7 @@ globals.o: ../../newt0/src/newt_core/incs/NewtObj.h
 globals.o: /usr/local/include/FL/fl_ask.h /usr/local/include/FL/Fl_Menu_Bar.H
 globals.o: dtk/Dtk_Document_Manager.h ./dtk/Dtk_Document.h dtk/Dtk_Project.h
 globals.o: dtk/Dtk_Error.h fltk/Flmm_Message.H fltk/Flio_Serial_Port.h
-globals.o: ../../newt0/src/newt_core/incs/NewtBC.h
+globals.o: fltk/Flio_Stream.h ../../newt0/src/newt_core/incs/NewtBC.h
 globals.o: ../../newt0/src/newt_core/incs/NewtParser.h
 globals.o: ../../newt0/src/newt_core/incs/NewtNSOF.h
 globals.o: ../../newt0/src/newt_core/incs/NewtPkg.h
@@ -1246,7 +1347,7 @@ main.o: /usr/local/include/FL/Fl_Export.H /usr/local/include/FL/Fl_Widget.H
 main.o: /usr/local/include/FL/Fl_Button.H
 main.o: /usr/local/include/FL/Fl_XPM_Image.H
 main.o: /usr/local/include/FL/Fl_Pixmap.H /usr/local/include/FL/Fl_Image.H
-main.o: fltk/Flio_Serial_Port.h fluid/Fldtk_Prefs.h
+main.o: fltk/Flio_Serial_Port.h fltk/Flio_Stream.h fluid/Fldtk_Prefs.h
 main.o: /usr/local/include/FL/Fl_Preferences.H /usr/include/stdio.h
 main.o: /usr/include/features.h /usr/include/sys/cdefs.h
 main.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
@@ -1255,13 +1356,22 @@ main.o: /usr/include/bits/typesizes.h /usr/include/libio.h
 main.o: /usr/include/_G_config.h /usr/include/wchar.h
 main.o: /usr/include/bits/wchar.h /usr/include/gconv.h
 main.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
-main.o: /usr/local/include/FL/Fl_Group.H /usr/local/include/FL/Fl_Widget.H
+main.o: /usr/include/stdlib.h /usr/include/sys/types.h /usr/include/time.h
+main.o: /usr/include/endian.h /usr/include/bits/endian.h
+main.o: /usr/include/sys/select.h /usr/include/bits/select.h
+main.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+main.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+main.o: /usr/include/alloca.h /usr/local/include/FL/Fl_Group.H
+main.o: /usr/local/include/FL/Fl_Widget.H
 main.o: /usr/local/include/FL/Fl_Check_Button.H
 main.o: /usr/local/include/FL/Fl_Light_Button.H
 main.o: /usr/local/include/FL/Fl_Button.H /usr/local/include/FL/Fl_Box.H
 main.o: /usr/local/include/FL/Fl_Choice.H /usr/local/include/FL/Fl_Menu_.H
 main.o: /usr/local/include/FL/Fl_Menu_Item.H /usr/local/include/FL/Fl_Input.H
 main.o: /usr/local/include/FL/Fl_Input_.H
+main.o: /usr/local/include/FL/Fl_Input_Choice.H
+main.o: /usr/local/include/FL/Fl_Menu_Button.H
+main.o: /usr/local/include/FL/fl_draw.H
 main.o: /usr/local/include/FL/Fl_Double_Window.H
 main.o: /usr/local/include/FL/Fl_Window.H /usr/local/include/FL/Fl_Group.H
 main.o: /usr/local/include/FL/Fl_Tabs.H fluid/Fldtk_Proj_Settings.h
@@ -1274,17 +1384,12 @@ main.o: /usr/local/include/FL/Fl_Text_Display.H
 main.o: /usr/local/include/FL/fl_draw.H /usr/local/include/FL/Fl_Scrollbar.H
 main.o: /usr/local/include/FL/Fl_Slider.H
 main.o: /usr/local/include/FL/Fl_Text_Buffer.H fluid/main_ui.h
-main.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Serial.h fltk/Flio_Serial_Port.h
+main.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Protocol.h fltk/Flio_Stream.h
 main.o: /usr/local/include/FL/x.H /usr/include/X11/Xlib.h
-main.o: /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h
-main.o: /usr/include/bits/endian.h /usr/include/sys/select.h
-main.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
-main.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
-main.o: /usr/include/bits/pthreadtypes.h /usr/include/X11/X.h
-main.o: /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h
-main.o: /usr/include/X11/Xutil.h /usr/include/X11/keysym.h
-main.o: /usr/include/X11/keysymdef.h /usr/include/X11/Xatom.h
-main.o: fltk/Flmm_Console.h fluid/Fldtk_Inspector.h
+main.o: /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h
+main.o: /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h
+main.o: /usr/include/X11/keysym.h /usr/include/X11/keysymdef.h
+main.o: /usr/include/X11/Xatom.h fltk/Flmm_Console.h fluid/Fldtk_Inspector.h
 main.o: fltk/Fldtk_Document_Tabs.h fltk/Fldtk_Document_Browser.h
 main.o: /usr/local/include/FL/Fl_Select_Browser.H
 main.o: /usr/local/include/FL/Fl_Browser.H
@@ -1292,8 +1397,7 @@ main.o: /usr/local/include/FL/Fl_Browser_.H fltk/Fldtk_Layout_Drop_Box.h
 main.o: nt/Nt_Group.h ../../newt0/src/newt_core/incs/NewtCore.h
 main.o: ../../newt0/src/newt_core/incs/NewtType.h
 main.o: ../../newt0/src/newt_core/incs/platform.h ../../newt0/src/config.h
-main.o: /usr/include/stdint.h /usr/include/stdlib.h /usr/include/alloca.h
-main.o: ../../newt0/src/newt_core/incs/NewtConf.h
+main.o: /usr/include/stdint.h ../../newt0/src/newt_core/incs/NewtConf.h
 main.o: ../../newt0/src/newt_core/incs/NewtErrs.h
 main.o: ../../newt0/src/newt_core/incs/NewtFns.h
 main.o: ../../newt0/src/newt_core/incs/NewtEnv.h
@@ -1361,18 +1465,19 @@ sandbox.o: /usr/local/include/FL/Fl_File_Input.H
 sandbox.o: /usr/local/include/FL/Fl_Input.H /usr/local/include/FL/Fl_Input_.H
 sandbox.o: /usr/local/include/FL/Fl_Return_Button.H
 sandbox.o: /usr/local/include/FL/fl_ask.H fluid/Fldtk_Prefs.h
-sandbox.o: /usr/local/include/FL/Fl_Tabs.H fluid/Fldtk_Proj_Settings.h
-sandbox.o: fltk/Flmm_Set_Input.h fltk/Flmm_Set_Check_Button.h
+sandbox.o: /usr/local/include/FL/Fl_Input_Choice.H
+sandbox.o: /usr/local/include/FL/fl_draw.H /usr/local/include/FL/Fl_Tabs.H
+sandbox.o: fluid/Fldtk_Proj_Settings.h fltk/Flmm_Set_Input.h
+sandbox.o: fltk/Flmm_Set_Check_Button.h
 sandbox.o: /usr/local/include/FL/Fl_Round_Button.H
 sandbox.o: /usr/local/include/FL/Fl_Value_Output.H dtk/Dtk_Document_Manager.h
 sandbox.o: ../../newt0/src/newt_core/incs/NewtType.h
 sandbox.o: ../../newt0/src/newt_core/incs/platform.h ../../newt0/src/config.h
 sandbox.o: /usr/include/stdint.h ../../newt0/src/newt_core/incs/NewtConf.h
 sandbox.o: ./dtk/Dtk_Document.h dtk/Dtk_Project.h fluid/main_ui.h
-sandbox.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Serial.h
-sandbox.o: fltk/Flio_Serial_Port.h fltk/Flmm_Console.h
-sandbox.o: fluid/Fldtk_Inspector.h fltk/Fldtk_Document_Tabs.h
-sandbox.o: fltk/Fldtk_Document_Browser.h
+sandbox.o: fltk/Flio_Inspector.h fltk/Flio_MNP4_Protocol.h fltk/Flio_Stream.h
+sandbox.o: fltk/Flmm_Console.h fluid/Fldtk_Inspector.h
+sandbox.o: fltk/Fldtk_Document_Tabs.h fltk/Fldtk_Document_Browser.h
 sandbox.o: /usr/local/include/FL/Fl_Select_Browser.H
 sandbox.o: fltk/Fldtk_Layout_Drop_Box.h nt/Nt_Group.h
 sandbox.o: ../../newt0/src/newt_core/incs/NewtCore.h
@@ -1382,7 +1487,7 @@ sandbox.o: ../../newt0/src/newt_core/incs/NewtEnv.h
 sandbox.o: ../../newt0/src/newt_core/incs/NewtMem.h
 sandbox.o: ../../newt0/src/newt_core/incs/NewtObj.h
 sandbox.o: /usr/local/include/FL/fl_ask.h /usr/local/include/FL/Fl_Menu_Bar.H
-sandbox.o: fltk/Flio_Serial_Port.h images/toolbox_open.xpm
+sandbox.o: fltk/Flio_Serial_Port.h fltk/Flio_Stream.h images/toolbox_open.xpm
 sandbox.o: images/toolbox_closed.xpm /usr/include/assert.h
 sandbox.o: ../../newt0/src/newt_core/incs/NewtBC.h
 sandbox.o: ../../newt0/src/newt_core/incs/NewtParser.h

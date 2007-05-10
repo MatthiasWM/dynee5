@@ -29,9 +29,12 @@ decl {\#include <FL/Fl_Preferences.H>} {public
 decl {\#include <stdlib.h>} {public
 } 
 
+decl {\#include <string.h>} {selected public
+} 
+
 widget_class Fldtk_Prefs_App {
   label App
-  xywh {663 220 445 185} type Double labelsize 12 visible position_relative
+  xywh {663 220 445 185} type Double labelsize 12 align 80 visible position_relative
 } {
   Fl_Check_Button {} {
     label {Show the &Standard Toolbar}
@@ -61,7 +64,7 @@ widget_class Fldtk_Prefs_App {
 
 widget_class Fldtk_Prefs_Layout {
   label Layout
-  xywh {681 251 445 185} type Double labelsize 12 visible position_relative
+  xywh {681 251 445 185} type Double labelsize 12 align 80 visible position_relative
 } {
   Fl_Check_Button {} {
     label {&Grid On}
@@ -112,7 +115,7 @@ widget_class Fldtk_Prefs_Layout {
 
 widget_class Fldtk_Prefs_Browser {
   label Browser
-  xywh {705 281 445 185} type Double labelsize 12 visible position_relative
+  xywh {705 281 445 185} type Double labelsize 12 align 80 visible position_relative
 } {
   Fl_Box {} {
     label {View List:}
@@ -164,7 +167,7 @@ widget_class Fldtk_Prefs_Browser {
 
 widget_class Fldtk_Prefs_Text {
   label {Text Views}
-  xywh {735 309 445 185} type Double labelsize 12 visible position_relative
+  xywh {735 309 445 185} type Double labelsize 12 align 80 visible position_relative
 } {
   Fl_Check_Button {} {
     label {Auto &Indent}
@@ -181,8 +184,8 @@ widget_class Fldtk_Prefs_Text {
 } 
 
 widget_class Fldtk_Prefs_Packages {
-  label Packages selected
-  xywh {762 337 445 185} type Double labelsize 12 visible position_relative
+  label Packages
+  xywh {762 337 445 185} type Double labelsize 12 align 80 visible position_relative
 } {
   code {portname_ = 0L;} {}
   Fl_Box {} {
@@ -291,7 +294,7 @@ portname_ = strdup(wPortname->value());} {}
 
 widget_class Fldtk_Prefs_Heaps {
   label Heaps
-  xywh {792 369 445 185} type Double labelsize 12 visible position_relative
+  xywh {792 369 445 185} type Double labelsize 12 align 80 visible position_relative
 } {
   Fl_Box {} {
     label {Size in KBytes}
@@ -317,7 +320,7 @@ widget_class Fldtk_Prefs {
   callback {Fldtk_Prefs *w = (Fldtk_Prefs*)o;
 w->hide();
 w->update_dialog();} open
-  xywh {805 432 470 275} type Double
+  xywh {805 432 470 275} type Double align 80
   class Fl_Double_Window modal visible
 } {
   Fl_Tabs {} {

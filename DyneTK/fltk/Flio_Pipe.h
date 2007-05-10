@@ -27,7 +27,7 @@
 #define FLIO_PIPE
 
 
-#include "Flio_Stream.H"
+#include "Flio_Stream.h"
 
 
 /**
