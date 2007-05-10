@@ -741,6 +741,26 @@ void DebugDumpNSOF() {
 	testNSOFReader(0);
 }
 
+void DebugDumpRsrc() {
+  const char *filename = fl_file_chooser("Read a resource fork", 0, 0);
+  if (!filename)
+    return;
+  char buf[1024];
+  sprintf(buf, "%s/rsrc", filename);
+  int fd = open(buf, O_RDONLY /*| O_NO_MFS*/, 0);
+  if (fd==-1) {
+    SystemAlert("Can't open resource fork");
+  }
+  for (;;) {
+    unsigned char c;
+    int n = read(fd, &c, 1);
+    if (n!=1) break;
+    printf("%02x ", c);
+  }
+  close(fd);
+}
+
+
 //
 // End of "$Id$".
 //

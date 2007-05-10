@@ -147,6 +147,8 @@ private:
   static void cb_Dump(Fl_Menu_*, void*);
   void cb_Dump1_i(Fl_Menu_*, void*);
   static void cb_Dump1(Fl_Menu_*, void*);
+  void cb_Dump2_i(Fl_Menu_*, void*);
+  static void cb_Dump2(Fl_Menu_*, void*);
 public:
   static Fl_Menu_Item *mLayout;
   static Fl_Menu_Item *mBrowser;
