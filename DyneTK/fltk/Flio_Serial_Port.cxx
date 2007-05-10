@@ -168,8 +168,8 @@ int Flio_Serial_Port::open(const char *portname, int bps)
   arg.StopBits = ONESTOPBIT;
   SetCommState( port_, &arg );
 
-  //static COMMTIMEOUTS timeout = { MAXDWORD, 0, 0, 0, 0 };
-  //SetCommTimeouts( port_, &timeout );
+  static COMMTIMEOUTS timeout = { MAXDWORD, 0, 0, 0, 0 };
+  SetCommTimeouts( port_, &timeout );
   PurgeComm( port_, PURGE_TXCLEAR|PURGE_RXCLEAR );
   ClearCommBreak(port_);
   SetCommMask(port_, EV_RXCHAR);
