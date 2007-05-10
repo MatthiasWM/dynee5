@@ -21,14 +21,46 @@
 
 #include "Fldtk_Snapshot.h"
 
-void show_snapshot(newtRef snap) {
-  Fl_Double_Window* w;
-  { Fl_Double_Window* o = new Fl_Double_Window(337, 139, "Snapshot Manager");
-    w = o;
-    { new Fl_Box(25, 25, 290, 85, "Snapshot will be here.");
-    } // Fl_Box* o
-    o->end();
-  } // Fl_Double_Window* o
+Fl_Double_Window *snapshot=(Fl_Double_Window *)0;
+
+Fl_Box *wImage=(Fl_Box *)0;
+
+void show_snapshot_window() {
+  if (!snapshot) {
+    { snapshot = new Fl_Double_Window(350, 510, "Snapshot Manager");
+      { wImage = new Fl_Box(10, 10, 330, 490, "Loading Snapshot...");
+        wImage->box(FL_THIN_DOWN_BOX);
+      } // Fl_Box* wImage
+      snapshot->end();
+    } // Fl_Double_Window* snapshot
+      }
+      // show message about loading the image
+Fl_Image *old_img = wImage->image();
+delete old_img;
+wImage->image(0);
+wImage->label("Loading Snapshot...");
+
+snapshot->show();
+}
+
+void update_snapshot_window(Fl_RGB_Image *img) {
+  // replace label with snapshot image
+if (!snapshot)
+  show_snapshot_window();
+
+if (img)
+  wImage->label(0);
+else
+  wImage->label("Error loading Snapshot");
+  
+Fl_Image *oldImg = wImage->image();
+wImage->image(0);
+delete oldImg;
+
+wImage->image(img);
+wImage->redraw();
+  
+snapshot->show();
 }
 
 //

@@ -287,10 +287,19 @@ void Flio_Inspector::gotNewtNtkFobj() {
 void Flio_Inspector::gotNewtNtkFobjSize() {
   dumpBuffer();
 
-		
-		newtRef obj = NewtReadNSOF((uint8_t*)(buffer_+0x10), nBuffer_-0x10);
-		NewtPrintObject(stdout, obj);
-/*
+	newtRef obj = NewtReadNSOF((uint8_t*)(buffer_+0x10), nBuffer_-0x10);
+	if (NewtRefIsFrame(obj)) {
+		newtRef interp = NewtGetFrameSlot(obj, NewtFindSlotIndex(obj, NSSYM(interpretation)));
+		if (NewtRefIsSymbol(interp)) {
+      if (NewtSymbolEqual(interp, NSSYM(screenshot))) {
+        InspectorSnapshotUpdate(obj);
+      }
+		}
+	}
+	//NewtPrintObject(stdout, obj);
+
+	//update_snapshot_window(obj);		
+		/*
 {
         interpretation: 'screenshot,
         data: {

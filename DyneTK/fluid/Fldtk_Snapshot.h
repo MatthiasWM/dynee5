@@ -23,9 +23,13 @@
 #define Fldtk_Snapshot_h
 #include <FL/Fl.H>
 #include "allNewt.h"
+#include <FL/Fl_RGB_Image.H>
 #include <FL/Fl_Double_Window.H>
+extern Fl_Double_Window *snapshot;
 #include <FL/Fl_Box.H>
-void show_snapshot(newtRef snap);
+extern Fl_Box *wImage;
+void show_snapshot_window();
+void update_snapshot_window(Fl_RGB_Image *img);
 #endif
 
 //

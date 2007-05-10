@@ -27,6 +27,7 @@
 #ifndef _DTK_GLOBALS_H_
 #define _DTK_GLOBALS_H_
 
+#include "allNewt.h"
 
 // global functions for general access. The functions are used
 // by the main menu and icon bars.
@@ -65,6 +66,7 @@ void	InspectorStackTrace();
 void	InspectorExitBreakLoop();
 void	InspectorPrintDepth(int);
 void	InspectorSnapshot();
+void	InspectorSnapshotUpdate(newtRef);
 
 void	UpdateMainMenu();
 

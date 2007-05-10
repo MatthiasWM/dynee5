@@ -31,6 +31,7 @@
 
 #include "fluid/Fldtk_Prefs.h"
 #include "fluid/Fldtk_Proj_Settings.h"
+#include "fluid/Fldtk_Snapshot.h"
 #include "fluid/main_ui.h"
 
 #include "dtk/Dtk_Document_Manager.h"
@@ -656,7 +657,7 @@ void InspectorPrintDepth(int d)
 void InspectorSnapshot()
 {
 	InspectorSendScript("|Screenshot:ntk|()");
-	fl_message("Snapshot is not yet implemented");
+	show_snapshot_window();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -677,6 +678,54 @@ void SystemAlert(const char *msg, int err)
 	Flmm_Message::alert("%s\n\n%s", msg, Flmm_Message::system_message(err));
 }
 
+/*---------------------------------------------------------------------------*/
+/**
+ * Convert the Newt Frame into an Fl_Image and update the snapshot dialog.
+ */
+void InspectorSnapshotUpdate(newtRef snapshot) 
+{
+	if (NewtRefIsFrame(snapshot)) {
+		newtRef data = NewtGetFrameSlot(snapshot, NewtFindSlotIndex(snapshot, NSSYM(data)));
+		if (NewtRefIsFrame(data)) {
+
+      // get the dimensions and data
+      newtRef nRowbytes = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(rowbytes)));
+      newtRef nTop      = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(top)));
+      newtRef nLeft     = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(left)));
+      newtRef nBottom   = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(bottom)));
+      newtRef nRight    = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(right)));
+      newtRef nDepth    = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(depth)));
+      newtRef nTheBits  = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(theBits)));
+      int rowbytes = NewtRefToInteger(nRowbytes);
+      int top      = NewtRefToInteger(nTop);
+      int left     = NewtRefToInteger(nLeft);
+      int bottom   = NewtRefToInteger(nBottom);
+      int right    = NewtRefToInteger(nRight);
+      int depth    = NewtRefToInteger(nDepth);
+      unsigned char *theBits = (unsigned char*)NewtRefToData(nTheBits);
+
+      if (depth!=4) {
+        printf("Unsupported pixel depth of %d bits\n", depth);
+        return;
+      }
+      // convert this to RGB (ah well)
+      int wdt = right - left, hgt = bottom - top, x, y;
+      unsigned char *dst = new unsigned char[wdt*hgt*1], *imgData = dst;
+      for (y=0; y<hgt; y++) {
+        unsigned char *src = theBits + y*rowbytes;
+        for (x=0; x<wdt; x+=2) {
+          unsigned char d = *src++;
+          *dst++ = ((d&0xf0)|(d>>4))^0xff;
+          *dst++ = ((d<<4)|(d&0x0f))^0xff;
+        }
+      }
+      Fl_RGB_Image *img = new Fl_RGB_Image(imgData, wdt, hgt, 1);
+      img->alloc_array = 1;
+      update_snapshot_window(img);
+      //free(imgData);
+		}
+	}
+}
 
 extern void testPkgReader(const char *filename);
 void DebugDumpPackage() {

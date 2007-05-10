@@ -26,16 +26,51 @@ comment {//
 decl {\#include "allNewt.h"} {public
 } 
 
-Function {show_snapshot(newtRef snap)} {open return_type void
+decl {\#include <FL/Fl_RGB_Image.H>} {public
+} 
+
+Function {show_snapshot_window()} {open return_type void
 } {
-  Fl_Window {} {
-    label {Snapshot Manager} open
-    xywh {207 400 337 139} type Double visible
+  codeblock {if (!snapshot)} {open
   } {
-    Fl_Box {} {
-      label {Snapshot will be here.} selected
-      xywh {25 25 290 85}
+    Fl_Window snapshot {
+      label {Snapshot Manager} open
+      xywh {529 326 350 510} type Double visible
+    } {
+      Fl_Box wImage {
+        label {Loading Snapshot...}
+        xywh {10 10 330 490} box THIN_DOWN_BOX
+      }
     }
+  }
+  code {// show message about loading the image
+Fl_Image *old_img = wImage->image();
+delete old_img;
+wImage->image(0);
+wImage->label("Loading Snapshot...");
+
+snapshot->show();} {}
+} 
+
+Function {update_snapshot_window(Fl_RGB_Image *img)} {open return_type void
+} {
+  code {// replace label with snapshot image
+if (!snapshot)
+  show_snapshot_window();
+
+if (img)
+  wImage->label(0);
+else
+  wImage->label("Error loading Snapshot");
+  
+Fl_Image *oldImg = wImage->image();
+wImage->image(0);
+delete oldImg;
+
+wImage->image(img);
+wImage->redraw();
+  
+snapshot->show();} {selected
   }
 } 
 
