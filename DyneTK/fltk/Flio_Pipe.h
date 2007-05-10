@@ -105,6 +105,9 @@ public:
 
 private:
 
+  int is_client_;
+  int send_fd_, recv_fd_;
+
 };
 
 
