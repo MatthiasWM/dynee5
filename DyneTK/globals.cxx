@@ -56,6 +56,9 @@ extern "C" {
 #ifndef WIN32
 # define Sleep(a) sleep((a)/1000)
 # include <arpa/inet.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 #else
 # include <winsock2.h>
 #endif
