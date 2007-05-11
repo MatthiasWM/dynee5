@@ -135,6 +135,10 @@ int main(int argc, char **argv) {
 
 	// launch the application
 	dtkMain->show(argc, argv);
+	if (argc==2) {
+		Fl::flush();
+		OpenProject(argv[1]);
+        }
 	Fl::run();
 
 	// clean the virtual machine

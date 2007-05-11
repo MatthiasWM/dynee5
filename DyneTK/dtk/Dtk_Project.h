@@ -43,6 +43,8 @@ public:
 
 	void		setDefaults();
 	int			load();
+	int			loadMac();
+	int			loadWin();
 	int			save();
 	void		close() {}
 
@@ -53,11 +55,16 @@ public:
 	void		setFilename(const char *filename);
 	newtRef		makeFileRef(const char *filename);
 
+protected:
+	void		pushDir();
+	void		popDir();
+
 private:
 	char		* packagename_;
 	char		* shortname_;
 	char		* filename_;
 	char		* name_;
+	char		* startdir_;
 	newtRef		package_;
 };
 

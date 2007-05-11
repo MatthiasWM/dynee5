@@ -69,6 +69,7 @@ public:
 	int				inProject(Dtk_Document*);
 
 	const char		*uniqueFilename(const char *filename);
+	char		*findFile(const char *filename);
 
 	newtRef			getProjectItemsRef();
 

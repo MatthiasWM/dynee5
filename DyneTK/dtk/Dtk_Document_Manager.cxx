@@ -48,14 +48,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern "C" {
-#include "NewtCore.h"
-#include "NewtBC.h"
-#include "NewtNSOF.h"
-#include "NewtPkg.h"
-#include "NewtPrint.h"
-#include "NewtEnv.h"
-}
+#include "allNewt.h"
+
+#include <FL/filename.H>
+#include <FL/Fl_File_Chooser.H>
 
 
 /*---------------------------------------------------------------------------*/
@@ -293,6 +289,27 @@ void Dtk_Document_Manager::setBrowser(Fldtk_Document_Browser *b)
 {
 	browser_ = b;
 }
+
+/*---------------------------------------------------------------------------*/
+/**
+ * Find a file based on a filename and path.
+ * If the returned value is not the same as the calling value, the buffer must be freed by the caller.
+ */
+char *Dtk_Document_Manager::findFile(const char *filename)
+{
+	if (access(filename, R_OK)==0)
+		return strdup(filename);
+	const char *name = fl_filename_name(filename);
+	char buf[FL_PATH_MAX];
+	fl_filename_absolute(buf, FL_PATH_MAX, name);
+	if (access(buf, R_OK)==0)
+		return strdup(buf);
+	const char *user = fl_file_chooser("File not found, please search manually", 0, buf);
+	if (!user)
+		return 0L;
+	return strdup(user);
+}
+
 
 //
 // End of "$Id$".

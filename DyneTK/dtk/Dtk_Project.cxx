@@ -64,6 +64,7 @@ Dtk_Project::Dtk_Project()
 	shortname_(0L),
 	filename_(0L),
 	name_(0L),
+	startdir_(0L),
 	package_(kNewtRefNIL)
 {
 	dtkMain->documents->activate();
@@ -85,6 +86,8 @@ Dtk_Project::~Dtk_Project()
 		free(filename_);
 	if (packagename_)
 		free(packagename_);
+	if (startdir_)
+		free(startdir_);
 }
 
 
@@ -217,6 +220,161 @@ RWDU	windowRect: {left: 3, top: 410, bottom:550, right: 730}
  */
 int Dtk_Project::load()
 {
+	uint8_t buf[4];
+	FILE *f = fopen(filename_, "rb");
+	if (!f) {
+		return -1;
+	}
+	int n = fread(buf, 4, 1, f);
+	fclose(f);
+	if (n<=0) {
+		return -1;
+	}
+	if (buf[0]==2) {
+		return loadWin();
+	} else if (buf[3]==103) {
+		return loadMac();
+	} else {
+		printf("Unrecognized file type in '%s'\n", filename_);
+		return -1;
+	}
+}
+
+static uint32_t readInt(FILE *f) {
+	uint32_t v;
+	fread(&v, 1, 4, f);
+	return ntohl(v);
+}
+
+static uint16_t readWord(FILE *f) {
+	uint16_t v;
+	fread(&v, 1, 2, f);
+	return ntohs(v);
+}
+
+static uint8_t readByte(FILE *f) {
+	uint8_t v;
+	fread(&v, 1, 1, f);
+	return v;
+}
+
+static char *PtoCFilename(uint8_t *src) {
+	int i, n = (int)src[0];
+	char *d = (char*)malloc(n+2), *dst = d;
+        *d++ = '/';
+	for (i=1; i<=n; i++) {
+		char c = (char)src[i];
+		if (c>126 || c<32) c = '_';
+		switch (c) {
+			case ':': *d++ = '/'; break;
+			case '/': *d++ = '.'; break;
+			case '?': *d++ = '_'; break;
+			default: *d++ = c; break;
+		}
+	}
+	*d = 0;
+	return dst;
+}
+
+/*---------------------------------------------------------------------------*/
+/**
+ * Load the .ntk file from disk.
+ */
+int Dtk_Project::loadMac()
+{
+	printf("Reading MAC file (%d) \n", sizeof(FSSpec));
+	int i, j;
+
+	// open the resource fork
+	char buf[1024];
+	sprintf(buf, "%s/rsrc", filename_);
+	FILE *rsrc = fopen(buf, "rb");
+	if (!rsrc) {
+		return -1;
+	}
+
+	// open the data fork
+	FILE *data = fopen(filename_, "rb");
+	if (!data) {
+		return -1;
+	}
+
+	pushDir();
+
+	uint32_t id = readInt(data);
+	uint16_t fileCount = readWord(data);
+	uint32_t sortBy = readInt(data);
+	for (i=0; i<fileCount; i++) {
+		uint32_t len = readInt(data);
+		// if len==70 (sizeof(FSSpec)) we must conver a filespec
+		// otherwise, this is an alias
+		uint8_t *alias = (uint8_t*)malloc(len);
+		fread(alias, len, 1, data);
+		char *fn = PtoCFilename(alias+0xc1);
+		char *filename = documents->findFile(fn);
+		Dtk_Document *doc = documents->newDocument(filename);
+		doc->load();
+		documents->addToProject(doc);
+		doc->edit();
+		printf("Alias %d = %s\n", i, filename);
+		free(fn);
+		free(filename);
+	}
+	uint16_t mainLayout = readWord(data);
+
+	// read the resource fork
+
+	// find and read the PJPF resource
+	// -- read the header
+	uint32_t rData = readInt(rsrc);
+	uint32_t rMap  = readInt(rsrc);
+
+	// -- read the resource map
+	fseek(rsrc, rMap+24, SEEK_SET);
+	uint16_t rsrcType = readWord(rsrc);
+	uint16_t rsrcName = readWord(rsrc);
+	uint16_t nRsrc = readWord(rsrc)+1;
+
+	// -- walk the resource type list	
+	for (i=0; i<nRsrc; i++) {
+		fseek(rsrc, rMap+rsrcType+8*i+2, SEEK_SET);
+		uint32_t type = readInt(rsrc);
+		uint16_t nType = readWord(rsrc)+1;
+		uint16_t list = readWord(rsrc);
+		printf("Rsrc %d: %.4s %d\n", i, &type, nType);
+		if (type=='PJPF') {
+			for (j=0; j<nType; j++) {
+				fseek(rsrc, rMap+rsrcType+list+12*j, SEEK_SET);
+				uint16_t id = readWord(rsrc);
+				uint16_t name = readWord(rsrc);
+				uint32_t offs = readInt(rsrc); //&0xffffff;
+				uint32_t handle = readInt(rsrc);
+				printf("PJPF: %d %d %d \n", id, name, offs);
+				if (id==9999) {
+					fseek(rsrc, rData+offs, SEEK_SET);
+					uint32_t len = readInt(rsrc);
+char buf[33];
+fread(buf, 33, 1, rsrc);
+printf("Appname is %.*s\n", buf[0], buf+1);
+				}
+			}
+		}
+	}
+
+	fclose(data);
+	fclose(rsrc);
+
+	popDir();
+
+	return 0;
+}
+
+/*---------------------------------------------------------------------------*/
+/**
+ * Load the .ntk file from disk.
+ */
+int Dtk_Project::loadWin()
+{
 	// read the project settings from disk
 	FILE *f = fopen(filename_, "rb");
 	if (!f) {
@@ -235,17 +393,7 @@ int Dtk_Project::load()
 
 	NewtPrintObject(stdout, p);
 
-		char projPath[FL_PATH_MAX];
-		char currPath[FL_PATH_MAX];
-		strcpy(projPath, filename_);
-		char *name = (char*)fl_filename_name(projPath);
-		if (name) *name = 0;
-
-		const char *here = getcwd(currPath, FL_PATH_MAX);
-		if (here) {
-			chdir(projPath);
-		}
-    
+	pushDir();
   
 	// now extract all supported settings and write them into their locations
 	if (NewtRefIsFrame(p)) {
@@ -344,14 +492,39 @@ int Dtk_Project::load()
 		}
 	}
 	dtkProjSettings->updateDialog();
-    
-		if (here) {
-			chdir(currPath);
-		}
-      
+	popDir();
 	return 0;
 }
 
+/*---------------------------------------------------------------------------*/
+void Dtk_Project::pushDir()
+{
+	char projPath[FL_PATH_MAX];
+	char currPath[FL_PATH_MAX];
+	strcpy(projPath, filename_);
+	char *name = (char*)fl_filename_name(projPath);
+	if (name) 
+		*name = 0;
+
+	if (startdir_) {
+		free(startdir_);
+		startdir_ = 0L;
+	}
+
+	const char *here = getcwd(currPath, FL_PATH_MAX);
+	if (here) {
+		startdir_ = strdup(here);
+		chdir(projPath);
+	}
+} 
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Project::popDir()
+{
+	if (startdir_) {
+		chdir(startdir_);
+	}
+}
 
 /*---------------------------------------------------------------------------*/
 /**

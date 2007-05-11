@@ -76,6 +76,7 @@ void	SystemAlert(const char *msg, int err=0xdecaff);
 void	DebugDumpPackage();
 void	DebugDumpNSOF();
 void	DebugDumpRsrc();
+void	DebugDumpBuffer(uint8_t*, int);
 
 #endif
 

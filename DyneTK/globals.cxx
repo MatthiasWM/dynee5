@@ -763,6 +763,25 @@ void DebugDumpRsrc() {
   close(fd);
 }
 
+void DebugDumpBuffer(uint8_t *src, int n)
+{
+        int i, j, nLine = n/16;
+        for (i=0; i<n; i+=16) {
+                char buf[78];
+                memset(buf, 32, 78); buf[76] = ' '; buf[77] = 0;
+                sprintf(buf, "%08x", i); buf[8] = ' ';
+                for (j=i; (j<i+16) && (j<n); j++) {
+                        uint8_t c = src[j];
+                        sprintf(buf+10+3*(j-i), "%02x", c); buf[12+3*(j-i)] = ' ';
+                        if (isprint(c))
+                                buf[59+j-i] = c;
+                        else
+                                buf[59+j-i] = '.';
+                }
+                puts(buf);
+        }
+}
+
 
 //
 // End of "$Id$".
