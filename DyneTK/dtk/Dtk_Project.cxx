@@ -353,9 +353,65 @@ int Dtk_Project::loadMac()
 				if (id==9999) {
 					fseek(rsrc, rData+offs, SEEK_SET);
 					uint32_t len = readInt(rsrc);
-char buf[33];
+char buf[64];
 fread(buf, 33, 1, rsrc);
 printf("Appname is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // padding
+fread(buf, 33, 1, rsrc);
+printf("Iconname is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // padding
+fread(buf, 33, 1, rsrc);
+printf("Platform is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // padding
+fread(buf, 33, 1, rsrc);
+printf("Packagename is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // padding
+fread(buf, 33, 1, rsrc);
+printf("AppSymbol is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // padding
+fread(buf, 33, 1, rsrc);
+printf("Version is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // padding
+fread(buf, 33, 1, rsrc);
+printf("Iconname is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // padding
+fread(buf, 64, 1, rsrc);
+printf("Copyright is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // OptimizeSpeed
+readByte(rsrc); // CopyProtected
+readByte(rsrc); // DeleteOnDownload
+readByte(rsrc); // DebugBuild
+readByte(rsrc); // AutoClose
+readByte(rsrc); // Padding
+fread(buf, 64, 1, rsrc);
+printf("IconFile is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // CustomPart
+readByte(rsrc); // Padding
+readInt(rsrc); // PartType (form, book, auto, soup)
+fseek(rsrc, 256, SEEK_CUR); // TopFrameExpression
+readByte(rsrc); // MakeStream
+readByte(rsrc); // DispatchOnly
+readByte(rsrc); // Newton20Only
+readByte(rsrc); // Padding
+readByte(rsrc); // CompileForProfiling
+readByte(rsrc); // CompileForSpeed
+readByte(rsrc); // DetailedSystemCalls
+readByte(rsrc); // Padding
+readWord(rsrc); // Memory (always 4k)
+readByte(rsrc); // Percent (always 4)
+readByte(rsrc); // DetailedUserFunctions
+fread(buf, 64, 1, rsrc);
+printf("Language is %.*s\n", buf[0], buf+1);
+readByte(rsrc); // IgnoreNative
+readByte(rsrc); // CheckGlobalFunctions
+readByte(rsrc); // OldBuildRules
+readByte(rsrc); // UseStepChildren
+readByte(rsrc); // SuppressByteCodes
+readByte(rsrc); // FasterFunctions
+readByte(rsrc); // FasterSoups
+readByte(rsrc); // FourByteAlignment
+readByte(rsrc); // ZippyCompression
+readByte(rsrc); // Padding
 				}
 			}
 		}
