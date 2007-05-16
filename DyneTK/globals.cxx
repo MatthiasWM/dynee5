@@ -42,14 +42,7 @@
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
 
-extern "C" {
-#include "NewtCore.h"
-#include "NewtBC.h"
-#include "NewtNSOF.h"
-#include "NewtPkg.h"
-#include "NewtPrint.h"
-#include "NewtEnv.h"
-}
+#include "allNewt.h"
 
 #include <assert.h>
 
@@ -61,6 +54,8 @@ extern "C" {
 # include <fcntl.h>
 #else
 # include <winsock2.h>
+# include <io.h>
+# include <fcntl.h>
 #endif
 
 extern Fl_Window *wConnect;

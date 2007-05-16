@@ -134,7 +134,7 @@ int main(int argc, char **argv) {
 	documents->setBrowser(dtkMain->documents);
 
 	// launch the application
-	dtkMain->show(argc, argv);
+	dtkMain->show(/*argc*/1, argv);
 	if (argc==2) {
 		Fl::flush();
 		OpenProject(argv[1]);

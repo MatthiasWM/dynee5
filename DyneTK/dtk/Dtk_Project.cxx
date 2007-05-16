@@ -42,6 +42,7 @@
 #include <stdio.h>
 #include <string.h>
 #ifdef WIN32
+# include <winsock2.h>
 # include <direct.h>
 #endif
 
@@ -282,7 +283,7 @@ static char *PtoCFilename(uint8_t *src) {
  */
 int Dtk_Project::loadMac()
 {
-	printf("Reading MAC file (%d) \n", sizeof(FSSpec));
+	printf("Reading MAC file\n");
 	int i, j;
 
 	// open the resource fork
@@ -290,7 +291,17 @@ int Dtk_Project::loadMac()
 	sprintf(buf, "%s/rsrc", filename_);
 	FILE *rsrc = fopen(buf, "rb");
 	if (!rsrc) {
-		return -1;
+    strcpy(buf, filename_);
+    char *fn = (char*)fl_filename_name(buf);
+    if (fn) {
+      memmove(fn+2, fn, strlen(fn)+1);
+      memcpy(fn, "._", 2);
+      rsrc = fopen(buf, "rb");
+      if (!rsrc)
+        return -1;
+    } else {
+		  return -1;
+    }
 	}
 
 	// open the data fork

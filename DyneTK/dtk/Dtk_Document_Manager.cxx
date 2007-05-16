@@ -44,6 +44,9 @@
 #include "fluid/main_ui.h"
 #include "main.h"
 
+#ifdef WIN32
+# include <io.h>
+#endif
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -297,12 +300,12 @@ void Dtk_Document_Manager::setBrowser(Fldtk_Document_Browser *b)
  */
 char *Dtk_Document_Manager::findFile(const char *filename)
 {
-	if (access(filename, R_OK)==0)
+	if (access(filename, 0004)==0) // R_OK
 		return strdup(filename);
 	const char *name = fl_filename_name(filename);
 	char buf[FL_PATH_MAX];
 	fl_filename_absolute(buf, FL_PATH_MAX, name);
-	if (access(buf, R_OK)==0)
+	if (access(buf, 0004)==0) // R_OK
 		return strdup(buf);
 	const char *user = fl_file_chooser("File not found, please search manually", 0, buf);
 	if (!user)
