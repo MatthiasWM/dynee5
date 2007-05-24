@@ -13,6 +13,9 @@
 ; Pressing the shortcut key '/' will add a new comment at the current PC
 ;
 
+
+0x00018b78 InitInterruptStacks()
+
 c 00018688 Initialize CPU and MMU
 c 00018694 Read the CPU ID number
 c 000186ac Write the very basic Cirrus flags without interfering with a warm boot

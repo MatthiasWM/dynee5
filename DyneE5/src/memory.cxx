@@ -750,8 +750,8 @@ unsigned int Dn_GPIO_Chunk::get32(unsigned int addr, char flags) {
     case 0x0f110000: ret = 0x00000000; break;
     case 0x0f242400: ret = 0x00000000; break;
     case 0x0f181000: ret = cpu->nInstr()/delta_s + 2082844854; break;
-    //case 0x0f18d400: ret = 0x00000001; break; // avoid cold boot?
-    case 0x0f18d400: ret = 0x00000000; break; // do cold boot and erase all RAM
+    case 0x0f18d400: ret = 0x00000001; break; // avoid cold boot?
+    //case 0x0f18d400: ret = 0x00000000; break; // do cold boot and erase all RAM
   }
   if (msg && !(flags&DN_MEM_PEEK)) {
     err(); printf("read access at %08x:%08x (GPIO: %s)\n", addr, ret, msg);

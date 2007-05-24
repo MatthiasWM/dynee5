@@ -11,7 +11,15 @@
 ; c aaaaaaaa comment    = add a comment at this address
 ;
 
-
+;
+; this is the first task that will be kicked off oafter machine initialisation
+;
+b 002F70A4 UserBoot(void)
+b 002F7198 InitialKSRVTask(void)
+b 001553CC InitPSSManager(unsigned long, unsigned long)
+b 0030BBA8 UserMain(void)
+b 0030D20C TNewtWorld::MainConstructor(void)
+b 01A3FFF4 InitExternal(void)
 
 b 00113CBC ZapInternalStoreCheck(void): if we reach this, we can get a dialog on the screen!
 b 0011401C TLoader::TheMain(void): Lots of setup tasks done here
