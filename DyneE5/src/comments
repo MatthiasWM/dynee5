@@ -21,3 +21,4 @@ c 00018694 Read the CPU ID number
 c 000186ac Write the very basic Cirrus flags without interfering with a warm boot
 c 00018720 This doesn't do anything on cold boot
 c 000188d8 call InitCirrusHW
+c 0030d2a8 Crash habbens in here

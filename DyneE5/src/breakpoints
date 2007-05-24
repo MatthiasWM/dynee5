@@ -14,15 +14,28 @@
 ;
 ; this is the first task that will be kicked off oafter machine initialisation
 ;
-b 002F70A4 UserBoot(void)
-b 002F7198 InitialKSRVTask(void)
-b 001553CC InitPSSManager(unsigned long, unsigned long)
-b 0030BBA8 UserMain(void)
-b 0030D20C TNewtWorld::MainConstructor(void)
-b 01A3FFF4 InitExternal(void)
+; b 002F70A4 UserBoot(void)
+; b 002F7198 InitialKSRVTask(void)
+; b 001553CC InitPSSManager(unsigned long, unsigned long)
+; b 0030BBA8 UserMain(void)
+; b 0030D20C TNewtWorld::MainConstructor(void)
+; b 01A3FFF4 InitExternal(void)
+b 0030d2a8 We crash below here... 
+c 002e0c78 We crahs below here...
+b 002e0c78 We crahs below here...
+c 00354c48 We crahs below here...
+b 00354c48 We crahs below here...
+c 003544a8 We crahs below here...
+b 003544a8 We crahs below here...
+c 002dfa44 We crahs below here...
+b 002dfa44 We crahs below here...
+c 002dd9b8 We crahs below here (Last chance)
+b 002dd9b8 We crahs below here...
+b 002ddf2c
+b 002ddf30
 
-b 00113CBC ZapInternalStoreCheck(void): if we reach this, we can get a dialog on the screen!
-b 0011401C TLoader::TheMain(void): Lots of setup tasks done here
+; b 00113CBC ZapInternalStoreCheck(void): if we reach this, we can get a dialog on the screen!
+; b 0011401C TLoader::TheMain(void): Lots of setup tasks done here
 
 b 00199e80 IsSerialDebuggingAndFlag: if we end up here, we will throw an exception and reboot
 b 003B889C SYMthrow
