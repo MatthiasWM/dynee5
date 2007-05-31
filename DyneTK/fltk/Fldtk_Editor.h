@@ -44,8 +44,8 @@ public:
 	void Fldtk_Editor_(const char *L=0L);
 	virtual ~Fldtk_Editor();
 
-	int		loadFile(const char *filename);
-	int		saveFile(const char *filename);
+	virtual int		loadFile(const char *filename);
+	virtual int		saveFile(const char *filename);
 	char	* getText();
 	void	setName(const char *name);
 

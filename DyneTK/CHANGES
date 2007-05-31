@@ -3,6 +3,7 @@
 Changes in DyneTK since V0.0.3 (April 4th, 2007)
 
     - moved archive to code.google.com
+    - script editor now converts \r and \r\n to the Unix style \n
 
 Changes in DyneTK since V0.0.2
 

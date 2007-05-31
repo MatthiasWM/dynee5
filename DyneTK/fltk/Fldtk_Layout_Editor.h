@@ -29,6 +29,8 @@
 
 #include "fltk/Fldtk_Editor.h"
 
+class Fl_Hold_Browser;
+
 
 /**
  * Container for a document editor.
@@ -38,6 +40,9 @@ class Fldtk_Layout_Editor : public Fldtk_Editor
 public:
 	Fldtk_Layout_Editor(const char *L=0L);
 	virtual ~Fldtk_Layout_Editor();
+protected:
+	Fl_Hold_Browser *tree_;
+	Fl_Hold_Browser *member_;
 };
 
 

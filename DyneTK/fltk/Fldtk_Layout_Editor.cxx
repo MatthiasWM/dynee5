@@ -32,6 +32,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Text_Editor.H>
 #include <FL/Fl_Text_Buffer.H>
+#include <FL/Fl_Hold_Browser.H>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,6 +41,12 @@
 Fldtk_Layout_Editor::Fldtk_Layout_Editor(const char *L)
 : Fldtk_Editor(L)
 {
+	editor_->resize(x(), y()+h()/4, w(), h()-h()/4);
+	editor_->box(FL_DOWN_BOX);
+	tree_ = new Fl_Hold_Browser(x(), y(), w()/2, h()/4);
+	member_ = new Fl_Hold_Browser(x()+w()/2, y(), w()-w()/2, h()/4);
+	init_sizes();
+	resizable(this);
 }
 
 

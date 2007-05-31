@@ -47,6 +47,36 @@ Fldtk_Script_Editor::~Fldtk_Script_Editor()
 {
 }
 
+int Fldtk_Script_Editor::loadFile(const char *filename) 
+{
+	// read the text
+	FILE *in = fopen(filename, "rb");
+	fseek(in, 0, SEEK_END);
+	int n = ftell(in);
+	rewind(in);
+	char *txt = (char*)malloc(n+1);
+	fread(txt, 1, n, in);
+	txt[n] = 0;
+	fclose(in);
+	// convert file endings into '\n'
+	char *src = txt, *dst = txt;
+	for (;;) {
+		char c = *src++;
+		if (!c) break;
+		if (c=='\r') {
+			if (*src=='\n') {
+				*dst++ = *src++;
+			} else {
+				*dst++ = '\n';
+			}
+		} else {
+			*dst++ = c;
+		}
+	}
+	*dst = 0;
+	editor_->buffer()->text(txt);
+	free(txt);
+}
 
 
 //

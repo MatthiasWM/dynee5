@@ -49,7 +49,7 @@ public:
 
 	void			setBrowser(Fldtk_Document_Browser*);
 
-	Dtk_Document	* newDocument(const char *filename);
+	Dtk_Document	* addDocument(const char *filename);
 	Dtk_Document	* newScript(const char *filename);
 	Dtk_Document	* newLayout(const char *filename);
 

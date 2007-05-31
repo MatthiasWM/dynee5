@@ -84,12 +84,20 @@ Dtk_Document_Manager::~Dtk_Document_Manager()
 
 /*---------------------------------------------------------------------------*/
 /**
- * Create a document of unknown type.
+ * Add an existing document by examining its type.
  * \todo return a setup that show that this type is not editable (and unsupported)
  */
-Dtk_Document *Dtk_Document_Manager::newDocument(const char *filename)
+Dtk_Document *Dtk_Document_Manager::addDocument(const char *filename)
 {
-	Dtk_Script_Document *doc = new Dtk_Script_Document();
+	FILE *f = fopen(filename, "rb");
+	int id = fgetc(f);
+	fclose(f);
+	Dtk_Document *doc = 0L;
+	if (id==2) { // its NSOF, so for now we assume it is a layout
+		doc = new Dtk_Layout_Document();
+	} else { // otherwise, this is likely text
+		doc = new Dtk_Script_Document();
+	}
 	doc->setFilename(uniqueFilename(filename));
 	doc->setAskForFilename();
 	addToVisible(doc);

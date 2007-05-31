@@ -291,17 +291,17 @@ int Dtk_Project::loadMac()
 	sprintf(buf, "%s/rsrc", filename_);
 	FILE *rsrc = fopen(buf, "rb");
 	if (!rsrc) {
-    strcpy(buf, filename_);
-    char *fn = (char*)fl_filename_name(buf);
-    if (fn) {
-      memmove(fn+2, fn, strlen(fn)+1);
-      memcpy(fn, "._", 2);
-      rsrc = fopen(buf, "rb");
-      if (!rsrc)
-        return -1;
-    } else {
-		  return -1;
-    }
+		strcpy(buf, filename_);
+		char *fn = (char*)fl_filename_name(buf);
+		if (fn) {
+			memmove(fn+2, fn, strlen(fn)+1);
+			memcpy(fn, "._", 2);
+			rsrc = fopen(buf, "rb");
+			if (!rsrc)
+			return -1;
+		} else {
+			return -1;
+		}
 	}
 
 	// open the data fork
@@ -323,7 +323,7 @@ int Dtk_Project::loadMac()
 		fread(alias, len, 1, data);
 		char *fn = PtoCFilename(alias+0xc1);
 		char *filename = documents->findFile(fn);
-		Dtk_Document *doc = documents->newDocument(filename);
+		Dtk_Document *doc = documents->addDocument(filename);
 		doc->load();
 		documents->addToProject(doc);
 		doc->edit();
@@ -547,7 +547,7 @@ int Dtk_Project::loadWin()
 							switch (type) {
 								case 0:  doc = documents->newLayout(filename); break;
 								case 5:  doc = documents->newScript(filename); break;
-								default: doc = documents->newDocument(filename); break;
+								default: doc = documents->addDocument(filename); break;
 							}
 							doc->load();
 							documents->addToProject(doc);
