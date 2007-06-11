@@ -84,7 +84,7 @@ void Dtk_Layout_Document::edit()
 {
 	if (!editor_) {
 		Fl_Group::current(0L);
-		editor_ = new Fldtk_Layout_Editor(fl_filename_name(filename_));
+		editor_ = new Fldtk_Layout_Editor(this);
 		dtkMain->document_tabs->add(editor_);
 	}
 	dtkMain->document_tabs->value(editor_);

@@ -29,6 +29,10 @@
 
 #include "Fldtk_Editor.h"
 
+#include "main.h"
+#include "fltk/Fldtk_Document_Tabs.h"
+#include "dtk/Dtk_Document.h"
+
 #include <FL/Fl.H>
 #include <FL/Fl_Text_Editor.H>
 #include <FL/Fl_Text_Buffer.H>
@@ -37,22 +41,14 @@
 #include <stdlib.h>
 
 
-Fldtk_Editor::Fldtk_Editor(int X, int Y, int W, int H, const char *L)
-: Fl_Group(X, Y, W, H)
+Fldtk_Editor::Fldtk_Editor(Dtk_Document *doc)
+:   Fl_Group(dtkDocumentTabs->x(), dtkDocumentTabs->y()+25, 
+             dtkDocumentTabs->w(), dtkDocumentTabs->h()-25),
+    document_(doc)
 {
-	Fldtk_Editor_(L);
-}
-
-
-Fldtk_Editor::Fldtk_Editor(const char *L)
-: Fl_Group(0, 0, 20, 20)
-{
-	Fldtk_Editor_(L);
-}
-
-
-void Fldtk_Editor::Fldtk_Editor_(const char *L)
-{
+    const char *L = 0L;
+    if (doc)
+        L = doc->name();
 	if (L)
 		copy_label(L);
 	labelsize(12);

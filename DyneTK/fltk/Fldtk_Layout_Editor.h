@@ -38,7 +38,7 @@ class Fl_Hold_Browser;
 class Fldtk_Layout_Editor : public Fldtk_Editor
 {
 public:
-	Fldtk_Layout_Editor(const char *L=0L);
+	Fldtk_Layout_Editor(Dtk_Document *doc);
 	virtual ~Fldtk_Layout_Editor();
 protected:
 	Fl_Hold_Browser *tree_;

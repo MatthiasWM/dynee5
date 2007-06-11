@@ -75,6 +75,17 @@ void	EditPreferences();
 
 /*---------------------------------------------------------------------------*/
 // Project menu
+
+/** Create a new project.
+ *
+ * If no filename is given, we ask the user for a filename by popping up a 
+ * file chooser dialog
+ *
+ * \param filename	[in] path and file name of .ntk file to create
+ *
+ * \retval	0 of successful
+ * \retval  -1 (or an error code <0) if the function failed
+ */
 int		NewProject(const char *filename=0L);
 
 /** Open an existing project.

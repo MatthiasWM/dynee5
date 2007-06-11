@@ -31,6 +31,7 @@
 
 
 class Fl_Text_Editor;
+class Dtk_Document;
 
 
 /**
@@ -39,18 +40,18 @@ class Fl_Text_Editor;
 class Fldtk_Editor : public Fl_Group
 {
 public:
-	Fldtk_Editor(int X, int Y, int W, int H, const char *L=0L);
-	Fldtk_Editor(const char *L=0L);
-	void Fldtk_Editor_(const char *L=0L);
+	Fldtk_Editor(Dtk_Document *doc);
 	virtual ~Fldtk_Editor();
 
 	virtual int		loadFile(const char *filename);
 	virtual int		saveFile(const char *filename);
 	char	* getText();
 	void	setName(const char *name);
+    Dtk_Document *document() { return document_; }
 
 protected:
-	Fl_Text_Editor	*editor_;
+	Fl_Text_Editor	* editor_;
+    Dtk_Document *document_;
 };
 
 

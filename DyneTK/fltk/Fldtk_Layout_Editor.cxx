@@ -38,8 +38,8 @@
 #include <stdlib.h>
 
 
-Fldtk_Layout_Editor::Fldtk_Layout_Editor(const char *L)
-: Fldtk_Editor(L)
+Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Document *doc)
+:   Fldtk_Editor(doc)
 {
 	editor_->resize(x(), y()+h()/4, w(), h()-h()/4);
 	editor_->box(FL_DOWN_BOX);

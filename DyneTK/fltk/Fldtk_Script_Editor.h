@@ -36,7 +36,7 @@
 class Fldtk_Script_Editor : public Fldtk_Editor
 {
 public:
-	Fldtk_Script_Editor(const char *L=0L);
+	Fldtk_Script_Editor(Dtk_Document *doc);
 	virtual ~Fldtk_Script_Editor();
 	virtual int loadFile(const char*);
 };

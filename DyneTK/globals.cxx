@@ -41,6 +41,7 @@
 
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
+#include "fltk/Fldtk_Editor.h"
 
 #include "globals.h"
 #include "allNewt.h"
@@ -207,8 +208,7 @@ int SaveCurrentDocumentAs()
 }
 
 
-/*---------------------------------------------------------------------------*/
-/* V2 */
+/*-v2------------------------------------------------------------------------*/
 int OpenProject(const char *filename) 
 {
     // close any dirty project first
@@ -239,38 +239,47 @@ int OpenProject(const char *filename)
 }
 
 
-/*---------------------------------------------------------------------------*/
-/** Create a new project.
- *
- * If no filename is given, we ask the user for a filename by popping up a 
- * file chooser dialog
- *
- * \todo	Write this function.
- *
- * \param filename	[in] path and file name of .ntk file to create
- *
- * \retval	0 of successful
- * \retval  -1 (or an error code <0) if the function failed
- */
+/*-v2------------------------------------------------------------------------*/
 int NewProject(const char *filename) 
 {
+    // close any dirty project first
+    if (dtkProject && dtkProject->isDirty()) {
+        CloseProject();
+        // abort if the user decided to not close the project
+        if (dtkProject) {
+            return -2;
+        }
+    }
+    // ask for a new filename where we will save this project, if none was given
 	if (!filename) {
 		filename = fl_file_chooser("New Toolkit Project", "*.ntk", 0L);
 		if (!filename) 
 			return 0;
 	}
-	CloseProject();
+    // confirm that we want to overwrite this project file if it exists already
+    if (access(filename, 0004)==0) { // R_OK
+        int v = fl_choice(
+            "A file with that filename already exist. Creating "
+            "a new project will eventually delete the original file.\n\n"
+            "Do you want to delete the file\n%s?", 
+            "delete file", "keep file", 0L, filename);
+        if (v==1)
+            return -1;
+    }
+    // if there is still a (non-dirty) project, close it now
+    if (dtkProject)
+	    CloseProject();
+    // finally we can create a brandnew project 
 	dtkProject = new Dtk_Project();
 	dtkProject->setFilename(filename);
 	dtkProject->setDefaults();
-
+    // make sure the menus show the right settings
 	UpdateMainMenu();
 	return 0;
 }
 
 
-/*---------------------------------------------------------------------------*/
-/* V2 */
+/*-v2------------------------------------------------------------------------*/
 int CloseProject()
 {
     // avoid failure
@@ -357,8 +366,7 @@ int AddCurrentDocToProject()
 }
 
 
-/*---------------------------------------------------------------------------*/
-/* V2 */
+/*-v2------------------------------------------------------------------------*/
 int	RemoveFileFromProject(Dtk_Document *doc)
 {
     // use the current document if there is none specified
@@ -830,7 +838,10 @@ void DebugDumpBuffer(uint8_t *src, int n)
 /*---------------------------------------------------------------------------*/
 Dtk_Document *GetCurrentDocument()
 {
-    return 0L;
+    Fldtk_Editor *ed = (Fldtk_Editor*)dtkDocumentTabs->value();
+    if (!ed) 
+        return 0L;
+    return ed->document();
 }
 
 

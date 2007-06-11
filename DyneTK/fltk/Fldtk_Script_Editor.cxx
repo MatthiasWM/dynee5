@@ -37,8 +37,8 @@
 #include <stdlib.h>
 
 
-Fldtk_Script_Editor::Fldtk_Script_Editor(const char *L)
-: Fldtk_Editor(L)
+Fldtk_Script_Editor::Fldtk_Script_Editor(Dtk_Document *doc)
+: Fldtk_Editor(doc)
 {
 }
 

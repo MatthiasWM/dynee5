@@ -92,7 +92,7 @@ void Dtk_Script_Document::edit()
 {
 	if (!editor_) {
 		Fl_Group::current(0L);
-		editor_ = new Fldtk_Script_Editor(fl_filename_name(filename_));
+		editor_ = new Fldtk_Script_Editor(this);
 		dtkMain->document_tabs->add(editor_);
 	}
 	dtkMain->document_tabs->value(editor_);
