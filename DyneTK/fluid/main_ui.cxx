@@ -21,6 +21,13 @@
 
 #include "main_ui.h"
 
+void Fldtk_Main_Window::cb_mFileNewLayout_i(Fl_Menu_*, void*) {
+  NewLayoutFile();
+}
+void Fldtk_Main_Window::cb_mFileNewLayout(Fl_Menu_* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mFileNewLayout_i(o,v);
+}
+
 void Fldtk_Main_Window::cb_mFileNewText_i(Fl_Menu_*, void*) {
   NewTextFile();
 }
@@ -191,7 +198,7 @@ void Fldtk_Main_Window::cb_mHelpAbout(Fl_Menu_* o, void* v) {
 
 Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"File", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 12, 0},
- {"New Layout", FL_COMMAND|0x6e,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
+ {"New Layout", FL_COMMAND|0x6e,  (Fl_Callback*)Fldtk_Main_Window::cb_mFileNewLayout, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {"New Proto Template", FL_COMMAND|0x74,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"New Text File", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mFileNewText, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {"Open...", FL_COMMAND|0x6f,  (Fl_Callback*)Fldtk_Main_Window::cb_mFileOpen, 0, 128, FL_NORMAL_LABEL, 0, 12, 0},
@@ -297,6 +304,7 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 Fl_Menu_Item* Fldtk_Main_Window::mFile = Fldtk_Main_Window::menu_ + 0;
+Fl_Menu_Item* Fldtk_Main_Window::mFileNewLayout = Fldtk_Main_Window::menu_ + 1;
 Fl_Menu_Item* Fldtk_Main_Window::mFileNewText = Fldtk_Main_Window::menu_ + 3;
 Fl_Menu_Item* Fldtk_Main_Window::mFileOpen = Fldtk_Main_Window::menu_ + 4;
 Fl_Menu_Item* Fldtk_Main_Window::mFileClose = Fldtk_Main_Window::menu_ + 6;
@@ -324,6 +332,13 @@ Fl_Menu_Item* Fldtk_Main_Window::mWindow = Fldtk_Main_Window::menu_ + 87;
 Fl_Menu_Item* Fldtk_Main_Window::mWindowConnectInspector = Fldtk_Main_Window::menu_ + 89;
 Fl_Menu_Item* Fldtk_Main_Window::mHelp = Fldtk_Main_Window::menu_ + 98;
 Fl_Menu_Item* Fldtk_Main_Window::mHelpAbout = Fldtk_Main_Window::menu_ + 102;
+
+void Fldtk_Main_Window::cb_tFileNewLayout_i(Fl_Button*, void*) {
+  NewLayoutFile();
+}
+void Fldtk_Main_Window::cb_tFileNewLayout(Fl_Button* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_tFileNewLayout_i(o,v);
+}
 
 #include <FL/Fl_Image.H>
 static unsigned char idata_table[] =
@@ -3025,14 +3040,14 @@ this->when(FL_WHEN_RELEASE);
 } // Fl_Menu_Bar* o
 { Fl_Group* o = new Fl_Group(0, 25, 785, 35);
   o->box(FL_THIN_DOWN_BOX);
-  { Fl_Button* o = new Fl_Button(10, 30, 25, 25);
-    o->tooltip("New Layout");
-    o->image(image_table);
-    o->deimage(image_table_da);
-    o->labelsize(11);
-    o->labelcolor(FL_GRAY0);
-    o->deactivate();
-  } // Fl_Button* o
+  { tFileNewLayout = new Fl_Button(10, 30, 25, 25);
+    tFileNewLayout->tooltip("New Layout");
+    tFileNewLayout->image(image_table);
+    tFileNewLayout->deimage(image_table_da);
+    tFileNewLayout->labelsize(11);
+    tFileNewLayout->labelcolor(FL_GRAY0);
+    tFileNewLayout->callback((Fl_Callback*)cb_tFileNewLayout);
+  } // Fl_Button* tFileNewLayout
   { Fl_Button* o = new Fl_Button(35, 30, 25, 25);
     o->tooltip("New Proto Template");
     o->image(image_plugin);

@@ -36,6 +36,7 @@ extern "C" {
 class Dtk_Document_List;
 class Dtk_Project;
 
+
 /*---------------------------------------------------------------------------*/
 /**
  * Base class for any kind of document that we can view, edit, or even compile.
@@ -59,14 +60,10 @@ public:
 	const char		*name();
 	bool			shown();
 	bool			topMost();
-	bool			isInProject() { return isInProject_; }
 	newtRef			getProjectItemRef();
 
     Dtk_Project     * project();
     int             isDirty() { return 0; }
-
-// don't use the following functions:
-	void			setInProject(bool v) { isInProject_ = v; }
 
 protected:
 	Fldtk_Editor	* editor_;
@@ -74,7 +71,6 @@ protected:
 	char			* filename_;
 	char			* name_;
 	bool			askForFilename_;
-	bool			isInProject_;
 
     /// we must always be a member of exactly one list
     Dtk_Document_List   * list_;

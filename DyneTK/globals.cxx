@@ -62,47 +62,37 @@
 
 extern Fl_Window *wConnect;
 
-/*---------------------------------------------------------------------------*/
-/**
- * Create a new Layout file and open it for editing.
- */
+/*-v2------------------------------------------------------------------------*/
 int NewLayoutFile(const char *filename) {
-
-	if (!filename) {
-		filename = "Doc.lyt";
-	}
-
+    // create a filename if we have none
+    if (!filename) {
+        filename = "layout.lyt";
+        /// \todo Make sure we choose a unique name here
+        /// \todo Add the current path to the filename
+        /// \todo Make sure that no file with that path and name exists
+    }
+    // add the new document to the global docs list
 	Dtk_Document *doc = dtkGlobalDocuments->newLayout(filename);
 	doc->edit();
-
+    // keep the menubar in sync
 	UpdateMainMenu();
 	return 0;
 }
 
 
-/*---------------------------------------------------------------------------*/
-/** Open a new text file for editing.
- * 
- * If no filename is given, name teh file with a default name for the current 
- * directory, but mark it so that the "Save" function will still pop up a 
- * file chooser dialog.
- *
- * \todo	Write this function.
- *
- * \param filename	[in] path and file name of a .ns file to create
- *
- * \retval	0 of successful
- * \retval  -1 (or an error code <0) if the function failed
- */
+/*-v2------------------------------------------------------------------------*/
 int NewTextFile(const char *filename) {
-
-	if (!filename) {
-		filename = "Text.txt";
-	}
-
+    // create a filename if we have none
+    if (!filename) {
+        filename = "script.txt";
+        /// \todo Make sure we choose a unique name here
+        /// \todo Add the current path to the filename
+        /// \todo Make sure that no file with that path and name exists
+    }
+    // add the new document to the global docs list
 	Dtk_Document *doc = dtkGlobalDocuments->newScript(filename);
 	doc->edit();
-
+    // keep the menubar in sync
 	UpdateMainMenu();
 	return 0;
 }
@@ -141,41 +131,30 @@ int CloseCurrentDocument()
 }
 
 
-/*---------------------------------------------------------------------------*/
-/** 
- * Open one of the currently supported document types.
- */
+/*-v2------------------------------------------------------------------------*/
 int OpenDocument(const char *filename)
 {
-    /*
 	int ret = -1;
-
+    // if there is no file name, pop up a file dialog
 	if (!filename) {
 		filename = fl_file_chooser("Open Document...",
+            "All Files(*)\t"
 			"Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
 			"Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
-			"Native Module Files (*.ntm)\tStream Files (*.stm)\tAll Files (*)", 0L);
+			"Native Module Files (*.ntm)\tStream Files (*.stm)", 0L);
 		if (!filename)
-			return ret;
+			return -2;
 	}
-	const char *ext = fl_filename_ext(filename);
-	if (strcmp(ext, ".ns")==0) { // Newton Script
-		Dtk_Document *doc = documents->newScript(filename);
-		doc->load();
-		doc->edit();
-		ret = 0;
-	} else {
-		// open our default text editor
-		Dtk_Document *doc = documents->newScript(filename);
-		doc->load();
-		doc->edit();
-		ret = 0;
-	}
-
+    // go ahead and add the document
+    Dtk_Document *doc = dtkGlobalDocuments->add(filename);
+    // update the menu bar
 	UpdateMainMenu();
+    // show an error message if needed
+    if (!doc) {
+        SystemAlert("Can't open document");
+        return -1;
+    }
 	return ret;
-    */
-    return -1;
 }
 
 
@@ -311,61 +290,61 @@ int CloseProject()
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Show the project setting dialog.
- */
+/*-v2------------------------------------------------------------------------*/
 void ShowProjectSettings()
 {
+    if (!dtkProject)
+        return;
 	dtkProjSettings->updateDialog();
 	dtkProjSettings->show();
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Add a new file to the current project.
- */
+/*-v2------------------------------------------------------------------------*/
 int AddFileToProject(const char *filename)
 {
-    /*
-	assert(project);
+    if (!dtkProject)
+        return -1;
+    // if there is no file name, pop up a file dialog
 	if (!filename) {
-		filename = fl_file_chooser("Add File to Project",
+		filename = fl_file_chooser("Open Document...",
+            "All Files(*)\t"
 			"Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
 			"Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
-			"Native Module Files (*.ntm)\tStream Files (*.stm)\tAll Files (*)", 0L);
-		if (!filename) 
-			return 0;
+			"Native Module Files (*.ntm)\tStream Files (*.stm)", 0L);
+		if (!filename)
+			return -2;
 	}
-	Dtk_Document *doc = documents->newScript(filename);
-	int ret = doc->load();
-	documents->addToProject(doc);
-	doc->edit();
-
+    // go ahead and add the document to the project
+    Dtk_Document *doc = dtkProject->documentList()->add(filename);
+    // update the menu bar
 	UpdateMainMenu();
-	return ret;
-    */
-    return -1;
+    // show an error message if needed
+    if (!doc) {
+        SystemAlert("Can't open document");
+        return -1;
+    }
+	return 0;
 }
 
-
-/*---------------------------------------------------------------------------*/
-/**
- * Add the current document to the project.
- */
+/*-v2------------------------------------------------------------------------*/
 int AddCurrentDocToProject()
 {
-    /*
-	Dtk_Document *doc = documents->getCurrentDoc();
-	if (!doc || doc->isInProject())
-		return -1;
-	documents->addToProject(doc);
-
+    if (!dtkProject)
+        return -1;
+    // which document are we talking about?
+    Dtk_Document *doc = GetCurrentDocument();
+    if (!doc)
+        return -1;
+    // if it is already in the project, don't bother
+    if (doc->project())
+        return 0;
+    // remove from globals and reattach to the project
+    dtkGlobalDocuments->remove(doc);
+    dtkProject->documentList()->append(doc);
+    // update the menus
 	UpdateMainMenu();
 	return 0;
-    */
-    return -1;
 }
 
 
@@ -401,66 +380,62 @@ int	RemoveFileFromProject(Dtk_Document *doc)
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Save the current project to a file.
- */
+/*-v2------------------------------------------------------------------------*/
 int SaveProject()
 {
-	assert(dtkProject);
+    if (!dtkProject)
+        return -1;
+    // save it
 	int ret = dtkProject->save();
-
+    if (ret!=0)
+        SystemAlert("Unable to save prject file!");
+    // keep the menus cool
 	UpdateMainMenu();
 	return ret;
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Change the filename of the project, then save it.
- */
+/*-v2------------------------------------------------------------------------*/
 int SaveProjectAs()
 {
-	assert(dtkProject);
+    if (!dtkProject)
+        return -1;
+    // get the filename form the user
 	const char *filename = fl_file_chooser("Save Toolkit Project", "*.ntk", 0L);
 	if (!filename) 
-		return 0;
+		return -2;
+    // save it
 	dtkProject->setFilename(filename);
 	int ret = dtkProject->save();
-
+    if (ret!=0)
+        SystemAlert("Unable to save project file!");
+    // keep the menus cool
 	UpdateMainMenu();
 	return ret;
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Compile a package file and save it to disk.
- */
+/*-v2------------------------------------------------------------------------*/
 int BuildPackage()
 {
-	assert(dtkProject);
+    if (!dtkProject)
+        return -1;
 	int err = dtkProject->buildPackage();
 	if (!err) {
 		err = dtkProject->savePackage();
 	}
-
 	UpdateMainMenu();
 	return err;
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Send the current package through the Inspector to the Newton.
- */
+/*-v2------------------------------------------------------------------------*/
 int DownloadPackage()
 {
 	assert(dtkProject);
 	int ret = InspectorSendPackage(
 			dtkProject->getPackageName(),
 			dtkProjSettings->app->symbol->get());
-
 	UpdateMainMenu();
 	return ret;
 }
@@ -498,10 +473,7 @@ int InspectorSendScript(const char *script)
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Launch the application that corresponds to the current package on the Newton.
- */
+/*-v2------------------------------------------------------------------------*/
 int LaunchPackage()
 {
 	return InspectorLaunchPackage(dtkProjSettings->app->symbol->get());
@@ -644,13 +616,13 @@ void UpdateMainMenu()
 	unsigned int mask = 0;
 	if (dtkProject)
 		mask |= 1;
-	//++ if (documents->numVisibleDocs())
+    Dtk_Document *doc = GetCurrentDocument();
+    if (doc) {
 		mask |= 2;
-	//Dtk_Document *doc = documents->getCurrentDoc();
-	//if (doc) {
-	//	if (doc->isInProject())
+        if (doc->project()) {
 			mask |= 4;
-	//}
+        }
+    }
 	if (wInspectorSerial->is_open()) {
 		mask |= 8;
 	}

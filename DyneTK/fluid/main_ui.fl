@@ -57,12 +57,13 @@ widget_class Fldtk_Main_Window {
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File
+      label File open
       xywh {5 5 100 20} labelsize 12
     } {
-      MenuItem {} {
+      MenuItem mFileNewLayout {
         label {New Layout}
-        xywh {5 5 100 20} shortcut 0x4006e labelsize 12 labelcolor 176 deactivate
+        callback {NewLayoutFile();}
+        xywh {5 5 100 20} shortcut 0x4006e labelsize 12
       }
       MenuItem {} {
         label {New Proto Template}
@@ -476,11 +477,12 @@ widget_class Fldtk_Main_Window {
       }
     }
   }
-  Fl_Group {} {
+  Fl_Group {} {open
     xywh {0 25 785 35} box THIN_DOWN_BOX
   } {
-    Fl_Button {} {
-      tooltip {New Layout} image {../images/table.png} deimage {../images/table_da.png} xywh {10 30 25 25} labelsize 11 labelcolor 32 deactivate
+    Fl_Button tFileNewLayout {
+      callback {NewLayoutFile();} selected
+      tooltip {New Layout} image {../images/table.png} deimage {../images/table_da.png} xywh {10 30 25 25} labelsize 11 labelcolor 32
     }
     Fl_Button {} {
       tooltip {New Proto Template} image {../images/plugin.png} deimage {../images/plugin_da.png} xywh {35 30 25 25} labelsize 11 deactivate
@@ -624,7 +626,7 @@ widget_class Fldtk_Main_Window {
     Fl_Group {} {open
       xywh {150 95 635 305} box FLAT_BOX
     } {
-      Fl_Tabs document_tabs {open selected
+      Fl_Tabs document_tabs {open
         xywh {153 98 629 299} box UP_BOX labelsize 12 resizable
         class Fldtk_Document_Tabs
       } {}

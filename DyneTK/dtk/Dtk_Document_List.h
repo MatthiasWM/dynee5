@@ -79,6 +79,7 @@ public:
 
     /** Remove a document from the list.
      *
+     * This function does not close or delete the document.
      * This also updates the browser if required.
      *
      * \param   [in] document address of doc to be removed
@@ -86,7 +87,7 @@ public:
      * \retval  0 if successful
      * \retval  -1 if the document was not in this list
      */
-    int remove(Dtk_Document *document);
+    int             remove(Dtk_Document *document);
 
     /** Find a file based on a filename and path.
      *
@@ -133,9 +134,9 @@ public:
      */
     Dtk_Project     * project() { return project_; }
 
-private:
     /// Add the document to the internal list and to the browser.
-    void            append_(Dtk_Document *doc);
+    void            append(Dtk_Document *doc);
+private:
 
     /// back reference to the project that keeps this list
     Dtk_Project     * project_;
@@ -146,6 +147,7 @@ private:
     /// we are in charge of keeping this browser updated and reacting to its messages
     Fldtk_Document_Browser      * browser_;
 
+    /// this is an FLTK callback tha is triggered when the browser is clicked
     static void browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d);
 };
 

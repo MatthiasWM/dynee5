@@ -30,20 +30,6 @@
 //			Increment some number before the extension.
 
 
-/*
-                    Dtk_Document_List(Dtk_Project *proj=0l);
-                    ~Dtk_Document_List();
-	char		    * findFile(const char *filename);
-	Dtk_Document	* addDocument(const char *filename);
-	Dtk_Document	* newScript(const char *filename);
-	Dtk_Document	* newLayout(const char *filename);
-	Dtk_Document	* getDocument(int i);
-	newtRef			getProjectItemsRef();
-	void			setBrowser(Fldtk_Document_Browser*);
-*/
-
-
-
 
 #ifdef WIN32
 #pragma warning(disable : 4996)
@@ -113,6 +99,8 @@ Dtk_Document *Dtk_Document_List::add(const char *filename)
 {
     // determine the file type by loading the first few bytes
 	FILE *f = fopen(filename, "rb");
+    if (!f)
+        return 0L;
 	int id = fgetc(f);
 	fclose(f);
 	Dtk_Document *doc = 0L;
@@ -127,7 +115,7 @@ Dtk_Document *Dtk_Document_List::add(const char *filename)
 	doc->setFilename(filename);
     doc->load();
     doc->edit();
-    append_(doc);
+    append(doc);
 	return doc;
 }
 
@@ -153,7 +141,7 @@ Dtk_Document *Dtk_Document_List::newScript(const char *filename)
 	Dtk_Script_Document *doc = new Dtk_Script_Document(this);
 	doc->setFilename(filename);
 	doc->setAskForFilename();
-    append_(doc);
+    append(doc);
 	return doc;
 }
 
@@ -163,7 +151,7 @@ Dtk_Document *Dtk_Document_List::newLayout(const char *filename)
 	Dtk_Layout_Document *doc = new Dtk_Layout_Document(this);
 	doc->setFilename(filename);
 	doc->setAskForFilename();
-    append_(doc);
+    append(doc);
 	return doc;
 }
 
@@ -191,7 +179,7 @@ Dtk_Document *Dtk_Document_List::getDocument(int i)
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Document_List::append_(Dtk_Document *doc)
+void Dtk_Document_List::append(Dtk_Document *doc)
 {
     docList_.push_back(doc);
     if (browser_) {
@@ -232,48 +220,6 @@ void Dtk_Document_List::browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List 
 
 #ifdef IGNORE_ME
 
-
-/*---------------------------------------------------------------------------*/
-/** 
- * Return the currently active document.
- */
-Dtk_Document *Dtk_Document_Manager::getCurrentDoc()
-{
-	std::list<Dtk_Document*>::iterator it = visible_docs.begin();
-	while (it!=visible_docs.end()) {
-		if ((*it)->topMost())
-			return (*it);
-		++it;
-	}
-	return 0L;
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Add a document to the manager.
- */
-void Dtk_Document_Manager::addToVisible(Dtk_Document *doc)
-{
-	assert(doc);
-	visible_docs.push_back(doc);
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Add a document to the manager.
- */
-void Dtk_Document_Manager::addToProject(Dtk_Document *doc)
-{
-	assert(doc);
-	doc->setInProject(true);
-	project_docs.push_back(doc);
-	if (browser_) 
-		browser_->add(doc->getName(), doc);
-}
-
-
 /*---------------------------------------------------------------------------*/
 /**
  * Update the name of a document in the browser.
@@ -288,88 +234,12 @@ void Dtk_Document_Manager::updateDocName(Dtk_Document *doc)
 
 /*---------------------------------------------------------------------------*/
 /**
- * Remove a document from the manager.
- */
-void Dtk_Document_Manager::removeVisibleDoc(Dtk_Document *doc)
-{
-	assert(doc);
-	doc->close();
-	visible_docs.remove(doc);
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Return the index of a document within the project, or -1.
- */
-int Dtk_Document_Manager::inProject(Dtk_Document *doc)
-{
-	int i = 0;
-	std::list<Dtk_Document*>::iterator it = project_docs.begin();
-	for ( ; it!=project_docs.end(); ++it, ++i) {
-		if ((*it)==doc) {
-			return i;
-		}
-	}
-	return -1;
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Remove a document from the manager.
- */
-void Dtk_Document_Manager::removeProjectDoc(Dtk_Document *doc)
-{
-	assert(doc);
-	int i = inProject(doc);
-	if (i>=0)
-		browser_->remove(i+1);
-	doc->setInProject(false);
-	project_docs.remove(doc);
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
  * Create a filename that is unique within the scope of the document manager.
  */
 const char *Dtk_Document_Manager::uniqueFilename(const char *filename)
 {
 	return filename;
 }
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Return the number of documents that are part of the current project.
- */
-int Dtk_Document_Manager::numVisibleDocs()
-{
-	return visible_docs.size();
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Return the number of documents that are part of the current project.
- */
-int Dtk_Document_Manager::numProjectDocs()
-{
-	return project_docs.size();
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * We will communicate directly with the browser.
- */
-void Dtk_Document_Manager::setBrowser(Fldtk_Document_Browser *b)
-{
-	browser_ = b;
-}
-
-
 
 #endif
 

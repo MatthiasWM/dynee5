@@ -38,10 +38,49 @@ class Dtk_Document;
 
 /*---------------------------------------------------------------------------*/
 // File menu
-int		NewLayout(const char *filename=0L);
+
+/** Create a new Layout file and open it for editing.
+ *
+ * If no filename is given, name the file with a default name for the current 
+ * directory, but mark it so that the "Save" function will still pop up a 
+ * file chooser dialog.
+ *
+ * \param filename optional filename for the new layout file
+ *
+ * \retval 0 if succeeded
+ * \retval negative if an error occured
+ */
+int		NewLayoutFile(const char *filename=0L);
+
 //      NewProtoTemplate()
+
+/** Open a new text file for editing.
+ * 
+ * If no filename is given, name the file with a default name for the current 
+ * directory, but mark it so that the "Save" function will still pop up a 
+ * file chooser dialog.
+ *
+ * \param filename optional filename for the new text file
+ *
+ * \retval	0 of successful
+ * \retval  -1 (or an error code <0) if the function failed
+ */
 int		NewTextFile(const char *filename=0L);
+
+/** Open an existing document.
+ *
+ * If no filename is given, we will pop up a file chooser.
+ * The document is not added to the project.
+ *
+ * \param filename optional filename
+ *
+ * \retval	0 of successful
+ * \retval  -1 (or an error code <0) if the function failed
+ *
+ * \todo We must make sure that we never have the same document in the databse twice!
+ */
 int		OpenDocument(const char *filename=0L);
+
 //      LinkLayout()
 
 /** Close the editor of the current document.
@@ -129,7 +168,24 @@ int		NewProject(const char *filename=0L);
  */
 int		OpenProject(const char *filename=0L);
 
+/** Save the current project to a file.
+ *
+ * \todo We need much better error handling here!
+ *
+ * \retval	0 if successful
+ * \retval  -1 (or an error code <0) if the function failed
+ */
 int		SaveProject();
+
+/** Ask for a filename and save the current project to that file.
+ *
+ * \todo We need much better error handling here!
+ * \todo Warn if we are about to overwrite an existing file!
+ *
+ * \retval	0 if successful
+ * \retval  -1 (or an error code <0) if the function failed
+ * \retval  -2 if the user aborted anywhere in the process
+ */
 int		SaveProjectAs();
 
 /** Close the current project and all associted documents.
@@ -144,7 +200,27 @@ int		SaveProjectAs();
  */
 int     CloseProject();
 
+/** Add the current document to the active project.
+ *
+ * If the doc is already part of a project, this function does nothing.
+ *
+ * \retval 0 if successful or if doc already in project
+ * \retval -1 if no document was active
+ */
 int		AddCurrentDocToProject();
+
+/** Add an existing document to the project.
+ *
+ * If no filename is given, we will pop up a file chooser.
+ * The document is loaded, opened, and added to the project.
+ *
+ * \param filename optional filename
+ *
+ * \retval	0 of successful
+ * \retval  -1 (or an error code <0) if the function failed
+ *
+ * \todo We must make sure that we never have the same document in the databse twice!
+ */
 int		AddFileToProject(const char *filename=0L);
 
 /** Remove a document from its project.
@@ -159,14 +235,41 @@ int		AddFileToProject(const char *filename=0L);
  */
 int		RemoveFileFromProject(Dtk_Document *document=0L);
 //      UpdateFiles()
+
+/** Compile a package file and save it to disk.
+ *
+ * \todo Unfortunatley there is no real error handling with the Newt/0 compiler.
+ *
+ * \retval  0, if successful
+ * \retval  negative if any part of the operation failed
+ */
 int		BuildPackage();
+
+/** Send the current package through the Inspector to the Newton.
+ *
+ * \retval  0, if successful
+ * \retval  negative if any part of the operation failed
+ */
 int		DownloadPackage();
+
+/** Launch the application that corresponds to the current package on the Newton.
+ *
+ * \todo Better inform the user if anything goes wrong.
+ *
+ * \retval  0, if successful
+ * \retval  negative if any part of the operation failed  
+ */
 int		LaunchPackage();
+
 //      ExportPackageToText()
 //      InstallToolkitApp()
 //      MarkAsMainLayout()
 //      ProcessEarlier()
 //      ProcessLater()
+
+/**
+ * Show the project settings dialog.
+ */
 void	ShowProjectSettings();
 
 // Layout menu

@@ -62,7 +62,6 @@ Dtk_Document::Dtk_Document(Dtk_Document_List *list)
 	filename_(0L),
 	name_(0L),
 	askForFilename_(false),
-	isInProject_(false),
     list_(list)
 {
 }

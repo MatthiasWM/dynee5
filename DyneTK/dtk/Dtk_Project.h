@@ -73,6 +73,7 @@ public:
 	newtRef		makeFileRef(const char *filename);
 
     const char  * name() { return name_; }
+    Dtk_Document_List   * documentList() { return documentList_; }
 
 protected:
 	void		pushDir();

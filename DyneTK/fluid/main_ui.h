@@ -47,6 +47,11 @@ public:
   Fldtk_Main_Window(int W, int H, const char *L = 0);
   static Fl_Menu_Item menu_[];
   static Fl_Menu_Item *mFile;
+  static Fl_Menu_Item *mFileNewLayout;
+private:
+  void cb_mFileNewLayout_i(Fl_Menu_*, void*);
+  static void cb_mFileNewLayout(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *mFileNewText;
 private:
   void cb_mFileNewText_i(Fl_Menu_*, void*);
@@ -163,6 +168,11 @@ public:
 private:
   void cb_mHelpAbout_i(Fl_Menu_*, void*);
   static void cb_mHelpAbout(Fl_Menu_*, void*);
+public:
+  Fl_Button *tFileNewLayout;
+private:
+  void cb_tFileNewLayout_i(Fl_Button*, void*);
+  static void cb_tFileNewLayout(Fl_Button*, void*);
 public:
   Fl_Button *tFileNewText;
 private:

@@ -74,6 +74,7 @@ int Fldtk_Script_Editor::loadFile(const char *filename)
 		}
 	}
 	*dst = 0;
+	editor_->buffer()->tab_distance(4);
 	editor_->buffer()->text(txt);
 	free(txt);
     return 0;
