@@ -33,6 +33,8 @@ extern "C" {
 #include "NewtType.h"
 }
 
+class Dtk_Document_List;
+class Dtk_Project;
 
 /*---------------------------------------------------------------------------*/
 /**
@@ -41,7 +43,7 @@ extern "C" {
 class Dtk_Document
 {
 public:
-					Dtk_Document();
+					Dtk_Document(Dtk_Document_List *list);
 	virtual			~Dtk_Document();
 
 	virtual int		load() { return -1; }
@@ -54,11 +56,14 @@ public:
 
 	void			setFilename(const char *filename);
 	void			setAskForFilename(bool v=true);
-	const char		* getName();
+	const char		*name();
 	bool			shown();
 	bool			topMost();
 	bool			isInProject() { return isInProject_; }
 	newtRef			getProjectItemRef();
+
+    Dtk_Project     * project();
+    int             isDirty() { return 0; }
 
 // don't use the following functions:
 	void			setInProject(bool v) { isInProject_ = v; }
@@ -70,6 +75,9 @@ protected:
 	char			* name_;
 	bool			askForFilename_;
 	bool			isInProject_;
+
+    /// we must always be a member of exactly one list
+    Dtk_Document_List   * list_;
 };
 
 

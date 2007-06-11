@@ -40,7 +40,7 @@
 #include "fluid/Fldtk_Prefs.h"
 #include "fluid/Fldtk_Proj_Settings.h"
 
-#include "dtk/Dtk_Document_Manager.h"
+#include "dtk/Dtk_Document_List.h"
 #include "dtk/Dtk_Document.h"
 #include "dtk/Dtk_Project.h"
 

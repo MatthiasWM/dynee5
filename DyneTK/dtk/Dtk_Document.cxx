@@ -28,7 +28,7 @@
 #endif
 
 #include "Dtk_Document.h"
-#include "Dtk_Document_Manager.h"
+#include "Dtk_Document_List.h"
 #include "Dtk_Project.h"
 #include "fltk/Fldtk_Editor.h"
 #include "fltk/Fldtk_Document_Tabs.h"
@@ -40,6 +40,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 extern "C" {
 #include "NewtCore.h"
@@ -55,13 +56,14 @@ extern "C" {
 /**
  * Constructor.
  */
-Dtk_Document::Dtk_Document()
+Dtk_Document::Dtk_Document(Dtk_Document_List *list)
 :	editor_(0L),
 	shortname_(0L),
 	filename_(0L),
 	name_(0L),
 	askForFilename_(false),
-	isInProject_(false)
+	isInProject_(false),
+    list_(list)
 {
 }
 
@@ -72,6 +74,13 @@ Dtk_Document::Dtk_Document()
  */
 Dtk_Document::~Dtk_Document()
 {
+    // close all GUI elements
+    close();
+
+    // remove all references to this document
+    list_->remove(this);
+
+    // remove all our resources
 	if (shortname_)
 		free(shortname_);
 	if (filename_)
@@ -98,7 +107,7 @@ void Dtk_Document::edit()
 /**
  * Return the name of the file.
  */
-const char *Dtk_Document::getName() 
+const char *Dtk_Document::name() 
 {
 	return name_;
 }
@@ -126,7 +135,7 @@ void Dtk_Document::setFilename(const char *filename)
 	}
 	if (editor_)
 		editor_->setName(name_);
-	documents->updateDocName(this);
+	// documents->updateDocName(this);
 }
 
 
@@ -174,12 +183,18 @@ void Dtk_Document::close()
 newtRef Dtk_Document::getProjectItemRef()
 {
 	newtRefVar itemA[] = {
-		NSSYM(file),			project->makeFileRef(filename_), 
+		NSSYM(file),			dtkProject->makeFileRef(filename_), 
 		NSSYM(type),			NewtMakeInt30(getID()), 
 		NSSYM(isMainLayout),	kNewtRefNIL,
 	};
 	newtRef item = NewtMakeFrame2(sizeof(itemA) / (sizeof(newtRefVar) * 2), itemA);
 	return item;
+}
+
+Dtk_Project *Dtk_Document::project()
+{
+    assert(list_);
+    return list_->project();
 }
 
 //

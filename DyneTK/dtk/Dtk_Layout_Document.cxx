@@ -45,8 +45,8 @@
 /**
  * Constructor.
  */
-Dtk_Layout_Document::Dtk_Layout_Document()
-:	Dtk_Document()
+Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
+:	Dtk_Document(list)
 {
 }
 

@@ -34,7 +34,7 @@
 #include "fluid/Fldtk_Snapshot.h"
 #include "fluid/main_ui.h"
 
-#include "dtk/Dtk_Document_Manager.h"
+#include "dtk/Dtk_Document_List.h"
 #include "dtk/Dtk_Document.h"
 #include "dtk/Dtk_Project.h"
 #include "dtk/Dtk_Error.h"
@@ -42,6 +42,7 @@
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
 
+#include "globals.h"
 #include "allNewt.h"
 
 #include <assert.h>
@@ -70,7 +71,7 @@ int NewLayoutFile(const char *filename) {
 		filename = "Doc.lyt";
 	}
 
-	Dtk_Document *doc = documents->newLayout(filename);
+	Dtk_Document *doc = dtkGlobalDocuments->newLayout(filename);
 	doc->edit();
 
 	UpdateMainMenu();
@@ -98,7 +99,7 @@ int NewTextFile(const char *filename) {
 		filename = "Text.txt";
 	}
 
-	Dtk_Document *doc = documents->newScript(filename);
+	Dtk_Document *doc = dtkGlobalDocuments->newScript(filename);
 	doc->edit();
 
 	UpdateMainMenu();
@@ -112,13 +113,15 @@ int NewTextFile(const char *filename) {
  */
 void CloseCurrentDocument()
 {
-	Dtk_Document *doc = documents->getCurrentDoc();
+    /*
+	Dtk_Document *doc = dtkGlobalDocuments->getCurrentDoc();
 	if (doc) {
-                documents->removeVisibleDoc(doc);
-                if (!doc->isInProject())
-                        delete doc;
+        dtkGlobalDocuments->removeVisibleDoc(doc);
+        if (!doc->isInProject())
+            delete doc;
 		UpdateMainMenu();
 	}
+    */
 }
 
 
@@ -128,6 +131,7 @@ void CloseCurrentDocument()
  */
 int OpenDocument(const char *filename)
 {
+    /*
 	int ret = -1;
 
 	if (!filename) {
@@ -154,6 +158,8 @@ int OpenDocument(const char *filename)
 
 	UpdateMainMenu();
 	return ret;
+    */
+    return -1;
 }
 
 
@@ -163,6 +169,7 @@ int OpenDocument(const char *filename)
  */
 int SaveCurrentDocument()
 {
+    /*
 	int ret = -1;
 
 	Dtk_Document *doc = documents->getCurrentDoc();
@@ -173,6 +180,8 @@ int SaveCurrentDocument()
 
 	UpdateMainMenu();
 	return ret;
+    */
+    return -1;
 }
 
 
@@ -182,6 +191,7 @@ int SaveCurrentDocument()
  */
 int SaveCurrentDocumentAs()
 {
+    /*
 	int ret = -1;
 
 	Dtk_Document *doc = documents->getCurrentDoc();
@@ -192,6 +202,8 @@ int SaveCurrentDocumentAs()
 
 	UpdateMainMenu();
 	return ret;
+    */
+    return -1;
 }
 
 
@@ -200,10 +212,10 @@ int SaveCurrentDocumentAs()
 int OpenProject(const char *filename) 
 {
     // close any dirty project first
-    if (project && project->isDirty()) {
+    if (dtkProject && dtkProject->isDirty()) {
         CloseProject();
         // abort if the user decided to not close the project
-        if (project) {
+        if (dtkProject) {
             return -2;
         }
     }
@@ -214,13 +226,13 @@ int OpenProject(const char *filename)
 			return -2;
 	}
     // now close the existing project, which can not be dirty
-	if (project) {
+	if (dtkProject) {
         CloseProject();
 	}
     // create a new project and load it
-	project = new Dtk_Project();
-	project->setFilename(filename);
-	int ret = project->load();
+	dtkProject = new Dtk_Project();
+	dtkProject->setFilename(filename);
+	int ret = dtkProject->load();
 
 	UpdateMainMenu();
 	return ret;
@@ -248,9 +260,9 @@ int NewProject(const char *filename)
 			return 0;
 	}
 	CloseProject();
-	project = new Dtk_Project();
-	project->setFilename(filename);
-	project->setDefaults();
+	dtkProject = new Dtk_Project();
+	dtkProject->setFilename(filename);
+	dtkProject->setDefaults();
 
 	UpdateMainMenu();
 	return 0;
@@ -262,25 +274,26 @@ int NewProject(const char *filename)
 int CloseProject()
 {
     // avoid failure
-	if (!project)
+	if (!dtkProject)
 		return -1;
     // confirm command if project is dirty
-    if (project->isDirty()) {
+    if (dtkProject->isDirty()) {
         int v = fl_choice(
             "Save changes to project %s?", 
-            "Abort", "Yes", "No", project->name());
+            "Abort", "Yes", "No", dtkProject->name());
         switch (v) {
         case 0: // abort
             return -2; 
         case 1: // yes
-            project->saveAll(); break; 
+            dtkProject->saveAll(); break; 
         case 2:  // no
             break;
         }
     }
-    project->close();
-	delete project;
-	project = 0L;
+    // now close the project and remove all references
+    dtkProject->close();
+	delete dtkProject;
+	dtkProject = 0L;
 	UpdateMainMenu();
     return 0;
 }
@@ -303,6 +316,7 @@ void ShowProjectSettings()
  */
 int AddFileToProject(const char *filename)
 {
+    /*
 	assert(project);
 	if (!filename) {
 		filename = fl_file_chooser("Add File to Project",
@@ -319,6 +333,8 @@ int AddFileToProject(const char *filename)
 
 	UpdateMainMenu();
 	return ret;
+    */
+    return -1;
 }
 
 
@@ -328,6 +344,7 @@ int AddFileToProject(const char *filename)
  */
 int AddCurrentDocToProject()
 {
+    /*
 	Dtk_Document *doc = documents->getCurrentDoc();
 	if (!doc || doc->isInProject())
 		return -1;
@@ -335,25 +352,41 @@ int AddCurrentDocToProject()
 
 	UpdateMainMenu();
 	return 0;
+    */
+    return -1;
 }
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Remove the current file form the project and close the file.
- */
-int	RemoveFileFromProject(const char *)
+/* V2 */
+int	RemoveFileFromProject(Dtk_Document *doc)
 {
-	assert(project);
-	Dtk_Document *doc = documents->getCurrentDoc();
-	if (!doc)
-		return -1;
-	if (!doc->isInProject())
-		return -1;
-	CloseCurrentDocument();
-	documents->removeProjectDoc(doc);
-	delete doc;
-	return 0;
+    // use the current document if there is none specified
+    if (!doc) {
+        doc = GetCurrentDocument();
+        if (!doc) 
+            return -1;
+    }
+    // see if it is part of a project
+    if (!doc->project())
+        return -1;
+    // if the document is dirty, we must ask the user before deleting
+    if (doc->isDirty()) {
+        int v = fl_choice(
+            "Save changes to document %s?", 
+            "Abort", "Yes", "No", doc->name());
+        switch (v) {
+        case 0: // abort
+            return -2; 
+        case 1: // yes
+            doc->save(); break; 
+        case 2:  // no
+            break;
+        }
+    }
+    // Now we can delete the document. It will unhook itself from lists and the GUI
+    delete doc;
+    return 0;
 }
 
 
@@ -363,8 +396,8 @@ int	RemoveFileFromProject(const char *)
  */
 int SaveProject()
 {
-	assert(project);
-	int ret = project->save();
+	assert(dtkProject);
+	int ret = dtkProject->save();
 
 	UpdateMainMenu();
 	return ret;
@@ -377,12 +410,12 @@ int SaveProject()
  */
 int SaveProjectAs()
 {
-	assert(project);
+	assert(dtkProject);
 	const char *filename = fl_file_chooser("Save Toolkit Project", "*.ntk", 0L);
 	if (!filename) 
 		return 0;
-	project->setFilename(filename);
-	int ret = project->save();
+	dtkProject->setFilename(filename);
+	int ret = dtkProject->save();
 
 	UpdateMainMenu();
 	return ret;
@@ -395,10 +428,10 @@ int SaveProjectAs()
  */
 int BuildPackage()
 {
-	assert(project);
-	int err = project->buildPackage();
+	assert(dtkProject);
+	int err = dtkProject->buildPackage();
 	if (!err) {
-		err = project->savePackage();
+		err = dtkProject->savePackage();
 	}
 
 	UpdateMainMenu();
@@ -412,9 +445,9 @@ int BuildPackage()
  */
 int DownloadPackage()
 {
-	assert(project);
+	assert(dtkProject);
 	int ret = InspectorSendPackage(
-			project->getPackageName(),
+			dtkProject->getPackageName(),
 			dtkProjSettings->app->symbol->get());
 
 	UpdateMainMenu();
@@ -592,16 +625,21 @@ void EditPreferences()
  */
 void UpdateMainMenu()
 {
+    // bits in the mask have the following meanings:
+    //	bit 0: a project is loaded
+    //	bit 1: a document is active for editing
+    //	bit 2: the active document is part of the project
+    //  bit 3: Inspector is connected to a Newton device
 	unsigned int mask = 0;
-	if (project)
+	if (dtkProject)
 		mask |= 1;
-	if (documents->numVisibleDocs())
+	//++ if (documents->numVisibleDocs())
 		mask |= 2;
-	Dtk_Document *doc = documents->getCurrentDoc();
-	if (doc) {
-		if (doc->isInProject())
+	//Dtk_Document *doc = documents->getCurrentDoc();
+	//if (doc) {
+	//	if (doc->isInProject())
 			mask |= 4;
-	}
+	//}
 	if (wInspectorSerial->is_open()) {
 		mask |= 8;
 	}
@@ -787,6 +825,12 @@ void DebugDumpBuffer(uint8_t *src, int n)
                 }
                 puts(buf);
         }
+}
+
+/*---------------------------------------------------------------------------*/
+Dtk_Document *GetCurrentDocument()
+{
+    return 0L;
 }
 
 

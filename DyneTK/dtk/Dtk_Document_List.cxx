@@ -30,11 +30,26 @@
 //			Increment some number before the extension.
 
 
+/*
+                    Dtk_Document_List(Dtk_Project *proj=0l);
+                    ~Dtk_Document_List();
+	char		    * findFile(const char *filename);
+	Dtk_Document	* addDocument(const char *filename);
+	Dtk_Document	* newScript(const char *filename);
+	Dtk_Document	* newLayout(const char *filename);
+	Dtk_Document	* getDocument(int i);
+	newtRef			getProjectItemsRef();
+	void			setBrowser(Fldtk_Document_Browser*);
+*/
+
+
+
+
 #ifdef WIN32
 #pragma warning(disable : 4996)
 #endif
 
-#include "Dtk_Document_Manager.h"
+#include "Dtk_Document_List.h"
 #include "Dtk_Document.h"
 #include "Dtk_Layout_Document.h"
 #include "Dtk_Script_Document.h"
@@ -57,80 +72,152 @@
 #include <FL/Fl_File_Chooser.H>
 
 
+
 /*---------------------------------------------------------------------------*/
-/**
- * Constructor.
- */
-Dtk_Document_Manager::Dtk_Document_Manager()
-:	browser_(0L)
+Dtk_Document_List::Dtk_Document_List(Dtk_Project *proj)
+:   project_(proj),
+    browser_(0L)
 {
+    if (project_) {
+        browser_ = dtkDocumentBrowser;
+        browser_->activate();
+        browser_->redraw();
+        //++ browser_->callback(show, this) // allow user to click on a name to pop that document up
+    }
 }
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Destructor.
- */
-Dtk_Document_Manager::~Dtk_Document_Manager()
+Dtk_Document_List::~Dtk_Document_List()
 {
-	if (browser_) {
-		browser_->clear();
-		browser_->deactivate();
-	}
-	project_docs.clear();
-	visible_docs.clear();
+    int i, n = docList_.size();
+    for (i=n-1; i>=0; --i) {
+        if (browser_) {
+            browser_->remove(i+1);
+        }
+        Dtk_Document *doc = docList_.at(i);
+        delete doc;
+    }
+    if (project_) {
+        browser_->deactivate();
+        browser_->redraw();
+        browser_->callback(0L, 0L);
+    }
+    browser_ = 0L;
+    project_ = 0L;
 }
 
-
 /*---------------------------------------------------------------------------*/
-/**
- * Add an existing document by examining its type.
- * \todo return a setup that show that this type is not editable (and unsupported)
- */
-Dtk_Document *Dtk_Document_Manager::addDocument(const char *filename)
+Dtk_Document *Dtk_Document_List::add(const char *filename)
 {
+    // determine the file type by loading the first few bytes
 	FILE *f = fopen(filename, "rb");
 	int id = fgetc(f);
 	fclose(f);
 	Dtk_Document *doc = 0L;
-	if (id==2) { // its NSOF, so for now we assume it is a layout
-		doc = new Dtk_Layout_Document();
-	} else { // otherwise, this is likely text
-		doc = new Dtk_Script_Document();
+	if (id==2) { 
+        // its NSOF, so for now we assume it is a layout
+		doc = new Dtk_Layout_Document(this);
+	} else { 
+        // otherwise, this is likely text
+		doc = new Dtk_Script_Document(this);
 	}
-	doc->setFilename(uniqueFilename(filename));
-	doc->setAskForFilename();
-	addToVisible(doc);
+    // load the file
+	doc->setFilename(filename);
+    doc->load();
+    doc->edit();
+    append_(doc);
 	return doc;
 }
-
 
 /*---------------------------------------------------------------------------*/
-/**
- * Create a new document that will contain scripts.
- */
-Dtk_Document *Dtk_Document_Manager::newScript(const char *filename)
+char *Dtk_Document_List::findFile(const char *filename)
 {
-	Dtk_Script_Document *doc = new Dtk_Script_Document();
-	doc->setFilename(uniqueFilename(filename));
-	doc->setAskForFilename();
-	addToVisible(doc);
-	return doc;
+	if (access(filename, 0004)==0) // R_OK
+		return strdup(filename);
+	const char *name = fl_filename_name(filename);
+	char buf[FL_PATH_MAX];
+	fl_filename_absolute(buf, FL_PATH_MAX, name);
+	if (access(buf, 0004)==0) // R_OK
+		return strdup(buf);
+	const char *user = fl_file_chooser("File not found, please search manually", 0, buf);
+	if (!user)
+		return 0L;
+	return strdup(user);
 }
-
 
 /*---------------------------------------------------------------------------*/
-/** 
- * Create a new Layout document.
- */
-Dtk_Document *Dtk_Document_Manager::newLayout(const char *filename)
+Dtk_Document *Dtk_Document_List::newScript(const char *filename)
 {
-	Dtk_Layout_Document *doc = new Dtk_Layout_Document();
-	doc->setFilename(uniqueFilename(filename));
+	Dtk_Script_Document *doc = new Dtk_Script_Document(this);
+	doc->setFilename(filename);
 	doc->setAskForFilename();
-	addToVisible(doc);
+    append_(doc);
 	return doc;
 }
+
+/*---------------------------------------------------------------------------*/
+Dtk_Document *Dtk_Document_List::newLayout(const char *filename)
+{
+	Dtk_Layout_Document *doc = new Dtk_Layout_Document(this);
+	doc->setFilename(filename);
+	doc->setAskForFilename();
+    append_(doc);
+	return doc;
+}
+
+/*---------------------------------------------------------------------------*/
+newtRef Dtk_Document_List::getProjectItemsRef()
+{
+	int i = 0, n = docList_.size();
+
+	newtRef items = NewtMakeArray(kNewtRefNIL, n);
+
+    for (i=0; i<n; ++i) {
+        Dtk_Document *doc = docList_.at(i);
+		NewtSetArraySlot(items, i, doc->getProjectItemRef());
+	}
+
+	return items;
+}
+
+/*---------------------------------------------------------------------------*/
+Dtk_Document *Dtk_Document_List::getDocument(int i)
+{
+    if (i<0 || i>=docList_.size())
+        return 0L;
+    return docList_.at(i);
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Document_List::append_(Dtk_Document *doc)
+{
+    docList_.push_back(doc);
+    if (browser_) {
+        browser_->add(doc->name(), doc);
+    }
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Document_List::remove(Dtk_Document *doc)
+{
+    int i, n = docList_.size();
+    // search the list for this document
+    for (i=0; i<n; ++i) {
+        if (docList_.at(i)==doc) {
+            docList_.erase(i);
+            if (browser_)
+                browser_.remove(i+1);
+        }
+    }
+    // not found
+    return -1;
+}
+
+
+
+
+#ifdef IGNORE_ME
 
 
 /*---------------------------------------------------------------------------*/
@@ -262,38 +349,6 @@ int Dtk_Document_Manager::numProjectDocs()
 
 /*---------------------------------------------------------------------------*/
 /**
- * Get a document that is part of the project by index.
- */
-Dtk_Document *Dtk_Document_Manager::getProjectDoc(int i)
-{
-	std::list<Dtk_Document*>::iterator it = project_docs.begin();
-	for ( ; i>0; i--) ++it;
-	return *(it);
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Create a Newt Array that conatins a list of all project documents.
- */
-newtRef Dtk_Document_Manager::getProjectItemsRef()
-{
-	int i = 0, n = project_docs.size();
-
-	newtRef items = NewtMakeArray(kNewtRefNIL, n);
-
-	std::list<Dtk_Document*>::iterator it = project_docs.begin();
-	while (it!=project_docs.end()) {
-		NewtSetArraySlot(items, i++, (*it)->getProjectItemRef());
-		++it;
-	}
-
-	return items;
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
  * We will communicate directly with the browser.
  */
 void Dtk_Document_Manager::setBrowser(Fldtk_Document_Browser *b)
@@ -301,25 +356,8 @@ void Dtk_Document_Manager::setBrowser(Fldtk_Document_Browser *b)
 	browser_ = b;
 }
 
-/*---------------------------------------------------------------------------*/
-/**
- * Find a file based on a filename and path.
- * If the returned value is not the same as the calling value, the buffer must be freed by the caller.
- */
-char *Dtk_Document_Manager::findFile(const char *filename)
-{
-	if (access(filename, 0004)==0) // R_OK
-		return strdup(filename);
-	const char *name = fl_filename_name(filename);
-	char buf[FL_PATH_MAX];
-	fl_filename_absolute(buf, FL_PATH_MAX, name);
-	if (access(buf, 0004)==0) // R_OK
-		return strdup(buf);
-	const char *user = fl_file_chooser("File not found, please search manually", 0, buf);
-	if (!user)
-		return 0L;
-	return strdup(user);
-}
+
+#endif
 
 
 //

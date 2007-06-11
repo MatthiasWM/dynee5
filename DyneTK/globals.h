@@ -29,6 +29,8 @@
 
 #include "allNewt.h"
 
+class Dtk_Document;
+
 // global functions for general access. The functions are used
 // by the main menu and icon bars.
 
@@ -106,7 +108,18 @@ int     CloseProject();
 
 int		AddCurrentDocToProject();
 int		AddFileToProject(const char *filename=0L);
-int		RemoveFileFromProject(const char *filename=0L);
+
+/** Remove a document from its project.
+ *
+ * Confirm removal if document is dirty.
+ * Then close the document and remove it from the list.
+ *
+ * \param   [in] document address
+ *
+ * \retval  0, if successful
+ * \retval  negative if any part of the operation failed
+ */
+int		RemoveFileFromProject(Dtk_Document *document=0L);
 //      UpdateFiles()
 int		BuildPackage();
 int		DownloadPackage();
@@ -162,6 +175,12 @@ void	InspectorConnect();
 //      HelpAbout()
 
 /*---------------------------------------------------------------------------*/
+
+/** Find the document that was last touched by the user.
+ *
+ * \retval   address of document or NULL
+ */
+Dtk_Document *GetCurrentDocument();
 
 int		InspectorSendScript(const char *script);
 int		InspectorSendPackage(const char *filename, const char *symbol);

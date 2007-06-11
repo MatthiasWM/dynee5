@@ -39,7 +39,7 @@
 #include "images/toolbox_open.xpm"
 #include "images/toolbox_closed.xpm"
 
-#include "dtk/Dtk_Document_Manager.h"
+#include "dtk/Dtk_Document_List.h"
 
 extern "C" {
 #include "NewtCore.h"
@@ -65,12 +65,16 @@ Flio_Inspector *wInspectorSerial;
 Flmm_Console *wConsole; 
 Fl_Button *wInspectorConnect; 
 
-Dtk_Project *project;
-Dtk_Document_Manager *documents;
-
 Fl_Window *wConnect;
 Fl_Image *toolbox_open_pixmap;
 Fl_Image *toolbox_closed_pixmap;
+
+Fldtk_Document_Browser * dtkDocumentBrowser;
+Fldtk_Document_Tabs    * dtkDocumentTabs;
+
+// global dtk project and document roots
+Dtk_Project         * dtkProject;
+Dtk_Document_List   * dtkGlobalDocuments;
 
 
 /*---------------------------------------------------------------------------*/
@@ -115,7 +119,7 @@ int main(int argc, char **argv) {
 	NEWT_DUMPBC = 1;
 
 	// create some global classes 
-	documents = new Dtk_Document_Manager();
+	dtkGlobalDocuments = new Dtk_Document_List();
 
 	// create various dialog panels
 	dtkPrefs = new Fldtk_Prefs();
@@ -131,7 +135,8 @@ int main(int argc, char **argv) {
 		dtkMain->size(w, h);
 
 	// link the functional elements to the visual elements
-	documents->setBrowser(dtkMain->documents);
+	dtkDocumentBrowser = dtkMain->documents;
+    dtkDocumentTabs = dtkMain->document_tabs;
 
 	// launch the application
 	dtkMain->show(/*argc*/1, argv);

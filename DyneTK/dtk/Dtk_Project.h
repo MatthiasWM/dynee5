@@ -31,6 +31,9 @@ extern "C" {
 }
 
 
+class Dtk_Document_List;
+
+
 /*---------------------------------------------------------------------------*/
 /**
  * Manage multiple documents that make up a project and generate and application.
@@ -51,7 +54,15 @@ public:
 	int			loadMac();
 	int			loadWin();
 	int			save();
+
+    /** Save all dirty parts of the project.
+     * \todo Implement me!
+     */
     int			saveAll() { return 0; }
+
+    /** Close and delete all dependent.
+     * \todo Implement me!
+     */
 	void		close() {}
 
 	int			buildPackage();
@@ -74,6 +85,9 @@ private:
 	char		* name_;
 	char		* startdir_;
 	newtRef		package_;
+
+    /// Keep a list of all documents in the project.
+    Dtk_Document_List   * documentList_;
 };
 
 

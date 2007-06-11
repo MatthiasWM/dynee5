@@ -56,8 +56,8 @@ extern "C" {
 /**
  * Constructor.
  */
-Dtk_Script_Document::Dtk_Script_Document()
-:	Dtk_Document()
+Dtk_Script_Document::Dtk_Script_Document(Dtk_Document_List *list)
+:	Dtk_Document(list)
 {
 }
 

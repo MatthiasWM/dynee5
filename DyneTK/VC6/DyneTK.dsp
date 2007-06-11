@@ -284,25 +284,16 @@ SOURCE=..\images\toolbox_open.xpm
 # Begin Group "dtk"
 
 # PROP Default_Filter ""
-# Begin Source File
+# Begin Group "dtk headers"
 
-SOURCE=..\dtk\Dtk_Document.cxx
-# End Source File
+# PROP Default_Filter ""
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Document.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\Dtk\Dtk_Document_Manager.cxx
-# End Source File
-# Begin Source File
-
-SOURCE=..\Dtk\Dtk_Document_Manager.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\dtk\Dtk_Error.cxx
+SOURCE=..\dtk\Dtk_Document_List.h
 # End Source File
 # Begin Source File
 
@@ -310,15 +301,7 @@ SOURCE=..\dtk\Dtk_Error.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\dtk\Dtk_Layout_Document.cxx
-# End Source File
-# Begin Source File
-
 SOURCE=..\dtk\Dtk_Layout_Document.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\dtk\Dtk_Project.cxx
 # End Source File
 # Begin Source File
 
@@ -326,11 +309,32 @@ SOURCE=..\dtk\Dtk_Project.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\dtk\Dtk_Script_Document.cxx
+SOURCE=..\dtk\Dtk_Script_Document.h
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Document.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\dtk\Dtk_Script_Document.h
+SOURCE=..\dtk\Dtk_Document_List.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Error.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Layout_Document.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Project.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Script_Document.cxx
 # End Source File
 # End Group
 # Begin Group "documentation"

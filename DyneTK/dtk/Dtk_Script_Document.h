@@ -37,7 +37,7 @@
 class Dtk_Script_Document : public Dtk_Document
 {
 public:
-					Dtk_Script_Document();
+					Dtk_Script_Document(Dtk_Document_List *list);
 	virtual			~Dtk_Script_Document();
 
 	virtual int		load();

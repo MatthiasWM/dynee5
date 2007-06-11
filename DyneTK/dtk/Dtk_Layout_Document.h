@@ -37,7 +37,7 @@
 class Dtk_Layout_Document : public Dtk_Document
 {
 public:
-					Dtk_Layout_Document();
+					Dtk_Layout_Document(Dtk_Document_List *list);
 	virtual			~Dtk_Layout_Document();
 
 	virtual int		load();

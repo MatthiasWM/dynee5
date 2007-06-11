@@ -50,10 +50,10 @@ decl {\#include "main.h"} {public
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
-  xywh {387 77 785 595} type Double resizable
-  class Fl_Double_Window visible
+  xywh {-32000 -32000 785 595} type Double hide resizable
+  class Fl_Double_Window
 } {
-  Fl_Menu_Bar {} {open
+  Fl_Menu_Bar {} {
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
@@ -441,7 +441,7 @@ widget_class Fldtk_Main_Window {
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
       }
       MenuItem {} {
-        label {Arrange Icons} selected
+        label {Arrange Icons}
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
       }
       MenuItem {} {
@@ -605,13 +605,13 @@ widget_class Fldtk_Main_Window {
       xywh {615 65 15 25} deactivate resizable
     }
   }
-  Fl_Tile center {
+  Fl_Tile center {open
     xywh {0 95 785 475} box FLAT_BOX labelsize 12 resizable
   } {
     Fl_Group {} {open
       xywh {0 95 150 305} box FLAT_BOX
     } {
-      Fl_Tabs browsers {open
+      Fl_Tabs browsers {
         xywh {3 98 144 299} box UP_BOX labelsize 12 resizable
       } {
         Fl_Browser documents {
@@ -624,7 +624,7 @@ widget_class Fldtk_Main_Window {
     Fl_Group {} {open
       xywh {150 95 635 305} box FLAT_BOX
     } {
-      Fl_Tabs document_tabs {open
+      Fl_Tabs document_tabs {open selected
         xywh {153 98 629 299} box UP_BOX labelsize 12 resizable
         class Fldtk_Document_Tabs
       } {}
@@ -674,7 +674,7 @@ widget_class Fldtk_Main_Window {
       xywh {590 570 15 25} resizable
     }
   }
-  Function {activate_menus(unsigned int mask)} {return_type void
+  Function {activate_menus(unsigned int mask)} {open return_type void
   } {
     code {// bits in the mask have the following meanings:
 //	bit 0: a project is loaded
@@ -764,7 +764,7 @@ if ( (mask & 0x00000009) == 0x00000009 ) {
 Function {create_connect_dialog()} {} {
   Fl_Window {} {
     label Progress open
-    xywh {237 236 225 115} type Double modal visible
+    xywh {-32000 -32000 225 115} type Double hide modal
   } {
     Fl_Box {} {
       label {Tap the Toolkit icon on the Newton device, select "Connect via Serial", and tap Connect Inspector.}

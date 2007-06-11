@@ -29,7 +29,7 @@
 
 #include "Dtk_Project.h"
 #include "Dtk_Document.h"
-#include "Dtk_Document_Manager.h"
+#include "dtk/Dtk_Document_List.h"
 
 #include "fluid/Fldtk_Proj_Settings.h"
 #include "fluid/main_ui.h"
@@ -66,10 +66,10 @@ Dtk_Project::Dtk_Project()
 	filename_(0L),
 	name_(0L),
 	startdir_(0L),
-	package_(kNewtRefNIL)
+	package_(kNewtRefNIL),
+    documentList_(0L)
 {
-	dtkMain->documents->activate();
-	dtkMain->browsers->redraw();
+    documentList_ = new Dtk_Document_List(this);
 }
 
 
@@ -79,8 +79,10 @@ Dtk_Project::Dtk_Project()
  */
 Dtk_Project::~Dtk_Project()
 {
-	dtkMain->documents->deactivate();
-	dtkMain->browsers->redraw();
+    // remove the project list and all documents it links to
+    delete documentList_;
+
+    // remove all name shortcuts
 	if (shortname_)
 		free(shortname_);
 	if (filename_)
@@ -322,12 +324,9 @@ int Dtk_Project::loadMac()
 		uint8_t *alias = (uint8_t*)malloc(len);
 		fread(alias, len, 1, data);
 		char *fn = PtoCFilename(alias+0xc1);
-		char *filename = documents->findFile(fn);
-		Dtk_Document *doc = documents->addDocument(filename);
-		doc->load();
-		documents->addToProject(doc);
-		doc->edit();
-		printf("Alias %d = %s\n", i, filename);
+		char *filename = documentList_->findFile(fn);
+		Dtk_Document *doc = documentList_->add(filename);
+		//printf("Alias %d = %s\n", i, filename);
 		free(fn);
 		free(filename);
 	}
@@ -352,7 +351,7 @@ int Dtk_Project::loadMac()
 		uint32_t type = readInt(rsrc);
 		uint16_t nType = readWord(rsrc)+1;
 		uint16_t list = readWord(rsrc);
-		printf("Rsrc %d: %.4s %d\n", i, &type, nType);
+		//printf("Rsrc %d: %.4s %d\n", i, &type, nType);
 		if (type=='PJPF') {
 			for (j=0; j<nType; j++) {
 				fseek(rsrc, rMap+rsrcType+list+12*j, SEEK_SET);
@@ -360,7 +359,7 @@ int Dtk_Project::loadMac()
 				uint16_t name = readWord(rsrc);
 				uint32_t offs = readInt(rsrc); //&0xffffff;
 				uint32_t handle = readInt(rsrc);
-				printf("PJPF: %d %d %d \n", id, name, offs);
+				//printf("PJPF: %d %d %d \n", id, name, offs);
 				if (id==9999) {
 					fseek(rsrc, rData+offs, SEEK_SET);
 					uint32_t len = readInt(rsrc);
@@ -545,13 +544,16 @@ int Dtk_Project::loadWin()
 							char *filename = NewtRefToString(name);
 							Dtk_Document *doc;
 							switch (type) {
-								case 0:  doc = documents->newLayout(filename); break;
-								case 5:  doc = documents->newScript(filename); break;
-								default: doc = documents->addDocument(filename); break;
+								case 0:  doc = documentList_->newLayout(filename); 
+							        doc->load();
+							        doc->edit();
+                                    break;
+								case 5:  doc = documentList_->newScript(filename); 
+							        doc->load();
+							        doc->edit();
+                                    break;
+								default: doc = documentList_->add(filename); break;
 							}
-							doc->load();
-							documents->addToProject(doc);
-							doc->edit();
 						}
 					}
 				}
@@ -667,7 +669,7 @@ newtRef Dtk_Project::makeFileRef(const char *filename)
  */
 int Dtk_Project::save() 
 {
-	newtRef items = documents->getProjectItemsRef();
+	newtRef items = documentList_->getProjectItemsRef();
 
 	newtRefVar projectItemsA[] = {
 		NSSYM(sortOrder),			NewtMakeInt30(0),
@@ -957,7 +959,7 @@ int Dtk_Project::buildPackage()
 	// FIXME: this only supports a single document per project
 	newtRefVar theForm = kNewtRefNIL;
 	newtRefVar theBase = kNewtRefNIL;
-	Dtk_Document *doc = documents->getProjectDoc(0);
+	Dtk_Document *doc = documentList_->getDocument(0);
 	if (doc) {
 		theForm = doc->compile();
 	}
