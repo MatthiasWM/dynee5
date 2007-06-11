@@ -196,29 +196,28 @@ int SaveCurrentDocumentAs()
 
 
 /*---------------------------------------------------------------------------*/
-/** Open an existing project,
- *
- * If no filename is given, we ask the user for a filename by popping up a 
- * file chooser dialog
- *
- * \todo	Write this function.
- *
- * \param filename	[in] path and file name of .ntk file to open
- *
- * \retval	0 of successful
- * \retval  -1 (or an error code <0) if the function failed
- */
+/* V2 */
 int OpenProject(const char *filename) 
 {
+    // close any dirty project first
+    if (project && project->isDirty()) {
+        CloseProject();
+        // abort if the user decided to not close the project
+        if (project) {
+            return -2;
+        }
+    }
+    // open a file chooser if there was no filename given
 	if (!filename) {
 		filename = fl_file_chooser("Open Toolkit Project", "*.ntk", 0L);
 		if (!filename) 
-			return 0;
+			return -2;
 	}
+    // now close the existing project, which can not be dirty
 	if (project) {
-		delete project;
-		project = 0L;
+        CloseProject();
 	}
+    // create a new project and load it
 	project = new Dtk_Project();
 	project->setFilename(filename);
 	int ret = project->load();
@@ -259,18 +258,31 @@ int NewProject(const char *filename)
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Close the current project and all associted documents.
- */
-void CloseProject()
+/* V2 */
+int CloseProject()
 {
+    // avoid failure
 	if (!project)
-		return;
-	// FIXME empty project browser
-	// FIXME save and close all open documentsOA
+		return -1;
+    // confirm command if project is dirty
+    if (project->isDirty()) {
+        int v = fl_choice(
+            "Save changes to project %s?", 
+            "Abort", "Yes", "No", project->name());
+        switch (v) {
+        case 0: // abort
+            return -2; 
+        case 1: // yes
+            project->saveAll(); break; 
+        case 2:  // no
+            break;
+        }
+    }
+    project->close();
 	delete project;
 	project = 0L;
 	UpdateMainMenu();
+    return 0;
 }
 
 

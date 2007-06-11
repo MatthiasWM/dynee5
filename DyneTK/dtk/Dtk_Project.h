@@ -41,11 +41,17 @@ public:
 	Dtk_Project();
 	~Dtk_Project();
 
+    /** Check if the project has changed and needs to be saved.
+     * \todo Implement me!
+     */
+    int         isDirty() { return 0; }
+
 	void		setDefaults();
 	int			load();
 	int			loadMac();
 	int			loadWin();
 	int			save();
+    int			saveAll() { return 0; }
 	void		close() {}
 
 	int			buildPackage();
@@ -54,6 +60,8 @@ public:
 	char		* getPackageName();
 	void		setFilename(const char *filename);
 	newtRef		makeFileRef(const char *filename);
+
+    const char  * name() { return name_; }
 
 protected:
 	void		pushDir();

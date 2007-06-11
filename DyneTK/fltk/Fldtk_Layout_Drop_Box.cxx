@@ -197,7 +197,7 @@ void Fldtk_Layout_Drop_Box::add_widget(newtRef r, Nt_Group *w)
 
 	g->end();
 }
-
+ 
 
 //
 // End of "$Id$".

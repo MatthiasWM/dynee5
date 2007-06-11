@@ -53,7 +53,7 @@ widget_class Fldtk_Main_Window {
   xywh {387 77 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {open selected
+  Fl_Menu_Bar {} {open
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
@@ -218,7 +218,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project open
+      label Project
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -412,7 +412,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mWindow {
-      label Window
+      label Window open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -425,7 +425,7 @@ widget_class Fldtk_Main_Window {
         xywh {5 5 100 20} shortcut 0x4006b labelsize 12
       }
       MenuItem {} {
-        label {New Brower}
+        label {New Browser}
         xywh {5 5 100 20} shortcut 0x40062 labelsize 12 labelcolor 176 deactivate
       }
       MenuItem {} {
@@ -441,15 +441,15 @@ widget_class Fldtk_Main_Window {
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
       }
       MenuItem {} {
-        label {Arrange Icons}
+        label {Arrange Icons} selected
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
       }
       MenuItem {} {
-        label {Set Default WIndow Position}
+        label {Set Default Window Position}
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
       }
       MenuItem {} {
-        label {1: WIndow}
+        label {1: Window}
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
       }
     }
@@ -476,7 +476,7 @@ widget_class Fldtk_Main_Window {
       }
     }
   }
-  Fl_Group {} {open
+  Fl_Group {} {
     xywh {0 25 785 35} box THIN_DOWN_BOX
   } {
     Fl_Button {} {
@@ -605,7 +605,7 @@ widget_class Fldtk_Main_Window {
       xywh {615 65 15 25} deactivate resizable
     }
   }
-  Fl_Tile center {open
+  Fl_Tile center {
     xywh {0 95 785 475} box FLAT_BOX labelsize 12 resizable
   } {
     Fl_Group {} {open
@@ -674,7 +674,7 @@ widget_class Fldtk_Main_Window {
       xywh {590 570 15 25} resizable
     }
   }
-  Function {activate_menus(unsigned int mask)} {open return_type void
+  Function {activate_menus(unsigned int mask)} {return_type void
   } {
     code {// bits in the mask have the following meanings:
 //	bit 0: a project is loaded
