@@ -128,17 +128,12 @@ SOURCE=..\fluid\main_ui.h
 # Begin Group "fltk"
 
 # PROP Default_Filter ""
-# Begin Source File
+# Begin Group "fltk headers"
 
-SOURCE=..\fltk\Fldtk_Document_Browser.cxx
-# End Source File
+# PROP Default_Filter ""
 # Begin Source File
 
 SOURCE=..\fltk\Fldtk_Document_Browser.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\fltk\Fldtk_Document_Tabs.cxx
 # End Source File
 # Begin Source File
 
@@ -146,15 +141,7 @@ SOURCE=..\fltk\Fldtk_Document_Tabs.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Fldtk_Editor.cxx
-# End Source File
-# Begin Source File
-
 SOURCE=..\fltk\Fldtk_Editor.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\fltk\Fldtk_Layout_Drop_Box.cxx
 # End Source File
 # Begin Source File
 
@@ -162,15 +149,7 @@ SOURCE=..\fltk\Fldtk_Layout_Drop_Box.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Fldtk_Layout_Editor.cxx
-# End Source File
-# Begin Source File
-
 SOURCE=..\fltk\Fldtk_Layout_Editor.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\fltk\Fldtk_Script_Editor.cxx
 # End Source File
 # Begin Source File
 
@@ -178,15 +157,7 @@ SOURCE=..\fltk\Fldtk_Script_Editor.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\fluid\Fldtk_Snapshot.cxx
-# End Source File
-# Begin Source File
-
 SOURCE=..\fluid\Fldtk_Snapshot.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\fltk\Flio_Inspector.cxx
 # End Source File
 # Begin Source File
 
@@ -194,15 +165,7 @@ SOURCE=..\fltk\Flio_Inspector.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Flio_MNP4_Protocol.cxx
-# End Source File
-# Begin Source File
-
 SOURCE=..\fltk\Flio_MNP4_Protocol.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\fltk\Flio_Pipe.cxx
 # End Source File
 # Begin Source File
 
@@ -210,15 +173,7 @@ SOURCE=..\fltk\Flio_Pipe.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Flio_Serial_Port.cxx
-# End Source File
-# Begin Source File
-
 SOURCE=..\fltk\Flio_Serial_Port.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\fltk\Flio_Stream.cxx
 # End Source File
 # Begin Source File
 
@@ -226,15 +181,7 @@ SOURCE=..\fltk\Flio_Stream.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Flmm_Console.cxx
-# End Source File
-# Begin Source File
-
 SOURCE=..\fltk\Flmm_Console.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\fltk\Flmm_Message.cxx
 # End Source File
 # Begin Source File
 
@@ -242,15 +189,7 @@ SOURCE=..\fltk\Flmm_Message.H
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Flmm_Set_Check_Button.cxx
-# End Source File
-# Begin Source File
-
 SOURCE=..\fltk\Flmm_Set_Check_Button.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\fltk\Flmm_Set_Input.cxx
 # End Source File
 # Begin Source File
 
@@ -258,11 +197,76 @@ SOURCE=..\fltk\Flmm_Set_Input.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Flmp_Image.cxx
+SOURCE=..\fltk\Flmp_Image.H
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Document_Browser.cxx
 # End Source File
 # Begin Source File
 
-SOURCE=..\fltk\Flmp_Image.H
+SOURCE=..\fltk\Fldtk_Document_Tabs.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Editor.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Layout_Drop_Box.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Layout_Editor.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Script_Editor.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fluid\Fldtk_Snapshot.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_Inspector.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_MNP4_Protocol.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_Pipe.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_Serial_Port.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flio_Stream.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmm_Console.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmm_Message.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmm_Set_Check_Button.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmm_Set_Input.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmp_Image.cxx
 # End Source File
 # End Group
 # Begin Group "Images"

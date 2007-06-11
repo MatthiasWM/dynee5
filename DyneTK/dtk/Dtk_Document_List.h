@@ -145,6 +145,8 @@ private:
 
     /// we are in charge of keeping this browser updated and reacting to its messages
     Fldtk_Document_Browser      * browser_;
+
+    static void browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d);
 };
 
 

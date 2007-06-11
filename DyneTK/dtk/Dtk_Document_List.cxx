@@ -82,7 +82,8 @@ Dtk_Document_List::Dtk_Document_List(Dtk_Project *proj)
         browser_ = dtkDocumentBrowser;
         browser_->activate();
         browser_->redraw();
-        //++ browser_->callback(show, this) // allow user to click on a name to pop that document up
+        // allow user to click on a name to pop that document up
+        browser_->callback((Fl_Callback*)browser_cb, this);
     }
 }
 
@@ -213,6 +214,17 @@ int Dtk_Document_List::remove(Dtk_Document *doc)
     }
     // not found
     return -1;
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Document_List::browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d)
+{
+    int it = w->value();
+    if (it==0)
+        return;
+    Dtk_Document *doc = (Dtk_Document*)w->data(it);
+    if (doc)
+        doc->edit();
 }
 
 
@@ -356,6 +368,7 @@ void Dtk_Document_Manager::setBrowser(Fldtk_Document_Browser *b)
 {
 	browser_ = b;
 }
+
 
 
 #endif

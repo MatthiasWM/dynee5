@@ -108,21 +108,36 @@ int NewTextFile(const char *filename) {
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Close the current document.
- */
-void CloseCurrentDocument()
+/*-v2------------------------------------------------------------------------*/
+int CloseCurrentDocument()
 {
-    /*
-	Dtk_Document *doc = dtkGlobalDocuments->getCurrentDoc();
-	if (doc) {
-        dtkGlobalDocuments->removeVisibleDoc(doc);
-        if (!doc->isInProject())
-            delete doc;
-		UpdateMainMenu();
-	}
-    */
+    // find the right document
+    Dtk_Document *doc = GetCurrentDocument();
+    if (!doc)
+        return -1;
+    // if the document is dirty, we must ask the user before closing
+    if (doc->isDirty()) {
+        int v = fl_choice(
+            "Save changes to document %s?", 
+            "Abort", "Yes", "No", doc->name());
+        switch (v) {
+        case 0: // abort
+            return -2; 
+        case 1: // yes
+            doc->save(); break; 
+        case 2:  // no
+            break;
+        }
+    }
+    // If we are part of a project, only close the editor, else discard the doc.
+    if (doc->project()) {
+        doc->close();
+    } else {
+        delete doc;
+    }
+    // correct menus
+    UpdateMainMenu();
+    return 0;
 }
 
 
@@ -164,47 +179,35 @@ int OpenDocument(const char *filename)
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Save the current document.
- */
+/*-v2------------------------------------------------------------------------*/
 int SaveCurrentDocument()
 {
-    /*
 	int ret = -1;
-
-	Dtk_Document *doc = documents->getCurrentDoc();
+    // find the current document and save it
+	Dtk_Document *doc = GetCurrentDocument();
 	if (doc)
 		ret = doc->save();
 	else 
 		ret = -1;
-
+    // activate the correct menus
 	UpdateMainMenu();
 	return ret;
-    */
-    return -1;
 }
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * As for a filename and save the current document.
- */
+/*-v2------------------------------------------------------------------------*/
 int SaveCurrentDocumentAs()
 {
-    /*
 	int ret = -1;
-
-	Dtk_Document *doc = documents->getCurrentDoc();
+    // find the current document and save it
+	Dtk_Document *doc = GetCurrentDocument();
 	if (doc)
 		ret = doc->saveAs();
 	else 
 		ret = -1;
-
+    // activate the correct menus
 	UpdateMainMenu();
 	return ret;
-    */
-    return -1;
 }
 
 

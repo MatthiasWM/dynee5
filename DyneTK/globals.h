@@ -31,8 +31,10 @@
 
 class Dtk_Document;
 
-// global functions for general access. The functions are used
-// by the main menu and icon bars.
+/** \file globals.h
+ * global functions for general access. The functions are used
+ * by the main menu and icon bars.
+ */
 
 /*---------------------------------------------------------------------------*/
 // File menu
@@ -41,9 +43,34 @@ int		NewLayout(const char *filename=0L);
 int		NewTextFile(const char *filename=0L);
 int		OpenDocument(const char *filename=0L);
 //      LinkLayout()
-void	CloseCurrentDocument();
+
+/** Close the editor of the current document.
+ *
+ * If the document belongs to a project, it will remain in memory
+ * and can be reopened at any time by clicking onto its entry in the browser.
+ * If the document does not belong to a project, it will be closed
+ * and removed.
+ * 
+ * \retval 0 if succeeded
+ * \retval negative if an error occured
+ * \retval -2 if the user canceled
+ */
+int     CloseCurrentDocument();
+
+/** Find the current document and save it to disk under its current name.
+ * 
+ * \retval 0 if succeeded
+ * \retval negative if an error occured
+ */
 int		SaveCurrentDocument();
+
+/** Find the current document and save it to disk with a new name.
+ * 
+ * \retval 0 if succeeded
+ * \retval negative if an error occured
+ */
 int		SaveCurrentDocumentAs();
+
 //      SaveAllDocuments()
 //      RevertCurrentDocument()
 //      PrintSetup()
