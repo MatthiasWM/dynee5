@@ -314,26 +314,6 @@ SOURCE=..\dtk\Dtk_Project.h
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Script_Document.h
-
-!IF  "$(CFG)" == "DyneTK - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "DyneTK - Win32 Debug"
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=..\dtk\Dtk_Unknown_Document.h
-
-!IF  "$(CFG)" == "DyneTK - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "DyneTK - Win32 Debug"
-
-# PROP Exclude_From_Build 1
-
-!ENDIF 
-
 # End Source File
 # End Group
 # Begin Source File
@@ -359,19 +339,6 @@ SOURCE=..\dtk\Dtk_Project.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Script_Document.cxx
-# End Source File
-# Begin Source File
-
-SOURCE=..\dtk\Dtk_Unknown_Document.cxx
-
-!IF  "$(CFG)" == "DyneTK - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "DyneTK - Win32 Debug"
-
-# PROP Exclude_From_Build 1
-
-!ENDIF 
-
 # End Source File
 # End Group
 # Begin Group "documentation"

@@ -40,13 +40,57 @@ class Fldtk_Script_Editor;
 class Dtk_Script_Document : public Dtk_Document
 {
 public:
-					Dtk_Script_Document(Dtk_Document_List*);
+    /** Create a document container for Newt Scripts.
+     *
+     * \param list this is the list that we will be hooked into
+     */
+					Dtk_Script_Document(Dtk_Document_List *list);
+    
+    /** Remove all links and resources and delete this document.
+     */
 	virtual			~Dtk_Script_Document();
 
+    /** Load this document from disk.
+     *
+     * Load the document file using the file and path referenced
+     * via getFilename().
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */
 	virtual int		load();
+
+    /** Open the appropritate editor for this document.
+     *
+     * If this document is editable, theis call will create and
+     * open the editor window. Most editor window are linked into the 
+     * decument tabs group. If the editor is already open, it
+     * will still be raised and made the urrent one.
+     */
 	virtual int     edit();
+
+    /** Save the document using the given filename.
+     *
+     * Save the doc without popping up a file chooser. If the 
+     * AskForFilename is set, this function will call saveAs()
+     * instead.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */
 	virtual int		save();
-	virtual int		saveAs();
+
+    /** Save the document under a new filename.
+     *
+     * Calling this function will pop up a file chooser set to the 
+     * current filename. The user can then leave things alone, or 
+     * change the filename, or cancel the operation.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     * \retval -2 if the user canceled
+     */
+    virtual int		saveAs();
 	virtual void	close();
 	virtual int		getID() { return 5; }
 	virtual	newtRef	compile();

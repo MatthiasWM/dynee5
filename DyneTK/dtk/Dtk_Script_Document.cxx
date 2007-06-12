@@ -53,30 +53,19 @@ extern "C" {
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Constructor.
- */
 Dtk_Script_Document::Dtk_Script_Document(Dtk_Document_List *list)
 :   Dtk_Document(list),
     editor_(0L)
 {
 }
 
-
 /*---------------------------------------------------------------------------*/
-/**
- * Destructor.
- */
 Dtk_Script_Document::~Dtk_Script_Document()
 {
     delete editor_;
 }
 
-
 /*---------------------------------------------------------------------------*/
-/**
- * Load a script from disk.
- */
 int Dtk_Script_Document::load()
 {
 	if (!editor_)
@@ -86,45 +75,34 @@ int Dtk_Script_Document::load()
 }
 
 /*---------------------------------------------------------------------------*/
-/**
- * Remove the editor from the global view.
- */
 void Dtk_Script_Document::close() 
 {
 	if (editor_) {
-		dtkMain->document_tabs->remove(editor_);
+		dtkDocumentTabs->remove(editor_);
+		dtkDocumentTabs->redraw();
 		delete editor_;
 		editor_ = 0L;
-		dtkMain->document_tabs->redraw();
 	}
 }
 
-
-
 /*---------------------------------------------------------------------------*/
-/**
- * Create an editor for the script file and show it.
- */
 int Dtk_Script_Document::edit() 
 {
 	if (!editor_) {
 		Fl_Group::current(0L);
 		editor_ = new Fldtk_Script_Editor(this);
-		dtkMain->document_tabs->add(editor_);
+		dtkDocumentTabs->add(editor_);
 	}
-	dtkMain->document_tabs->value(editor_);
+	dtkDocumentTabs->value(editor_);
     return 0;
 }
 
 
 /*---------------------------------------------------------------------------*/
-/** 
- * Save the script to disk.
- */
 int Dtk_Script_Document::save()
 {
 	if (askForFilename_) {
-		saveAs();
+		return saveAs();
 	}
 	return editor_->saveFile(filename_);
 	return 0;
@@ -132,9 +110,6 @@ int Dtk_Script_Document::save()
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Ask for a new filename, then save the script.
- */
 int Dtk_Script_Document::saveAs()
 {
 	char *filename = fl_file_chooser("Save Document As...", "*.txt", filename_);

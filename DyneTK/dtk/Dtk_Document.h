@@ -34,9 +34,18 @@ class Dtk_Document_List;
 class Dtk_Project;
 
 
-/*---------------------------------------------------------------------------*/
 /**
  * Base class for any kind of document that we can view, edit, or even compile.
+ *
+ * The DyneTK browser differs from NTK and shows a lot less information. We will
+ * provide a dialog on right-click that will show additional data, including:
+ *  * sequence number
+ *  * name and path information
+ *  * file type details
+ *  * size
+ *  * modification data
+ *  * main layout flag
+ *
  */
 class Dtk_Document
 {

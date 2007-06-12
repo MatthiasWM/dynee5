@@ -42,9 +42,6 @@
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Constructor.
- */
 Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
 :   Dtk_Document(list),
     editor_(0L)
@@ -53,9 +50,6 @@ Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Destructor.
- */
 Dtk_Layout_Document::~Dtk_Layout_Document()
 {
     delete editor_;
@@ -63,11 +57,6 @@ Dtk_Layout_Document::~Dtk_Layout_Document()
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Load a Layout file from the disk.
- *
- * \todo Layout files are NSOF files describing the GUI 
- */
 int Dtk_Layout_Document::load()
 {
 	if (!editor_)
@@ -78,30 +67,23 @@ int Dtk_Layout_Document::load()
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Create and open the appropriate editor for layouts.
- * \todo not yet implemented
- */
 int Dtk_Layout_Document::edit() 
 {
 	if (!editor_) {
 		Fl_Group::current(0L);
 		editor_ = new Fldtk_Layout_Editor(this);
-		dtkMain->document_tabs->add(editor_);
+		dtkDocumentTabs->add(editor_);
 	}
-	dtkMain->document_tabs->value(editor_);
+	dtkDocumentTabs->value(editor_);
     return 0;
 }
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Save the current layout to disk
- */
 int Dtk_Layout_Document::save()
 {
 	if (askForFilename_) {
-		saveAs();
+		return saveAs();
 	}
 	// FIXME write the code to save out the text
 	return 0;
@@ -109,9 +91,6 @@ int Dtk_Layout_Document::save()
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Ask for a filename and save the layout to disk.
- */
 int Dtk_Layout_Document::saveAs()
 {
 	char *filename = fl_file_chooser("Save Document As...", "*.lyt", filename_);
@@ -124,9 +103,6 @@ int Dtk_Layout_Document::saveAs()
 
 
 /*---------------------------------------------------------------------------*/
-/**
- * Remove the document editor.
- */
 void Dtk_Layout_Document::close() 
 {
 	Dtk_Document::close();
