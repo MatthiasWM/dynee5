@@ -94,7 +94,7 @@ public:
      * If the returned value is not the same as the calling value, the buffer 
      * must be freed by the caller.
      *
-     * \todo Do we really need this?
+     * \todo We need this to avoid duplicate files, so please implement this.
      */
 	char		    * findFile(const char *filename);
 
@@ -134,8 +134,18 @@ public:
      */
     Dtk_Project     * project() { return project_; }
 
-    /// Add the document to the internal list and to the browser.
+    /** Add the document to the internal list and to the browser.
+     * 
+     * \param doc the document that we want to add to the list
+     */
     void            append(Dtk_Document *doc);
+
+    /** A document tells us that its name changed.
+     *
+     * \param document the document that changed its name.
+     */
+    void            filenameChanged(Dtk_Document *document);
+
 private:
 
     /// back reference to the project that keeps this list

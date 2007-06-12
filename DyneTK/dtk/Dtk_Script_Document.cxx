@@ -57,7 +57,8 @@ extern "C" {
  * Constructor.
  */
 Dtk_Script_Document::Dtk_Script_Document(Dtk_Document_List *list)
-:	Dtk_Document(list)
+:   Dtk_Document(list),
+    editor_(0L)
 {
 }
 
@@ -68,6 +69,7 @@ Dtk_Script_Document::Dtk_Script_Document(Dtk_Document_List *list)
  */
 Dtk_Script_Document::~Dtk_Script_Document()
 {
+    delete editor_;
 }
 
 
@@ -83,12 +85,27 @@ int Dtk_Script_Document::load()
 	return editor_->loadFile(filename_);
 }
 
+/*---------------------------------------------------------------------------*/
+/**
+ * Remove the editor from the global view.
+ */
+void Dtk_Script_Document::close() 
+{
+	if (editor_) {
+		dtkMain->document_tabs->remove(editor_);
+		delete editor_;
+		editor_ = 0L;
+		dtkMain->document_tabs->redraw();
+	}
+}
+
+
 
 /*---------------------------------------------------------------------------*/
 /**
  * Create an editor for the script file and show it.
  */
-void Dtk_Script_Document::edit() 
+int Dtk_Script_Document::edit() 
 {
 	if (!editor_) {
 		Fl_Group::current(0L);
@@ -96,6 +113,7 @@ void Dtk_Script_Document::edit()
 		dtkMain->document_tabs->add(editor_);
 	}
 	dtkMain->document_tabs->value(editor_);
+    return 0;
 }
 
 
@@ -125,16 +143,6 @@ int Dtk_Script_Document::saveAs()
 	askForFilename_ = false;
 	setFilename(filename);
 	return save();
-}
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Remove the editor for the script.
- */
-void Dtk_Script_Document::close() 
-{
-	Dtk_Document::close();
 }
 
 

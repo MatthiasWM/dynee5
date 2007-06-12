@@ -30,6 +30,9 @@
 #include <dtk/Dtk_Document.h>
 
 
+class Fldtk_Script_Editor;
+
+
 /*---------------------------------------------------------------------------*/
 /**
  * This class manages documents containing scripts.
@@ -37,11 +40,11 @@
 class Dtk_Script_Document : public Dtk_Document
 {
 public:
-					Dtk_Script_Document(Dtk_Document_List *list);
+					Dtk_Script_Document(Dtk_Document_List*);
 	virtual			~Dtk_Script_Document();
 
 	virtual int		load();
-	virtual void	edit();
+	virtual int     edit();
 	virtual int		save();
 	virtual int		saveAs();
 	virtual void	close();
@@ -49,6 +52,7 @@ public:
 	virtual	newtRef	compile();
 
 private:
+    Fldtk_Script_Editor *editor_;
 };
 
 

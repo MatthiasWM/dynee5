@@ -29,7 +29,7 @@
 
 #include "globals.h"
 
-// FIXME: move these into the corretc files
+// FIXME: move these into the correct files
 extern void send_test(int);
 extern void preferences_cb(class Fl_Menu_*, void*);
 extern void quit_cb(class Fl_Menu_*, void*);

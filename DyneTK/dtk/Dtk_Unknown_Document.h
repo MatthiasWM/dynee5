@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Layout_Document header file for the Dyne Toolkit.
+// Dtk_Unknown_Document header file for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -23,35 +23,56 @@
 // Please report all bugs and problems to "dtk@matthiasm.com".
 //
 
-#ifndef DTK_LAYOUT_DOCUMENT_H
-#define DTK_LAYOUT_DOCUMENT_H
+#ifndef DTK_UNKNOWN_DOCUMENT_H
+#define DTK_UNKNOWN_DOCUMENT_H
 
 
-#include <dtk/Dtk_Document.h>
+class Fldtk_Editor;
 
+extern "C" {
+#include "NewtType.h"
+}
 
-class Fldtk_Layout_Editor;
+class Dtk_Document_List;
+class Dtk_Project;
 
 
 /*---------------------------------------------------------------------------*/
 /**
  * Base class for any kind of document that we can view, edit, or even compile.
  */
-class Dtk_Layout_Document : public Dtk_Document
+class Dtk_Document
 {
 public:
-					Dtk_Layout_Document(Dtk_Document_List *list);
-	virtual			~Dtk_Layout_Document();
+					Dtk_Document(Dtk_Document_List *list);
+	virtual			~Dtk_Document();
 
-	virtual int		load();
-	virtual int     edit();
-	virtual int		save();
-	virtual int		saveAs();
+	virtual int		load() { return -1; }
+	virtual int		save() { return -1; }
+	virtual int		saveAs() { return -1; }
 	virtual void	close();
-	virtual int		getID() { return 0; }
+	virtual void	edit();
 
-private:
-    Fldtk_Layout_Editor * editor_;
+	virtual	newtRef	compile() { return kNewtRefNIL; }
+	newtRef			getProjectItemRef();
+   	virtual int		getID() { return -1; }
+
+	void			setFilename(const char *filename);
+	void			setAskForFilename(bool v=true);
+	const char		*name();
+
+    Dtk_Project     * project();
+    virtual int     isDirty() { return 0; }
+
+protected:
+	Fldtk_Editor	* editor_;
+	char			* shortname_;
+	char			* filename_;
+	char			* name_;
+	bool			askForFilename_;
+
+    /// we must always be a member of exactly one list
+    Dtk_Document_List   * list_;
 };
 
 

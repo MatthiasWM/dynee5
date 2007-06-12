@@ -204,7 +204,7 @@ int Dtk_Document_List::remove(Dtk_Document *doc)
     return -1;
 }
 
-/*---------------------------------------------------------------------------*/
+/*-v2------------------------------------------------------------------------*/
 void Dtk_Document_List::browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d)
 {
     int it = w->value();
@@ -215,7 +215,21 @@ void Dtk_Document_List::browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List 
         doc->edit();
 }
 
-
+/*-v2------------------------------------------------------------------------*/
+void Dtk_Document_List::filenameChanged(Dtk_Document *document)
+{
+    // if we have no browser, we don't care
+    if (!browser_)
+        return;
+    int i, n = docList_.size();
+    // search the list for this document
+    for (i=0; i<n; ++i) {
+        if (docList_.at(i)==document) {
+            browser_->text(i+1, document->name());
+            return;
+        }
+    }
+}
 
 
 #ifdef IGNORE_ME

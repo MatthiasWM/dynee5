@@ -46,7 +46,8 @@
  * Constructor.
  */
 Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
-:	Dtk_Document(list)
+:   Dtk_Document(list),
+    editor_(0L)
 {
 }
 
@@ -57,6 +58,7 @@ Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
  */
 Dtk_Layout_Document::~Dtk_Layout_Document()
 {
+    delete editor_;
 }
 
 
@@ -80,7 +82,7 @@ int Dtk_Layout_Document::load()
  * Create and open the appropriate editor for layouts.
  * \todo not yet implemented
  */
-void Dtk_Layout_Document::edit() 
+int Dtk_Layout_Document::edit() 
 {
 	if (!editor_) {
 		Fl_Group::current(0L);
@@ -88,6 +90,7 @@ void Dtk_Layout_Document::edit()
 		dtkMain->document_tabs->add(editor_);
 	}
 	dtkMain->document_tabs->value(editor_);
+    return 0;
 }
 
 

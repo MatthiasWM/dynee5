@@ -41,14 +41,7 @@
 
 #include "dtk/Dtk_Document_List.h"
 
-extern "C" {
-#include "NewtCore.h"
-#include "NewtBC.h"
-#include "NewtNSOF.h"
-#include "NewtPkg.h"
-#include "NewtPrint.h"
-#include "NewtEnv.h"
-}
+#include "allNewt.h"
 
 #include <stdio.h>
 
