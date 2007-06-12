@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Layout_Document header file for the Dyne Toolkit.
+// Dtk_Template_List header file for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -23,43 +23,39 @@
 // Please report all bugs and problems to "dtk@matthiasm.com".
 //
 
-#ifndef DTK_LAYOUT_DOCUMENT_H
-#define DTK_LAYOUT_DOCUMENT_H
+#ifndef DTK_TEMPLATE_LIST_H
+#define DTK_TEMPLATE_LIST_H
 
 
-#include <dtk/Dtk_Document.h>
+#include <vector>
 
 
 class Dtk_Template;
-class Fldtk_Layout_Editor;
+class Dtk_Layout_Document;
 
 
-/*---------------------------------------------------------------------------*/
-/**
- * Base class for any kind of document that we can view, edit, or even compile.
+/** Keep a list of templates.
  */
-class Dtk_Layout_Document : public Dtk_Document
+class Dtk_Template_List
 {
 public:
-					Dtk_Layout_Document(Dtk_Document_List *list);
-	virtual			~Dtk_Layout_Document();
 
-	virtual int		load();
-	virtual int     edit();
-	virtual int		save();
-	virtual int		saveAs();
-	virtual void	close();
-	virtual int		getID() { return 0; }
+    /** Initialize a template list
+     */
+                    Dtk_Template_List(Dtk_Template *parent);
+
+    /** Remove a template list and all its members.
+     */
+                    ~Dtk_Template_List();
 
 private:
-    /// The root element of the tree of all templates inside this layout.
-    Dtk_Template    * root_;
 
-    /// Editor in the document tabs.
-    Fldtk_Layout_Editor * editor_;
+    /// back reference to the template that keeps this list
+    Dtk_Template    * parent_;
 
-    /// Visual layout editor.
-    // Fldtk_Visual_Layout * visualEditor_;
+    /// stdlib list of documents
+	std::vector<Dtk_Template*>  tmplList_;
+
 };
 
 

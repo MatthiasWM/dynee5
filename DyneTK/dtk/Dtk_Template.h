@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Layout_Document header file for the Dyne Toolkit.
+// Dtk_Template header file for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -23,43 +23,42 @@
 // Please report all bugs and problems to "dtk@matthiasm.com".
 //
 
-#ifndef DTK_LAYOUT_DOCUMENT_H
-#define DTK_LAYOUT_DOCUMENT_H
+#ifndef DTK_TEMPLATE_H
+#define DTK_TEMPLATE_H
 
 
-#include <dtk/Dtk_Document.h>
+class Dtk_Layout_Document;
+class Dtk_Template_List;
 
 
-class Dtk_Template;
-class Fldtk_Layout_Editor;
-
-
-/*---------------------------------------------------------------------------*/
-/**
- * Base class for any kind of document that we can view, edit, or even compile.
+/** Manage a template object in a layout.
+ *
+ * Templates are arranged as a tree inside a layout.
+ * They contain a list of slots which make up the 
+ * attributes and signal handling of a template.
  */
-class Dtk_Layout_Document : public Dtk_Document
+class Dtk_Template
 {
 public:
-					Dtk_Layout_Document(Dtk_Document_List *list);
-	virtual			~Dtk_Layout_Document();
 
-	virtual int		load();
-	virtual int     edit();
-	virtual int		save();
-	virtual int		saveAs();
-	virtual void	close();
-	virtual int		getID() { return 0; }
+    /** Initialize a template.
+     */
+                    Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list=0L);
+
+    /** Remove a template and all its children.
+     */
+                    ~Dtk_Template();
 
 private:
-    /// The root element of the tree of all templates inside this layout.
-    Dtk_Template    * root_;
 
-    /// Editor in the document tabs.
-    Fldtk_Layout_Editor * editor_;
+    /// we must be part of a single layout
+    Dtk_Layout_Document * layout_;
 
-    /// Visual layout editor.
-    // Fldtk_Visual_Layout * visualEditor_;
+    /// every template except the root is a member of exactly one list
+    Dtk_Template_List   * list_;
+
+    /// a template can contain a list of templates to form a tree.
+    Dtk_Template_List   * tmplList_;
 };
 
 

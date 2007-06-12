@@ -44,6 +44,7 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
 :   Dtk_Document(list),
+    root_(0L),
     editor_(0L)
 {
 }
@@ -53,6 +54,7 @@ Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
 Dtk_Layout_Document::~Dtk_Layout_Document()
 {
     delete editor_;
+    delete root_;
 }
 
 
