@@ -27,7 +27,8 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Dtk_Layout_Document.h"
+#include "dtk/Dtk_Layout_Document.h"
+#include "dtk/Dtk_Template.h"
 #include "fltk/Fldtk_Layout_Editor.h"
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fluid/main_ui.h"
@@ -64,7 +65,34 @@ int Dtk_Layout_Document::load()
 	if (!editor_)
 		edit();
 	askForFilename_ = false; // FIXME only if the document was loaded successfuly
-	return editor_->loadFile(filename_);
+
+    uint8_t *buffer;
+    FILE *f = fopen(filename_, "rb");
+	if (!f) {
+    	SystemAlert("Can't open layout file");
+		return -1;
+	}
+    fseek(f, 0, SEEK_END);
+    int nn = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    buffer = (uint8_t*)malloc(nn);
+    int n = fread(buffer, 1, nn, f);
+    fclose(f);
+
+    if (n) {
+        root_ = new Dtk_Template(this, 0L);
+		newtRef obj = NewtReadNSOF(buffer, n);
+		newtRef hrc = NewtGetFrameSlot(obj, NewtFindSlotIndex(obj, NSSYM(templateHierarchy)));
+		if (NewtRefIsFrame(hrc)) {
+            // load an MSWindow layout
+			root_->load(hrc);
+		} else {
+            // load a Mac layout
+			root_->load(obj);
+		}
+        // FIXME: we still need to load global layout settings, like layout size, etc.
+	}
+    return 0;
 }
 
 

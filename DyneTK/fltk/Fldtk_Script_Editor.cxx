@@ -28,6 +28,7 @@
 #endif
 
 #include "Fldtk_Script_Editor.h"
+#include "dtk/Dtk_Script_Document.h"
 
 #include <FL/Fl.H>
 #include <FL/Fl_Text_Editor.H>
@@ -37,14 +38,30 @@
 #include <stdlib.h>
 
 
-Fldtk_Script_Editor::Fldtk_Script_Editor(Dtk_Document *doc)
-: Fldtk_Editor(doc)
+Fldtk_Script_Editor::Fldtk_Script_Editor(Dtk_Script_Document *script)
+:   Fldtk_Editor(script->name()),
+    script_(script),
+    editor_(0L)
 {
+    begin();
+	editor_ = new Fl_Text_Editor(x()+3, y()+3, w()-6, h()-6);
+	editor_->buffer(new Fl_Text_Buffer());
+	editor_->textfont(FL_COURIER);
+	editor_->textsize(12);
+	editor_->box(FL_FLAT_BOX);
+    end();
+	resizable(editor_);
 }
 
 
 Fldtk_Script_Editor::~Fldtk_Script_Editor()
 {
+}
+
+
+Dtk_Document *Fldtk_Script_Editor::document() 
+{
+    return script_; 
 }
 
 int Fldtk_Script_Editor::loadFile(const char *filename) 
@@ -80,6 +97,14 @@ int Fldtk_Script_Editor::loadFile(const char *filename)
     return 0;
 }
 
+int Fldtk_Script_Editor::saveFile(const char *filename)
+{
+	return editor_->buffer()->savefile(filename);
+}
+
+char *Fldtk_Script_Editor::getText() {
+	return editor_->buffer()->text();
+}
 
 //
 // End of "$Id$".

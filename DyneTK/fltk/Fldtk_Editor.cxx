@@ -23,69 +23,34 @@
 // Please report all bugs and problems to "flmm@matthiasm.com".
 //
 
-#ifdef WIN32
-#pragma warning(disable : 4996)
-#endif
 
 #include "Fldtk_Editor.h"
-
+#include "Fldtk_Document_Tabs.h"
 #include "main.h"
-#include "fltk/Fldtk_Document_Tabs.h"
-#include "dtk/Dtk_Document.h"
-
-#include <FL/Fl.H>
-#include <FL/Fl_Text_Editor.H>
-#include <FL/Fl_Text_Buffer.H>
-
-#include <stdio.h>
-#include <stdlib.h>
 
 
-Fldtk_Editor::Fldtk_Editor(Dtk_Document *doc)
+/*---------------------------------------------------------------------------*/
+Fldtk_Editor::Fldtk_Editor(const char *name)
 :   Fl_Group(dtkDocumentTabs->x(), dtkDocumentTabs->y()+25, 
-             dtkDocumentTabs->w(), dtkDocumentTabs->h()-25),
-    document_(doc)
+             dtkDocumentTabs->w(), dtkDocumentTabs->h()-25)
 {
-    const char *L = 0L;
-    if (doc)
-        L = doc->name();
-	if (L)
-		copy_label(L);
+    if (name)
+        copy_label(name);
 	labelsize(12);
-
-	editor_ = new Fl_Text_Editor(x()+2, y()+2, w()-4, h()-4);
-	editor_->buffer(new Fl_Text_Buffer());
-	editor_->textfont(FL_COURIER);
-	editor_->textsize(12);
-	editor_->box(FL_FLAT_BOX);
-	resizable(editor_);
+    end();
 }
 
 
+/*---------------------------------------------------------------------------*/
 Fldtk_Editor::~Fldtk_Editor()
 {
 }
 
 
-void Fldtk_Editor::setName(const char *name) 
+/*---------------------------------------------------------------------------*/
+void Fldtk_Editor::updateName(const char *name) 
 {
 	copy_label(name);
-}
-
-
-int Fldtk_Editor::loadFile(const char *filename)
-{
-	return editor_->buffer()->loadfile(filename);
-}
-
-
-int Fldtk_Editor::saveFile(const char *filename)
-{
-	return editor_->buffer()->savefile(filename);
-}
-
-char *Fldtk_Editor::getText() {
-	return editor_->buffer()->text();
 }
 
 //

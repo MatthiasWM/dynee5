@@ -30,28 +30,21 @@
 #include <FL/Fl_Group.H>
 
 
-class Fl_Text_Editor;
 class Dtk_Document;
 
 
-/**
- * Container for a document editor.
+/** Minimal container for a document editor.
  */
 class Fldtk_Editor : public Fl_Group
 {
 public:
-	Fldtk_Editor(Dtk_Document *doc);
-	virtual ~Fldtk_Editor();
+	                Fldtk_Editor(const char *name);
 
-	virtual int		loadFile(const char *filename);
-	virtual int		saveFile(const char *filename);
-	char	* getText();
-	void	setName(const char *name);
-    Dtk_Document *document() { return document_; }
+	virtual         ~Fldtk_Editor();
 
-protected:
-	Fl_Text_Editor	* editor_;
-    Dtk_Document *document_;
+	void	        updateName(const char *name);
+
+    virtual Dtk_Document *document() { return 0L; }
 };
 
 

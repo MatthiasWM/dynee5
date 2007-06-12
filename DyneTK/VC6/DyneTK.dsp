@@ -315,6 +315,14 @@ SOURCE=..\dtk\Dtk_Project.h
 
 SOURCE=..\dtk\Dtk_Script_Document.h
 # End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Template.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Template_List.h
+# End Source File
 # End Group
 # Begin Source File
 
@@ -339,6 +347,14 @@ SOURCE=..\dtk\Dtk_Project.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Script_Document.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Template.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Template_List.cxx
 # End Source File
 # End Group
 # Begin Group "documentation"

@@ -29,20 +29,32 @@
 
 #include "fltk/Fldtk_Editor.h"
 
+
 class Fl_Hold_Browser;
+class Dtk_Layout_Document;
 
 
-/**
- * Container for a document editor.
+/** GUI element for editing layouts.
  */
 class Fldtk_Layout_Editor : public Fldtk_Editor
 {
 public:
-	Fldtk_Layout_Editor(Dtk_Document *doc);
-	virtual ~Fldtk_Layout_Editor();
+	                        Fldtk_Layout_Editor(Dtk_Layout_Document *layout);
+	virtual                 ~Fldtk_Layout_Editor();
+    virtual Dtk_Document    * document();
+
 protected:
-	Fl_Hold_Browser *tree_;
-	Fl_Hold_Browser *member_;
+    Dtk_Layout_Document     * layout_;
+	Fl_Hold_Browser         * tmplBrowser_;
+	Fl_Hold_Browser         * slotBrowser_;
+    // slot menus
+    //  specific
+    //  methods
+    //  attributes
+    // apply
+    // revert
+    // slot editor
+    //  ... (many)
 };
 
 

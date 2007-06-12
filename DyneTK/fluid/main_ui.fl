@@ -50,8 +50,8 @@ decl {\#include "main.h"} {public
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
-  xywh {-32000 -32000 785 595} type Double hide resizable
-  class Fl_Double_Window
+  xywh {486 112 785 595} type Double resizable
+  class Fl_Double_Window visible
 } {
   Fl_Menu_Bar {} {
     xywh {0 0 785 25} box THIN_UP_BOX
@@ -481,7 +481,7 @@ widget_class Fldtk_Main_Window {
     xywh {0 25 785 35} box THIN_DOWN_BOX
   } {
     Fl_Button tFileNewLayout {
-      callback {NewLayoutFile();} selected
+      callback {NewLayoutFile();}
       tooltip {New Layout} image {../images/table.png} deimage {../images/table_da.png} xywh {10 30 25 25} labelsize 11 labelcolor 32
     }
     Fl_Button {} {
@@ -613,12 +613,12 @@ widget_class Fldtk_Main_Window {
     Fl_Group {} {open
       xywh {0 95 150 305} box FLAT_BOX
     } {
-      Fl_Tabs browsers {
+      Fl_Tabs browsers {selected
         xywh {3 98 144 299} box UP_BOX labelsize 12 resizable
       } {
         Fl_Browser documents {
           label Files
-          xywh {3 118 144 279} labelsize 12 textsize 12 deactivate resizable
+          xywh {3 123 144 274} labelsize 12 textsize 12 deactivate resizable
           class Fldtk_Document_Browser
         }
       }

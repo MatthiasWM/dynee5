@@ -48,6 +48,10 @@ public:
      */
                     ~Dtk_Template_List();
 
+    /** Add an existing template to this list.
+     */
+    void add(Dtk_Template *tmpl);
+
 private:
 
     /// back reference to the template that keeps this list

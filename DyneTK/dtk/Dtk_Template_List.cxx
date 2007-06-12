@@ -49,6 +49,11 @@ Dtk_Template_List::~Dtk_Template_List()
     }
 }
 
+/*---------------------------------------------------------------------------*/
+void Dtk_Template_List::add(Dtk_Template *tmpl)
+{
+    tmplList_.push_back(tmpl);
+}
 
 //
 // End of "$Id$".

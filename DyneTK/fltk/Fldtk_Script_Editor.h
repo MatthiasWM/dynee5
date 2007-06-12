@@ -30,15 +30,39 @@
 #include "fltk/Fldtk_Editor.h"
 
 
-/**
- * Container for a document editor.
+class Dtk_Script_Document;
+class Fl_Text_Editor;
+
+
+/** GUI for editing Newt Scripts.
  */
 class Fldtk_Script_Editor : public Fldtk_Editor
 {
 public:
-	Fldtk_Script_Editor(Dtk_Document *doc);
-	virtual ~Fldtk_Script_Editor();
+	                        Fldtk_Script_Editor(Dtk_Script_Document *script);
+	virtual                 ~Fldtk_Script_Editor();
+    virtual Dtk_Document    * document();
+
+	int		                loadFile(const char *filename);
+	int		                saveFile(const char *filename);
+	char	                * getText();
+    
+    /*
 	virtual int loadFile(const char*);
+public:
+	Fldtk_Editor(Dtk_Document *doc);
+	virtual ~Fldtk_Editor();
+
+	void	setName(const char *name);
+    Dtk_Document *document() { return document_; }
+
+protected:
+	Fl_Text_Editor	* editor_;
+    Dtk_Document *document_;
+*/
+protected:
+    Dtk_Script_Document         * script_;
+    Fl_Text_Editor              * editor_;
 };
 
 

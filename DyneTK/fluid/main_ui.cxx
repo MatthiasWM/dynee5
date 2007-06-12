@@ -3298,7 +3298,7 @@ this->when(FL_WHEN_RELEASE);
     { browsers = new Fl_Tabs(3, 98, 144, 299);
       browsers->box(FL_UP_BOX);
       browsers->labelsize(12);
-      { documents = new Fldtk_Document_Browser(3, 118, 144, 279, "Files");
+      { documents = new Fldtk_Document_Browser(3, 123, 144, 274, "Files");
         documents->box(FL_NO_BOX);
         documents->color(FL_BACKGROUND2_COLOR);
         documents->selection_color(FL_SELECTION_COLOR);

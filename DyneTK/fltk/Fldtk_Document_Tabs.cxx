@@ -63,8 +63,8 @@ void Fldtk_Document_Tabs::draw()
 
 void Fldtk_Document_Tabs::add(Fldtk_Editor *doc)
 {
-	doc->resize(x(), y()+20, w(), h()-20);
 	Fl_Tabs::add(doc);
+	doc->resize(x(), y()+25, w(), h()-25);
 	resizable(doc);
 	redraw();
 }

@@ -30,6 +30,10 @@
 class Dtk_Layout_Document;
 class Dtk_Template_List;
 
+extern "C" {
+#include "NewtType.h"
+}
+
 
 /** Manage a template object in a layout.
  *
@@ -49,6 +53,10 @@ public:
      */
                     ~Dtk_Template();
 
+    /** Load a template tree starting at the given newtRef
+     */
+    int             load(newtRef node);
+
 private:
 
     /// we must be part of a single layout
@@ -59,6 +67,7 @@ private:
 
     /// a template can contain a list of templates to form a tree.
     Dtk_Template_List   * tmplList_;
+
 };
 
 
