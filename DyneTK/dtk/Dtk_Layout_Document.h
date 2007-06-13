@@ -33,6 +33,7 @@
 class Dtk_Template;
 class Fldtk_Layout_Editor;
 class Fl_Hold_Browser;
+class Fl_Wizard;
 
 /*---------------------------------------------------------------------------*/
 /**
@@ -53,6 +54,7 @@ public:
 
     Fl_Hold_Browser * templateBrowser();
     Fl_Hold_Browser * slotBrowser();
+    Fl_Wizard       * slotEditor();
 
 private:
     void            rebuildTemplateBrowser();
@@ -66,8 +68,11 @@ private:
     /// Visual layout editor.
     // Fldtk_Visual_Layout * visualEditor_;
 
-    /// GUI callback whenever a new template is selected
+    /// GUI callback whenever a different template is selected
     static void templateBrowser_cb(Fl_Hold_Browser*, Dtk_Layout_Document*);
+
+    /// GUI callback whenever a different slot is selected
+    static void slotBrowser_cb(Fl_Hold_Browser*, Dtk_Layout_Document*);
 };
 
 

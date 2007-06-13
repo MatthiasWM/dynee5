@@ -34,6 +34,7 @@
 #include "Dtk_Slot_List.h"
 #include "Dtk_Template.h"
 #include "Dtk_Slot.h"
+#include "Dtk_Script_Slot.h"
 
 #include "allNewt.h"
 
@@ -107,10 +108,24 @@ int Dtk_Template::load(newtRef node)
                 // everything's handled; now go and read the next slot
                 continue;
             }
-            // newtRef datatype = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
-            Dtk_Slot *dSlot = new Dtk_Slot(slotList_, NewtSymbolGetName(key));
-            slotList_->add(dSlot);
-            //    const char *unsinn = NewtSymbolGetName(name);
+            // also 'viewBounds, 'viewClass, 'viewFlags, 'viewFormat
+            //      'viewJustify, 'viewEffect, 'viewTransferMode, '_proto
+            newtRef datatype = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
+            Dtk_Slot *dSlot = 0L;
+            if (NewtRefIsString(datatype)) {
+                const char *dt = NewtRefToString(datatype);
+                const char *keyname = NewtSymbolGetName(key);
+                if (strcmp(dt, "SCPT")==0 || strcmp(dt, "EVAL")==0) {
+                    dSlot = new Dtk_Script_Slot(slotList_, keyname, slot);
+                } else {
+                    // also: RECT, CLAS, NUMB, PICT, PROT, USER, any more?
+                    printf("Unsupported slot datatype \"%s\"\n", dt);
+                    dSlot = new Dtk_Slot(slotList_, keyname, slot);
+                }
+            }
+            if (dSlot) {
+                slotList_->add(dSlot);
+            }
         }
     }
 /*
@@ -173,25 +188,6 @@ int Dtk_Template::load(newtRef node)
 	g->labelsize(9);
 	g->end();
 */    
-/*
-	{	// read the children
-		newtRef c = NewtGetFrameSlot(value, NewtFindSlotIndex(value, NSSYM(stepChildren)));
-		if (NewtRefIsFrame(c)) {
-			newtRef a = NewtGetFrameSlot(c, NewtFindSlotIndex(c, NSSYM(value)));
-			if (NewtRefIsArray(a)) {
-				int i, n = NewtArrayLength(a);
-                if (n) {
-                    tmplList_ = new Dtk_Template_List(this);
-                }
-				for (i=0; i<n; i++) {
-                    Dtk_Template *tmpl = new Dtk_Template(layout_, tmplList_);
-                    tmplList_->add(tmpl);
-                    tmpl->load(NewtGetArraySlot(a, i));
-				}
-			}
-		}
-	}
-*/
     return 0;
 }
 
@@ -233,6 +229,8 @@ const char *Dtk_Template::browserName()
     } else {
         sprintf(buf+4*indent_, "%s", id);
     }
+    // FIXME there can also be a userProto. The Format is then
+    //       infoButton <userProto> (protoInfoButton.lyt)
     browserName_ = strdup(buf);
     return browserName_;
 }
@@ -246,7 +244,7 @@ void Dtk_Template::edit()
         int i, n = slotList_->size();
         for (i=0; i<n; i++) {
             Dtk_Slot *slot = slotList_->at(i);
-            slotBrowser->add(slot->key());
+            slotBrowser->add(slot->key(), slot);
         }
     }
 }

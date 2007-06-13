@@ -29,6 +29,7 @@
 
 #include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Template.h"
+#include "dtk/Dtk_Slot.h"
 #include "fltk/Fldtk_Layout_Editor.h"
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fluid/main_ui.h"
@@ -56,6 +57,7 @@ Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
 Dtk_Layout_Document::~Dtk_Layout_Document()
 {
     editor_->templateBrowser()->callback(0L, 0L);
+    editor_->slotBrowser()->callback(0L, 0L);
     delete editor_;
     delete root_;
 }
@@ -154,6 +156,7 @@ void Dtk_Layout_Document::rebuildTemplateBrowser()
     int index = 1;
     root_->updateBrowserLink(b, indent, index, true);
     b->callback((Fl_Callback*)templateBrowser_cb, this);
+    slotBrowser()->callback((Fl_Callback*)slotBrowser_cb, this);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -167,6 +170,11 @@ Fl_Hold_Browser *Dtk_Layout_Document::slotBrowser() {
 }
 
 /*---------------------------------------------------------------------------*/
+Fl_Wizard *Dtk_Layout_Document::slotEditor() {
+    return editor_->slotEditor();
+}
+
+/*---------------------------------------------------------------------------*/
 void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Document *layout)
 {
     int i = browser->value();
@@ -174,7 +182,20 @@ void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layou
         Dtk_Template *tmpl = (Dtk_Template*)browser->data(i);
         tmpl->edit();
     } else {
+        layout->slotBrowser()->clear();
         // FIXME no template selected. Clear slot list and hide any editor
+    }
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Layout_Document::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Document *layout)
+{
+    int i = browser->value();
+    if (i) {
+        Dtk_Slot *slot = (Dtk_Slot*)browser->data(i);
+        slot->edit();
+    } else {
+        // FIXME no slot selected. Clear any editor
     }
 }
 

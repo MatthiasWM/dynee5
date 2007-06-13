@@ -157,6 +157,10 @@ SOURCE=..\fltk\Fldtk_Script_Editor.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Fldtk_Script_Slot_Editor.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fluid\Fldtk_Snapshot.h
 # End Source File
 # Begin Source File
@@ -223,6 +227,10 @@ SOURCE=..\fltk\Fldtk_Layout_Editor.cxx
 # Begin Source File
 
 SOURCE=..\fltk\Fldtk_Script_Editor.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Script_Slot_Editor.cxx
 # End Source File
 # Begin Source File
 
@@ -317,6 +325,10 @@ SOURCE=..\dtk\Dtk_Script_Document.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\dtk\Dtk_Script_Slot.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\dtk\Dtk_Slot.h
 # End Source File
 # Begin Source File
@@ -355,6 +367,10 @@ SOURCE=..\dtk\Dtk_Project.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Script_Document.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Script_Slot.cxx
 # End Source File
 # Begin Source File
 

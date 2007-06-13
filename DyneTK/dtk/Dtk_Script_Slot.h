@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Slot header file for the Dyne Toolkit.
+// Dtk_Script_Slot header file for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -23,51 +23,41 @@
 // Please report all bugs and problems to "dtk@matthiasm.com".
 //
 
-#ifndef DTK_SLOT_H
-#define DTK_SLOT_H
+#ifndef DTK_SCRIPT_SLOT_H
+#define DTK_SCRIPT_SLOT_H
 
 
-class Dtk_Slot_List;
-class Dtk_Layout_Document;
-
-extern "C" {
-#include "NewtType.h"
-}
+#include "Dtk_Slot.h"
 
 
-/** Manage a slot inside a template.
+class Fldtk_Script_Slot_Editor;
+
+
+/** Manage a script slot inside a template.
  */
-class Dtk_Slot
+class Dtk_Script_Slot : public Dtk_Slot
 {
 public:
 
     /** Initialize a slot
      */
-                    Dtk_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
+                    Dtk_Script_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
 
     /** Remove a slot and unlink it from the list.
      */
-    virtual         ~Dtk_Slot();
+    virtual         ~Dtk_Script_Slot();
 
-    /** Return the key name of this slot as a C-String
-     */
-    const char      * key() { return key_; }
-
-    /** Pop up the editor for this slot.
+    /** Pop up the script slot editor.
      */
     virtual void    edit();
 
-    /** Find the address of the layout that we are part of.
-     */
-    Dtk_Layout_Document * layout();
-
 private:
 
-    /// back reference to the slot list
-    Dtk_Slot_List   * list_;
+    /// this is the editor that we are using
+    Fldtk_Script_Slot_Editor    * editor_;
 
-    /// this is the key name of the slot as a C-String.
-    char            * key_;
+    /// the actual script as a C-String
+    char            * script_;
 };
 
 

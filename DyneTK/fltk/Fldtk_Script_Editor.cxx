@@ -46,6 +46,7 @@ Fldtk_Script_Editor::Fldtk_Script_Editor(Dtk_Script_Document *script)
     begin();
 	editor_ = new Fl_Text_Editor(x()+3, y()+3, w()-6, h()-6);
 	editor_->buffer(new Fl_Text_Buffer());
+	editor_->buffer()->tab_distance(4);
 	editor_->textfont(FL_COURIER);
 	editor_->textsize(12);
 	editor_->box(FL_FLAT_BOX);
@@ -91,7 +92,6 @@ int Fldtk_Script_Editor::loadFile(const char *filename)
 		}
 	}
 	*dst = 0;
-	editor_->buffer()->tab_distance(4);
 	editor_->buffer()->text(txt);
 	free(txt);
     return 0;

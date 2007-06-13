@@ -39,6 +39,7 @@
 #include <FL/Fl_Text_Buffer.H>
 #include <FL/Fl_Hold_Browser.H>
 #include <FL/Fl_Menu_Button.H>
+#include <FL/Fl_Wizard.H>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -117,9 +118,14 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
                     revert->labelsize(12);
                 }
                 slotMenus->end();
-                Fl_Box *bx = new Fl_Box(X, Y+H/4+2+30, W, H-H/4-2-30);
-                bx->box(FL_DOWN_BOX);
-                s->resizable(bx);
+                slotEditor_ = new Fl_Wizard(X, Y+H/4+2+30, W, H-H/4-2-30);
+                {
+                    Fl_Box *box = new Fl_Box(X, Y+H/4+2+30, W, H-H/4-2-30);
+                    box->box(FL_DOWN_BOX);
+                }
+                slotEditor_->box(FL_FLAT_BOX);
+                slotEditor_->end();
+                s->resizable(slotEditor_);
             }
             s->box(FL_FLAT_BOX);
             s->end();
