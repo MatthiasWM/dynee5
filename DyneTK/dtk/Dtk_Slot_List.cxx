@@ -73,6 +73,24 @@ Dtk_Layout_Document *Dtk_Slot_List::layout()
     return template_->layout();
 }
 
+/*---------------------------------------------------------------------------*/
+void Dtk_Slot_List::add(Dtk_Slot *slot) 
+{
+    slotList_.push_back(slot);
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Slot_List::size()
+{
+    return slotList_.size();
+}
+
+/*---------------------------------------------------------------------------*/
+Dtk_Slot *Dtk_Slot_List::at(int index)
+{
+    return slotList_.at(index);
+}
+
 //
 // End of "$Id$".
 //

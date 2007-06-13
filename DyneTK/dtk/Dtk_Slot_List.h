@@ -54,6 +54,18 @@ public:
      */
     Dtk_Layout_Document * layout();
 
+    /** Add an existing slot to our list.
+     */
+    void add(Dtk_Slot *slot);
+
+    /** Return the numbeer of slots in the list
+     */
+    int size();
+
+    /** Return the slot at the specified index.
+     */
+    Dtk_Slot *at(int index);
+
 private:
 
     /// back reference to the template that keeps this list

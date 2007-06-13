@@ -75,6 +75,12 @@ public:
      */
     Dtk_Layout_Document * layout() { return layout_; }
 
+    /** This template was selected by the user for editing.
+     *
+     * We need to update the slot browser and the slot editor.
+     */
+    void edit();
+
 private:
 
     /// we must be part of a single layout

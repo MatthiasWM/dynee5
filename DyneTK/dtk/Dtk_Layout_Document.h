@@ -65,6 +65,9 @@ private:
 
     /// Visual layout editor.
     // Fldtk_Visual_Layout * visualEditor_;
+
+    /// GUI callback whenever a new template is selected
+    static void templateBrowser_cb(Fl_Hold_Browser*, Dtk_Layout_Document*);
 };
 
 

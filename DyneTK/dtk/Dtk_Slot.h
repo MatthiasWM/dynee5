@@ -41,16 +41,23 @@ public:
 
     /** Initialize a slot
      */
-                    Dtk_Slot(Dtk_Slot_List *list);
+                    Dtk_Slot(Dtk_Slot_List *list, const char *key);
 
     /** Remove a slot and unlink it from the list.
      */
                     ~Dtk_Slot();
 
+    /** Return the key name of this slot as a C-String
+     */
+                    const char      * key() { return key_; }
+
 private:
 
     /// back reference to the slot list
-    Dtk_Slot_List     * list_;
+    Dtk_Slot_List   * list_;
+
+    /// this is the key name of the slot as a C-String.
+    char            * key_;
 };
 
 

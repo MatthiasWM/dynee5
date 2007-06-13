@@ -30,7 +30,10 @@
 #endif
 
 #include "Dtk_Template_List.h"
+#include "Dtk_Layout_Document.h"
+#include "Dtk_Slot_List.h"
 #include "Dtk_Template.h"
+#include "Dtk_Slot.h"
 
 #include "allNewt.h"
 
@@ -67,15 +70,61 @@ Dtk_Template::~Dtk_Template()
 /*---------------------------------------------------------------------------*/
 int Dtk_Template::load(newtRef node)
 {
-	newtRef value = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(value)));
-	if (!NewtRefIsFrame(value))
-		return -1;
-
+    // find the name of this template
     newtRef ntName = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntName)));
     if (NewtRefIsString(ntName)) ntName_ = strdup(NewtRefToString(ntName));
 
+    // find an ID; this does not mean too much as the ID can be changed later in the UI
     newtRef ntId = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntId)));
     if (NewtRefIsSymbol(ntId)) ntId_ = strdup(NewtSymbolGetName(ntId));
+
+    // now load all slots for this template
+	newtRef value = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(value)));
+    if (NewtRefIsFrame(value)) {
+        int i, n = NewtFrameLength(value);
+        if (n && !slotList_)
+            slotList_ = new Dtk_Slot_List(this);
+        for (i=0; i<n; i++) {
+            uint32_t index;
+            newtRef key = NewtGetFrameKey(value, i);
+            newtRef slot = NewtGetFrameSlot(value, i);
+            if (!NewtRefIsFrame(slot)) 
+                continue;
+            // the 'stepChildren slot generates a new template list with all children
+            if (key==NSSYM(stepChildren)) {
+			    newtRef a = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
+			    if (NewtRefIsArray(a)) {
+				    int i, n = NewtArrayLength(a);
+                    if (n) {
+                        tmplList_ = new Dtk_Template_List(this);
+                    }
+				    for (i=0; i<n; i++) {
+                        Dtk_Template *tmpl = new Dtk_Template(layout_, tmplList_);
+                        tmplList_->add(tmpl);
+                        tmpl->load(NewtGetArraySlot(a, i));
+				    }
+			    }
+                // everything's handled; now go and read the next slot
+                continue;
+            }
+            // newtRef datatype = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
+            Dtk_Slot *dSlot = new Dtk_Slot(slotList_, NewtSymbolGetName(key));
+            slotList_->add(dSlot);
+            //    const char *unsinn = NewtSymbolGetName(name);
+        }
+    }
+/*
+    viewBounds: {
+      __ntDatatype: "RECT", 
+      value: {
+        top: 0, 
+        left: 0, 
+        bottom: 125, 
+        right: 0
+      }, 
+      __ntFlags: 0
+    }, 
+*/
 
 /*
 
@@ -124,7 +173,7 @@ int Dtk_Template::load(newtRef node)
 	g->labelsize(9);
 	g->end();
 */    
-
+/*
 	{	// read the children
 		newtRef c = NewtGetFrameSlot(value, NewtFindSlotIndex(value, NSSYM(stepChildren)));
 		if (NewtRefIsFrame(c)) {
@@ -142,7 +191,7 @@ int Dtk_Template::load(newtRef node)
 			}
 		}
 	}
-
+*/
     return 0;
 }
 
@@ -186,6 +235,20 @@ const char *Dtk_Template::browserName()
     }
     browserName_ = strdup(buf);
     return browserName_;
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::edit()
+{
+    Fl_Hold_Browser *slotBrowser = layout()->slotBrowser();
+    slotBrowser->clear();
+    if (slotList_) {
+        int i, n = slotList_->size();
+        for (i=0; i<n; i++) {
+            Dtk_Slot *slot = slotList_->at(i);
+            slotBrowser->add(slot->key());
+        }
+    }
 }
 
 //

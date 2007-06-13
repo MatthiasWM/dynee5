@@ -55,6 +55,7 @@ Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
 /*---------------------------------------------------------------------------*/
 Dtk_Layout_Document::~Dtk_Layout_Document()
 {
+    editor_->templateBrowser()->callback(0L, 0L);
     delete editor_;
     delete root_;
 }
@@ -152,6 +153,7 @@ void Dtk_Layout_Document::rebuildTemplateBrowser()
     int indent = 0;
     int index = 1;
     root_->updateBrowserLink(b, indent, index, true);
+    b->callback((Fl_Callback*)templateBrowser_cb, this);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -163,6 +165,19 @@ Fl_Hold_Browser *Dtk_Layout_Document::templateBrowser() {
 Fl_Hold_Browser *Dtk_Layout_Document::slotBrowser() {
     return editor_->slotBrowser();
 }
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Document *layout)
+{
+    int i = browser->value();
+    if (i) {
+        Dtk_Template *tmpl = (Dtk_Template*)browser->data(i);
+        tmpl->edit();
+    } else {
+        // FIXME no template selected. Clear slot list and hide any editor
+    }
+}
+
 
 //
 // End of "$Id$".
