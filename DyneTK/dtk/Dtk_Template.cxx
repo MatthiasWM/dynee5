@@ -35,6 +35,7 @@
 #include "Dtk_Template.h"
 #include "Dtk_Slot.h"
 #include "Dtk_Script_Slot.h"
+#include "Dtk_Rect_Slot.h"
 
 #include "allNewt.h"
 
@@ -117,6 +118,8 @@ int Dtk_Template::load(newtRef node)
                 const char *keyname = NewtSymbolGetName(key);
                 if (strcmp(dt, "SCPT")==0 || strcmp(dt, "EVAL")==0) {
                     dSlot = new Dtk_Script_Slot(slotList_, keyname, slot);
+                } else if (strcmp(dt, "RECT")==0) {
+                    dSlot = new Dtk_Rect_Slot(slotList_, keyname, slot);
                 } else {
                     // also: RECT, CLAS, NUMB, PICT, PROT, USER, any more?
                     printf("Unsupported slot datatype \"%s\"\n", dt);

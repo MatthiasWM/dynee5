@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Fldtk_Script_Slot_Editor implementation for the FLMM extension to FLTK.
+// Fldtk_Rect_Slot_Editor header file for the FLMM extension to FLTK.
 //
 // Copyright 2002-2007 by Matthias Melcher.
 //
@@ -23,33 +23,33 @@
 // Please report all bugs and problems to "flmm@matthiasm.com".
 //
 
-#include "Fldtk_Script_Slot_Editor.h"
-#include "dtk/Dtk_Script_Slot.h"
-
-#include <FL/Fl_Text_Buffer.H>
+#ifndef FLDTK_RECT_SLOT_EDITOR_H
+#define FLDTK_RECT_SLOT_EDITOR_H
 
 
-Fldtk_Script_Slot_Editor::Fldtk_Script_Slot_Editor(Fl_Group *container, Dtk_Script_Slot *slot)
-:   Fl_Text_Editor(container->x(), container->y(), container->w(), container->h()),
-    slot_(slot)
+#include <FL/Fl_Group.H>
+
+
+class Dtk_Rect_Slot;
+class Fl_Input;
+
+
+/** GUI for editing script slots.
+ */
+class Fldtk_Rect_Slot_Editor : public Fl_Group
 {
-    buffer(new Fl_Text_Buffer());
-	buffer()->tab_distance(4);
-	textfont(FL_COURIER);
-	textsize(12);
-}
+public:
+	        Fldtk_Rect_Slot_Editor(Fl_Group *container, Dtk_Rect_Slot *slot);
+	        ~Fldtk_Rect_Slot_Editor();
+    void    rect(int t, int l, int b, int r);
+
+protected:
+    Dtk_Rect_Slot * slot_;
+    Fl_Input    *wTop_, *wLeft_, *wBottom_, *wRight_;
+};
 
 
-Fldtk_Script_Slot_Editor::~Fldtk_Script_Slot_Editor()
-{
-}
-
-
-void Fldtk_Script_Slot_Editor::text(char *script) 
-{
-    buffer()->text(script);
-}
-
+#endif
 
 //
 // End of "$Id$".
