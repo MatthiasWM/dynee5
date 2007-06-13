@@ -47,7 +47,8 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
     indent_(0),
     browser_(0L),
     browserName_(0L),
-    ntName_(0L)
+    ntName_(0L),
+    ntId_(0L)    
 {
 }
 
@@ -55,6 +56,7 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
 /*---------------------------------------------------------------------------*/
 Dtk_Template::~Dtk_Template()
 {
+    delete ntId_;
     delete ntName_;
     delete browserName_;
     delete tmplList_;
@@ -72,6 +74,9 @@ int Dtk_Template::load(newtRef node)
 
     newtRef ntName = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntName)));
     if (NewtRefIsString(ntName)) ntName_ = strdup(NewtRefToString(ntName));
+
+    newtRef ntId = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntId)));
+    if (NewtRefIsSymbol(ntId)) ntId_ = strdup(NewtSymbolGetName(ntId));
 
 /*
 
@@ -167,13 +172,19 @@ const char *Dtk_Template::browserName()
 {
     if (browserName_)
         return browserName_;
+
     char *name = ntName_;
-    if (!name)
-        name = "-unnamed-";
-    char *id = "clView";
+    char *id = ntId_;
+    if (!id ||!*id)
+        id = "-unknown-";
+
     char buf[512];
     memset(buf, ' ', 511);
-    sprintf(buf+4*indent_, "%s <%s>", name, id);
+    if (name && *name) {
+        sprintf(buf+4*indent_, "%s <%s>", name, id);
+    } else {
+        sprintf(buf+4*indent_, "%s", id);
+    }
     browserName_ = strdup(buf);
     return browserName_;
 }

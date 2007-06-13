@@ -95,6 +95,9 @@ private:
 
     /// dtk name of template
     char                *ntName_;
+
+    /// dtk id of template (compareable to C++ "class")
+    char                *ntId_;
 };
 
 
