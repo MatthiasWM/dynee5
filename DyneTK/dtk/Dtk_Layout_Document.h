@@ -32,7 +32,7 @@
 
 class Dtk_Template;
 class Fldtk_Layout_Editor;
-
+class Fl_Hold_Browser;
 
 /*---------------------------------------------------------------------------*/
 /**
@@ -50,6 +50,9 @@ public:
 	virtual int		saveAs();
 	virtual void	close();
 	virtual int		getID() { return 0; }
+
+    Fl_Hold_Browser * templateBrowser();
+    Fl_Hold_Browser * slotBrowser();
 
 private:
     void            rebuildTemplateBrowser();

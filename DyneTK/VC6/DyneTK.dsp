@@ -317,6 +317,14 @@ SOURCE=..\dtk\Dtk_Script_Document.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\dtk\Dtk_Slot.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Slot_List.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\dtk\Dtk_Template.h
 # End Source File
 # Begin Source File
@@ -347,6 +355,14 @@ SOURCE=..\dtk\Dtk_Project.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Script_Document.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Slot.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Slot_List.cxx
 # End Source File
 # Begin Source File
 

@@ -43,6 +43,7 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
 :   layout_(layout),
     list_(list),
     tmplList_(0L),
+    slotList_(0L),
     index_(0),
     indent_(0),
     browser_(0L),
@@ -59,6 +60,7 @@ Dtk_Template::~Dtk_Template()
     delete ntId_;
     delete ntName_;
     delete browserName_;
+    delete slotList_;
     delete tmplList_;
 }
 
@@ -68,9 +70,6 @@ int Dtk_Template::load(newtRef node)
 	newtRef value = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(value)));
 	if (!NewtRefIsFrame(value))
 		return -1;
-
-    // __ntId contain 'clView or similar
-    // __ntName contains the user given name
 
     newtRef ntName = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntName)));
     if (NewtRefIsString(ntName)) ntName_ = strdup(NewtRefToString(ntName));

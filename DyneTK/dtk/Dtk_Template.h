@@ -36,6 +36,7 @@ extern "C" {
 
 
 class Fl_Hold_Browser;
+class Dtk_Slot_List;
 
 
 /** Manage a template object in a layout.
@@ -70,6 +71,10 @@ public:
      */
     const char      * browserName();
 
+    /** Return the associated Layout
+     */
+    Dtk_Layout_Document * layout() { return layout_; }
+
 private:
 
     /// we must be part of a single layout
@@ -80,6 +85,9 @@ private:
 
     /// a template can contain a list of templates to form a tree.
     Dtk_Template_List   * tmplList_;
+
+    /// a template can have any number of slots
+    Dtk_Slot_List       * slotList_;
 
     /// index in the browser widget
     int                 index_;

@@ -157,7 +157,7 @@ private:
     /// we are in charge of keeping this browser updated and reacting to its messages
     Fldtk_Document_Browser      * browser_;
 
-    /// this is an FLTK callback tha is triggered when the browser is clicked
+    /// this is an FLTK callback that is triggered when the browser is clicked
     static void browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d);
 };
 

@@ -154,6 +154,15 @@ void Dtk_Layout_Document::rebuildTemplateBrowser()
     root_->updateBrowserLink(b, indent, index, true);
 }
 
+/*---------------------------------------------------------------------------*/
+Fl_Hold_Browser *Dtk_Layout_Document::templateBrowser() {
+    return editor_->templateBrowser();
+}
+
+/*---------------------------------------------------------------------------*/
+Fl_Hold_Browser *Dtk_Layout_Document::slotBrowser() {
+    return editor_->slotBrowser();
+}
 
 //
 // End of "$Id$".
