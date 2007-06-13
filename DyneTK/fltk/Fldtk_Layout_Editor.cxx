@@ -79,6 +79,7 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
             Fl_Group *nw = new Fl_Group(X, Y, W/2, H/4);
             {
                 tmplBrowser_ = new Fl_Hold_Browser(X, Y, W/2-2, H/4-2);
+                tmplBrowser_->textsize(12);
                 nw->resizable(tmplBrowser_);
             }
             nw->box(FL_FLAT_BOX);
@@ -86,6 +87,7 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
             Fl_Group *ne = new Fl_Group(X+W/2, Y, W-W/2, H/4);
             {
                 slotBrowser_ = new Fl_Hold_Browser(X+W/2+2, Y, W-W/2-2, H/4-2);
+                slotBrowser_->textsize(12);
                 ne->resizable(slotBrowser_);
             }
             ne->box(FL_FLAT_BOX);

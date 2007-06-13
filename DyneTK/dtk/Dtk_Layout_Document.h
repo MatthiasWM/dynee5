@@ -52,6 +52,8 @@ public:
 	virtual int		getID() { return 0; }
 
 private:
+    void            rebuildTemplateBrowser();
+
     /// The root element of the tree of all templates inside this layout.
     Dtk_Template    * root_;
 

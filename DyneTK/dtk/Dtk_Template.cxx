@@ -35,11 +35,19 @@
 #include "allNewt.h"
 
 
+#include <FL/Fl_Hold_Browser.H>
+
+
 /*---------------------------------------------------------------------------*/
 Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
 :   layout_(layout),
     list_(list),
-    tmplList_(0L)
+    tmplList_(0L),
+    index_(0),
+    indent_(0),
+    browser_(0L),
+    browserName_(0L),
+    ntName_(0L)
 {
 }
 
@@ -47,6 +55,8 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
 /*---------------------------------------------------------------------------*/
 Dtk_Template::~Dtk_Template()
 {
+    delete ntName_;
+    delete browserName_;
     delete tmplList_;
 }
 
@@ -56,6 +66,13 @@ int Dtk_Template::load(newtRef node)
 	newtRef value = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(value)));
 	if (!NewtRefIsFrame(value))
 		return -1;
+
+    // __ntId contain 'clView or similar
+    // __ntName contains the user given name
+
+    newtRef ntName = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntName)));
+    if (NewtRefIsString(ntName)) ntName_ = strdup(NewtRefToString(ntName));
+
 /*
 
 	int32_t wl, wr, wt, wb;
@@ -125,6 +142,41 @@ int Dtk_Template::load(newtRef node)
     return 0;
 }
 
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add)
+{
+    browser_ = browser;
+    indent_ = indent;
+    index_ = index++;
+    if (add) {
+        browser->add(browserName(), this);
+    }
+    if (tmplList_) {
+        int i, n = tmplList_->size();
+        indent++;
+        for (i=0; i<n; i++) {
+            Dtk_Template *tmpl = tmplList_->at(i);
+            tmpl->updateBrowserLink(browser, indent, index, add);
+        }
+        indent--;
+    }
+}
+
+/*---------------------------------------------------------------------------*/
+const char *Dtk_Template::browserName()
+{
+    if (browserName_)
+        return browserName_;
+    char *name = ntName_;
+    if (!name)
+        name = "-unnamed-";
+    char *id = "clView";
+    char buf[512];
+    memset(buf, ' ', 511);
+    sprintf(buf+4*indent_, "%s <%s>", name, id);
+    browserName_ = strdup(buf);
+    return browserName_;
+}
 
 //
 // End of "$Id$".

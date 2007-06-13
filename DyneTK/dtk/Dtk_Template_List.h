@@ -52,6 +52,14 @@ public:
      */
     void add(Dtk_Template *tmpl);
 
+    /** Return the number of templates in the list.
+     */
+    int size() { return tmplList_.size(); }
+
+    /** Return the template pointer using an index.
+     */
+    Dtk_Template *at(int index) { return tmplList_.at(index); }
+
 private:
 
     /// back reference to the template that keeps this list

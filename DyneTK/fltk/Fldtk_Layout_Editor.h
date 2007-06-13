@@ -42,6 +42,7 @@ public:
 	                        Fldtk_Layout_Editor(Dtk_Layout_Document *layout);
 	virtual                 ~Fldtk_Layout_Editor();
     virtual Dtk_Document    * document();
+    Fl_Hold_Browser         * templateBrowser() { return tmplBrowser_; }
 
 protected:
     Dtk_Layout_Document     * layout_;

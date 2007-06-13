@@ -36,6 +36,7 @@
 
 #include <FL/filename.h>
 #include <FL/fl_file_chooser.h>
+#include <FL/Fl_Hold_Browser.H>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -92,6 +93,7 @@ int Dtk_Layout_Document::load()
 		}
         // FIXME: we still need to load global layout settings, like layout size, etc.
 	}
+    rebuildTemplateBrowser();
     return 0;
 }
 
@@ -136,6 +138,20 @@ int Dtk_Layout_Document::saveAs()
 void Dtk_Layout_Document::close() 
 {
 	Dtk_Document::close();
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Layout_Document::rebuildTemplateBrowser() 
+{
+    if (!editor_)
+        return;
+    Fl_Hold_Browser *b = editor_->templateBrowser();
+    b->clear();
+    if (!root_)
+        return;
+    int indent = 0;
+    int index = 1;
+    root_->updateBrowserLink(b, indent, index, true);
 }
 
 
