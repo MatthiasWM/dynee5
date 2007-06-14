@@ -183,7 +183,7 @@ void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layou
         tmpl->edit();
     } else {
         layout->slotBrowser()->clear();
-        // FIXME no template selected. Clear slot list and hide any editor
+        slotEditor()->clear();
     }
 }
 
@@ -195,7 +195,7 @@ void Dtk_Layout_Document::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Do
         Dtk_Slot *slot = (Dtk_Slot*)browser->data(i);
         slot->edit();
     } else {
-        // FIXME no slot selected. Clear any editor
+        slotEditor()->clear();
     }
 }
 

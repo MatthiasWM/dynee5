@@ -153,6 +153,10 @@ SOURCE=..\fltk\Fldtk_Layout_Editor.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Fldtk_Layout_View.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Fldtk_Rect_Slot_Editor.h
 # End Source File
 # Begin Source File
@@ -162,6 +166,10 @@ SOURCE=..\fltk\Fldtk_Script_Editor.h
 # Begin Source File
 
 SOURCE=..\fltk\Fldtk_Script_Slot_Editor.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Slot_Editor_Group.h
 # End Source File
 # Begin Source File
 
@@ -230,6 +238,10 @@ SOURCE=..\fltk\Fldtk_Layout_Editor.cxx
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Fldtk_Layout_View.cxx
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Fldtk_Rect_Slot_Editor.cxx
 # End Source File
 # Begin Source File
@@ -239,6 +251,10 @@ SOURCE=..\fltk\Fldtk_Script_Editor.cxx
 # Begin Source File
 
 SOURCE=..\fltk\Fldtk_Script_Slot_Editor.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Slot_Editor_Group.cxx
 # End Source File
 # Begin Source File
 

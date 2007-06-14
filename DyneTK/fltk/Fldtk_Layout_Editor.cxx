@@ -45,6 +45,7 @@
 #include <stdlib.h>
 
 
+/*---------------------------------------------------------------------------*/
 Fl_Menu_Item specificMenu[] = {
     { "viewBounds" },
     { "viewFlags" },
@@ -52,6 +53,7 @@ Fl_Menu_Item specificMenu[] = {
     { 0 }
 };
 
+/*---------------------------------------------------------------------------*/
 Fl_Menu_Item methodsMenu[] = {
     { "afterScript" },
     { "beforeScript" },
@@ -59,6 +61,7 @@ Fl_Menu_Item methodsMenu[] = {
     { 0 }
 };
 
+/*---------------------------------------------------------------------------*/
 Fl_Menu_Item attributesMenu[] = {
     { "copyProtection" },
     { "declareSelf" },
@@ -66,6 +69,7 @@ Fl_Menu_Item attributesMenu[] = {
     { 0 }
 };
 
+/*---------------------------------------------------------------------------*/
 Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
 :   Fldtk_Editor(layout->name()),
     layout_(layout),
@@ -147,10 +151,12 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
 }
 
 
+/*---------------------------------------------------------------------------*/
 Fldtk_Layout_Editor::~Fldtk_Layout_Editor()
 {
 }
 
+/*---------------------------------------------------------------------------*/
 Dtk_Document *Fldtk_Layout_Editor::document() 
 {
     return layout_; 
