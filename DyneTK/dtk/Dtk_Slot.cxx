@@ -28,11 +28,11 @@
 #include "Dtk_Slot_List.h"
 #include "Dtk_Template.h"
 #include "Dtk_Layout_Document.h"
+#include "fltk/Fldtk_Slot_Editor_Group.h"
 
 #include "allNewt.h"
 
 #include <FL/Fl_Hold_Browser.H>
-#include <FL/Fl_Wizard.H>
 
 
 /*---------------------------------------------------------------------------*/
@@ -54,8 +54,7 @@ Dtk_Slot::~Dtk_Slot()
 /*---------------------------------------------------------------------------*/
 void Dtk_Slot::edit()
 {
-    Fl_Wizard *container = layout()->slotEditor();
-    container->value(container->child(0));
+    layout()->slotEditor()->blank();
 }
 
 /*---------------------------------------------------------------------------*/

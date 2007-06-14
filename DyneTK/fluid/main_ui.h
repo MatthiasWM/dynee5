@@ -163,6 +163,11 @@ private:
   void cb_mWindowConnectInspector_i(Fl_Menu_*, void*);
   static void cb_mWindowConnectInspector(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *mOpenLayout;
+private:
+  void cb_mOpenLayout_i(Fl_Menu_*, void*);
+  static void cb_mOpenLayout(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *mHelp;
   static Fl_Menu_Item *mHelpAbout;
 private:

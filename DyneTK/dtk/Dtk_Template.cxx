@@ -39,8 +39,8 @@
 
 #include "allNewt.h"
 
-
 #include <FL/Fl_Hold_Browser.H>
+#include <FL/Fl_Group.H>
 
 
 /*---------------------------------------------------------------------------*/
@@ -195,20 +195,23 @@ int Dtk_Template::load(newtRef node)
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add)
+void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, Fl_Group *grp, int &indent, int &index, bool add)
 {
     browser_ = browser;
     indent_ = indent;
     index_ = index++;
     if (add) {
         browser->add(browserName(), this);
+	grp->begin();
+	//widget_ = new Fl_Group(10, 10, 100, 100, "Yo!");
+
     }
     if (tmplList_) {
         int i, n = tmplList_->size();
         indent++;
         for (i=0; i<n; i++) {
             Dtk_Template *tmpl = tmplList_->at(i);
-            tmpl->updateBrowserLink(browser, indent, index, add);
+            tmpl->updateBrowserLink(browser, grp, indent, index, add);
         }
         indent--;
     }

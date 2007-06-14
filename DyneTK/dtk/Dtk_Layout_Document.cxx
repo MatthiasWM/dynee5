@@ -31,6 +31,8 @@
 #include "dtk/Dtk_Template.h"
 #include "dtk/Dtk_Slot.h"
 #include "fltk/Fldtk_Layout_Editor.h"
+#include "fltk/Fldtk_Layout_View.h"
+#include "fltk/Fldtk_Slot_Editor_Group.h"
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fluid/main_ui.h"
 #include "main.h"
@@ -48,7 +50,8 @@
 Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
 :   Dtk_Document(list),
     root_(0L),
-    editor_(0L)
+    editor_(0L),
+    view_(0L)
 {
 }
 
@@ -59,6 +62,7 @@ Dtk_Layout_Document::~Dtk_Layout_Document()
     editor_->templateBrowser()->callback(0L, 0L);
     editor_->slotBrowser()->callback(0L, 0L);
     delete editor_;
+    delete view_;
     delete root_;
 }
 
@@ -96,7 +100,7 @@ int Dtk_Layout_Document::load()
 		}
         // FIXME: we still need to load global layout settings, like layout size, etc.
 	}
-    rebuildTemplateBrowser();
+    setupEditors();
     return 0;
 }
 
@@ -110,9 +114,18 @@ int Dtk_Layout_Document::edit()
 		dtkDocumentTabs->add(editor_);
 	}
 	dtkDocumentTabs->value(editor_);
+    if (!view_) {
+        Fl_Group::current(0L);
+        view_ = new Fldtk_Layout_View(this, 320, 480);
+    }
     return 0;
 }
 
+/*---------------------------------------------------------------------------*/
+void Dtk_Layout_Document::editView() 
+{
+    view_->show();
+}
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Layout_Document::save()
@@ -144,7 +157,7 @@ void Dtk_Layout_Document::close()
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout_Document::rebuildTemplateBrowser() 
+void Dtk_Layout_Document::setupEditors() 
 {
     if (!editor_)
         return;
@@ -154,7 +167,7 @@ void Dtk_Layout_Document::rebuildTemplateBrowser()
         return;
     int indent = 0;
     int index = 1;
-    root_->updateBrowserLink(b, indent, index, true);
+    root_->updateBrowserLink(b, layoutView(), indent, index, true);
     b->callback((Fl_Callback*)templateBrowser_cb, this);
     slotBrowser()->callback((Fl_Callback*)slotBrowser_cb, this);
 }
@@ -170,7 +183,7 @@ Fl_Hold_Browser *Dtk_Layout_Document::slotBrowser() {
 }
 
 /*---------------------------------------------------------------------------*/
-Fl_Wizard *Dtk_Layout_Document::slotEditor() {
+Fldtk_Slot_Editor_Group *Dtk_Layout_Document::slotEditor() {
     return editor_->slotEditor();
 }
 
@@ -183,7 +196,7 @@ void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layou
         tmpl->edit();
     } else {
         layout->slotBrowser()->clear();
-        slotEditor()->clear();
+        layout->slotEditor()->blank();
     }
 }
 
@@ -195,7 +208,7 @@ void Dtk_Layout_Document::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Do
         Dtk_Slot *slot = (Dtk_Slot*)browser->data(i);
         slot->edit();
     } else {
-        slotEditor()->clear();
+        layout->slotEditor()->blank();
     }
 }
 

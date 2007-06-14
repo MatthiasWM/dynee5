@@ -37,7 +37,7 @@ class Fldtk_Slot_Editor_Group : public Fl_Wizard
 public:
 	            Fldtk_Slot_Editor_Group(int X, int Y, int W, int H);
 	virtual     ~Fldtk_Slot_Editor_Group();
-    void        clear();
+    void        blank();
 };
 
 

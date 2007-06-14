@@ -158,6 +158,10 @@ public:
      */
     Dtk_Project     * project();
 
+    /** Return true, if this document is a layout or derived from a layout.
+     */
+    virtual bool isLayout() { return false; }
+
     /// replace me
     virtual int		getID() { return -1; }
 

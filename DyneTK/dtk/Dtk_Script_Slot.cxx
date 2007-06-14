@@ -27,6 +27,7 @@
 #include "Dtk_Script_Slot.h"
 #include "Dtk_Layout_Document.h"
 #include "fltk/Fldtk_Script_Slot_Editor.h"
+#include "fltk/Fldtk_Slot_Editor_Group.h"
 
 #include "allNewt.h"
 
@@ -66,7 +67,7 @@ Dtk_Script_Slot::~Dtk_Script_Slot()
 /*---------------------------------------------------------------------------*/
 void Dtk_Script_Slot::edit()
 {
-    Fl_Wizard *container = layout()->slotEditor();
+    Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
     if (!editor_) {
         container->begin();
         editor_ = new Fldtk_Script_Slot_Editor(container, this);

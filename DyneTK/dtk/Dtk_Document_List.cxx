@@ -194,7 +194,7 @@ int Dtk_Document_List::remove(Dtk_Document *doc)
     // search the list for this document
     for (i=0; i<n; ++i) {
         if (docList_.at(i)==doc) {
-            docList_.erase(&docList_[i]);
+            docList_.erase(docList_.begin()+i);
             if (browser_)
                 browser_->remove(i+1);
             return 0;

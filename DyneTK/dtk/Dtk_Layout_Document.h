@@ -32,6 +32,8 @@
 
 class Dtk_Template;
 class Fldtk_Layout_Editor;
+class Fldtk_Slot_Editor_Group;
+class Fldtk_Layout_View;
 class Fl_Hold_Browser;
 class Fl_Wizard;
 
@@ -52,18 +54,25 @@ public:
 	virtual void	close();
 	virtual int		getID() { return 0; }
 
+    virtual bool isLayout() { return true; }
+
+    void editView();
     Fl_Hold_Browser * templateBrowser();
     Fl_Hold_Browser * slotBrowser();
-    Fl_Wizard       * slotEditor();
+    Fldtk_Slot_Editor_Group * slotEditor();
+    Fldtk_Layout_View * layoutView() { return view_; }
 
 private:
-    void            rebuildTemplateBrowser();
+    void            setupEditors();
 
     /// The root element of the tree of all templates inside this layout.
     Dtk_Template    * root_;
 
     /// Editor in the document tabs.
     Fldtk_Layout_Editor * editor_;
+
+    /// Visual layout editor.
+    Fldtk_Layout_View *view_;
 
     /// Visual layout editor.
     // Fldtk_Visual_Layout * visualEditor_;

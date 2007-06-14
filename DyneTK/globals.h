@@ -30,6 +30,7 @@
 #include "allNewt.h"
 
 class Dtk_Document;
+class Dtk_Layout_Document;
 
 /** \file globals.h
  * global functions for general access. The functions are used
@@ -300,9 +301,23 @@ void	ShowProjectSettings();
 /*---------------------------------------------------------------------------*/
 // Window menu
 //      OpenInspector()
-void	InspectorConnect();
+
+/** Attempt to connect the Inspector to a Newton.
+ *
+ * This will pop up a cancelation dialog, and the try to connect to a Newton
+ * until either the connection is established or the user cancels the operation.
+ */
+void InspectorConnect();
+
 //      NewBrowser()
-//      OpenLayout()
+
+/** Open the layout view for the current layout document.
+ *
+ * If a Layout Document is selected, this function will pop up the related
+ * visual layout editor.
+ */
+int OpenLayoutView(Dtk_Layout_Document *lyt=0L);
+
 //      Cascade()
 //      Tile()
 //      ArrangeIcons()

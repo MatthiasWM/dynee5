@@ -33,6 +33,7 @@ Fldtk_Layout_View::Fldtk_Layout_View(Dtk_Layout_Document *layout, int width, int
 :   Fl_Double_Window(width, height),
     layout_(layout)
 {
+    set_non_modal();
 }
 
 

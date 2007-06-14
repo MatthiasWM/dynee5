@@ -27,10 +27,9 @@
 #include "Dtk_Rect_Slot.h"
 #include "Dtk_Layout_Document.h"
 #include "fltk/Fldtk_Rect_Slot_Editor.h"
+#include "fltk/Fldtk_Slot_Editor_Group.h"
 
 #include "allNewt.h"
-
-#include <FL/Fl_Wizard.H>
 
 #include <string.h>
 
@@ -66,7 +65,7 @@ Dtk_Rect_Slot::~Dtk_Rect_Slot()
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::edit()
 {
-    Fl_Wizard *container = layout()->slotEditor();
+    Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
     if (!editor_) {
         container->begin();
         editor_ = new Fldtk_Rect_Slot_Editor(container, this);

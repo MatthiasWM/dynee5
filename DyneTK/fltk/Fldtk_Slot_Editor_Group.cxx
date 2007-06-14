@@ -30,17 +30,21 @@
 
 /*---------------------------------------------------------------------------*/
 Fldtk_Slot_Editor_Group::Fldtk_Slot_Editor_Group(int X, int Y, int W, int H)
-:   Fl_Wizard(width, height),
-    layout_(layout)
+:   Fl_Wizard(X, Y, W, H)
 {
 }
 
 
 /*---------------------------------------------------------------------------*/
-Fldtk_Layout_View::~Fldtk_Layout_View()
+Fldtk_Slot_Editor_Group::~Fldtk_Slot_Editor_Group()
 {
 }
 
+/*---------------------------------------------------------------------------*/
+void Fldtk_Slot_Editor_Group::blank()
+{
+    value(child(0));
+}
 
 //
 // End of "$Id$".

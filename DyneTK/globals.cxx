@@ -36,6 +36,7 @@
 
 #include "dtk/Dtk_Document_List.h"
 #include "dtk/Dtk_Document.h"
+#include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Project.h"
 #include "dtk/Dtk_Error.h"
 
@@ -819,6 +820,18 @@ Dtk_Document *GetCurrentDocument()
     return ed->document();
 }
 
+/*---------------------------------------------------------------------------*/
+int OpenLayoutView(Dtk_Layout_Document *lyt)
+{
+    if (!lyt) {
+        Dtk_Document *doc = GetCurrentDocument();
+        if (!doc || !doc->isLayout())
+            return -1;
+        lyt = (Dtk_Layout_Document*)doc;
+    }
+    lyt->editView();
+    return 0;
+}
 
 //
 // End of "$Id$".

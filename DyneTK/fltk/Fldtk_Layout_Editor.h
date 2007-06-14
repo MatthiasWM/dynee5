@@ -31,8 +31,8 @@
 
 
 class Fl_Hold_Browser;
-class Fl_Wizard;
 class Dtk_Layout_Document;
+class Fldtk_Slot_Editor_Group;
 
 
 /** GUI element for editing layouts.
@@ -45,13 +45,13 @@ public:
     virtual Dtk_Document    * document();
     Fl_Hold_Browser         * templateBrowser() { return tmplBrowser_; }
     Fl_Hold_Browser         * slotBrowser() { return slotBrowser_; }
-    Fl_Wizard               * slotEditor() { return slotEditor_; }
+    Fldtk_Slot_Editor_Group * slotEditor() { return slotEditor_; }
 
 protected:
     Dtk_Layout_Document     * layout_;
 	Fl_Hold_Browser         * tmplBrowser_;
 	Fl_Hold_Browser         * slotBrowser_;
-    Fl_Wizard               * slotEditor_;
+    Fldtk_Slot_Editor_Group * slotEditor_;
     // slot menus
     //  specific
     //  methods

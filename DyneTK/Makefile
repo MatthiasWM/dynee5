@@ -3,32 +3,42 @@ all: dynetk
 
 SRCFILES = \
   dtk/Dtk_Document.cxx \
-  dtk/Dtk_Script_Document.cxx \
-  dtk/Dtk_Project.cxx \
-  dtk/Dtk_Document_Manager.cxx \
+  dtk/Dtk_Document_List.cxx \
   dtk/Dtk_Error.cxx \
   dtk/Dtk_Layout_Document.cxx \
+  dtk/Dtk_Project.cxx \
+  dtk/Dtk_Rect_Slot.cxx \
+  dtk/Dtk_Script_Document.cxx \
+  dtk/Dtk_Script_Slot.cxx \
+  dtk/Dtk_Slot.cxx \
+  dtk/Dtk_Slot_List.cxx \
+  dtk/Dtk_Template.cxx \
+  dtk/Dtk_Template_List.cxx \
   fltk/Flio_Inspector.cxx \
-  fltk/Fldtk_Layout_Drop_Box.cxx \
-  fltk/Flmm_Set_Input.cxx \
   fltk/Flio_MNP4_Protocol.cxx \
-  fltk/Flio_Stream.cxx \
   fltk/Flio_Pipe.cxx \
   fltk/Flio_Serial_Port.cxx \
-  fltk/Flmm_Set_Check_Button.cxx \
-  fltk/Fldtk_Script_Editor.cxx \
-  fltk/Flmm_Message.cxx \
-  fltk/Fldtk_Document_Browser.cxx \
-  fltk/Fldtk_Layout_Editor.cxx \
-  fltk/Fldtk_Editor.cxx \
-  fltk/Fldtk_Document_Tabs.cxx \
+  fltk/Flio_Stream.cxx \
   fltk/Flmm_Console.cxx \
+  fltk/Flmm_Message.cxx \
+  fltk/Flmm_Set_Input.cxx \
+  fltk/Flmm_Set_Check_Button.cxx \
   fltk/Flmp_Image.cxx \
-  fluid/Fldtk_Proj_Settings.cxx \
-  fluid/main_ui.cxx \
-  fluid/Fldtk_Prefs.cxx \
+  fltk/Fldtk_Document_Browser.cxx \
+  fltk/Fldtk_Document_Tabs.cxx \
+  fltk/Fldtk_Editor.cxx \
+  fltk/Fldtk_Layout_Drop_Box.cxx \
+  fltk/Fldtk_Layout_Editor.cxx \
+  fltk/Fldtk_Layout_View.cxx \
+  fltk/Fldtk_Rect_Slot_Editor.cxx \
+  fltk/Fldtk_Script_Editor.cxx \
+  fltk/Fldtk_Script_Slot_Editor.cxx \
+  fltk/Fldtk_Slot_Editor_Group.cxx \
   fluid/Fldtk_Inspector.cxx \
+  fluid/Fldtk_Proj_Settings.cxx \
+  fluid/Fldtk_Prefs.cxx \
   fluid/Fldtk_Snapshot.cxx \
+  fluid/main_ui.cxx \
   globals.cxx \
   main.cxx \
   sandbox.cxx \
@@ -65,6 +75,7 @@ clean:
 	rm dynetk
 
 depend:
+	mkdep $(CXXFLAGS) $(INCLUDES) $(NEWTINCLUDES) $(SRCFILES)
 	makedepend -- $(CXXFLAGS) $(INCLUDES) $(NEWTINCLUDES) -- $(SRCFILES)
 
 

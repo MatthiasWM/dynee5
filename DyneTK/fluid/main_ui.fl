@@ -53,11 +53,11 @@ widget_class Fldtk_Main_Window {
   xywh {486 112 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {
+  Fl_Menu_Bar {} {open
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File open
+      label File
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mFileNewLayout {
@@ -429,9 +429,10 @@ widget_class Fldtk_Main_Window {
         label {New Browser}
         xywh {5 5 100 20} shortcut 0x40062 labelsize 12 labelcolor 176 deactivate
       }
-      MenuItem {} {
+      MenuItem mOpenLayout {
         label {Open Layout}
-        xywh {5 5 100 20} shortcut 0x4006c labelsize 12 labelcolor 176 deactivate divider
+        callback {OpenLayoutView();}
+        xywh {5 5 100 20} shortcut 0x4006c labelsize 12 deactivate divider
       }
       MenuItem {} {
         label Cascade
@@ -613,7 +614,7 @@ widget_class Fldtk_Main_Window {
     Fl_Group {} {open
       xywh {0 95 150 305} box FLAT_BOX
     } {
-      Fl_Tabs browsers {selected
+      Fl_Tabs browsers {
         xywh {3 98 144 299} box UP_BOX labelsize 12 resizable
       } {
         Fl_Browser documents {
@@ -722,11 +723,13 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSave->activate();
   tFileSave->activate();
   mFileSaveAs->activate();
+  mOpenLayout->activate();
 } else {
   mFileClose->deactivate();
   mFileSave->deactivate();
   tFileSave->deactivate();
   mFileSaveAs->deactivate();
+  mOpenLayout->deactivate();
 }
 
 // if a project is loaded, a document is active, and the document is part of the project
@@ -759,7 +762,8 @@ if ( (mask & 0x00000009) == 0x00000009 ) {
   mProjectDownload->deactivate(); // could depend on existing pkg
   tProjectDownload->deactivate(); // could depend on existing pkg
   mProjectLaunch->deactivate(); // could depend on downloaded pkg
-}} {}
+}} {selected
+    }
   }
 } 
 

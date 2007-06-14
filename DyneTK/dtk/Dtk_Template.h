@@ -36,6 +36,7 @@ extern "C" {
 
 
 class Fl_Hold_Browser;
+class Fl_Group;
 class Dtk_Slot_List;
 
 
@@ -65,7 +66,7 @@ public:
      *
      * Upate all information needed to keep the browser information current.
      */
-    void            updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add=false);
+    void            updateBrowserLink(Fl_Hold_Browser *browser, Fl_Group *grp, int &indent, int &index, bool add=false);
 
     /** Return the name of the template as it will appear in the browser
      */
