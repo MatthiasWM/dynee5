@@ -38,7 +38,9 @@ extern "C" {
 class Fl_Hold_Browser;
 class Fl_Group;
 class Dtk_Slot_List;
-
+class Flnt_Widget;
+class Dtk_Slot;
+class Dtk_Rect_Slot;
 
 /** Manage a template object in a layout.
  *
@@ -66,7 +68,7 @@ public:
      *
      * Upate all information needed to keep the browser information current.
      */
-    void            updateBrowserLink(Fl_Hold_Browser *browser, Fl_Group *grp, int &indent, int &index, bool add=false);
+    void            updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add=false);
 
     /** Return the name of the template as it will appear in the browser
      */
@@ -81,6 +83,13 @@ public:
      * We need to update the slot browser and the slot editor.
      */
     void edit();
+
+    /** Return the coordinates of the template in the layout.
+     */
+    int x();
+    int y();
+    int w();
+    int h();
 
 private:
 
@@ -106,13 +115,19 @@ private:
     Fl_Hold_Browser     * browser_;
 
     /// name of the template as it appears in the browser view
-    char                *browserName_;
+    char                * browserName_;
 
     /// dtk name of template
-    char                *ntName_;
+    char                * ntName_;
 
     /// dtk id of template (compareable to C++ "class")
-    char                *ntId_;
+    char                * ntId_;
+
+    /// an FLTK derived widget graphically representing the Newt UI element
+    Flnt_Widget         * widget_;
+
+    /// slot containing the coordintes of the template widget
+    Dtk_Rect_Slot       * viewBounds_;
 };
 
 

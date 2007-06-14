@@ -453,6 +453,22 @@ SOURCE=..\nt\Nt_Group.cxx
 SOURCE=..\nt\Nt_Group.h
 # End Source File
 # End Group
+# Begin Group "flnt"
+
+# PROP Default_Filter ""
+# Begin Group "flnt headers"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\flnt\Flnt_Widget.h
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=..\flnt\Flnt_Widget.cxx
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=..\globals.cxx

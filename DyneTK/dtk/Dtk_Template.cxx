@@ -37,6 +37,8 @@
 #include "Dtk_Script_Slot.h"
 #include "Dtk_Rect_Slot.h"
 
+#include "flnt/Flnt_Widget.h"
+
 #include "allNewt.h"
 
 #include <FL/Fl_Hold_Browser.H>
@@ -54,7 +56,8 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
     browser_(0L),
     browserName_(0L),
     ntName_(0L),
-    ntId_(0L)    
+    ntId_(0L),
+    viewBounds_(0L)
 {
 }
 
@@ -126,6 +129,9 @@ int Dtk_Template::load(newtRef node)
                     dSlot = new Dtk_Slot(slotList_, keyname, slot);
                 }
             }
+            if (key==NSSYM(viewBounds)) {
+                viewBounds_ = (Dtk_Rect_Slot*)dSlot;
+            }
             if (dSlot) {
                 slotList_->add(dSlot);
             }
@@ -195,25 +201,26 @@ int Dtk_Template::load(newtRef node)
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, Fl_Group *grp, int &indent, int &index, bool add)
+void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add)
 {
     browser_ = browser;
     indent_ = indent;
     index_ = index++;
     if (add) {
         browser->add(browserName(), this);
-	grp->begin();
-	//widget_ = new Fl_Group(10, 10, 100, 100, "Yo!");
-
+	    widget_ = new Flnt_Widget(this);
     }
     if (tmplList_) {
         int i, n = tmplList_->size();
         indent++;
         for (i=0; i<n; i++) {
             Dtk_Template *tmpl = tmplList_->at(i);
-            tmpl->updateBrowserLink(browser, grp, indent, index, add);
+            tmpl->updateBrowserLink(browser, indent, index, add);
         }
         indent--;
+    }
+    if (add) {
+	    widget_->end();
     }
 }
 
@@ -253,6 +260,30 @@ void Dtk_Template::edit()
             slotBrowser->add(slot->key(), slot);
         }
     }
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Template::x()
+{
+    return viewBounds_ ? viewBounds_->left() : 0;
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Template::y()
+{
+    return viewBounds_ ? viewBounds_->top() : 0;
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Template::w()
+{
+    return viewBounds_ ? viewBounds_->right() - viewBounds_->left() : 0;
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Template::h()
+{
+    return viewBounds_ ? viewBounds_->bottom() - viewBounds_->top() : 0;
 }
 
 //

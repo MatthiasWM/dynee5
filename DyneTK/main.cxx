@@ -97,6 +97,17 @@ int main(int argc, char **argv) {
 	Fl::lock();
 	Fl::scheme("GTK+");
 	Fl_Tooltip::size(11);
+    // Set font 16/17 to Epsy Sans (Bold)
+    Fl::set_font((Fl_Font)16, (Fl_Font)1);
+    Fl::set_font((Fl_Font)17, (Fl_Font)2);
+    Fl::set_font((Fl_Font)16, " Nu Sans");
+    Fl::set_font((Fl_Font)17, "BNu Sans");
+    // Set font 20/21 to Casual (Bold)
+    Fl::set_font((Fl_Font)20, (Fl_Font)14);
+    Fl::set_font((Fl_Font)21, (Fl_Font)15);
+    Fl::set_font((Fl_Font)20, " Nu Casual");
+    Fl::set_font((Fl_Font)21, "BNu Casual");
+    // font for all messages
 	fl_message_font(FL_HELVETICA, 12);
 
 	toolbox_open_pixmap = new Fl_Pixmap(toolbox_open_xpm);

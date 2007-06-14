@@ -40,18 +40,19 @@ Dtk_Rect_Slot::Dtk_Rect_Slot(Dtk_Slot_List *list, const char *theKey, newtRef sl
     editor_(0L),
     top_(0), left_(0), bottom_(0), right_(0)
 {
-/*
-    newtRef value = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-    if (NewtRefIsString(value)) {
-        script_ = strdup(NewtRefToString(value));
-        char *s = script_;
-        for (;;s++) {
-            char c = *s;
-            if (!c) break;
-            if (c=='\r') *s = '\n';
-        }
-    }
-*/
+    // read the view bounds
+	newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
+	if (NewtRefIsFrame(v)) {
+		 newtRef i;
+		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(top)));
+		 if (NewtRefIsInteger(i)) top_ = NewtRefToInteger(i);
+		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(left)));
+		 if (NewtRefIsInteger(i)) left_ = NewtRefToInteger(i);
+		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(bottom)));
+		 if (NewtRefIsInteger(i)) bottom_ = NewtRefToInteger(i);
+		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(right)));
+		 if (NewtRefIsInteger(i)) right_ = NewtRefToInteger(i);
+	}
 }
 
 

@@ -27,6 +27,7 @@
 #include "dtk/Dtk_Script_Slot.h"
 
 #include <FL/Fl_Int_Input.H>
+#include <FL/Fl_Box.H>
 
 #include <stdio.h>
 

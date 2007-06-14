@@ -167,7 +167,9 @@ void Dtk_Layout_Document::setupEditors()
         return;
     int indent = 0;
     int index = 1;
-    root_->updateBrowserLink(b, layoutView(), indent, index, true);
+    layoutView()->begin();
+    root_->updateBrowserLink(b, indent, index, true);
+    layoutView()->end();
     b->callback((Fl_Callback*)templateBrowser_cb, this);
     slotBrowser()->callback((Fl_Callback*)slotBrowser_cb, this);
 }

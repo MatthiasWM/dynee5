@@ -51,6 +51,13 @@ public:
      */
     virtual void    edit();
 
+    /** Return the coordintaes of the rectangle.
+     */
+    int     top() { return top_; }
+    int     left() { return left_; }
+    int     bottom() { return bottom_; }
+    int     right() { return right_; }
+
 private:
 
     /// this is the editor that we are using
