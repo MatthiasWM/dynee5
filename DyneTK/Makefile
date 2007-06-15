@@ -14,6 +14,7 @@ SRCFILES = \
   dtk/Dtk_Slot_List.cxx \
   dtk/Dtk_Template.cxx \
   dtk/Dtk_Template_List.cxx \
+  dtk/Dtk_Value_Slot.cxx \
   fltk/Flio_Inspector.cxx \
   fltk/Flio_MNP4_Protocol.cxx \
   fltk/Flio_Pipe.cxx \
@@ -34,11 +35,13 @@ SRCFILES = \
   fltk/Fldtk_Script_Editor.cxx \
   fltk/Fldtk_Script_Slot_Editor.cxx \
   fltk/Fldtk_Slot_Editor_Group.cxx \
+  fltk/Fldtk_Value_Slot_Editor.cxx \
   fluid/Fldtk_Inspector.cxx \
   fluid/Fldtk_Proj_Settings.cxx \
   fluid/Fldtk_Prefs.cxx \
   fluid/Fldtk_Snapshot.cxx \
   fluid/main_ui.cxx \
+  flnt/Flnt_Widget.cxx \
   globals.cxx \
   main.cxx \
   sandbox.cxx \

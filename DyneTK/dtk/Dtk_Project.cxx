@@ -44,6 +44,8 @@
 #ifdef WIN32
 # include <winsock2.h>
 # include <direct.h>
+#else
+# include <arpa/inet.h>
 #endif
 
 #include "allNewt.h"
