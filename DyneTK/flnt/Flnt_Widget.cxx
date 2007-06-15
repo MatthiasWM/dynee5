@@ -32,9 +32,11 @@
 
 /*---------------------------------------------------------------------------*/
 Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl)
-:   Fl_Group(tmpl->x(), tmpl->y(), tmpl->w(), tmpl->h()),
+:   Fl_Group(0, 0, 10, 10),
     template_(tmpl)
 {
+    newtResize();
+    init_sizes();
     copy_label(tmpl->browserName());
     align(FL_ALIGN_INSIDE|FL_ALIGN_WRAP|FL_ALIGN_CLIP|FL_ALIGN_TOP|FL_ALIGN_LEFT);
     labelfont((Fl_Font)16);
@@ -46,6 +48,25 @@ Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl)
 /*---------------------------------------------------------------------------*/
 Flnt_Widget::~Flnt_Widget()
 {
+}
+
+/*---------------------------------------------------------------------------*/
+void Flnt_Widget::newtResize()
+{
+    int t, l, b, r;
+    int X, Y, W, H;
+    unsigned int jst;
+
+    template_->getSize(t, l, b, r);
+    jst = template_->justify();
+
+    // FIXME these following calculations depend heavily on the justification flags
+    X = l;
+    Y = t;
+    W = r - l;
+    H = b - t;
+
+    resize(X, Y, W, H);
 }
 
 

@@ -177,6 +177,10 @@ SOURCE=..\fluid\Fldtk_Snapshot.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Fldtk_Value_Slot_Editor.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Flio_Inspector.h
 # End Source File
 # Begin Source File
@@ -259,6 +263,10 @@ SOURCE=..\fltk\Fldtk_Slot_Editor_Group.cxx
 # Begin Source File
 
 SOURCE=..\fluid\Fldtk_Snapshot.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Value_Slot_Editor.cxx
 # End Source File
 # Begin Source File
 
@@ -371,6 +379,10 @@ SOURCE=..\dtk\Dtk_Template.h
 
 SOURCE=..\dtk\Dtk_Template_List.h
 # End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Value_Slot.h
+# End Source File
 # End Group
 # Begin Source File
 
@@ -419,6 +431,10 @@ SOURCE=..\dtk\Dtk_Template.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Template_List.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Value_Slot.cxx
 # End Source File
 # End Group
 # Begin Group "documentation"

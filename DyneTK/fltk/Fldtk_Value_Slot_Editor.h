@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Flnt_Widget header file for the FLMM extension to FLTK.
+// Fldtk_Value_Slot_Editor header file for the FLMM extension to FLTK.
 //
 // Copyright 2002-2007 by Matthias Melcher.
 //
@@ -23,30 +23,30 @@
 // Please report all bugs and problems to "flmm@matthiasm.com".
 //
 
-#ifndef FLNT_WIDGET_H
-#define FLNT_WIDGET_H
+#ifndef FLDTK_VALUE_SLOT_EDITOR_H
+#define FLDTK_VALUE_SLOT_EDITOR_H
 
 
 #include <FL/Fl_Group.H>
 
 
-class Dtk_Template;
+class Dtk_Value_Slot;
+class Fl_Input;
 
 
-/** GUI Widget representing a Newt Template.
+/** GUI for editing value slots.
  */
-class Flnt_Widget : public Fl_Group
+class Fldtk_Value_Slot_Editor : public Fl_Group
 {
 public:
-	                Flnt_Widget(Dtk_Template *tmpl);
-
-	virtual         ~Flnt_Widget();
-
-    void            newtResize();
+	        Fldtk_Value_Slot_Editor(Fl_Group *container, Dtk_Value_Slot *slot);
+	        ~Fldtk_Value_Slot_Editor();
+    void    value(double v);
+    double  value();
 
 protected:
-
-    Dtk_Template    * template_;
+    Dtk_Value_Slot * slot_;
+    Fl_Input    *wValue_;
 };
 
 

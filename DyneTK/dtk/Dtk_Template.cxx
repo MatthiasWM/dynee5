@@ -36,6 +36,7 @@
 #include "Dtk_Slot.h"
 #include "Dtk_Script_Slot.h"
 #include "Dtk_Rect_Slot.h"
+#include "Dtk_Value_Slot.h"
 
 #include "flnt/Flnt_Widget.h"
 
@@ -123,6 +124,8 @@ int Dtk_Template::load(newtRef node)
                     dSlot = new Dtk_Script_Slot(slotList_, keyname, slot);
                 } else if (strcmp(dt, "RECT")==0) {
                     dSlot = new Dtk_Rect_Slot(slotList_, keyname, slot);
+                } else if (strcmp(dt, "NUMB")==0) {
+                    dSlot = new Dtk_Value_Slot(slotList_, keyname, slot);
                 } else {
                     // also: RECT, CLAS, NUMB, PICT, PROT, USER, any more?
                     printf("Unsupported slot datatype \"%s\"\n", dt);
@@ -263,28 +266,23 @@ void Dtk_Template::edit()
 }
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Template::x()
+void Dtk_Template::getSize(int &t, int &l, int &b, int &r)
 {
-    return viewBounds_ ? viewBounds_->left() : 0;
+    if (viewBounds_) {
+        t = viewBounds_->top();
+        l = viewBounds_->left();
+        b = viewBounds_->bottom();
+        r = viewBounds_->right();
+    }
 }
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Template::y()
+unsigned int Dtk_Template::justify()
 {
-    return viewBounds_ ? viewBounds_->top() : 0;
+    //return alignment_ ? alignment_->value() : 0;
+    return 0;
 }
 
-/*---------------------------------------------------------------------------*/
-int Dtk_Template::w()
-{
-    return viewBounds_ ? viewBounds_->right() - viewBounds_->left() : 0;
-}
-
-/*---------------------------------------------------------------------------*/
-int Dtk_Template::h()
-{
-    return viewBounds_ ? viewBounds_->bottom() - viewBounds_->top() : 0;
-}
 
 //
 // End of "$Id$".

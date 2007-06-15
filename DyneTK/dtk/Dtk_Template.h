@@ -86,10 +86,11 @@ public:
 
     /** Return the coordinates of the template in the layout.
      */
-    int x();
-    int y();
-    int w();
-    int h();
+    void getSize(int &t, int &l, int &b, int &r);
+
+    /** Return the template alignment.
+     */
+    unsigned int justify();
 
 private:
 
