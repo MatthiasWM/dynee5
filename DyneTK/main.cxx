@@ -83,6 +83,11 @@ extern "C" void yyerror(char * s)
 }
 
 
+static void update_menus_cb(Fl_Widget*, void*)
+{
+    UpdateMainMenu();
+}
+
 /*---------------------------------------------------------------------------*/
 /**
  * Main entry function.
@@ -141,6 +146,7 @@ int main(int argc, char **argv) {
 	// link the functional elements to the visual elements
 	dtkDocumentBrowser = dtkMain->documents;
     dtkDocumentTabs = dtkMain->document_tabs;
+    dtkDocumentTabs->callback(update_menus_cb);
 
 	// launch the application
 	dtkMain->show(/*argc*/1, argv);

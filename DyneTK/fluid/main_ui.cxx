@@ -77,6 +77,13 @@ void Fldtk_Main_Window::cb_mFileExit(Fl_Menu_* o, void* v) {
   ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mFileExit_i(o,v);
 }
 
+void Fldtk_Main_Window::cb_mEditNewtScreenshot_i(Fl_Menu_*, void*) {
+  InspectorSnapshot();
+}
+void Fldtk_Main_Window::cb_mEditNewtScreenshot(Fl_Menu_* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mEditNewtScreenshot_i(o,v);
+}
+
 void Fldtk_Main_Window::cb_mEditPreferences_i(Fl_Menu_*, void*) {
   EditPreferences();
 }
@@ -196,11 +203,11 @@ void Fldtk_Main_Window::cb_mWindowConnectInspector(Fl_Menu_* o, void* v) {
   ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mWindowConnectInspector_i(o,v);
 }
 
-void Fldtk_Main_Window::cb_mOpenLayout_i(Fl_Menu_*, void*) {
+void Fldtk_Main_Window::cb_mWindowOpenLayout_i(Fl_Menu_*, void*) {
   OpenLayoutView();
 }
-void Fldtk_Main_Window::cb_mOpenLayout(Fl_Menu_* o, void* v) {
-  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mOpenLayout_i(o,v);
+void Fldtk_Main_Window::cb_mWindowOpenLayout(Fl_Menu_* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mWindowOpenLayout_i(o,v);
 }
 
 void Fldtk_Main_Window::cb_mHelpAbout_i(Fl_Menu_*, void*) {
@@ -248,7 +255,7 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Find...", FL_COMMAND|0x66,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Find Next", FL_COMMAND|0x67,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Find Inherited", 0,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
- {"Newt Screen Shot", 0,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
+ {"Newt Screen Shot", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mEditNewtScreenshot, 0, 129, FL_NORMAL_LABEL, 0, 12, 0},
  {"Toolkit Preferences...", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mEditPreferences, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0},
  {"Project", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 12, 0},
@@ -302,7 +309,7 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Open Inspector", 0,  0, 0, 17, FL_NORMAL_LABEL, 0, 12, 176},
  {"Connect Inspector", FL_COMMAND|0x6b,  (Fl_Callback*)Fldtk_Main_Window::cb_mWindowConnectInspector, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {"New Browser", FL_COMMAND|0x62,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
- {"Open Layout", FL_COMMAND|0x6c,  (Fl_Callback*)Fldtk_Main_Window::cb_mOpenLayout, 0, 129, FL_NORMAL_LABEL, 0, 12, 0},
+ {"Open Layout", FL_COMMAND|0x6c,  (Fl_Callback*)Fldtk_Main_Window::cb_mWindowOpenLayout, 0, 129, FL_NORMAL_LABEL, 0, 12, 0},
  {"Cascade", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Tile", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Arrange Icons", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
@@ -327,6 +334,7 @@ Fl_Menu_Item* Fldtk_Main_Window::mFileSaveAs = Fldtk_Main_Window::menu_ + 8;
 Fl_Menu_Item* Fldtk_Main_Window::mFileSaveAll = Fldtk_Main_Window::menu_ + 9;
 Fl_Menu_Item* Fldtk_Main_Window::mFileExit = Fldtk_Main_Window::menu_ + 18;
 Fl_Menu_Item* Fldtk_Main_Window::mEdit = Fldtk_Main_Window::menu_ + 20;
+Fl_Menu_Item* Fldtk_Main_Window::mEditNewtScreenshot = Fldtk_Main_Window::menu_ + 37;
 Fl_Menu_Item* Fldtk_Main_Window::mEditPreferences = Fldtk_Main_Window::menu_ + 38;
 Fl_Menu_Item* Fldtk_Main_Window::mProject = Fldtk_Main_Window::menu_ + 40;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectNew = Fldtk_Main_Window::menu_ + 41;
@@ -345,7 +353,7 @@ Fl_Menu_Item* Fldtk_Main_Window::mLayout = Fldtk_Main_Window::menu_ + 63;
 Fl_Menu_Item* Fldtk_Main_Window::mBrowser = Fldtk_Main_Window::menu_ + 75;
 Fl_Menu_Item* Fldtk_Main_Window::mWindow = Fldtk_Main_Window::menu_ + 87;
 Fl_Menu_Item* Fldtk_Main_Window::mWindowConnectInspector = Fldtk_Main_Window::menu_ + 89;
-Fl_Menu_Item* Fldtk_Main_Window::mOpenLayout = Fldtk_Main_Window::menu_ + 91;
+Fl_Menu_Item* Fldtk_Main_Window::mWindowOpenLayout = Fldtk_Main_Window::menu_ + 91;
 Fl_Menu_Item* Fldtk_Main_Window::mHelp = Fldtk_Main_Window::menu_ + 98;
 Fl_Menu_Item* Fldtk_Main_Window::mHelpAbout = Fldtk_Main_Window::menu_ + 102;
 
@@ -1597,11 +1605,11 @@ static unsigned char idata_find_da[] =
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static Fl_RGB_Image image_find_da(idata_find_da, 16, 16, 4, 0);
 
-void Fldtk_Main_Window::cb_tSnapshot_i(Fl_Button*, void*) {
+void Fldtk_Main_Window::cb_tEditNewtScreenshot_i(Fl_Button*, void*) {
   InspectorSnapshot();
 }
-void Fldtk_Main_Window::cb_tSnapshot(Fl_Button* o, void* v) {
-  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_tSnapshot_i(o,v);
+void Fldtk_Main_Window::cb_tEditNewtScreenshot(Fl_Button* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_tEditNewtScreenshot_i(o,v);
 }
 
 static unsigned char idata_camera[] =
@@ -1895,11 +1903,11 @@ static unsigned char idata_package_go_da[] =
 158,158,158,235,158,158,158,255,157,157,157,4,0,0,0,0,0,0,0,0,0,0,0,0};
 static Fl_RGB_Image image_package_go_da(idata_package_go_da, 16, 16, 4, 0);
 
-void Fldtk_Main_Window::cb_tOpenLayout_i(Fl_Button*, void*) {
+void Fldtk_Main_Window::cb_tWindowOpenLayout_i(Fl_Button*, void*) {
   OpenLayoutView();
 }
-void Fldtk_Main_Window::cb_tOpenLayout(Fl_Button* o, void* v) {
-  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_tOpenLayout_i(o,v);
+void Fldtk_Main_Window::cb_tWindowOpenLayout(Fl_Button* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->parent()))->cb_tWindowOpenLayout_i(o,v);
 }
 
 static unsigned char idata_shape_group[] =
@@ -3164,14 +3172,14 @@ this->when(FL_WHEN_RELEASE);
     o->labelsize(11);
     o->deactivate();
   } // Fl_Button* o
-  { tSnapshot = new Fl_Button(365, 30, 25, 25);
-    tSnapshot->tooltip("Newt Screen Shot");
-    tSnapshot->image(image_camera);
-    tSnapshot->deimage(image_camera_da);
-    tSnapshot->labelsize(9);
-    tSnapshot->callback((Fl_Callback*)cb_tSnapshot);
-    tSnapshot->deactivate();
-  } // Fl_Button* tSnapshot
+  { tEditNewtScreenshot = new Fl_Button(365, 30, 25, 25);
+    tEditNewtScreenshot->tooltip("Newt Screen Shot");
+    tEditNewtScreenshot->image(image_camera);
+    tEditNewtScreenshot->deimage(image_camera_da);
+    tEditNewtScreenshot->labelsize(9);
+    tEditNewtScreenshot->callback((Fl_Callback*)cb_tEditNewtScreenshot);
+    tEditNewtScreenshot->deactivate();
+  } // Fl_Button* tEditNewtScreenshot
   { tProjectBuild = new Fl_Button(395, 30, 25, 25);
     tProjectBuild->tooltip("Build Package");
     tProjectBuild->image(image_wrench_orange);
@@ -3188,13 +3196,14 @@ this->when(FL_WHEN_RELEASE);
     tProjectDownload->callback((Fl_Callback*)cb_tProjectDownload);
     tProjectDownload->deactivate();
   } // Fl_Button* tProjectDownload
-  { tOpenLayout = new Fl_Button(450, 30, 25, 25);
-    tOpenLayout->tooltip("Open Layout");
-    tOpenLayout->image(image_shape_group);
-    tOpenLayout->deimage(image_shape_group_da);
-    tOpenLayout->labelsize(9);
-    tOpenLayout->callback((Fl_Callback*)cb_tOpenLayout);
-  } // Fl_Button* tOpenLayout
+  { tWindowOpenLayout = new Fl_Button(450, 30, 25, 25);
+    tWindowOpenLayout->tooltip("Open Layout");
+    tWindowOpenLayout->image(image_shape_group);
+    tWindowOpenLayout->deimage(image_shape_group_da);
+    tWindowOpenLayout->labelsize(9);
+    tWindowOpenLayout->callback((Fl_Callback*)cb_tWindowOpenLayout);
+    tWindowOpenLayout->deactivate();
+  } // Fl_Button* tWindowOpenLayout
   { Fl_Button* o = new Fl_Button(475, 30, 25, 25);
     o->tooltip("Create New Browser");
     o->image(image_table_edit);
@@ -3438,6 +3447,7 @@ void Fldtk_Main_Window::activate_menus(unsigned int mask) {
 //	bit 1: a document is active for editing
 //	bit 2: the active document is part of the project
 //      bit 3: Inspector is connected to a Newton device
+//      bit 4: a layout is active for editing
 
 // mFileNewTex is always active
 // mFileOpen is always active
@@ -3479,7 +3489,6 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->activate();
   mFileSaveAll->activate();
   tFileSaveAll->activate();
-  mOpenLayout->activate();
 } else {
   mFileClose->deactivate();
   mFileSave->deactivate();
@@ -3487,7 +3496,6 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->deactivate();
   mFileSaveAll->deactivate();
   tFileSaveAll->deactivate();
-  mOpenLayout->deactivate();
 }
 
 // if a project is loaded, a document is active, and the document is part of the project
@@ -3506,9 +3514,11 @@ if ( (mask & 0x00000007) == 0x00000003 ) {
 
 // if the Inspector is connected...
 if ( (mask & 0x00000008) == 0x00000008 ) {
-  tSnapshot->activate();
+  mEditNewtScreenshot->activate();
+  tEditNewtScreenshot->activate();
 } else {
-  tSnapshot->deactivate();
+  mEditNewtScreenshot->deactivate();
+  tEditNewtScreenshot->deactivate();
 }
 
 // if a project is loaded and the Inspector is connected
@@ -3520,6 +3530,15 @@ if ( (mask & 0x00000009) == 0x00000009 ) {
   mProjectDownload->deactivate(); // could depend on existing pkg
   tProjectDownload->deactivate(); // could depend on existing pkg
   mProjectLaunch->deactivate(); // could depend on downloaded pkg
+}
+
+// if there is a current document, and the type is layout
+if ( (mask & 0x00000010) == 0x00000010 ) {
+  mWindowOpenLayout->activate();
+  tWindowOpenLayout->activate();
+} else {
+  mWindowOpenLayout->deactivate();
+  tWindowOpenLayout->deactivate();
 }
 }
 

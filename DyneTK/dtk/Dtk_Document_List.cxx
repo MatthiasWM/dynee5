@@ -213,6 +213,7 @@ void Dtk_Document_List::browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List 
     Dtk_Document *doc = (Dtk_Document*)w->data(it);
     if (doc)
         doc->edit();
+    UpdateMainMenu();
 }
 
 /*-v2------------------------------------------------------------------------*/

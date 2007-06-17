@@ -209,6 +209,10 @@ SOURCE=..\fltk\Flmm_Message.H
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Flmm_Newt_Script_Editor.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Flmm_Set_Check_Button.h
 # End Source File
 # Begin Source File
@@ -295,6 +299,10 @@ SOURCE=..\fltk\Flmm_Console.cxx
 # Begin Source File
 
 SOURCE=..\fltk\Flmm_Message.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmm_Newt_Script_Editor.cxx
 # End Source File
 # Begin Source File
 

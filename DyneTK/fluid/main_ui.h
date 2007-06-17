@@ -88,6 +88,11 @@ private:
   static void cb_mFileExit(Fl_Menu_*, void*);
 public:
   static Fl_Menu_Item *mEdit;
+  static Fl_Menu_Item *mEditNewtScreenshot;
+private:
+  void cb_mEditNewtScreenshot_i(Fl_Menu_*, void*);
+  static void cb_mEditNewtScreenshot(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *mEditPreferences;
 private:
   void cb_mEditPreferences_i(Fl_Menu_*, void*);
@@ -168,10 +173,10 @@ private:
   void cb_mWindowConnectInspector_i(Fl_Menu_*, void*);
   static void cb_mWindowConnectInspector(Fl_Menu_*, void*);
 public:
-  static Fl_Menu_Item *mOpenLayout;
+  static Fl_Menu_Item *mWindowOpenLayout;
 private:
-  void cb_mOpenLayout_i(Fl_Menu_*, void*);
-  static void cb_mOpenLayout(Fl_Menu_*, void*);
+  void cb_mWindowOpenLayout_i(Fl_Menu_*, void*);
+  static void cb_mWindowOpenLayout(Fl_Menu_*, void*);
 public:
   static Fl_Menu_Item *mHelp;
   static Fl_Menu_Item *mHelpAbout;
@@ -204,10 +209,10 @@ private:
   void cb_tFileSaveAll_i(Fl_Button*, void*);
   static void cb_tFileSaveAll(Fl_Button*, void*);
 public:
-  Fl_Button *tSnapshot;
+  Fl_Button *tEditNewtScreenshot;
 private:
-  void cb_tSnapshot_i(Fl_Button*, void*);
-  static void cb_tSnapshot(Fl_Button*, void*);
+  void cb_tEditNewtScreenshot_i(Fl_Button*, void*);
+  static void cb_tEditNewtScreenshot(Fl_Button*, void*);
 public:
   Fl_Button *tProjectBuild;
 private:
@@ -219,10 +224,10 @@ private:
   void cb_tProjectDownload_i(Fl_Button*, void*);
   static void cb_tProjectDownload(Fl_Button*, void*);
 public:
-  Fl_Button *tOpenLayout;
+  Fl_Button *tWindowOpenLayout;
 private:
-  void cb_tOpenLayout_i(Fl_Button*, void*);
-  static void cb_tOpenLayout(Fl_Button*, void*);
+  void cb_tWindowOpenLayout_i(Fl_Button*, void*);
+  static void cb_tWindowOpenLayout(Fl_Button*, void*);
   void cb__i(Fl_Input*, void*);
   static void cb_(Fl_Input*, void*);
   static Fl_Menu_Item menu_1[];

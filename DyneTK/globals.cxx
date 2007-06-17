@@ -622,6 +622,7 @@ void UpdateMainMenu()
     //	bit 1: a document is active for editing
     //	bit 2: the active document is part of the project
     //  bit 3: Inspector is connected to a Newton device
+    //  bit 4: a layout is active for editing
 	unsigned int mask = 0;
 	if (dtkProject)
 		mask |= 1;
@@ -630,6 +631,9 @@ void UpdateMainMenu()
 		mask |= 2;
         if (doc->project()) {
 			mask |= 4;
+        }
+        if (doc->isLayout()) {
+            mask |= 16;
         }
     }
 	if (wInspectorSerial->is_open()) {

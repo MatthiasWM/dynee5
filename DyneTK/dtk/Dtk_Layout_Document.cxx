@@ -202,6 +202,7 @@ void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layou
         layout->slotEditor()->blank();
     }
     layout->view_->redraw();
+    UpdateMainMenu();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -214,6 +215,7 @@ void Dtk_Layout_Document::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Do
     } else {
         layout->slotEditor()->blank();
     }
+    UpdateMainMenu();
 }
 
 

@@ -39,7 +39,7 @@ decl {\#include "fltk/Fldtk_Document_Tabs.h"} {public
 decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
 } 
 
-decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {public
+decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {selected public
 } 
 
 decl {\#include <FL/fl_ask.h>} {public
@@ -50,14 +50,14 @@ decl {\#include "main.h"} {public
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
-  xywh {0 41 604 595} type Double resizable
+  xywh {457 178 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {open
+  Fl_Menu_Bar {} {
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File open
+      label File
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mFileNewLayout {
@@ -209,9 +209,10 @@ widget_class Fldtk_Main_Window {
         label {Find Inherited}
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
       }
-      MenuItem {} {
+      MenuItem mEditNewtScreenshot {
         label {Newt Screen Shot}
-        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+        callback {InspectorSnapshot();}
+        xywh {5 5 100 20} labelsize 12 deactivate divider
       }
       MenuItem mEditPreferences {
         label {Toolkit Preferences...}
@@ -430,7 +431,7 @@ widget_class Fldtk_Main_Window {
         label {New Browser}
         xywh {5 5 100 20} shortcut 0x40062 labelsize 12 labelcolor 176 deactivate
       }
-      MenuItem mOpenLayout {
+      MenuItem mWindowOpenLayout {
         label {Open Layout}
         callback {OpenLayoutView();}
         xywh {5 5 100 20} shortcut 0x4006c labelsize 12 deactivate divider
@@ -479,7 +480,7 @@ widget_class Fldtk_Main_Window {
       }
     }
   }
-  Fl_Group {} {open
+  Fl_Group {} {
     xywh {0 25 785 35} box THIN_DOWN_BOX
   } {
     Fl_Button tFileNewLayout {
@@ -526,7 +527,7 @@ widget_class Fldtk_Main_Window {
     Fl_Button {} {
       tooltip Find image {../images/find.png} deimage {../images/find_da.png} xywh {335 30 25 25} labelsize 11 deactivate
     }
-    Fl_Button tSnapshot {
+    Fl_Button tEditNewtScreenshot {
       callback {InspectorSnapshot();}
       tooltip {Newt Screen Shot} image {../images/camera.png} deimage {../images/camera_da.png} xywh {365 30 25 25} labelsize 9 deactivate
     }
@@ -538,9 +539,9 @@ widget_class Fldtk_Main_Window {
       callback {DownloadPackage();}
       tooltip {Download Package} image {../images/package_go.png} deimage {../images/package_go_da.png} xywh {420 30 25 25} labelsize 9 deactivate
     }
-    Fl_Button tOpenLayout {
+    Fl_Button tWindowOpenLayout {
       callback {OpenLayoutView();}
-      tooltip {Open Layout} image {../images/shape_group.png} deimage {../images/shape_group_da.png} xywh {450 30 25 25} labelsize 9
+      tooltip {Open Layout} image {../images/shape_group.png} deimage {../images/shape_group_da.png} xywh {450 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
       tooltip {Create New Browser} image {../images/table_edit.png} deimage {../images/table_edit_da.png} xywh {475 30 25 25} labelsize 9 deactivate
@@ -611,10 +612,10 @@ widget_class Fldtk_Main_Window {
       xywh {615 65 15 25} deactivate resizable
     }
   }
-  Fl_Tile center {open
+  Fl_Tile center {
     xywh {0 95 785 475} box FLAT_BOX labelsize 12 resizable
   } {
-    Fl_Group {} {open
+    Fl_Group {} {
       xywh {0 95 150 305} box FLAT_BOX
     } {
       Fl_Tabs browsers {
@@ -627,7 +628,7 @@ widget_class Fldtk_Main_Window {
         }
       }
     }
-    Fl_Group {} {open
+    Fl_Group {} {
       xywh {150 95 635 305} box FLAT_BOX
     } {
       Fl_Tabs document_tabs {open
@@ -635,7 +636,7 @@ widget_class Fldtk_Main_Window {
         class Fldtk_Document_Tabs
       } {}
     }
-    Fl_Group {} {open
+    Fl_Group {} {
       xywh {0 400 785 170} box FLAT_BOX
     } {
       Fl_Tabs consoles {open
@@ -687,6 +688,7 @@ widget_class Fldtk_Main_Window {
 //	bit 1: a document is active for editing
 //	bit 2: the active document is part of the project
 //      bit 3: Inspector is connected to a Newton device
+//      bit 4: a layout is active for editing
 
 // mFileNewTex is always active
 // mFileOpen is always active
@@ -728,7 +730,6 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->activate();
   mFileSaveAll->activate();
   tFileSaveAll->activate();
-  mOpenLayout->activate();
 } else {
   mFileClose->deactivate();
   mFileSave->deactivate();
@@ -736,7 +737,6 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->deactivate();
   mFileSaveAll->deactivate();
   tFileSaveAll->deactivate();
-  mOpenLayout->deactivate();
 }
 
 // if a project is loaded, a document is active, and the document is part of the project
@@ -755,9 +755,11 @@ if ( (mask & 0x00000007) == 0x00000003 ) {
 
 // if the Inspector is connected...
 if ( (mask & 0x00000008) == 0x00000008 ) {
-  tSnapshot->activate();
+  mEditNewtScreenshot->activate();
+  tEditNewtScreenshot->activate();
 } else {
-  tSnapshot->deactivate();
+  mEditNewtScreenshot->deactivate();
+  tEditNewtScreenshot->deactivate();
 }
 
 // if a project is loaded and the Inspector is connected
@@ -769,8 +771,16 @@ if ( (mask & 0x00000009) == 0x00000009 ) {
   mProjectDownload->deactivate(); // could depend on existing pkg
   tProjectDownload->deactivate(); // could depend on existing pkg
   mProjectLaunch->deactivate(); // could depend on downloaded pkg
-}} {selected
-    }
+}
+
+// if there is a current document, and the type is layout
+if ( (mask & 0x00000010) == 0x00000010 ) {
+  mWindowOpenLayout->activate();
+  tWindowOpenLayout->activate();
+} else {
+  mWindowOpenLayout->deactivate();
+  tWindowOpenLayout->deactivate();
+}} {}
   }
 } 
 
