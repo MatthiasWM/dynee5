@@ -32,6 +32,7 @@
 
 class Dtk_Rect_Slot;
 class Fl_Input;
+class Fl_Box;
 
 
 /** GUI for editing script slots.
@@ -44,8 +45,11 @@ public:
     void    rect(int t, int l, int b, int r);
 
 protected:
+    static void update_cb(Fl_Widget*, Fldtk_Rect_Slot_Editor*);
+
     Dtk_Rect_Slot * slot_;
     Fl_Input    *wTop_, *wLeft_, *wBottom_, *wRight_;
+    Fl_Box      *wWidth_, *wHeight_;
 };
 
 

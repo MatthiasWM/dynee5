@@ -27,7 +27,7 @@
 #define FLDTK_SCRIPT_SLOT_EDITOR_H
 
 
-#include <FL/Fl_Text_Editor.H>
+#include "fltk/Flmm_Newt_Script_Editor.h"
 
 
 class Dtk_Script_Slot;
@@ -35,7 +35,7 @@ class Dtk_Script_Slot;
 
 /** GUI for editing script slots.
  */
-class Fldtk_Script_Slot_Editor : public Fl_Text_Editor
+class Fldtk_Script_Slot_Editor : public Flmm_Newt_Script_Editor
 {
 public:
 	        Fldtk_Script_Slot_Editor(Fl_Group *container, Dtk_Script_Slot *slot);

@@ -77,6 +77,11 @@ private:
   void cb_mFileSaveAs_i(Fl_Menu_*, void*);
   static void cb_mFileSaveAs(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *mFileSaveAll;
+private:
+  void cb_mFileSaveAll_i(Fl_Menu_*, void*);
+  static void cb_mFileSaveAll(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *mFileExit;
 private:
   void cb_mFileExit_i(Fl_Menu_*, void*);
@@ -194,6 +199,11 @@ private:
   void cb_tFileSave_i(Fl_Button*, void*);
   static void cb_tFileSave(Fl_Button*, void*);
 public:
+  Fl_Button *tFileSaveAll;
+private:
+  void cb_tFileSaveAll_i(Fl_Button*, void*);
+  static void cb_tFileSaveAll(Fl_Button*, void*);
+public:
   Fl_Button *tSnapshot;
 private:
   void cb_tSnapshot_i(Fl_Button*, void*);
@@ -208,6 +218,11 @@ public:
 private:
   void cb_tProjectDownload_i(Fl_Button*, void*);
   static void cb_tProjectDownload(Fl_Button*, void*);
+public:
+  Fl_Button *tOpenLayout;
+private:
+  void cb_tOpenLayout_i(Fl_Button*, void*);
+  static void cb_tOpenLayout(Fl_Button*, void*);
   void cb__i(Fl_Input*, void*);
   static void cb_(Fl_Input*, void*);
   static Fl_Menu_Item menu_1[];

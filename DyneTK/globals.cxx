@@ -221,6 +221,14 @@ int OpenProject(const char *filename)
 	return ret;
 }
 
+/*-v2------------------------------------------------------------------------*/
+int SaveAllDocuments()
+{
+	if (dtkProject) {
+        return dtkProject->saveAll();
+	}
+    return 0;
+}
 
 /*-v2------------------------------------------------------------------------*/
 int NewProject(const char *filename) 

@@ -50,14 +50,14 @@ decl {\#include "main.h"} {public
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
-  xywh {486 112 785 595} type Double resizable
+  xywh {0 41 604 595} type Double resizable
   class Fl_Double_Window visible
 } {
   Fl_Menu_Bar {} {open
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File
+      label File open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mFileNewLayout {
@@ -98,9 +98,10 @@ widget_class Fldtk_Main_Window {
         callback {SaveCurrentDocumentAs();}
         xywh {5 5 100 20} labelsize 12 deactivate
       }
-      MenuItem {} {
+      MenuItem mFileSaveAll {
         label {Save All}
-        xywh {5 5 100 20} shortcut 0x4006d labelsize 12 labelcolor 176 deactivate
+        callback {SaveAllDocuments();}
+        xywh {5 5 100 20} shortcut 0x4006d labelsize 12 deactivate
       }
       MenuItem {} {
         label Revert
@@ -413,7 +414,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mWindow {
-      label Window open
+      label Window
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -500,7 +501,8 @@ widget_class Fldtk_Main_Window {
       callback {SaveCurrentDocument();}
       tooltip Save image {../images/disk.png} deimage {../images/disk_da.png} xywh {115 30 25 25} labelsize 11 deactivate
     }
-    Fl_Button {} {
+    Fl_Button tFileSaveAll {
+      callback {SaveAllDocuments();}
       tooltip {Save all open files} image {../images/disk_multiple.png} deimage {../images/disk_multiple_da.png} xywh {140 30 25 25} labelsize 11 deactivate
     }
     Fl_Button {} {
@@ -536,8 +538,9 @@ widget_class Fldtk_Main_Window {
       callback {DownloadPackage();}
       tooltip {Download Package} image {../images/package_go.png} deimage {../images/package_go_da.png} xywh {420 30 25 25} labelsize 9 deactivate
     }
-    Fl_Button {} {
-      tooltip {Open Layout} image {../images/shape_group.png} deimage {../images/shape_group_da.png} xywh {450 30 25 25} labelsize 9 deactivate
+    Fl_Button tOpenLayout {
+      callback {OpenLayoutView();}
+      tooltip {Open Layout} image {../images/shape_group.png} deimage {../images/shape_group_da.png} xywh {450 30 25 25} labelsize 9
     }
     Fl_Button {} {
       tooltip {Create New Browser} image {../images/table_edit.png} deimage {../images/table_edit_da.png} xywh {475 30 25 25} labelsize 9 deactivate
@@ -723,12 +726,16 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSave->activate();
   tFileSave->activate();
   mFileSaveAs->activate();
+  mFileSaveAll->activate();
+  tFileSaveAll->activate();
   mOpenLayout->activate();
 } else {
   mFileClose->deactivate();
   mFileSave->deactivate();
   tFileSave->deactivate();
   mFileSaveAs->deactivate();
+  mFileSaveAll->deactivate();
+  tFileSaveAll->deactivate();
   mOpenLayout->deactivate();
 }
 

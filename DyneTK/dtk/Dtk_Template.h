@@ -41,6 +41,7 @@ class Dtk_Slot_List;
 class Flnt_Widget;
 class Dtk_Slot;
 class Dtk_Rect_Slot;
+class Dtk_Value_Slot;
 
 /** Manage a template object in a layout.
  *
@@ -92,6 +93,14 @@ public:
      */
     unsigned int justify();
 
+    /** This template was selected in the view
+     */
+    void selectedInView();
+
+    /** Return 1 if this template is selected
+     */
+    char isSelected();
+
 private:
 
     /// we must be part of a single layout
@@ -129,6 +138,9 @@ private:
 
     /// slot containing the coordintes of the template widget
     Dtk_Rect_Slot       * viewBounds_;
+
+    ///slot containing the widget justify value
+    Dtk_Value_Slot      * viewJustify_;
 };
 
 

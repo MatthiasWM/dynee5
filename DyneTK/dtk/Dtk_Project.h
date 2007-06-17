@@ -56,9 +56,8 @@ public:
 	int			save();
 
     /** Save all dirty parts of the project.
-     * \todo Implement me!
      */
-    int			saveAll() { return 0; }
+    int			saveAll();
 
     /** Close and delete all dependent.
      * \todo Implement me!

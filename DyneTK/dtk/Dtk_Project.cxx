@@ -659,6 +659,17 @@ newtRef Dtk_Project::makeFileRef(const char *filename)
 
 
 /*---------------------------------------------------------------------------*/
+int Dtk_Project::saveAll() 
+{
+    int i, n = documentList_->size();
+    for (i=0; i<n; ++i) {
+        documentList_->at(i)->save();
+    }
+    return save();
+}
+
+
+/*---------------------------------------------------------------------------*/
 /**
  * Save the project as an .ntk file to disk.
  */

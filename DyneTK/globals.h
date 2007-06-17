@@ -111,7 +111,14 @@ int		SaveCurrentDocument();
  */
 int		SaveCurrentDocumentAs();
 
-//      SaveAllDocuments()
+/** Save all open documents and projects.
+ *
+ * \retval 0 if succeeded
+ * \retval negative if an error occured
+ * \retval -2 if the user canceled
+ */
+int SaveAllDocuments();
+
 //      RevertCurrentDocument()
 //      PrintSetup()
 //      PrintOne()

@@ -30,10 +30,10 @@
 
 
 Fldtk_Script_Slot_Editor::Fldtk_Script_Slot_Editor(Fl_Group *container, Dtk_Script_Slot *slot)
-:   Fl_Text_Editor(container->x(), container->y(), container->w(), container->h()),
+:   Flmm_Newt_Script_Editor(container->x(), container->y(), container->w(), container->h()),
     slot_(slot)
 {
-    buffer(new Fl_Text_Buffer());
+    //buffer(new Fl_Text_Buffer());
 	buffer()->tab_distance(4);
 	textfont(FL_COURIER);
 	textsize(12);

@@ -58,7 +58,8 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
     browserName_(0L),
     ntName_(0L),
     ntId_(0L),
-    viewBounds_(0L)
+    viewBounds_(0L),
+    viewJustify_(0L)
 {
 }
 
@@ -134,72 +135,14 @@ int Dtk_Template::load(newtRef node)
             }
             if (key==NSSYM(viewBounds)) {
                 viewBounds_ = (Dtk_Rect_Slot*)dSlot;
+            } else if (key==NSSYM(viewJustify)) {
+                viewJustify_ = (Dtk_Value_Slot*)dSlot;
             }
             if (dSlot) {
                 slotList_->add(dSlot);
             }
         }
     }
-/*
-    viewBounds: {
-      __ntDatatype: "RECT", 
-      value: {
-        top: 0, 
-        left: 0, 
-        bottom: 125, 
-        right: 0
-      }, 
-      __ntFlags: 0
-    }, 
-*/
-
-/*
-
-	int32_t wl, wr, wt, wb;
-	uint32_t justify = 0;
-	char *text = 0L;
-	{	// read the view bounds
-		newtRef bnds = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(viewBounds)));
-		if (NewtRefIsFrame(bnds)) {
-			newtRef v = NewtGetFrameSlot(bnds, NewtFindSlotIndex(bnds, NSSYM(value)));
-			if (NewtRefIsFrame(v)) {
-				 newtRef i;
-				 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(top)));
-				 if (NewtRefIsInteger(i)) wt = NewtRefToInteger(i);
-				 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(left)));
-				 if (NewtRefIsInteger(i)) wl = NewtRefToInteger(i);
-				 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(bottom)));
-				 if (NewtRefIsInteger(i)) wb = NewtRefToInteger(i);
-				 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(right)));
-				 if (NewtRefIsInteger(i)) wr = NewtRefToInteger(i);
-			}
-		}
-	}
-	{	// read the view justify flags
-		newtRef jst = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(viewJustify)));
-		if (NewtRefIsFrame(jst)) {
-			newtRef v = NewtGetFrameSlot(jst, NewtFindSlotIndex(jst, NSSYM(value)));
-			if (NewtRefIsInteger(v)) justify = NewtRefToInteger(v);
-		}
-	}
-	{	// read the label 
-		newtRef txt = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(text)));
-		if (NewtRefIsFrame(txt)) {
-			newtRef v = NewtGetFrameSlot(txt, NewtFindSlotIndex(txt, NSSYM(value)));
-			if (NewtRefIsString(v)) text = NewtRefToString(v);
-		}
-		if (!text) {
-			newtRef v = NewtGetFrameSlot(r, NewtFindSlotIndex(r, NSSYM(__ntName)));
-			if (NewtRefIsString(v)) text = NewtRefToString(v);
-		}
-	}
-
-
-	Nt_Group *g = new Nt_Group(wl, wt, wr, wb, justify, text);
-	g->align(FL_ALIGN_INSIDE | FL_ALIGN_WRAP);
-	g->labelsize(9);
-	g->end();
-*/    
     return 0;
 }
 
@@ -279,8 +222,26 @@ void Dtk_Template::getSize(int &t, int &l, int &b, int &r)
 /*---------------------------------------------------------------------------*/
 unsigned int Dtk_Template::justify()
 {
-    //return alignment_ ? alignment_->value() : 0;
-    return 0;
+    return viewJustify_ ? (unsigned int)viewJustify_->value() : 0;
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::selectedInView()
+{
+    int i, n = browser_->size();
+    for (i=1; i<=n; ++i) {
+        if (browser_->data(i)==this)
+            break;
+    }
+    if (i>n) return; // Ooops?
+    browser_->value(i);
+    browser_->do_callback();
+}
+
+/*---------------------------------------------------------------------------*/
+char Dtk_Template::isSelected()
+{
+    return browser_->value()==index_ ? 1 : 0;
 }
 
 

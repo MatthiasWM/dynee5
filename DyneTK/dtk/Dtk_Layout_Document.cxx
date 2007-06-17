@@ -194,12 +194,14 @@ void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layou
 {
     int i = browser->value();
     if (i) {
+        layout->slotEditor()->blank();
         Dtk_Template *tmpl = (Dtk_Template*)browser->data(i);
         tmpl->edit();
     } else {
         layout->slotBrowser()->clear();
         layout->slotEditor()->blank();
     }
+    layout->view_->redraw();
 }
 
 /*---------------------------------------------------------------------------*/

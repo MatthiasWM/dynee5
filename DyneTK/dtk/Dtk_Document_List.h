@@ -146,6 +146,10 @@ public:
      */
     void            filenameChanged(Dtk_Document *document);
 
+    int             size() { return docList_.size(); }
+
+    Dtk_Document    * at(int i) { return docList_.at(i); }
+
 private:
 
     /// back reference to the project that keeps this list

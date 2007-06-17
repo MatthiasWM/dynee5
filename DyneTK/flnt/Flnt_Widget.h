@@ -44,6 +44,10 @@ public:
 
     void            newtResize();
 
+    int             handle(int event);
+
+    void            draw();
+
 protected:
 
     Dtk_Template    * template_;
