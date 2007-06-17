@@ -145,6 +145,10 @@ SOURCE=..\fltk\Fldtk_Editor.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Fldtk_Justify_Slot_Editor.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Fldtk_Layout_Drop_Box.h
 # End Source File
 # Begin Source File
@@ -235,6 +239,10 @@ SOURCE=..\fltk\Fldtk_Document_Tabs.cxx
 # Begin Source File
 
 SOURCE=..\fltk\Fldtk_Editor.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Justify_Slot_Editor.cxx
 # End Source File
 # Begin Source File
 

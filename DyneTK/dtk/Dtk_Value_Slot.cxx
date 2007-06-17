@@ -27,6 +27,7 @@
 #include "Dtk_Value_Slot.h"
 #include "Dtk_Layout_Document.h"
 #include "fltk/Fldtk_Value_Slot_Editor.h"
+#include "fltk/Fldtk_Justify_Slot_Editor.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
 
 #include "allNewt.h"
@@ -79,7 +80,10 @@ void Dtk_Value_Slot::edit()
     Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
     if (!editor_) {
         container->begin();
-        editor_ = new Fldtk_Value_Slot_Editor(container, this);
+        if (strcasecmp(key_, "viewJustify")==0)
+            editor_ = new Fldtk_Justify_Slot_Editor(container, this);
+        else
+            editor_ = new Fldtk_Value_Slot_Editor(container, this);
         container->end();
         editor_->value(value_);
     }

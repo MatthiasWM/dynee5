@@ -40,11 +40,13 @@ class Fldtk_Value_Slot_Editor : public Fl_Group
 {
 public:
 	        Fldtk_Value_Slot_Editor(Fl_Group *container, Dtk_Value_Slot *slot);
-	        ~Fldtk_Value_Slot_Editor();
-    void    value(double v);
-    double  value();
+    virtual ~Fldtk_Value_Slot_Editor();
+    virtual void    value(double v);
+    virtual double  value();
 
 protected:
+    // don't call this. This is needed by Fluid.
+    Fldtk_Value_Slot_Editor(int, int, int, int, const char *) : Fl_Group(0, 0, 0, 0) {}
     Dtk_Value_Slot * slot_;
     Fl_Input    *wValue_;
 };

@@ -61,7 +61,7 @@ public:
      */
     Dtk_Layout_Document * layout();
 
-private:
+protected:
 
     /// back reference to the slot list
     Dtk_Slot_List   * list_;
