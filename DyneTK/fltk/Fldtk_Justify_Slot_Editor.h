@@ -33,10 +33,12 @@ class Fldtk_Justify_Slot_Editor : public Fldtk_Value_Slot_Editor {
 public:
   Fldtk_Justify_Slot_Editor(Fl_Group *container, Dtk_Value_Slot *slot) ;
   ~Fldtk_Justify_Slot_Editor();
-  double value();
   void value(double v);
+  double value();
 private:
   int value_; 
+  Fl_Group* buildUI_();
+public:
   Fl_Choice *wHParent;
   static Fl_Menu_Item menu_wHParent[];
   Fl_Choice *wHSibling;
