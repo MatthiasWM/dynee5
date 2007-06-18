@@ -22,12 +22,14 @@ SRCFILES = \
   fltk/Flio_Stream.cxx \
   fltk/Flmm_Console.cxx \
   fltk/Flmm_Message.cxx \
+  fltk/Flmm_Newt_Script_Editor.cxx \
   fltk/Flmm_Set_Input.cxx \
   fltk/Flmm_Set_Check_Button.cxx \
   fltk/Flmp_Image.cxx \
   fltk/Fldtk_Document_Browser.cxx \
   fltk/Fldtk_Document_Tabs.cxx \
   fltk/Fldtk_Editor.cxx \
+  fltk/Fldtk_Justify_Slot_Editor.cxx \
   fltk/Fldtk_Layout_Drop_Box.cxx \
   fltk/Fldtk_Layout_Editor.cxx \
   fltk/Fldtk_Layout_View.cxx \
