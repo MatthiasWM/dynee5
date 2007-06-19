@@ -58,8 +58,8 @@ Fl_Menu_Item Fldtk_Justify_Slot_Editor::menu_wVSibling[] = {
 
 Fl_Menu_Item Fldtk_Justify_Slot_Editor::menu_wHText[] = {
  {"Left", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {"Center", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {"Right", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"Center", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {"Full", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
@@ -94,6 +94,32 @@ Fldtk_Justify_Slot_Editor::~Fldtk_Justify_Slot_Editor() {
 
 void Fldtk_Justify_Slot_Editor::value(double v) {
   value_ = (unsigned int)v;
+wHText->value( value_&3 ); // bits 0 1
+wVText->value( (value_>>2)&3 ); // bits 2 3
+wHParent->value( (value_>>4)&3 ); // bits 4 5
+wVParent->value( (value_>>6)&3 ); // bits 6 7
+wAnchored->value( (value_ & 0x00000100) ? 1 : 0 ); // bit 8
+wLasso->value( (value_ & 0x00008000) ? 1 : 0 ); // bit 15
+wReflow->value( (value_ & 0x00010000) ? 1 : 0 ); // bit 16
+wTextLimits->value( (value_>>19)&3 ); // bits 19 20
+wPropLeft->value( (value_ & 0x04000000) ? 1 : 0); // bit 26
+wPropRight->value( (value_ & 0x08000000) ? 1 : 0); // bit 27
+wPropTop->value( (value_ & 0x10000000) ? 1 : 0); // bit 28
+wPropBottom->value( (value_ & 0xe0000000) ? 1 : 0); // bits 29 30 31 (why?)
+switch (value_ & 0x00000e00) { // bits 9 10 11
+  case 0x0800: wHSibling->value(1); break; // left
+  case 0x0200: wHSibling->value(2); break; // center
+  case 0x0400: wHSibling->value(3); break; // right
+  case 0x0600: wHSibling->value(4); break; // full
+  default: wHSibling->value(0); break;
+}
+switch (value_ & 0x00007000) { // bits 12 13 14
+  case 0x4000: wVSibling->value(1); break; // top 
+  case 0x1000: wVSibling->value(2); break; // center
+  case 0x2000: wVSibling->value(3); break; // bottom
+  case 0x3000: wVSibling->value(4); break; // full
+  default: wVSibling->value(0); break;
+}
 }
 
 double Fldtk_Justify_Slot_Editor::value() {

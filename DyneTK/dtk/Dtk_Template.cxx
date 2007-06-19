@@ -129,7 +129,11 @@ int Dtk_Template::load(newtRef node)
                     dSlot = new Dtk_Value_Slot(slotList_, keyname, slot);
                 } else {
                     // also: RECT, CLAS, NUMB, PICT, PROT, USER, any more?
-                    printf("Unsupported slot datatype \"%s\"\n", dt);
+                    // CLAS is __ntTemplate
+                    // PROT is __ntTemplate
+                    // USER is __ntTemplate
+                    // PICt is icon
+                    printf("Unsupported slot datatype \"%s\" (%s)\n", dt, keyname);
                     dSlot = new Dtk_Slot(slotList_, keyname, slot);
                 }
             }
