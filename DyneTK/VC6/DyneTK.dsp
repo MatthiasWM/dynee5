@@ -381,6 +381,10 @@ SOURCE=..\dtk\Dtk_Script_Slot.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\dtk\Dtk_Script_Writer.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\dtk\Dtk_Slot.h
 # End Source File
 # Begin Source File
@@ -431,6 +435,10 @@ SOURCE=..\dtk\Dtk_Script_Document.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Script_Slot.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Script_Writer.cxx
 # End Source File
 # Begin Source File
 
