@@ -42,6 +42,8 @@ class Flnt_Widget;
 class Dtk_Slot;
 class Dtk_Rect_Slot;
 class Dtk_Value_Slot;
+class Dtk_Script_Writer;
+
 
 /** Manage a template object in a layout.
  *
@@ -64,6 +66,13 @@ public:
     /** Load a template tree starting at the given newtRef
      */
     int             load(newtRef node);
+
+    /** Write this template as a Newt Script.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		write(Dtk_Script_Writer &sw);
 
     /** Recursively run through all templates in the tree.
      *
@@ -100,6 +109,10 @@ public:
     /** Return 1 if this template is selected
      */
     char isSelected();
+
+    /** Return the parent template of this template.
+     */
+    Dtk_Template *parent();
 
 private:
 

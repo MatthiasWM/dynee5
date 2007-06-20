@@ -32,6 +32,7 @@
 
 class Dtk_Document_List;
 class Dtk_Project;
+class Dtk_Script_Writer;
 
 
 /**
@@ -98,6 +99,13 @@ public:
      */
 	virtual int		saveAs() { return -1; }
 
+    /** Write this document type as a Newt Script.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		write(Dtk_Script_Writer &sw) { return -1; }
+
     /** Return 1 if the document should be saved.
      *
      * \retval 0 if the document is save
@@ -148,9 +156,9 @@ public:
 
     /** Return a pointer to the name part of the filename.
      *
-     * \retval pointer to the anme with the file extension.
+     * \retval pointer to the name with original file extension.
      */
-	const char		*name();
+	const char		* name();
 
     /** Return the project that holds this document.
      *

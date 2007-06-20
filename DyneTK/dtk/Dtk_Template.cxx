@@ -37,6 +37,7 @@
 #include "Dtk_Script_Slot.h"
 #include "Dtk_Rect_Slot.h"
 #include "Dtk_Value_Slot.h"
+#include "Dtk_Script_Writer.h"
 
 #include "flnt/Flnt_Widget.h"
 
@@ -150,6 +151,46 @@ int Dtk_Template::load(newtRef node)
     return 0;
 }
 
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Template::write(Dtk_Script_Writer &sw)
+{
+    char buf[1024];
+
+    Dtk_Template *p = parent();
+    if (p) {
+        sprintf(buf, "_view%03d := /* child of _view??? */\n", sw.viewCount++);
+    } else {
+        sprintf(buf, "_view%03d :=\n", sw.viewCount++);
+    }
+    sw.put(buf);
+    sw.put("    {\n");
+
+    if (slotList_) {
+        int i, n = slotList_->size(), needComma = 0, ret = 0;
+        for (i=0; i<n; i++) {
+            if (needComma)
+                sw.put(",\n");
+            int ret = slotList_->at(i)->write(sw);
+            needComma = (ret==0) ? 1 : 0;
+        }
+        if (needComma)
+            sw.put("\n");
+    }
+
+    sw.put("    };\n\n");
+
+    if (tmplList_) {
+        int i, n = tmplList_->size();
+        for (i=0; i<n; i++) {
+            tmplList_->at(i)->write(sw);
+        }
+    }
+
+    return 0;
+}
+
+
 /*---------------------------------------------------------------------------*/
 void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add)
 {
@@ -246,6 +287,14 @@ void Dtk_Template::selectedInView()
 char Dtk_Template::isSelected()
 {
     return browser_->value()==index_ ? 1 : 0;
+}
+
+/*---------------------------------------------------------------------------*/
+Dtk_Template *Dtk_Template::parent()
+{
+    if (list_)
+        return list_->parent();
+    return 0L;
 }
 
 

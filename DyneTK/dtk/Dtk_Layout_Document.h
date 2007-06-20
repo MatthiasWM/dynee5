@@ -56,6 +56,16 @@ public:
 
     virtual bool isLayout() { return true; }
 
+    /** Write this document type as a Newt Script.
+     *
+     * Write the header, followed by all templates, followed
+     * by the footer.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		write(Dtk_Script_Writer &sw);
+
     void editView();
     Fl_Hold_Browser * templateBrowser();
     Fl_Hold_Browser * slotBrowser();

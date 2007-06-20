@@ -27,6 +27,8 @@
 #define DTK_SCRIPT_WRITER_H
 
 
+#include <stdio.h>
+
 class Dtk_Project;
 
 extern "C" {
@@ -47,11 +49,33 @@ public:
      */
                     ~Dtk_Script_Writer();
 
+    /** Close the currently open destination.
+     */
+    void            close();
+
+    /** Open the script destination as a text file.
+     *
+     * \retval  0, if successful
+     * \retval  negative if any part of the operation failed  
+     */
+    int             open(const char *filename);
+
+    /** Copy the C-string verbatim into the destination stream.
+     *
+     * \retval  0, if successful
+     * \retval  negative if any part of the operation failed  
+     */
+    int             put(const char *text, int n = -1);
+
+    int             viewCount;
+
 private:
 
     /// we must be part of a project
     Dtk_Project     * project_;
 
+    /// write all text to this file
+    FILE            * file_;
 };
 
 

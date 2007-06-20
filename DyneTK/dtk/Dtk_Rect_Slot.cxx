@@ -26,6 +26,7 @@
 
 #include "Dtk_Rect_Slot.h"
 #include "Dtk_Layout_Document.h"
+#include "Dtk_Script_Writer.h"
 #include "fltk/Fldtk_Rect_Slot_Editor.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
 
@@ -75,6 +76,17 @@ void Dtk_Rect_Slot::edit()
     }
     container->value(editor_);
 }
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Rect_Slot::write(Dtk_Script_Writer &sw)
+{
+    char buf[1024];
+    sprintf(buf, "     %s: {left: %d, top: %d, bottom: %d, right: %d}",
+        key_, left_, top_, bottom_, right_);
+    sw.put(buf);
+    return 0;
+}
+
 
 //
 // End of "$Id$".

@@ -168,6 +168,13 @@ void Fldtk_Main_Window::cb_mProjectLaunch(Fl_Menu_* o, void* v) {
   ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mProjectLaunch_i(o,v);
 }
 
+void Fldtk_Main_Window::cb_mProjectExportToText_i(Fl_Menu_*, void*) {
+  ExportPackageToText();
+}
+void Fldtk_Main_Window::cb_mProjectExportToText(Fl_Menu_* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mProjectExportToText_i(o,v);
+}
+
 void Fldtk_Main_Window::cb_mProjectSettings_i(Fl_Menu_*, void*) {
   ShowProjectSettings();
 }
@@ -271,7 +278,7 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Build Package", FL_COMMAND|0x31,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectBuild, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Download Package", FL_COMMAND|0x32,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectDownload, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Launch Package", FL_COMMAND|0x33,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectLaunch, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
- {"Export Package to Text", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
+ {"Export Package to Text", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectExportToText, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Install Toolkit App", 0,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
  {"Mark as Main Layout", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Process Earlier", FL_COMMAND|0xff52,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
@@ -348,6 +355,7 @@ Fl_Menu_Item* Fldtk_Main_Window::mProjectRemoveFile = Fldtk_Main_Window::menu_ +
 Fl_Menu_Item* Fldtk_Main_Window::mProjectBuild = Fldtk_Main_Window::menu_ + 50;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectDownload = Fldtk_Main_Window::menu_ + 51;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectLaunch = Fldtk_Main_Window::menu_ + 52;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectExportToText = Fldtk_Main_Window::menu_ + 53;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectSettings = Fldtk_Main_Window::menu_ + 58;
 Fl_Menu_Item* Fldtk_Main_Window::mLayout = Fldtk_Main_Window::menu_ + 63;
 Fl_Menu_Item* Fldtk_Main_Window::mBrowser = Fldtk_Main_Window::menu_ + 75;
@@ -3469,6 +3477,7 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectBuild->activate();
   tProjectBuild->activate();
   mProjectSettings->activate();
+  mProjectExportToText->activate();
 } else {
   mProjectNew->activate();
   mProjectOpen->activate();
@@ -3479,6 +3488,7 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectBuild->deactivate();
   tProjectBuild->deactivate();
   mProjectSettings->deactivate();
+  mProjectExportToText->deactivate();
 }
 
 // if there is a document active for editing

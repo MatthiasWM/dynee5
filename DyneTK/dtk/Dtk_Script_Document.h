@@ -91,8 +91,21 @@ public:
      * \retval -2 if the user canceled
      */
     virtual int		saveAs();
+
 	virtual void	close();
+
+    /** Write this document type as a Newt Script.
+     *
+     * The Script Document is copied to the destination without 
+     * changes. 
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		write(Dtk_Script_Writer &sw);
+
 	virtual int		getID() { return 5; }
+
 	virtual	newtRef	compile();
 
 private:

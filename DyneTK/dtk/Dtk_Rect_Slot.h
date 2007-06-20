@@ -31,6 +31,7 @@
 
 
 class Fldtk_Rect_Slot_Editor;
+class Dtk_Script_Writer;
 
 
 /** Manage a script slot inside a template.
@@ -57,6 +58,13 @@ public:
     int     left() { return left_; }
     int     bottom() { return bottom_; }
     int     right() { return right_; }
+
+    /** Write this slot as a Newt Script.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		write(Dtk_Script_Writer &sw);
 
 private:
 

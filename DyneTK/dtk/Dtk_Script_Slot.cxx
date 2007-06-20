@@ -26,6 +26,7 @@
 
 #include "Dtk_Script_Slot.h"
 #include "Dtk_Layout_Document.h"
+#include "Dtk_Script_Writer.h"
 #include "fltk/Fldtk_Script_Slot_Editor.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
 
@@ -76,6 +77,38 @@ void Dtk_Script_Slot::edit()
     }
     container->value(editor_);
 }
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Script_Slot::write(Dtk_Script_Writer &sw)
+{
+    char buf[1024];
+    if (strchr(script_, '\n')) {
+        sprintf(buf, "     %s:\n", key_);
+        sw.put(buf);
+        char *src = script_, *end = script_;
+        for (;;) {
+            sw.put("        ");
+            if (*src==0) continue;
+            for (;;) {
+                char c = *end;
+                if (c==0 || c=='\n') break;
+                end++;
+            }
+            sw.put(src, end-src);
+            if (*end==0) 
+                break;
+            sw.put("\n");
+            end++;
+            src = end;
+        }
+    } else {
+        sprintf(buf, "     %s: ", key_);
+        sw.put(buf);
+        sw.put(script_);
+    }
+    return 0;
+}
+
 
 //
 // End of "$Id$".

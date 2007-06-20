@@ -39,7 +39,7 @@ decl {\#include "fltk/Fldtk_Document_Tabs.h"} {public
 decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
 } 
 
-decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {selected public
+decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {public
 } 
 
 decl {\#include <FL/fl_ask.h>} {public
@@ -283,9 +283,10 @@ widget_class Fldtk_Main_Window {
         callback {LaunchPackage();}
         xywh {15 15 100 20} shortcut 0x40033 labelsize 12 deactivate
       }
-      MenuItem {} {
+      MenuItem mProjectExportToText {
         label {Export Package to Text}
-        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+        callback {ExportPackageToText();}
+        xywh {5 5 100 20} labelsize 12 deactivate
       }
       MenuItem {} {
         label {Install Toolkit App}
@@ -710,6 +711,7 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectBuild->activate();
   tProjectBuild->activate();
   mProjectSettings->activate();
+  mProjectExportToText->activate();
 } else {
   mProjectNew->activate();
   mProjectOpen->activate();
@@ -720,6 +722,7 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectBuild->deactivate();
   tProjectBuild->deactivate();
   mProjectSettings->deactivate();
+  mProjectExportToText->deactivate();
 }
 
 // if there is a document active for editing
@@ -780,7 +783,8 @@ if ( (mask & 0x00000010) == 0x00000010 ) {
 } else {
   mWindowOpenLayout->deactivate();
   tWindowOpenLayout->deactivate();
-}} {}
+}} {selected
+    }
   }
 } 
 

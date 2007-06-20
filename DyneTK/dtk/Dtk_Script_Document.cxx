@@ -28,6 +28,7 @@
 #endif
 
 #include "Dtk_Script_Document.h"
+#include "Dtk_Script_Writer.h"
 #include "Dtk_Error.h"
 #include "fltk/Fldtk_Script_Editor.h"
 #include "fltk/Fldtk_Document_Tabs.h"
@@ -171,6 +172,20 @@ newtRef Dtk_Script_Document::compile()
 #endif
 
 	return form;
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Script_Document::write(Dtk_Script_Writer &sw) 
+{ 
+    char buf[1024];
+    sprintf(buf, "// Beginning of file %s\n", name());
+    sw.put(buf);
+    char *script = editor_->getText();
+    sw.put(script);
+    free(script);
+    sprintf(buf, "\n// End of file %s\n\n", name());
+    sw.put(buf);
+    return -1; 
 }
 
 //

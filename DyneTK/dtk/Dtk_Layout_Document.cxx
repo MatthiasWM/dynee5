@@ -30,6 +30,7 @@
 #include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Template.h"
 #include "dtk/Dtk_Slot.h"
+#include "dtk/Dtk_Script_Writer.h"
 #include "fltk/Fldtk_Layout_Editor.h"
 #include "fltk/Fldtk_Layout_View.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
@@ -218,6 +219,21 @@ void Dtk_Layout_Document::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Do
     UpdateMainMenu();
 }
 
+/*---------------------------------------------------------------------------*/
+int Dtk_Layout_Document::write(Dtk_Script_Writer &sw) 
+{ 
+    char buf[1024];
+    sprintf(buf, "// Beginning of file %s\n", name());
+    sw.put(buf);
+    root_->write(sw);
+
+    // only if this is the main layout:
+    // constant |layout_%NAME%| :=  %NAME_OF_FIRST_TEMPLATE%;
+
+    sprintf(buf, "\n// End of file %s\n\n", name());
+    sw.put(buf);
+    return -1; 
+}
 
 //
 // End of "$Id$".

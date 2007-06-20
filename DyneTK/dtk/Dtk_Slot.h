@@ -29,6 +29,7 @@
 
 class Dtk_Slot_List;
 class Dtk_Layout_Document;
+class Dtk_Script_Writer;
 
 extern "C" {
 #include "NewtType.h"
@@ -56,6 +57,13 @@ public:
     /** Pop up the editor for this slot.
      */
     virtual void    edit();
+
+    /** Write this slot as a Newt Script.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+    virtual int		write(Dtk_Script_Writer &sw) { return -1; }
 
     /** Find the address of the layout that we are part of.
      */

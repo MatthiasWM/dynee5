@@ -26,6 +26,7 @@
 
 #include "Dtk_Value_Slot.h"
 #include "Dtk_Layout_Document.h"
+#include "Dtk_Script_Writer.h"
 #include "fltk/Fldtk_Value_Slot_Editor.h"
 #include "fltk/Fldtk_Justify_Slot_Editor.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
@@ -33,6 +34,7 @@
 #include "allNewt.h"
 
 #include <string.h>
+#include <math.h>
 
 
 /*---------------------------------------------------------------------------*/
@@ -49,21 +51,6 @@ Dtk_Value_Slot::Dtk_Value_Slot(Dtk_Slot_List *list, const char *theKey, newtRef 
     } else {
         printf("############################# Can't read number!\n"); // FIXME
     }
-    // read the value
-    /*
-	newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-	if (NewtRefIsFrame(v)) {
-		 newtRef i;
-		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(top)));
-		 if (NewtRefIsInteger(i)) top_ = NewtRefToInteger(i);
-		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(left)));
-		 if (NewtRefIsInteger(i)) left_ = NewtRefToInteger(i);
-		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(bottom)));
-		 if (NewtRefIsInteger(i)) bottom_ = NewtRefToInteger(i);
-		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(right)));
-		 if (NewtRefIsInteger(i)) right_ = NewtRefToInteger(i);
-	}
-    */
 }
 
 
@@ -88,6 +75,22 @@ void Dtk_Value_Slot::edit()
         editor_->value(value_);
     }
     container->value(editor_);
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Value_Slot::write(Dtk_Script_Writer &sw)
+{
+    char buf[1024], val[32];
+
+    double i, f = fabs(modf(value_, &i));
+    if (f>0.0)
+        sprintf(val, "%.f%0f", i, f);
+    else
+        sprintf(val, "%.f", i);
+
+    sprintf(buf, "     %s: %s", key_, val);
+    sw.put(buf);
+    return 0;
 }
 
 //

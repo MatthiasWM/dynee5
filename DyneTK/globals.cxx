@@ -39,6 +39,7 @@
 #include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Project.h"
 #include "dtk/Dtk_Error.h"
+#include "dtk/Dtk_Script_Writer.h"
 
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
@@ -449,6 +450,24 @@ int DownloadPackage()
 	return ret;
 }
 
+
+/*-v2------------------------------------------------------------------------*/
+int ExportPackageToText()
+{
+	assert(dtkProject);
+    Dtk_Script_Writer sw(dtkProject);
+    int ret = sw.open("testing_script_writer.txt");
+    if (ret) {
+        SystemAlert("Can't open file.");
+        return ret;
+    }
+    ret = dtkProject->write(sw);
+    if (ret) {
+        SystemAlert("Can't write to file.");
+        return ret;
+    }
+	return 0;
+}
 
 /*---------------------------------------------------------------------------*/
 /**

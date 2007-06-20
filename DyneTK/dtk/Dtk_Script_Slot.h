@@ -31,6 +31,7 @@
 
 
 class Fldtk_Script_Slot_Editor;
+class Dtk_Script_Writer;
 
 
 /** Manage a script slot inside a template.
@@ -50,6 +51,13 @@ public:
     /** Pop up the script slot editor.
      */
     virtual void    edit();
+
+    /** Write this slot as a Newt Script.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		write(Dtk_Script_Writer &sw);
 
 private:
 

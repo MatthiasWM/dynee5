@@ -60,6 +60,10 @@ public:
      */
     Dtk_Template *at(int index) { return tmplList_.at(index); }
 
+    /** Return the the owner of this template list.
+     */
+    Dtk_Template *parent() { return parent_; }
+
 private:
 
     /// back reference to the template that keeps this list

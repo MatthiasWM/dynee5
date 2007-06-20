@@ -27,8 +27,9 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Dtk_Project.h"
-#include "Dtk_Document.h"
+#include "dtk/Dtk_Project.h"
+#include "dtk/Dtk_Document.h"
+#include "dtk/Dtk_Script_Writer.h"
 #include "dtk/Dtk_Document_List.h"
 
 #include "fluid/Fldtk_Proj_Settings.h"
@@ -41,9 +42,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #ifdef WIN32
 # include <winsock2.h>
 # include <direct.h>
+# define strdate _strdate
+# define strtime _strtime
 #else
 # include <arpa/inet.h>
 #endif
@@ -1096,6 +1100,28 @@ int Dtk_Project::savePackage()
 	streamFile_filename	A reference to the contents of a processed stream 
 					file named filename
 */
+
+/*---------------------------------------------------------------------------*/
+/**
+ * Save the collected documents as a single Newt Script.
+ */
+int Dtk_Project::write(Dtk_Script_Writer &sw)
+{
+    char buf[1024], fn[2048], dbuf[10], tbuf[10];
+    fl_filename_absolute(fn, 2047, filename());
+    sprintf(buf, "// Text of project %s written on: %s %s\n", 
+        fn, strdate(dbuf), strtime(tbuf));
+    sw.put(buf);
+
+    int i, n = documentList_->size();
+    for (i=0; i<n; ++i) {
+        documentList_->at(i)->write(sw);
+    }
+
+    return 0;
+}
+
+
 
 //
 // End of "$Id$".

@@ -32,6 +32,7 @@ extern "C" {
 
 
 class Dtk_Document_List;
+class Dtk_Script_Writer;
 
 
 /*---------------------------------------------------------------------------*/
@@ -55,6 +56,8 @@ public:
 	int			loadWin();
 	int			save();
 
+	int			write(Dtk_Script_Writer &sw);
+
     /** Save all dirty parts of the project.
      */
     int			saveAll();
@@ -72,6 +75,7 @@ public:
 	newtRef		makeFileRef(const char *filename);
 
     const char  * name() { return name_; }
+    const char  * filename() { return filename_; }
     Dtk_Document_List   * documentList() { return documentList_; }
 
 protected:

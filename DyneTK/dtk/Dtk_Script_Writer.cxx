@@ -27,9 +27,13 @@
 #include "Dtk_Project.h"
 
 
+#include <string.h>
+
+
 /*---------------------------------------------------------------------------*/
 Dtk_Script_Writer::Dtk_Script_Writer(Dtk_Project *proj)
-:   project_(proj)
+:   project_(proj),
+    file_(0L)
 {
 }
 
@@ -37,8 +41,45 @@ Dtk_Script_Writer::Dtk_Script_Writer(Dtk_Project *proj)
 /*---------------------------------------------------------------------------*/
 Dtk_Script_Writer::~Dtk_Script_Writer()
 {
+    close();
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Script_Writer::close()
+{
+    if (file_) {
+        fclose(file_);
+        file_ = 0L;
+    }
+}
+
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Script_Writer::open(const char *filename)
+{
+    viewCount = 0;
+
+    if (file_)
+        close();
+    file_ = fopen(filename, "wb");
+    if (!file_)
+        return -1;
+    return 0;
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Script_Writer::put(const char *text, int n)
+{
+    int ret = -1;
+    if (n==-1)
+        n = strlen(text);
+    if (file_) {
+        if (fwrite(text, 1, n, file_)==n)
+            ret = -1;
+    }
+    return ret;
+}
 
 //
 // End of "$Id$".

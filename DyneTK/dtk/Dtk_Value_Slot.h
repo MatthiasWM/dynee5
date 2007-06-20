@@ -53,7 +53,15 @@ public:
 
     /** Return the value
      */
-    double  value() { return value_; }
+    double          value() { return value_; }
+    void            value(double v) { value_ = v; }
+
+    /** Write this slot as a Newt Script.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		write(Dtk_Script_Writer &sw);
 
 private:
 

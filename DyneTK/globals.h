@@ -269,7 +269,13 @@ int		DownloadPackage();
  */
 int		LaunchPackage();
 
-//      ExportPackageToText()
+/** Export all documents in a project into a single script file.
+ * 
+ * \retval  0, if successful
+ * \retval  negative if any part of the operation failed  
+ */
+int ExportPackageToText();
+
 //      InstallToolkitApp()
 //      MarkAsMainLayout()
 //      ProcessEarlier()
