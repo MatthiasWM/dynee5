@@ -37,6 +37,7 @@
 #include "Dtk_Script_Slot.h"
 #include "Dtk_Rect_Slot.h"
 #include "Dtk_Value_Slot.h"
+#include "Dtk_Proto_Slot.h"
 #include "Dtk_Script_Writer.h"
 
 #include "flnt/Flnt_Widget.h"
@@ -128,6 +129,8 @@ int Dtk_Template::load(newtRef node)
                     dSlot = new Dtk_Rect_Slot(slotList_, keyname, slot);
                 } else if (strcmp(dt, "NUMB")==0) {
                     dSlot = new Dtk_Value_Slot(slotList_, keyname, slot);
+                } else if (strcmp(dt, "PROT")==0) {
+                    dSlot = new Dtk_Proto_Slot(slotList_, keyname, slot);
                 } else {
                     // also: RECT, CLAS, NUMB, PICT, PROT, USER, any more?
                     // CLAS is __ntTemplate

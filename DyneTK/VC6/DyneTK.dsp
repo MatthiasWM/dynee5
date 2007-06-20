@@ -161,6 +161,10 @@ SOURCE=..\fltk\Fldtk_Layout_View.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Fldtk_Proto_Slot_Editor.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Fldtk_Rect_Slot_Editor.h
 # End Source File
 # Begin Source File
@@ -255,6 +259,10 @@ SOURCE=..\fltk\Fldtk_Layout_Editor.cxx
 # Begin Source File
 
 SOURCE=..\fltk\Fldtk_Layout_View.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Fldtk_Proto_Slot_Editor.cxx
 # End Source File
 # Begin Source File
 
@@ -369,6 +377,10 @@ SOURCE=..\dtk\Dtk_Project.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\dtk\Dtk_Proto_Slot.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\dtk\Dtk_Rect_Slot.h
 # End Source File
 # Begin Source File
@@ -423,6 +435,10 @@ SOURCE=..\dtk\Dtk_Layout_Document.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Project.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Proto_Slot.cxx
 # End Source File
 # Begin Source File
 
