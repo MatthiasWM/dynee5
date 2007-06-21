@@ -160,6 +160,8 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
 {
     char buf[1024];
 
+    // FIXME run the 'beforeScript
+
     Dtk_Template *p = parent();
     if (p) {
         sprintf(buf, "_view%03d := /* child of _view??? */\n", sw.viewCount++);
@@ -189,6 +191,8 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
             tmplList_->at(i)->write(sw);
         }
     }
+
+    // FIXME run the 'afterScript
 
     return 0;
 }

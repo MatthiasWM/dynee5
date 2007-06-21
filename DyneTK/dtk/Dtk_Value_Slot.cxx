@@ -23,6 +23,13 @@
 // Please report all bugs and problems to "flmm@matthiasm.com".
 //
 
+/*
+A number slot can hold either an integer or a real number. 
+If you enter an integer in the range -536,870,912 to 536,870,911, 
+NTK stores it as type integer. If you enter an integer outside 
+that range or a number containing a decimal point, NTK stores 
+it as type real.
+*/
 
 #include "Dtk_Value_Slot.h"
 #include "Dtk_Layout_Document.h"

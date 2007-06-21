@@ -982,6 +982,8 @@ int Dtk_Project::buildPackage()
 	theForm = kNewtRefUnbind;
 	theForm = NcGetGlobalVar(NSSYM(theForm));
 	theBase = NcGetGlobalVar(NSSYM(theBase));
+    if (theForm==kNewtRefUnbind || theBase==kNewtRefUnbind)
+        return -1;
 
 	// the following little hack removes all local variables from the 
 	// base object to avoid a recursion when writing the package
