@@ -159,6 +159,11 @@ private:
   void cb_mProjectExportToText_i(Fl_Menu_*, void*);
   static void cb_mProjectExportToText(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *mProjectMainLayout;
+private:
+  void cb_mProjectMainLayout_i(Fl_Menu_*, void*);
+  static void cb_mProjectMainLayout(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *mProjectSettings;
 private:
   void cb_mProjectSettings_i(Fl_Menu_*, void*);

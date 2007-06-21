@@ -62,7 +62,8 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Document_List::Dtk_Document_List(Dtk_Project *proj)
 :   project_(proj),
-    browser_(0L)
+    browser_(0L),
+    main_(0L)
 {
     if (project_) {
         browser_ = dtkDocumentBrowser;
@@ -183,7 +184,7 @@ void Dtk_Document_List::append(Dtk_Document *doc)
 {
     docList_.push_back(doc);
     if (browser_) {
-        browser_->add(doc->name(), doc);
+        browser_->add(doc->browserName(), doc);
     }
 }
 
@@ -191,6 +192,9 @@ void Dtk_Document_List::append(Dtk_Document *doc)
 int Dtk_Document_List::remove(Dtk_Document *doc)
 {
     int i, n = docList_.size();
+    if (main_==doc) {
+        setMain(0L);
+    }
     // search the list for this document
     for (i=0; i<n; ++i) {
         if (docList_.at(i)==doc) {
@@ -226,9 +230,25 @@ void Dtk_Document_List::filenameChanged(Dtk_Document *document)
     // search the list for this document
     for (i=0; i<n; ++i) {
         if (docList_.at(i)==document) {
-            browser_->text(i+1, document->name());
+            browser_->text(i+1, document->browserName());
             return;
         }
+    }
+}
+
+/*-v2------------------------------------------------------------------------*/
+void Dtk_Document_List::setMain(Dtk_Document *document)
+{
+    if (main_==document)
+        return;
+    if (main_) {
+        Dtk_Document *doc = main_;
+        main_ = 0L;
+        doc->updateBrowserName();
+    }
+    main_ = document;
+    if (main_) {
+        main_->updateBrowserName();
     }
 }
 

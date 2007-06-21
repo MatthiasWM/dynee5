@@ -329,7 +329,9 @@ int Dtk_Project::loadMac()
 		free(fn);
 		free(filename);
 	}
+    // FIXME mainLayout is an index, but not by the same sorting standard!
 	uint16_t mainLayout = readWord(data);
+    documentList_->setMain(documentList_->at(mainLayout));
 
 	// read the resource fork
 
@@ -527,6 +529,7 @@ int Dtk_Project::loadWin()
 				uint32_t i, n = NewtArrayLength(items);
 				for (i=0; i<n; i++) {
 					// file, type, isMainLayout
+    				Dtk_Document *doc = 0L;
 					newtRef item = NewtGetArraySlot(items, i);
 					int type = -1;
 					ix = NewtFindSlotIndex(item, NSSYM(type)); 
@@ -541,7 +544,6 @@ int Dtk_Project::loadWin()
 						if (ix>=0) {
 							newtRef name = NewtGetFrameSlot(file, ix);						
 							char *filename = NewtRefToString(name);
-							Dtk_Document *doc;
 							switch (type) {
 								case 0:  doc = documentList_->newLayout(filename); 
 							        doc->load();
@@ -555,6 +557,9 @@ int Dtk_Project::loadWin()
 							}
 						}
 					}
+					ix = NewtFindSlotIndex(item, NSSYM(isMainLayout)); 
+					if (ix>=0 && doc) 
+                        documentList_->setMain(doc);
 				}
 			}
 		}

@@ -160,6 +160,16 @@ public:
      */
 	const char		* name();
 
+    /** Return a pointer to the name as it appears in the browser.
+     *
+     * \retval pointer to the name with original file extension and a 'main' indicator.
+     */
+    const char		* browserName() { return browserName_; }
+
+    /** Update the browser name and tell the list about it.
+     */
+    void            updateBrowserName(bool tellTheList=true);
+
     /** Return the project that holds this document.
      *
      * \retval pointer to the project, or NULL if not part of a project
@@ -179,6 +189,10 @@ public:
     /// replace me
 	newtRef			getProjectItemRef();
 
+    /** Make myself the main document in the project.
+     */
+    void            setMain();
+
 protected:
     /// this is the name of the file without path or extension
 	char			* shortname_;
@@ -188,6 +202,9 @@ protected:
 
     /// this is the name of the file without path, but with extension
 	char			* name_;
+
+    /// the name of the file plus a tag indicating the main file
+	char			* browserName_;
 
     /// if this flag is set, the "save" function will behave like "save as"
 	bool			askForFilename_;

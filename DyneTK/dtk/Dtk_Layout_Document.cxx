@@ -225,12 +225,12 @@ int Dtk_Layout_Document::write(Dtk_Script_Writer &sw)
     char buf[1024];
     sprintf(buf, "// Beginning of file %s\n", name());
     sw.put(buf);
-    root_->write(sw);
-
-    // only if this is the main layout:
-    // constant |layout_%NAME%| :=  %NAME_OF_FIRST_TEMPLATE%;
-
-    sprintf(buf, "\n// End of file %s\n\n", name());
+    if (root_) {
+        root_->write(sw);
+        sprintf(buf, "constant |layout_%s| := %s;\n", name(), root_->scriptName());
+        sw.put(buf);
+    }
+    sprintf(buf, "// End of file %s\n\n", name());
     sw.put(buf);
     return -1; 
 }

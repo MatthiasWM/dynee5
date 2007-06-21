@@ -146,9 +146,21 @@ public:
      */
     void            filenameChanged(Dtk_Document *document);
 
+    /** Return the number of documents in this list.
+     */
     int             size() { return docList_.size(); }
 
+    /** Return a pointer to the document at index i.
+     */
     Dtk_Document    * at(int i) { return docList_.at(i); }
+
+    /** Return the main document.
+     */
+    Dtk_Document    * getMain() { return main_; }
+
+    /** Change the main document.
+     */
+    void            setMain(Dtk_Document *doc);
 
 private:
 
@@ -160,6 +172,9 @@ private:
 
     /// we are in charge of keeping this browser updated and reacting to its messages
     Fldtk_Document_Browser      * browser_;
+
+    /// every project has a main document which describes the top level layout
+    Dtk_Document                * main_;
 
     /// this is an FLTK callback that is triggered when the browser is clicked
     static void browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d);

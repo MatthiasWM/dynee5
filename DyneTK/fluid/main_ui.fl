@@ -53,7 +53,7 @@ widget_class Fldtk_Main_Window {
   xywh {457 178 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {
+  Fl_Menu_Bar {} {open
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
@@ -221,7 +221,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project
+      label Project open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -292,9 +292,10 @@ widget_class Fldtk_Main_Window {
         label {Install Toolkit App}
         xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
       }
-      MenuItem {} {
+      MenuItem mProjectMainLayout {
         label {Mark as Main Layout}
-        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+        callback {SetMainLayout();}
+        xywh {5 5 100 20} labelsize 12 deactivate
       }
       MenuItem {} {
         label {Process Earlier}
@@ -625,6 +626,8 @@ widget_class Fldtk_Main_Window {
         Fl_Browser documents {
           label Files
           xywh {3 123 144 274} labelsize 12 textsize 12 deactivate resizable
+          code0 {static int cw[] = { 12, 0 };}
+          code1 {documents->column_widths(cw);}
           class Fldtk_Document_Browser
         }
       }
@@ -711,7 +714,7 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectBuild->activate();
   tProjectBuild->activate();
   mProjectSettings->activate();
-  mProjectExportToText->activate();
+  mProjectExportToText->activate(); 
 } else {
   mProjectNew->activate();
   mProjectOpen->activate();
@@ -733,6 +736,7 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->activate();
   mFileSaveAll->activate();
   tFileSaveAll->activate();
+  mProjectMainLayout->activate(); // in DTK, this is only possible for layouts
 } else {
   mFileClose->deactivate();
   mFileSave->deactivate();
@@ -740,6 +744,7 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->deactivate();
   mFileSaveAll->deactivate();
   tFileSaveAll->deactivate();
+  mProjectMainLayout->deactivate();
 }
 
 // if a project is loaded, a document is active, and the document is part of the project

@@ -43,6 +43,7 @@ Dtk_Document::Dtk_Document(Dtk_Document_List *list)
 :	shortname_(0L),
 	filename_(0L),
 	name_(0L),
+    browserName_(0L),
 	askForFilename_(false),
     list_(list)
 {
@@ -58,6 +59,8 @@ Dtk_Document::~Dtk_Document()
     list_->remove(this);
 
     // remove all our resources
+	if (browserName_)
+        free(browserName_);
 	if (shortname_)
 		free(shortname_);
 	if (filename_)
@@ -68,6 +71,23 @@ Dtk_Document::~Dtk_Document()
 const char *Dtk_Document::name() 
 {
 	return name_;
+}
+
+/*-v2------------------------------------------------------------------------*/
+void Dtk_Document::updateBrowserName(bool tellTheList) 
+{
+	if (browserName_)
+        free(browserName_);
+    char buf[128];
+    buf[0] = 0;
+    if (list_ && list_->getMain()==this) {
+        strcpy(buf, "*");
+    }
+    strcat(buf, "\t");
+    strcat(buf, name_);
+    browserName_ = strdup(buf);
+    if (list_ && tellTheList)
+        list_->filenameChanged(this);
 }
 
 /*-v2------------------------------------------------------------------------*/
@@ -84,6 +104,7 @@ void Dtk_Document::setFilename(const char *filename)
 		int n = ext-name_;
 		shortname_ = (char*)calloc(n+1, 1);
 		memcpy(shortname_, name_, n);
+        updateBrowserName();
 	}
     list_->filenameChanged(this);
 }
@@ -113,6 +134,14 @@ Dtk_Project *Dtk_Document::project()
 {
     assert(list_);
     return list_->project();
+}
+
+
+/*-v2------------------------------------------------------------------------*/
+void Dtk_Document::setMain()
+{
+    assert(list_);
+    list_->setMain(this);
 }
 
 //

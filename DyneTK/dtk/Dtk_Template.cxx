@@ -60,6 +60,8 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
     browserName_(0L),
     ntName_(0L),
     ntId_(0L),
+    scriptName_(0L),
+    autoScriptName_(true),
     viewBounds_(0L),
     viewJustify_(0L)
 {
@@ -69,6 +71,7 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
 /*---------------------------------------------------------------------------*/
 Dtk_Template::~Dtk_Template()
 {
+    delete scriptName_;
     delete ntId_;
     delete ntName_;
     delete browserName_;
@@ -160,13 +163,22 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
 {
     char buf[1024];
 
+    if (!scriptName_ || autoScriptName_) {
+        if (scriptName_)
+            free(scriptName_);
+        char name[32];
+        sprintf(name, "_view%03d", sw.viewCount++);
+        scriptName_ = strdup(name);
+        autoScriptName_ = true;
+    }
+
     // FIXME run the 'beforeScript
 
     Dtk_Template *p = parent();
     if (p) {
-        sprintf(buf, "_view%03d := /* child of _view??? */\n", sw.viewCount++);
+        sprintf(buf, "%s := /* child of %s */\n", scriptName(), parent()->scriptName());
     } else {
-        sprintf(buf, "_view%03d :=\n", sw.viewCount++);
+        sprintf(buf, "%s :=\n", scriptName());
     }
     sw.put(buf);
     sw.put("    {\n");
@@ -187,8 +199,18 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
 
     if (tmplList_) {
         int i, n = tmplList_->size();
-        for (i=0; i<n; i++) {
-            tmplList_->at(i)->write(sw);
+        if (n) {
+            for (i=0; i<n; i++) {
+                tmplList_->at(i)->write(sw);
+            }
+            sprintf(buf, "%s.stepChildren := [ ", scriptName());
+            sw.put(buf);
+            for (i=0; i<n; i++) {
+                sw.put(tmplList_->at(i)->scriptName());
+                if (i<n-1)
+                    sw.put(", ");
+            }
+            sw.put(" ];\n\n");
         }
     }
 

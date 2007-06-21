@@ -277,7 +277,15 @@ int		LaunchPackage();
 int ExportPackageToText();
 
 //      InstallToolkitApp()
-//      MarkAsMainLayout()
+
+/** Set a document as the main layout.
+ *
+ * \retval  0 if successful
+ * \retval  -1 if no document was given, or none active
+ * \retval  -2 if the document is not part of a project
+ */
+int SetMainLayout(Dtk_Document *doc=0L);
+
 //      ProcessEarlier()
 //      ProcessLater()
 

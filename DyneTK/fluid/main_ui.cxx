@@ -175,6 +175,13 @@ void Fldtk_Main_Window::cb_mProjectExportToText(Fl_Menu_* o, void* v) {
   ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mProjectExportToText_i(o,v);
 }
 
+void Fldtk_Main_Window::cb_mProjectMainLayout_i(Fl_Menu_*, void*) {
+  SetMainLayout();
+}
+void Fldtk_Main_Window::cb_mProjectMainLayout(Fl_Menu_* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mProjectMainLayout_i(o,v);
+}
+
 void Fldtk_Main_Window::cb_mProjectSettings_i(Fl_Menu_*, void*) {
   ShowProjectSettings();
 }
@@ -280,7 +287,7 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Launch Package", FL_COMMAND|0x33,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectLaunch, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Export Package to Text", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectExportToText, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Install Toolkit App", 0,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
- {"Mark as Main Layout", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
+ {"Mark as Main Layout", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectMainLayout, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Process Earlier", FL_COMMAND|0xff52,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Process Later", FL_COMMAND|0xff54,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
  {"Settings...", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mProjectSettings, 0, 129, FL_NORMAL_LABEL, 0, 12, 0},
@@ -356,6 +363,7 @@ Fl_Menu_Item* Fldtk_Main_Window::mProjectBuild = Fldtk_Main_Window::menu_ + 50;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectDownload = Fldtk_Main_Window::menu_ + 51;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectLaunch = Fldtk_Main_Window::menu_ + 52;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectExportToText = Fldtk_Main_Window::menu_ + 53;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectMainLayout = Fldtk_Main_Window::menu_ + 55;
 Fl_Menu_Item* Fldtk_Main_Window::mProjectSettings = Fldtk_Main_Window::menu_ + 58;
 Fl_Menu_Item* Fldtk_Main_Window::mLayout = Fldtk_Main_Window::menu_ + 63;
 Fl_Menu_Item* Fldtk_Main_Window::mBrowser = Fldtk_Main_Window::menu_ + 75;
@@ -3359,6 +3367,8 @@ this->when(FL_WHEN_RELEASE);
         documents->when(FL_WHEN_RELEASE_ALWAYS);
         documents->deactivate();
         Fl_Group::current()->resizable(documents);
+        static int cw[] = { 12, 0 };
+        documents->column_widths(cw);
       } // Fldtk_Document_Browser* documents
       browsers->end();
       Fl_Group::current()->resizable(browsers);
@@ -3477,7 +3487,7 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectBuild->activate();
   tProjectBuild->activate();
   mProjectSettings->activate();
-  mProjectExportToText->activate();
+  mProjectExportToText->activate(); 
 } else {
   mProjectNew->activate();
   mProjectOpen->activate();
@@ -3499,6 +3509,7 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->activate();
   mFileSaveAll->activate();
   tFileSaveAll->activate();
+  mProjectMainLayout->activate(); // in DTK, this is only possible for layouts
 } else {
   mFileClose->deactivate();
   mFileSave->deactivate();
@@ -3506,6 +3517,7 @@ if ( (mask & 0x00000002) == 0x00000002 ) {
   mFileSaveAs->deactivate();
   mFileSaveAll->deactivate();
   tFileSaveAll->deactivate();
+  mProjectMainLayout->deactivate();
 }
 
 // if a project is loaded, a document is active, and the document is part of the project

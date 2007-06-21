@@ -864,6 +864,20 @@ int OpenLayoutView(Dtk_Layout_Document *lyt)
     return 0;
 }
 
+/*---------------------------------------------------------------------------*/
+int SetMainLayout(Dtk_Document *doc)
+{
+    if (!doc) {
+        doc = GetCurrentDocument();
+        if (!doc) 
+            return -1;
+    }
+    if (!doc->project())
+        return -2;
+    doc->setMain();
+    return 0;
+}
+
 //
 // End of "$Id$".
 //
