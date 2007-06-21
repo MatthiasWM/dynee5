@@ -235,6 +235,16 @@ int Dtk_Layout_Document::write(Dtk_Script_Writer &sw)
     return -1; 
 }
 
+/*---------------------------------------------------------------------------*/
+int Dtk_Layout_Document::writeTheForm(Dtk_Script_Writer &sw)
+{
+    char buf[1204];
+    sprintf(buf, "DefGlobalVar('theForm, |layout_%s|);\n", name());
+    sw.put(buf);
+    return 0;    
+}
+
+
 //
 // End of "$Id$".
 //

@@ -9,6 +9,7 @@ extern "C" {
 #include "NewtPkg.h"
 #include "NewtPrint.h"
 #include "NewtEnv.h"
+#include "NewtVM.h"
 }
 
 #endif

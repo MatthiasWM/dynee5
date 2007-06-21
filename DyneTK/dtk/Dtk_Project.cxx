@@ -28,6 +28,7 @@
 #endif
 
 #include "dtk/Dtk_Project.h"
+#include "dtk/Dtk_Error.h"
 #include "dtk/Dtk_Document.h"
 #include "dtk/Dtk_Script_Writer.h"
 #include "dtk/Dtk_Document_List.h"
@@ -43,6 +44,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <sys/stat.h>
 #ifdef WIN32
 # include <winsock2.h>
 # include <direct.h>
@@ -51,6 +53,7 @@
 #else
 # include <arpa/inet.h>
 #endif
+
 
 #include "allNewt.h"
 
@@ -974,6 +977,8 @@ int Dtk_Project::buildPackage()
 	// FIXME: this only supports a single document per project
 	newtRefVar theForm = kNewtRefNIL;
 	newtRefVar theBase = kNewtRefNIL;
+
+# if 0 // the old way which supports only a single document
 	Dtk_Document *doc = documentList_->getDocument(0);
 	if (doc) {
 		theForm = doc->compile();
@@ -981,6 +986,29 @@ int Dtk_Project::buildPackage()
 	if (theForm==kNewtRefUnbind) {
 		return -1;
 	}
+# else // the new way which currently requires a script file on disk
+    // write the package into a file
+    ExportPackageToText();
+    // read it back into memory
+    struct stat st;
+    stat("testing_script_writer.txt", &st);
+    FILE *f = fopen("testing_script_writer.txt", "rb");
+	char *script = (char*)malloc(st.st_size);
+    fread(script, 1, st.st_size, f);
+    fclose(f);
+    // compile and run ir
+    newtErr	err;
+    theForm = NVMInterpretStr(script, &err);
+    // release the memory taken by the script
+    free(script);
+    // very simple error code output
+	if (theForm==kNewtRefUnbind) {
+		printf("**** ERROR while compiling or interpreting\n");
+		printf("**** %s: %s\n", newt_error_class(err), newt_error(err));
+		return kNewtRefUnbind;
+	} else {
+	}
+# endif
 
 	NewtPrintObject(stdout, theForm);
 
@@ -1124,6 +1152,14 @@ int Dtk_Project::write(Dtk_Script_Writer &sw)
     for (i=0; i<n; ++i) {
         documentList_->at(i)->write(sw);
     }
+
+    Dtk_Document *mm = documentList_->getMain();
+    if (mm) {
+        mm->writeTheForm(sw);
+    }
+    sw.put("dtkHelperFunc := func() begin end;\n");
+    sw.put("DefGlobalVar('theBase, dtkHelperFunc.argFrame._nextArgFrame);\n");
+    sw.put("return dtkHelperFunc;\n");
 
     return 0;
 }

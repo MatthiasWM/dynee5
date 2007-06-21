@@ -66,6 +66,13 @@ public:
      */     
 	virtual int		write(Dtk_Script_Writer &sw);
 
+    /** Write a script line that will make the main form public.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		writeTheForm(Dtk_Script_Writer &sw);
+
     void editView();
     Fl_Hold_Browser * templateBrowser();
     Fl_Hold_Browser * slotBrowser();

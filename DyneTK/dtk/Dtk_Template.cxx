@@ -211,6 +211,7 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
                     sw.put(", ");
             }
             sw.put(" ];\n\n");
+            // or "AddStepView"?
         }
     }
 

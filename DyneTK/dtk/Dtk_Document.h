@@ -106,6 +106,13 @@ public:
      */     
 	virtual int		write(Dtk_Script_Writer &sw) { return -1; }
 
+    /** Write a script line that will make the main form public.
+     *
+     * \retval 0 if successful
+     * \retval negative if an error occured
+     */     
+	virtual int		writeTheForm(Dtk_Script_Writer &sw) { return -1; }
+
     /** Return 1 if the document should be saved.
      *
      * \retval 0 if the document is save
