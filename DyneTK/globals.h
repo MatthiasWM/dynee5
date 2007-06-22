@@ -382,6 +382,9 @@ void	DebugDumpNSOF();
 void	DebugDumpRsrc();
 void	DebugDumpBuffer(uint8_t*, int);
 
+void    SetModeEditTemplate();
+void    SetModeAddTemplate();
+
 #endif
 
 

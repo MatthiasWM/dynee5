@@ -44,6 +44,7 @@
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
 #include "fltk/Fldtk_Editor.h"
+#include "fltk/Fldtk_Layout_View.h"
 
 #include "globals.h"
 #include "allNewt.h"
@@ -642,6 +643,7 @@ void UpdateMainMenu()
     //	bit 2: the active document is part of the project
     //  bit 3: Inspector is connected to a Newton device
     //  bit 4: a layout is active for editing
+    //  bit 5: the current layout has a visible layout view
 	unsigned int mask = 0;
 	if (dtkProject)
 		mask |= 1;
@@ -653,6 +655,9 @@ void UpdateMainMenu()
         }
         if (doc->isLayout()) {
             mask |= 16;
+            Dtk_Layout_Document *layout = (Dtk_Layout_Document*)doc;
+            if (layout->editViewShown())
+                mask |= 32;
         }
     }
 	if (wInspectorSerial->is_open()) {
@@ -877,6 +882,21 @@ int SetMainLayout(Dtk_Document *doc)
     doc->setMain();
     return 0;
 }
+
+/*---------------------------------------------------------------------------*/
+void SetModeEditTemplate()
+{
+    Fldtk_Layout_View::mode(0);
+    UpdateMainMenu();
+}
+
+/*---------------------------------------------------------------------------*/
+void SetModeAddTemplate()
+{
+    Fldtk_Layout_View::mode(1);
+    UpdateMainMenu();
+}
+
 
 //
 // End of "$Id$".

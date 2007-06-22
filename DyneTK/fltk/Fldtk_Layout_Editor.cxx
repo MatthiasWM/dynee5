@@ -118,8 +118,10 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
                     slotMenus->resizable(space);
                     Fl_Button *apply = new Fl_Button(X+W-10-150, Y+H/4+2+4, 70, 20, "Apply");
                     apply->labelsize(12);
+                    apply->callback((Fl_Callback*)apply_cb, this);
                     Fl_Button *revert = new Fl_Button(X+W-10-70, Y+H/4+2+4, 70, 20, "Revert");
                     revert->labelsize(12);
+                    revert->callback((Fl_Callback*)revert_cb, this);
                 }
                 slotMenus->end();
                 slotEditor_ = new Fldtk_Slot_Editor_Group(X, Y+H/4+2+30, W, H-H/4-2-30);
@@ -160,6 +162,20 @@ Fldtk_Layout_Editor::~Fldtk_Layout_Editor()
 Dtk_Document *Fldtk_Layout_Editor::document() 
 {
     return layout_; 
+}
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_Editor::apply_cb(Fl_Widget*, Fldtk_Layout_Editor *w)
+{
+    Fl_Widget *slot = w->slotEditor_->value();
+    if (slot) slot->do_callback(slot, 'aply');
+}
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_Editor::revert_cb(Fl_Widget*, Fldtk_Layout_Editor *w)
+{
+    Fl_Widget *slot = w->slotEditor_->value();
+    if (slot) slot->do_callback(slot, 'rvrt');
 }
 
 

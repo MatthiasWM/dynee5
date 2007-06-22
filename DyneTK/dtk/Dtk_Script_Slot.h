@@ -42,7 +42,7 @@ public:
 
     /** Initialize a slot
      */
-                    Dtk_Script_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
+                    Dtk_Script_Slot(Dtk_Slot_List *list, const char *key, newtRef slot=kNewtRefUnbind);
 
     /** Remove a slot and unlink it from the list.
      */
@@ -58,6 +58,18 @@ public:
      * \retval negative if an error occured
      */     
 	virtual int		write(Dtk_Script_Writer &sw);
+
+    /** Apply the changes in the editor to the slot.
+     */
+    virtual void    apply();
+
+    /** Revert the changes in the editor to the current slot sttings.
+     */
+    virtual void    revert();
+
+    /** Set the text of a new script.
+     */
+    void            set(const char *text);
 
 private:
 

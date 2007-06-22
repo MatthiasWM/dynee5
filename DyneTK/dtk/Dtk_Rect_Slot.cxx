@@ -42,18 +42,20 @@ Dtk_Rect_Slot::Dtk_Rect_Slot(Dtk_Slot_List *list, const char *theKey, newtRef sl
     top_(0), left_(0), bottom_(0), right_(0)
 {
     // read the view bounds
-	newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-	if (NewtRefIsFrame(v)) {
-		 newtRef i;
-		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(top)));
-		 if (NewtRefIsInteger(i)) top_ = NewtRefToInteger(i);
-		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(left)));
-		 if (NewtRefIsInteger(i)) left_ = NewtRefToInteger(i);
-		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(bottom)));
-		 if (NewtRefIsInteger(i)) bottom_ = NewtRefToInteger(i);
-		 i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(right)));
-		 if (NewtRefIsInteger(i)) right_ = NewtRefToInteger(i);
-	}
+    if (slot != kNewtRefUnbind) {
+	    newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
+	    if (NewtRefIsFrame(v)) {
+		     newtRef i;
+		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(top)));
+		     if (NewtRefIsInteger(i)) top_ = NewtRefToInteger(i);
+		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(left)));
+		     if (NewtRefIsInteger(i)) left_ = NewtRefToInteger(i);
+		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(bottom)));
+		     if (NewtRefIsInteger(i)) bottom_ = NewtRefToInteger(i);
+		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(right)));
+		     if (NewtRefIsInteger(i)) right_ = NewtRefToInteger(i);
+	    }
+    }
 }
 
 
@@ -86,6 +88,18 @@ int Dtk_Rect_Slot::write(Dtk_Script_Writer &sw)
     sw.put(buf);
     return 0;
 }
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Rect_Slot::set(int t, int l, int b, int r)
+{
+    top_ = t;
+    left_ = l;
+    right_ = r;
+    bottom_ = b;
+    if (editor_) 
+        editor_->rect(top_, left_, bottom_, right_);
+}
+
 
 
 //

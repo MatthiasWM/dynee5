@@ -1,9 +1,9 @@
 //
 // "$Id$"
 //
-// Fldtk_Script_Slot_Editor header file for the FLMM extension to FLTK.
+// Dtk_Template_Proto header file for the Dyne Toolkit.
 //
-// Copyright 2002-2007 by Matthias Melcher.
+// Copyright 2007 by Matthias Melcher.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Library General Public
@@ -20,31 +20,32 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA.
 //
-// Please report all bugs and problems to "flmm@matthiasm.com".
+// Please report all bugs and problems to "dtk@matthiasm.com".
 //
 
-#ifndef FLDTK_SCRIPT_SLOT_EDITOR_H
-#define FLDTK_SCRIPT_SLOT_EDITOR_H
+#ifndef DTK_TEMPLATE_PROTO_H
+#define DTK_TEMPLATE_PROTO_H
 
 
-#include "fltk/Flmm_Newt_Script_Editor.h"
+struct Fl_Menu_Item;
+class Dtk_Template;
 
 
-class Dtk_Script_Slot;
+typedef void (*FSetup)(Dtk_Template*);
 
-
-/** GUI for editing script slots.
+/** A helper class that is used to create new templates.
  */
-class Fldtk_Script_Slot_Editor : public Flmm_Newt_Script_Editor
+class Dtk_Template_Proto
 {
 public:
-	        Fldtk_Script_Slot_Editor(Fl_Group *container, Dtk_Script_Slot *slot);
-	        ~Fldtk_Script_Slot_Editor();
-    void    text(char *script);
-    char    *text();
-protected:
-    Dtk_Script_Slot * slot_;
-    static void editor_cb(Fldtk_Script_Slot_Editor *w, unsigned int cmd);
+    static Fl_Menu_Item *menu;
+
+    char    *name;
+    int     id;
+    FSetup  setup;
+    // specific slots
+    // methods
+    // attributes
 };
 
 

@@ -43,7 +43,7 @@ class Dtk_Slot;
 class Dtk_Rect_Slot;
 class Dtk_Value_Slot;
 class Dtk_Script_Writer;
-
+class Dtk_Template_Proto;
 
 /** Manage a template object in a layout.
  *
@@ -57,7 +57,10 @@ public:
 
     /** Initialize a template.
      */
-                    Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list=0L);
+                    Dtk_Template(
+                        Dtk_Layout_Document *layout, 
+                        Dtk_Template_List *list=0L,
+                        Dtk_Template_Proto *proto=0L);
 
     /** Remove a template and all its children.
      */
@@ -83,6 +86,18 @@ public:
     /** Return the name of the template as it will appear in the browser
      */
     const char      * browserName();
+
+    /** Add a new template as a step child to this template.
+     *
+     * \param x \param y \param w \param h position and size of the new template
+     * \param proto prototype for the new template, or NULL to add the user-selected prototype
+     * \return the newly created template or NULL
+     */
+    Dtk_Template    * add(int x, int y, int w, int h, Dtk_Template_Proto *proto=0L);
+
+    /** Add a previously create slot to this layout.
+     */
+    void            add(Dtk_Slot *);
 
     /** Return the associated Layout
      */
@@ -117,6 +132,12 @@ public:
     /** Returns the name of the template during script building.
      */
     char *scriptName() { return scriptName_; }
+
+    /** Return the slot list.
+     *
+     * If there is no slot list, this call creates one.
+     */
+    Dtk_Slot_List       * slotList();
 
 private:
 

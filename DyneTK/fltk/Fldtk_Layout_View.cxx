@@ -24,8 +24,15 @@
 //
 
 #include "Fldtk_Layout_View.h"
+#include "globals.h"
+#include "fluid/main_ui.h"
 
 #include <FL/Fl.H>
+
+/*---------------------------------------------------------------------------*/
+
+
+int Fldtk_Layout_View::mode_ = 0;
 
 
 /*---------------------------------------------------------------------------*/
@@ -34,12 +41,39 @@ Fldtk_Layout_View::Fldtk_Layout_View(Dtk_Layout_Document *layout, int width, int
     layout_(layout)
 {
     set_non_modal();
+    callback(hide_cb, this);
 }
 
 
 /*---------------------------------------------------------------------------*/
 Fldtk_Layout_View::~Fldtk_Layout_View()
 {
+    hide();
+    UpdateMainMenu();
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_View::hide_cb(Fl_Widget *w, void*)
+{
+    ((Fldtk_Layout_View*)w)->hide();
+    UpdateMainMenu();
+}
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_View::mode(int m)
+{
+    switch (m) {
+    case 0:
+        dtkMain->tLayoutModeEdit->value(1);
+        dtkMain->tLayoutModeAdd->value(0);
+        break;
+    case 1:
+        dtkMain->tLayoutModeEdit->value(0);
+        dtkMain->tLayoutModeAdd->value(1);
+        break;
+    }
+    mode_ = m;
 }
 
 

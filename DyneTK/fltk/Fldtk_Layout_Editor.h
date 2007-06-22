@@ -60,6 +60,9 @@ protected:
     // revert
     // slot editor
     //  ... (many)
+
+    static void apply_cb(Fl_Widget*, Fldtk_Layout_Editor*);
+    static void revert_cb(Fl_Widget*, Fldtk_Layout_Editor*);
 };
 
 

@@ -31,6 +31,7 @@
 
 
 class Dtk_Layout_Document;
+class Fl_Widget;
 
 
 /** GUI element for visually editing layouts.
@@ -40,9 +41,16 @@ class Fldtk_Layout_View : public Fl_Double_Window
 public:
 	                    Fldtk_Layout_View(Dtk_Layout_Document *layout, int width, int height);
 	virtual             ~Fldtk_Layout_View();
+    static void         mode(int m);
+    static int          mode() { return mode_; }
 
 protected:
     Dtk_Layout_Document * layout_;
+
+    /// mode 0 is "edit", mode 1 is "add"
+    static int          mode_;
+
+    static void         hide_cb(Fl_Widget*, void*);
 };
 
 

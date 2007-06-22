@@ -37,6 +37,7 @@ Fldtk_Script_Slot_Editor::Fldtk_Script_Slot_Editor(Fl_Group *container, Dtk_Scri
 	buffer()->tab_distance(4);
 	textfont(FL_COURIER);
 	textsize(12);
+    callback((Fl_Callback*)editor_cb);
 }
 
 
@@ -48,6 +49,19 @@ Fldtk_Script_Slot_Editor::~Fldtk_Script_Slot_Editor()
 void Fldtk_Script_Slot_Editor::text(char *script) 
 {
     buffer()->text(script);
+}
+
+char *Fldtk_Script_Slot_Editor::text() 
+{
+    return buffer()->text();
+}
+
+void Fldtk_Script_Slot_Editor::editor_cb(Fldtk_Script_Slot_Editor *w, unsigned int cmd)
+{
+    switch (cmd) {
+    case 'aply': w->slot_->apply(); break;
+    case 'rvrt': w->slot_->revert(); break;
+    }
 }
 
 

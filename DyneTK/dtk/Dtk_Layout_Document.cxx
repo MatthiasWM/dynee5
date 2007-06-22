@@ -126,6 +126,7 @@ int Dtk_Layout_Document::edit()
 void Dtk_Layout_Document::editView() 
 {
     view_->show();
+    UpdateMainMenu();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -168,9 +169,12 @@ void Dtk_Layout_Document::setupEditors()
         return;
     int indent = 0;
     int index = 1;
+    layoutView()->clear();
     layoutView()->begin();
     root_->updateBrowserLink(b, indent, index, true);
     layoutView()->end();
+    layoutView()->redraw();
+    b->redraw();
     b->callback((Fl_Callback*)templateBrowser_cb, this);
     slotBrowser()->callback((Fl_Callback*)slotBrowser_cb, this);
 }
@@ -242,6 +246,16 @@ int Dtk_Layout_Document::writeTheForm(Dtk_Script_Writer &sw)
     sprintf(buf, "DefGlobalVar('theForm, |layout_%s|);\n", name());
     sw.put(buf);
     return 0;    
+}
+
+/*---------------------------------------------------------------------------*/
+bool Dtk_Layout_Document::editViewShown()
+{
+    // FIXME update the menus when the view is shown
+    // FIXME update the menus when the view is hidden
+    if (view_ && view_->visible())
+        return true;
+    return false;
 }
 
 

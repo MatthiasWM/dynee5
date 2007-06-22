@@ -26,6 +26,8 @@
 
 #include "Flnt_Widget.h"
 #include "dtk/Dtk_Template.h"
+#include "fltk/Fldtk_Layout_View.h"
+#include "globals.h"
 
 #include <FL/Fl.H>
 #include <FL/Fl_Group.H>
@@ -46,6 +48,8 @@ Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl)
     labelfont((Fl_Font)16);
     labelsize(10);
     box(FL_BORDER_BOX);
+    //align(FL_ALIGN_CLIP);
+    resizable(0L);
 }
 
 
@@ -147,6 +151,7 @@ void Flnt_Widget::newtResize()
 
 int Flnt_Widget::handle(int event)
 {
+    // mode 0=drag, 1=resize, 2=create
     static int mode, ox, oy, wx, wy, ww, wh;
     switch(event) {
         case FL_PUSH:
@@ -161,7 +166,9 @@ int Flnt_Widget::handle(int event)
                 wx = x(); wy = y();
                 ww = w(); wh = h();
                 mode = 1;
-                if (ox>=x()+w()-8 && oy>=y()+h()-8)
+                if (Fldtk_Layout_View::mode()==1)
+                    mode = 3;
+                else if (ox>=x()+w()-8 && oy>=y()+h()-8)
                     mode = 2;
             }
             return 1;
@@ -170,21 +177,33 @@ int Flnt_Widget::handle(int event)
                 if (mode==1) { // drag widget
                     position(wx-ox+Fl::event_x(), wy-oy+Fl::event_y());
                     window()->redraw();
-                } else { // resize widget
+                } else if (mode==2) { // resize widget
                     size(ww-ox+Fl::event_x(), wh-oy+Fl::event_y());
                     window()->redraw();
+                } else if (mode==3) { // create a new widget
+                    // FIXME show a rubberband rect
                 }
                 // FIXME tnewtReverseResize();
                 // FIXME template_->setSize();
                 return 1;
             }
             break;
+        case FL_RELEASE:
+            wx = Fl::event_x();
+            wy = Fl::event_y();
+            if (mode==3) {
+                template_->add(ox, oy, wx-ox, wy-oy);
+                SetModeEditTemplate();
+            }
     }
     return Fl_Group::handle(event);
 }
 
 void Flnt_Widget::draw()
 {
+    fl_color(FL_BLACK);
+    fl_rect(x(), y(), w(), h());
+    fl_push_clip(x()+1, y()+1, w()-2, h()-2);
     Fl_Group::draw();
     if (template_->isSelected()) {
         fl_color(FL_BLACK);
@@ -193,6 +212,7 @@ void Flnt_Widget::draw()
         fl_yxline(x()+w()-3, y()+7, y()+2, x()+w()-8);
         fl_yxline(x()+2, y()+h()-8, y()+h()-3, x()+7);
     }
+    fl_pop_clip();
 }
 
 //

@@ -20,7 +20,6 @@ private:
         int nDeleted);
     static void changed_cb_(int, int nInserted, int nDeleted,int, const char*, void* v);
     void changed_cb(int nInserted, int nDeleted);
-
 };
 
 #endif

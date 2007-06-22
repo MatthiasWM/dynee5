@@ -43,14 +43,16 @@ Dtk_Script_Slot::Dtk_Script_Slot(Dtk_Slot_List *list, const char *theKey, newtRe
     editor_(0L),
     script_(0L)
 {
-    newtRef value = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-    if (NewtRefIsString(value)) {
-        script_ = strdup(NewtRefToString(value));
-        char *s = script_;
-        for (;;s++) {
-            char c = *s;
-            if (!c) break;
-            if (c=='\r') *s = '\n';
+    if (slot!=kNewtRefUnbind) {
+        newtRef value = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
+        if (NewtRefIsString(value)) {
+            script_ = strdup(NewtRefToString(value));
+            char *s = script_;
+            for (;;s++) {
+                char c = *s;
+                if (!c) break;
+                if (c=='\r') *s = '\n';
+            }
         }
     }
 }
@@ -88,7 +90,7 @@ int Dtk_Script_Slot::write(Dtk_Script_Writer &sw)
         char *src = script_, *end = script_;
         for (;;) {
             sw.put("        ");
-            if (*src==0) continue;
+            if (*src==0) break;
             for (;;) {
                 char c = *end;
                 if (c==0 || c=='\n') break;
@@ -108,6 +110,34 @@ int Dtk_Script_Slot::write(Dtk_Script_Writer &sw)
     }
     return 0;
 }
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Script_Slot::apply() 
+{ 
+    if (script_)
+        free(script_);
+    script_ = editor_->text();
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Script_Slot::revert() 
+{
+    editor_->text(script_);
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Script_Slot::set(const char *script) 
+{
+    if (script_)
+        free(script_);
+    script_ = strdup(script);
+    if (editor_)
+        revert();
+}
+
 
 
 //

@@ -42,7 +42,7 @@ public:
 
     /** Initialize a slot
      */
-                    Dtk_Rect_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
+                    Dtk_Rect_Slot(Dtk_Slot_List *list, const char *key, newtRef slot=kNewtRefUnbind);
 
     /** Remove a slot and unlink it from the list.
      */
@@ -58,6 +58,10 @@ public:
     int     left() { return left_; }
     int     bottom() { return bottom_; }
     int     right() { return right_; }
+
+    /** Set the coordintaes for the rectangle.
+     */
+    void    set(int t, int l, int b, int r);
 
     /** Write this slot as a Newt Script.
      *

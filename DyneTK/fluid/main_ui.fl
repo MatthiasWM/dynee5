@@ -42,6 +42,8 @@ decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
 decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {public
 } 
 
+decl {\#include "dtk/Dtk_Template_Proto.h"} {} 
+
 decl {\#include <FL/fl_ask.h>} {public
 } 
 
@@ -221,7 +223,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project open
+      label Project
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -564,7 +566,7 @@ widget_class Fldtk_Main_Window {
       xywh {760 30 15 25} deactivate resizable
     }
   }
-  Fl_Group {} {
+  Fl_Group {} {open
     xywh {0 60 785 35} box THIN_DOWN_BOX
   } {
     Fl_Button {} {
@@ -585,25 +587,29 @@ widget_class Fldtk_Main_Window {
     Fl_Button {} {
       tooltip {CreaAlign Horizontal Center} image {../images/shape_align_center.png} deimage {../images/shape_align_center_da.png} xywh {135 65 25 25} labelsize 9 deactivate
     }
-    Fl_Button {} {
-      tooltip {Select Mode} image {../images/cursor.png} deimage {../images/cursor_da.png} xywh {165 65 25 25} labelsize 9 deactivate
-    }
-    Fl_Button {} {
-      tooltip {Create Proto} image {../images/add.png} deimage {../images/add_da.png} xywh {195 65 25 25} labelsize 9 deactivate
-    }
-    Fl_Button {} {
-      tooltip {Create Proto} image {../images/plugin_add.png} deimage {../images/plugin_add_da.png} xywh {405 65 25 25} labelsize 9 deactivate
-    }
-    Fl_Choice {} {open
-      xywh {225 66 175 23} down_box BORDER_BOX labelsize 11 textsize 11 deactivate
+    Fl_Group {} {open
+      xywh {165 65 55 25}
     } {
-      MenuItem {} {
-        label newtApplication
-        xywh {5 5 100 20} labelsize 11
+      Fl_Button tLayoutModeEdit {
+        callback {SetModeEditTemplate();} selected
+        tooltip {Select Mode} image {../images/cursor.png} deimage {../images/cursor_da.png} xywh {165 65 25 25} type Radio value 1 labelsize 9 deactivate
+      }
+      Fl_Button tLayoutModeAdd {
+        callback {SetModeAddTemplate();}
+        tooltip {Create Proto} image {../images/add.png} deimage {../images/add_da.png} xywh {190 65 25 25} type Radio labelsize 9 deactivate
       }
     }
+    Fl_Choice tTemplateChoice {
+      callback {OpenLayoutView();
+SetModeAddTemplate();} open
+      xywh {220 66 175 23} down_box BORDER_BOX labelsize 11 textsize 11 deactivate
+      code0 {tTemplateChoice->menu(Dtk_Template_Proto::menu);}
+    } {}
+    Fl_Button {} {
+      tooltip {Create Proto} image {../images/plugin_add.png} deimage {../images/plugin_add_da.png} xywh {400 65 25 25} labelsize 9 deactivate
+    }
     Fl_Choice {} {open
-      xywh {435 66 175 23} down_box BORDER_BOX labelsize 11 textsize 11 deactivate
+      xywh {430 66 175 23} down_box BORDER_BOX labelsize 11 textsize 11 deactivate
     } {
       MenuItem {} {
         label {No Custom Protos}
@@ -693,6 +699,7 @@ widget_class Fldtk_Main_Window {
 //	bit 2: the active document is part of the project
 //      bit 3: Inspector is connected to a Newton device
 //      bit 4: a layout is active for editing
+//      bit 5: the current layout has a visible layout view
 
 // mFileNewTex is always active
 // mFileOpen is always active
@@ -785,11 +792,21 @@ if ( (mask & 0x00000009) == 0x00000009 ) {
 if ( (mask & 0x00000010) == 0x00000010 ) {
   mWindowOpenLayout->activate();
   tWindowOpenLayout->activate();
+  tTemplateChoice->activate();
 } else {
   mWindowOpenLayout->deactivate();
   tWindowOpenLayout->deactivate();
-}} {selected
-    }
+  tTemplateChoice->deactivate();
+}
+
+// if there is a current document, and the type is layout, and the viewer is visible
+if ( (mask & 0x00000020) == 0x00000020 ) {
+  tLayoutModeEdit->activate();
+  tLayoutModeAdd->activate();
+} else {
+  tLayoutModeEdit->deactivate();
+  tLayoutModeAdd->deactivate();
+}} {}
   }
 } 
 

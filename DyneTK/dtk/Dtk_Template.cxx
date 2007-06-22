@@ -39,8 +39,11 @@
 #include "Dtk_Value_Slot.h"
 #include "Dtk_Proto_Slot.h"
 #include "Dtk_Script_Writer.h"
+#include "Dtk_Template_Proto.h"
 
 #include "flnt/Flnt_Widget.h"
+
+#include "fluid/main_ui.h"
 
 #include "allNewt.h"
 
@@ -49,7 +52,9 @@
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
+Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, 
+                           Dtk_Template_List *list,
+                           Dtk_Template_Proto *proto)
 :   layout_(layout),
     list_(list),
     tmplList_(0L),
@@ -65,6 +70,8 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, Dtk_Template_List *list)
     viewBounds_(0L),
     viewJustify_(0L)
 {
+    //if (proto && proto->setup)
+        //proto->setup(this);
 }
 
 
@@ -79,9 +86,12 @@ Dtk_Template::~Dtk_Template()
     delete tmplList_;
 }
 
+
 /*---------------------------------------------------------------------------*/
 int Dtk_Template::load(newtRef node)
 {
+    printf("===========\n");
+    NewtPrintObject(stdout, node);
     // find the name of this template
     newtRef ntName = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntName)));
     if (NewtRefIsString(ntName)) ntName_ = strdup(NewtRefToString(ntName));
@@ -94,8 +104,8 @@ int Dtk_Template::load(newtRef node)
 	newtRef value = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(value)));
     if (NewtRefIsFrame(value)) {
         int i, n = NewtFrameLength(value);
-        if (n && !slotList_)
-            slotList_ = new Dtk_Slot_List(this);
+        if (n)
+            slotList(); // create a slot list
         for (i=0; i<n; i++) {
             uint32_t index;
             newtRef key = NewtGetFrameKey(value, i);
@@ -245,6 +255,7 @@ void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int 
     }
 }
 
+
 /*---------------------------------------------------------------------------*/
 const char *Dtk_Template::browserName()
 {
@@ -269,6 +280,7 @@ const char *Dtk_Template::browserName()
     return browserName_;
 }
 
+
 /*---------------------------------------------------------------------------*/
 void Dtk_Template::edit()
 {
@@ -283,6 +295,7 @@ void Dtk_Template::edit()
     }
 }
 
+
 /*---------------------------------------------------------------------------*/
 void Dtk_Template::getSize(int &t, int &l, int &b, int &r)
 {
@@ -294,11 +307,13 @@ void Dtk_Template::getSize(int &t, int &l, int &b, int &r)
     }
 }
 
+
 /*---------------------------------------------------------------------------*/
 unsigned int Dtk_Template::justify()
 {
     return viewJustify_ ? (unsigned int)viewJustify_->value() : 0;
 }
+
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Template::selectedInView()
@@ -313,11 +328,13 @@ void Dtk_Template::selectedInView()
     browser_->do_callback();
 }
 
+
 /*---------------------------------------------------------------------------*/
 char Dtk_Template::isSelected()
 {
     return browser_->value()==index_ ? 1 : 0;
 }
+
 
 /*---------------------------------------------------------------------------*/
 Dtk_Template *Dtk_Template::parent()
@@ -325,6 +342,121 @@ Dtk_Template *Dtk_Template::parent()
     if (list_)
         return list_->parent();
     return 0L;
+}
+
+
+/*---------------------------------------------------------------------------*/
+Dtk_Template *Dtk_Template::add(int x, int y, int w, int h, Dtk_Template_Proto *proto)
+{
+    if (!proto) {
+        Fl_Choice *c = dtkMain->tTemplateChoice;
+        proto = (Dtk_Template_Proto*)c->menu()[c->value()].user_data();
+    }
+
+    Dtk_Template *tmpl = new Dtk_Template(layout_, list_, proto);
+
+    static char *txt = 
+        "return { "
+        "  value: { "
+        "    viewBounds: { value: { top: 0, left: 0, bottom: 10, right: 10 }, __ntDatatype: \"RECT\" } "
+        "  }, "
+        "  __ntId: 'dasIstEinTest "
+        "};";
+        /*
+        " return {\n"
+        "        value: {\n"
+        "                __ntTemplate: {\n"
+        "                        value: 226,\n"
+        "                        __ntDatatype: \"PROT\",\n"
+        "                        __ntFlags: 16\n"
+        "                },\n"
+        "                buttonClickScript: {\n"
+        "                        value: \"func()\rbegin\rend\",\n"
+        "                        __ntDatatype: \"SCPT\"\n"
+        "                },\n"
+        "                text: {\n"
+        "                        value: \"\\\"Click me!\\\"\",\n"
+        "                        __ntDatatype: \"EVAL\",\n"
+        "                        __ntStatusInfo: {\n"
+        "                                state: 1,\n"
+        "                                by: 4673327\n"
+        "                        }\n"
+        "                },\n"
+        "                viewBounds: {\n"
+        "                        value: {\n"
+        "                                top: 200,\n"
+        "                                left: 50,\n"
+        "                                bottom: 246,\n"
+        "                                right: 176\n"
+        "                        },\n"
+        "                        __ntDatatype: \"RECT\"\n"
+        "                }\n"
+        "        },\n"
+        "        __ntId: 'protoTextButton\n"
+        "}\n";
+        */
+    newtErr	err;
+    newtRef t = NVMInterpretStr(txt, &err);
+    NewtPrintObject(stdout, t);
+#if 0
+#if 0
+	newtRef code = NBCCompileStr(script, true);
+	newtRef form = kNewtRefNIL;
+	if (NewtRefIsFrame(code)) {
+		int32_t ix = NewtFindSlotIndex(code, NSSYM(literals));
+		if (ix>=0) {
+			newtRef literals = NewtGetFrameSlot(code, ix);
+			form = NewtGetArraySlot(literals, 0);
+		}
+	} else {
+		printf("***** Syntax error!\n");
+	}
+#else
+    newtErr	err;
+    newtRef form = NVMInterpretStr(script, &err);
+	//NewtPrintObject(stdout, form);
+	if (form==kNewtRefUnbind) {
+		printf("**** ERROR while compiling or interpreting\n");
+		printf("**** %s: %s\n", newt_error_class(err), newt_error(err));
+		return kNewtRefUnbind;
+	} else {
+	}
+#endif
+#endif
+    tmpl->load(t);
+
+    if (tmpl->viewBounds_)
+        tmpl->viewBounds_->set(x, y, w, h);
+
+    if (!tmplList_)
+        tmplList_ = new Dtk_Template_List(this);
+    tmplList_->add(tmpl);
+
+    int indent = indent_, index = index_;
+    updateBrowserLink(browser_, indent, index);
+    browser_->insert(tmpl->index_, tmpl->browserName(), tmpl);
+
+    widget_->begin();
+    tmpl->widget_ = new Flnt_Widget(tmpl);
+    tmpl->widget_->resize(x, y, w, h);
+    Fl_Group::current(0L);
+    widget_->redraw();
+
+    return tmpl;
+}
+
+/*---------------------------------------------------------------------------*/
+Dtk_Slot_List *Dtk_Template::slotList() 
+{ 
+    if (!slotList_)
+        slotList_ = new Dtk_Slot_List(this);
+    return slotList_; 
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::add(Dtk_Slot *slot) 
+{
+    slotList()->add(slot);
 }
 
 

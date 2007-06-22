@@ -73,14 +73,18 @@ public:
      */     
 	virtual int		writeTheForm(Dtk_Script_Writer &sw);
 
+    /** Return true if there is a layout view and it is visible.
+     */
+    bool            editViewShown();
+
     void editView();
     Fl_Hold_Browser * templateBrowser();
     Fl_Hold_Browser * slotBrowser();
     Fldtk_Slot_Editor_Group * slotEditor();
     Fldtk_Layout_View * layoutView() { return view_; }
 
+    void            setupEditors(); // FIXME this is not supposed to be public
 private:
-    void            setupEditors();
 
     /// The root element of the tree of all templates inside this layout.
     Dtk_Template    * root_;
@@ -89,7 +93,7 @@ private:
     Fldtk_Layout_Editor * editor_;
 
     /// Visual layout editor.
-    Fldtk_Layout_View *view_;
+    Fldtk_Layout_View * view_;
 
     /// Visual layout editor.
     // Fldtk_Visual_Layout * visualEditor_;

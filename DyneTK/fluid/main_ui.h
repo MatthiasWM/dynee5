@@ -240,8 +240,22 @@ private:
   static void cb_tWindowOpenLayout(Fl_Button*, void*);
   void cb__i(Fl_Input*, void*);
   static void cb_(Fl_Input*, void*);
+public:
+  Fl_Button *tLayoutModeEdit;
+private:
+  void cb_tLayoutModeEdit_i(Fl_Button*, void*);
+  static void cb_tLayoutModeEdit(Fl_Button*, void*);
+public:
+  Fl_Button *tLayoutModeAdd;
+private:
+  void cb_tLayoutModeAdd_i(Fl_Button*, void*);
+  static void cb_tLayoutModeAdd(Fl_Button*, void*);
+public:
+  Fl_Choice *tTemplateChoice;
+private:
+  void cb_tTemplateChoice_i(Fl_Choice*, void*);
+  static void cb_tTemplateChoice(Fl_Choice*, void*);
   static Fl_Menu_Item menu_1[];
-  static Fl_Menu_Item menu_2[];
 public:
   Fl_Tile *center;
   Fl_Tabs *browsers;

@@ -69,6 +69,14 @@ public:
      */
     Dtk_Layout_Document * layout();
 
+    /** Apply the changes in the editor to the slot.
+     */
+    virtual void    apply() { }
+
+    /** Revert the changes in the editor to the current slot sttings.
+     */
+    virtual void    revert() { }
+
 protected:
 
     /// back reference to the slot list
