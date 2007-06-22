@@ -7,9 +7,11 @@ SRCFILES = \
   dtk/Dtk_Error.cxx \
   dtk/Dtk_Layout_Document.cxx \
   dtk/Dtk_Project.cxx \
+  dtk/Dtk_Proto_Slot.cxx \
   dtk/Dtk_Rect_Slot.cxx \
   dtk/Dtk_Script_Document.cxx \
   dtk/Dtk_Script_Slot.cxx \
+  dtk/Dtk_Script_Writer.cxx \
   dtk/Dtk_Slot.cxx \
   dtk/Dtk_Slot_List.cxx \
   dtk/Dtk_Template.cxx \
@@ -33,6 +35,7 @@ SRCFILES = \
   fltk/Fldtk_Layout_Drop_Box.cxx \
   fltk/Fldtk_Layout_Editor.cxx \
   fltk/Fldtk_Layout_View.cxx \
+  fltk/Fldtk_Proto_Slot_Editor.cxx \
   fltk/Fldtk_Rect_Slot_Editor.cxx \
   fltk/Fldtk_Script_Editor.cxx \
   fltk/Fldtk_Script_Slot_Editor.cxx \

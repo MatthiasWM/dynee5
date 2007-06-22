@@ -334,7 +334,8 @@ int Dtk_Project::loadMac()
 	}
     // FIXME mainLayout is an index, but not by the same sorting standard!
 	uint16_t mainLayout = readWord(data);
-    documentList_->setMain(documentList_->at(mainLayout));
+    if (mainLayout>0 && mainLayout<=documentList_->size())
+        documentList_->setMain(documentList_->at(mainLayout-1));
 
 	// read the resource fork
 
@@ -1144,8 +1145,14 @@ int Dtk_Project::write(Dtk_Script_Writer &sw)
 {
     char buf[1024], fn[2048], dbuf[10], tbuf[10];
     fl_filename_absolute(fn, 2047, filename());
+# ifdef  WIN32
     sprintf(buf, "// Text of project %s written on: %s %s\n", 
         fn, strdate(dbuf), strtime(tbuf));
+# else
+    time_t now;
+    time(&now);
+    sprintf(buf, "// Text of project %s written on: %s\n", fn, ctime(&now));
+# endif
     sw.put(buf);
 
     int i, n = documentList_->size();

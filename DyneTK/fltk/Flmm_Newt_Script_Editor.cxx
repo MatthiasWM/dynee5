@@ -8,16 +8,19 @@
 #include <errno.h>
 
 
+// FIXME remove the highlighting of "directives", no such thing in Newt Script
+// FIXME add highlighting of symbols like 'symbol
+
 
 static Fl_Text_Display::Style_Table_Entry
                    styletable[] = {
-		     { FL_BLACK,      FL_COURIER,        14 }, // A - Plain
-		     { FL_DARK_GREEN, FL_COURIER_ITALIC, 14 }, // B - Line comments
-		     { FL_DARK_GREEN, FL_COURIER_ITALIC, 14 }, // C - Block comments
-		     { FL_BLUE,       FL_COURIER,        14 }, // D - Strings
-		     { FL_DARK_RED,   FL_COURIER,        14 }, // E - Directives
-		     { FL_DARK_RED,   FL_COURIER_BOLD,   14 }, // F - Types
-		     { FL_BLUE,       FL_COURIER_BOLD,   14 }  // G - Keywords
+		     { FL_BLACK,      FL_COURIER,        12 }, // A - Plain
+		     { FL_DARK_GREEN, FL_COURIER_ITALIC, 12 }, // B - Line comments
+		     { FL_DARK_GREEN, FL_COURIER_ITALIC, 12 }, // C - Block comments
+		     { FL_BLUE,       FL_COURIER,        12 }, // D - Strings
+		     { FL_DARK_RED,   FL_COURIER,        12 }, // E - Directives
+		     { FL_DARK_RED,   FL_COURIER_BOLD,   12 }, // F - Types
+		     { FL_BLUE,       FL_COURIER_BOLD,   12 }  // G - Keywords
 		   };
 
 const char         *code_keywords[] = {	// List of known Newt Script keywords...
@@ -74,7 +77,7 @@ extern "C" {
   int
   compare_keywords(const void *a,
                    const void *b) {
-    return (strcmp(*((const char **)a), *((const char **)b)));
+    return (strcasecmp(*((const char **)a), *((const char **)b)));
   }
 }
 
