@@ -31,7 +31,7 @@
 #include "dtk/Dtk_Script_Document.h"
 
 #include <FL/Fl.H>
-#include <FL/Fl_Text_Editor.H>
+#include "fltk/Flmm_Newt_Script_Editor.H"
 #include <FL/Fl_Text_Buffer.H>
 
 #include <stdio.h>
@@ -44,8 +44,8 @@ Fldtk_Script_Editor::Fldtk_Script_Editor(Dtk_Script_Document *script)
     editor_(0L)
 {
     begin();
-	editor_ = new Fl_Text_Editor(x()+3, y()+3, w()-6, h()-6);
-	editor_->buffer(new Fl_Text_Buffer());
+	editor_ = new Flmm_Newt_Script_Editor(x()+3, y()+3, w()-6, h()-6);
+	//editor_->buffer(new Fl_Text_Buffer());
 	editor_->buffer()->tab_distance(4);
 	editor_->textfont(FL_COURIER);
 	editor_->textsize(12);

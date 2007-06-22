@@ -31,7 +31,7 @@
 
 
 class Dtk_Script_Document;
-class Fl_Text_Editor;
+class Flmm_Newt_Script_Editor;
 
 
 /** GUI for editing Newt Scripts.
@@ -62,7 +62,7 @@ protected:
 */
 protected:
     Dtk_Script_Document         * script_;
-    Fl_Text_Editor              * editor_;
+    Flmm_Newt_Script_Editor     * editor_;
 };
 
 

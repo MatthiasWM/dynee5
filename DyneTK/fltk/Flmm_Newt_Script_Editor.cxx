@@ -7,6 +7,9 @@
 #include <ctype.h>
 #include <errno.h>
 
+#ifdef WIN32
+# define strcasecmp stricmp
+#endif
 
 // FIXME remove the highlighting of "directives", no such thing in Newt Script
 // FIXME add highlighting of symbols like 'symbol
