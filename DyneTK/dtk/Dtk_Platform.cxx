@@ -69,6 +69,18 @@ int Dtk_Platform::load(const char *filename)
 
     platform_ = NewtReadNSOF(pf, st.st_size);
 
+FILE *ff = fopen("platform1.txt", "wb");
+NewtPrintObject(ff, platform_);
+fclose(ff);
+
+newtRef ta = NewtGetArraySlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+if (ta==kNewtRefUnbind)
+    return 0L;
+
+ff = fopen("platform.txt", "wb");
+NewtPrintObject(ff, ta);
+fclose(ff);
+
     free(pf);
 
     if (platform_==kNewtRefUnbind) {
@@ -93,9 +105,9 @@ Fl_Menu_Item *Dtk_Platform::templateChoiceMenu()
     if (ta==kNewtRefUnbind)
         return 0L;
 
-FILE *ff = fopen("platform.txt", "wb");
-NewtPrintObject(ff, ta);
-fclose(ff);
+//FILE *ff = fopen("platform.txt", "wb");
+//NewtPrintObject(ff, ta);
+//fclose(ff);
 
     int i, n = NewtArrayLength(ta);
     for (i=0; i<n; i++) {

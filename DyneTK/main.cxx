@@ -129,6 +129,7 @@ int main(int argc, char **argv) {
 	NcSetGlobalVar(NSSYM(printDepth), NSINT(30));
 	NEWT_INDENT = 1;
 	NEWT_DUMPBC = 1;
+    NEWT_MODE_NOS2 = true;
 
 	// create some global classes 
 	dtkGlobalDocuments = new Dtk_Document_List();
@@ -138,7 +139,7 @@ int main(int argc, char **argv) {
 	dtkProjSettings = new Fldtk_Proj_Settings();
 
     // load the standard platform file.
-    dtkPlatform = new Dtk_Platform("Newton 2.1");
+    dtkPlatform = new Dtk_Platform("Newton20.ptf");
 
 	// create the main window
 	dtkMain = new Fldtk_Main_Window(785, 595);

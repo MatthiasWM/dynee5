@@ -5,6 +5,7 @@
 extern "C" {
 #include "NewtCore.h"
 #include "NewtBC.h"
+#include "NewtGC.h"
 #include "NewtNSOF.h"
 #include "NewtPkg.h"
 #include "NewtPrint.h"
