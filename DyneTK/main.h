@@ -49,6 +49,7 @@ extern class Fldtk_Document_Tabs    * dtkDocumentTabs;
 // global dtk project and document roots
 extern class Dtk_Document_List  * dtkGlobalDocuments;
 extern class Dtk_Project        * dtkProject;
+extern class Dtk_Platform       * dtkPlatform;
 
 
 #endif

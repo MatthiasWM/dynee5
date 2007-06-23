@@ -31,6 +31,8 @@ extern "C" {
 #include "NewtType.h"
 }
 
+struct Fl_Menu_Item;
+
 
 /** Read a platform file and provide database and GUI access.
  */
@@ -46,7 +48,19 @@ public:
      */
     virtual         ~Dtk_Platform();
 
+    /** Load a platform file from disk.
+     */
+    int             load(const char *filename);
+
+    /** Return the FLTK menu items for the template choice menu.
+     */
+    Fl_Menu_Item    * templateChoiceMenu();
+
 protected:
+
+    newtRef         platform_;
+
+    Fl_Menu_Item    * templateChoiceMenu_;
 
 };
 

@@ -373,6 +373,10 @@ SOURCE=..\dtk\Dtk_Layout_Document.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\dtk\Dtk_Platform.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\dtk\Dtk_Project.h
 # End Source File
 # Begin Source File
@@ -435,6 +439,10 @@ SOURCE=..\dtk\Dtk_Error.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Layout_Document.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtk\Dtk_Platform.cxx
 # End Source File
 # Begin Source File
 

@@ -42,7 +42,8 @@ decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
 decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {public
 } 
 
-decl {\#include "dtk/Dtk_Template_Proto.h"} {} 
+decl {\#include "dtk/Dtk_Platform.h"} {selected
+} 
 
 decl {\#include <FL/fl_ask.h>} {public
 } 
@@ -591,7 +592,7 @@ widget_class Fldtk_Main_Window {
       xywh {165 65 55 25}
     } {
       Fl_Button tLayoutModeEdit {
-        callback {SetModeEditTemplate();} selected
+        callback {SetModeEditTemplate();}
         tooltip {Select Mode} image {../images/cursor.png} deimage {../images/cursor_da.png} xywh {165 65 25 25} type Radio value 1 labelsize 9 deactivate
       }
       Fl_Button tLayoutModeAdd {
@@ -603,7 +604,7 @@ widget_class Fldtk_Main_Window {
       callback {OpenLayoutView();
 SetModeAddTemplate();} open
       xywh {220 66 175 23} down_box BORDER_BOX labelsize 11 textsize 11 deactivate
-      code0 {tTemplateChoice->menu(Dtk_Template_Proto::menu);}
+      code0 {tTemplateChoice->menu(dtkPlatform->templateChoiceMenu());}
     } {}
     Fl_Button {} {
       tooltip {Create Proto} image {../images/plugin_add.png} deimage {../images/plugin_add_da.png} xywh {400 65 25 25} labelsize 9 deactivate

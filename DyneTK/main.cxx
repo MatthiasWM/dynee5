@@ -40,6 +40,7 @@
 #include "images/toolbox_closed.xpm"
 
 #include "dtk/Dtk_Document_List.h"
+#include "dtk/Dtk_Platform.h"
 
 #include "allNewt.h"
 
@@ -68,6 +69,7 @@ Fldtk_Document_Tabs    * dtkDocumentTabs;
 // global dtk project and document roots
 Dtk_Project         * dtkProject;
 Dtk_Document_List   * dtkGlobalDocuments;
+Dtk_Platform        * dtkPlatform;
 
 
 /*---------------------------------------------------------------------------*/
@@ -101,6 +103,7 @@ int main(int argc, char **argv) {
 	// initialize our GUI library
 	Fl::lock();
 	Fl::scheme("GTK+");
+    Fl::get_system_colors();
 	Fl_Tooltip::size(11);
     // Set font 16/17 to Epsy Sans (Bold)
     Fl::set_font((Fl_Font)16, (Fl_Font)1);
@@ -133,6 +136,9 @@ int main(int argc, char **argv) {
 	// create various dialog panels
 	dtkPrefs = new Fldtk_Prefs();
 	dtkProjSettings = new Fldtk_Proj_Settings();
+
+    // load the standard platform file.
+    dtkPlatform = new Dtk_Platform("Newton 2.1");
 
 	// create the main window
 	dtkMain = new Fldtk_Main_Window(785, 595);
