@@ -56,11 +56,17 @@ public:
      */
     Fl_Menu_Item    * templateChoiceMenu();
 
+    /** Return the FLTK menu items for the "Attributes" choice menu.
+     */
+    Fl_Menu_Item    * attributesChoiceMenu();
+
 protected:
 
     newtRef         platform_;
 
     Fl_Menu_Item    * templateChoiceMenu_;
+
+    Fl_Menu_Item    * attributesChoiceMenu_;
 
 };
 

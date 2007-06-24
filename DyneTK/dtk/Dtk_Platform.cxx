@@ -43,7 +43,8 @@ extern  const char *platformStr4;
 /*---------------------------------------------------------------------------*/
 Dtk_Platform::Dtk_Platform(const char *filename)
 :   platform_(kNewtRefUnbind),
-    templateChoiceMenu_(0L)
+    templateChoiceMenu_(0L),
+    attributesChoiceMenu_(0L)
 {
     load(filename);
 }
@@ -52,6 +53,8 @@ Dtk_Platform::Dtk_Platform(const char *filename)
 /*---------------------------------------------------------------------------*/
 Dtk_Platform::~Dtk_Platform()
 {
+    delete templateChoiceMenu_; // FIXME this should also delete all allocated menu labels
+    delete attributesChoiceMenu_;
 }
 
 
@@ -137,9 +140,40 @@ Fl_Menu_Item *Dtk_Platform::templateChoiceMenu()
             printf("++\n");
         }
     }
+    templateChoiceMenu_ = (Fl_Menu_Item*)realloc(templateChoiceMenu_, (mi+1) * sizeof(Fl_Menu_Item));
 
     return templateChoiceMenu_;
 }
+
+
+/*---------------------------------------------------------------------------*/
+Fl_Menu_Item *Dtk_Platform::attributesChoiceMenu()
+{
+    // FIXME we will have to gray out those menu item that already have
+    // FIXME their attributa added to the current template
+    if (attributesChoiceMenu_)
+        return attributesChoiceMenu_;
+    if (platform_==kNewtRefUnbind)
+        return 0L;
+
+    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
+    if (ta==kNewtRefUnbind)
+        return 0L;
+
+    // create the choice of attributess by finding all symbols inside the 
+    // TemplateArray. 
+    // FIXME also add the contents of the ViewClassArray
+    int i, n = NewtFrameLength(ta);
+    attributesChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
+    for (i=0; i<n; i++) {
+        //newtRef sym = NewtSlotsGetSlot(ta, i);
+        newtRef sym = NewtGetFrameKey(ta, i);
+        attributesChoiceMenu_[i].label(strdup(NewtSymbolGetName(sym)));
+    }
+
+    return attributesChoiceMenu_;
+}
+
 
 
 static const char *platformStr1 = 

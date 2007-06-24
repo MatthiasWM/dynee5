@@ -30,6 +30,8 @@
 #include "Fldtk_Layout_Editor.h"
 #include "Fldtk_Slot_Editor_Group.h"
 #include "dtk/Dtk_Layout_Document.h"
+#include "dtk/Dtk_Platform.h"
+#include "main.h"
 
 #include <FL/Fl.H>
 #include <FL/Fl_Group.H>
@@ -58,14 +60,6 @@ Fl_Menu_Item methodsMenu[] = {
     { "afterScript" },
     { "beforeScript" },
     { "pickActionScript" },
-    { 0 }
-};
-
-/*---------------------------------------------------------------------------*/
-Fl_Menu_Item attributesMenu[] = {
-    { "copyProtection" },
-    { "declareSelf" },
-    { "hideSound" },
     { 0 }
 };
 
@@ -112,7 +106,7 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
                     Fl_Menu_Button *attributes = new Fl_Menu_Button(X+10+220, Y+H/4+2+4, 100, 20, "Attributes");
                     attributes->labelsize(12);
                     attributes->textsize(12);
-                    attributes->menu(attributesMenu);
+                    attributes->menu(dtkPlatform->attributesChoiceMenu());
                     Fl_Box *space = new Fl_Box(X+10+320, Y+H/4+2+4, (X+W-10-150)-(X+10+320), 20);
                     space->box(FL_NO_BOX);
                     slotMenus->resizable(space);
