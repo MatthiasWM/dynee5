@@ -951,7 +951,7 @@ newtRef makeRemoveScript() {
 		NSSYM(p),				kNewtRefNIL
 	};
 	newtRef argFrame = NewtMakeFrame2(sizeof(argFrameA) / (sizeof(newtRefVar) * 2), argFrameA);
-	// FIXME argFrame->map[0] = 0x0a000002 (probably marking the fact that the slot must not besorted?)
+	// FIXME argFrame->map[0] = 0x0a000002 (probably marking the fact that the slot must not be sorted?)
 	// FIXME seems to work anyways though
 
 	newtRefVar scriptA[] = {
@@ -975,19 +975,10 @@ int Dtk_Project::buildPackage()
 {
 	int32_t ix;
 
-	// FIXME: this only supports a single document per project
 	newtRefVar theForm = kNewtRefNIL;
 	newtRefVar theBase = kNewtRefNIL;
 
-# if 0 // the old way which supports only a single document
-	Dtk_Document *doc = documentList_->getDocument(0);
-	if (doc) {
-		theForm = doc->compile();
-	}
-	if (theForm==kNewtRefUnbind) {
-		return -1;
-	}
-# else // the new way which currently requires a script file on disk
+    // the new way which currently requires a script file on disk
     // write the package into a file
     ExportPackageToText();
     // read it back into memory
@@ -1009,7 +1000,6 @@ int Dtk_Project::buildPackage()
 		return kNewtRefUnbind;
 	} else {
 	}
-# endif
 
 	NewtPrintObject(stdout, theForm);
 
@@ -1098,7 +1088,6 @@ int Dtk_Project::buildPackage()
  */
 int Dtk_Project::savePackage()
 {
-	// FIXME write the package it to disk
 	int size = NewtBinaryLength(package_);
 	uint8_t *data = NewtRefToBinary(package_);
 

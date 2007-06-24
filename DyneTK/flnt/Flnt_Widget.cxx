@@ -149,10 +149,11 @@ void Flnt_Widget::newtResize()
 	resize(xx, yy, ww, hh);
 }
 
+// mode 0=drag, 1=resize, 2=create
+static int mode, ox, oy, wx, wy, ww, wh;
+
 int Flnt_Widget::handle(int event)
 {
-    // mode 0=drag, 1=resize, 2=create
-    static int mode, ox, oy, wx, wy, ww, wh;
     switch(event) {
         case FL_PUSH:
             mode = 0;
@@ -181,7 +182,8 @@ int Flnt_Widget::handle(int event)
                     size(ww-ox+Fl::event_x(), wh-oy+Fl::event_y());
                     window()->redraw();
                 } else if (mode==3) { // create a new widget
-                    // FIXME show a rubberband rect
+                    // FIXME draw a rubberband
+                    //redraw();
                 }
                 // FIXME tnewtReverseResize();
                 // FIXME template_->setSize();
@@ -194,7 +196,12 @@ int Flnt_Widget::handle(int event)
             if (mode==3) {
                 template_->add(ox, oy, wx-ox, wy-oy);
                 SetModeEditTemplate();
+                mode = 0;
+                //redraw();
+                return 1;
             }
+            break;
+
     }
     return Fl_Group::handle(event);
 }

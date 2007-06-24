@@ -65,10 +65,10 @@ Dtk_Platform::Dtk_Platform(const char *filename)
 /*---------------------------------------------------------------------------*/
 Dtk_Platform::~Dtk_Platform()
 {
-    delete templateChoiceMenu_; // FIXME this should also delete all allocated menu labels
+    delete templateChoiceMenu_; // this should also delete all allocated menu labels
     delete methodsChoiceMenu_;
     delete attributesChoiceMenu_;
-    // FIXME the menus in the map are not deleted
+    // the menus in the map are not deleted
 }
 
 
@@ -208,8 +208,6 @@ Fl_Menu_Item *Dtk_Platform::specificChoiceMenu(Dtk_Template *tmpl)
 /*---------------------------------------------------------------------------*/
 Fl_Menu_Item *Dtk_Platform::methodsChoiceMenu()
 {
-    // FIXME we will have to gray out those menu item that already have
-    // FIXME their attributa added to the current template
     if (methodsChoiceMenu_)
         return methodsChoiceMenu_;
     if (platform_==kNewtRefUnbind)
@@ -236,8 +234,6 @@ Fl_Menu_Item *Dtk_Platform::methodsChoiceMenu()
 /*---------------------------------------------------------------------------*/
 Fl_Menu_Item *Dtk_Platform::attributesChoiceMenu()
 {
-    // FIXME we will have to gray out those menu item that already have
-    // FIXME their attributa added to the current template
     if (attributesChoiceMenu_)
         return attributesChoiceMenu_;
     if (platform_==kNewtRefUnbind)

@@ -83,8 +83,9 @@ public:
     Fldtk_Slot_Editor_Group * slotEditor();
     Fldtk_Layout_View * layoutView() { return view_; }
 
-    void            setupEditors(); // FIXME this is not supposed to be public
 private:
+
+    void            setupEditors(); 
 
     /// The root element of the tree of all templates inside this layout.
     Dtk_Template    * root_;
