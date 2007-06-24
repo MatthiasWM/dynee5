@@ -77,6 +77,10 @@ int Dtk_Platform::load(const char *filename)
     platform_ = NewtReadNSOF(pf, st.st_size);
 */
 
+    // assemple a long string from a few short strings. VisualC6 can not deal with 
+    // very long stringas and ends up in a buffer overflow (it is graceful enough
+    // to give us an error description, even with a recomendation to increase heap size,
+    // which does not fix the problem though)
     int len = strlen(platformStr1) + strlen(platformStr2) + strlen(platformStr3) + strlen(platformStr4);
     char *platformStr = (char*)malloc(len+10);
     strcpy(platformStr, platformStr1);
@@ -119,6 +123,9 @@ Fl_Menu_Item *Dtk_Platform::templateChoiceMenu()
     if (ta==kNewtRefUnbind)
         return 0L;
 
+    // create the choice of templates by finding all symbols inside the 
+    // TemplateArray. 
+    // FIXME also add the contents of the ViewClassArray
     int mi = 0, i, n = NewtArrayLength(ta);
     templateChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
     for (i=0; i<n; i++) {
