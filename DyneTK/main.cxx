@@ -123,8 +123,6 @@ int main(int argc, char **argv) {
 
 	// initialize the local interpreter and compiler
 	NewtInit(argc, (const char**)argv, 0);
-
-	NewtInit(argc, (const char**)argv, 0);
 	NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
 	NcSetGlobalVar(NSSYM(printDepth), NSINT(30));
 	NEWT_INDENT = 1;
@@ -160,7 +158,7 @@ int main(int argc, char **argv) {
 	if (argc==2) {
 		Fl::flush();
 		OpenProject(argv[1]);
-        }
+    }
 	Fl::run();
 
 	// clean the virtual machine

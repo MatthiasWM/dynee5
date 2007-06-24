@@ -39,7 +39,7 @@
 #include "Dtk_Value_Slot.h"
 #include "Dtk_Proto_Slot.h"
 #include "Dtk_Script_Writer.h"
-#include "Dtk_Template_Proto.h"
+#include "Dtk_Platform.h"
 
 #include "flnt/Flnt_Widget.h"
 
@@ -54,7 +54,7 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, 
                            Dtk_Template_List *list,
-                           Dtk_Template_Proto *proto)
+                           char *proto)
 :   layout_(layout),
     list_(list),
     tmplList_(0L),
@@ -90,8 +90,8 @@ Dtk_Template::~Dtk_Template()
 /*---------------------------------------------------------------------------*/
 int Dtk_Template::load(newtRef node)
 {
-    printf("===========\n");
-    NewtPrintObject(stdout, node);
+    //printf("===========\n");
+    //NewtPrintObject(stdout, node);
     // find the name of this template
     newtRef ntName = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntName)));
     if (NewtRefIsString(ntName)) ntName_ = strdup(NewtRefToString(ntName));
@@ -193,6 +193,8 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
     sw.put(buf);
     sw.put("    {\n");
 
+    // FIXME write the '_proto magic pointer based on the __ntId, if found in the platform file
+    // FIXME ignore the __ntTemplate slot
     if (slotList_) {
         int i, n = slotList_->size(), needComma = 0, ret = 0;
         for (i=0; i<n; i++) {
@@ -346,84 +348,16 @@ Dtk_Template *Dtk_Template::parent()
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Template *Dtk_Template::add(int x, int y, int w, int h, Dtk_Template_Proto *proto)
+Dtk_Template *Dtk_Template::add(int x, int y, int w, int h, char *proto)
 {
     if (!proto) {
         Fl_Choice *c = dtkMain->tTemplateChoice;
-        proto = (Dtk_Template_Proto*)c->menu()[c->value()].user_data();
+        proto = (char*)c->menu()[c->value()].label();
     }
 
     Dtk_Template *tmpl = new Dtk_Template(layout_, list_, proto);
 
-    static char *txt = 
-        "return { "
-        "  value: { "
-        "    viewBounds: { value: { top: 0, left: 0, bottom: 10, right: 10 }, __ntDatatype: \"RECT\" } "
-        "  }, "
-        "  __ntId: 'dasIstEinTest "
-        "};";
-        /*
-        " return {\n"
-        "        value: {\n"
-        "                __ntTemplate: {\n"
-        "                        value: 226,\n"
-        "                        __ntDatatype: \"PROT\",\n"
-        "                        __ntFlags: 16\n"
-        "                },\n"
-        "                buttonClickScript: {\n"
-        "                        value: \"func()\rbegin\rend\",\n"
-        "                        __ntDatatype: \"SCPT\"\n"
-        "                },\n"
-        "                text: {\n"
-        "                        value: \"\\\"Click me!\\\"\",\n"
-        "                        __ntDatatype: \"EVAL\",\n"
-        "                        __ntStatusInfo: {\n"
-        "                                state: 1,\n"
-        "                                by: 4673327\n"
-        "                        }\n"
-        "                },\n"
-        "                viewBounds: {\n"
-        "                        value: {\n"
-        "                                top: 200,\n"
-        "                                left: 50,\n"
-        "                                bottom: 246,\n"
-        "                                right: 176\n"
-        "                        },\n"
-        "                        __ntDatatype: \"RECT\"\n"
-        "                }\n"
-        "        },\n"
-        "        __ntId: 'protoTextButton\n"
-        "}\n";
-        */
-    newtErr	err;
-    newtRef t = NVMInterpretStr(txt, &err);
-    NewtPrintObject(stdout, t);
-#if 0
-#if 0
-	newtRef code = NBCCompileStr(script, true);
-	newtRef form = kNewtRefNIL;
-	if (NewtRefIsFrame(code)) {
-		int32_t ix = NewtFindSlotIndex(code, NSSYM(literals));
-		if (ix>=0) {
-			newtRef literals = NewtGetFrameSlot(code, ix);
-			form = NewtGetArraySlot(literals, 0);
-		}
-	} else {
-		printf("***** Syntax error!\n");
-	}
-#else
-    newtErr	err;
-    newtRef form = NVMInterpretStr(script, &err);
-	//NewtPrintObject(stdout, form);
-	if (form==kNewtRefUnbind) {
-		printf("**** ERROR while compiling or interpreting\n");
-		printf("**** %s: %s\n", newt_error_class(err), newt_error(err));
-		return kNewtRefUnbind;
-	} else {
-	}
-#endif
-#endif
-    tmpl->load(t);
+    tmpl->load(dtkPlatform->newtTemplate(proto));
 
     if (tmpl->viewBounds_)
         tmpl->viewBounds_->set(x, y, w, h);
@@ -457,6 +391,12 @@ Dtk_Slot_List *Dtk_Template::slotList()
 void Dtk_Template::add(Dtk_Slot *slot) 
 {
     slotList()->add(slot);
+}
+
+/*---------------------------------------------------------------------------*/
+Dtk_Slot *Dtk_Template::findSlot(const char *key)
+{
+    return slotList()->find(key);
 }
 
 

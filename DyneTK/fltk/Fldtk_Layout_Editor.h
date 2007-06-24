@@ -31,7 +31,9 @@
 
 
 class Fl_Hold_Browser;
+class Fl_Menu_Button;
 class Dtk_Layout_Document;
+class Dtk_Template;
 class Fldtk_Slot_Editor_Group;
 
 
@@ -46,12 +48,18 @@ public:
     Fl_Hold_Browser         * templateBrowser() { return tmplBrowser_; }
     Fl_Hold_Browser         * slotBrowser() { return slotBrowser_; }
     Fldtk_Slot_Editor_Group * slotEditor() { return slotEditor_; }
+    void                    userDeselectedTemplates();
+    void                    userSelectedTemplate(Dtk_Template *tmpl);
 
 protected:
     Dtk_Layout_Document     * layout_;
 	Fl_Hold_Browser         * tmplBrowser_;
 	Fl_Hold_Browser         * slotBrowser_;
     Fldtk_Slot_Editor_Group * slotEditor_;
+    Fl_Menu_Button          * specificChoice_;
+    Fl_Menu_Button          * methodsChoice_;
+    Fl_Menu_Button          * attributesChoice_;
+
     // slot menus
     //  specific
     //  methods

@@ -66,6 +66,10 @@ public:
      */
     Dtk_Slot *at(int index);
 
+    /** Return the slot witha given key.
+     */
+    Dtk_Slot *find(const char *key);
+
 private:
 
     /// back reference to the template that keeps this list

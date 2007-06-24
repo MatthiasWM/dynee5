@@ -91,6 +91,18 @@ Dtk_Slot *Dtk_Slot_List::at(int index)
     return slotList_.at(index);
 }
 
+/*---------------------------------------------------------------------------*/
+Dtk_Slot *Dtk_Slot_List::find(const char *key)
+{
+    int i, n = slotList_.size();
+    for (i=n-1; i>=0; --i) {
+        Dtk_Slot *slot = slotList_.at(i);
+        if (strcasecmp(slot->key(), key)==0)
+            return slot;
+    }
+    return 0L;
+}
+
 //
 // End of "$Id$".
 //

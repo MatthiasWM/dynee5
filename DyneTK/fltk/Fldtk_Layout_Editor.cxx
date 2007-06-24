@@ -32,7 +32,6 @@
 #include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Platform.h"
 #include "main.h"
-
 #include <FL/Fl.H>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Tile.H>
@@ -55,20 +54,17 @@ Fl_Menu_Item specificMenu[] = {
     { 0 }
 };
 
-/*---------------------------------------------------------------------------*/
-Fl_Menu_Item methodsMenu[] = {
-    { "afterScript" },
-    { "beforeScript" },
-    { "pickActionScript" },
-    { 0 }
-};
 
 /*---------------------------------------------------------------------------*/
 Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
 :   Fldtk_Editor(layout->name()),
     layout_(layout),
 	tmplBrowser_(0L),
-	slotBrowser_(0L)
+	slotBrowser_(0L),
+    slotEditor_(0L),
+    specificChoice_(0L),
+    methodsChoice_(0L),
+    attributesChoice_(0L)
 {
     int X = x()+3, Y = y()+3, W = w()-6, H = h()-6;
     begin();
@@ -95,24 +91,35 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
             {
                 Fl_Group *slotMenus = new Fl_Group(X, Y+H/4+2, W, 30);
                 {
-                    Fl_Menu_Button *specific = new Fl_Menu_Button(X+10, Y+H/4+2+4, 100, 20, "Specific");
-                    specific->labelsize(12);
-                    specific->textsize(12);
-                    specific->menu(specificMenu);
-                    Fl_Menu_Button *methods = new Fl_Menu_Button(X+10+110, Y+H/4+2+4, 100, 20, "Methods");
-                    methods->labelsize(12);
-                    methods->textsize(12);
-                    methods->menu(methodsMenu);
-                    Fl_Menu_Button *attributes = new Fl_Menu_Button(X+10+220, Y+H/4+2+4, 100, 20, "Attributes");
-                    attributes->labelsize(12);
-                    attributes->textsize(12);
-                    attributes->menu(dtkPlatform->attributesChoiceMenu());
+                    // pulldown menu to select specific methods of a templat
+                    specificChoice_ = new Fl_Menu_Button(X+10, Y+H/4+2+4, 100, 20, "Specific");
+                    specificChoice_->labelsize(12);
+                    specificChoice_->textsize(12);
+                    specificChoice_->menu(specificMenu);
+                    specificChoice_->deactivate();
+                    // pulldown menu for standard methods
+                    methodsChoice_ = new Fl_Menu_Button(X+10+110, Y+H/4+2+4, 100, 20, "Methods");
+                    methodsChoice_->labelsize(12);
+                    methodsChoice_->textsize(12);
+                    methodsChoice_->menu(dtkPlatform->methodsChoiceMenu());
+                    methodsChoice_->deactivate();
+                    // pulldown menu for standard attributes
+                    attributesChoice_ = new Fl_Menu_Button(X+10+220, Y+H/4+2+4, 100, 20, "Attributes");
+                    attributesChoice_->labelsize(12);
+                    attributesChoice_->textsize(12);
+                    attributesChoice_->menu(dtkPlatform->attributesChoiceMenu());
+                    attributesChoice_->deactivate();
+                    // box to manage nice resizing behavior
                     Fl_Box *space = new Fl_Box(X+10+320, Y+H/4+2+4, (X+W-10-150)-(X+10+320), 20);
                     space->box(FL_NO_BOX);
                     slotMenus->resizable(space);
+                    // the "Apply" button copies the GUI settings into the template
+                    // FIXME should initially be disabled until the slot editor changes
                     Fl_Button *apply = new Fl_Button(X+W-10-150, Y+H/4+2+4, 70, 20, "Apply");
                     apply->labelsize(12);
                     apply->callback((Fl_Callback*)apply_cb, this);
+                    // the "Revert" button copies the template settings into the GUI
+                    // FIXME should initially be disabled until the slot editor changes
                     Fl_Button *revert = new Fl_Button(X+W-10-70, Y+H/4+2+4, 70, 20, "Revert");
                     revert->labelsize(12);
                     revert->callback((Fl_Callback*)revert_cb, this);
@@ -152,11 +159,13 @@ Fldtk_Layout_Editor::~Fldtk_Layout_Editor()
 {
 }
 
+
 /*---------------------------------------------------------------------------*/
 Dtk_Document *Fldtk_Layout_Editor::document() 
 {
     return layout_; 
 }
+
 
 /*---------------------------------------------------------------------------*/
 void Fldtk_Layout_Editor::apply_cb(Fl_Widget*, Fldtk_Layout_Editor *w)
@@ -165,6 +174,7 @@ void Fldtk_Layout_Editor::apply_cb(Fl_Widget*, Fldtk_Layout_Editor *w)
     if (slot) slot->do_callback(slot, 'aply');
 }
 
+
 /*---------------------------------------------------------------------------*/
 void Fldtk_Layout_Editor::revert_cb(Fl_Widget*, Fldtk_Layout_Editor *w)
 {
@@ -172,6 +182,28 @@ void Fldtk_Layout_Editor::revert_cb(Fl_Widget*, Fldtk_Layout_Editor *w)
     if (slot) slot->do_callback(slot, 'rvrt');
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_Editor::userDeselectedTemplates()
+{
+    specificChoice_->deactivate();
+    methodsChoice_->deactivate();
+    attributesChoice_->deactivate();
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_Editor::userSelectedTemplate(Dtk_Template *tmpl)
+{
+    specificChoice_->menu(dtkPlatform->specificChoiceMenu(tmpl));
+    specificChoice_->activate();
+    methodsChoice_->activate();
+    attributesChoice_->activate();
+
+    Dtk_Platform::updateActivation((Fl_Menu_Item*)specificChoice_->menu(), tmpl);
+    Dtk_Platform::updateActivation((Fl_Menu_Item*)methodsChoice_->menu(), tmpl);
+    Dtk_Platform::updateActivation((Fl_Menu_Item*)attributesChoice_->menu(), tmpl);
+}
 
 //
 // End of "$Id$".

@@ -27,12 +27,14 @@
 #define DTK_PLATFORM_H
 
 
+#include <map>
+
 extern "C" {
 #include "NewtType.h"
 }
 
 struct Fl_Menu_Item;
-
+class Dtk_Template;
 
 /** Read a platform file and provide database and GUI access.
  */
@@ -56,18 +58,46 @@ public:
      */
     Fl_Menu_Item    * templateChoiceMenu();
 
+    /** Return the FLTK menu items for the specific choice menu.
+     */
+    Fl_Menu_Item    * specificChoiceMenu(Dtk_Template *tmpl);
+
+    /** Return the FLTK menu items for the "Methods" choice menu.
+     */
+    Fl_Menu_Item    * methodsChoiceMenu();
+
     /** Return the FLTK menu items for the "Attributes" choice menu.
      */
     Fl_Menu_Item    * attributesChoiceMenu();
 
+    /** Deactivate menu items with slots that already exist.
+     */
+    static void     updateActivation(Fl_Menu_Item *menu, Dtk_Template *tmpl);
+
+    /** Sort an FLTK menu array in alphabetic order.
+     */
+    static void     sort(Fl_Menu_Item *menu, int n=-1);
+
+    /** Create a form with the default attributes for a template.
+     */
+    newtRef         newtTemplate(char *id);
+
 protected:
+
+    class CStringSort {
+    public:
+        bool operator()(const char*, const char*) const;
+    };
 
     newtRef         platform_;
 
     Fl_Menu_Item    * templateChoiceMenu_;
 
+    Fl_Menu_Item    * methodsChoiceMenu_;
+
     Fl_Menu_Item    * attributesChoiceMenu_;
 
+    std::map<char*,Fl_Menu_Item*,CStringSort> specificMenuMap_;
 };
 
 

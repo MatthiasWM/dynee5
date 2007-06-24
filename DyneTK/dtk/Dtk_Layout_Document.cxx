@@ -195,6 +195,7 @@ Fldtk_Slot_Editor_Group *Dtk_Layout_Document::slotEditor() {
 }
 
 /*---------------------------------------------------------------------------*/
+// FIXME this callback should be where the widget is, in Fldtk_Layout_Editor
 void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Document *layout)
 {
     int i = browser->value();
@@ -202,9 +203,11 @@ void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layou
         layout->slotEditor()->blank();
         Dtk_Template *tmpl = (Dtk_Template*)browser->data(i);
         tmpl->edit();
+        layout->editor_->userSelectedTemplate(tmpl);
     } else {
         layout->slotBrowser()->clear();
         layout->slotEditor()->blank();
+        layout->editor_->userDeselectedTemplates();
     }
     layout->view_->redraw();
     UpdateMainMenu();

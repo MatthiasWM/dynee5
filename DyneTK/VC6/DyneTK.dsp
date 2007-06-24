@@ -417,10 +417,6 @@ SOURCE=..\dtk\Dtk_Template_List.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\dtk\Dtk_Template_Proto.h
-# End Source File
-# Begin Source File
-
 SOURCE=..\dtk\Dtk_Value_Slot.h
 # End Source File
 # End Group
@@ -483,10 +479,6 @@ SOURCE=..\dtk\Dtk_Template.cxx
 # Begin Source File
 
 SOURCE=..\dtk\Dtk_Template_List.cxx
-# End Source File
-# Begin Source File
-
-SOURCE=..\dtk\Dtk_Template_Proto.cxx
 # End Source File
 # Begin Source File
 

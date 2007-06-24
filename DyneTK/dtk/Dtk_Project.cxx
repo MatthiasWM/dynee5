@@ -462,7 +462,7 @@ int Dtk_Project::loadWin()
 
 	free(data);
 
-	NewtPrintObject(stdout, p);
+	//NewtPrintObject(stdout, p);
 
 	pushDir();
   

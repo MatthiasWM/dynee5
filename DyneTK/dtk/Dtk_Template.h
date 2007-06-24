@@ -60,7 +60,7 @@ public:
                     Dtk_Template(
                         Dtk_Layout_Document *layout, 
                         Dtk_Template_List *list=0L,
-                        Dtk_Template_Proto *proto=0L);
+                        char *prot=0L);
 
     /** Remove a template and all its children.
      */
@@ -93,7 +93,7 @@ public:
      * \param proto prototype for the new template, or NULL to add the user-selected prototype
      * \return the newly created template or NULL
      */
-    Dtk_Template    * add(int x, int y, int w, int h, Dtk_Template_Proto *proto=0L);
+    Dtk_Template    * add(int x, int y, int w, int h, char *proto=0L);
 
     /** Add a previously create slot to this layout.
      */
@@ -138,6 +138,14 @@ public:
      * If there is no slot list, this call creates one.
      */
     Dtk_Slot_List       * slotList();
+
+    /** Return the ID, the class name of this template.
+     */
+    char                * id() { return ntId_; }
+
+    /** Find a slot by key.
+     */
+    Dtk_Slot            * findSlot(const char *key);
 
 private:
 
