@@ -35,7 +35,13 @@ class Fl_Input;
 class Fl_Box;
 
 
-/** GUI for editing script slots.
+/** GUI for editing rectangle slots.
+ *
+ * A rectangle remembers values for the top left and the bottom right
+ * coordinates. This editor does not do any additional processing.
+ * The actual coordinates of a template depend on additional values
+ * including 'viewJustify and possibly the position of the parent
+ * and sibling.
  */
 class Fldtk_Rect_Slot_Editor : public Fl_Group
 {

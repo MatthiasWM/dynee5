@@ -61,6 +61,11 @@ public:
   Fl_Check_Button *wLasso;
   Fl_Check_Button *wAnchored;
 };
+/** \class Fldtk_Justify_Slot_Editor
+ * A big editor for a single 32-bit justification value.
+ *
+ * \fixme "value()" functions are not complete ny any means!
+ */
 #endif
 
 //

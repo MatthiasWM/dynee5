@@ -71,8 +71,7 @@ switch (value_ & 0x00007000) { // bits 12 13 14
   case 0x2000: wVSibling->value(3); break; // bottom
   case 0x3000: wVSibling->value(4); break; // full
   default: wVSibling->value(0); break;
-}} {selected
-    }
+}} {}
   }
   Function {value()} {open return_type double
   } {
@@ -302,6 +301,13 @@ switch (value_ & 0x00007000) { // bits 12 13 14
       }
     }
   }
+} 
+
+comment {/** \\class Fldtk_Justify_Slot_Editor
+ * A big editor for a single 32-bit justification value.
+ *
+ * \\fixme "value()" functions are not complete ny any means!
+ */} {selected not_in_source in_header
 } 
 
 comment {
