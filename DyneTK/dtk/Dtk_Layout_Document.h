@@ -83,6 +83,8 @@ public:
     Fldtk_Slot_Editor_Group * slotEditor();
     Fldtk_Layout_View * layoutView() { return view_; }
 
+    Dtk_Template    * addTemplate(int x, int y, int w, int h, char *proto=0L);
+
 private:
 
     void            setupEditors(); 

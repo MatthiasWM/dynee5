@@ -155,6 +155,10 @@ public:
      */
     Dtk_Slot            * findSlot(const char *key);
 
+    Dtk_Rect_Slot       * viewBounds() { return viewBounds_; }
+    Flnt_Widget         * widget() { return widget_; }
+    void                widget(Flnt_Widget *w) { widget_ = w; }
+
 private:
 
     /// we must be part of a single layout

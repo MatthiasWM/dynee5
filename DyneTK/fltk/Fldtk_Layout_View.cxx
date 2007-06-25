@@ -24,6 +24,7 @@
 //
 
 #include "Fldtk_Layout_View.h"
+#include "flnt/Flnt_Widget.h"
 #include "globals.h"
 #include "fluid/main_ui.h"
 
@@ -42,6 +43,9 @@ Fldtk_Layout_View::Fldtk_Layout_View(Dtk_Layout_Document *layout, int width, int
 {
     set_non_modal();
     callback(hide_cb, this);
+    begin();
+    Flnt_Widget *root = new Flnt_Widget(0L, layout);
+    root->resize(0, 0, width, height);
 }
 
 

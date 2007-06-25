@@ -26,6 +26,7 @@
 
 #include "Flnt_Widget.h"
 #include "dtk/Dtk_Template.h"
+#include "dtk/Dtk_Layout_Document.h"
 #include "fltk/Fldtk_Layout_View.h"
 #include "globals.h"
 
@@ -36,12 +37,19 @@
 #include <stdio.h>
 
 
+Flnt_Widget *Flnt_Widget::rubberband_ = 0L;
+
+
 /*---------------------------------------------------------------------------*/
-Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl)
+Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl, Dtk_Layout_Document *layout)
 :   Fl_Group(0, 0, 10, 10),
-    template_(tmpl)
+    template_(tmpl),
+    layout_(layout)
 {
-    copy_label(tmpl->browserName());
+    if (!layout_ && template_)
+        layout_ = template_->layout();
+    if (tmpl)
+        copy_label(tmpl->browserName());
     newtResize();
     init_sizes();
     align(FL_ALIGN_INSIDE|FL_ALIGN_WRAP|FL_ALIGN_CLIP|FL_ALIGN_TOP|FL_ALIGN_LEFT);
@@ -61,6 +69,9 @@ Flnt_Widget::~Flnt_Widget()
 /*---------------------------------------------------------------------------*/
 void Flnt_Widget::newtResize()
 {
+    if (!template_)
+        return;
+
     Fl_Group *par = parent();
     Fl_Widget *sib = 0L;
 	if (sib==0L && par!=0L) {
@@ -158,7 +169,7 @@ int Flnt_Widget::handle(int event)
         case FL_PUSH:
             mode = 0;
             if (!Fl_Group::handle(event)) {
-                if (!template_->isSelected()) {
+                if (template_ && !template_->isSelected()) {
                     template_->selectedInView();
                     redraw();
                 } 
@@ -167,10 +178,13 @@ int Flnt_Widget::handle(int event)
                 wx = x(); wy = y();
                 ww = w(); wh = h();
                 mode = 1;
-                if (Fldtk_Layout_View::mode()==1)
+                if (Fldtk_Layout_View::mode()==1) {
                     mode = 3;
-                else if (ox>=x()+w()-8 && oy>=y()+h()-8)
+                    rubberband_ = this;
+                    redraw();
+                } else if (ox>=x()+w()-8 && oy>=y()+h()-8) {
                     mode = 2;
+                }
             }
             return 1;
         case FL_DRAG:
@@ -182,8 +196,9 @@ int Flnt_Widget::handle(int event)
                     size(ww-ox+Fl::event_x(), wh-oy+Fl::event_y());
                     window()->redraw();
                 } else if (mode==3) { // create a new widget
-                    // FIXME draw a rubberband
-                    //redraw();
+                    wx = Fl::event_x();
+                    wy = Fl::event_y();
+                    redraw();
                 }
                 // FIXME tnewtReverseResize();
                 // FIXME template_->setSize();
@@ -194,10 +209,15 @@ int Flnt_Widget::handle(int event)
             wx = Fl::event_x();
             wy = Fl::event_y();
             if (mode==3) {
-                template_->addTemplate(ox, oy, wx-ox, wy-oy);
+                if (template_) {
+                    template_->addTemplate(ox, oy, wx-ox, wy-oy);
+                } else {
+                    layout_->addTemplate(ox, oy, wx-ox, wy-oy);
+                }
                 SetModeEditTemplate();
                 mode = 0;
-                //redraw();
+                rubberband_ = 0L;
+                redraw();
                 return 1;
             }
             break;
@@ -212,12 +232,16 @@ void Flnt_Widget::draw()
     fl_rect(x(), y(), w(), h());
     fl_push_clip(x()+1, y()+1, w()-2, h()-2);
     Fl_Group::draw();
-    if (template_->isSelected()) {
+    if (template_ && template_->isSelected()) {
         fl_color(FL_BLACK);
         fl_rectf(x()+w()-7, y()+h()-7, 5, 5);
         fl_yxline(x()+2, y()+7, y()+2, x()+7);
         fl_yxline(x()+w()-3, y()+7, y()+2, x()+w()-8);
         fl_yxline(x()+2, y()+h()-8, y()+h()-3, x()+7);
+    }
+    if (rubberband_==this) {
+        fl_color(FL_RED);
+        fl_rect(ox, oy, wx-ox, wy-oy);
     }
     fl_pop_clip();
 }

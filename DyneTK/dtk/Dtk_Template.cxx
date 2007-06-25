@@ -429,6 +429,7 @@ void Dtk_Template::id(char *newID)
         browserName_ = 0L;
     }
     layout()->templateBrowser()->text(index_, browserName());
+    widget_->copy_label(browserName());
 }
 
 //

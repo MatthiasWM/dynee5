@@ -30,12 +30,15 @@
 #include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Template.h"
 #include "dtk/Dtk_Slot.h"
+#include "dtk/Dtk_Rect_Slot.h"
 #include "dtk/Dtk_Script_Writer.h"
+#include "dtk/Dtk_Platform.h"
 #include "fltk/Fldtk_Layout_Editor.h"
 #include "fltk/Fldtk_Layout_View.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fluid/main_ui.h"
+#include "flnt/Flnt_Widget.h"
 #include "main.h"
 
 #include <FL/filename.h>
@@ -169,11 +172,13 @@ void Dtk_Layout_Document::setupEditors()
         return;
     int indent = 0;
     int index = 1;
-    layoutView()->clear();
-    layoutView()->begin();
+
+    Flnt_Widget *wp = (Flnt_Widget*)view_->child(0);
+    wp->clear();
+    wp->begin();
     root_->updateBrowserLink(b, indent, index, true);
-    layoutView()->end();
-    layoutView()->redraw();
+    wp->end();
+    wp->redraw();
     b->redraw();
     b->callback((Fl_Callback*)templateBrowser_cb, this);
     slotBrowser()->callback((Fl_Callback*)slotBrowser_cb, this);
@@ -260,6 +265,29 @@ bool Dtk_Layout_Document::editViewShown()
     return false;
 }
 
+
+/*---------------------------------------------------------------------------*/
+// FIXME this is duplicate code from Dtk_Template::addTemplate! Fix that!
+Dtk_Template *Dtk_Layout_Document::addTemplate(int x, int y, int w, int h, char *proto)
+{
+    if (!proto) {
+        Fl_Choice *c = dtkMain->tTemplateChoice;
+        proto = (char*)c->menu()[c->value()].label();
+    }
+
+    Dtk_Template *tmpl = new Dtk_Template(this, 0L, proto);
+
+    tmpl->load(dtkPlatform->newtTemplate(proto));
+
+    if (tmpl->viewBounds())
+        tmpl->viewBounds()->set(x, y, w, h);
+
+    root_ = tmpl;
+
+    setupEditors();
+
+    return tmpl;
+}
 
 //
 // End of "$Id$".

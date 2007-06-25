@@ -311,7 +311,16 @@ newtRef Dtk_Platform::newtTemplate(char *id)
     int i, nr = NewtFrameLength(rqd), vi = 0, ai = 0, as = 0;
 
     newtRefVar attr[100];    
-    newtRefVar val[100];    
+    newtRefVar val[100];
+    int p = findProto(id);
+    if (p!=-1) {
+        attr[ai++] = NSSYM(value);
+        attr[ai++] = NewtMakeInt30(p);
+        attr[ai++] = NSSYM(__ntDatatype);
+        attr[ai++] = NewtMakeString("PROT", true);
+        val[vi++] = NSSYM(__ntTemplate);
+        val[vi++] = NewtMakeFrame2(2, attr+ai-4);
+    }
     for (i=0; i<nr; i++) {
         newtRef sym = NewtGetFrameKey(rqd, i);
         int def = NewtFindSlotIndex(tmplDB, sym);

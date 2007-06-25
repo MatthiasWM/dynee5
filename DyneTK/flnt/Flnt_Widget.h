@@ -31,6 +31,7 @@
 
 
 class Dtk_Template;
+class Dtk_Layout_Document;
 
 
 /** GUI Widget representing a Newt Template.
@@ -38,7 +39,7 @@ class Dtk_Template;
 class Flnt_Widget : public Fl_Group
 {
 public:
-	                Flnt_Widget(Dtk_Template *tmpl);
+	                Flnt_Widget(Dtk_Template *tmpl, Dtk_Layout_Document *layout=0L);
 
 	virtual         ~Flnt_Widget();
 
@@ -51,6 +52,10 @@ public:
 protected:
 
     Dtk_Template    * template_;
+
+    Dtk_Layout_Document * layout_;
+
+    static Flnt_Widget * rubberband_;
 };
 
 
