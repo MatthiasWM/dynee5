@@ -53,6 +53,9 @@ public:
 
 protected:
     Dtk_Layout_Document     * layout_;
+
+    /// The currently selected template
+    Dtk_Template            * template_;
 	Fl_Hold_Browser         * tmplBrowser_;
 	Fl_Hold_Browser         * slotBrowser_;
     Fldtk_Slot_Editor_Group * slotEditor_;
@@ -71,6 +74,9 @@ protected:
 
     static void apply_cb(Fl_Widget*, Fldtk_Layout_Editor*);
     static void revert_cb(Fl_Widget*, Fldtk_Layout_Editor*);
+    static void specific_choice_cb(Fl_Menu_Button*, Fldtk_Layout_Editor*);
+    static void methods_choice_cb(Fl_Menu_Button*, Fldtk_Layout_Editor*);
+    static void attributes_choice_cb(Fl_Menu_Button*, Fldtk_Layout_Editor*);
 };
 
 

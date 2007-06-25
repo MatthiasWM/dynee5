@@ -330,39 +330,85 @@ newtRef Dtk_Platform::newtTemplate(char *id)
     return result;
 }
 
-        /*
-        " return {\n"
-        "        value: {\n"
-        "                __ntTemplate: {\n"
-        "                        value: 226,\n"
-        "                        __ntDatatype: \"PROT\",\n"
-        "                        __ntFlags: 16\n"
-        "                },\n"
-        "                buttonClickScript: {\n"
-        "                        value: \"func()\rbegin\rend\",\n"
-        "                        __ntDatatype: \"SCPT\"\n"
-        "                },\n"
-        "                text: {\n"
-        "                        value: \"\\\"Click me!\\\"\",\n"
-        "                        __ntDatatype: \"EVAL\",\n"
-        "                        __ntStatusInfo: {\n"
-        "                                state: 1,\n"
-        "                                by: 4673327\n"
-        "                        }\n"
-        "                },\n"
-        "                viewBounds: {\n"
-        "                        value: {\n"
-        "                                top: 200,\n"
-        "                                left: 50,\n"
-        "                                bottom: 246,\n"
-        "                                right: 176\n"
-        "                        },\n"
-        "                        __ntDatatype: \"RECT\"\n"
-        "                }\n"
-        "        },\n"
-        "        __ntId: 'protoTextButton\n"
-        "}\n";
-        */
+/*---------------------------------------------------------------------------*/
+newtRef Dtk_Platform::getSpecificSlotDescription(Dtk_Template *tmpl, newtRefArg key)
+{
+    char *id = tmpl->id();
+    if (!id)
+        return 0L;
+    if (platform_==kNewtRefUnbind)
+        return 0L;
+
+    // find the default settings for this slot in the given template
+    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+    int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+    newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
+    newtRef def = kNewtRefUnbind, dt = kNewtRefUnbind;
+    newtRef val = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, key));
+
+    // first, search the __ntOptional frame
+    def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
+    ix = NewtFindSlotIndex(def, key);
+    if (ix>=0) dt = NewtGetFrameSlot(def, ix);
+
+    // next, search the __ntRequired frame
+    if (dt==kNewtRefUnbind) {
+        def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
+        ix = NewtFindSlotIndex(def, key);
+        if (ix>=0) dt = NewtGetFrameSlot(def, ix);
+    }
+
+    // if we still have not found it, where can we look next?
+    // make a guess:
+    if (dt==kNewtRefUnbind) {
+        // FIXME look at the type of 'val' to set this correctly
+        dt = NewtMakeString("NUMB", true);
+    }
+
+    newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), dt };
+    newtRef ret = NewtMakeFrame2(2, tmp);
+
+    return ret;
+}
+    
+/*---------------------------------------------------------------------------*/
+newtRef Dtk_Platform::getScriptSlotDescription(newtRefArg key)
+{
+    if (platform_==kNewtRefUnbind)
+        return 0L;
+    newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
+    newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+    newtRef val = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
+
+    newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), NewtMakeString("SCPT", true) };
+    newtRef ret = NewtMakeFrame2(2, tmp);
+
+    return ret;
+}
+
+
+/*---------------------------------------------------------------------------*/
+newtRef Dtk_Platform::getAttributesSlotDescription(newtRefArg key)
+{
+    if (platform_==kNewtRefUnbind)
+        return 0L;
+    newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
+    newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+    newtRef val = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
+    newtRef dt = kNewtRefUnbind;
+
+    // what do we do if no 'val' was found?
+    if (val==kNewtRefUnbind)
+        val = NewtMakeString("nil", true);
+    if (dt==kNewtRefUnbind)
+        dt= NewtMakeString("SCPT", true);
+
+    // FIXME derive the __ntDatatype from the actual value (and possibly key)
+    newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), dt };
+    newtRef ret = NewtMakeFrame2(2, tmp);
+
+    return ret;
+}
 
 
 

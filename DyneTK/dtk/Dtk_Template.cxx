@@ -126,41 +126,8 @@ int Dtk_Template::load(newtRef node)
                         tmpl->load(NewtGetArraySlot(a, i));
 				    }
 			    }
-                // everything's handled; now go and read the next slot
-                continue;
-            }
-            // also 'viewBounds, 'viewClass, 'viewFlags, 'viewFormat
-            //      'viewJustify, 'viewEffect, 'viewTransferMode, '_proto
-            newtRef datatype = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
-            Dtk_Slot *dSlot = 0L;
-            if (NewtRefIsString(datatype)) {
-                const char *dt = NewtRefToString(datatype);
-                const char *keyname = NewtSymbolGetName(key);
-                if (strcmp(dt, "SCPT")==0 || strcmp(dt, "EVAL")==0) {
-                    dSlot = new Dtk_Script_Slot(slotList_, keyname, slot);
-                } else if (strcmp(dt, "RECT")==0) {
-                    dSlot = new Dtk_Rect_Slot(slotList_, keyname, slot);
-                } else if (strcmp(dt, "NUMB")==0) {
-                    dSlot = new Dtk_Value_Slot(slotList_, keyname, slot);
-                } else if (strcmp(dt, "PROT")==0) {
-                    dSlot = new Dtk_Proto_Slot(slotList_, keyname, slot);
-                } else {
-                    // also: RECT, CLAS, NUMB, PICT, USER, any more?
-                    // CLAS is __ntTemplate
-                    // PROT is __ntTemplate
-                    // USER is __ntTemplate
-                    // PICT is icon
-                    printf("Unsupported slot datatype \"%s\" (%s)\n", dt, keyname);
-                    dSlot = new Dtk_Slot(slotList_, keyname, slot);
-                }
-            }
-            if (key==NSSYM(viewBounds)) {
-                viewBounds_ = (Dtk_Rect_Slot*)dSlot;
-            } else if (key==NSSYM(viewJustify)) {
-                viewJustify_ = (Dtk_Value_Slot*)dSlot;
-            }
-            if (dSlot) {
-                slotList_->add(dSlot);
+            } else {
+                addSlot(key, slot);
             }
         }
     }
@@ -348,7 +315,7 @@ Dtk_Template *Dtk_Template::parent()
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Template *Dtk_Template::add(int x, int y, int w, int h, char *proto)
+Dtk_Template *Dtk_Template::addTemplate(int x, int y, int w, int h, char *proto)
 {
     if (!proto) {
         Fl_Choice *c = dtkMain->tTemplateChoice;
@@ -388,9 +355,51 @@ Dtk_Slot_List *Dtk_Template::slotList()
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Template::add(Dtk_Slot *slot) 
+void Dtk_Template::addSlot(Dtk_Slot *slot) 
 {
     slotList()->add(slot);
+}
+
+/*---------------------------------------------------------------------------*/
+Dtk_Slot *Dtk_Template::addSlot(newtRef key, newtRef slot) 
+{
+    if (!NewtRefIsFrame(slot)) 
+        return 0L;
+    // the 'stepChildren slot generates a new template list with all children
+    if (key==NSSYM(stepChildren))
+        return 0L;
+    newtRef datatype = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
+    Dtk_Slot *dSlot = 0L;
+    if (NewtRefIsString(datatype)) {
+        const char *dt = NewtRefToString(datatype);
+        const char *keyname = NewtSymbolGetName(key);
+        if (strcmp(dt, "SCPT")==0 || strcmp(dt, "EVAL")==0) {
+            dSlot = new Dtk_Script_Slot(slotList_, keyname, slot);
+        } else if (strcmp(dt, "RECT")==0) {
+            dSlot = new Dtk_Rect_Slot(slotList_, keyname, slot);
+        } else if (strcmp(dt, "NUMB")==0) {
+            dSlot = new Dtk_Value_Slot(slotList_, keyname, slot);
+        } else if (strcmp(dt, "PROT")==0) {
+            dSlot = new Dtk_Proto_Slot(slotList_, keyname, slot);
+        } else {
+            // also: RECT, CLAS, NUMB, PICT, USER, any more?
+            // CLAS is __ntTemplate
+            // PROT is __ntTemplate
+            // USER is __ntTemplate
+            // PICT is icon
+            printf("Unsupported slot datatype \"%s\" (%s)\n", dt, keyname);
+            dSlot = new Dtk_Slot(slotList_, keyname, slot);
+        }
+    }
+    if (key==NSSYM(viewBounds)) {
+        viewBounds_ = (Dtk_Rect_Slot*)dSlot;
+    } else if (key==NSSYM(viewJustify)) {
+        viewJustify_ = (Dtk_Value_Slot*)dSlot;
+    }
+    if (dSlot) {
+        slotList_->add(dSlot);
+    }
+    return dSlot;
 }
 
 /*---------------------------------------------------------------------------*/

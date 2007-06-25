@@ -31,7 +31,10 @@
 #include "Fldtk_Slot_Editor_Group.h"
 #include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Platform.h"
+#include "dtk/Dtk_Template.h"
+#include "dtk/Dtk_Slot.h"
 #include "main.h"
+
 #include <FL/Fl.H>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Tile.H>
@@ -59,6 +62,7 @@ Fl_Menu_Item specificMenu[] = {
 Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
 :   Fldtk_Editor(layout->name()),
     layout_(layout),
+    template_(0L),
 	tmplBrowser_(0L),
 	slotBrowser_(0L),
     slotEditor_(0L),
@@ -97,18 +101,21 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
                     specificChoice_->textsize(12);
                     specificChoice_->menu(specificMenu);
                     specificChoice_->deactivate();
+                    specificChoice_->callback((Fl_Callback*)specific_choice_cb, this);
                     // pulldown menu for standard methods
                     methodsChoice_ = new Fl_Menu_Button(X+10+110, Y+H/4+2+4, 100, 20, "Methods");
                     methodsChoice_->labelsize(12);
                     methodsChoice_->textsize(12);
                     methodsChoice_->menu(dtkPlatform->methodsChoiceMenu());
                     methodsChoice_->deactivate();
+                    methodsChoice_->callback((Fl_Callback*)methods_choice_cb, this);
                     // pulldown menu for standard attributes
                     attributesChoice_ = new Fl_Menu_Button(X+10+220, Y+H/4+2+4, 100, 20, "Attributes");
                     attributesChoice_->labelsize(12);
                     attributesChoice_->textsize(12);
                     attributesChoice_->menu(dtkPlatform->attributesChoiceMenu());
                     attributesChoice_->deactivate();
+                    attributesChoice_->callback((Fl_Callback*)attributes_choice_cb, this);
                     // box to manage nice resizing behavior
                     Fl_Box *space = new Fl_Box(X+10+320, Y+H/4+2+4, (X+W-10-150)-(X+10+320), 20);
                     space->box(FL_NO_BOX);
@@ -182,10 +189,48 @@ void Fldtk_Layout_Editor::revert_cb(Fl_Widget*, Fldtk_Layout_Editor *w)
     if (slot) slot->do_callback(slot, 'rvrt');
 }
 
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_Editor::specific_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Editor *e)
+{
+    char *name = (char*)w->menu()[w->value()].label();
+    newtRef key = NewtMakeSymbol(name);
+    newtRef descr = dtkPlatform->getSpecificSlotDescription(e->template_, key);
+    Dtk_Slot *slot = e->template_->addSlot(key, descr);
+    e->slotBrowser()->add(slot->key(), slot);
+    e->slotBrowser()->value(e->slotBrowser()->size());
+    e->slotBrowser()->do_callback();
+}
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_Editor::methods_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Editor *e)
+{
+    char *name = (char*)w->menu()[w->value()].label();
+    newtRef key = NewtMakeSymbol(name);
+    // FIXME traverse the slot specific description first 
+    newtRef descr = dtkPlatform->getScriptSlotDescription(key);
+    Dtk_Slot *slot = e->template_->addSlot(key, descr);
+    e->slotBrowser()->add(slot->key(), slot);
+    e->slotBrowser()->value(e->slotBrowser()->size());
+    e->slotBrowser()->do_callback();
+}
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_Editor::attributes_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Editor *e)
+{
+    char *name = (char*)w->menu()[w->value()].label();
+    newtRef key = NewtMakeSymbol(name);
+    // FIXME traverse the slot specific description first 
+    newtRef descr = dtkPlatform->getAttributesSlotDescription(key);
+    Dtk_Slot *slot = e->template_->addSlot(key, descr);
+    e->slotBrowser()->add(slot->key(), slot);
+    e->slotBrowser()->value(e->slotBrowser()->size());
+    e->slotBrowser()->do_callback();
+}
 
 /*---------------------------------------------------------------------------*/
 void Fldtk_Layout_Editor::userDeselectedTemplates()
 {
+    template_ = 0L;
     specificChoice_->deactivate();
     methodsChoice_->deactivate();
     attributesChoice_->deactivate();
@@ -195,6 +240,8 @@ void Fldtk_Layout_Editor::userDeselectedTemplates()
 /*---------------------------------------------------------------------------*/
 void Fldtk_Layout_Editor::userSelectedTemplate(Dtk_Template *tmpl)
 {
+    template_ = tmpl;
+
     specificChoice_->menu(dtkPlatform->specificChoiceMenu(tmpl));
     specificChoice_->activate();
     methodsChoice_->activate();

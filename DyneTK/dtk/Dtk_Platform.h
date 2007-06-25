@@ -82,6 +82,18 @@ public:
      */
     newtRef         newtTemplate(char *id);
 
+    /** Create a newt frame containing a slot.
+     */
+    newtRef         getSpecificSlotDescription(Dtk_Template *tmpl, newtRefArg key);
+
+    /** Create a newt frame containing a slot.
+     */
+    newtRef         getScriptSlotDescription(newtRefArg key);
+
+    /** Create a newt frame containing a slot.
+     */
+    newtRef         getAttributesSlotDescription(newtRefArg key);
+
 protected:
 
     class CStringSort {

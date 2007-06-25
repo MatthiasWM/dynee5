@@ -194,7 +194,7 @@ int Flnt_Widget::handle(int event)
             wx = Fl::event_x();
             wy = Fl::event_y();
             if (mode==3) {
-                template_->add(ox, oy, wx-ox, wy-oy);
+                template_->addTemplate(ox, oy, wx-ox, wy-oy);
                 SetModeEditTemplate();
                 mode = 0;
                 //redraw();

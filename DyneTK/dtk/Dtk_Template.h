@@ -93,11 +93,15 @@ public:
      * \param proto prototype for the new template, or NULL to add the user-selected prototype
      * \return the newly created template or NULL
      */
-    Dtk_Template    * add(int x, int y, int w, int h, char *proto=0L);
+    Dtk_Template    * addTemplate(int x, int y, int w, int h, char *proto=0L);
 
     /** Add a previously create slot to this layout.
      */
-    void            add(Dtk_Slot *);
+    void            addSlot(Dtk_Slot *);
+
+    /** Add a named slot using a newt script description.
+     */
+    Dtk_Slot        * addSlot(newtRef key, newtRef slot);
 
     /** Return the associated Layout
      */
