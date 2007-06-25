@@ -206,8 +206,9 @@ void Fldtk_Layout_Editor::methods_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Edit
 {
     char *name = (char*)w->menu()[w->value()].label();
     newtRef key = NewtMakeSymbol(name);
-    // FIXME traverse the slot specific description first 
-    newtRef descr = dtkPlatform->getScriptSlotDescription(key);
+    newtRef descr = dtkPlatform->getSpecificSlotDescription(e->template_, key);
+    if (descr==kNewtRefUnbind) 
+        descr = dtkPlatform->getScriptSlotDescription(key);
     Dtk_Slot *slot = e->template_->addSlot(key, descr);
     e->slotBrowser()->add(slot->key(), slot);
     e->slotBrowser()->value(e->slotBrowser()->size());
@@ -219,8 +220,9 @@ void Fldtk_Layout_Editor::attributes_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_E
 {
     char *name = (char*)w->menu()[w->value()].label();
     newtRef key = NewtMakeSymbol(name);
-    // FIXME traverse the slot specific description first 
-    newtRef descr = dtkPlatform->getAttributesSlotDescription(key);
+    newtRef descr = dtkPlatform->getSpecificSlotDescription(e->template_, key);
+    if (descr==kNewtRefUnbind) 
+        descr = dtkPlatform->getAttributesSlotDescription(key);
     Dtk_Slot *slot = e->template_->addSlot(key, descr);
     e->slotBrowser()->add(slot->key(), slot);
     e->slotBrowser()->value(e->slotBrowser()->size());

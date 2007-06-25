@@ -335,16 +335,22 @@ newtRef Dtk_Platform::getSpecificSlotDescription(Dtk_Template *tmpl, newtRefArg 
 {
     char *id = tmpl->id();
     if (!id)
-        return 0L;
+        return kNewtRefUnbind;
     if (platform_==kNewtRefUnbind)
-        return 0L;
+        return kNewtRefUnbind;
 
     // find the default settings for this slot in the given template
     newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
     int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+    if (ix==-1)
+        return kNewtRefUnbind;
     newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
+    if (tmplDB==kNewtRefUnbind)
+        return kNewtRefUnbind;
     newtRef def = kNewtRefUnbind, dt = kNewtRefUnbind;
     newtRef val = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, key));
+    if (val==kNewtRefUnbind)
+        return kNewtRefUnbind;
 
     // first, search the __ntOptional frame
     def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
