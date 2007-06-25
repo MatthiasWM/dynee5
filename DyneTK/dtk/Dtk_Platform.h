@@ -94,6 +94,10 @@ public:
      */
     newtRef         getAttributesSlotDescription(newtRefArg key);
 
+    /** Convert the template id into a proto magic pointer number.
+     */
+    int             findProto(const char *id);
+
 protected:
 
     class CStringSort {

@@ -25,8 +25,10 @@
 
 #include "Fldtk_Proto_Slot_Editor.h"
 #include "dtk/Dtk_Proto_Slot.h"
+#include "dtk/Dtk_Platform.h"
+#include "main.h"
 
-#include <FL/Fl_Float_Input.H>
+#include <FL/Fl_Choice.H>
 #include <FL/Fl_Box.H>
 
 #include <stdio.h>
@@ -37,10 +39,12 @@ Fldtk_Proto_Slot_Editor::Fldtk_Proto_Slot_Editor(Fl_Group *container, Dtk_Proto_
 :   Fl_Group(container->x(), container->y(), container->w(), container->h()),
     slot_(slot)
 {
-    wValue_ = new Fl_Float_Input(x()+50, y()+25, 120, 20, "Value:");
-    wValue_->textsize(12);
-    wValue_->textfont(FL_COURIER);
-    wValue_->labelsize(12);
+    wProto_ = new Fl_Choice(x()+80, y()+25, 175, 20, "Templates:");
+    wProto_->labelsize(12);
+    wProto_->textsize(12);
+    wProto_->menu(dtkPlatform->templateChoiceMenu());
+    //wProto_->callback((Fl_Callback*)specific_choice_cb, this);
+    callback((Fl_Callback*)editor_cb);
     end();
 }
 
@@ -50,18 +54,35 @@ Fldtk_Proto_Slot_Editor::~Fldtk_Proto_Slot_Editor()
 }
 
 
-void Fldtk_Proto_Slot_Editor::value(int v)
+void Fldtk_Proto_Slot_Editor::value(char *id)
 {
-    char buf[32];
-    sprintf(buf, "%d", v);
-    wValue_->value(buf);
+    const Fl_Menu_Item *mi = wProto_->menu();
+    for (;;++mi) {
+        const char *t = mi->label();
+        if (!t) {
+            // FIXME what is a good alternative?
+            wProto_->value(wProto_->menu());
+        }
+        if (strcasecmp(t, id)==0) {
+            wProto_->value(mi);
+            return;
+        }
+    }
 }
 
-int Fldtk_Proto_Slot_Editor::value()
+char *Fldtk_Proto_Slot_Editor::value()
 {
-    return atoi(wValue_->value());
+    return (char*)wProto_->menu()[wProto_->value()].label();
 }
 
+
+void Fldtk_Proto_Slot_Editor::editor_cb(Fldtk_Proto_Slot_Editor *w, unsigned int cmd)
+{
+    switch (cmd) {
+    case 'aply': w->slot_->apply(); break;
+    case 'rvrt': w->slot_->revert(); break;
+    }
+}
 
 //
 // End of "$Id$".

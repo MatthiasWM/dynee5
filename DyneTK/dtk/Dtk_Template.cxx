@@ -68,7 +68,8 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout,
     scriptName_(0L),
     autoScriptName_(true),
     viewBounds_(0L),
-    viewJustify_(0L)
+    viewJustify_(0L),
+    proto_(0L)
 {
     //if (proto && proto->setup)
         //proto->setup(this);
@@ -160,10 +161,17 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
     sw.put(buf);
     sw.put("    {\n");
 
-    // FIXME write the '_proto magic pointer based on the __ntId, if found in the platform file
-    // FIXME ignore the __ntTemplate slot
+    int needComma = 0;
+    // if there is a valid magic pointer for our ID, write a '_proto slot
+    int proto = dtkPlatform->findProto(id());
+    if (proto!=-1) {
+        sprintf(buf, "     _proto: @%d", proto);
+        sw.put(buf);
+        needComma = 1;
+    }
+    // now write all the other slots
     if (slotList_) {
-        int i, n = slotList_->size(), needComma = 0, ret = 0;
+        int i, n = slotList_->size(), ret = 0;
         for (i=0; i<n; i++) {
             if (needComma)
                 sw.put(",\n");
@@ -380,7 +388,7 @@ Dtk_Slot *Dtk_Template::addSlot(newtRef key, newtRef slot)
         } else if (strcmp(dt, "NUMB")==0) {
             dSlot = new Dtk_Value_Slot(slotList_, keyname, slot);
         } else if (strcmp(dt, "PROT")==0) {
-            dSlot = new Dtk_Proto_Slot(slotList_, keyname, slot);
+            dSlot = new Dtk_Proto_Slot(slotList_, "_proto", slot);
         } else {
             // also: RECT, CLAS, NUMB, PICT, USER, any more?
             // CLAS is __ntTemplate
@@ -408,6 +416,20 @@ Dtk_Slot *Dtk_Template::findSlot(const char *key)
     return slotList()->find(key);
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::id(char *newID)
+{
+    newID = strdup(newID);
+    if (ntId_)
+        free(ntId_);
+    ntId_ = newID;
+    if (browserName_) {
+        free(browserName_);
+        browserName_ = 0L;
+    }
+    layout()->templateBrowser()->text(index_, browserName());
+}
 
 //
 // End of "$Id$".

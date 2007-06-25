@@ -42,8 +42,8 @@ class Flnt_Widget;
 class Dtk_Slot;
 class Dtk_Rect_Slot;
 class Dtk_Value_Slot;
+class Dtk_Proto_Slot;
 class Dtk_Script_Writer;
-class Dtk_Template_Proto;
 
 /** Manage a template object in a layout.
  *
@@ -147,6 +147,10 @@ public:
      */
     char                * id() { return ntId_; }
 
+    /** Set a new ID.
+     */ 
+    void                id(char *id);
+
     /** Find a slot by key.
      */
     Dtk_Slot            * findSlot(const char *key);
@@ -195,8 +199,11 @@ private:
     /// slot containing the coordintes of the template widget
     Dtk_Rect_Slot       * viewBounds_;
 
-    ///slot containing the widget justify value
+    /// slot containing the widget justify value
     Dtk_Value_Slot      * viewJustify_;
+
+    /// slot containing the proto magic pointer 
+    Dtk_Proto_Slot      * proto_;
 };
 
 

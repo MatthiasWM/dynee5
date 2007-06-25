@@ -63,6 +63,12 @@ Dtk_Layout_Document *Dtk_Slot::layout()
     return list_->layout();
 }
 
+/*---------------------------------------------------------------------------*/
+Dtk_Template *Dtk_Slot::getTemplate()
+{
+    return list_ ? list_->getTemplate() : 0L;
+}
+
 //
 // End of "$Id$".
 //

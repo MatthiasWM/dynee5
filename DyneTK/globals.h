@@ -385,6 +385,15 @@ void	DebugDumpBuffer(uint8_t*, int);
 void    SetModeEditTemplate();
 void    SetModeAddTemplate();
 
+#ifdef WIN32
+# define  EnterDebugger() \
+            __asm { int 3 }
+#else
+# define  EnterDebugger() \
+            __asm__("\n int3\n")
+#endif
+
+
 #endif
 
 

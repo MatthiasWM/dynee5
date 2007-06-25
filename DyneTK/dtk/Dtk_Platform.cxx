@@ -149,6 +149,9 @@ Fl_Menu_Item *Dtk_Platform::templateChoiceMenu()
         newtRef sym = NewtSlotsGetSlot(ta, i);
         if (NewtRefIsSymbol(sym)) {
             templateChoiceMenu_[mi].label(strdup(NewtSymbolGetName(sym)));
+            newtRef tmplDB = NewtGetFrameSlot(ta, i+1);
+            newtRef proto = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__proto)));
+            templateChoiceMenu_[mi].user_data((void*)NewtRefToInteger(proto));
             mi++;
         } else {
             // ignore
@@ -416,6 +419,21 @@ newtRef Dtk_Platform::getAttributesSlotDescription(newtRefArg key)
     return ret;
 }
 
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Platform::findProto(const char *id)
+{
+    const Fl_Menu_Item *mi = templateChoiceMenu();
+    for (;;++mi) {
+        const char *t = mi->label();
+        if (!t) {
+            return -1;
+        }
+        if (strcasecmp(t, id)==0) {
+            return (int)mi->user_data();
+        }
+    }
+}
 
 
 static const char *platformStr1 = 

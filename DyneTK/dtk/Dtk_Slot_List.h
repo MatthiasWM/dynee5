@@ -70,6 +70,10 @@ public:
      */
     Dtk_Slot *find(const char *key);
 
+    /** Return the tamplate that holds this slot list
+     */
+    Dtk_Template *getTemplate() { return template_; }
+
 private:
 
     /// back reference to the template that keeps this list

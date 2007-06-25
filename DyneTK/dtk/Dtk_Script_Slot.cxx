@@ -89,8 +89,9 @@ int Dtk_Script_Slot::write(Dtk_Script_Writer &sw)
         sw.put(buf);
         char *src = script_, *end = script_;
         for (;;) {
+            if (*end==0) break;
+            src = end;
             sw.put("        ");
-            if (*src==0) break;
             for (;;) {
                 char c = *end;
                 if (c==0 || c=='\n') break;
@@ -101,12 +102,17 @@ int Dtk_Script_Slot::write(Dtk_Script_Writer &sw)
                 break;
             sw.put("\n");
             end++;
-            src = end;
+        }
+        if (strstr(src, "//")) {
+            sw.put("\n        ");
         }
     } else {
         sprintf(buf, "     %s: ", key_);
         sw.put(buf);
         sw.put(script_);
+        // if the last buffer contained a double-slash comment, we must add a new line
+        if (strstr(script_, "//"))
+            sw.put("\n        ");
     }
     return 0;
 }

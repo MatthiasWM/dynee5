@@ -53,8 +53,16 @@ public:
 
     /** Return the value
      */
-    int             value() { return value_; }
-    void            value(int v) { value_ = v; }
+    char            * value();
+    void            value(char *id);
+
+    /** Apply the changes in the editor to the slot.
+     */
+    virtual void    apply();
+
+    /** Revert the changes in the editor to the current slot sttings.
+     */
+    virtual void    revert();
 
     /** Write this slot as a Newt Script.
      *
@@ -67,9 +75,6 @@ private:
 
     /// this is the editor that we are using
     Fldtk_Proto_Slot_Editor    * editor_;
-
-    /// the rectangle iteslf
-    int             value_;
 };
 
 

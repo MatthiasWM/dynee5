@@ -31,7 +31,7 @@
 
 
 class Dtk_Proto_Slot;
-class Fl_Input;
+class Fl_Choice;
 
 
 /** GUI for editing value slots.
@@ -39,14 +39,15 @@ class Fl_Input;
 class Fldtk_Proto_Slot_Editor : public Fl_Group
 {
 public:
-	        Fldtk_Proto_Slot_Editor(Fl_Group *container, Dtk_Proto_Slot *slot);
-    virtual ~Fldtk_Proto_Slot_Editor();
-    virtual void    value(int v);
-    virtual int     value();
+	                Fldtk_Proto_Slot_Editor(Fl_Group *container, Dtk_Proto_Slot *slot);
+    virtual         ~Fldtk_Proto_Slot_Editor();
+    virtual void    value(char *id);
+    virtual char    * value();
 
 protected:
-    Dtk_Proto_Slot * slot_;
-    Fl_Input    *wValue_; // should be a pulldown of all known protos...
+    Dtk_Proto_Slot  * slot_;
+    Fl_Choice       * wProto_;
+    static void editor_cb(Fldtk_Proto_Slot_Editor *w, unsigned int cmd);
 };
 
 

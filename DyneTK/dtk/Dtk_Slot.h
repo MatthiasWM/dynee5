@@ -30,6 +30,7 @@
 class Dtk_Slot_List;
 class Dtk_Layout_Document;
 class Dtk_Script_Writer;
+class Dtk_Template;
 
 extern "C" {
 #include "NewtType.h"
@@ -76,6 +77,10 @@ public:
     /** Revert the changes in the editor to the current slot sttings.
      */
     virtual void    revert() { }
+
+    /** Return the tamplate that holds this slot list
+     */
+    Dtk_Template    * getTemplate();
 
 protected:
 
