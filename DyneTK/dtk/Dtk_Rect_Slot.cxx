@@ -74,7 +74,7 @@ void Dtk_Rect_Slot::edit()
         container->begin();
         editor_ = new Fldtk_Rect_Slot_Editor(container, this);
         container->end();
-        editor_->rect(top_, left_, bottom_, right_);
+        editor_->setRect(top_, left_, bottom_, right_);
     }
     container->value(editor_);
 }
@@ -96,10 +96,33 @@ void Dtk_Rect_Slot::set(int t, int l, int b, int r)
     left_ = l;
     right_ = r;
     bottom_ = b;
-    if (editor_) 
-        editor_->rect(top_, left_, bottom_, right_);
 }
 
+/*---------------------------------------------------------------------------*/
+void Dtk_Rect_Slot::get(int &t, int &l, int &b, int &r)
+{
+    t = top_;
+    l = left_;
+    r = right_;
+    b = bottom_;
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Rect_Slot::apply() 
+{ 
+    if (editor_) {
+        editor_->getRect(top_, left_, bottom_, right_);
+    }
+    signalRectChanged(this);
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Rect_Slot::revert() 
+{
+    if (editor_) 
+        editor_->setRect(top_, left_, bottom_, right_);
+}
 
 
 //

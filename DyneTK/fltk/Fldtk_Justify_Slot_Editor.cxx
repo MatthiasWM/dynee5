@@ -123,7 +123,14 @@ switch (value_ & 0x00007000) { // bits 12 13 14
 }
 
 double Fldtk_Justify_Slot_Editor::value() {
-  return (double)value_;
+  unsigned int v = value_;
+
+v &= 0xffffff0f;
+
+v |= ( wHParent->value() << 4 );
+v |= ( wVParent->value() << 6 );
+
+return (double)v;
 }
 
 Fl_Group* Fldtk_Justify_Slot_Editor::buildUI_() {
@@ -158,6 +165,7 @@ Fl_Group* Fldtk_Justify_Slot_Editor::buildUI_() {
         wHSibling->down_box(FL_BORDER_BOX);
         wHSibling->labelsize(12);
         wHSibling->textsize(12);
+        wHSibling->deactivate();
         wHSibling->menu(menu_wHSibling);
       } // Fl_Choice* wHSibling
       { Fl_Box* o = new Fl_Box(15, 55, 65, 20, "Vertical:");
@@ -174,6 +182,7 @@ Fl_Group* Fldtk_Justify_Slot_Editor::buildUI_() {
         wVSibling->down_box(FL_BORDER_BOX);
         wVSibling->labelsize(12);
         wVSibling->textsize(12);
+        wVSibling->deactivate();
         wVSibling->menu(menu_wVSibling);
       } // Fl_Choice* wVSibling
       o->end();
@@ -182,21 +191,26 @@ Fl_Group* Fldtk_Justify_Slot_Editor::buildUI_() {
       o->box(FL_THIN_DOWN_BOX);
       o->labelsize(12);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->deactivate();
       { wPropLeft = new Fl_Check_Button(20, 120, 70, 20, "Left");
         wPropLeft->down_box(FL_DOWN_BOX);
         wPropLeft->labelsize(12);
+        wPropLeft->deactivate();
       } // Fl_Check_Button* wPropLeft
       { wPropRight = new Fl_Check_Button(90, 120, 70, 20, "Right");
         wPropRight->down_box(FL_DOWN_BOX);
         wPropRight->labelsize(12);
+        wPropRight->deactivate();
       } // Fl_Check_Button* wPropRight
       { wPropTop = new Fl_Check_Button(160, 120, 70, 20, "Top");
         wPropTop->down_box(FL_DOWN_BOX);
         wPropTop->labelsize(12);
+        wPropTop->deactivate();
       } // Fl_Check_Button* wPropTop
       { wPropBottom = new Fl_Check_Button(230, 120, 70, 20, "Bottom");
         wPropBottom->down_box(FL_DOWN_BOX);
         wPropBottom->labelsize(12);
+        wPropBottom->deactivate();
       } // Fl_Check_Button* wPropBottom
       o->end();
     } // Fl_Group* o
@@ -204,22 +218,26 @@ Fl_Group* Fldtk_Justify_Slot_Editor::buildUI_() {
       o->box(FL_THIN_DOWN_BOX);
       o->labelsize(12);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->deactivate();
       { wHText = new Fl_Choice(85, 190, 150, 20, "Horizontal:");
         wHText->down_box(FL_BORDER_BOX);
         wHText->labelsize(12);
         wHText->textsize(12);
+        wHText->deactivate();
         wHText->menu(menu_wHText);
       } // Fl_Choice* wHText
       { wVText = new Fl_Choice(85, 215, 150, 20, "Vertical:");
         wVText->down_box(FL_BORDER_BOX);
         wVText->labelsize(12);
         wVText->textsize(12);
+        wVText->deactivate();
         wVText->menu(menu_wVText);
       } // Fl_Choice* wVText
       { wTextLimits = new Fl_Choice(85, 240, 150, 20, "Text Limits:");
         wTextLimits->down_box(FL_BORDER_BOX);
         wTextLimits->labelsize(12);
         wTextLimits->textsize(12);
+        wTextLimits->deactivate();
         wTextLimits->menu(menu_wTextLimits);
       } // Fl_Choice* wTextLimits
       o->end();
@@ -228,19 +246,23 @@ Fl_Group* Fldtk_Justify_Slot_Editor::buildUI_() {
       o->box(FL_THIN_DOWN_BOX);
       o->labelsize(12);
       o->align(FL_ALIGN_TOP_LEFT|FL_ALIGN_INSIDE);
+      o->deactivate();
       { wReflow = new Fl_Check_Button(265, 185, 115, 20, "Reflow");
         wReflow->down_box(FL_DOWN_BOX);
         wReflow->labelsize(12);
+        wReflow->deactivate();
       } // Fl_Check_Button* wReflow
       { wLasso = new Fl_Check_Button(265, 205, 115, 20, "Lasso Children");
         wLasso->down_box(FL_DOWN_BOX);
         wLasso->labelsize(12);
+        wLasso->deactivate();
       } // Fl_Check_Button* wLasso
       o->end();
     } // Fl_Group* o
     { wAnchored = new Fl_Check_Button(265, 245, 115, 20, "Anchored");
       wAnchored->down_box(FL_DOWN_BOX);
       wAnchored->labelsize(12);
+      wAnchored->deactivate();
     } // Fl_Check_Button* wAnchored
     { Fl_Box* o = new Fl_Box(415, 275, 10, 10);
       Fl_Group::current()->resizable(o);

@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Fldtk_Value_Slot_Editor header file for the FLMM extension to FLTK.
+// Flmm_Signal header file for the FLMM extension to FLTK.
 //
 // Copyright 2002-2007 by Matthias Melcher.
 //
@@ -23,31 +23,37 @@
 // Please report all bugs and problems to "flmm@matthiasm.com".
 //
 
-#ifndef FLDTK_VALUE_SLOT_EDITOR_H
-#define FLDTK_VALUE_SLOT_EDITOR_H
+#ifndef FLMM_SIGNAL_H
+#define FLMM_SIGNAL_H
 
 
-#include <FL/Fl_Group.H>
+class Flmm_Slot_Class { };
+typedef void (Flmm_Slot_Class::*Flmm_Slot)(void *, void *);
 
-
-class Dtk_Value_Slot;
-class Fl_Input;
-
-
-/** GUI for editing value slots.
+/**
+ * Testing.
  */
-class Fldtk_Value_Slot_Editor : public Fl_Group
+class Flmm_Signal
 {
+    class Slot {
+        friend Flmm_Signal;
+    public:
+        Slot(void *base, Flmm_Slot func, void *user);
+        void call(void *caller);
+    private:
+        Flmm_Slot_Class *base_;
+        Flmm_Slot func_;
+        void *user_;
+    };
 public:
-	        Fldtk_Value_Slot_Editor(Fl_Group *container, Dtk_Value_Slot *slot);
-    virtual ~Fldtk_Value_Slot_Editor();
-    virtual void    value(double v);
-    virtual double  value();
-
-protected:
-    Dtk_Value_Slot * slot_;
-    Fl_Input    *wValue_;
-    static void editor_cb(Fldtk_Value_Slot_Editor *w, unsigned int cmd);
+    Flmm_Signal();
+    ~Flmm_Signal();
+    void connect(void *base, Flmm_Slot func, void *user=0L);
+    void disconnect(void *base, Flmm_Slot func);
+    void operator()(void *caller=0L);
+private:
+    Slot *rcvr_;
+    short nRcvr_, NRcvr_;
 };
 
 

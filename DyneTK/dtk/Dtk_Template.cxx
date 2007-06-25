@@ -67,8 +67,10 @@ Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout,
     ntId_(0L),
     scriptName_(0L),
     autoScriptName_(true),
+    widget_(0L),
     viewBounds_(0L),
     viewJustify_(0L),
+    defaultJustify_(0),
     proto_(0L)
 {
     //if (proto && proto->setup)
@@ -99,7 +101,7 @@ int Dtk_Template::load(newtRef node)
 
     // find an ID; this does not mean too much as the ID can be changed later in the UI
     newtRef ntId = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntId)));
-    if (NewtRefIsSymbol(ntId)) ntId_ = strdup(NewtSymbolGetName(ntId));
+    if (NewtRefIsSymbol(ntId)) id(NewtSymbolGetName(ntId));
 
     // now load all slots for this template
 	newtRef value = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(value)));
@@ -211,12 +213,16 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
 /*---------------------------------------------------------------------------*/
 void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add)
 {
+    if (browserName_) {
+        free(browserName_);
+        browserName_ = 0L;
+    }
     browser_ = browser;
     indent_ = indent;
     index_ = index++;
     if (add) {
         browser->add(browserName(), this);
-	    widget_ = new Flnt_Widget(this);
+        newWidget();
     }
     if (tmplList_) {
         int i, n = tmplList_->size();
@@ -277,10 +283,7 @@ void Dtk_Template::edit()
 void Dtk_Template::getSize(int &t, int &l, int &b, int &r)
 {
     if (viewBounds_) {
-        t = viewBounds_->top();
-        l = viewBounds_->left();
-        b = viewBounds_->bottom();
-        r = viewBounds_->right();
+        viewBounds_->get(t, l, b, r);
     }
 }
 
@@ -288,7 +291,7 @@ void Dtk_Template::getSize(int &t, int &l, int &b, int &r)
 /*---------------------------------------------------------------------------*/
 unsigned int Dtk_Template::justify()
 {
-    return viewJustify_ ? (unsigned int)viewJustify_->value() : 0;
+    return viewJustify_ ? (unsigned int)viewJustify_->value() : defaultJustify_;
 }
 
 
@@ -346,7 +349,7 @@ Dtk_Template *Dtk_Template::addTemplate(int x, int y, int w, int h, char *proto)
     browser_->insert(tmpl->index_, tmpl->browserName(), tmpl);
 
     widget_->begin();
-    tmpl->widget_ = new Flnt_Widget(tmpl);
+    tmpl->newWidget();
     tmpl->widget_->resize(x, y, w, h);
     Fl_Group::current(0L);
     widget_->redraw();
@@ -401,8 +404,10 @@ Dtk_Slot *Dtk_Template::addSlot(newtRef key, newtRef slot)
     }
     if (key==NSSYM(viewBounds)) {
         viewBounds_ = (Dtk_Rect_Slot*)dSlot;
+        viewBounds_->signalRectChanged.connect(this, (Flmm_Slot)Dtk_Template::viewBoundsChangedSignal);
     } else if (key==NSSYM(viewJustify)) {
         viewJustify_ = (Dtk_Value_Slot*)dSlot;
+        viewJustify_->signalValueChanged.connect(this, (Flmm_Slot)Dtk_Template::viewJustifyChangedSignal);
     }
     if (dSlot) {
         slotList_->add(dSlot);
@@ -418,9 +423,9 @@ Dtk_Slot *Dtk_Template::findSlot(const char *key)
 
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Template::id(char *newID)
+void Dtk_Template::id(const char *cNewID)
 {
-    newID = strdup(newID);
+    char *newID = strdup(cNewID);
     if (ntId_)
         free(ntId_);
     ntId_ = newID;
@@ -429,8 +434,65 @@ void Dtk_Template::id(char *newID)
         browserName_ = 0L;
     }
     layout()->templateBrowser()->text(index_, browserName());
-    widget_->copy_label(browserName());
+    if (widget_)
+        widget_->copy_label(browserName());
+
+    // A few protos have a different default justify if no viewJustif slot exists
+    if (strcasecmp(newID, "protoApp")==0) {
+        defaultJustify_ = 16;
+    } else {
+        defaultJustify_ = 0;
+    }
+    if (widget_ && !viewJustify_) {
+        widget_->newtSetJustify(defaultJustify_);
+    }
 }
+
+
+/*---------------------------------------------------------------------------*/
+Flnt_Widget *Dtk_Template::newWidget()
+{
+    widget_ = new Flnt_Widget(this);
+    widget_->signalBoundsChanged.connect(this, (Flmm_Slot)Dtk_Template::widgetBoundsChangedSignal);
+    widget_->newtSetJustify(justify());
+    viewBoundsChangedSignal();
+    return widget_;
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::widgetBoundsChangedSignal()
+{
+    if (viewBounds_ && widget_) {
+        int t, l, b, r;
+        widget_->newtGetRect(t, l, b, r);
+        viewBounds_->set(t, l, b, r);
+        viewBounds_->revert();
+    }
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::viewBoundsChangedSignal()
+{
+    if (viewBounds_ && widget_) {
+        int t, l, b, r;
+        viewBounds_->get(t, l, b, r);
+        widget_->newtSetRect(t, l, b, r);
+    }
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::viewJustifyChangedSignal()
+{
+    if (viewJustify_ && widget_) {
+        unsigned int j = (unsigned int)viewJustify_->value();
+        widget_->newtSetJustify(j);
+        // setting the justify will likely modify the viewBounds!
+        widgetBoundsChangedSignal();
+    }
+}
+
 
 //
 // End of "$Id$".

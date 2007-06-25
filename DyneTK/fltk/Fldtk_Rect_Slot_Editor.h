@@ -3,7 +3,7 @@
 //
 // Fldtk_Rect_Slot_Editor header file for the FLMM extension to FLTK.
 //
-// Copyright 2002-2007 by Matthias Melcher.
+// Copyright 2007 by Matthias Melcher.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Library General Public
@@ -46,16 +46,53 @@ class Fl_Box;
 class Fldtk_Rect_Slot_Editor : public Fl_Group
 {
 public:
+
+    /** Create an editor for rectangles.
+     *
+     * The rect editor has four integer input fields for the 
+     * coordinates of two corners of the rectangle. It also 
+     * calculates and show the height and width of the rectangle.
+     *
+     * \param container This widget will hold the editor
+     * \param slot      This is the slot that we can edit
+     */
 	        Fldtk_Rect_Slot_Editor(Fl_Group *container, Dtk_Rect_Slot *slot);
+
+    /** Release all alocated resources.
+     */
 	        ~Fldtk_Rect_Slot_Editor();
-    void    rect(int t, int l, int b, int r);
+
+    /** Set new rectangle coordinates.
+     *
+     * \param top top edge of rectangle
+     * \param left left edge
+     * \param bottom bottom edge
+     * \param right right edge
+     */
+    void    setRect(int top, int left, int bottom, int right);
+
+    /** Get the current rectangle coordinates.
+     *
+     * \param top top edge of rectangle
+     * \param left left edge
+     * \param bottom bottom edge
+     * \param right right edge
+     */
+    void    getRect(int &top, int &left, int &bottom, int &right);
 
 protected:
-    static void update_cb(Fl_Widget*, Fldtk_Rect_Slot_Editor*);
-
+    /// back pointer to slot
     Dtk_Rect_Slot * slot_;
+
+    /// input fields for coordinates
     Fl_Input    *wTop_, *wLeft_, *wBottom_, *wRight_;
+
+    /// output fields for calculated size
     Fl_Box      *wWidth_, *wHeight_;
+
+    static void editor_cb(Fldtk_Rect_Slot_Editor *w, unsigned int cmd);
+
+    static void update_cb(Fl_Widget*, Fldtk_Rect_Slot_Editor*);
 };
 
 

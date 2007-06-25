@@ -43,6 +43,7 @@ Flnt_Widget *Flnt_Widget::rubberband_ = 0L;
 /*---------------------------------------------------------------------------*/
 Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl, Dtk_Layout_Document *layout)
 :   Fl_Group(0, 0, 10, 10),
+    top_(0), left_(0), bottom_(0), right_(0), justify_(0),
     template_(tmpl),
     layout_(layout)
 {
@@ -50,13 +51,12 @@ Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl, Dtk_Layout_Document *layout)
         layout_ = template_->layout();
     if (tmpl)
         copy_label(tmpl->browserName());
-    newtResize();
+    screenToNewt();
     init_sizes();
     align(FL_ALIGN_INSIDE|FL_ALIGN_WRAP|FL_ALIGN_CLIP|FL_ALIGN_TOP|FL_ALIGN_LEFT);
     labelfont((Fl_Font)16);
     labelsize(10);
     box(FL_BORDER_BOX);
-    //align(FL_ALIGN_CLIP);
     resizable(0L);
 }
 
@@ -66,7 +66,114 @@ Flnt_Widget::~Flnt_Widget()
 {
 }
 
+
 /*---------------------------------------------------------------------------*/
+void Flnt_Widget::newtToScreen()
+{
+    // FIXME support all justify flags
+    Fl_Group *p = parent();
+    int xx = left_, yy = top_, ww = right_-left_, hh = bottom_-top_;
+
+    // horizontal justification to parent
+	switch (justify_&48) {
+	case 0: // align left
+		ww = right_ - left_;
+		xx = p->x() + left_;
+		break;
+	case 16: // center
+		ww = right_-left_;
+		xx = p->x() + (p->w()-ww)/2 + left_;
+		break;
+	case 32: // right
+		xx = p->x() + p->w() + left_;
+		ww = right_ - left_;
+		break;
+	case 48: // inset
+		xx = p->x() + left_;
+		ww = p->w() + right_ - left_;
+		break;
+	}
+
+	switch (justify_&192) {
+	case 0: // align top_
+		yy = p->y() + top_;
+		hh = bottom_ - top_;
+		break;
+	case 64: // center
+		hh = bottom_-top_;
+		yy = p->y() + 0.5*(p->h()-hh) + top_;
+		break;
+	case 128: // bottom_
+		yy = p->y() + p->h() + top_;
+		hh = bottom_ - top_;
+		break;
+	case 192: // inset
+		yy = p->y() + top_;
+		hh = p->h() + bottom_ - top_;
+		break;
+	}
+
+    resize(xx, yy, ww, hh);
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Flnt_Widget::screenToNewt()
+{
+    // FIXME support all justify flags
+    Fl_Group *p = parent();
+    top_ = y(); left_ = x(); bottom_ = y()+h(); right_ = x()+w();
+    int dd = 0;
+
+    // horizontal justification to parent
+	switch (justify_&48) {
+	case 0: // align left
+        left_ -= p->x();
+        right_ -= p->x();
+		break;
+	case 16: // center
+        dd = p->x() + (p->w()-right_+left_)/2;
+        left_  = left_  - dd;
+        right_ = right_ - dd;
+		break;
+	case 32: // right
+        dd = p->x() + p->w();
+        left_  = left_  - dd;
+        right_ = right_ - dd;
+		break;
+	case 48: // inset
+        left_ -= p->x();
+        right_ = right_ - (p->x()+p->w());
+		break;
+	}
+
+    // vertical justification to parent
+	switch (justify_&192) {
+	case 0: // align top
+        top_    -= p->y();
+        bottom_ -= p->y();
+		break;
+	case 64: // center
+        dd = p->y() + (p->h()-bottom_+top_)/2;
+        top_  = top_  - dd;
+        bottom_ = bottom_ - dd;
+		break;
+	case 128: // bottom
+        dd = p->y() + p->h();
+        top_  = top_  - dd;
+        bottom_ = bottom_ - dd;
+		break;
+	case 192: // inset
+        top_ -= p->y();
+        bottom_ = bottom_ - (p->y()+p->h());
+		break;
+	}
+
+}
+
+
+/*---------------------------------------------------------------------------*/
+/*
 void Flnt_Widget::newtResize()
 {
     if (!template_)
@@ -87,7 +194,7 @@ void Flnt_Widget::newtResize()
     unsigned int justify = template_->justify();
 	int d, xx = left, yy = top, ww = right-left, hh = bottom-top;
 
-	printf("Layout: 0x%08x %9d, %4d %4d %4d %4d \"%s\"\n", justify, justify, left, top, right, bottom, label());
+	//printf("Layout: 0x%08x %9d, %4d %4d %4d %4d \"%s\"\n", justify, justify, left, top, right, bottom, label());
 	if (justify & 0x0f) {
 		d = 3; // not yet supported?
 	}
@@ -159,6 +266,53 @@ void Flnt_Widget::newtResize()
 	}
 	resize(xx, yy, ww, hh);
 }
+*/
+
+
+/*---------------------------------------------------------------------------*/
+void Flnt_Widget::newtSetJustify(unsigned int justify)
+{
+    justify_ = justify;
+    screenToNewt();
+    parent()->redraw();
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Flnt_Widget::newtSetRect(int top, int left, int bottom, int right)
+{
+    top_ = top;
+    left_ = left;
+    bottom_ = bottom;
+    right_ = right;
+    newtToScreen();
+    parent()->redraw();
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Flnt_Widget::newtGetRect(int &top, int &left, int &bottom, int &right)
+{
+    screenToNewt();
+    top = top_;
+    left = left_;
+    bottom = bottom_;
+    right = right_;
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Flnt_Widget::layoutChildren()
+{
+    screenToNewt();
+    int i, n = children();
+    for (i=0; i<n; i++) {
+        Flnt_Widget *ci = (Flnt_Widget*)child(i);
+        ci->newtToScreen();
+        ci->layoutChildren();
+    }
+}
+
 
 // mode 0=drag, 1=resize, 2=create
 static int mode, ox, oy, wx, wy, ww, wh;
@@ -177,12 +331,13 @@ int Flnt_Widget::handle(int event)
                 oy = Fl::event_y();
                 wx = x(); wy = y();
                 ww = w(); wh = h();
-                mode = 1;
+                if (template_)
+                    mode = 1;
                 if (Fldtk_Layout_View::mode()==1) {
                     mode = 3;
                     rubberband_ = this;
                     redraw();
-                } else if (ox>=x()+w()-8 && oy>=y()+h()-8) {
+                } else if (template_ && ox>=x()+w()-8 && oy>=y()+h()-8) {
                     mode = 2;
                 }
             }
@@ -191,16 +346,18 @@ int Flnt_Widget::handle(int event)
             if (mode /*&& !Fl::event_is_click()*/) {
                 if (mode==1) { // drag widget
                     position(wx-ox+Fl::event_x(), wy-oy+Fl::event_y());
+                    layoutChildren();
                     window()->redraw();
                 } else if (mode==2) { // resize widget
                     size(ww-ox+Fl::event_x(), wh-oy+Fl::event_y());
+                    layoutChildren();
                     window()->redraw();
                 } else if (mode==3) { // create a new widget
                     wx = Fl::event_x();
                     wy = Fl::event_y();
                     redraw();
                 }
-                // FIXME tnewtReverseResize();
+                // FIXME tNewtReverseResize();
                 // FIXME template_->setSize();
                 return 1;
             }
@@ -208,7 +365,11 @@ int Flnt_Widget::handle(int event)
         case FL_RELEASE:
             wx = Fl::event_x();
             wy = Fl::event_y();
-            if (mode==3) {
+            if (mode==1 || mode==2) {
+                layoutChildren();
+                screenToNewt();
+                signalBoundsChanged(this);
+            } else if (mode==3) {
                 if (template_) {
                     template_->addTemplate(ox, oy, wx-ox, wy-oy);
                 } else {
@@ -229,7 +390,8 @@ int Flnt_Widget::handle(int event)
 void Flnt_Widget::draw()
 {
     fl_color(FL_BLACK);
-    fl_rect(x(), y(), w(), h());
+    if (template_)
+        fl_rect(x(), y(), w(), h());
     fl_push_clip(x()+1, y()+1, w()-2, h()-2);
     Fl_Group::draw();
     if (template_ && template_->isSelected()) {

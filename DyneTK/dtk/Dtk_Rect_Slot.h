@@ -28,6 +28,7 @@
 
 
 #include "Dtk_Slot.h"
+#include "fltk/Flmm_Signal.h"
 
 
 class Fldtk_Rect_Slot_Editor;
@@ -52,12 +53,9 @@ public:
      */
     virtual void    edit();
 
-    /** Return the coordintaes of the rectangle.
+    /** Return the coordinates of the rectangle.
      */
-    int     top() { return top_; }
-    int     left() { return left_; }
-    int     bottom() { return bottom_; }
-    int     right() { return right_; }
+    void    get(int &t, int &l, int &b, int &r);
 
     /** Set the coordintaes for the rectangle.
      */
@@ -69,6 +67,18 @@ public:
      * \retval negative if an error occured
      */     
 	virtual int		write(Dtk_Script_Writer &sw);
+
+    /** Apply the changes in the editor to the slot.
+     */
+    virtual void    apply();
+
+    /** Revert the changes in the editor to the current slot sttings.
+     */
+    virtual void    revert();
+
+    /** This signal will be called whenever the user applies changes to the rect.
+     */
+    Flmm_Signal     signalRectChanged;
 
 private:
 

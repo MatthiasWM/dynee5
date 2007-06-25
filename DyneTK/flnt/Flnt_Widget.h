@@ -29,6 +29,8 @@
 
 #include <FL/Fl_Group.H>
 
+#include "fltk/Flmm_Signal.h"
+
 
 class Dtk_Template;
 class Dtk_Layout_Document;
@@ -43,13 +45,29 @@ public:
 
 	virtual         ~Flnt_Widget();
 
-    void            newtResize();
+    //void            newtResize();
+
+    void            newtSetRect(int top, int left, int bottom, int right);
+
+    void            newtGetRect(int &top, int &left, int &bottom, int &right);
+
+    void            newtSetJustify(unsigned int justify);
 
     int             handle(int event);
 
     void            draw();
 
+    void            layoutChildren();
+
+    Flmm_Signal     signalBoundsChanged;
+
 protected:
+
+    void            newtToScreen();
+    void            screenToNewt();
+
+    int             top_, left_, bottom_, right_;
+    unsigned int    justify_;
 
     Dtk_Template    * template_;
 

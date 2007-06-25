@@ -28,7 +28,7 @@
 
 
 #include "Dtk_Slot.h"
-
+#include "fltk/Flmm_Signal.h"
 
 class Fldtk_Value_Slot_Editor;
 
@@ -62,6 +62,18 @@ public:
      * \retval negative if an error occured
      */     
 	virtual int		write(Dtk_Script_Writer &sw);
+
+    /** Apply the changes in the editor to the slot.
+     */
+    virtual void    apply();
+
+    /** Revert the changes in the editor to the current slot sttings.
+     */
+    virtual void    revert();
+
+    /** This signal will be called whenever the user applies changes to the value.
+     */
+    Flmm_Signal     signalValueChanged;
 
 private:
 

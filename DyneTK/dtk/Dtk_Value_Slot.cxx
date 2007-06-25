@@ -100,6 +100,25 @@ int Dtk_Value_Slot::write(Dtk_Script_Writer &sw)
     return 0;
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Value_Slot::apply() 
+{ 
+    if (editor_) {
+        value_ = editor_->value();
+    }
+    signalValueChanged(this);
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Value_Slot::revert() 
+{
+    if (editor_) 
+        editor_->value(value_);
+}
+
+
 //
 // End of "$Id$".
 //

@@ -75,7 +75,15 @@ switch (value_ & 0x00007000) { // bits 12 13 14
   }
   Function {value()} {open return_type double
   } {
-    code {return (double)value_;} {}
+    code {unsigned int v = value_;
+
+v &= 0xffffff0f;
+
+v |= ( wHParent->value() << 4 );
+v |= ( wVParent->value() << 6 );
+
+return (double)v;} {selected
+    }
   }
   decl {int value_;} {global
   }
@@ -115,8 +123,8 @@ switch (value_ & 0x00007000) { // bits 12 13 14
           }
         }
         Fl_Choice wHSibling {
-          label {Sibling:} open
-          xywh {290 30 115 20} down_box BORDER_BOX labelsize 12 textsize 12
+          label {Sibling:}
+          xywh {290 30 115 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           MenuItem {} {
             label None
@@ -165,8 +173,8 @@ switch (value_ & 0x00007000) { // bits 12 13 14
           }
         }
         Fl_Choice wVSibling {
-          label {Sibling:} open
-          xywh {290 55 115 20} down_box BORDER_BOX labelsize 12 textsize 12
+          label {Sibling:}
+          xywh {290 55 115 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           MenuItem {} {
             label None
@@ -192,32 +200,32 @@ switch (value_ & 0x00007000) { // bits 12 13 14
       }
       Fl_Group {} {
         label {Proportional Bounds:}
-        xywh {5 95 410 60} box THIN_DOWN_BOX labelsize 12 align 21
+        xywh {5 95 410 60} box THIN_DOWN_BOX labelsize 12 align 21 deactivate
       } {
         Fl_Check_Button wPropLeft {
           label Left
-          xywh {20 120 70 20} down_box DOWN_BOX labelsize 12
+          xywh {20 120 70 20} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button wPropRight {
           label Right
-          xywh {90 120 70 20} down_box DOWN_BOX labelsize 12
+          xywh {90 120 70 20} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button wPropTop {
           label Top
-          xywh {160 120 70 20} down_box DOWN_BOX labelsize 12
+          xywh {160 120 70 20} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button wPropBottom {
           label Bottom
-          xywh {230 120 70 20} down_box DOWN_BOX labelsize 12
+          xywh {230 120 70 20} down_box DOWN_BOX labelsize 12 deactivate
         }
       }
       Fl_Group {} {
         label {Text/Graphics:}
-        xywh {5 165 240 110} box THIN_DOWN_BOX labelsize 12 align 21
+        xywh {5 165 240 110} box THIN_DOWN_BOX labelsize 12 align 21 deactivate
       } {
         Fl_Choice wHText {
           label {Horizontal:}
-          xywh {85 190 150 20} down_box BORDER_BOX labelsize 12 textsize 12
+          xywh {85 190 150 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           MenuItem {} {
             label Left
@@ -238,7 +246,7 @@ switch (value_ & 0x00007000) { // bits 12 13 14
         }
         Fl_Choice wVText {
           label {Vertical:}
-          xywh {85 215 150 20} down_box BORDER_BOX labelsize 12 textsize 12
+          xywh {85 215 150 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           MenuItem {} {
             label Top
@@ -259,7 +267,7 @@ switch (value_ & 0x00007000) { // bits 12 13 14
         }
         Fl_Choice wTextLimits {
           label {Text Limits:}
-          xywh {85 240 150 20} down_box BORDER_BOX labelsize 12 textsize 12
+          xywh {85 240 150 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
         } {
           MenuItem {} {
             label {No limit}
@@ -281,20 +289,20 @@ switch (value_ & 0x00007000) { // bits 12 13 14
       }
       Fl_Group {} {
         label {Printing:}
-        xywh {255 165 160 70} box THIN_DOWN_BOX labelsize 12 align 21
+        xywh {255 165 160 70} box THIN_DOWN_BOX labelsize 12 align 21 deactivate
       } {
         Fl_Check_Button wReflow {
           label Reflow
-          xywh {265 185 115 20} down_box DOWN_BOX labelsize 12
+          xywh {265 185 115 20} down_box DOWN_BOX labelsize 12 deactivate
         }
         Fl_Check_Button wLasso {
           label {Lasso Children}
-          xywh {265 205 115 20} down_box DOWN_BOX labelsize 12
+          xywh {265 205 115 20} down_box DOWN_BOX labelsize 12 deactivate
         }
       }
       Fl_Check_Button wAnchored {
         label Anchored
-        xywh {265 245 115 20} down_box DOWN_BOX labelsize 12
+        xywh {265 245 115 20} down_box DOWN_BOX labelsize 12 deactivate
       }
       Fl_Box {} {
         xywh {415 275 10 10} resizable
@@ -307,7 +315,7 @@ comment {/** \\class Fldtk_Justify_Slot_Editor
  * A big editor for a single 32-bit justification value.
  *
  * \\fixme "value()" functions are not complete ny any means!
- */} {selected not_in_source in_header
+ */} {not_in_source in_header
 } 
 
 comment {

@@ -90,6 +90,7 @@ static void update_menus_cb(Fl_Widget*, void*)
     UpdateMainMenu();
 }
 
+
 /*---------------------------------------------------------------------------*/
 /**
  * Main entry function.

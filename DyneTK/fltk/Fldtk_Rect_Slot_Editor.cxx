@@ -3,7 +3,7 @@
 //
 // Fldtk_Rect_Slot_Editor implementation for the FLMM extension to FLTK.
 //
-// Copyright 2002-2007 by Matthias Melcher.
+// Copyright 2007 by Matthias Melcher.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Library General Public
@@ -24,7 +24,7 @@
 //
 
 #include "Fldtk_Rect_Slot_Editor.h"
-#include "dtk/Dtk_Script_Slot.h"
+#include "dtk/Dtk_Rect_Slot.h"
 
 #include <FL/Fl_Int_Input.H>
 #include <FL/Fl_Box.H>
@@ -32,9 +32,13 @@
 #include <stdio.h>
 
 
+/*---------------------------------------------------------------------------*/
+
 static char *widthStr = " Width: %d";
 static char *heightStr = "Height: %d";
 
+
+/*---------------------------------------------------------------------------*/
 Fldtk_Rect_Slot_Editor::Fldtk_Rect_Slot_Editor(Fl_Group *container, Dtk_Rect_Slot *slot)
 :   Fl_Group(container->x(), container->y(), container->w(), container->h()),
     slot_(slot)
@@ -70,15 +74,18 @@ Fldtk_Rect_Slot_Editor::Fldtk_Rect_Slot_Editor(Fl_Group *container, Dtk_Rect_Slo
     wHeight_->labelsize(12);
     wHeight_->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
     end();
+    callback((Fl_Callback*)editor_cb, this);
 }
 
 
+/*---------------------------------------------------------------------------*/
 Fldtk_Rect_Slot_Editor::~Fldtk_Rect_Slot_Editor()
 {
 }
 
 
-void Fldtk_Rect_Slot_Editor::rect(int t, int l, int b, int r)
+/*---------------------------------------------------------------------------*/
+void Fldtk_Rect_Slot_Editor::setRect(int t, int l, int b, int r)
 {
     char buf[32];
     sprintf(buf, "%d", t); wTop_->value(buf);
@@ -88,6 +95,18 @@ void Fldtk_Rect_Slot_Editor::rect(int t, int l, int b, int r)
     update_cb(0L, this);
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Rect_Slot_Editor::getRect(int &t, int &l, int &b, int &r)
+{
+    t = atoi(wTop_->value());
+    l = atoi(wLeft_->value());
+    b = atoi(wBottom_->value());
+    r = atoi(wRight_->value());
+}
+
+
+/*---------------------------------------------------------------------------*/
 void Fldtk_Rect_Slot_Editor::update_cb(Fl_Widget*, Fldtk_Rect_Slot_Editor *e)
 {
     char buf[100];
@@ -97,10 +116,19 @@ void Fldtk_Rect_Slot_Editor::update_cb(Fl_Widget*, Fldtk_Rect_Slot_Editor *e)
     e->wWidth_->copy_label(buf);
     int top = atoi(e->wTop_->value());
     int bottom = atoi(e->wBottom_->value());
-    sprintf(buf, widthStr, bottom-top);
+    sprintf(buf, heightStr, bottom-top);
     e->wHeight_->copy_label(buf);
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Rect_Slot_Editor::editor_cb(Fldtk_Rect_Slot_Editor *w, unsigned int cmd)
+{
+    switch (cmd) {
+    case 'aply': w->slot_->apply(); break;
+    case 'rvrt': w->slot_->revert(); break;
+    }
+}
 
 //
 // End of "$Id$".

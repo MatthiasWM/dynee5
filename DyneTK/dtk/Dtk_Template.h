@@ -149,7 +149,7 @@ public:
 
     /** Set a new ID.
      */ 
-    void                id(char *id);
+    void                id(const char *id);
 
     /** Find a slot by key.
      */
@@ -157,9 +157,24 @@ public:
 
     Dtk_Rect_Slot       * viewBounds() { return viewBounds_; }
     Flnt_Widget         * widget() { return widget_; }
-    void                widget(Flnt_Widget *w) { widget_ = w; }
+
+    /** Create a new widget in the template view.
+     */
+    Flnt_Widget         * newWidget();
 
 private:
+
+    /** This slot is called if the widget is dragged or resized.
+     */
+    void                widgetBoundsChangedSignal();
+
+    /** This slot is called if the viewBounds rectangle is modified.
+     */
+    void                viewBoundsChangedSignal();
+
+    /** This slot is called if the viewJustify is modified by the user.
+     */
+    void                viewJustifyChangedSignal();
 
     /// we must be part of a single layout
     Dtk_Layout_Document * layout_;
@@ -205,6 +220,9 @@ private:
 
     /// slot containing the widget justify value
     Dtk_Value_Slot      * viewJustify_;
+
+    /// return this if no viewJustify Slot is connected
+    unsigned int        defaultJustify_;
 
     /// slot containing the proto magic pointer 
     Dtk_Proto_Slot      * proto_;

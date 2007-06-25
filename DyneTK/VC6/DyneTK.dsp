@@ -229,6 +229,10 @@ SOURCE=..\fltk\Flmm_Set_Input.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\fltk\Flmm_Signal.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\fltk\Flmp_Image.H
 # End Source File
 # End Group
@@ -327,6 +331,10 @@ SOURCE=..\fltk\Flmm_Set_Check_Button.cxx
 # Begin Source File
 
 SOURCE=..\fltk\Flmm_Set_Input.cxx
+# End Source File
+# Begin Source File
+
+SOURCE=..\fltk\Flmm_Signal.cxx
 # End Source File
 # Begin Source File
 

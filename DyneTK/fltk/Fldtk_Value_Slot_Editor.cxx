@@ -24,7 +24,7 @@
 //
 
 #include "Fldtk_Value_Slot_Editor.h"
-#include "dtk/Dtk_Script_Slot.h"
+#include "dtk/Dtk_Value_Slot.h"
 
 #include <FL/Fl_Float_Input.H>
 #include <FL/Fl_Box.H>
@@ -33,6 +33,7 @@
 #include <math.h>
 
 
+/*---------------------------------------------------------------------------*/
 Fldtk_Value_Slot_Editor::Fldtk_Value_Slot_Editor(Fl_Group *container, Dtk_Value_Slot *slot)
 :   Fl_Group(container->x(), container->y(), container->w(), container->h()),
     slot_(slot)
@@ -42,14 +43,17 @@ Fldtk_Value_Slot_Editor::Fldtk_Value_Slot_Editor(Fl_Group *container, Dtk_Value_
     wValue_->textfont(FL_COURIER);
     wValue_->labelsize(12);
     end();
+    callback((Fl_Callback*)editor_cb, this);
 }
 
 
+/*---------------------------------------------------------------------------*/
 Fldtk_Value_Slot_Editor::~Fldtk_Value_Slot_Editor()
 {
 }
 
 
+/*---------------------------------------------------------------------------*/
 void Fldtk_Value_Slot_Editor::value(double v)
 {
     char buf[32];
@@ -61,11 +65,22 @@ void Fldtk_Value_Slot_Editor::value(double v)
     wValue_->value(buf);
 }
 
+
+/*---------------------------------------------------------------------------*/
 double Fldtk_Value_Slot_Editor::value()
 {
     return atof(wValue_->value());
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Value_Slot_Editor::editor_cb(Fldtk_Value_Slot_Editor *w, unsigned int cmd)
+{
+    switch (cmd) {
+    case 'aply': w->slot_->apply(); break;
+    case 'rvrt': w->slot_->revert(); break;
+    }
+}
 
 //
 // End of "$Id$".
