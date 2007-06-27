@@ -36,7 +36,7 @@ typedef void (Flmm_Slot_Class::*Flmm_Slot)(void *, void *);
 class Flmm_Signal
 {
     class Slot {
-        friend Flmm_Signal;
+        friend class Flmm_Signal;
     public:
         Slot(void *base, Flmm_Slot func, void *user);
         void call(void *caller);

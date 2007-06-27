@@ -445,7 +445,7 @@ int Dtk_Platform::findProto(const char *id)
 }
 
 
-static const char *platformStr1 = 
+const char *platformStr1 = 
 "return {\n"
 "  MagicPointerTable: [\n"
 "  ], \n"
@@ -1185,7 +1185,7 @@ static const char *platformStr1 =
 "      __ntAncestor: 'protoLabelInputLine, \n"
 "      labelActionScript: \"func()\\rbegin\\r\\tinherited:?LabelActionScript();\\t\\t// this method is defined internally\\rend\", \n"
 "      textChanged: \"func()\\rbegin\\r\\tinherited:?TextChanged();\\t\\t// this method is defined internally\\rend\", \n";
-static const char *platformStr2 = 
+const char *platformStr2 = 
 "      textSetup: \"func()\\rbegin\\r\\tinherited:?TextSetup();\\t\\t// this method is defined internally\\rend\", \n"
 "      entryFlags: 264705, \n"
 "      keyboard: \"'phoneKeyboard\", \n"
@@ -1860,7 +1860,7 @@ static const char *platformStr2 =
 "        routeScripts: \"Override to change the action items from the default Delete and Duplicate.\", \n"
 "        labelsFilter: \"Used by showBar to store filing settings.\"\n"
 "      }, \n";
-static const char *platformStr3 = 
+const char *platformStr3 = 
 "      scrollingEndBehavior: \"// What to do when scrolling wraps: beepAndWrap, 'wrap, 'stop or 'beepAndStop\\r'beepAndWrap\", \n"
 "      theApp: \"// Almost always set to the newtApp base view\\rnil\", \n"
 "      appAll: \"\\\"All Items\\\"\", \n"
@@ -2643,7 +2643,7 @@ static const char *platformStr3 =
 "    showSound: {\n"
 "      \n"
 "    }, \n";
-static const char *platformStr4 = 
+const char *platformStr4 = 
 "    hideSound: {\n"
 "      \n"
 "    }, \n"

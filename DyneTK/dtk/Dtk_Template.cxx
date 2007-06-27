@@ -406,10 +406,10 @@ Dtk_Slot *Dtk_Template::addSlot(newtRef key, newtRef slot)
     }
     if (key==NSSYM(viewBounds)) {
         viewBounds_ = (Dtk_Rect_Slot*)dSlot;
-        viewBounds_->signalRectChanged.connect(this, (Flmm_Slot)Dtk_Template::viewBoundsChangedSignal);
+        viewBounds_->signalRectChanged.connect(this, (Flmm_Slot)&Dtk_Template::viewBoundsChangedSignal);
     } else if (key==NSSYM(viewJustify)) {
         viewJustify_ = (Dtk_Value_Slot*)dSlot;
-        viewJustify_->signalValueChanged.connect(this, (Flmm_Slot)Dtk_Template::viewJustifyChangedSignal);
+        viewJustify_->signalValueChanged.connect(this, (Flmm_Slot)&Dtk_Template::viewJustifyChangedSignal);
     }
     if (dSlot) {
         slotList_->add(dSlot);
@@ -455,7 +455,7 @@ void Dtk_Template::id(const char *cNewID)
 Flnt_Widget *Dtk_Template::newWidget()
 {
     widget_ = new Flnt_Widget(this);
-    widget_->signalBoundsChanged.connect(this, (Flmm_Slot)Dtk_Template::widgetBoundsChangedSignal);
+    widget_->signalBoundsChanged.connect(this, (Flmm_Slot)&Dtk_Template::widgetBoundsChangedSignal);
     widget_->newtSetJustify(justify());
     viewBoundsChangedSignal();
     return widget_;

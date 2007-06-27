@@ -6,6 +6,7 @@ SRCFILES = \
   dtk/Dtk_Document_List.cxx \
   dtk/Dtk_Error.cxx \
   dtk/Dtk_Layout_Document.cxx \
+  dtk/Dtk_Platform.cxx \
   dtk/Dtk_Project.cxx \
   dtk/Dtk_Proto_Slot.cxx \
   dtk/Dtk_Rect_Slot.cxx \
@@ -27,6 +28,7 @@ SRCFILES = \
   fltk/Flmm_Newt_Script_Editor.cxx \
   fltk/Flmm_Set_Input.cxx \
   fltk/Flmm_Set_Check_Button.cxx \
+  fltk/Flmm_Signal.cxx \
   fltk/Flmp_Image.cxx \
   fltk/Fldtk_Document_Browser.cxx \
   fltk/Fldtk_Document_Tabs.cxx \
