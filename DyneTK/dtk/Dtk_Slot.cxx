@@ -72,6 +72,28 @@ Dtk_Template *Dtk_Slot::getTemplate()
     return list_ ? list_->getTemplate() : 0L;
 }
 
+/*---------------------------------------------------------------------------*/
+void Dtk_Slot::setKey(const char *name)
+{
+    // check if anything changed at all
+    if (name && key_ && strcmp(name, key_)==0)
+        return;
+
+    // remove the old key
+    if (key_) {
+        free(key_);
+        key_ = 0L;
+    }
+
+    // set the new key
+    if (name) {
+        key_ = strdup(name);
+    }
+
+    // update all GUIs (we should instead send a signal to all subscribed slots)
+    list_->updateKey(this);
+}
+
 //
 // End of "$Id$".
 //

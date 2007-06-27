@@ -67,11 +67,13 @@ Dtk_Slot_List::~Dtk_Slot_List()
     template_ = 0L;
 }
 
+
 /*---------------------------------------------------------------------------*/
 Dtk_Layout_Document *Dtk_Slot_List::layout() 
 {
     return template_->layout();
 }
+
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Slot_List::add(Dtk_Slot *slot) 
@@ -79,17 +81,20 @@ void Dtk_Slot_List::add(Dtk_Slot *slot)
     slotList_.push_back(slot);
 }
 
+
 /*---------------------------------------------------------------------------*/
 int Dtk_Slot_List::size()
 {
     return slotList_.size();
 }
 
+
 /*---------------------------------------------------------------------------*/
 Dtk_Slot *Dtk_Slot_List::at(int index)
 {
     return slotList_.at(index);
 }
+
 
 /*---------------------------------------------------------------------------*/
 Dtk_Slot *Dtk_Slot_List::find(const char *key)
@@ -102,6 +107,21 @@ Dtk_Slot *Dtk_Slot_List::find(const char *key)
     }
     return 0L;
 }
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Slot_List::updateKey(Dtk_Slot *slot)
+{
+    if (!browser_)
+        return;
+    int i, n = size();
+    for (i=0; i<n; ++i) {
+        if (slotList_.at(i)==slot) {
+            browser_->text(i+1, slot->key());
+        }
+    }
+}
+
 
 //
 // End of "$Id$".

@@ -553,19 +553,64 @@ newtRef	Dtk_Template::save()
     */
     newtRef value = NewtMakeFrame2(vi/2, valueA);
 
-    newtRefVar hrcA[] = {
-        NSSYM(value),   value,
-        NSSYM(__ntId),  NewtMakeSymbol(id()),
-        //NSSYM(__ntName),        NewtMakeString(name(),true),
-        //NSSYM(__ntExternFile),  ...,
-        //NSSYM(__ntDeclare),     ...
+    int hi = 0;
+    newtRefVar hrcA[20];
+    hrcA[hi++] = NSSYM(value);
+    hrcA[hi++] = value;
+    if (ntId_ && *ntId_) {
+        hrcA[hi++] = NSSYM(__ntId);
+        hrcA[hi++] = NewtMakeSymbol(id());
+    }
+    if (ntName_ && *ntName_) {
+        hrcA[hi++] = NSSYM(__ntName);
+        hrcA[hi++] = NewtMakeString(ntName_,true);
     };
-    newtRef hrc = NewtMakeFrame2(sizeof(hrcA) / (sizeof(newtRefVar) * 2), hrcA);
+    //NSSYM(__ntExternFile),  ...,
+    //NSSYM(__ntDeclare),     ...
+    newtRef hrc = NewtMakeFrame2(hi/2, hrcA);
 
     NewtPrintObject(stdout, hrc);
 
     return hrc;
 }
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template::setName(const char *name)
+{
+    if (name && (*name==0L))
+        name = 0L;
+
+    // check if anything changed at all
+    if (name && ntName_ && strcmp(name, ntName_)==0)
+        return;
+    if ((name==0L)&&(ntName_==0L))
+        return;
+
+    // invalidate all naming related variables
+    if (browserName_) {
+        free(browserName_);
+        browserName_ = 0L;
+    }
+    if (scriptName_) {
+        free(scriptName_);
+        scriptName_ = 0L;
+    }
+    if (ntName_) {
+        free(ntName_);
+        ntName_ = 0L;
+    }
+    if (name) {
+        ntName_ = strdup(name);
+    }
+
+    // now update the GUI that we know
+    /// \todo don't update anything here, just send a signal to all subscribers
+    if (browser_)
+        browser_->text(index_, browserName());
+    if (widget_)
+        widget_->copy_label(browserName());
+}
+
 
 //
 // End of "$Id$".

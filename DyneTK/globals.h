@@ -31,6 +31,8 @@
 
 class Dtk_Document;
 class Dtk_Layout_Document;
+class Dtk_Template;
+class Dtk_Slot;
 
 /** \file globals.h
  * global functions for general access. The functions are used
@@ -308,9 +310,37 @@ void	ShowProjectSettings();
 
 /*---------------------------------------------------------------------------*/
 // Browser menu
-//      TemplateInfo()
+
+/** Pop up a dialog for the most basic template data.
+ *
+ * This dialog allows the user to rename the template.
+ * 
+ * \param tmpl Edit this template, or the selected template, if NULL
+ *
+ * \retval   0 if the user OK's the dialog
+ * \retval  -1 if no selected and valid template was found
+ * \retval  -2 if the user canceled the dialog
+ *
+ * \todo The original dialog has a "Declare" checkbox and a "to" pulldown menu.
+ */
+int ShowTemplateInfo(Dtk_Template *tmpl=0L);
+
 //      NewSlot()
-//      RenameSlot()
+
+/** Pop up a dialog that can be used to rename the selected slot.
+ *
+ * This will also update any GUI.
+ *
+ * \param slot Edit this slot, or the selected slot, if NULL
+ *
+ * \retval   0 if the user OK's the dialog
+ * \retval  -1 if no selected and valid template was found
+ * \retval  -2 if the user canceled the dialog
+ *
+ * \todo The original dialog depends on the template type and has a help text.
+ */
+int RenameSlot(Dtk_Slot *slot=0L);
+
 //      TemplatedByType()
 //      TemplatesByHierarchy()
 //      SlotsByName()
@@ -353,11 +383,30 @@ int OpenLayoutView(Dtk_Layout_Document *lyt=0L);
 
 /*---------------------------------------------------------------------------*/
 
-/** Find the document that was last touched by the user.
+/** Find the document that is currently edited by the user.
  *
  * \retval   address of document or NULL
  */
 Dtk_Document *GetCurrentDocument();
+
+/** Find the layout document that is currently edited by the user.
+ *
+ * \retval   address of document or NULL if no doc is edited, or it's not a layout
+ */
+Dtk_Layout_Document *GetCurrentLayout();
+
+/** Find the template that is currently edited by the user.
+ *
+ * \retval   address of template or NULL if no template is edited
+ */
+Dtk_Template *GetCurrentTemplate();
+
+/** Find the slot that is currently edited by the user.
+ *
+ * \retval   address of slot or NULL if no slot is edited
+ */
+Dtk_Slot *GetCurrentSlot();
+
 
 int		InspectorSendScript(const char *script);
 int		InspectorSendPackage(const char *filename, const char *symbol);

@@ -66,13 +66,17 @@ public:
      */
     Dtk_Slot *at(int index);
 
-    /** Return the slot witha given key.
+    /** Return the slot with a given key.
      */
     Dtk_Slot *find(const char *key);
 
     /** Return the tamplate that holds this slot list
      */
     Dtk_Template *getTemplate() { return template_; }
+
+    /** Update the entry in the listy that points to the specified slot.
+     */
+    void updateKey(Dtk_Slot *slot);
 
 private:
 

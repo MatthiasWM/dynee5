@@ -211,6 +211,20 @@ void Fldtk_Main_Window::cb_Dump2(Fl_Menu_* o, void* v) {
   ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_Dump2_i(o,v);
 }
 
+void Fldtk_Main_Window::cb_mBrowserTemplateInfo_i(Fl_Menu_*, void*) {
+  ShowTemplateInfo();
+}
+void Fldtk_Main_Window::cb_mBrowserTemplateInfo(Fl_Menu_* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mBrowserTemplateInfo_i(o,v);
+}
+
+void Fldtk_Main_Window::cb_mBrowserRenameSlot_i(Fl_Menu_*, void*) {
+  RenameSlot();
+}
+void Fldtk_Main_Window::cb_mBrowserRenameSlot(Fl_Menu_* o, void* v) {
+  ((Fldtk_Main_Window*)(o->parent()->user_data()))->cb_mBrowserRenameSlot_i(o,v);
+}
+
 void Fldtk_Main_Window::cb_mWindowConnectInspector_i(Fl_Menu_*, void*) {
   InspectorConnect();
 }
@@ -309,9 +323,9 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Preview", FL_COMMAND|0x79,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {0,0,0,0,0,0,0,0,0},
  {"Browser", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 12, 0},
- {"Template Info", FL_COMMAND|0x69,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
+ {"Template Info", FL_COMMAND|0x69,  (Fl_Callback*)Fldtk_Main_Window::cb_mBrowserTemplateInfo, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"New Slot...", FL_COMMAND|0x1006e,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
- {"Rename Slot...", 0,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
+ {"Rename Slot...", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mBrowserRenameSlot, 0, 129, FL_NORMAL_LABEL, 0, 12, 0},
  {"Templates by Type", 0,  0, 0, 3, FL_NORMAL_LABEL, 0, 12, 176},
  {"Templates by Hierarchy", 0,  0, 0, 3, FL_NORMAL_LABEL, 0, 12, 176},
  {"Slots by Name", 0,  0, 0, 3, FL_NORMAL_LABEL, 0, 12, 176},
@@ -368,6 +382,8 @@ Fl_Menu_Item* Fldtk_Main_Window::mProjectMainLayout = Fldtk_Main_Window::menu_ +
 Fl_Menu_Item* Fldtk_Main_Window::mProjectSettings = Fldtk_Main_Window::menu_ + 58;
 Fl_Menu_Item* Fldtk_Main_Window::mLayout = Fldtk_Main_Window::menu_ + 63;
 Fl_Menu_Item* Fldtk_Main_Window::mBrowser = Fldtk_Main_Window::menu_ + 75;
+Fl_Menu_Item* Fldtk_Main_Window::mBrowserTemplateInfo = Fldtk_Main_Window::menu_ + 76;
+Fl_Menu_Item* Fldtk_Main_Window::mBrowserRenameSlot = Fldtk_Main_Window::menu_ + 78;
 Fl_Menu_Item* Fldtk_Main_Window::mWindow = Fldtk_Main_Window::menu_ + 87;
 Fl_Menu_Item* Fldtk_Main_Window::mWindowConnectInspector = Fldtk_Main_Window::menu_ + 89;
 Fl_Menu_Item* Fldtk_Main_Window::mWindowOpenLayout = Fldtk_Main_Window::menu_ + 91;
@@ -3480,9 +3496,11 @@ void Fldtk_Main_Window::activate_menus(unsigned int mask) {
 //	bit 0: a project is loaded
 //	bit 1: a document is active for editing
 //	bit 2: the active document is part of the project
-//      bit 3: Inspector is connected to a Newton device
-//      bit 4: a layout is active for editing
-//      bit 5: the current layout has a visible layout view
+//	bit 3: Inspector is connected to a Newton device
+//	bit 4: a layout is active for editing
+//	bit 5: the current layout has a visible layout view
+//	bit 6: a template is active for editing
+//	bit 7: a slot is active for editing
 
 // mFileNewTex is always active
 // mFileOpen is always active
@@ -3589,6 +3607,20 @@ if ( (mask & 0x00000020) == 0x00000020 ) {
 } else {
   tLayoutModeEdit->deactivate();
   tLayoutModeAdd->deactivate();
+}
+
+// if there is any template selected
+if ( (mask & 0x00000040) == 0x00000040 ) {
+  mBrowserTemplateInfo->activate();
+} else {
+  mBrowserTemplateInfo->deactivate();
+}
+
+// if there is any slot selected
+if ( (mask & 0x00000080) == 0x00000080 ) {
+  mBrowserRenameSlot->activate();
+} else {
+  mBrowserRenameSlot->deactivate();
 }
 }
 

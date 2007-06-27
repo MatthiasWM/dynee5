@@ -104,6 +104,23 @@ public:
      */
     const char      * browserName();
 
+    /** Return the name of this template.
+     *
+     * This is a pointer into an internal buffer which may change or move at any time.
+     *
+     * \return pointer to the template name
+     */
+    const char      * getName() const { return ntName_; }
+
+    /** Set a new name for this template.
+     *
+     * Setting the name of the Template may trigger a redraw of the 
+     * template browser and the layout view.
+     *
+     * \param name this string will be copied into the Template class
+     */
+    void            setName(const char *name);
+
     /** Add a new template as a step child to this template.
      *
      * \param x, y, w, h position and size of the new template

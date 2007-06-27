@@ -374,20 +374,22 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mBrowser {
-      label Browser
+      label Browser open
       xywh {5 5 100 20} labelsize 12
     } {
-      MenuItem {} {
+      MenuItem mBrowserTemplateInfo {
         label {Template Info}
-        xywh {5 5 100 20} shortcut 0x40069 labelsize 12 labelcolor 176 deactivate
+        callback {ShowTemplateInfo();}
+        xywh {5 5 100 20} shortcut 0x40069 labelsize 12 deactivate
       }
       MenuItem {} {
         label {New Slot...}
         xywh {5 5 100 20} shortcut 0x5006e labelsize 12 labelcolor 176 deactivate
       }
-      MenuItem {} {
+      MenuItem mBrowserRenameSlot {
         label {Rename Slot...}
-        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+        callback {RenameSlot();} selected
+        xywh {5 5 100 20} labelsize 12 deactivate divider
       }
       MenuItem {} {
         label {Templates by Type}
@@ -554,7 +556,7 @@ widget_class Fldtk_Main_Window {
       tooltip {Help Index} image {../images/help.png} deimage {../images/help_da.png} xywh {505 30 25 25} labelfont 1 labelsize 13 deactivate
     }
     Fl_Input {} {
-      callback {NewtAlert(atoi(o->value()));} selected
+      callback {NewtAlert(atoi(o->value()));}
       tooltip {Enter an error code here to get the error message.} image {../images/bug.png} deimage {../images/bug_da.png} xywh {560 31 45 23} type Int labelsize 11 textsize 12
     }
     Fl_Box {} {
@@ -692,9 +694,11 @@ SetModeAddTemplate();} open
 //	bit 0: a project is loaded
 //	bit 1: a document is active for editing
 //	bit 2: the active document is part of the project
-//      bit 3: Inspector is connected to a Newton device
-//      bit 4: a layout is active for editing
-//      bit 5: the current layout has a visible layout view
+//	bit 3: Inspector is connected to a Newton device
+//	bit 4: a layout is active for editing
+//	bit 5: the current layout has a visible layout view
+//	bit 6: a template is active for editing
+//	bit 7: a slot is active for editing
 
 // mFileNewTex is always active
 // mFileOpen is always active
@@ -801,6 +805,20 @@ if ( (mask & 0x00000020) == 0x00000020 ) {
 } else {
   tLayoutModeEdit->deactivate();
   tLayoutModeAdd->deactivate();
+}
+
+// if there is any template selected
+if ( (mask & 0x00000040) == 0x00000040 ) {
+  mBrowserTemplateInfo->activate();
+} else {
+  mBrowserTemplateInfo->deactivate();
+}
+
+// if there is any slot selected
+if ( (mask & 0x00000080) == 0x00000080 ) {
+  mBrowserRenameSlot->activate();
+} else {
+  mBrowserRenameSlot->deactivate();
 }} {}
   }
 } 

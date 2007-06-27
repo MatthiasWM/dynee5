@@ -53,7 +53,13 @@ public:
 
     /** Return the key name of this slot as a C-String
      */
-    const char      * key() { return key_; }
+    const char      * key() const { return key_; }
+
+    /** Set the key name of this slot.
+     *
+     * This call also updates all GUI.
+     */
+    void            setKey(const char *name);
 
     /** Pop up the editor for this slot.
      */

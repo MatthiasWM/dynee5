@@ -27,6 +27,7 @@
 
 #include <FL/x.H>
 #include <FL/Fl.H>
+#include <FL/Fl_Hold_Browser.H>
 #include <FL/fl_file_chooser.h>
 
 #include "fluid/Fldtk_Prefs.h"
@@ -40,6 +41,8 @@
 #include "dtk/Dtk_Project.h"
 #include "dtk/Dtk_Error.h"
 #include "dtk/Dtk_Script_Writer.h"
+#include "dtk/Dtk_Template.h"
+#include "dtk/Dtk_Slot.h"
 
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
@@ -652,6 +655,8 @@ void UpdateMainMenu()
     //  bit 3: Inspector is connected to a Newton device
     //  bit 4: a layout is active for editing
     //  bit 5: the current layout has a visible layout view
+    //  bit 6: a template is active for editing
+    //  bit 7: a slot is active for editing
 	unsigned int mask = 0;
 	if (dtkProject)
 		mask |= 1;
@@ -666,6 +671,12 @@ void UpdateMainMenu()
             Dtk_Layout_Document *layout = (Dtk_Layout_Document*)doc;
             if (layout->editViewShown())
                 mask |= 32;
+            if (GetCurrentTemplate()) {
+                mask |= 64;
+                if (GetCurrentSlot()) {
+                    mask |= 128;
+                }
+            }
         }
     }
 	if (wInspectorSerial->is_open()) {
@@ -864,14 +875,54 @@ Dtk_Document *GetCurrentDocument()
     return ed->document();
 }
 
+
+/*---------------------------------------------------------------------------*/
+Dtk_Layout_Document *GetCurrentLayout()
+{
+    Dtk_Document *doc = GetCurrentDocument();
+    if (doc && doc->isLayout())
+        return (Dtk_Layout_Document*)doc;
+    return 0L;
+}
+
+
+/*---------------------------------------------------------------------------*/
+Dtk_Template *GetCurrentTemplate()
+{
+    Dtk_Layout_Document *lyt = GetCurrentLayout();
+    if (!lyt)
+        return 0L;
+    Fl_Hold_Browser *te = lyt->templateBrowser();
+    int ix = te->value();
+    if (!ix) 
+        return 0L;
+    Dtk_Template *tmpl = (Dtk_Template*)te->data(ix);
+    return tmpl;
+}
+
+
+/*---------------------------------------------------------------------------*/
+Dtk_Slot *GetCurrentSlot()
+{
+    Dtk_Layout_Document *lyt = GetCurrentLayout();
+    if (!lyt)
+        return 0L;
+    Fl_Hold_Browser *se = lyt->slotBrowser();
+    int ix = se->value();
+    if (!ix) 
+        return 0L;
+    Dtk_Slot *slot = (Dtk_Slot*)se->data(ix);
+    return slot;
+}
+
+    
 /*---------------------------------------------------------------------------*/
 int OpenLayoutView(Dtk_Layout_Document *lyt)
 {
     if (!lyt) {
-        Dtk_Document *doc = GetCurrentDocument();
-        if (!doc || !doc->isLayout())
+        lyt = GetCurrentLayout();
+        if (!lyt)
             return -1;
-        lyt = (Dtk_Layout_Document*)doc;
     }
     lyt->editView();
     return 0;
@@ -905,7 +956,36 @@ void SetModeAddTemplate()
     UpdateMainMenu();
 }
 
-// 	http://www.unna.org/view.php?/apple/development/NTK/platformfiles/Newton2.1_Platform_File.sea.hqx
+/*---------------------------------------------------------------------------*/
+int ShowTemplateInfo(Dtk_Template *tmpl)
+{
+    if (!tmpl) {
+        tmpl = GetCurrentTemplate();
+        if (!tmpl)
+            return -1;
+    }
+    const char *name = fl_input("Template name:", tmpl->getName());
+    if (!name)
+        return -2;
+    tmpl->setName(name);
+    return 0;
+}
+
+/*---------------------------------------------------------------------------*/
+int RenameSlot(Dtk_Slot *slot)
+{
+    if (!slot) {
+        slot = GetCurrentSlot();
+        if (!slot)
+            return -1;
+    }
+    const char *name = fl_input("Slot name:", slot->key());
+    if (!name)
+        return -2;
+    slot->setKey(name);
+    return 0;
+}
+
 //
 // End of "$Id$".
 //

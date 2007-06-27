@@ -177,6 +177,16 @@ private:
 public:
   static Fl_Menu_Item *mLayout;
   static Fl_Menu_Item *mBrowser;
+  static Fl_Menu_Item *mBrowserTemplateInfo;
+private:
+  void cb_mBrowserTemplateInfo_i(Fl_Menu_*, void*);
+  static void cb_mBrowserTemplateInfo(Fl_Menu_*, void*);
+public:
+  static Fl_Menu_Item *mBrowserRenameSlot;
+private:
+  void cb_mBrowserRenameSlot_i(Fl_Menu_*, void*);
+  static void cb_mBrowserRenameSlot(Fl_Menu_*, void*);
+public:
   static Fl_Menu_Item *mWindow;
   static Fl_Menu_Item *mWindowConnectInspector;
 private:

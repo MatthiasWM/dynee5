@@ -31,6 +31,9 @@
 #include "Dtk_Document_List.h"
 #include "Dtk_Project.h"
 
+#include "fltk/Fldtk_Document_Tabs.h"
+#include "fltk/Fldtk_Editor.h"
+
 #include "main.h"
 #include "allNewt.h"
 
@@ -93,18 +96,38 @@ void Dtk_Document::updateBrowserName(bool tellTheList)
 /*-v2------------------------------------------------------------------------*/
 void Dtk_Document::setFilename(const char *filename)
 {
-	if (shortname_)
+    // check if anything changed at all
+    if (filename && filename_ && strcmp(filename, filename_)==0)
+        return;
+    if ((filename==0L)&&(filename_==0L))
+        return;
+
+    if (shortname_) {
 		free(shortname_);
-	if (filename_)
+        shortname_ = 0L;
+    }
+    if (filename_) {
 		free(filename_);
+        filename_ = 0L;
+    }
 	if (filename) {
 		filename_ = strdup(filename);
 		name_ = (char*)fl_filename_name(filename_);
 		const char *ext = fl_filename_ext(name_);
-		int n = ext-name_;
+		int i, n = ext-name_;
 		shortname_ = (char*)calloc(n+1, 1);
 		memcpy(shortname_, name_, n);
         updateBrowserName();
+        // hack to update the corresponding Tab:
+        n = dtkDocumentTabs->children();
+        for (i=0; i<n; i++) {
+            Fldtk_Editor *ed = (Fldtk_Editor*)dtkDocumentTabs->child(i);
+            if (ed->document()==this) {
+                ed->copy_label(name_);
+                break;
+            }
+        }
+        dtkDocumentTabs->parent()->redraw();
 	}
     list_->filenameChanged(this);
 }

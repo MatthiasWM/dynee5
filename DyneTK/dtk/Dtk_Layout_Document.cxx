@@ -49,6 +49,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <direct.h>
 
 
 /*---------------------------------------------------------------------------*/
@@ -157,9 +158,14 @@ newtRef Dtk_Layout_Document::saveLayoutSettings()
 	newtRef gridSize = NewtMakeFrame2(sizeof(gridSizeA) / (sizeof(newtRefVar) * 2), gridSizeA);
 
     // according to the documentation, this frame is unused
+    char pathname[1024];
+    pathname[0] = 0;
+    getcwd(pathname, 1023);
+    if (project() && project()->pathname())
+        strcpy(pathname, project()->pathname());
     newtRefVar linkedToA[] = {
         NSSYM(class),               NSSYM(fileReference),
-        NSSYM(projectPath),         NewtMakeString(project()->pathname(), false),
+        NSSYM(projectPath),         NewtMakeString(pathname, false),
         NSSYM(deltaFromProject),    NewtMakeString("", true) }; // FIXME support this
 	newtRef linkedTo = NewtMakeFrame2(sizeof(linkedToA) / (sizeof(newtRefVar) * 2), linkedToA);
 
@@ -375,6 +381,7 @@ Dtk_Template *Dtk_Layout_Document::addTemplate(int x, int y, int w, int h, char 
 
     return tmpl;
 }
+
 
 //
 // End of "$Id$".
