@@ -54,7 +54,7 @@ public:
 	virtual void	close();
 	virtual int		getID() { return 0; }
 
-    virtual bool isLayout() { return true; }
+    virtual bool    isLayout() { return true; }
 
     /** Write this document type as a Newt Script.
      *
@@ -88,6 +88,7 @@ public:
 private:
 
     void            setupEditors(); 
+    newtRef	        saveLayoutSettings();
 
     /// The root element of the tree of all templates inside this layout.
     Dtk_Template    * root_;

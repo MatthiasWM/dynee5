@@ -71,6 +71,10 @@ public:
      */     
 	virtual int		write(Dtk_Script_Writer &sw);
 
+    /** Proto slots are written in Dtk_Template::save().
+     */
+    virtual newtRefVar save() { return kNewtRefUnbind; }
+
 private:
 
     /// this is the editor that we are using

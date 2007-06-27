@@ -283,7 +283,7 @@ void testNSOFReader(const char *filename)
 	fclose(f);
 	if (n) {
 		NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
-		NcSetGlobalVar(NSSYM(printDepth), NSINT(3));
+		NcSetGlobalVar(NSSYM(printDepth), NSINT(10));
 		NEWT_DUMPBC = 0;
 		NEWT_INDENT = -2;
 

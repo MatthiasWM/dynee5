@@ -337,8 +337,8 @@ Dtk_Template *Dtk_Template::addTemplate(int x, int y, int w, int h, char *proto)
 
     tmpl->load(dtkPlatform->newtTemplate(proto));
 
-    if (tmpl->viewBounds_)
-        tmpl->viewBounds_->set(x, y, w, h);
+    //if (tmpl->viewBounds_)
+    //    tmpl->viewBounds_->set(x, y, w, h);
 
     if (!tmplList_)
         tmplList_ = new Dtk_Template_List(this);
@@ -351,6 +351,8 @@ Dtk_Template *Dtk_Template::addTemplate(int x, int y, int w, int h, char *proto)
     widget_->begin();
     tmpl->newWidget();
     tmpl->widget_->resize(x, y, w, h);
+    tmpl->widget_->newtSetJustify(tmpl->justify());
+    tmpl->widget_->signalBoundsChanged();
     Fl_Group::current(0L);
     widget_->redraw();
 
@@ -493,6 +495,77 @@ void Dtk_Template::viewJustifyChangedSignal()
     }
 }
 
+/*---------------------------------------------------------------------------*/
+newtRef	Dtk_Template::save()
+{
+    newtRefVar valueA[512]; // ouch, no fixed sizes!
+    newtRefVar tmpA[1024]; // ouch, no fixed sizes!
+    int vi = 0, ti = 0;
+    
+    // the first slot is the template if we have one
+    int v = dtkPlatform->findProto(id());
+    if (v!=-1) {
+        tmpA[ti++] = NSSYM(value);
+        tmpA[ti++] = NewtMakeInt30(v);
+        tmpA[ti++] = NSSYM(__ntDataType);
+        tmpA[ti++] = NewtMakeString("PROT", true);
+        tmpA[ti++] = NSSYM(__ntFlags);
+        tmpA[ti++] = NewtMakeInt30(16);
+        valueA[vi++] = NSSYM(__ntTemplate);
+        valueA[vi++] = NewtMakeFrame2(3, tmpA+ti-6);
+    }
+    // now walk the slots
+    int i, n = slotList_->size();
+    for (i=0; i<n; ++i) {
+        Dtk_Slot *slot = slotList_->at(i);
+        newtRef newtSlot = slot->save();
+        if (newtSlot!=kNewtRefUnbind) {
+            valueA[vi++] = NewtMakeSymbol(slot->key());
+            valueA[vi++] = newtSlot;
+        }
+    }
+
+    // now walk the children
+    n = tmplList_ ? tmplList_->size() : 0;
+    if (n) {
+        tmpA[ti++] = NSSYM(value);
+        newtRef sc = tmpA[ti++] = NewtMakeArray(NSSYM(stepChildren), n);
+        tmpA[ti++] = NSSYM(__ntDataType);
+        tmpA[ti++] = NewtMakeString("ARAY", true);
+        tmpA[ti++] = NSSYM(__ntFlags);
+        tmpA[ti++] = NewtMakeInt30(64);
+        for (i=0; i<n; ++i) {
+            Dtk_Template *tmpl = tmplList_->at(i);
+            newtRef newtTmpl = tmpl->save();
+            NewtSetArraySlot(sc, i, newtTmpl);
+        }
+        valueA[vi++] = NSSYM(stepChildren);
+        valueA[vi++] = NewtMakeFrame2(3, tmpA+ti-6);
+    }
+
+    /*
+      stepChildren: {
+        value: [
+          stepChildren: 
+          {
+        __ntDataType: "ARAY", 
+        __ntFlags: 64
+    */
+    newtRef value = NewtMakeFrame2(vi/2, valueA);
+
+    newtRefVar hrcA[] = {
+        NSSYM(value),   value,
+        NSSYM(__ntId),  NewtMakeSymbol(id()),
+        //NSSYM(__ntName),        NewtMakeString(name(),true),
+        //NSSYM(__ntExternFile),  ...,
+        //NSSYM(__ntDeclare),     ...
+    };
+    newtRef hrc = NewtMakeFrame2(sizeof(hrcA) / (sizeof(newtRefVar) * 2), hrcA);
+
+    NewtPrintObject(stdout, hrc);
+
+    return hrc;
+}
 
 //
 // End of "$Id$".

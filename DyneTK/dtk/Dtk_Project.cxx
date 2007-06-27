@@ -68,6 +68,7 @@ Dtk_Project::Dtk_Project()
 	filename_(0L),
 	name_(0L),
 	startdir_(0L),
+    pathname_(0L),
 	package_(kNewtRefNIL),
     documentList_(0L)
 {
@@ -89,6 +90,8 @@ Dtk_Project::~Dtk_Project()
 		free(shortname_);
 	if (filename_)
 		free(filename_);
+	if (pathname_)
+		free(pathname_);
 	if (packagename_)
 		free(packagename_);
 	if (startdir_)
@@ -123,8 +126,22 @@ void Dtk_Project::setFilename(const char *filename)
 		n = ext-name_;
 		shortname_ = (char*)calloc(n+1, 1);
 		memcpy(shortname_, name_, n);
+        // The pathname is the path part of the filename with a trailing slash.
+        // For compatibility with MSWindows, the path separators are backslashes!
+        pathname_ = (char*)calloc(1, name_-filename_+1);
+        memcpy(pathname_, filename_, name_-filename_);
+        for (char *s=pathname_; *s; ++s) {
+            if (*s=='/') *s='\\';
+        }
 	}
 	// FIXME I want the name of the current project in the main window title bar!
+}
+
+
+/*---------------------------------------------------------------------------*/
+char *Dtk_Project::pathname()
+{
+    return pathname_;
 }
 
 
@@ -799,13 +816,20 @@ int Dtk_Project::save()
 
 	int size = NewtBinaryLength(nsof);
 	uint8_t *data = NewtRefToBinary(nsof);
-	FILE *f = fopen(filename_, "wb");
-	if (f) {
-		fwrite(data, size, 1, f);
-		fclose(f);
-	}
 
-	return -1;
+    // Open a file as a destination for our project
+	FILE *f = fopen(filename_, "wb");
+    if (!f) {
+        return -1;
+    }
+    // Write everything in a single block
+    if (fwrite(data, 1, size, f)!=size) {
+        fclose(f);
+        return -1;
+    }
+    // Close the file and return indicating no error
+    fclose(f);
+	return 0;
 }
 
 

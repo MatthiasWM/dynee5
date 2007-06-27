@@ -38,7 +38,8 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Slot::Dtk_Slot(Dtk_Slot_List *list, const char *theKey, newtRef)
 :   list_(list),
-    key_(strdup(theKey))
+    key_(strdup(theKey)),
+    datatype_(0L)
 {
 }
 
@@ -48,6 +49,8 @@ Dtk_Slot::~Dtk_Slot()
 {
     if (key_)
         free(key_);
+    if (datatype_)
+        free(datatype_);
     list_ = 0L;
 }
 

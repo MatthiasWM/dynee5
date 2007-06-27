@@ -56,11 +56,16 @@ class Dtk_Template
 public:
 
     /** Initialize a template.
+     * 
+     * \param layout back reference to our parent layout
+     * \param list bvack referenc to the list that manages us; if this is 
+     *        NULL, we are the root of the layout
+     * \param proto a C-String naming the prototype for this template
      */
                     Dtk_Template(
                         Dtk_Layout_Document *layout, 
                         Dtk_Template_List *list=0L,
-                        char *prot=0L);
+                        char *proto=0L);
 
     /** Remove a template and all its children.
      */
@@ -70,7 +75,13 @@ public:
      */
     int             load(newtRef node);
 
+    /** Create a frame that can be saved to a layout file.
+     */
+    newtRefVar      save();
+
     /** Write this template as a Newt Script.
+     *
+     * \param sw reference to the script writer
      *
      * \retval 0 if successful
      * \retval negative if an error occured
@@ -84,12 +95,18 @@ public:
     void            updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add=false);
 
     /** Return the name of the template as it will appear in the browser
+     *
+     * The text that is used in the browser is prepended with spaces to create 
+     * a tree-style list of templates. The actual text is a composition
+     * of the name, id, and prototype of the template.
+     *
+     * \return creates and returns the name of the template as it appear in the browser
      */
     const char      * browserName();
 
     /** Add a new template as a step child to this template.
      *
-     * \param x \param y \param w \param h position and size of the new template
+     * \param x, y, w, h position and size of the new template
      * \param proto prototype for the new template, or NULL to add the user-selected prototype
      * \return the newly created template or NULL
      */

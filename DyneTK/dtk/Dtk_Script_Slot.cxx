@@ -54,6 +54,12 @@ Dtk_Script_Slot::Dtk_Script_Slot(Dtk_Slot_List *list, const char *theKey, newtRe
                 if (c=='\r') *s = '\n';
             }
         }
+	    newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
+	    if (NewtRefIsString(dt)) {
+            datatype_ = strdup(NewtRefToString(dt));
+        } else {
+            datatype_ = strdup("SCPT");
+        }
     }
 }
 
@@ -144,6 +150,17 @@ void Dtk_Script_Slot::set(const char *script)
         revert();
 }
 
+
+/*---------------------------------------------------------------------------*/
+newtRef	Dtk_Script_Slot::save()
+{
+    newtRefVar slotA[] = {
+        NSSYM(value),           NewtMakeString(script_, false),
+        NSSYM(__ntDataType),    NewtMakeString(datatype_, false) };
+    newtRef slot = NewtMakeFrame2(2, slotA);
+
+    return slot;
+}
 
 
 //

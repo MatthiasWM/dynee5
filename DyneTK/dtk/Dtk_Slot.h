@@ -59,6 +59,10 @@ public:
      */
     virtual void    edit();
 
+    /** Create a frame that can be saved to a layout file.
+     */
+    virtual newtRefVar save() { return kNewtRefUnbind; }
+
     /** Write this slot as a Newt Script.
      *
      * \retval 0 if successful
@@ -89,6 +93,9 @@ protected:
 
     /// this is the key name of the slot as a C-String.
     char            * key_;
+
+    /// remember the datatype
+    char            * datatype_;
 };
 
 

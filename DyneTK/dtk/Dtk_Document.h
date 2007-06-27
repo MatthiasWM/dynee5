@@ -183,6 +183,13 @@ public:
      */
     Dtk_Project     * project();
 
+    /** Update the list back pointer.
+     *
+     * After attaching the document to a project, we must set 
+     * the list backpointer correctly.
+     */
+    void            setList(Dtk_Document_List *list);
+
     /** Return true, if this document is a layout or derived from a layout.
      */
     virtual bool isLayout() { return false; }
@@ -201,6 +208,7 @@ public:
     void            setMain();
 
 protected:
+
     /// this is the name of the file without path or extension
 	char			* shortname_;
 

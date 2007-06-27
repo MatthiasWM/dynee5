@@ -46,6 +46,7 @@ Dtk_Proto_Slot::Dtk_Proto_Slot(Dtk_Slot_List *list, const char *theKey, newtRef 
 :   Dtk_Slot(list, theKey, slot),
     editor_(0L)
 {
+    datatype_ = strdup("PROT");
     /*
 	newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
 	if (NewtRefIsInteger(v)) {

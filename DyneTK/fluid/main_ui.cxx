@@ -3253,19 +3253,8 @@ this->when(FL_WHEN_RELEASE);
     o->labelsize(13);
     o->deactivate();
   } // Fl_Button* o
-  { Fldtk_Layout_Drop_Box* o = new Fldtk_Layout_Drop_Box(545, 30, 25, 25, ".lyt");
-    o->tooltip("Layout Drop Box");
-    o->box(FL_UP_BOX);
-    o->color(FL_BACKGROUND_COLOR);
-    o->selection_color(FL_BACKGROUND_COLOR);
-    o->labeltype(FL_NORMAL_LABEL);
-    o->labelfont(0);
-    o->labelsize(11);
-    o->labelcolor(FL_FOREGROUND_COLOR);
-    o->align(FL_ALIGN_CENTER);
-    o->when(FL_WHEN_RELEASE);
-  } // Fldtk_Layout_Drop_Box* o
-  { Fl_Input* o = new Fl_Input(600, 31, 45, 23);
+  { Fl_Input* o = new Fl_Input(560, 31, 45, 23);
+    o->tooltip("Enter an error code here to get the error message.");
     o->type(2);
     o->image(image_bug);
     o->deimage(image_bug_da);

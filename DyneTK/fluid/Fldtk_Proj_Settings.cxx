@@ -415,9 +415,9 @@ deleteOnDownload->update_widget();
 }
 
 Fl_Menu_Item Fldtk_Proj_Project::menu_Platform[] = {
- {"Msgpad", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
- {"Newton20", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
- {"Newton21", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
+ {"Msgpad", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"Newton20", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"Newton21", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 Fldtk_Proj_Project::Fldtk_Proj_Project(int X, int Y, int W, int H, const char *L)

@@ -350,9 +350,16 @@ int AddCurrentDocToProject()
     // if it is already in the project, don't bother
     if (doc->project())
         return 0;
+    // save the project to disk first, possibly renaming it
+    doc->setList(dtkProject->documentList());
+    int ret = doc->save();
+    doc->setList(0L);
+    if (ret!=0)
+        return -1;
     // remove from globals and reattach to the project
     dtkGlobalDocuments->remove(doc);
     dtkProject->documentList()->append(doc);
+    doc->setList(dtkProject->documentList());
     // update the menus
 	UpdateMainMenu();
 	return 0;
@@ -399,7 +406,7 @@ int SaveProject()
     // save it
 	int ret = dtkProject->save();
     if (ret!=0)
-        SystemAlert("Unable to save prject file!");
+        SystemAlert("Unable to save project file!");
     // keep the menus cool
 	UpdateMainMenu();
 	return ret;
@@ -538,6 +545,7 @@ int InspectorSendPackage(const char *filename, const char *symbol)
 	// read the package itself from disk
 	uint8_t *buffer;
 	FILE *f = fopen(filename, "rb");
+    if (!f) EnterDebugger();
 	fseek(f, 0, SEEK_END);
 	int nn = ftell(f);
 	fseek(f, 0, SEEK_SET);

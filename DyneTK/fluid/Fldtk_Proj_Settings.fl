@@ -332,24 +332,24 @@ deleteOnDownload->update_widget();} {}
 } 
 
 widget_class Fldtk_Proj_Project {
-  label Project
+  label Project open selected
   xywh {649 311 380 245} type Double labelsize 12 visible position_relative
 } {
   Fl_Choice {} {
-    label {&Platform:}
+    label {&Platform:} open
     xywh {100 15 145 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
   } {
     MenuItem {} {
       label Msgpad
-      xywh {0 0 100 20} labelsize 12 deactivate
+      xywh {0 0 100 20} labelsize 12
     }
     MenuItem {} {
       label Newton20
-      xywh {0 0 100 20} labelsize 12 deactivate
+      xywh {0 0 100 20} labelsize 12
     }
     MenuItem {} {
       label Newton21
-      xywh {0 0 100 20} labelsize 12 deactivate
+      xywh {0 0 100 20} labelsize 12
     }
   }
   Fl_Input {} {
@@ -455,7 +455,7 @@ widget_class Fldtk_Proj_Output {
 widget_class Fldtk_Proj_Settings {
   callback {Fldtk_Proj_Settings *w = (Fldtk_Proj_Settings*)o;
 w->hide();
-w->updateDialog();} selected
+w->updateDialog();}
   xywh {530 192 400 335} type Double
   code0 {this->label("Dyne Toolkit Project Settings");}
   class Fl_Double_Window non_modal visible

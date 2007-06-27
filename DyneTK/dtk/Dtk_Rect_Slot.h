@@ -55,11 +55,11 @@ public:
 
     /** Return the coordinates of the rectangle.
      */
-    void    get(int &t, int &l, int &b, int &r);
+    void            get(int &t, int &l, int &b, int &r);
 
     /** Set the coordintaes for the rectangle.
      */
-    void    set(int t, int l, int b, int r);
+    void            set(int t, int l, int b, int r);
 
     /** Write this slot as a Newt Script.
      *
@@ -79,6 +79,10 @@ public:
     /** This signal will be called whenever the user applies changes to the rect.
      */
     Flmm_Signal     signalRectChanged;
+
+    /** Create a frame that can be saved to a layout file.
+     */
+    virtual newtRefVar save();
 
 private:
 

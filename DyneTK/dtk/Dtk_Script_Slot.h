@@ -71,6 +71,10 @@ public:
      */
     void            set(const char *text);
 
+    /** Create a frame that can be saved to a layout file.
+     */
+    virtual newtRefVar save();
+
 private:
 
     /// this is the editor that we are using

@@ -55,6 +55,12 @@ Dtk_Rect_Slot::Dtk_Rect_Slot(Dtk_Slot_List *list, const char *theKey, newtRef sl
 		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(right)));
 		     if (NewtRefIsInteger(i)) right_ = NewtRefToInteger(i);
 	    }
+	    newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
+	    if (NewtRefIsString(dt)) {
+            datatype_ = strdup(NewtRefToString(dt));
+        } else {
+            datatype_ = strdup("RECT");
+        }
     }
 }
 
@@ -124,6 +130,24 @@ void Dtk_Rect_Slot::revert()
         editor_->setRect(top_, left_, bottom_, right_);
 }
 
+
+/*---------------------------------------------------------------------------*/
+newtRef	Dtk_Rect_Slot::save()
+{
+    newtRefVar rectA[] = {
+        NSSYM(left),    NewtMakeInt30(left_),
+        NSSYM(top),     NewtMakeInt30(top_),
+        NSSYM(bottom),  NewtMakeInt30(bottom_),
+        NSSYM(right),   NewtMakeInt30(right_) };
+    newtRef rect = NewtMakeFrame2(4, rectA);
+
+    newtRefVar slotA[] = {
+        NSSYM(value),   rect,
+        NSSYM(__ntDataType), NewtMakeString(datatype_, false) };
+    newtRef slot = NewtMakeFrame2(2, slotA);
+
+    return slot;
+}
 
 //
 // End of "$Id$".

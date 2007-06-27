@@ -39,6 +39,7 @@ it as type real.
 #include "fltk/Fldtk_Slot_Editor_Group.h"
 
 #include "allNewt.h"
+#include "globals.h"
 
 #include <string.h>
 #include <math.h>
@@ -50,13 +51,22 @@ Dtk_Value_Slot::Dtk_Value_Slot(Dtk_Slot_List *list, const char *theKey, newtRef 
     editor_(0L),
     value_(0.0)
 {
-	newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-	if (NewtRefIsReal(v)) {
-        value_ = NewtRefToReal(v);
-    } else if (NewtRefIsInteger(v)) {
-        value_ = (double)NewtRefToInteger(v);
-    } else {
-        printf("############################# Can't read number!\n"); // FIXME
+    if (slot!=kNewtRefUnbind) {
+	    newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
+	    if (NewtRefIsReal(v)) {
+            value_ = NewtRefToReal(v);
+        } else if (NewtRefIsInteger(v)) {
+            value_ = (double)NewtRefToInteger(v);
+        } else {
+            printf("############################# Can't read number!\n"); // FIXME
+            EnterDebugger();
+        }
+	    newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
+	    if (NewtRefIsString(dt)) {
+            datatype_ = strdup(NewtRefToString(dt));
+        } else {
+            datatype_ = strdup("NUMB");
+        }
     }
 }
 
@@ -116,6 +126,25 @@ void Dtk_Value_Slot::revert()
 {
     if (editor_) 
         editor_->value(value_);
+}
+
+
+/*---------------------------------------------------------------------------*/
+newtRef	Dtk_Value_Slot::save()
+{
+    newtRefVar slotA[] = {
+        NSSYM(value),   kNewtRefNIL,
+        NSSYM(__ntDataType), NewtMakeString(datatype_, false) };
+
+    double i, f = fabs(modf(value_, &i));
+    if (f>0.0)
+        slotA[1] = NewtMakeReal(value_);
+    else
+        slotA[1] = NewtMakeInteger((int)value_);
+
+    newtRef slot = NewtMakeFrame2(2, slotA);
+
+    return slot;
 }
 
 

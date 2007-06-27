@@ -74,6 +74,9 @@ public:
 	void		setFilename(const char *filename);
 	newtRef		makeFileRef(const char *filename);
 
+    /// the pathname of the file with backslash separators and a trailing backslash
+    char        * pathname();
+
     const char  * name() { return name_; }
     const char  * filename() { return filename_; }
     Dtk_Document_List   * documentList() { return documentList_; }
@@ -83,11 +86,13 @@ protected:
 	void		popDir();
 
 private:
+
 	char		* packagename_;
 	char		* shortname_;
 	char		* filename_;
 	char		* name_;
 	char		* startdir_;
+	char		* pathname_;
 	newtRef		package_;
 
     /// Keep a list of all documents in the project.

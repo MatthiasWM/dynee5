@@ -42,8 +42,7 @@ decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
 decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {public
 } 
 
-decl {\#include "dtk/Dtk_Platform.h"} {selected
-} 
+decl {\#include "dtk/Dtk_Platform.h"} {} 
 
 decl {\#include <FL/fl_ask.h>} {public
 } 
@@ -554,14 +553,9 @@ widget_class Fldtk_Main_Window {
     Fl_Button {} {
       tooltip {Help Index} image {../images/help.png} deimage {../images/help_da.png} xywh {505 30 25 25} labelfont 1 labelsize 13 deactivate
     }
-    Fl_Button {} {
-      label {.lyt}
-      tooltip {Layout Drop Box} xywh {545 30 25 25} labelsize 11
-      class Fldtk_Layout_Drop_Box
-    }
     Fl_Input {} {
-      callback {NewtAlert(atoi(o->value()));}
-      image {../images/bug.png} deimage {../images/bug_da.png} xywh {600 31 45 23} type Int labelsize 11 textsize 12
+      callback {NewtAlert(atoi(o->value()));} selected
+      tooltip {Enter an error code here to get the error message.} image {../images/bug.png} deimage {../images/bug_da.png} xywh {560 31 45 23} type Int labelsize 11 textsize 12
     }
     Fl_Box {} {
       xywh {760 30 15 25} deactivate resizable

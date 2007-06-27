@@ -144,6 +144,12 @@ void Dtk_Document::setMain()
     list_->setMain(this);
 }
 
+/*-v2------------------------------------------------------------------------*/
+void Dtk_Document::setList(Dtk_Document_List *list)
+{
+    list_ = list;
+}
+
 //
 // End of "$Id$".
 //

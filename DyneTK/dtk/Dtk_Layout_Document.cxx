@@ -29,6 +29,7 @@
 
 #include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Template.h"
+#include "dtk/Dtk_Project.h"
 #include "dtk/Dtk_Slot.h"
 #include "dtk/Dtk_Rect_Slot.h"
 #include "dtk/Dtk_Script_Writer.h"
@@ -133,12 +134,95 @@ void Dtk_Layout_Document::editView()
 }
 
 /*---------------------------------------------------------------------------*/
+newtRef Dtk_Layout_Document::saveLayoutSettings()
+{
+    /// \todo the window rect is a useful setting; we shoudl support it
+    newtRefVar windowRectA[] = {
+        NSSYM(left),    NewtMakeInt30(347),
+        NSSYM(top),     NewtMakeInt30(345), 
+        NSSYM(bottom),  NewtMakeInt30(834), 
+        NSSYM(right),   NewtMakeInt30(706) };
+	newtRef windowRect = NewtMakeFrame2(sizeof(windowRectA) / (sizeof(newtRefVar) * 2), windowRectA);
+
+    /// \todo add layout size support
+    newtRefVar layoutSizeA[] = {
+        NSSYM(h),       NewtMakeInt30(320), 
+        NSSYM(v),       NewtMakeInt30(434) };
+	newtRef layoutSize = NewtMakeFrame2(sizeof(layoutSizeA) / (sizeof(newtRefVar) * 2), layoutSizeA);
+
+    /// \todo implement grid support for the layout view
+    newtRefVar gridSizeA[] = {
+        NSSYM(h),       NewtMakeInt30(5), 
+        NSSYM(v),       NewtMakeInt30(5) };
+	newtRef gridSize = NewtMakeFrame2(sizeof(gridSizeA) / (sizeof(newtRefVar) * 2), gridSizeA);
+
+    // according to the documentation, this frame is unused
+    newtRefVar linkedToA[] = {
+        NSSYM(class),               NSSYM(fileReference),
+        NSSYM(projectPath),         NewtMakeString(project()->pathname(), false),
+        NSSYM(deltaFromProject),    NewtMakeString("", true) }; // FIXME support this
+	newtRef linkedTo = NewtMakeFrame2(sizeof(linkedToA) / (sizeof(newtRefVar) * 2), linkedToA);
+
+    newtRefVar settingA[] = {
+        NSSYM(ntkPlatform),     NewtMakeInt30(1), 
+        NSSYM(ntkVersion),      NewtMakeReal(1.0),
+        NSSYM(windowRect),      windowRect,
+        NSSYM(layoutName),      NewtMakeString("", true),
+        NSSYM(layoutType),      NewtMakeInt30(0), 
+        NSSYM(platformName),    NewtMakeString("MessagePad 2000", true),
+        NSSYM(layoutSize),      layoutSize,
+        NSSYM(gridState),       kNewtRefNIL, 
+        NSSYM(gridSnap),        kNewtRefNIL, 
+        NSSYM(gridSize),        gridSize,
+        NSSYM(previewState),    kNewtRefNIL, 
+        NSSYM(arrowKeyUnit),    NewtMakeInt30(1), 
+        NSSYM(shiftKeyUnit),    NewtMakeInt30(5), 
+        NSSYM(linkedTo),        linkedTo };
+	newtRef settings = NewtMakeFrame2(sizeof(settingA) / (sizeof(newtRefVar) * 2), settingA);
+
+    return settings;
+}
+
+
+/*---------------------------------------------------------------------------*/
 int Dtk_Layout_Document::save()
 {
 	if (askForFilename_) {
 		return saveAs();
 	}
-	// FIXME write the code to save out the text
+
+    newtRefVar hrc = kNewtRefNIL;
+    if (root_)
+        hrc = root_->save();
+
+	newtRefVar lytFrame[] = {
+		NSSYM(layoutSettings),		saveLayoutSettings(),
+		NSSYM(templateHierarchy),	hrc
+	};
+	newtRef lyt = NewtMakeFrame2(sizeof(lytFrame) / (sizeof(newtRefVar) * 2), lytFrame);
+
+    NewtPrintObject(stdout, lyt);
+    
+	newtRef rcvr = kNewtRefNIL;
+	newtRef nsof = NsMakeNSOF(rcvr, lyt, NewtMakeInt30(2));
+    if (!NewtRefIsBinary(nsof))
+        return -1;
+
+  	int size = NewtBinaryLength(nsof);
+	uint8_t *data = NewtRefToBinary(nsof);
+
+    // Open a file as a destination for our project
+	FILE *f = fopen(filename_, "wb");
+    if (!f) {
+        return -1;
+    }
+    // Write everything in a single block
+    if (fwrite(data, 1, size, f)!=size) {
+        fclose(f);
+        return -1;
+    }
+    // Close the file and return indicating no error
+    fclose(f);
 	return 0;
 }
 
@@ -280,11 +364,14 @@ Dtk_Template *Dtk_Layout_Document::addTemplate(int x, int y, int w, int h, char 
     tmpl->load(dtkPlatform->newtTemplate(proto));
 
     if (tmpl->viewBounds())
-        tmpl->viewBounds()->set(x, y, w, h);
+        tmpl->viewBounds()->set(x, y, x+w, y+h);
 
     root_ = tmpl;
 
     setupEditors();
+    tmpl->widget()->resize(x, y, w, h);
+    tmpl->widget()->newtSetJustify(tmpl->justify());
+    tmpl->widget()->signalBoundsChanged();
 
     return tmpl;
 }
