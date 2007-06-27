@@ -251,6 +251,11 @@ private:
   void cb__i(Fl_Input*, void*);
   static void cb_(Fl_Input*, void*);
 public:
+  Fl_Button *tProjectLaunch;
+private:
+  void cb_tProjectLaunch_i(Fl_Button*, void*);
+  static void cb_tProjectLaunch(Fl_Button*, void*);
+public:
   Fl_Button *tLayoutModeEdit;
 private:
   void cb_tLayoutModeEdit_i(Fl_Button*, void*);

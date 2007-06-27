@@ -374,7 +374,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mBrowser {
-      label Browser open
+      label Browser
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mBrowserTemplateInfo {
@@ -388,7 +388,7 @@ widget_class Fldtk_Main_Window {
       }
       MenuItem mBrowserRenameSlot {
         label {Rename Slot...}
-        callback {RenameSlot();} selected
+        callback {RenameSlot();}
         xywh {5 5 100 20} labelsize 12 deactivate divider
       }
       MenuItem {} {
@@ -547,20 +547,24 @@ widget_class Fldtk_Main_Window {
     }
     Fl_Button tWindowOpenLayout {
       callback {OpenLayoutView();}
-      tooltip {Open Layout} image {../images/shape_group.png} deimage {../images/shape_group_da.png} xywh {450 30 25 25} labelsize 9 deactivate
+      tooltip {Open Layout} image {../images/shape_group.png} deimage {../images/shape_group_da.png} xywh {475 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      tooltip {Create New Browser} image {../images/table_edit.png} deimage {../images/table_edit_da.png} xywh {475 30 25 25} labelsize 9 deactivate
+      tooltip {Create New Browser} image {../images/table_edit.png} deimage {../images/table_edit_da.png} xywh {500 30 25 25} labelsize 9 deactivate
     }
     Fl_Button {} {
-      tooltip {Help Index} image {../images/help.png} deimage {../images/help_da.png} xywh {505 30 25 25} labelfont 1 labelsize 13 deactivate
+      tooltip {Help Index} image {../images/help.png} deimage {../images/help_da.png} xywh {530 30 25 25} labelfont 1 labelsize 13 deactivate
     }
     Fl_Input {} {
       callback {NewtAlert(atoi(o->value()));}
-      tooltip {Enter an error code here to get the error message.} image {../images/bug.png} deimage {../images/bug_da.png} xywh {560 31 45 23} type Int labelsize 11 textsize 12
+      tooltip {Enter an error code here to get the error message.} image {../images/bug.png} deimage {../images/bug_da.png} xywh {585 31 45 23} type Int labelsize 11 textsize 12
     }
     Fl_Box {} {
       xywh {760 30 15 25} deactivate resizable
+    }
+    Fl_Button tProjectLaunch {
+      callback {LaunchPackage();}
+      tooltip {Launch Package} image {../images/cog.png} deimage {../images/cog_da.png} xywh {445 30 25 25} labelsize 9 deactivate
     }
   }
   Fl_Group {} {open
@@ -584,7 +588,7 @@ widget_class Fldtk_Main_Window {
     Fl_Button {} {
       tooltip {CreaAlign Horizontal Center} image {../images/shape_align_center.png} deimage {../images/shape_align_center_da.png} xywh {135 65 25 25} labelsize 9 deactivate
     }
-    Fl_Group {} {open
+    Fl_Group {} {
       xywh {165 65 55 25}
     } {
       Fl_Button tLayoutModeEdit {
@@ -781,10 +785,12 @@ if ( (mask & 0x00000009) == 0x00000009 ) {
   mProjectDownload->activate(); // could depend on existing pkg
   tProjectDownload->activate(); // could depend on existing pkg
   mProjectLaunch->activate(); // could depend on downloaded pkg
+  tProjectLaunch->activate(); // could depend on downloaded pkg
 } else {
   mProjectDownload->deactivate(); // could depend on existing pkg
   tProjectDownload->deactivate(); // could depend on existing pkg
   mProjectLaunch->deactivate(); // could depend on downloaded pkg
+  tProjectLaunch->deactivate(); // could depend on downloaded pkg
 }
 
 // if there is a current document, and the type is layout
@@ -819,7 +825,8 @@ if ( (mask & 0x00000080) == 0x00000080 ) {
   mBrowserRenameSlot->activate();
 } else {
   mBrowserRenameSlot->deactivate();
-}} {}
+}} {selected
+    }
   }
 } 
 
