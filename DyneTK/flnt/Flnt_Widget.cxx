@@ -101,7 +101,7 @@ void Flnt_Widget::newtToScreen()
 		break;
 	case 64: // center
 		hh = bottom_-top_;
-		yy = p->y() + 0.5*(p->h()-hh) + top_;
+		yy = p->y() + (p->h()-hh)/2 + top_;
 		break;
 	case 128: // bottom_
 		yy = p->y() + p->h() + top_;

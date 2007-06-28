@@ -31,7 +31,7 @@
 #include "dtk/Dtk_Script_Document.h"
 
 #include <FL/Fl.H>
-#include "fltk/Flmm_Newt_Script_Editor.H"
+#include "fltk/Flmm_Newt_Script_Editor.h"
 #include <FL/Fl_Text_Buffer.H>
 
 #include <stdio.h>

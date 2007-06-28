@@ -49,7 +49,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <direct.h>
+
+#ifdef WIN32
+# include <direct.h>
+#else
+# include <unistd.h>
+#endif
 
 
 /*---------------------------------------------------------------------------*/
