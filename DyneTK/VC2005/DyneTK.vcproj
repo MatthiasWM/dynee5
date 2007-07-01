@@ -383,6 +383,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\fltk\Fldtk_Justify_Slot_Editor.cxx"
+				>
+			</File>
+			<File
 				RelativePath="..\fltk\Fldtk_Layout_Drop_Box.cxx"
 				>
 				<FileConfiguration
@@ -783,6 +787,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\fltk\Flmm_Signal.cxx"
+				>
+			</File>
+			<File
 				RelativePath="..\fltk\Flmp_Image.cxx"
 				>
 				<FileConfiguration
@@ -820,6 +828,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\fltk\Fldtk_Justify_Slot_Editor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\fltk\Fldtk_Layout_Drop_Box.h"
 					>
 				</File>
@@ -829,6 +841,14 @@
 				</File>
 				<File
 					RelativePath="..\fltk\Fldtk_Layout_View.h"
+					>
+				</File>
+				<File
+					RelativePath="..\fltk\Fldtk_Proto_Slot_Editor.cxx"
+					>
+				</File>
+				<File
+					RelativePath="..\fltk\Fldtk_Proto_Slot_Editor.h"
 					>
 				</File>
 				<File
@@ -893,6 +913,10 @@
 				</File>
 				<File
 					RelativePath="..\fltk\Flmm_Set_Input.h"
+					>
+				</File>
+				<File
+					RelativePath="..\fltk\Flmm_Signal.h"
 					>
 				</File>
 				<File
@@ -1009,6 +1033,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\dtk\Dtk_Platform.cxx"
+				>
+			</File>
+			<File
 				RelativePath="..\dtk\Dtk_Project.cxx"
 				>
 				<FileConfiguration
@@ -1029,6 +1057,10 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\dtk\Dtk_Proto_Slot.cxx"
+				>
 			</File>
 			<File
 				RelativePath="..\dtk\Dtk_Rect_Slot.cxx"
@@ -1095,6 +1127,10 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\dtk\Dtk_Script_Writer.cxx"
+				>
 			</File>
 			<File
 				RelativePath="..\dtk\Dtk_Slot.cxx"
@@ -1226,7 +1262,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\dtk\Dtk_Platform.h"
+					>
+				</File>
+				<File
 					RelativePath="..\dtk\Dtk_Project.h"
+					>
+				</File>
+				<File
+					RelativePath="..\dtk\Dtk_Proto_Slot.h"
 					>
 				</File>
 				<File
@@ -1239,6 +1283,10 @@
 				</File>
 				<File
 					RelativePath="..\dtk\Dtk_Script_Slot.h"
+					>
+				</File>
+				<File
+					RelativePath="..\dtk\Dtk_Script_Writer.h"
 					>
 				</File>
 				<File
