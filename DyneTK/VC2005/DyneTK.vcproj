@@ -45,6 +45,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/wd4996"
 				Optimization="0"
 				AdditionalIncludeDirectories=".,..,..\..\..\Newt0\src\newt_core\incs,..\..\..\Newt0\src\newt_core\incs\VC6"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN"
@@ -70,16 +71,15 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="newtd.lib fltkd.lib fltkimagesd.lib fltkjpeg.lib wsock32.lib comctl32.lib"
+				AdditionalDependencies="newtd.lib fltk.lib fltkimages.lib fltkjpeg.lib wsock32.lib comctl32.lib"
 				OutputFile="../test/DyneTKd.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\lib,..\..\..\NEWT0\build"
-				IgnoreDefaultLibraryNames="libcd"
+				AdditionalLibraryDirectories="..\..\..\NEWT0\build"
+				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\DyneTK_Debug/DyneTKd.pdb"
 				SubSystem="2"
-				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -165,14 +165,13 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="newt.lib fltkimages.lib fltkjpegd.lib fltk.lib wsock32.lib comctl32.lib"
+				AdditionalDependencies="newt.lib fltkimages.lib fltkjpeg.lib fltk.lib wsock32.lib comctl32.lib"
 				OutputFile="../test/DyneTK.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\lib,..\..\..\NEWT0\build"
+				AdditionalLibraryDirectories="..\..\..\NEWT0\build"
 				ProgramDatabaseFile=".\DyneTK_Release/DyneTK.pdb"
 				SubSystem="2"
-				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"

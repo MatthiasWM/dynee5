@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DyneMP", "..\..\DyneMP\VC6\DyneMP.vcproj", "{E34B0826-3D27-466E-89BA-F8D2B52DD6FB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9529DD9D-BDBB-4974-BB35-666BCD214124} = {9529DD9D-BDBB-4974-BB35-666BCD214124}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DyneTK", "DyneTK.vcproj", "{D2110541-9349-4391-908C-0CFFF7CB09C7}"
 	ProjectSection(ProjectDependencies) = postProject
