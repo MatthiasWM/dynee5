@@ -28,8 +28,11 @@
 #pragma warning(disable : 4996)
 #endif
 
+#define DEBUG_SEND
+#define DEBUG_RECV
 
 #include "Flio_Serial_Port.h"
+#include "globals.h"
 
 #include <FL/Fl.H>
 #include <FL/fl_draw.h>
@@ -194,14 +197,14 @@ int Flio_Serial_Port::open(const char *portname, int bps)
     return -1;
   fcntl(port_, F_SETFL, FNDELAY);
   struct termios tio = { 0 };
-  //tcgetattr(port_, &tio);
-  //cfmakeraw(&tio);
-  //cfsetspeed(&tio, bps);
+  tcgetattr(port_, &tio);
+  cfmakeraw(&tio);
+  cfsetspeed(&tio, bps);
   //tio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL | CREAD;
-  tio.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
-  tio.c_iflag = IGNPAR | IGNBRK;
-  tio.c_oflag = 0;
-  tio.c_lflag = 0;
+  //tio.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
+  //tio.c_iflag = IGNPAR | IGNBRK;
+  //tio.c_oflag = 0;
+  //tio.c_lflag = 0;
   tio.c_cc[VMIN] = 1;
   tio.c_cc[VTIME] = 0;
   cfsetspeed(&tio, B38400);
@@ -213,6 +216,10 @@ int Flio_Serial_Port::open(const char *portname, int bps)
 #endif
   
   redraw();
+
+#if (defined DEBUG_SEND) || (defined DEBUG_RCV)
+  printf("DEBUG: serial port \"%s\" at %dbps openend\n", portname, bps);
+#endif
 
   return 0;
 }
@@ -243,6 +250,11 @@ void Flio_Serial_Port::lights_cb(void *u)
 
 int Flio_Serial_Port::write(const unsigned char *data, int n)
 {
+#ifdef DEBUG_SEND
+  printf("DEBUG: ---> writing %d bytes to serial port\n", n);
+  DebugDumpBuffer((uint8_t*)data, n);
+#endif
+
   txActive_ = 1;
 #ifdef WIN32
   DWORD result;
@@ -284,6 +296,10 @@ int Flio_Serial_Port::read(unsigned char *dest, int n)
     memcpy(dest+n1, ring_, n-n1);
     ringTail_ = n-n1;
   }
+#ifdef DEBUG_RECV
+  printf("DEBUG: <<-- read %d bytes from serial port buffer\n", n);
+  DebugDumpBuffer(dest, n);
+#endif
   return n;
 }
 
@@ -372,14 +388,18 @@ void Flio_Serial_Port::reader_cb(int, void *u)
 
 void Flio_Serial_Port::reader()
 {
-  printf("Serial Reader called\n");
   int nc = 0;
   for (;;) {
     int n = free_to_end(); 
     int na = ::read(port_, ring_+ringHead_, n);
     if (na<=0)
       break;
-    printf("  %d bytes read\n", na);
+#ifdef DEBUG_RECV
+    else {
+      printf("DEBUG: <--- received %d bytes from serial port\n", na);
+      DebugDumpBuffer(ring_+ringHead_, na);
+    }
+#endif
     ringHead_ += na;
     if (ringHead_ == NRing_)
       ringHead_ = 0;

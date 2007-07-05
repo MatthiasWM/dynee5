@@ -737,9 +737,9 @@ int Dtk_Project::save()
 	newtRef profilerSettings = NewtMakeFrame2(sizeof(profilerSettingsA) / (sizeof(newtRefVar) * 2), profilerSettingsA);
 
 	newtRefVar packageSettingsA[] = {
-		NSSYM(packageName),			NewtMakeString(dtkProjSettings->package->name->get(), false),
-		NSSYM(version),				NewtMakeString(dtkProjSettings->package->version->get(), false),
-		NSSYM(copyright),			NewtMakeString(dtkProjSettings->package->copyright->get(), false),
+		NSSYM(packageName),			NewtMakeString(dtkProjSettings->package->name->get(), true),
+		NSSYM(version),				NewtMakeString(dtkProjSettings->package->version->get(), true),
+		NSSYM(copyright),			NewtMakeString(dtkProjSettings->package->copyright->get(), true),
 		NSSYM(optimizeSpeed),		kNewtRefTRUE,
 		NSSYM(copyProtected),		kNewtRefNIL,
 		NSSYM(deleteOnDownload),	dtkProjSettings->package->deleteOnDownload->get() ? kNewtRefTRUE : kNewtRefNIL,
