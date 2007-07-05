@@ -1,0 +1,293 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0108 
+header_name {.h} 
+code_name {.cxx}
+comment {//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+} {in_source in_header
+} 
+
+decl {\#include "Fldtk_Value_Slot_Editor.h"} {public
+} 
+
+decl {\#include <FL/Fl_Input.H>} {global
+} 
+
+decl {\#include <stdio.h>} {global
+} 
+
+decl {\#include <stdlib.h>} {global
+} 
+
+decl {class Dtk_Value_Slot;} {public global
+} 
+
+class Fldtk_Format_Slot_Editor {open : {public Fldtk_Value_Slot_Editor}
+} {
+  Function {Fldtk_Format_Slot_Editor(Fl_Group *container, Dtk_Value_Slot *slot) : Fldtk_Value_Slot_Editor(container, slot), value_(0)} {} {
+    code {wValue_->hide();
+position(0, 0);
+begin();
+buildUI_();
+end();
+position(container->x(), container->y());} {}
+  }
+  Function {~Fldtk_Format_Slot_Editor()} {} {}
+  Function {value(double v)} {open return_type void
+  } {
+    code {value_ = (unsigned int)v;
+
+int t;
+char buf[32];
+
+sprintf(buf, "%d", (value_>>8) & 15);
+wPen->value(buf);
+
+sprintf(buf, "%d", (value_>>24) & 15);
+wRoundness->value(buf);
+
+sprintf(buf, "%d", (value_>>16) & 3);
+wInset->value(buf);
+
+sprintf(buf, "%d", (value_>>18) & 3);
+wShadow->value(buf);
+
+switch (value_&15) {
+  case 0:  wFill->value(0); break; // none
+  case 1:  wFill->value(1); break; // white
+  case 2:  wFill->value(2); break; // lt gray
+  case 3:  wFill->value(3); break; // gray
+  case 4:  wFill->value(4); break; // dk gray
+  case 5:  wFill->value(5); break; // black
+  case 14: wFill->value(6); break; // custom
+}
+
+switch (value_&0xf0) {
+  case 0:   wFrame->value(0); break; // none
+  case 16:  wFrame->value(1); break; // white
+  case 32:  wFrame->value(2); break; // lt gray
+  case 48:  wFrame->value(3); break; // gray
+  case 64:  wFrame->value(4); break; // dk gray
+  case 80:  wFrame->value(5); break; // black
+  case 224: wFrame->value(6); break; // custom
+  case 240: wFrame->value(7); break; // matte
+}
+
+switch (value_&0xf000) {
+  case 0:     wLines->value(0); break; // none
+  case 4096:  wLines->value(1); break; // none
+  case 8192:  wLines->value(2); break; // white
+  case 12288: wLines->value(3); break; // lt gray
+  case 16384: wLines->value(4); break; // gray
+  case 20480: wLines->value(5); break; // dk gray
+  case 57344: wLines->value(6); break; // black
+}} {}
+  }
+  Function {value()} {open return_type double
+  } {
+    code {unsigned int v = value_;
+
+v &= 0xf0f00000;
+
+v |= ( (atoi(wPen->value()) & 15 ) << 8 );
+v |= ( (atoi(wRoundness->value()) & 15 ) << 24 );
+v |= ( (atoi(wInset->value()) & 3 ) << 16 );
+v |= ( (atoi(wShadow->value()) & 3 ) << 18 );
+
+switch (wFill->value()) {
+  case 0: v|= 0; break;
+  case 1: v|= 1; break;
+  case 2: v|= 2; break;
+  case 3: v|= 3; break;
+  case 4: v|= 4; break;
+  case 5: v|= 5; break;
+  case 6: v|= 14; break;
+}
+
+switch (wFrame->value()) {
+  case 0: v|= 0; break;
+  case 1: v|= 16; break;
+  case 2: v|= 32; break;
+  case 3: v|= 48; break;
+  case 4: v|= 64; break;
+  case 5: v|= 80; break;
+  case 6: v|= 224; break;
+  case 7: v|= 240; break;
+}
+
+switch (wLines->value()) {
+  case 0: v|= 0; break;
+  case 1: v|= 4096; break;
+  case 2: v|= 8192; break;
+  case 3: v|= 12288; break;
+  case 4: v|= 16384; break;
+  case 5: v|= 20480; break;
+  case 6: v|= 57344; break;
+}
+
+return (double)v;} {selected
+    }
+  }
+  decl {int value_;} {global
+  }
+  Function {buildUI_()} {open private
+  } {
+    Fl_Window {} {open
+      xywh {471 189 374 126} type Double resizable
+      class Fl_Group visible
+    } {
+      Fl_Box {} {
+        xywh {415 275 10 10} resizable
+      }
+      Fl_Input wPen {
+        label {Pen:}
+        tooltip {Frame width in 0-15 pixels} xywh {85 15 50 20} type Int labelsize 12 textsize 12
+      }
+      Fl_Input wRoundness {
+        label {Roundness:}
+        tooltip {Corner radius of frame in 0-15 pixels} xywh {85 40 50 20} type Int labelsize 12 textsize 12
+      }
+      Fl_Input wInset {
+        label {Inset:}
+        tooltip {Whitespace between bounds and frame (0-3 pixels)} xywh {85 65 50 20} type Int labelsize 12 textsize 12
+      }
+      Fl_Input wShadow {
+        label {Shadow:}
+        tooltip {Frame shadow (0-3 pixels)} xywh {85 90 50 20} type Int labelsize 12 textsize 12
+      }
+      Fl_Choice wFrame {
+        label {Frame:} open
+        xywh {200 15 150 20} down_box BORDER_BOX labelsize 12 textsize 12
+      } {
+        MenuItem {} {
+          label None
+          xywh {50 50 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label White
+          xywh {50 50 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label {Light Gray}
+          xywh {50 50 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Gray
+          xywh {50 50 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label {Dark Gray}
+          xywh {60 60 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Black
+          xywh {70 70 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Custom
+          xywh {80 80 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Matte
+          xywh {90 90 100 20} labelsize 12
+        }
+      }
+      Fl_Choice wFill {
+        label {Fill:} open
+        xywh {200 40 150 20} down_box BORDER_BOX labelsize 12 textsize 12
+      } {
+        MenuItem {} {
+          label None
+          xywh {60 60 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label White
+          xywh {60 60 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label {Light Gray}
+          xywh {60 60 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Gray
+          xywh {60 60 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label {Dark Gray}
+          xywh {70 70 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Black
+          xywh {80 80 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Custom
+          xywh {90 90 100 20} labelsize 12
+        }
+      }
+      Fl_Choice wLines {
+        label {Lines:} open
+        xywh {200 65 150 20} down_box BORDER_BOX labelsize 12 textsize 12
+      } {
+        MenuItem {} {
+          label None
+          xywh {70 70 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label White
+          xywh {70 70 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label {Light Gray}
+          xywh {70 70 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Gray
+          xywh {70 70 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label {Dark Gray}
+          xywh {80 80 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Black
+          xywh {90 90 100 20} labelsize 12
+        }
+        MenuItem {} {
+          label Custom
+          xywh {100 100 100 20} labelsize 12
+        }
+      }
+    }
+  }
+} 
+
+comment {/** \\class Fldtk_Format_Slot_Editor
+ * A big editor for a single 32-bit viewFormat value.
+ *
+ * \\fixme "value()" functions are not complete yet.
+ */} {not_in_source in_header
+} 
+
+comment {
+//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//} {in_source in_header
+} 

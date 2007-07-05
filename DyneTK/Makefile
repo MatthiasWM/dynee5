@@ -33,6 +33,7 @@ SRCFILES = \
   fltk/Fldtk_Document_Browser.cxx \
   fltk/Fldtk_Document_Tabs.cxx \
   fltk/Fldtk_Editor.cxx \
+  fltk/Fldtk_Format_Slot_Editor.cxx \
   fltk/Fldtk_Justify_Slot_Editor.cxx \
   fltk/Fldtk_Layout_Drop_Box.cxx \
   fltk/Fldtk_Layout_Editor.cxx \

@@ -35,6 +35,7 @@ it as type real.
 #include "Dtk_Layout_Document.h"
 #include "Dtk_Script_Writer.h"
 #include "fltk/Fldtk_Value_Slot_Editor.h"
+#include "fltk/Fldtk_Format_Slot_Editor.h"
 #include "fltk/Fldtk_Justify_Slot_Editor.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
 
@@ -86,6 +87,8 @@ void Dtk_Value_Slot::edit()
         container->begin();
         if (strcasecmp(key_, "viewJustify")==0)
             editor_ = new Fldtk_Justify_Slot_Editor(container, this);
+        else if (strcasecmp(key_, "viewFormat")==0)
+            editor_ = new Fldtk_Format_Slot_Editor(container, this);
         else
             editor_ = new Fldtk_Value_Slot_Editor(container, this);
         container->end();

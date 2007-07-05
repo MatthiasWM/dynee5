@@ -1011,6 +1011,7 @@ void InspectorPrintf(const char *msg, ...)
     vsprintf(buffer, msg, args);
     va_end(args);
     wConsole->insert(buffer);
+    wConsole->show_insert_position();
 }
 
 
