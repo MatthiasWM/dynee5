@@ -29,6 +29,8 @@
 
 #include "allNewt.h"
 
+#include <stdarg.h>
+
 class Dtk_Document;
 class Dtk_Layout_Document;
 class Dtk_Template;
@@ -420,6 +422,7 @@ void	InspectorExitBreakLoop();
 void	InspectorPrintDepth(int);
 void	InspectorSnapshot();
 void	InspectorSnapshotUpdate(newtRef);
+void	InspectorPrintf(const char *format, ...);
 
 void	UpdateMainMenu();
 

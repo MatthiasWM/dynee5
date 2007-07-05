@@ -38,6 +38,7 @@
 #include "main.h"
 
 #include <FL/filename.h>
+#include "fltk/Flmm_Message.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -63,13 +64,13 @@
  * Constructor.
  */
 Dtk_Project::Dtk_Project()
-:	packagename_(0L),
-	shortname_(0L),
-	filename_(0L),
-	name_(0L),
-	startdir_(0L),
+:    packagename_(0L),
+    shortname_(0L),
+    filename_(0L),
+    name_(0L),
+    startdir_(0L),
     pathname_(0L),
-	package_(kNewtRefNIL),
+    package_(kNewtRefNIL),
     documentList_(0L)
 {
     documentList_ = new Dtk_Document_List(this);
@@ -635,7 +636,7 @@ void Dtk_Project::setDefaults()
 
 	sprintf(buf, "%s:SIG", shortname_);
 	dtkProjSettings->package->name->set(buf);
-	dtkProjSettings->package->copyright->set("©1997 Apple Computer, Inc. All rights reserved.");
+	dtkProjSettings->package->copyright->set("(c) 2007 DyneTK, All Rights Reserved.");
 	dtkProjSettings->package->version->set("1");
 	dtkProjSettings->package->deleteOnDownload->set(1);
 }
@@ -997,6 +998,7 @@ newtRef makeRemoveScript() {
  */
 int Dtk_Project::buildPackage()
 {
+    InspectorPrintf("Building package\n");
 	int32_t ix;
 
 	newtRefVar theForm = kNewtRefNIL;
@@ -1019,8 +1021,8 @@ int Dtk_Project::buildPackage()
     free(script);
     // very simple error code output
 	if (theForm==kNewtRefUnbind) {
-		printf("**** ERROR while compiling or interpreting\n");
-		printf("**** %s: %s\n", newt_error_class(err), newt_error(err));
+		InspectorPrintf("**** ERROR while compiling or interpreting\n");
+		InspectorPrintf("**** %s: %s\n", newt_error_class(err), newt_error(err));
 		return kNewtRefUnbind;
 	} else {
 	}
@@ -1030,8 +1032,10 @@ int Dtk_Project::buildPackage()
 	theForm = kNewtRefUnbind;
 	theForm = NcGetGlobalVar(NSSYM(theForm));
 	theBase = NcGetGlobalVar(NSSYM(theBase));
-    if (theForm==kNewtRefUnbind || theBase==kNewtRefUnbind)
+    if (theForm==kNewtRefUnbind || theBase==kNewtRefUnbind) {
+        InspectorPrintf("Error building project (no base or form found)!\n");
         return -1;
+    }
 
 	// the following little hack removes all local variables from the 
 	// base object to avoid a recursion when writing the package
@@ -1102,7 +1106,14 @@ int Dtk_Project::buildPackage()
 	package_ = NsMakePkg(rcvr, package);
 	NewtPrintObject(stdout, package_);
 
-	return 0;
+    if (NewtRefIsBinary(package_)) {
+        InspectorPrintf("Package build successfuly (%dkBytes)\n", NewtBinaryLength(package_)/1024+1);
+    } else {
+        InspectorPrintf("Error assembling package\n");
+        return -1;
+    }
+
+    return 0;
 }
 
 
@@ -1112,17 +1123,33 @@ int Dtk_Project::buildPackage()
  */
 int Dtk_Project::savePackage()
 {
-	int size = NewtBinaryLength(package_);
-	uint8_t *data = NewtRefToBinary(package_);
+    InspectorPrintf("Writing package to %s\n", getPackageName());
+    if (!NewtRefIsBinary(package_)) {
+        InspectorPrintf("Error: no package to write\n");
+        return -1;
+    }
 
-	FILE *f = fopen(getPackageName(), "wb");
-	if (f) {
-		fwrite(data, size, 1, f);
-		fclose(f);
-	}
+    int size = NewtBinaryLength(package_);
+    uint8_t *data = NewtRefToBinary(package_);
+    if (!size || !data) {
+        InspectorPrintf("Error: package is empty\n");
+        return -1;
+    }
 
+    FILE *f = fopen(getPackageName(), "wb");
+    if (!f) {
+        InspectorPrintf("Error opening file: %s\n", Flmm_Message::system_message());
+        return -1;
+    }
+    if (fwrite(data, 1, size, f)!=size) {
+        InspectorPrintf("Error writing file: %s\n", Flmm_Message::system_message());
+        fclose(f);
+        return -1;
+    }
+    fclose(f);
+    InspectorPrintf("Done.\n");
 
-	return -1;
+    return 0;
 }
 
 /* Prologue:

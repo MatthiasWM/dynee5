@@ -160,6 +160,7 @@ int main(int argc, char **argv) {
 		Fl::flush();
 		OpenProject(argv[1]);
     }
+
 	Fl::run();
 
 	// clean the virtual machine

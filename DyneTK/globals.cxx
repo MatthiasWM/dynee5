@@ -331,6 +331,10 @@ int AddFileToProject(const char *filename)
 	}
     // go ahead and add the document to the project
     Dtk_Document *doc = dtkProject->documentList()->add(filename);
+    // if this is a layout and there is no main layout yet, use this one
+    if (doc->isLayout() && !dtkProject->documentList()->getMain()) {
+        dtkProject->documentList()->setMain(doc);
+    }
     // update the menu bar
 	UpdateMainMenu();
     // show an error message if needed
@@ -363,6 +367,10 @@ int AddCurrentDocToProject()
     dtkGlobalDocuments->remove(doc);
     dtkProject->documentList()->append(doc);
     doc->setList(dtkProject->documentList());
+    // if this is a layout and there is no main layout yet, use this one
+    if (doc->isLayout() && !dtkProject->documentList()->getMain()) {
+        dtkProject->documentList()->setMain(doc);
+    }
     // update the menus
 	UpdateMainMenu();
 	return 0;
@@ -454,10 +462,16 @@ int BuildPackage()
 int DownloadPackage()
 {
 	assert(dtkProject);
+	InspectorPrintf("Sending package %s\n", dtkProject->getPackageName());
 	int ret = InspectorSendPackage(
 			dtkProject->getPackageName(),
 			dtkProjSettings->app->symbol->get());
 	UpdateMainMenu();
+	if (ret==-1) {
+ 		InspectorPrintf("Failed: %s\n", Flmm_Message::system_message());
+	} else {
+ 		InspectorPrintf("Done.\n");
+   	}
 	return ret;
 }
 
@@ -548,7 +562,9 @@ int InspectorSendPackage(const char *filename, const char *symbol)
 	// read the package itself from disk
 	uint8_t *buffer;
 	FILE *f = fopen(filename, "rb");
-    if (!f) EnterDebugger();
+        if (!f) {
+		InspectorPrintf("Can't open package %s\n", filename);
+ 	}
 	fseek(f, 0, SEEK_END);
 	int nn = ftell(f);
 	fseek(f, 0, SEEK_SET);
@@ -985,6 +1001,18 @@ int RenameSlot(Dtk_Slot *slot)
     slot->setKey(name);
     return 0;
 }
+
+/*---------------------------------------------------------------------------*/
+void InspectorPrintf(const char *msg, ...)
+{
+    char buffer[1024];
+    va_list args;
+    va_start(args, msg);
+    vsprintf(buffer, msg, args);
+    va_end(args);
+    wConsole->insert(buffer);
+}
+
 
 //
 // End of "$Id$".

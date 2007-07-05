@@ -28,8 +28,8 @@
 #pragma warning(disable : 4996)
 #endif
 
-#define DEBUG_SEND
-#define DEBUG_RECV
+//#define DEBUG_SEND
+//#define DEBUG_RECV
 
 #include "Flio_Serial_Port.h"
 #include "globals.h"
