@@ -73,7 +73,6 @@ Fldtk_Format_Slot_Editor::~Fldtk_Format_Slot_Editor() {
 void Fldtk_Format_Slot_Editor::value(double v) {
   value_ = (unsigned int)v;
 
-int t;
 char buf[32];
 
 sprintf(buf, "%d", (value_>>8) & 15);

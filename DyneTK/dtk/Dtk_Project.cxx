@@ -334,9 +334,9 @@ int Dtk_Project::loadMac()
 
 	pushDir();
 
-	uint32_t id = readInt(data);
+	/*uint32_t id =*/ readInt(data);
 	uint16_t fileCount = readWord(data);
-	uint32_t sortBy = readInt(data);
+	/*uint32_t sortBy =*/ readInt(data);
 	for (i=0; i<fileCount; i++) {
 		uint32_t len = readInt(data);
 		// if len==70 (sizeof(FSSpec)) we must conver a filespec
@@ -345,7 +345,7 @@ int Dtk_Project::loadMac()
 		fread(alias, len, 1, data);
 		char *fn = PtoCFilename(alias+0xc1);
 		char *filename = documentList_->findFile(fn);
-		Dtk_Document *doc = documentList_->add(filename);
+		/*Dtk_Document *doc =*/ documentList_->add(filename);
 		//printf("Alias %d = %s\n", i, filename);
 		free(fn);
 		free(filename);
@@ -365,7 +365,7 @@ int Dtk_Project::loadMac()
 	// -- read the resource map
 	fseek(rsrc, rMap+24, SEEK_SET);
 	uint16_t rsrcType = readWord(rsrc);
-	uint16_t rsrcName = readWord(rsrc);
+	/*uint16_t rsrcName =*/ readWord(rsrc);
 	uint16_t nRsrc = readWord(rsrc)+1;
 
 	// -- walk the resource type list	
@@ -379,13 +379,13 @@ int Dtk_Project::loadMac()
 			for (j=0; j<nType; j++) {
 				fseek(rsrc, rMap+rsrcType+list+12*j, SEEK_SET);
 				uint16_t id = readWord(rsrc);
-				uint16_t name = readWord(rsrc);
+				/*uint16_t name =*/ readWord(rsrc);
 				uint32_t offs = readInt(rsrc); //&0xffffff;
-				uint32_t handle = readInt(rsrc);
+				/*uint32_t handle =*/ readInt(rsrc);
 				//printf("PJPF: %d %d %d \n", id, name, offs);
 				if (id==9999) {
 					fseek(rsrc, rData+offs, SEEK_SET);
-					uint32_t len = readInt(rsrc);
+					/*uint32_t len =*/ readInt(rsrc);
 char buf[64];
 fread(buf, 33, 1, rsrc);
 printf("Appname is %.*s\n", buf[0], buf+1);
@@ -824,7 +824,7 @@ int Dtk_Project::save()
         return -1;
     }
     // Write everything in a single block
-    if (fwrite(data, 1, size, f)!=size) {
+    if (fwrite(data, 1, size, f)!=(size_t)size) {
         fclose(f);
         return -1;
     }
@@ -999,7 +999,7 @@ newtRef makeRemoveScript() {
 int Dtk_Project::buildPackage()
 {
     InspectorPrintf("Building package\n");
-	int32_t ix;
+	//int32_t ix;
 
 	newtRefVar theForm = kNewtRefNIL;
 	newtRefVar theBase = kNewtRefNIL;
@@ -1141,7 +1141,7 @@ int Dtk_Project::savePackage()
         InspectorPrintf("Error opening file: %s\n", Flmm_Message::system_message());
         return -1;
     }
-    if (fwrite(data, 1, size, f)!=size) {
+    if (fwrite(data, 1, size, f)!=(size_t)size) {
         InspectorPrintf("Error writing file: %s\n", Flmm_Message::system_message());
         fclose(f);
         return -1;
@@ -1183,9 +1183,10 @@ int Dtk_Project::savePackage()
  */
 int Dtk_Project::write(Dtk_Script_Writer &sw)
 {
-    char buf[1024], fn[2048], dbuf[10], tbuf[10];
+    char buf[1024], fn[2048];
     fl_filename_absolute(fn, 2047, filename());
 # ifdef  WIN32
+    char dbuf[10], tbuf[10];
     sprintf(buf, "// Text of project %s written on: %s %s\n", 
         fn, strdate(dbuf), strtime(tbuf));
 # else

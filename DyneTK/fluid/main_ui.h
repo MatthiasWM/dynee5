@@ -27,7 +27,6 @@
 #include "fluid/Fldtk_Inspector.h"
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fltk/Fldtk_Document_Browser.h"
-#include "fltk/Fldtk_Layout_Drop_Box.h"
 #include <FL/fl_ask.h>
 #include "main.h"
 #include <FL/Fl_Double_Window.H>

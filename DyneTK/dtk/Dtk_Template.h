@@ -69,7 +69,7 @@ public:
 
     /** Remove a template and all its children.
      */
-                    ~Dtk_Template();
+    virtual         ~Dtk_Template();
 
     /** Load a template tree starting at the given newtRef
      */

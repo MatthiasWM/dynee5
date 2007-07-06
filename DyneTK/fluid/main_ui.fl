@@ -39,9 +39,6 @@ decl {\#include "fltk/Fldtk_Document_Tabs.h"} {public
 decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
 } 
 
-decl {\#include "fltk/Fldtk_Layout_Drop_Box.h"} {public
-} 
-
 decl {\#include "dtk/Dtk_Platform.h"} {} 
 
 decl {\#include <FL/fl_ask.h>} {public
@@ -825,8 +822,7 @@ if ( (mask & 0x00000080) == 0x00000080 ) {
   mBrowserRenameSlot->activate();
 } else {
   mBrowserRenameSlot->deactivate();
-}} {selected
-    }
+}} {}
   }
 } 
 

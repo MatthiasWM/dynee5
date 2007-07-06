@@ -360,7 +360,7 @@ void Flio_Inspector::gotNewtNtkEerr() {
 
 void Flio_Inspector::gotNewtNtkEerrSize() {
   unsigned int i, n = get_uint(buffer_+16);
-  unsigned int ex = get_uint(buffer_+12);
+  /*unsigned int ex =*/ get_uint(buffer_+12);
   unsigned char *s = buffer_+20;
   for (i=0; i<n; i++) {
     if (*s=='\r') *s = '\n';
@@ -378,9 +378,9 @@ void Flio_Inspector::gotNewtNtkEref() {
 
 void Flio_Inspector::gotNewtNtkErefSize() {
   unsigned int i;
-  unsigned int n  = get_uint(buffer_+12);
+  /*unsigned int n  =*/ get_uint(buffer_+12);
   unsigned int n1 = get_uint(buffer_+16);
-  unsigned int n2 = get_uint(buffer_+20+n1);
+  /*unsigned int n2 =*/ get_uint(buffer_+20+n1);
   unsigned char *s = buffer_+20;
   for (i=0; i<n1; i++) {
     if (*s=='\r') *s = '\n';
@@ -408,7 +408,7 @@ void Flio_Inspector::gotNewtNtkFstkSize() {
 
 void Flio_Inspector::dumpBuffer()
 {
-	int i, j, nLine = nBuffer_/16;
+	int i, j;
 	for (i=0; i<nBuffer_; i+=16) {
 		char buf[78];
 		memset(buf, 32, 78); buf[76] = '\n'; buf[77] = 0;

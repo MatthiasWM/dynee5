@@ -47,8 +47,8 @@
 #include "fluid/main_ui.h"
 #include "fltk/Flio_Serial_Port.h"
 
-#include "images/toolbox_open.xpm"
-#include "images/toolbox_closed.xpm"
+//#include "images/toolbox_open.xpm"
+//#include "images/toolbox_closed.xpm"
 
 #include <assert.h>
 
@@ -124,10 +124,12 @@ int getNSO(const char *command, unsigned char **data, int *size)
   return 0;
 }
 
+/*
 static unsigned char recv_cnnt[] = {
   0x02, 0x04, 0x01, 0x6e, 0x65, 0x77, 0x74, 0x6e, 0x74, 0x70, 0x20, 0x63, 0x6e, 
   0x6e, 0x74, 0x00, 0x01, 0x00, 0x00, 0x00
 };
+*/
 
 unsigned char data0013a[] = { 2,4,0, 0x6e, 0x65, 0x77, 0x74, };
 unsigned char data0014a[] = { 2,4,0, 0x6e, 0x74, 0x70, 0x20, };
@@ -248,7 +250,7 @@ void send_test(int ix) {
     wInspectorSerial->send_data_block(nso, nNso);
 	*/
   } else if (ix==3) {
-    int err = getNSO("Print(3*0.5)", &nso, &nNso);
+    getNSO("Print(3*0.5)", &nso, &nNso);
     if (nNso==0) return;
     wInspectorSerial->send_block(data0013a, sizeof(data0013a));
     wInspectorSerial->send_block(data0014a, sizeof(data0014a));
@@ -287,10 +289,10 @@ void testNSOFReader(const char *filename)
 		NEWT_DUMPBC = 0;
 		NEWT_INDENT = -2;
 
-		FILE *f = fopen("dump_nsof.txt", "wb");
+		FILE *g = fopen("dump_nsof.txt", "wb");
 		newtRef pkg = NewtReadNSOF(buffer, n);
-		NewtPrintObject(f, pkg);
-		fclose(f);
+		NewtPrintObject(g, pkg);
+		fclose(g);
 
 	}
 }
@@ -311,7 +313,7 @@ void testPkgReader(const char *filename)
 	int n = fread(buffer, 1, nn, f);
 	fclose(f);
 	if (n) {
-		const char *argv[] = { "DyneTK" };
+		//const char *argv[] = { "DyneTK" };
 		//NewtInit(1, argv, 0);
 
 		NcSetGlobalVar(NSSYM(printLength), NSINT(9999));

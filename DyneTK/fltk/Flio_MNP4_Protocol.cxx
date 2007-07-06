@@ -302,7 +302,6 @@ void Flio_Mnp4_Protocol::send_block(unsigned char *data, int size)
 void Flio_Mnp4_Protocol::send_data_block(unsigned char *data, int size)
 {
   const int max_block = 250;
-  int i;
   unsigned char *src = data;
   while (size>max_block) {
     send_data_block2(src, max_block);

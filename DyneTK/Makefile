@@ -35,7 +35,6 @@ SRCFILES = \
   fltk/Fldtk_Editor.cxx \
   fltk/Fldtk_Format_Slot_Editor.cxx \
   fltk/Fldtk_Justify_Slot_Editor.cxx \
-  fltk/Fldtk_Layout_Drop_Box.cxx \
   fltk/Fldtk_Layout_Editor.cxx \
   fltk/Fldtk_Layout_View.cxx \
   fltk/Fldtk_Proto_Slot_Editor.cxx \
@@ -52,17 +51,16 @@ SRCFILES = \
   flnt/Flnt_Widget.cxx \
   globals.cxx \
   main.cxx \
-  sandbox.cxx \
-  nt/Nt_Group.cxx
+  sandbox.cxx
 
 OBJFILES = $(SRCFILES:.cxx=.o)
 
 
 CXX := $(shell fltk-config --use-images --cxx)
 
-CXXFLAGS := $(shell fltk-config --use-images --cxxflags)
+CXXFLAGS := -Wall $(shell fltk-config --use-images --cxxflags)
 
-INCLUDES := -I. -Idtk -Ifltk -Ifluid -Int
+INCLUDES := -I. -Idtk -Ifltk -Ifluid 
 
 NEWTINCLUDES := -I../../newt0/src/ -I../../newt0/src/newt_core/incs/
 

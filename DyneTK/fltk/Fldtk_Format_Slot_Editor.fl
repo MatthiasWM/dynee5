@@ -53,7 +53,6 @@ position(container->x(), container->y());} {}
   } {
     code {value_ = (unsigned int)v;
 
-int t;
 char buf[32];
 
 sprintf(buf, "%d", (value_>>8) & 15);
@@ -97,7 +96,8 @@ switch (value_&0xf000) {
   case 16384: wLines->value(4); break; // gray
   case 20480: wLines->value(5); break; // dk gray
   case 57344: wLines->value(6); break; // black
-}} {}
+}} {selected
+    }
   }
   Function {value()} {open return_type double
   } {
@@ -141,8 +141,7 @@ switch (wLines->value()) {
   case 6: v|= 57344; break;
 }
 
-return (double)v;} {selected
-    }
+return (double)v;} {}
   }
   decl {int value_;} {global
   }

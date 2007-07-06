@@ -75,7 +75,7 @@ int Dtk_Script_Writer::put(const char *text, int n)
     if (n==-1)
         n = strlen(text);
     if (file_) {
-        if (fwrite(text, 1, n, file_)==n)
+        if (fwrite(text, 1, n, file_)==(size_t)n)
             ret = -1;
     }
     return ret;

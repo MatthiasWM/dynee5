@@ -63,8 +63,8 @@ Flio_Serial_Port::Flio_Serial_Port(int X, int Y, int W, int H, const char *L)
   ringTail_(0),
   portname_(0L),
   rxActive_(0),
-  txActive_(0),
   pRxActive_(0),
+  txActive_(0),
   pTxActive_(0)
 #ifdef WIN32
 , port_(INVALID_HANDLE_VALUE),
@@ -86,8 +86,8 @@ Flio_Serial_Port::Flio_Serial_Port(Flio_Stream *super)
   ringTail_(0),
   portname_(0L),
   rxActive_(0),
-  txActive_(0),
   pRxActive_(0),
+  txActive_(0),
   pTxActive_(0)
 #ifdef WIN32
 , port_(INVALID_HANDLE_VALUE),

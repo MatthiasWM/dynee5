@@ -569,7 +569,7 @@ int InspectorSendPackage(const char *filename, const char *symbol)
 	int nn = ftell(f);
 	fseek(f, 0, SEEK_SET);
 	buffer = (uint8_t*)malloc(nn);
-	int n = fread(buffer, 1, nn, f);
+	fread(buffer, 1, nn, f);
 	fclose(f);
 
 	// send the package
@@ -865,7 +865,7 @@ void DebugDumpRsrc() {
 
 void DebugDumpBuffer(uint8_t *src, int n)
 {
-        int i, j, nLine = n/16;
+        int i, j;
         for (i=0; i<n; i+=16) {
                 char buf[78];
                 memset(buf, 32, 78); buf[76] = ' '; buf[77] = 0;

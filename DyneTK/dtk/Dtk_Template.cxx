@@ -110,7 +110,7 @@ int Dtk_Template::load(newtRef node)
         if (n)
             slotList(); // create a slot list
         for (i=0; i<n; i++) {
-            uint32_t index;
+            //uint32_t index;
             newtRef key = NewtGetFrameKey(value, i);
             newtRef slot = NewtGetFrameSlot(value, i);
             if (!NewtRefIsFrame(slot)) 
@@ -177,7 +177,7 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
         for (i=0; i<n; i++) {
             if (needComma)
                 sw.put(",\n");
-            int ret = slotList_->at(i)->write(sw);
+            ret = slotList_->at(i)->write(sw);
             needComma = (ret==0) ? 1 : 0;
         }
         if (needComma)

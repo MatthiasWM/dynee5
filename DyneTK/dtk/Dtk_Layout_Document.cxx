@@ -228,7 +228,7 @@ int Dtk_Layout_Document::save()
         return -1;
     }
     // Write everything in a single block
-    if (fwrite(data, 1, size, f)!=size) {
+    if (fwrite(data, 1, size, f)!=(size_t)size) {
         fclose(f);
         return -1;
     }

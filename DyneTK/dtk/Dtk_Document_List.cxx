@@ -174,7 +174,7 @@ newtRef Dtk_Document_List::getProjectItemsRef()
 /*---------------------------------------------------------------------------*/
 Dtk_Document *Dtk_Document_List::getDocument(int i)
 {
-    if (i<0 || i>=docList_.size())
+    if (i<0 || i>=(int)docList_.size())
         return 0L;
     return docList_.at(i);
 }
