@@ -343,12 +343,21 @@ int Dtk_Project::loadMac()
 		// otherwise, this is an alias
 		uint8_t *alias = (uint8_t*)malloc(len);
 		fread(alias, len, 1, data);
-		char *fn = PtoCFilename(alias+0xc1);
-		char *filename = documentList_->findFile(fn);
-		/*Dtk_Document *doc =*/ documentList_->add(filename);
-		//printf("Alias %d = %s\n", i, filename);
-		free(fn);
-		free(filename);
+#               if 1 // find the name in any case
+		    char *fn = PtoCFilename(alias+0x32);
+		    char *filename = documentList_->findFile(fn);
+		    documentList_->add(filename);
+		    printf("Alias %d = %s\n", i, filename);
+		    free(fn);
+		    free(filename);
+#               else // find the path and name, but doesn't always work
+		    char *fn = PtoCFilename(alias+0xc1);
+		    char *filename = documentList_->findFile(fn);
+		    documentList_->add(filename);
+		    printf("Alias %d = %s\n", i, filename);
+		    free(fn);
+		    free(filename);
+#               endif
 	}
     // FIXME mainLayout is an index, but not by the same sorting standard!
 	uint16_t mainLayout = readWord(data);

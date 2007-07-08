@@ -1,6 +1,9 @@
 
 all: dynetk
 
+#DEBUGFLAGS := -g -O0
+DEBUGFLAGS := -O3
+
 SRCFILES = \
   dtk/Dtk_Document.cxx \
   dtk/Dtk_Document_List.cxx \
@@ -71,13 +74,13 @@ LIBS := $(shell fltk-config --use-images --libs)
 
 dynetk: $(OBJFILES)
 	echo Linking $@...
-	$(CXX) -g $(LDFLAGS) -o $@ $(OBJFILES) -lnewt -liconv $(LIBS)
+	$(CXX) $(DEBUGFLAGS) $(LDFLAGS) -o $@ $(OBJFILES) -lnewt -liconv $(LIBS)
 
 .SUFFIXES: .cxx .o
 
 .cxx.o:
 	echo Compiling $<...
-	$(CXX) -c -g $(CXXFLAGS) $(INCLUDES) $(NEWTINCLUDES) -o $@ $<
+	$(CXX) -c $(DEBUGFLAGS) $(CXXFLAGS) $(INCLUDES) $(NEWTINCLUDES) -o $@ $<
 
 clean:
 	rm $(OBJFILES)
