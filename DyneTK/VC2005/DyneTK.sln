@@ -1,11 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DyneMP", "..\..\DyneMP\VC6\DyneMP.vcproj", "{E34B0826-3D27-466E-89BA-F8D2B52DD6FB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9529DD9D-BDBB-4974-BB35-666BCD214124} = {9529DD9D-BDBB-4974-BB35-666BCD214124}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DyneTK", "DyneTK.vcproj", "{D2110541-9349-4391-908C-0CFFF7CB09C7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9529DD9D-BDBB-4974-BB35-666BCD214124} = {9529DD9D-BDBB-4974-BB35-666BCD214124}
@@ -19,10 +14,6 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E34B0826-3D27-466E-89BA-F8D2B52DD6FB}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E34B0826-3D27-466E-89BA-F8D2B52DD6FB}.Debug|Win32.Build.0 = Debug|Win32
-		{E34B0826-3D27-466E-89BA-F8D2B52DD6FB}.Release|Win32.ActiveCfg = Release|Win32
-		{E34B0826-3D27-466E-89BA-F8D2B52DD6FB}.Release|Win32.Build.0 = Release|Win32
 		{D2110541-9349-4391-908C-0CFFF7CB09C7}.Debug|Win32.ActiveCfg = Debug|Win32
 		{D2110541-9349-4391-908C-0CFFF7CB09C7}.Debug|Win32.Build.0 = Debug|Win32
 		{D2110541-9349-4391-908C-0CFFF7CB09C7}.Release|Win32.ActiveCfg = Release|Win32

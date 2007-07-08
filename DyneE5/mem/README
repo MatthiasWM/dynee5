@@ -1,8 +1,0 @@
-
-Drop the Newton MP2100 ROM that you extracted from your device here. 
-
-Name the file "717006". It should be exactly 8MB large.
-
-This directory will also contain the flash and RAM dump after 
-you quit Dyne successfuly or after you explicitly ask Dyne to
-save them here.

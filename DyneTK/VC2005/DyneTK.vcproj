@@ -382,30 +382,12 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\fltk\Fldtk_Justify_Slot_Editor.cxx"
+				RelativePath="..\fltk\Fldtk_Format_Slot_Editor.cxx"
 				>
 			</File>
 			<File
-				RelativePath="..\fltk\Fldtk_Layout_Drop_Box.cxx"
+				RelativePath="..\fltk\Fldtk_Justify_Slot_Editor.cxx"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\fltk\Fldtk_Layout_Editor.cxx"
@@ -450,6 +432,10 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\fltk\Fldtk_Proto_Slot_Editor.cxx"
+				>
 			</File>
 			<File
 				RelativePath="..\fltk\Fldtk_Rect_Slot_Editor.cxx"
@@ -827,11 +813,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\fltk\Fldtk_Justify_Slot_Editor.h"
+					RelativePath="..\fltk\Fldtk_Format_Slot_Editor.h"
 					>
 				</File>
 				<File
-					RelativePath="..\fltk\Fldtk_Layout_Drop_Box.h"
+					RelativePath="..\fltk\Fldtk_Justify_Slot_Editor.h"
 					>
 				</File>
 				<File
@@ -840,10 +826,6 @@
 				</File>
 				<File
 					RelativePath="..\fltk\Fldtk_Layout_View.h"
-					>
-				</File>
-				<File
-					RelativePath="..\fltk\Fldtk_Proto_Slot_Editor.cxx"
 					>
 				</File>
 				<File
@@ -1327,36 +1309,6 @@
 			</File>
 			<File
 				RelativePath="..\README"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="nt"
-			>
-			<File
-				RelativePath="..\nt\Nt_Group.cxx"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\nt\Nt_Group.h"
 				>
 			</File>
 		</Filter>
