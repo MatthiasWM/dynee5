@@ -1,8 +1,8 @@
 
 all: dynetk
 
-#DEBUGFLAGS := -g -O0
-DEBUGFLAGS := -O3
+DEBUGFLAGS := -g -O0
+#DEBUGFLAGS := -O3
 
 SRCFILES = \
   dtk/Dtk_Document.cxx \
