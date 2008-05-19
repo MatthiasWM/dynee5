@@ -81,6 +81,7 @@ private:
   void cb_mFileSaveAll_i(Fl_Menu_*, void*);
   static void cb_mFileSaveAll(Fl_Menu_*, void*);
 public:
+  static Fl_Menu_Item *mPrevProj[8];
   static Fl_Menu_Item *mFileExit;
 private:
   void cb_mFileExit_i(Fl_Menu_*, void*);

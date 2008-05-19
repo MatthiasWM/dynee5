@@ -154,6 +154,8 @@ int main(int argc, char **argv) {
     dtkDocumentTabs = dtkMain->document_tabs;
     dtkDocumentTabs->callback(update_menus_cb);
 
+	UpdatePrevProjMenu();
+
 	// launch the application
 	dtkMain->show(/*argc*/1, argv);
 	if (argc==2) {

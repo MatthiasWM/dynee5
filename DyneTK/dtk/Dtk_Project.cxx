@@ -253,6 +253,7 @@ int Dtk_Project::load()
 	if (n<=0) {
 		return -1;
 	}
+	AddPrevProj(filename_);
 	if (buf[0]==2) {
 		return loadWin();
 	} else if (buf[3]==103) {
@@ -839,6 +840,8 @@ int Dtk_Project::save()
     }
     // Close the file and return indicating no error
     fclose(f);
+	AddPrevProj(filename_);
+
 	return 0;
 }
 

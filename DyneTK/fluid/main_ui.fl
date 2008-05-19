@@ -56,7 +56,7 @@ widget_class Fldtk_Main_Window {
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File
+      label File open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mFileNewLayout {
@@ -118,21 +118,34 @@ widget_class Fldtk_Main_Window {
         label {Print...}
         xywh {5 5 100 20} shortcut 0x40070 labelsize 12 labelcolor 176 deactivate divider
       }
-      MenuItem {} {
-        label {1: prev file}
-        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
-      }
-      MenuItem {} {
-        label {2: prev file}
-        xywh {15 15 100 20} labelsize 12 labelcolor 176 deactivate
-      }
-      MenuItem {} {
-        label {3: prev file}
-        xywh {25 25 100 20} labelsize 12 labelcolor 176 deactivate
-      }
-      MenuItem {} {
-        label {4: prev file}
-        xywh {35 35 100 20} labelsize 12 labelcolor 176 deactivate divider
+      Submenu {} {
+        label {Previous Projects} open
+        xywh {0 0 63 20} labelsize 12 divider
+      } {
+        MenuItem {mPrevProj[0]} {
+          xywh {15 15 100 20} labelsize 12 labelcolor 176 hide
+        }
+        MenuItem {mPrevProj[1]} {
+          xywh {25 25 100 20} labelsize 12 labelcolor 176 hide
+        }
+        MenuItem {mPrevProj[2]} {
+          xywh {35 35 100 20} labelsize 12 labelcolor 176 hide
+        }
+        MenuItem {mPrevProj[3]} {
+          xywh {45 45 100 20} labelsize 12 labelcolor 176 hide
+        }
+        MenuItem {mPrevProj[4]} {
+          xywh {55 55 100 20} labelsize 12 labelcolor 176 hide
+        }
+        MenuItem {mPrevProj[5]} {
+          xywh {65 65 100 20} labelsize 12 labelcolor 176 hide
+        }
+        MenuItem {mPrevProj[6]} {
+          xywh {75 75 100 20} labelsize 12 labelcolor 176 hide
+        }
+        MenuItem {mPrevProj[7]} {selected
+          xywh {85 85 100 20} labelsize 12 labelcolor 176 hide
+        }
       }
       MenuItem mFileExit {
         label Exit

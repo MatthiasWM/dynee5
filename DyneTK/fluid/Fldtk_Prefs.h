@@ -113,6 +113,8 @@ private:
   static void cb_wApply(Fl_Button*, void*);
 public:
   int win_x, win_y, win_w, win_h; 
+  int nPrevProj; 
+  char *prevProj[8]; 
   Fldtk_Prefs();
   void get_prefs();
   void set_prefs();

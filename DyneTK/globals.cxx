@@ -704,6 +704,44 @@ void UpdateMainMenu()
 
 /*---------------------------------------------------------------------------*/
 /**
+ * Update the labels and visibility of the Previous Project menu items.
+ */
+void UpdatePrevProjMenu() 
+{
+	int i;
+	for (i=0; i<8; i++) {
+		if (i>dtkPrefs->nPrevProj) {
+			dtkMain->mPrevProj[i]->hide();
+		} else {
+			Fl_Menu_Item *mi = dtkMain->mPrevProj[i];
+			mi->show();
+			if (mi->label()) {
+				free((void*)mi->label());
+				mi->label(0L);
+			}
+			// FIXME Actually we should add the relative path if this file is "below" the current dir
+			if (dtkPrefs->prevProj[i])
+				mi->label(strdup(dtkPrefs->prevProj[i]));
+		}
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/**
+ * Add a new filename to the list of previous projects.
+ */
+void AddPrevProj(const char *filename)
+{
+	// FIXME insanely oversimplified!
+	memmove(dtkPrefs->prevProj+1, dtkPrefs->prevProj, sizeof(void*)*7);
+	dtkPrefs->prevProj[0] = strdup(filename);
+	if (dtkPrefs->nPrevProj<8)
+		dtkPrefs->nPrevProj++;
+	UpdatePrevProjMenu();
+}
+
+/*---------------------------------------------------------------------------*/
+/**
  * Toggle the 'breakOnThrows' flag on and off.
  * \todo should be a toggle
  */

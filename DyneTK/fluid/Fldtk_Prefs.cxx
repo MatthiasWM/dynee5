@@ -483,7 +483,9 @@ Fldtk_Prefs::Fldtk_Prefs(): Fl_Double_Window(470, 275) {
 }
 
 void Fldtk_Prefs::get_prefs() {
-  Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
+  int i;
+
+Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
 
 Fl_Preferences pack(prefs, "Packages");
 packages->get_prefs(pack);
@@ -493,10 +495,17 @@ app.get("win_x", win_x, 0xDECAFF);
 app.get("win_y", win_y, 0xDECAFF);
 app.get("win_w", win_w, 0xDECAFF);
 app.get("win_h", win_h, 0xDECAFF);
+
+Fl_Preferences pproj(prefs, "PreviousProjects");
+pproj.get("n", nPrevProj, 0);
+for (i=0; i<8; i++) 
+    pproj.get(Fl_Preferences::Name(i), prevProj[i], "");
 }
 
 void Fldtk_Prefs::set_prefs() {
-  Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
+  int i;
+
+Fl_Preferences prefs(Fl_Preferences::USER, "matthiasm.com", "DyneTK");
 Fl_Preferences pack(prefs, "Packages");
 packages->set_prefs(pack);
 
@@ -505,6 +514,11 @@ app.set("win_x", win_x);
 app.set("win_y", win_y);
 app.set("win_w", win_w);
 app.set("win_h", win_h);
+
+Fl_Preferences pproj(prefs, "PreviousProjects");
+pproj.set("n", nPrevProj);
+for (i=0; i<8; i++) 
+    pproj.set(Fl_Preferences::Name(i), prevProj[i]);
 }
 
 void Fldtk_Prefs::update_data() {

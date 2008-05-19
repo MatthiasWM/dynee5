@@ -425,6 +425,9 @@ void	InspectorSnapshotUpdate(newtRef);
 void	InspectorPrintf(const char *format, ...);
 
 void	UpdateMainMenu();
+void	UpdatePrevProjMenu();
+
+void 	AddPrevProj(const char *filename);
 
 void	NewtAlert(int err);
 void	SystemAlert(const char *msg, int err=0xdecaff);

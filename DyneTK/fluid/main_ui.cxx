@@ -261,10 +261,16 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Print Setup...", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Print One", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Print...", FL_COMMAND|0x70,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
- {"1: prev file", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
- {"2: prev file", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
- {"3: prev file", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
- {"4: prev file", 0,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
+ {"Previous Projects", 0,  0, 0, 192, FL_NORMAL_LABEL, 0, 12, 0},
+ {"", 0,  0, 0, 16, FL_NORMAL_LABEL, 0, 12, 176},
+ {"", 0,  0, 0, 16, FL_NORMAL_LABEL, 0, 12, 176},
+ {"", 0,  0, 0, 16, FL_NORMAL_LABEL, 0, 12, 176},
+ {"", 0,  0, 0, 16, FL_NORMAL_LABEL, 0, 12, 176},
+ {"", 0,  0, 0, 16, FL_NORMAL_LABEL, 0, 12, 176},
+ {"", 0,  0, 0, 16, FL_NORMAL_LABEL, 0, 12, 176},
+ {"", 0,  0, 0, 16, FL_NORMAL_LABEL, 0, 12, 176},
+ {"", 0,  0, 0, 16, FL_NORMAL_LABEL, 0, 12, 176},
+ {0,0,0,0,0,0,0,0,0},
  {"Exit", FL_COMMAND|0x71,  (Fl_Callback*)Fldtk_Main_Window::cb_mFileExit, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0},
  {"Edit", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 12, 0},
@@ -361,34 +367,35 @@ Fl_Menu_Item* Fldtk_Main_Window::mFileClose = Fldtk_Main_Window::menu_ + 6;
 Fl_Menu_Item* Fldtk_Main_Window::mFileSave = Fldtk_Main_Window::menu_ + 7;
 Fl_Menu_Item* Fldtk_Main_Window::mFileSaveAs = Fldtk_Main_Window::menu_ + 8;
 Fl_Menu_Item* Fldtk_Main_Window::mFileSaveAll = Fldtk_Main_Window::menu_ + 9;
-Fl_Menu_Item* Fldtk_Main_Window::mFileExit = Fldtk_Main_Window::menu_ + 18;
-Fl_Menu_Item* Fldtk_Main_Window::mEdit = Fldtk_Main_Window::menu_ + 20;
-Fl_Menu_Item* Fldtk_Main_Window::mEditNewtScreenshot = Fldtk_Main_Window::menu_ + 37;
-Fl_Menu_Item* Fldtk_Main_Window::mEditPreferences = Fldtk_Main_Window::menu_ + 38;
-Fl_Menu_Item* Fldtk_Main_Window::mProject = Fldtk_Main_Window::menu_ + 40;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectNew = Fldtk_Main_Window::menu_ + 41;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectOpen = Fldtk_Main_Window::menu_ + 42;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectSave = Fldtk_Main_Window::menu_ + 43;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectSaveAs = Fldtk_Main_Window::menu_ + 44;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectClose = Fldtk_Main_Window::menu_ + 45;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectAddWindow = Fldtk_Main_Window::menu_ + 46;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectAddFile = Fldtk_Main_Window::menu_ + 47;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectRemoveFile = Fldtk_Main_Window::menu_ + 48;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectBuild = Fldtk_Main_Window::menu_ + 50;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectDownload = Fldtk_Main_Window::menu_ + 51;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectLaunch = Fldtk_Main_Window::menu_ + 52;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectExportToText = Fldtk_Main_Window::menu_ + 53;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectMainLayout = Fldtk_Main_Window::menu_ + 55;
-Fl_Menu_Item* Fldtk_Main_Window::mProjectSettings = Fldtk_Main_Window::menu_ + 58;
-Fl_Menu_Item* Fldtk_Main_Window::mLayout = Fldtk_Main_Window::menu_ + 63;
-Fl_Menu_Item* Fldtk_Main_Window::mBrowser = Fldtk_Main_Window::menu_ + 75;
-Fl_Menu_Item* Fldtk_Main_Window::mBrowserTemplateInfo = Fldtk_Main_Window::menu_ + 76;
-Fl_Menu_Item* Fldtk_Main_Window::mBrowserRenameSlot = Fldtk_Main_Window::menu_ + 78;
-Fl_Menu_Item* Fldtk_Main_Window::mWindow = Fldtk_Main_Window::menu_ + 87;
-Fl_Menu_Item* Fldtk_Main_Window::mWindowConnectInspector = Fldtk_Main_Window::menu_ + 89;
-Fl_Menu_Item* Fldtk_Main_Window::mWindowOpenLayout = Fldtk_Main_Window::menu_ + 91;
-Fl_Menu_Item* Fldtk_Main_Window::mHelp = Fldtk_Main_Window::menu_ + 98;
-Fl_Menu_Item* Fldtk_Main_Window::mHelpAbout = Fldtk_Main_Window::menu_ + 102;
+Fl_Menu_Item* Fldtk_Main_Window::mPrevProj[8];
+Fl_Menu_Item* Fldtk_Main_Window::mFileExit = Fldtk_Main_Window::menu_ + 24;
+Fl_Menu_Item* Fldtk_Main_Window::mEdit = Fldtk_Main_Window::menu_ + 26;
+Fl_Menu_Item* Fldtk_Main_Window::mEditNewtScreenshot = Fldtk_Main_Window::menu_ + 43;
+Fl_Menu_Item* Fldtk_Main_Window::mEditPreferences = Fldtk_Main_Window::menu_ + 44;
+Fl_Menu_Item* Fldtk_Main_Window::mProject = Fldtk_Main_Window::menu_ + 46;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectNew = Fldtk_Main_Window::menu_ + 47;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectOpen = Fldtk_Main_Window::menu_ + 48;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectSave = Fldtk_Main_Window::menu_ + 49;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectSaveAs = Fldtk_Main_Window::menu_ + 50;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectClose = Fldtk_Main_Window::menu_ + 51;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectAddWindow = Fldtk_Main_Window::menu_ + 52;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectAddFile = Fldtk_Main_Window::menu_ + 53;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectRemoveFile = Fldtk_Main_Window::menu_ + 54;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectBuild = Fldtk_Main_Window::menu_ + 56;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectDownload = Fldtk_Main_Window::menu_ + 57;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectLaunch = Fldtk_Main_Window::menu_ + 58;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectExportToText = Fldtk_Main_Window::menu_ + 59;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectMainLayout = Fldtk_Main_Window::menu_ + 61;
+Fl_Menu_Item* Fldtk_Main_Window::mProjectSettings = Fldtk_Main_Window::menu_ + 64;
+Fl_Menu_Item* Fldtk_Main_Window::mLayout = Fldtk_Main_Window::menu_ + 69;
+Fl_Menu_Item* Fldtk_Main_Window::mBrowser = Fldtk_Main_Window::menu_ + 81;
+Fl_Menu_Item* Fldtk_Main_Window::mBrowserTemplateInfo = Fldtk_Main_Window::menu_ + 82;
+Fl_Menu_Item* Fldtk_Main_Window::mBrowserRenameSlot = Fldtk_Main_Window::menu_ + 84;
+Fl_Menu_Item* Fldtk_Main_Window::mWindow = Fldtk_Main_Window::menu_ + 93;
+Fl_Menu_Item* Fldtk_Main_Window::mWindowConnectInspector = Fldtk_Main_Window::menu_ + 95;
+Fl_Menu_Item* Fldtk_Main_Window::mWindowOpenLayout = Fldtk_Main_Window::menu_ + 97;
+Fl_Menu_Item* Fldtk_Main_Window::mHelp = Fldtk_Main_Window::menu_ + 104;
+Fl_Menu_Item* Fldtk_Main_Window::mHelpAbout = Fldtk_Main_Window::menu_ + 108;
 
 void Fldtk_Main_Window::cb_tFileNewLayout_i(Fl_Button*, void*) {
   NewLayoutFile();
@@ -3655,6 +3662,14 @@ this->align(FL_ALIGN_TOP);
 this->when(FL_WHEN_RELEASE);
 { Fl_Menu_Bar* o = new Fl_Menu_Bar(0, 0, 785, 25);
   o->box(FL_THIN_UP_BOX);
+  mPrevProj[0] = &menu_[15];
+  mPrevProj[1] = &menu_[16];
+  mPrevProj[2] = &menu_[17];
+  mPrevProj[3] = &menu_[18];
+  mPrevProj[4] = &menu_[19];
+  mPrevProj[5] = &menu_[20];
+  mPrevProj[6] = &menu_[21];
+  mPrevProj[7] = &menu_[22];
   o->menu(menu_);
 } // Fl_Menu_Bar* o
 { Fl_Group* o = new Fl_Group(0, 25, 785, 35);

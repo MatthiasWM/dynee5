@@ -75,7 +75,8 @@ Dtk_Platform::~Dtk_Platform()
 /*---------------------------------------------------------------------------*/
 int Dtk_Platform::load(const char *filename)
 {
-/*
+#if 0
+    // load platform file from disk
     struct stat st;
     if (stat(filename, &st)) {
         fl_alert(
@@ -92,9 +93,8 @@ int Dtk_Platform::load(const char *filename)
     fclose(f);
 
     platform_ = NewtReadNSOF(pf, st.st_size);
-*/
-
-    // assemple a long string from a few short strings. VisualC6 can not deal with 
+#else
+    // assemble a long string from a few short strings. VisualC6 can not deal with 
     // very long stringas and ends up in a buffer overflow (it is graceful enough
     // to give us an error description, even with a recomendation to increase heap size,
     // which does not fix the problem though)
@@ -118,6 +118,7 @@ int Dtk_Platform::load(const char *filename)
     fclose(ff);
 */
     free(platformStr);
+#endif
 
     if (platform_==kNewtRefUnbind) {
         fl_alert("Error reading platform file.");
