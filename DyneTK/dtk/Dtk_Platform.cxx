@@ -73,8 +73,22 @@ Dtk_Platform::~Dtk_Platform()
 
 
 /*---------------------------------------------------------------------------*/
+/**
+ * Load the Platform support file into the internal compiler.
+ * 
+ * The Platform files are part of the original NTK. They can be downloaded from
+ * Unna here: "http://www.unna.org/view.php?/apple/development/NTK/platformfiles/21PTF.ZIP"
+ *
+ * The archive contains two files. The first file, NEWTON21.PTF, conatins a description
+ * of the platform interface int NSOF format and is required by the DyneTK layout editor.
+ *
+ * The second file, 21DEFS.TXT, conatins a list of all constants that may be used in 
+ * Newton Script files. It is included into the "big script" before compilation.
+ */
 int Dtk_Platform::load(const char *filename)
 {
+    
+
 #if 0
     // load platform file from disk
     struct stat st;
@@ -83,7 +97,7 @@ int Dtk_Platform::load(const char *filename)
             "Platform file \"%s\" not found.\n\n"
             "This file is required to edit DyneTK projects. It must be placed in the DyneTK start directory.\n"
             "\"%s\" is part of the Mac NTK and should be available on Unna:\n\n"
-            "http://www.unna.org/view.php?/apple/development/NTK/platformfiles/Newton2.1_Platform_File.sea.hqx",
+            "http://www.unna.org/view.php?/apple/development/NTK/platformfiles/21PTF.ZIP",
             filename, filename);
         return -1;
     }
