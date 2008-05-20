@@ -722,11 +722,12 @@ void UpdatePrevProjMenu()
 			Fl_Menu_Item *mi = dtkMain->mPrevProj[i];
 			mi->show();
 			if (mi->label()) {
-				free((void*)mi->label());
-				mi->label(0L);
+				if (strcmp(mi->label(), "")) // do not delete static labels (set to an emty string)
+          free((void*)mi->label());
+				mi->label("");
 			}
 			// FIXME Actually we should add the relative path if this file is "below" the current dir
-			if (dtkPrefs->prevProj[i])
+			if (dtkPrefs->prevProj[i] && *(dtkPrefs->prevProj[i]))
 				mi->label(strdup(dtkPrefs->prevProj[i]));
 		}
 	}

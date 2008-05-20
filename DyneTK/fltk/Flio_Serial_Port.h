@@ -172,7 +172,7 @@ private:
 #else
   int port_;
   static void reader_cb(int, void*);
-  void reader();
+  void reader();    
 #endif
 };
 

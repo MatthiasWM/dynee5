@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0108 
 use_FL_COMMAND 
 header_name {.h} 
 code_name {.cxx}
@@ -56,7 +56,7 @@ widget_class Fldtk_Main_Window {
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File open
+      label File
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mFileNewLayout {
@@ -119,48 +119,40 @@ widget_class Fldtk_Main_Window {
         xywh {5 5 100 20} shortcut 0x40070 labelsize 12 labelcolor 176 deactivate divider
       }
       Submenu {} {
-        label {Previous Projects} open
+        label {Previous Projects}
         xywh {0 0 63 20} labelsize 12 divider
       } {
         MenuItem {mPrevProj[0]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          callback {OpenPreviousProject(o->mvalue()->label());}
           xywh {15 15 100 20} labelsize 12 hide
-          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[1]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          callback {OpenPreviousProject(o->mvalue()->label());}
           xywh {25 25 100 20} labelsize 12 hide
-          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[2]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          callback {OpenPreviousProject(o->mvalue()->label());}
           xywh {35 35 100 20} labelsize 12 hide
-          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[3]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          callback {OpenPreviousProject(o->mvalue()->label());}
           xywh {45 45 100 20} labelsize 12 hide
-          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[4]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          callback {OpenPreviousProject(o->mvalue()->label());}
           xywh {55 55 100 20} labelsize 12 hide
-          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[5]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          callback {OpenPreviousProject(o->mvalue()->label());}
           xywh {65 65 100 20} labelsize 12 hide
-          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[6]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          callback {OpenPreviousProject(o->mvalue()->label());}
           xywh {75 75 100 20} labelsize 12 hide
-          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[7]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          callback {OpenPreviousProject(o->mvalue()->label());}
           xywh {85 85 100 20} labelsize 12 hide
-          code0 {o->label(0L);}
         }
       }
       MenuItem mFileExit {
@@ -249,7 +241,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project open
+      label Project
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -490,7 +482,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mHelp {
-      label Help
+      label Help open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -507,7 +499,9 @@ widget_class Fldtk_Main_Window {
       }
       MenuItem mHelpAbout {
         label {About Dyne Toolkit...}
-        callback {fl_message("Welcome to the Dyne Toolkit...");}
+        callback {if (!wAboutDialog) 
+  create_about_dialog();
+wAboutDialog->show();}
         xywh {5 5 100 20} labelsize 12
       }
     }
@@ -718,7 +712,7 @@ SetModeAddTemplate();} open
       xywh {590 570 15 25} resizable
     }
   }
-  Function {activate_menus(unsigned int mask)} {open return_type void
+  Function {activate_menus(unsigned int mask)} {return_type void
   } {
     code {// bits in the mask have the following meanings:
 //	bit 0: a project is loaded
@@ -855,10 +849,11 @@ if ( (mask & 0x00000080) == 0x00000080 ) {
   }
 } 
 
-Function {create_connect_dialog()} {} {
+Function {create_connect_dialog()} {open
+} {
   Fl_Window {} {
     label Progress open
-    xywh {-32000 -32000 225 115} type Double hide modal
+    xywh {4 30 225 115} type Double modal visible
   } {
     Fl_Box {} {
       label {Tap the Toolkit icon on the Newton device, select "Connect via Serial", and tap Connect Inspector.}
@@ -868,6 +863,42 @@ Function {create_connect_dialog()} {} {
       label Cancel
       callback {InspectorCancelConnect();}
       xywh {72 81 80 20} labelsize 12 hotspot
+    }
+  }
+} 
+
+Function {create_about_dialog()} {open
+} {
+  Fl_Window wAboutDialog {
+    label {About DyneTK} open
+    xywh {411 223 326 287} type Double modal visible
+  } {
+    Fl_Group {} {open
+      xywh {5 5 315 250} box THIN_DOWN_BOX
+    } {
+      Fl_Box {} {
+        label {Dyne Toolkit}
+        xywh {10 10 305 70} box FLAT_BOX color 137 labelfont 1 labelsize 41 labelcolor 7 align 16
+      }
+      Fl_Box {} {
+        label {Version 1.7.0}
+        xywh {215 80 100 20} labelfont 1 labelsize 13 align 24
+      }
+      Fl_Box {} {
+        label {DyneTK (c) 2007, 2008 Matthias Melcher. DyneTK is licensed under GPL. Please visit http://code.google.com/p/dynee5/ for more information.
+
+DyneTK is based on the following GPL and LGPL licensed software:
+ - Newt/0: http://www.so-kukan.com/
+ - FLTK: http://www.fltk.org/
+
+Newton never dies, it just gets new tools.}
+        xywh {10 100 305 150} labelsize 11 align 148
+      }
+    }
+    Fl_Button {} {
+      label Close
+      callback {wAboutDialog->hide();} selected
+      xywh {250 260 70 20} labelsize 12
     }
   }
 } 
