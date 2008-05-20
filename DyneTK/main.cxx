@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
 	dtkProjSettings = new Fldtk_Proj_Settings();
 
     // load the standard platform file.
-    dtkPlatform = new Dtk_Platform("NEWTON21.PTF");
+    dtkPlatform = new Dtk_Platform("platfrms/Newton21.ptf");
 
 	// create the main window
 	dtkMain = new Fldtk_Main_Window(785, 595);

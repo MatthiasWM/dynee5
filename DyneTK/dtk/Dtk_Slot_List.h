@@ -58,7 +58,11 @@ public:
      */
     void add(Dtk_Slot *slot);
 
-    /** Return the numbeer of slots in the list
+    /** Remove a slot from this list and from the GUI.
+     */
+    void remove(Dtk_Slot *slot);
+
+    /** Return the number of slots in the list
      */
     int size();
 

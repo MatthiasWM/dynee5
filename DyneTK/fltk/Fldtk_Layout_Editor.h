@@ -35,6 +35,8 @@ class Fl_Menu_Button;
 class Dtk_Layout_Document;
 class Dtk_Template;
 class Fldtk_Slot_Editor_Group;
+class Fldtk_Slot_Browser;
+class Fldtk_Tmpl_Browser;
 
 
 /** GUI element for editing layouts.
@@ -45,9 +47,10 @@ public:
 	                        Fldtk_Layout_Editor(Dtk_Layout_Document *layout);
 	virtual                 ~Fldtk_Layout_Editor();
     virtual Dtk_Document    * document();
-    Fl_Hold_Browser         * templateBrowser() { return tmplBrowser_; }
-    Fl_Hold_Browser         * slotBrowser() { return slotBrowser_; }
+    Fldtk_Tmpl_Browser      * templateBrowser() { return tmplBrowser_; }
+    Fldtk_Slot_Browser      * slotBrowser() { return slotBrowser_; }
     Fldtk_Slot_Editor_Group * slotEditor() { return slotEditor_; }
+    void                    userChangedSlots();
     void                    userDeselectedTemplates();
     void                    userSelectedTemplate(Dtk_Template *tmpl);
 
@@ -56,8 +59,8 @@ protected:
 
     /// The currently selected template
     Dtk_Template            * template_;
-	Fl_Hold_Browser         * tmplBrowser_;
-	Fl_Hold_Browser         * slotBrowser_;
+	Fldtk_Tmpl_Browser      * tmplBrowser_;
+	Fldtk_Slot_Browser      * slotBrowser_;
     Fldtk_Slot_Editor_Group * slotEditor_;
     Fl_Menu_Button          * specificChoice_;
     Fl_Menu_Button          * methodsChoice_;

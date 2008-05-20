@@ -39,7 +39,7 @@ class Fl_Wizard;
 
 /*---------------------------------------------------------------------------*/
 /**
- * Base class for any kind of document that we can view, edit, or even compile.
+ * A document of the the type Layout.
  */
 class Dtk_Layout_Document : public Dtk_Document
 {
@@ -77,6 +77,10 @@ public:
      */
     bool            editViewShown();
 
+    /** Call this to update the pulldown menus in the layout editor.
+     */ 
+    void updateMenus();
+
     void editView();
     Fl_Hold_Browser * templateBrowser();
     Fl_Hold_Browser * slotBrowser();
@@ -84,6 +88,10 @@ public:
     Fldtk_Layout_View * layoutView() { return view_; }
 
     Dtk_Template    * addTemplate(int x, int y, int w, int h, char *proto=0L);
+
+    /** Remove a template from this layout.
+     */
+    void            removeTemplate(Dtk_Template*);
 
 private:
 

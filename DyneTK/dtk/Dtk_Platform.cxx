@@ -87,26 +87,26 @@ Dtk_Platform::~Dtk_Platform()
  */
 int Dtk_Platform::load(const char *filename)
 {
-    
-
-#if 0
-    // load platform file from disk
+#if 1
+    // try to load the platform file:
     struct stat st;
     if (stat(filename, &st)) {
         fl_alert(
             "Platform file \"%s\" not found.\n\n"
             "This file is required to edit DyneTK projects. It must be placed in the DyneTK start directory.\n"
-            "\"%s\" is part of the Mac NTK and should be available on Unna:\n\n"
-            "http://www.unna.org/view.php?/apple/development/NTK/platformfiles/21PTF.ZIP",
+            "\"%s\" is part of the MSWindow NTK and should be available on Unna:\n\n"
+            "http://www.unna.org/view.php?/apple/development/NTK/winntk/1.6b10/NTK.ZIP",
             filename, filename);
         return -1;
     }
+    // load the file
     FILE *f = fopen(filename, "rb");
 	uint8_t *pf = (uint8_t*)malloc(st.st_size);
     fread(pf, 1, st.st_size, f);
     fclose(f);
-
+    // interprete the NSOF stream
     platform_ = NewtReadNSOF(pf, st.st_size);
+
 #else
     // assemble a long string from a few short strings. VisualC6 can not deal with 
     // very long stringas and ends up in a buffer overflow (it is graceful enough
@@ -165,7 +165,7 @@ Fl_Menu_Item *Dtk_Platform::templateChoiceMenu()
         if (NewtRefIsSymbol(sym)) {
             templateChoiceMenu_[mi].label(strdup(NewtSymbolGetName(sym)));
             newtRef tmplDB = NewtGetFrameSlot(ta, i+1);
-            newtRef proto = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__proto)));
+            newtRef proto = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(_proto)));
             templateChoiceMenu_[mi].user_data((void*)NewtRefToInteger(proto));
             mi++;
         } else {

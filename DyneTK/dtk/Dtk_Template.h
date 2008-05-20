@@ -129,13 +129,17 @@ public:
      */
     Dtk_Template    * addTemplate(int x, int y, int w, int h, char *proto=0L);
 
-    /** Add a previously create slot to this layout.
+    /** Add a previously create slot to this template.
      */
     void            addSlot(Dtk_Slot *);
 
     /** Add a named slot using a newt script description.
      */
     Dtk_Slot        * addSlot(newtRef key, newtRef slot);
+
+    /** Remove a slot from this template
+     */
+    void            removeSlot(Dtk_Slot *);
 
     /** Return the associated Layout
      */

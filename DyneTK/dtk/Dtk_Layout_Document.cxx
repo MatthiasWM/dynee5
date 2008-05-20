@@ -37,6 +37,8 @@
 #include "fltk/Fldtk_Layout_Editor.h"
 #include "fltk/Fldtk_Layout_View.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
+#include "fltk/Fldtk_Slot_Browser.h"
+#include "fltk/Fldtk_Tmpl_Browser.h"
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fluid/main_ui.h"
 #include "flnt/Flnt_Widget.h"
@@ -386,6 +388,23 @@ Dtk_Template *Dtk_Layout_Document::addTemplate(int x, int y, int w, int h, char 
 
     return tmpl;
 }
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Layout_Document::removeTemplate(Dtk_Template *tmpl)
+{
+    fl_alert("Removing templates is not implemented yet");
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Layout_Document::updateMenus()
+{
+    Fldtk_Layout_Editor *ed = (Fldtk_Layout_Editor*)editor_;
+    if (ed) {
+        ed->userChangedSlots();
+    }
+}
+
 
 
 //

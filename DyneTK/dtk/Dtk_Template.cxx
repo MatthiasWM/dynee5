@@ -374,6 +374,12 @@ void Dtk_Template::addSlot(Dtk_Slot *slot)
 }
 
 /*---------------------------------------------------------------------------*/
+void Dtk_Template::removeSlot(Dtk_Slot *slot) 
+{
+    slotList()->remove(slot);
+}
+
+/*---------------------------------------------------------------------------*/
 Dtk_Slot *Dtk_Template::addSlot(newtRef key, newtRef slot) 
 {
     if (!NewtRefIsFrame(slot)) 

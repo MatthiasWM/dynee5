@@ -29,6 +29,8 @@
 
 #include "Fldtk_Layout_Editor.h"
 #include "Fldtk_Slot_Editor_Group.h"
+#include "Fldtk_Slot_Browser.h"
+#include "Fldtk_Tmpl_Browser.h"
 #include "dtk/Dtk_Layout_Document.h"
 #include "dtk/Dtk_Platform.h"
 #include "dtk/Dtk_Template.h"
@@ -77,7 +79,7 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
         {
             Fl_Group *nw = new Fl_Group(X, Y, W/2, H/4);
             {
-                tmplBrowser_ = new Fl_Hold_Browser(X, Y, W/2-2, H/4-2);
+                tmplBrowser_ = new Fldtk_Tmpl_Browser(X, Y, W/2-2, H/4-2);
                 tmplBrowser_->textsize(12);
                 nw->resizable(tmplBrowser_);
             }
@@ -85,7 +87,7 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
             nw->end();
             Fl_Group *ne = new Fl_Group(X+W/2, Y, W-W/2, H/4);
             {
-                slotBrowser_ = new Fl_Hold_Browser(X+W/2+2, Y, W-W/2-2, H/4-2);
+                slotBrowser_ = new Fldtk_Slot_Browser(X+W/2+2, Y, W-W/2-2, H/4-2);
                 slotBrowser_->textsize(12);
                 ne->resizable(slotBrowser_);
             }
@@ -199,6 +201,7 @@ void Fldtk_Layout_Editor::specific_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Edi
     e->slotBrowser()->add(slot->key(), slot);
     e->slotBrowser()->value(e->slotBrowser()->size());
     e->slotBrowser()->do_callback();
+    e->userChangedSlots();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -213,6 +216,7 @@ void Fldtk_Layout_Editor::methods_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Edit
     e->slotBrowser()->add(slot->key(), slot);
     e->slotBrowser()->value(e->slotBrowser()->size());
     e->slotBrowser()->do_callback();
+    e->userChangedSlots();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -227,6 +231,16 @@ void Fldtk_Layout_Editor::attributes_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_E
     e->slotBrowser()->add(slot->key(), slot);
     e->slotBrowser()->value(e->slotBrowser()->size());
     e->slotBrowser()->do_callback();
+    e->userChangedSlots();
+}
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Layout_Editor::userChangedSlots()
+{
+    if (template_)
+        userSelectedTemplate(template_);
+    else
+        userDeselectedTemplates();
 }
 
 /*---------------------------------------------------------------------------*/

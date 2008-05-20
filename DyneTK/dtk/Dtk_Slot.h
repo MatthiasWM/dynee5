@@ -76,7 +76,7 @@ public:
      */     
     virtual int		write(Dtk_Script_Writer &sw) { return -1; }
 
-    /** Find the address of the layout that we are part of.
+    /** Find the address of the layout that manages this slot.
      */
     Dtk_Layout_Document * layout();
 
@@ -88,7 +88,7 @@ public:
      */
     virtual void    revert() { }
 
-    /** Return the tamplate that holds this slot list
+    /** Return the template that manages this slot.
      */
     Dtk_Template    * getTemplate();
 

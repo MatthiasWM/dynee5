@@ -39,6 +39,7 @@
 #include "Dtk_Slot.h"
 #include "Dtk_Template.h"
 #include "Dtk_Layout_Document.h"
+#include "fltk/Fldtk_Slot_Editor_Group.h"
 
 #include "allNewt.h"
 
@@ -79,6 +80,28 @@ Dtk_Layout_Document *Dtk_Slot_List::layout()
 void Dtk_Slot_List::add(Dtk_Slot *slot) 
 {
     slotList_.push_back(slot);
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Slot_List::remove(Dtk_Slot *slot) 
+{
+    int i, n = slotList_.size();
+    for (i=n-1; i>=0; --i) {
+        if (slotList_.at(i)==slot) {
+            slotList_.erase(slotList_.begin()+i);
+            if (browser_) {
+                browser_->remove(i+1);
+                browser_->value(0);
+            }
+            if (layout()) {
+                layout()->slotEditor()->blank();
+                layout()->updateMenus();
+            }
+            delete slot;
+            break;
+        }
+    }
 }
 
 

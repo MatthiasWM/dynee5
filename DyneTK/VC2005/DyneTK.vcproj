@@ -4,6 +4,7 @@
 	Version="8.00"
 	Name="DyneTK"
 	ProjectGUID="{D2110541-9349-4391-908C-0CFFF7CB09C7}"
+	RootNamespace="DyneTK"
 	>
 	<Platforms>
 		<Platform
@@ -504,6 +505,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\fltk\Fldtk_Slot_Browser.cxx"
+				>
+			</File>
+			<File
 				RelativePath="..\fltk\Fldtk_Slot_Editor_Group.cxx"
 				>
 				<FileConfiguration
@@ -546,6 +551,10 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\fltk\Fldtk_Tmpl_Browser.cxx"
+				>
 			</File>
 			<File
 				RelativePath="..\fltk\Fldtk_Value_Slot_Editor.cxx"
@@ -845,11 +854,19 @@
 					>
 				</File>
 				<File
+					RelativePath="..\fltk\Fldtk_Slot_Browser.h"
+					>
+				</File>
+				<File
 					RelativePath="..\fltk\Fldtk_Slot_Editor_Group.h"
 					>
 				</File>
 				<File
 					RelativePath="..\fluid\Fldtk_Snapshot.h"
+					>
+				</File>
+				<File
+					RelativePath="..\fltk\Fldtk_Tmpl_Browser.h"
 					>
 				</File>
 				<File
