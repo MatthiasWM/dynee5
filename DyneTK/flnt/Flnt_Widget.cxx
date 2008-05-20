@@ -54,7 +54,7 @@ Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl, Dtk_Layout_Document *layout)
     screenToNewt();
     init_sizes();
     align(FL_ALIGN_INSIDE|FL_ALIGN_WRAP|FL_ALIGN_CLIP|FL_ALIGN_TOP|FL_ALIGN_LEFT);
-    labelfont((Fl_Font)16);
+    //labelfont((Fl_Font)16);
     labelsize(10);
     box(FL_BORDER_BOX);
     resizable(0L);

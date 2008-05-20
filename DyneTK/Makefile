@@ -45,6 +45,8 @@ SRCFILES = \
   fltk/Fldtk_Script_Editor.cxx \
   fltk/Fldtk_Script_Slot_Editor.cxx \
   fltk/Fldtk_Slot_Editor_Group.cxx \
+  fltk/Fldtk_Slot_Browser.cxx \
+  fltk/Fldtk_Tmpl_Browser.cxx \
   fltk/Fldtk_Value_Slot_Editor.cxx \
   fluid/Fldtk_Inspector.cxx \
   fluid/Fldtk_Proj_Settings.cxx \

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 use_FL_COMMAND 
 header_name {.h} 
 code_name {.cxx}
@@ -56,7 +56,7 @@ widget_class Fldtk_Main_Window {
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File
+      label File open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mFileNewLayout {
@@ -119,40 +119,40 @@ widget_class Fldtk_Main_Window {
         xywh {5 5 100 20} shortcut 0x40070 labelsize 12 labelcolor 176 deactivate divider
       }
       Submenu {} {
-        label {Previous Projects}
+        label {Previous Projects} open
         xywh {0 0 63 20} labelsize 12 divider
       } {
         MenuItem {mPrevProj[0]} {
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {15 15 100 20} labelsize 12 hide
+          xywh {15 15 100 20} shortcut 0x80031 labelsize 12 hide
         }
         MenuItem {mPrevProj[1]} {
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {25 25 100 20} labelsize 12 hide
+          xywh {25 25 100 20} shortcut 0x80032 labelsize 12 hide
         }
         MenuItem {mPrevProj[2]} {
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {35 35 100 20} labelsize 12 hide
+          xywh {35 35 100 20} shortcut 0x80033 labelsize 12 hide
         }
         MenuItem {mPrevProj[3]} {
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {45 45 100 20} labelsize 12 hide
+          xywh {45 45 100 20} shortcut 0x80034 labelsize 12 hide
         }
         MenuItem {mPrevProj[4]} {
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {55 55 100 20} labelsize 12 hide
+          xywh {55 55 100 20} shortcut 0x80035 labelsize 12 hide
         }
         MenuItem {mPrevProj[5]} {
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {65 65 100 20} labelsize 12 hide
+          xywh {65 65 100 20} shortcut 0x80036 labelsize 12 hide
         }
         MenuItem {mPrevProj[6]} {
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {75 75 100 20} labelsize 12 hide
+          xywh {75 75 100 20} shortcut 0x80037 labelsize 12 hide
         }
         MenuItem {mPrevProj[7]} {
-          callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {85 85 100 20} labelsize 12 hide
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {85 85 100 20} shortcut 0x80038 labelsize 12 hide
         }
       }
       MenuItem mFileExit {
@@ -291,7 +291,7 @@ widget_class Fldtk_Main_Window {
       MenuItem mProjectBuild {
         label {Build Package}
         callback {BuildPackage();}
-        xywh {5 5 100 20} shortcut 0x40031 labelsize 12 deactivate
+        xywh {5 5 100 20} shortcut 0x400031 labelsize 12 deactivate
       }
       MenuItem mProjectDownload {
         label {Download Package}
@@ -392,12 +392,12 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mBrowser {
-      label Browser open
+      label Browser
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mBrowserTemplateInfo {
         label {Template Info...}
-        callback {ShowTemplateInfo();} selected
+        callback {ShowTemplateInfo();}
         xywh {5 5 100 20} shortcut 0x40069 labelsize 12 deactivate divider
       }
       MenuItem {} {

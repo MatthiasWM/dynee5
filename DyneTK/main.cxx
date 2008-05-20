@@ -138,7 +138,18 @@ int main(int argc, char **argv) {
 	dtkProjSettings = new Fldtk_Proj_Settings();
 
     // load the standard platform file.
+#ifdef USING_APPLE_BUNDLE
+  CFURLRef    seagullURL;
+  CFBundleRef mainBundle;
+  mainBundle = CFBundleGetMainBundle();
+  seagullURL = CFBundleCopyResourceURL( mainBundle, CFSTR("Newton21"), CFSTR("ptf"), NULL );
+  CFStringRef str = CFURLCopyFileSystemPath(seagullURL, kCFURLPOSIXPathStyle);
+  char buf[2048];
+  CFStringGetCString(str, buf, 2048, 0);
+  dtkPlatform = new Dtk_Platform(buf);
+#else
     dtkPlatform = new Dtk_Platform("platfrms/Newton21.ptf");
+#endif
 
 	// create the main window
 	dtkMain = new Fldtk_Main_Window(785, 595);

@@ -9,54 +9,78 @@
 /* Begin PBXBuildFile section */
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
-		C9FF05B80BC6264A008673DF /* globals.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05B20BC6264A008673DF /* globals.cxx */; };
-		C9FF05B90BC6264A008673DF /* main.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05B40BC6264A008673DF /* main.cxx */; };
-		C9FF05BA0BC6264A008673DF /* sandbox.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05B70BC6264A008673DF /* sandbox.cxx */; };
+		C9FB9BF80DE352BE00026BB1 /* sandbox.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B540DE352BD00026BB1 /* sandbox.cxx */; };
+		C9FB9BF90DE352BE00026BB1 /* Dtk_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B560DE352BD00026BB1 /* Dtk_Document.cxx */; };
+		C9FB9BFB0DE352BE00026BB1 /* Dtk_Document_List.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B590DE352BE00026BB1 /* Dtk_Document_List.cxx */; };
+		C9FB9BFD0DE352BE00026BB1 /* Dtk_Error.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B5C0DE352BE00026BB1 /* Dtk_Error.cxx */; };
+		C9FB9BFF0DE352BE00026BB1 /* Dtk_Layout_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B5F0DE352BE00026BB1 /* Dtk_Layout_Document.cxx */; };
+		C9FB9C010DE352BE00026BB1 /* Dtk_Platform.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B620DE352BE00026BB1 /* Dtk_Platform.cxx */; };
+		C9FB9C030DE352BE00026BB1 /* Dtk_Project.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B650DE352BE00026BB1 /* Dtk_Project.cxx */; };
+		C9FB9C050DE352BE00026BB1 /* Dtk_Proto_Slot.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B680DE352BE00026BB1 /* Dtk_Proto_Slot.cxx */; };
+		C9FB9C070DE352BE00026BB1 /* Dtk_Rect_Slot.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B6B0DE352BE00026BB1 /* Dtk_Rect_Slot.cxx */; };
+		C9FB9C090DE352BE00026BB1 /* Dtk_Script_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B6E0DE352BE00026BB1 /* Dtk_Script_Document.cxx */; };
+		C9FB9C0B0DE352BE00026BB1 /* Dtk_Script_Slot.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B710DE352BE00026BB1 /* Dtk_Script_Slot.cxx */; };
+		C9FB9C0D0DE352BE00026BB1 /* Dtk_Script_Writer.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B740DE352BE00026BB1 /* Dtk_Script_Writer.cxx */; };
+		C9FB9C0F0DE352BE00026BB1 /* Dtk_Slot.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B770DE352BE00026BB1 /* Dtk_Slot.cxx */; };
+		C9FB9C110DE352BE00026BB1 /* Dtk_Slot_List.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B7A0DE352BE00026BB1 /* Dtk_Slot_List.cxx */; };
+		C9FB9C130DE352BE00026BB1 /* Dtk_Template.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B7D0DE352BE00026BB1 /* Dtk_Template.cxx */; };
+		C9FB9C150DE352BE00026BB1 /* Dtk_Template_List.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B800DE352BE00026BB1 /* Dtk_Template_List.cxx */; };
+		C9FB9C170DE352BE00026BB1 /* Dtk_Value_Slot.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B830DE352BE00026BB1 /* Dtk_Value_Slot.cxx */; };
+		C9FB9C190DE352BE00026BB1 /* Fldtk_Inspector.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B870DE352BE00026BB1 /* Fldtk_Inspector.cxx */; };
+		C9FB9C1C0DE352BE00026BB1 /* Fldtk_Prefs.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B8B0DE352BE00026BB1 /* Fldtk_Prefs.cxx */; };
+		C9FB9C1F0DE352BE00026BB1 /* Fldtk_Proj_Settings.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B8F0DE352BE00026BB1 /* Fldtk_Proj_Settings.cxx */; };
+		C9FB9C220DE352BE00026BB1 /* Fldtk_Snapshot.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B930DE352BE00026BB1 /* Fldtk_Snapshot.cxx */; };
+		C9FB9C250DE352BE00026BB1 /* main_ui.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B970DE352BE00026BB1 /* main_ui.cxx */; };
+		C9FB9C280DE352BE00026BB1 /* main.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B9B0DE352BE00026BB1 /* main.cxx */; };
+		C9FB9C290DE352BE00026BB1 /* Flnt_Widget.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B9D0DE352BE00026BB1 /* Flnt_Widget.cxx */; };
+		C9FB9C2B0DE352BE00026BB1 /* globals.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BA10DE352BE00026BB1 /* globals.cxx */; };
+		C9FB9C2C0DE352BE00026BB1 /* Fldtk_Document_Browser.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BA40DE352BE00026BB1 /* Fldtk_Document_Browser.cxx */; };
+		C9FB9C2E0DE352BE00026BB1 /* Fldtk_Document_Tabs.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BA70DE352BE00026BB1 /* Fldtk_Document_Tabs.cxx */; };
+		C9FB9C300DE352BE00026BB1 /* Fldtk_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BAA0DE352BE00026BB1 /* Fldtk_Editor.cxx */; };
+		C9FB9C320DE352BE00026BB1 /* Fldtk_Format_Slot_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BAD0DE352BE00026BB1 /* Fldtk_Format_Slot_Editor.cxx */; };
+		C9FB9C350DE352BE00026BB1 /* Fldtk_Justify_Slot_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BB10DE352BE00026BB1 /* Fldtk_Justify_Slot_Editor.cxx */; };
+		C9FB9C380DE352BE00026BB1 /* Fldtk_Layout_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BB50DE352BE00026BB1 /* Fldtk_Layout_Editor.cxx */; };
+		C9FB9C3A0DE352BE00026BB1 /* Fldtk_Layout_View.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BB80DE352BE00026BB1 /* Fldtk_Layout_View.cxx */; };
+		C9FB9C3C0DE352BE00026BB1 /* Fldtk_Proto_Slot_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BBB0DE352BE00026BB1 /* Fldtk_Proto_Slot_Editor.cxx */; };
+		C9FB9C3E0DE352BE00026BB1 /* Fldtk_Rect_Slot_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BBE0DE352BE00026BB1 /* Fldtk_Rect_Slot_Editor.cxx */; };
+		C9FB9C400DE352BE00026BB1 /* Fldtk_Script_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BC10DE352BE00026BB1 /* Fldtk_Script_Editor.cxx */; };
+		C9FB9C420DE352BE00026BB1 /* Fldtk_Script_Slot_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BC40DE352BE00026BB1 /* Fldtk_Script_Slot_Editor.cxx */; };
+		C9FB9C440DE352BE00026BB1 /* Fldtk_Slot_Browser.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BC70DE352BE00026BB1 /* Fldtk_Slot_Browser.cxx */; };
+		C9FB9C460DE352BE00026BB1 /* Fldtk_Slot_Editor_Group.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BCA0DE352BE00026BB1 /* Fldtk_Slot_Editor_Group.cxx */; };
+		C9FB9C480DE352BE00026BB1 /* Fldtk_Tmpl_Browser.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BCD0DE352BE00026BB1 /* Fldtk_Tmpl_Browser.cxx */; };
+		C9FB9C4A0DE352BE00026BB1 /* Fldtk_Value_Slot_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BD00DE352BE00026BB1 /* Fldtk_Value_Slot_Editor.cxx */; };
+		C9FB9C4D0DE352BE00026BB1 /* Flio_Inspector.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BD40DE352BE00026BB1 /* Flio_Inspector.cxx */; };
+		C9FB9C4F0DE352BE00026BB1 /* Flio_MNP4_Protocol.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BD70DE352BE00026BB1 /* Flio_MNP4_Protocol.cxx */; };
+		C9FB9C510DE352BE00026BB1 /* Flio_Pipe.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BDA0DE352BE00026BB1 /* Flio_Pipe.cxx */; };
+		C9FB9C530DE352BE00026BB1 /* Flio_Serial_Port.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BDD0DE352BE00026BB1 /* Flio_Serial_Port.cxx */; };
+		C9FB9C550DE352BE00026BB1 /* Flio_Stream.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BE00DE352BE00026BB1 /* Flio_Stream.cxx */; };
+		C9FB9C570DE352BE00026BB1 /* Flmm_Console.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BE30DE352BE00026BB1 /* Flmm_Console.cxx */; };
+		C9FB9C590DE352BE00026BB1 /* Flmm_Message.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BE60DE352BE00026BB1 /* Flmm_Message.cxx */; };
+		C9FB9C5B0DE352BE00026BB1 /* Flmm_Newt_Script_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BE90DE352BE00026BB1 /* Flmm_Newt_Script_Editor.cxx */; };
+		C9FB9C5D0DE352BE00026BB1 /* Flmm_Set_Check_Button.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BEC0DE352BE00026BB1 /* Flmm_Set_Check_Button.cxx */; };
+		C9FB9C5F0DE352BE00026BB1 /* Flmm_Set_Input.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BEF0DE352BE00026BB1 /* Flmm_Set_Input.cxx */; };
+		C9FB9C610DE352BE00026BB1 /* Flmm_Signal.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BF20DE352BE00026BB1 /* Flmm_Signal.cxx */; };
+		C9FB9C630DE352BE00026BB1 /* Flmp_Image.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9BF50DE352BE00026BB1 /* Flmp_Image.cxx */; };
+		C9FBA0450DE3754400026BB1 /* Newton21.ptf in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9FBA0430DE3753800026BB1 /* Newton21.ptf */; };
+		C9FBA0460DE3754400026BB1 /* Newton21.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = C9FBA0440DE3753800026BB1 /* Newton21.txt */; };
 		C9FF05EE0BC6267E008673DF /* toolbox_closed.xpm in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05BC0BC6267E008673DF /* toolbox_closed.xpm */; };
 		C9FF05EF0BC6267E008673DF /* toolbox_inactive.xpm in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05BD0BC6267E008673DF /* toolbox_inactive.xpm */; };
 		C9FF05F00BC6267E008673DF /* toolbox_open.xpm in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05BE0BC6267E008673DF /* toolbox_open.xpm */; };
-		C9FF05F10BC6267E008673DF /* Fldtk_Document_Browser.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C00BC6267E008673DF /* Fldtk_Document_Browser.cxx */; };
-		C9FF05F20BC6267E008673DF /* Fldtk_Document_Tabs.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C20BC6267E008673DF /* Fldtk_Document_Tabs.cxx */; };
-		C9FF05F30BC6267E008673DF /* Fldtk_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C40BC6267E008673DF /* Fldtk_Editor.cxx */; };
-		C9FF05F40BC6267E008673DF /* Fldtk_Layout_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C60BC6267E008673DF /* Fldtk_Layout_Editor.cxx */; };
-		C9FF05F50BC6267E008673DF /* Fldtk_Script_Editor.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05C80BC6267E008673DF /* Fldtk_Script_Editor.cxx */; };
-		C9FF05F60BC6267E008673DF /* Flio_Inspector.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05CA0BC6267E008673DF /* Flio_Inspector.cxx */; };
-		C9FF05F70BC6267E008673DF /* Flio_MNP4_Serial.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05CC0BC6267E008673DF /* Flio_MNP4_Serial.cxx */; };
-		C9FF05F80BC6267E008673DF /* Flio_Serial_Port.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05CE0BC6267E008673DF /* Flio_Serial_Port.cxx */; };
-		C9FF05F90BC6267E008673DF /* Flmm_Console.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D00BC6267E008673DF /* Flmm_Console.cxx */; };
-		C9FF05FA0BC6267E008673DF /* Flmm_Set_Check_Button.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D20BC6267E008673DF /* Flmm_Set_Check_Button.cxx */; };
-		C9FF05FB0BC6267E008673DF /* Flmm_Set_Input.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D40BC6267E008673DF /* Flmm_Set_Input.cxx */; };
-		C9FF05FC0BC6267E008673DF /* Dtk_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D70BC6267E008673DF /* Dtk_Document.cxx */; };
-		C9FF05FD0BC6267E008673DF /* Dtk_Document_Manager.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05D90BC6267E008673DF /* Dtk_Document_Manager.cxx */; };
-		C9FF05FE0BC6267E008673DF /* Dtk_Layout_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05DB0BC6267E008673DF /* Dtk_Layout_Document.cxx */; };
-		C9FF05FF0BC6267E008673DF /* Dtk_Project.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05DD0BC6267E008673DF /* Dtk_Project.cxx */; };
-		C9FF06000BC6267E008673DF /* Dtk_Script_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05DF0BC6267E008673DF /* Dtk_Script_Document.cxx */; };
-		C9FF06010BC6267E008673DF /* Fldtk_Inspector.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05E20BC6267E008673DF /* Fldtk_Inspector.cxx */; };
-		C9FF06020BC6267E008673DF /* Fldtk_Inspector.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05E30BC6267E008673DF /* Fldtk_Inspector.fl */; };
-		C9FF06030BC6267E008673DF /* Fldtk_Prefs.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05E50BC6267E008673DF /* Fldtk_Prefs.cxx */; };
-		C9FF06040BC6267E008673DF /* Fldtk_Prefs.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05E60BC6267E008673DF /* Fldtk_Prefs.fl */; };
-		C9FF06050BC6267E008673DF /* Fldtk_Proj_Settings.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05E80BC6267E008673DF /* Fldtk_Proj_Settings.cxx */; };
-		C9FF06060BC6267E008673DF /* Fldtk_Proj_Settings.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05E90BC6267E008673DF /* Fldtk_Proj_Settings.fl */; };
-		C9FF06070BC6267E008673DF /* main_ui.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FF05EB0BC6267E008673DF /* main_ui.cxx */; };
-		C9FF06080BC6267E008673DF /* main_ui.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9FF05EC0BC6267E008673DF /* main_ui.fl */; };
-		C9FF06B10BC63F87008673DF /* newt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FF06B00BC63F87008673DF /* newt.a */; };
-		C9FF06B50BC64075008673DF /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C9FF06B40BC64075008673DF /* libiconv.dylib */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-		5FD914BF095F51EE00976476 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.fl";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-				"$(INPUT_FILE_DIR)/$(INPUT_FILE_BASE).h",
-				"$(INPUT_FILE_DIR)/$(INPUT_FILE_BASE).cxx",
+/* Begin PBXCopyFilesBuildPhase section */
+		C9FBA0420DE3750600026BB1 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				C9FBA0450DE3754400026BB1 /* Newton21.ptf in CopyFiles */,
+				C9FBA0460DE3754400026BB1 /* Newton21.txt in CopyFiles */,
 			);
-			script = "flc ${INPUT_FILE_PATH}";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXBuildRule section */
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -64,64 +88,114 @@
 		32DBCF6D0370B57F00C91783 /* FltkTpl_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FltkTpl_Prefix.pch; sourceTree = "<group>"; };
 		4A9504C8FFE6A3BC11CA0CBA /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		4A9504CAFFE6A41611CA0CBA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
-		5FD9149C095F515300976476 /* mac.r */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.rez; name = mac.r; path = Resource/mac.r; sourceTree = "<group>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D0C4E970486CD37000505A6 /* FltkTpl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FltkTpl.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9FF05B20BC6264A008673DF /* globals.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = globals.cxx; path = ../globals.cxx; sourceTree = SOURCE_ROOT; };
-		C9FF05B30BC6264A008673DF /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = globals.h; path = ../globals.h; sourceTree = SOURCE_ROOT; };
-		C9FF05B40BC6264A008673DF /* main.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cxx; path = ../main.cxx; sourceTree = SOURCE_ROOT; };
-		C9FF05B50BC6264A008673DF /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../main.h; sourceTree = SOURCE_ROOT; };
-		C9FF05B60BC6264A008673DF /* sandbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sandbox.h; path = ../sandbox.h; sourceTree = SOURCE_ROOT; };
-		C9FF05B70BC6264A008673DF /* sandbox.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sandbox.cxx; path = ../sandbox.cxx; sourceTree = SOURCE_ROOT; };
+		8D0C4E970486CD37000505A6 /* DyneTK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DyneTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9FB9B540DE352BD00026BB1 /* sandbox.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sandbox.cxx; path = ../sandbox.cxx; sourceTree = SOURCE_ROOT; };
+		C9FB9B560DE352BD00026BB1 /* Dtk_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Document.cxx; sourceTree = "<group>"; };
+		C9FB9B570DE352BD00026BB1 /* Dtk_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Document.h; sourceTree = "<group>"; };
+		C9FB9B590DE352BE00026BB1 /* Dtk_Document_List.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Document_List.cxx; sourceTree = "<group>"; };
+		C9FB9B5A0DE352BE00026BB1 /* Dtk_Document_List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Document_List.h; sourceTree = "<group>"; };
+		C9FB9B5C0DE352BE00026BB1 /* Dtk_Error.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Error.cxx; sourceTree = "<group>"; };
+		C9FB9B5D0DE352BE00026BB1 /* Dtk_Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Error.h; sourceTree = "<group>"; };
+		C9FB9B5F0DE352BE00026BB1 /* Dtk_Layout_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Layout_Document.cxx; sourceTree = "<group>"; };
+		C9FB9B600DE352BE00026BB1 /* Dtk_Layout_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Layout_Document.h; sourceTree = "<group>"; };
+		C9FB9B620DE352BE00026BB1 /* Dtk_Platform.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Platform.cxx; sourceTree = "<group>"; };
+		C9FB9B630DE352BE00026BB1 /* Dtk_Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Platform.h; sourceTree = "<group>"; };
+		C9FB9B650DE352BE00026BB1 /* Dtk_Project.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Project.cxx; sourceTree = "<group>"; };
+		C9FB9B660DE352BE00026BB1 /* Dtk_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Project.h; sourceTree = "<group>"; };
+		C9FB9B680DE352BE00026BB1 /* Dtk_Proto_Slot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Proto_Slot.cxx; sourceTree = "<group>"; };
+		C9FB9B690DE352BE00026BB1 /* Dtk_Proto_Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Proto_Slot.h; sourceTree = "<group>"; };
+		C9FB9B6B0DE352BE00026BB1 /* Dtk_Rect_Slot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Rect_Slot.cxx; sourceTree = "<group>"; };
+		C9FB9B6C0DE352BE00026BB1 /* Dtk_Rect_Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Rect_Slot.h; sourceTree = "<group>"; };
+		C9FB9B6E0DE352BE00026BB1 /* Dtk_Script_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Script_Document.cxx; sourceTree = "<group>"; };
+		C9FB9B6F0DE352BE00026BB1 /* Dtk_Script_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Script_Document.h; sourceTree = "<group>"; };
+		C9FB9B710DE352BE00026BB1 /* Dtk_Script_Slot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Script_Slot.cxx; sourceTree = "<group>"; };
+		C9FB9B720DE352BE00026BB1 /* Dtk_Script_Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Script_Slot.h; sourceTree = "<group>"; };
+		C9FB9B740DE352BE00026BB1 /* Dtk_Script_Writer.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Script_Writer.cxx; sourceTree = "<group>"; };
+		C9FB9B750DE352BE00026BB1 /* Dtk_Script_Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Script_Writer.h; sourceTree = "<group>"; };
+		C9FB9B770DE352BE00026BB1 /* Dtk_Slot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Slot.cxx; sourceTree = "<group>"; };
+		C9FB9B780DE352BE00026BB1 /* Dtk_Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Slot.h; sourceTree = "<group>"; };
+		C9FB9B7A0DE352BE00026BB1 /* Dtk_Slot_List.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Slot_List.cxx; sourceTree = "<group>"; };
+		C9FB9B7B0DE352BE00026BB1 /* Dtk_Slot_List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Slot_List.h; sourceTree = "<group>"; };
+		C9FB9B7D0DE352BE00026BB1 /* Dtk_Template.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Template.cxx; sourceTree = "<group>"; };
+		C9FB9B7E0DE352BE00026BB1 /* Dtk_Template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Template.h; sourceTree = "<group>"; };
+		C9FB9B800DE352BE00026BB1 /* Dtk_Template_List.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Template_List.cxx; sourceTree = "<group>"; };
+		C9FB9B810DE352BE00026BB1 /* Dtk_Template_List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Template_List.h; sourceTree = "<group>"; };
+		C9FB9B830DE352BE00026BB1 /* Dtk_Value_Slot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Value_Slot.cxx; sourceTree = "<group>"; };
+		C9FB9B840DE352BE00026BB1 /* Dtk_Value_Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Value_Slot.h; sourceTree = "<group>"; };
+		C9FB9B870DE352BE00026BB1 /* Fldtk_Inspector.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Inspector.cxx; sourceTree = "<group>"; };
+		C9FB9B890DE352BE00026BB1 /* Fldtk_Inspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Inspector.h; sourceTree = "<group>"; };
+		C9FB9B8B0DE352BE00026BB1 /* Fldtk_Prefs.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Prefs.cxx; sourceTree = "<group>"; };
+		C9FB9B8D0DE352BE00026BB1 /* Fldtk_Prefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Prefs.h; sourceTree = "<group>"; };
+		C9FB9B8F0DE352BE00026BB1 /* Fldtk_Proj_Settings.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Proj_Settings.cxx; sourceTree = "<group>"; };
+		C9FB9B910DE352BE00026BB1 /* Fldtk_Proj_Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Proj_Settings.h; sourceTree = "<group>"; };
+		C9FB9B930DE352BE00026BB1 /* Fldtk_Snapshot.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Snapshot.cxx; sourceTree = "<group>"; };
+		C9FB9B950DE352BE00026BB1 /* Fldtk_Snapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Snapshot.h; sourceTree = "<group>"; };
+		C9FB9B970DE352BE00026BB1 /* main_ui.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main_ui.cxx; sourceTree = "<group>"; };
+		C9FB9B990DE352BE00026BB1 /* main_ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main_ui.h; sourceTree = "<group>"; };
+		C9FB9B9B0DE352BE00026BB1 /* main.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cxx; path = ../main.cxx; sourceTree = SOURCE_ROOT; };
+		C9FB9B9D0DE352BE00026BB1 /* Flnt_Widget.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flnt_Widget.cxx; sourceTree = "<group>"; };
+		C9FB9B9E0DE352BE00026BB1 /* Flnt_Widget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flnt_Widget.h; sourceTree = "<group>"; };
+		C9FB9BA10DE352BE00026BB1 /* globals.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = globals.cxx; path = ../globals.cxx; sourceTree = SOURCE_ROOT; };
+		C9FB9BA40DE352BE00026BB1 /* Fldtk_Document_Browser.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Document_Browser.cxx; sourceTree = "<group>"; };
+		C9FB9BA50DE352BE00026BB1 /* Fldtk_Document_Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Document_Browser.h; sourceTree = "<group>"; };
+		C9FB9BA70DE352BE00026BB1 /* Fldtk_Document_Tabs.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Document_Tabs.cxx; sourceTree = "<group>"; };
+		C9FB9BA80DE352BE00026BB1 /* Fldtk_Document_Tabs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Document_Tabs.h; sourceTree = "<group>"; };
+		C9FB9BAA0DE352BE00026BB1 /* Fldtk_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BAB0DE352BE00026BB1 /* Fldtk_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Editor.h; sourceTree = "<group>"; };
+		C9FB9BAD0DE352BE00026BB1 /* Fldtk_Format_Slot_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Format_Slot_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BAF0DE352BE00026BB1 /* Fldtk_Format_Slot_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Format_Slot_Editor.h; sourceTree = "<group>"; };
+		C9FB9BB10DE352BE00026BB1 /* Fldtk_Justify_Slot_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Justify_Slot_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BB30DE352BE00026BB1 /* Fldtk_Justify_Slot_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Justify_Slot_Editor.h; sourceTree = "<group>"; };
+		C9FB9BB50DE352BE00026BB1 /* Fldtk_Layout_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Layout_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BB60DE352BE00026BB1 /* Fldtk_Layout_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Layout_Editor.h; sourceTree = "<group>"; };
+		C9FB9BB80DE352BE00026BB1 /* Fldtk_Layout_View.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Layout_View.cxx; sourceTree = "<group>"; };
+		C9FB9BB90DE352BE00026BB1 /* Fldtk_Layout_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Layout_View.h; sourceTree = "<group>"; };
+		C9FB9BBB0DE352BE00026BB1 /* Fldtk_Proto_Slot_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Proto_Slot_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BBC0DE352BE00026BB1 /* Fldtk_Proto_Slot_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Proto_Slot_Editor.h; sourceTree = "<group>"; };
+		C9FB9BBE0DE352BE00026BB1 /* Fldtk_Rect_Slot_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Rect_Slot_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BBF0DE352BE00026BB1 /* Fldtk_Rect_Slot_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Rect_Slot_Editor.h; sourceTree = "<group>"; };
+		C9FB9BC10DE352BE00026BB1 /* Fldtk_Script_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Script_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BC20DE352BE00026BB1 /* Fldtk_Script_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Script_Editor.h; sourceTree = "<group>"; };
+		C9FB9BC40DE352BE00026BB1 /* Fldtk_Script_Slot_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Script_Slot_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BC50DE352BE00026BB1 /* Fldtk_Script_Slot_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Script_Slot_Editor.h; sourceTree = "<group>"; };
+		C9FB9BC70DE352BE00026BB1 /* Fldtk_Slot_Browser.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Slot_Browser.cxx; sourceTree = "<group>"; };
+		C9FB9BC80DE352BE00026BB1 /* Fldtk_Slot_Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Slot_Browser.h; sourceTree = "<group>"; };
+		C9FB9BCA0DE352BE00026BB1 /* Fldtk_Slot_Editor_Group.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Slot_Editor_Group.cxx; sourceTree = "<group>"; };
+		C9FB9BCB0DE352BE00026BB1 /* Fldtk_Slot_Editor_Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Slot_Editor_Group.h; sourceTree = "<group>"; };
+		C9FB9BCD0DE352BE00026BB1 /* Fldtk_Tmpl_Browser.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Tmpl_Browser.cxx; sourceTree = "<group>"; };
+		C9FB9BCE0DE352BE00026BB1 /* Fldtk_Tmpl_Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Tmpl_Browser.h; sourceTree = "<group>"; };
+		C9FB9BD00DE352BE00026BB1 /* Fldtk_Value_Slot_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Value_Slot_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BD10DE352BE00026BB1 /* Fldtk_Value_Slot_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Value_Slot_Editor.h; sourceTree = "<group>"; };
+		C9FB9BD40DE352BE00026BB1 /* Flio_Inspector.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_Inspector.cxx; sourceTree = "<group>"; };
+		C9FB9BD50DE352BE00026BB1 /* Flio_Inspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_Inspector.h; sourceTree = "<group>"; };
+		C9FB9BD70DE352BE00026BB1 /* Flio_MNP4_Protocol.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_MNP4_Protocol.cxx; sourceTree = "<group>"; };
+		C9FB9BD80DE352BE00026BB1 /* Flio_MNP4_Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_MNP4_Protocol.h; sourceTree = "<group>"; };
+		C9FB9BDA0DE352BE00026BB1 /* Flio_Pipe.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_Pipe.cxx; sourceTree = "<group>"; };
+		C9FB9BDB0DE352BE00026BB1 /* Flio_Pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_Pipe.h; sourceTree = "<group>"; };
+		C9FB9BDD0DE352BE00026BB1 /* Flio_Serial_Port.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_Serial_Port.cxx; sourceTree = "<group>"; };
+		C9FB9BDE0DE352BE00026BB1 /* Flio_Serial_Port.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_Serial_Port.h; sourceTree = "<group>"; };
+		C9FB9BE00DE352BE00026BB1 /* Flio_Stream.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_Stream.cxx; sourceTree = "<group>"; };
+		C9FB9BE10DE352BE00026BB1 /* Flio_Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_Stream.h; sourceTree = "<group>"; };
+		C9FB9BE30DE352BE00026BB1 /* Flmm_Console.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Console.cxx; sourceTree = "<group>"; };
+		C9FB9BE40DE352BE00026BB1 /* Flmm_Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Console.h; sourceTree = "<group>"; };
+		C9FB9BE60DE352BE00026BB1 /* Flmm_Message.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Message.cxx; sourceTree = "<group>"; };
+		C9FB9BE70DE352BE00026BB1 /* Flmm_Message.H */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Flmm_Message.H; sourceTree = "<group>"; };
+		C9FB9BE90DE352BE00026BB1 /* Flmm_Newt_Script_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Newt_Script_Editor.cxx; sourceTree = "<group>"; };
+		C9FB9BEA0DE352BE00026BB1 /* Flmm_Newt_Script_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Newt_Script_Editor.h; sourceTree = "<group>"; };
+		C9FB9BEC0DE352BE00026BB1 /* Flmm_Set_Check_Button.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Set_Check_Button.cxx; sourceTree = "<group>"; };
+		C9FB9BED0DE352BE00026BB1 /* Flmm_Set_Check_Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Set_Check_Button.h; sourceTree = "<group>"; };
+		C9FB9BEF0DE352BE00026BB1 /* Flmm_Set_Input.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Set_Input.cxx; sourceTree = "<group>"; };
+		C9FB9BF00DE352BE00026BB1 /* Flmm_Set_Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Set_Input.h; sourceTree = "<group>"; };
+		C9FB9BF20DE352BE00026BB1 /* Flmm_Signal.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Signal.cxx; sourceTree = "<group>"; };
+		C9FB9BF30DE352BE00026BB1 /* Flmm_Signal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Signal.h; sourceTree = "<group>"; };
+		C9FB9BF50DE352BE00026BB1 /* Flmp_Image.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmp_Image.cxx; sourceTree = "<group>"; };
+		C9FB9BF60DE352BE00026BB1 /* Flmp_Image.H */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Flmp_Image.H; sourceTree = "<group>"; };
+		C9FBA0430DE3753800026BB1 /* Newton21.ptf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Newton21.ptf; path = ../test/platfrms/Newton21.ptf; sourceTree = SOURCE_ROOT; };
+		C9FBA0440DE3753800026BB1 /* Newton21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Newton21.txt; path = ../test/platfrms/Newton21.txt; sourceTree = SOURCE_ROOT; };
 		C9FF05BC0BC6267E008673DF /* toolbox_closed.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_closed.xpm; sourceTree = "<group>"; };
 		C9FF05BD0BC6267E008673DF /* toolbox_inactive.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_inactive.xpm; sourceTree = "<group>"; };
 		C9FF05BE0BC6267E008673DF /* toolbox_open.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_open.xpm; sourceTree = "<group>"; };
-		C9FF05C00BC6267E008673DF /* Fldtk_Document_Browser.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Document_Browser.cxx; sourceTree = "<group>"; };
-		C9FF05C10BC6267E008673DF /* Fldtk_Document_Browser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Document_Browser.h; sourceTree = "<group>"; };
-		C9FF05C20BC6267E008673DF /* Fldtk_Document_Tabs.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Document_Tabs.cxx; sourceTree = "<group>"; };
-		C9FF05C30BC6267E008673DF /* Fldtk_Document_Tabs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Document_Tabs.h; sourceTree = "<group>"; };
-		C9FF05C40BC6267E008673DF /* Fldtk_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Editor.cxx; sourceTree = "<group>"; };
-		C9FF05C50BC6267E008673DF /* Fldtk_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Editor.h; sourceTree = "<group>"; };
-		C9FF05C60BC6267E008673DF /* Fldtk_Layout_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Layout_Editor.cxx; sourceTree = "<group>"; };
-		C9FF05C70BC6267E008673DF /* Fldtk_Layout_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Layout_Editor.h; sourceTree = "<group>"; };
-		C9FF05C80BC6267E008673DF /* Fldtk_Script_Editor.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Script_Editor.cxx; sourceTree = "<group>"; };
-		C9FF05C90BC6267E008673DF /* Fldtk_Script_Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Script_Editor.h; sourceTree = "<group>"; };
-		C9FF05CA0BC6267E008673DF /* Flio_Inspector.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_Inspector.cxx; sourceTree = "<group>"; };
-		C9FF05CB0BC6267E008673DF /* Flio_Inspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_Inspector.h; sourceTree = "<group>"; };
-		C9FF05CC0BC6267E008673DF /* Flio_MNP4_Serial.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_MNP4_Serial.cxx; sourceTree = "<group>"; };
-		C9FF05CD0BC6267E008673DF /* Flio_MNP4_Serial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_MNP4_Serial.h; sourceTree = "<group>"; };
-		C9FF05CE0BC6267E008673DF /* Flio_Serial_Port.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flio_Serial_Port.cxx; sourceTree = "<group>"; };
-		C9FF05CF0BC6267E008673DF /* Flio_Serial_Port.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flio_Serial_Port.h; sourceTree = "<group>"; };
-		C9FF05D00BC6267E008673DF /* Flmm_Console.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Console.cxx; sourceTree = "<group>"; };
-		C9FF05D10BC6267E008673DF /* Flmm_Console.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Console.h; sourceTree = "<group>"; };
-		C9FF05D20BC6267E008673DF /* Flmm_Set_Check_Button.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Set_Check_Button.cxx; sourceTree = "<group>"; };
-		C9FF05D30BC6267E008673DF /* Flmm_Set_Check_Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Set_Check_Button.h; sourceTree = "<group>"; };
-		C9FF05D40BC6267E008673DF /* Flmm_Set_Input.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flmm_Set_Input.cxx; sourceTree = "<group>"; };
-		C9FF05D50BC6267E008673DF /* Flmm_Set_Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flmm_Set_Input.h; sourceTree = "<group>"; };
-		C9FF05D70BC6267E008673DF /* Dtk_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Document.cxx; sourceTree = "<group>"; };
-		C9FF05D80BC6267E008673DF /* Dtk_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Document.h; sourceTree = "<group>"; };
-		C9FF05D90BC6267E008673DF /* Dtk_Document_Manager.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Document_Manager.cxx; sourceTree = "<group>"; };
-		C9FF05DA0BC6267E008673DF /* Dtk_Document_Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Document_Manager.h; sourceTree = "<group>"; };
-		C9FF05DB0BC6267E008673DF /* Dtk_Layout_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Layout_Document.cxx; sourceTree = "<group>"; };
-		C9FF05DC0BC6267E008673DF /* Dtk_Layout_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Layout_Document.h; sourceTree = "<group>"; };
-		C9FF05DD0BC6267E008673DF /* Dtk_Project.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Project.cxx; sourceTree = "<group>"; };
-		C9FF05DE0BC6267E008673DF /* Dtk_Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Project.h; sourceTree = "<group>"; };
-		C9FF05DF0BC6267E008673DF /* Dtk_Script_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Script_Document.cxx; sourceTree = "<group>"; };
-		C9FF05E00BC6267E008673DF /* Dtk_Script_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Script_Document.h; sourceTree = "<group>"; };
-		C9FF05E20BC6267E008673DF /* Fldtk_Inspector.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Inspector.cxx; sourceTree = "<group>"; };
-		C9FF05E30BC6267E008673DF /* Fldtk_Inspector.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fldtk_Inspector.fl; sourceTree = "<group>"; };
-		C9FF05E40BC6267E008673DF /* Fldtk_Inspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Inspector.h; sourceTree = "<group>"; };
-		C9FF05E50BC6267E008673DF /* Fldtk_Prefs.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Prefs.cxx; sourceTree = "<group>"; };
-		C9FF05E60BC6267E008673DF /* Fldtk_Prefs.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fldtk_Prefs.fl; sourceTree = "<group>"; };
-		C9FF05E70BC6267E008673DF /* Fldtk_Prefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Prefs.h; sourceTree = "<group>"; };
-		C9FF05E80BC6267E008673DF /* Fldtk_Proj_Settings.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Proj_Settings.cxx; sourceTree = "<group>"; };
-		C9FF05E90BC6267E008673DF /* Fldtk_Proj_Settings.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fldtk_Proj_Settings.fl; sourceTree = "<group>"; };
-		C9FF05EA0BC6267E008673DF /* Fldtk_Proj_Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Proj_Settings.h; sourceTree = "<group>"; };
-		C9FF05EB0BC6267E008673DF /* main_ui.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main_ui.cxx; sourceTree = "<group>"; };
-		C9FF05EC0BC6267E008673DF /* main_ui.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main_ui.fl; sourceTree = "<group>"; };
-		C9FF05ED0BC6267E008673DF /* main_ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main_ui.h; sourceTree = "<group>"; };
-		C9FF06B00BC63F87008673DF /* newt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = newt.a; path = ../../../newt0/build/newt.a; sourceTree = SOURCE_ROOT; };
-		C9FF06B40BC64075008673DF /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = /usr/lib/libiconv.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +204,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */,
-				C9FF06B10BC63F87008673DF /* newt.a in Frameworks */,
-				C9FF06B50BC64075008673DF /* libiconv.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +213,7 @@
 		195DF8CFFE9D517E11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D0C4E970486CD37000505A6 /* FltkTpl.app */,
+				8D0C4E970486CD37000505A6 /* DyneTK.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,17 +232,16 @@
 		20286C2AFDCF999611CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C9FB9BA10DE352BE00026BB1 /* globals.cxx */,
+				C9FB9B9B0DE352BE00026BB1 /* main.cxx */,
+				C9FB9B540DE352BD00026BB1 /* sandbox.cxx */,
+				C9FBA0430DE3753800026BB1 /* Newton21.ptf */,
+				C9FBA0440DE3753800026BB1 /* Newton21.txt */,
+				C9FB9B550DE352BD00026BB1 /* dtk */,
+				C9FB9B860DE352BE00026BB1 /* fluid */,
+				C9FB9B9C0DE352BE00026BB1 /* flnt */,
+				C9FB9BA30DE352BE00026BB1 /* fltk */,
 				C9FF05BB0BC6267E008673DF /* images */,
-				C9FF05BF0BC6267E008673DF /* fltk */,
-				C9FF05D60BC6267E008673DF /* dtk */,
-				C9FF05E10BC6267E008673DF /* fluid */,
-				C9FF05B20BC6264A008673DF /* globals.cxx */,
-				C9FF05B30BC6264A008673DF /* globals.h */,
-				C9FF05B40BC6264A008673DF /* main.cxx */,
-				C9FF05B50BC6264A008673DF /* main.h */,
-				C9FF05B60BC6264A008673DF /* sandbox.h */,
-				C9FF05B70BC6264A008673DF /* sandbox.cxx */,
-				5FD9149C095F515300976476 /* mac.r */,
 				32DBCF6D0370B57F00C91783 /* FltkTpl_Prefix.pch */,
 			);
 			name = Sources;
@@ -188,14 +259,142 @@
 		20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				C9FF06B40BC64075008673DF /* libiconv.dylib */,
-				C9FF06B00BC63F87008673DF /* newt.a */,
 				20286C33FDCF999611CA2CEA /* Carbon.framework */,
 				4A9504CAFFE6A41611CA0CBA /* CoreServices.framework */,
 				4A9504C8FFE6A3BC11CA0CBA /* ApplicationServices.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
+		};
+		C9FB9B550DE352BD00026BB1 /* dtk */ = {
+			isa = PBXGroup;
+			children = (
+				C9FB9B560DE352BD00026BB1 /* Dtk_Document.cxx */,
+				C9FB9B570DE352BD00026BB1 /* Dtk_Document.h */,
+				C9FB9B590DE352BE00026BB1 /* Dtk_Document_List.cxx */,
+				C9FB9B5A0DE352BE00026BB1 /* Dtk_Document_List.h */,
+				C9FB9B5C0DE352BE00026BB1 /* Dtk_Error.cxx */,
+				C9FB9B5D0DE352BE00026BB1 /* Dtk_Error.h */,
+				C9FB9B5F0DE352BE00026BB1 /* Dtk_Layout_Document.cxx */,
+				C9FB9B600DE352BE00026BB1 /* Dtk_Layout_Document.h */,
+				C9FB9B620DE352BE00026BB1 /* Dtk_Platform.cxx */,
+				C9FB9B630DE352BE00026BB1 /* Dtk_Platform.h */,
+				C9FB9B650DE352BE00026BB1 /* Dtk_Project.cxx */,
+				C9FB9B660DE352BE00026BB1 /* Dtk_Project.h */,
+				C9FB9B680DE352BE00026BB1 /* Dtk_Proto_Slot.cxx */,
+				C9FB9B690DE352BE00026BB1 /* Dtk_Proto_Slot.h */,
+				C9FB9B6B0DE352BE00026BB1 /* Dtk_Rect_Slot.cxx */,
+				C9FB9B6C0DE352BE00026BB1 /* Dtk_Rect_Slot.h */,
+				C9FB9B6E0DE352BE00026BB1 /* Dtk_Script_Document.cxx */,
+				C9FB9B6F0DE352BE00026BB1 /* Dtk_Script_Document.h */,
+				C9FB9B710DE352BE00026BB1 /* Dtk_Script_Slot.cxx */,
+				C9FB9B720DE352BE00026BB1 /* Dtk_Script_Slot.h */,
+				C9FB9B740DE352BE00026BB1 /* Dtk_Script_Writer.cxx */,
+				C9FB9B750DE352BE00026BB1 /* Dtk_Script_Writer.h */,
+				C9FB9B770DE352BE00026BB1 /* Dtk_Slot.cxx */,
+				C9FB9B780DE352BE00026BB1 /* Dtk_Slot.h */,
+				C9FB9B7A0DE352BE00026BB1 /* Dtk_Slot_List.cxx */,
+				C9FB9B7B0DE352BE00026BB1 /* Dtk_Slot_List.h */,
+				C9FB9B7D0DE352BE00026BB1 /* Dtk_Template.cxx */,
+				C9FB9B7E0DE352BE00026BB1 /* Dtk_Template.h */,
+				C9FB9B800DE352BE00026BB1 /* Dtk_Template_List.cxx */,
+				C9FB9B810DE352BE00026BB1 /* Dtk_Template_List.h */,
+				C9FB9B830DE352BE00026BB1 /* Dtk_Value_Slot.cxx */,
+				C9FB9B840DE352BE00026BB1 /* Dtk_Value_Slot.h */,
+			);
+			name = dtk;
+			path = ../dtk;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9FB9B860DE352BE00026BB1 /* fluid */ = {
+			isa = PBXGroup;
+			children = (
+				C9FB9B870DE352BE00026BB1 /* Fldtk_Inspector.cxx */,
+				C9FB9B890DE352BE00026BB1 /* Fldtk_Inspector.h */,
+				C9FB9B8B0DE352BE00026BB1 /* Fldtk_Prefs.cxx */,
+				C9FB9B8D0DE352BE00026BB1 /* Fldtk_Prefs.h */,
+				C9FB9B8F0DE352BE00026BB1 /* Fldtk_Proj_Settings.cxx */,
+				C9FB9B910DE352BE00026BB1 /* Fldtk_Proj_Settings.h */,
+				C9FB9B930DE352BE00026BB1 /* Fldtk_Snapshot.cxx */,
+				C9FB9B950DE352BE00026BB1 /* Fldtk_Snapshot.h */,
+				C9FB9B970DE352BE00026BB1 /* main_ui.cxx */,
+				C9FB9B990DE352BE00026BB1 /* main_ui.h */,
+			);
+			name = fluid;
+			path = ../fluid;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9FB9B9C0DE352BE00026BB1 /* flnt */ = {
+			isa = PBXGroup;
+			children = (
+				C9FB9B9D0DE352BE00026BB1 /* Flnt_Widget.cxx */,
+				C9FB9B9E0DE352BE00026BB1 /* Flnt_Widget.h */,
+			);
+			name = flnt;
+			path = ../flnt;
+			sourceTree = SOURCE_ROOT;
+		};
+		C9FB9BA30DE352BE00026BB1 /* fltk */ = {
+			isa = PBXGroup;
+			children = (
+				C9FB9BA40DE352BE00026BB1 /* Fldtk_Document_Browser.cxx */,
+				C9FB9BA50DE352BE00026BB1 /* Fldtk_Document_Browser.h */,
+				C9FB9BA70DE352BE00026BB1 /* Fldtk_Document_Tabs.cxx */,
+				C9FB9BA80DE352BE00026BB1 /* Fldtk_Document_Tabs.h */,
+				C9FB9BAA0DE352BE00026BB1 /* Fldtk_Editor.cxx */,
+				C9FB9BAB0DE352BE00026BB1 /* Fldtk_Editor.h */,
+				C9FB9BAD0DE352BE00026BB1 /* Fldtk_Format_Slot_Editor.cxx */,
+				C9FB9BAF0DE352BE00026BB1 /* Fldtk_Format_Slot_Editor.h */,
+				C9FB9BB10DE352BE00026BB1 /* Fldtk_Justify_Slot_Editor.cxx */,
+				C9FB9BB30DE352BE00026BB1 /* Fldtk_Justify_Slot_Editor.h */,
+				C9FB9BB50DE352BE00026BB1 /* Fldtk_Layout_Editor.cxx */,
+				C9FB9BB60DE352BE00026BB1 /* Fldtk_Layout_Editor.h */,
+				C9FB9BB80DE352BE00026BB1 /* Fldtk_Layout_View.cxx */,
+				C9FB9BB90DE352BE00026BB1 /* Fldtk_Layout_View.h */,
+				C9FB9BBB0DE352BE00026BB1 /* Fldtk_Proto_Slot_Editor.cxx */,
+				C9FB9BBC0DE352BE00026BB1 /* Fldtk_Proto_Slot_Editor.h */,
+				C9FB9BBE0DE352BE00026BB1 /* Fldtk_Rect_Slot_Editor.cxx */,
+				C9FB9BBF0DE352BE00026BB1 /* Fldtk_Rect_Slot_Editor.h */,
+				C9FB9BC10DE352BE00026BB1 /* Fldtk_Script_Editor.cxx */,
+				C9FB9BC20DE352BE00026BB1 /* Fldtk_Script_Editor.h */,
+				C9FB9BC40DE352BE00026BB1 /* Fldtk_Script_Slot_Editor.cxx */,
+				C9FB9BC50DE352BE00026BB1 /* Fldtk_Script_Slot_Editor.h */,
+				C9FB9BC70DE352BE00026BB1 /* Fldtk_Slot_Browser.cxx */,
+				C9FB9BC80DE352BE00026BB1 /* Fldtk_Slot_Browser.h */,
+				C9FB9BCA0DE352BE00026BB1 /* Fldtk_Slot_Editor_Group.cxx */,
+				C9FB9BCB0DE352BE00026BB1 /* Fldtk_Slot_Editor_Group.h */,
+				C9FB9BCD0DE352BE00026BB1 /* Fldtk_Tmpl_Browser.cxx */,
+				C9FB9BCE0DE352BE00026BB1 /* Fldtk_Tmpl_Browser.h */,
+				C9FB9BD00DE352BE00026BB1 /* Fldtk_Value_Slot_Editor.cxx */,
+				C9FB9BD10DE352BE00026BB1 /* Fldtk_Value_Slot_Editor.h */,
+				C9FB9BD40DE352BE00026BB1 /* Flio_Inspector.cxx */,
+				C9FB9BD50DE352BE00026BB1 /* Flio_Inspector.h */,
+				C9FB9BD70DE352BE00026BB1 /* Flio_MNP4_Protocol.cxx */,
+				C9FB9BD80DE352BE00026BB1 /* Flio_MNP4_Protocol.h */,
+				C9FB9BDA0DE352BE00026BB1 /* Flio_Pipe.cxx */,
+				C9FB9BDB0DE352BE00026BB1 /* Flio_Pipe.h */,
+				C9FB9BDD0DE352BE00026BB1 /* Flio_Serial_Port.cxx */,
+				C9FB9BDE0DE352BE00026BB1 /* Flio_Serial_Port.h */,
+				C9FB9BE00DE352BE00026BB1 /* Flio_Stream.cxx */,
+				C9FB9BE10DE352BE00026BB1 /* Flio_Stream.h */,
+				C9FB9BE30DE352BE00026BB1 /* Flmm_Console.cxx */,
+				C9FB9BE40DE352BE00026BB1 /* Flmm_Console.h */,
+				C9FB9BE60DE352BE00026BB1 /* Flmm_Message.cxx */,
+				C9FB9BE70DE352BE00026BB1 /* Flmm_Message.H */,
+				C9FB9BE90DE352BE00026BB1 /* Flmm_Newt_Script_Editor.cxx */,
+				C9FB9BEA0DE352BE00026BB1 /* Flmm_Newt_Script_Editor.h */,
+				C9FB9BEC0DE352BE00026BB1 /* Flmm_Set_Check_Button.cxx */,
+				C9FB9BED0DE352BE00026BB1 /* Flmm_Set_Check_Button.h */,
+				C9FB9BEF0DE352BE00026BB1 /* Flmm_Set_Input.cxx */,
+				C9FB9BF00DE352BE00026BB1 /* Flmm_Set_Input.h */,
+				C9FB9BF20DE352BE00026BB1 /* Flmm_Signal.cxx */,
+				C9FB9BF30DE352BE00026BB1 /* Flmm_Signal.h */,
+				C9FB9BF50DE352BE00026BB1 /* Flmp_Image.cxx */,
+				C9FB9BF60DE352BE00026BB1 /* Flmp_Image.H */,
+			);
+			name = fltk;
+			path = ../fltk;
+			sourceTree = SOURCE_ROOT;
 		};
 		C9FF05BB0BC6267E008673DF /* images */ = {
 			isa = PBXGroup;
@@ -208,74 +407,6 @@
 			path = ../images;
 			sourceTree = SOURCE_ROOT;
 		};
-		C9FF05BF0BC6267E008673DF /* fltk */ = {
-			isa = PBXGroup;
-			children = (
-				C9FF05C00BC6267E008673DF /* Fldtk_Document_Browser.cxx */,
-				C9FF05C10BC6267E008673DF /* Fldtk_Document_Browser.h */,
-				C9FF05C20BC6267E008673DF /* Fldtk_Document_Tabs.cxx */,
-				C9FF05C30BC6267E008673DF /* Fldtk_Document_Tabs.h */,
-				C9FF05C40BC6267E008673DF /* Fldtk_Editor.cxx */,
-				C9FF05C50BC6267E008673DF /* Fldtk_Editor.h */,
-				C9FF05C60BC6267E008673DF /* Fldtk_Layout_Editor.cxx */,
-				C9FF05C70BC6267E008673DF /* Fldtk_Layout_Editor.h */,
-				C9FF05C80BC6267E008673DF /* Fldtk_Script_Editor.cxx */,
-				C9FF05C90BC6267E008673DF /* Fldtk_Script_Editor.h */,
-				C9FF05CA0BC6267E008673DF /* Flio_Inspector.cxx */,
-				C9FF05CB0BC6267E008673DF /* Flio_Inspector.h */,
-				C9FF05CC0BC6267E008673DF /* Flio_MNP4_Serial.cxx */,
-				C9FF05CD0BC6267E008673DF /* Flio_MNP4_Serial.h */,
-				C9FF05CE0BC6267E008673DF /* Flio_Serial_Port.cxx */,
-				C9FF05CF0BC6267E008673DF /* Flio_Serial_Port.h */,
-				C9FF05D00BC6267E008673DF /* Flmm_Console.cxx */,
-				C9FF05D10BC6267E008673DF /* Flmm_Console.h */,
-				C9FF05D20BC6267E008673DF /* Flmm_Set_Check_Button.cxx */,
-				C9FF05D30BC6267E008673DF /* Flmm_Set_Check_Button.h */,
-				C9FF05D40BC6267E008673DF /* Flmm_Set_Input.cxx */,
-				C9FF05D50BC6267E008673DF /* Flmm_Set_Input.h */,
-			);
-			name = fltk;
-			path = ../fltk;
-			sourceTree = SOURCE_ROOT;
-		};
-		C9FF05D60BC6267E008673DF /* dtk */ = {
-			isa = PBXGroup;
-			children = (
-				C9FF05D70BC6267E008673DF /* Dtk_Document.cxx */,
-				C9FF05D80BC6267E008673DF /* Dtk_Document.h */,
-				C9FF05D90BC6267E008673DF /* Dtk_Document_Manager.cxx */,
-				C9FF05DA0BC6267E008673DF /* Dtk_Document_Manager.h */,
-				C9FF05DB0BC6267E008673DF /* Dtk_Layout_Document.cxx */,
-				C9FF05DC0BC6267E008673DF /* Dtk_Layout_Document.h */,
-				C9FF05DD0BC6267E008673DF /* Dtk_Project.cxx */,
-				C9FF05DE0BC6267E008673DF /* Dtk_Project.h */,
-				C9FF05DF0BC6267E008673DF /* Dtk_Script_Document.cxx */,
-				C9FF05E00BC6267E008673DF /* Dtk_Script_Document.h */,
-			);
-			name = dtk;
-			path = ../dtk;
-			sourceTree = SOURCE_ROOT;
-		};
-		C9FF05E10BC6267E008673DF /* fluid */ = {
-			isa = PBXGroup;
-			children = (
-				C9FF05E20BC6267E008673DF /* Fldtk_Inspector.cxx */,
-				C9FF05E30BC6267E008673DF /* Fldtk_Inspector.fl */,
-				C9FF05E40BC6267E008673DF /* Fldtk_Inspector.h */,
-				C9FF05E50BC6267E008673DF /* Fldtk_Prefs.cxx */,
-				C9FF05E60BC6267E008673DF /* Fldtk_Prefs.fl */,
-				C9FF05E70BC6267E008673DF /* Fldtk_Prefs.h */,
-				C9FF05E80BC6267E008673DF /* Fldtk_Proj_Settings.cxx */,
-				C9FF05E90BC6267E008673DF /* Fldtk_Proj_Settings.fl */,
-				C9FF05EA0BC6267E008673DF /* Fldtk_Proj_Settings.h */,
-				C9FF05EB0BC6267E008673DF /* main_ui.cxx */,
-				C9FF05EC0BC6267E008673DF /* main_ui.fl */,
-				C9FF05ED0BC6267E008673DF /* main_ui.h */,
-			);
-			name = fluid;
-			path = ../fluid;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -286,16 +417,16 @@
 				8D0C4E8C0486CD37000505A6 /* Resources */,
 				8D0C4E8F0486CD37000505A6 /* Sources */,
 				8D0C4E910486CD37000505A6 /* Frameworks */,
+				C9FBA0420DE3750600026BB1 /* CopyFiles */,
 			);
 			buildRules = (
-				5FD914BF095F51EE00976476 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
 			name = DyneTK;
 			productInstallPath = "$(HOME)/Applications";
 			productName = FltkTpl;
-			productReference = 8D0C4E970486CD37000505A6 /* FltkTpl.app */;
+			productReference = 8D0C4E970486CD37000505A6 /* DyneTK.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -324,10 +455,6 @@
 				C9FF05EE0BC6267E008673DF /* toolbox_closed.xpm in Resources */,
 				C9FF05EF0BC6267E008673DF /* toolbox_inactive.xpm in Resources */,
 				C9FF05F00BC6267E008673DF /* toolbox_open.xpm in Resources */,
-				C9FF06020BC6267E008673DF /* Fldtk_Inspector.fl in Resources */,
-				C9FF06040BC6267E008673DF /* Fldtk_Prefs.fl in Resources */,
-				C9FF06060BC6267E008673DF /* Fldtk_Proj_Settings.fl in Resources */,
-				C9FF06080BC6267E008673DF /* main_ui.fl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,29 +465,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9FF05B80BC6264A008673DF /* globals.cxx in Sources */,
-				C9FF05B90BC6264A008673DF /* main.cxx in Sources */,
-				C9FF05BA0BC6264A008673DF /* sandbox.cxx in Sources */,
-				C9FF05F10BC6267E008673DF /* Fldtk_Document_Browser.cxx in Sources */,
-				C9FF05F20BC6267E008673DF /* Fldtk_Document_Tabs.cxx in Sources */,
-				C9FF05F30BC6267E008673DF /* Fldtk_Editor.cxx in Sources */,
-				C9FF05F40BC6267E008673DF /* Fldtk_Layout_Editor.cxx in Sources */,
-				C9FF05F50BC6267E008673DF /* Fldtk_Script_Editor.cxx in Sources */,
-				C9FF05F60BC6267E008673DF /* Flio_Inspector.cxx in Sources */,
-				C9FF05F70BC6267E008673DF /* Flio_MNP4_Serial.cxx in Sources */,
-				C9FF05F80BC6267E008673DF /* Flio_Serial_Port.cxx in Sources */,
-				C9FF05F90BC6267E008673DF /* Flmm_Console.cxx in Sources */,
-				C9FF05FA0BC6267E008673DF /* Flmm_Set_Check_Button.cxx in Sources */,
-				C9FF05FB0BC6267E008673DF /* Flmm_Set_Input.cxx in Sources */,
-				C9FF05FC0BC6267E008673DF /* Dtk_Document.cxx in Sources */,
-				C9FF05FD0BC6267E008673DF /* Dtk_Document_Manager.cxx in Sources */,
-				C9FF05FE0BC6267E008673DF /* Dtk_Layout_Document.cxx in Sources */,
-				C9FF05FF0BC6267E008673DF /* Dtk_Project.cxx in Sources */,
-				C9FF06000BC6267E008673DF /* Dtk_Script_Document.cxx in Sources */,
-				C9FF06010BC6267E008673DF /* Fldtk_Inspector.cxx in Sources */,
-				C9FF06030BC6267E008673DF /* Fldtk_Prefs.cxx in Sources */,
-				C9FF06050BC6267E008673DF /* Fldtk_Proj_Settings.cxx in Sources */,
-				C9FF06070BC6267E008673DF /* main_ui.cxx in Sources */,
+				C9FB9BF80DE352BE00026BB1 /* sandbox.cxx in Sources */,
+				C9FB9BF90DE352BE00026BB1 /* Dtk_Document.cxx in Sources */,
+				C9FB9BFB0DE352BE00026BB1 /* Dtk_Document_List.cxx in Sources */,
+				C9FB9BFD0DE352BE00026BB1 /* Dtk_Error.cxx in Sources */,
+				C9FB9BFF0DE352BE00026BB1 /* Dtk_Layout_Document.cxx in Sources */,
+				C9FB9C010DE352BE00026BB1 /* Dtk_Platform.cxx in Sources */,
+				C9FB9C030DE352BE00026BB1 /* Dtk_Project.cxx in Sources */,
+				C9FB9C050DE352BE00026BB1 /* Dtk_Proto_Slot.cxx in Sources */,
+				C9FB9C070DE352BE00026BB1 /* Dtk_Rect_Slot.cxx in Sources */,
+				C9FB9C090DE352BE00026BB1 /* Dtk_Script_Document.cxx in Sources */,
+				C9FB9C0B0DE352BE00026BB1 /* Dtk_Script_Slot.cxx in Sources */,
+				C9FB9C0D0DE352BE00026BB1 /* Dtk_Script_Writer.cxx in Sources */,
+				C9FB9C0F0DE352BE00026BB1 /* Dtk_Slot.cxx in Sources */,
+				C9FB9C110DE352BE00026BB1 /* Dtk_Slot_List.cxx in Sources */,
+				C9FB9C130DE352BE00026BB1 /* Dtk_Template.cxx in Sources */,
+				C9FB9C150DE352BE00026BB1 /* Dtk_Template_List.cxx in Sources */,
+				C9FB9C170DE352BE00026BB1 /* Dtk_Value_Slot.cxx in Sources */,
+				C9FB9C190DE352BE00026BB1 /* Fldtk_Inspector.cxx in Sources */,
+				C9FB9C1C0DE352BE00026BB1 /* Fldtk_Prefs.cxx in Sources */,
+				C9FB9C1F0DE352BE00026BB1 /* Fldtk_Proj_Settings.cxx in Sources */,
+				C9FB9C220DE352BE00026BB1 /* Fldtk_Snapshot.cxx in Sources */,
+				C9FB9C250DE352BE00026BB1 /* main_ui.cxx in Sources */,
+				C9FB9C280DE352BE00026BB1 /* main.cxx in Sources */,
+				C9FB9C290DE352BE00026BB1 /* Flnt_Widget.cxx in Sources */,
+				C9FB9C2B0DE352BE00026BB1 /* globals.cxx in Sources */,
+				C9FB9C2C0DE352BE00026BB1 /* Fldtk_Document_Browser.cxx in Sources */,
+				C9FB9C2E0DE352BE00026BB1 /* Fldtk_Document_Tabs.cxx in Sources */,
+				C9FB9C300DE352BE00026BB1 /* Fldtk_Editor.cxx in Sources */,
+				C9FB9C320DE352BE00026BB1 /* Fldtk_Format_Slot_Editor.cxx in Sources */,
+				C9FB9C350DE352BE00026BB1 /* Fldtk_Justify_Slot_Editor.cxx in Sources */,
+				C9FB9C380DE352BE00026BB1 /* Fldtk_Layout_Editor.cxx in Sources */,
+				C9FB9C3A0DE352BE00026BB1 /* Fldtk_Layout_View.cxx in Sources */,
+				C9FB9C3C0DE352BE00026BB1 /* Fldtk_Proto_Slot_Editor.cxx in Sources */,
+				C9FB9C3E0DE352BE00026BB1 /* Fldtk_Rect_Slot_Editor.cxx in Sources */,
+				C9FB9C400DE352BE00026BB1 /* Fldtk_Script_Editor.cxx in Sources */,
+				C9FB9C420DE352BE00026BB1 /* Fldtk_Script_Slot_Editor.cxx in Sources */,
+				C9FB9C440DE352BE00026BB1 /* Fldtk_Slot_Browser.cxx in Sources */,
+				C9FB9C460DE352BE00026BB1 /* Fldtk_Slot_Editor_Group.cxx in Sources */,
+				C9FB9C480DE352BE00026BB1 /* Fldtk_Tmpl_Browser.cxx in Sources */,
+				C9FB9C4A0DE352BE00026BB1 /* Fldtk_Value_Slot_Editor.cxx in Sources */,
+				C9FB9C4D0DE352BE00026BB1 /* Flio_Inspector.cxx in Sources */,
+				C9FB9C4F0DE352BE00026BB1 /* Flio_MNP4_Protocol.cxx in Sources */,
+				C9FB9C510DE352BE00026BB1 /* Flio_Pipe.cxx in Sources */,
+				C9FB9C530DE352BE00026BB1 /* Flio_Serial_Port.cxx in Sources */,
+				C9FB9C550DE352BE00026BB1 /* Flio_Stream.cxx in Sources */,
+				C9FB9C570DE352BE00026BB1 /* Flmm_Console.cxx in Sources */,
+				C9FB9C590DE352BE00026BB1 /* Flmm_Message.cxx in Sources */,
+				C9FB9C5B0DE352BE00026BB1 /* Flmm_Newt_Script_Editor.cxx in Sources */,
+				C9FB9C5D0DE352BE00026BB1 /* Flmm_Set_Check_Button.cxx in Sources */,
+				C9FB9C5F0DE352BE00026BB1 /* Flmm_Set_Input.cxx in Sources */,
+				C9FB9C610DE352BE00026BB1 /* Flmm_Signal.cxx in Sources */,
+				C9FB9C630DE352BE00026BB1 /* Flmp_Image.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +537,7 @@
 		C0E91AC608A95435008D54AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = i386;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -388,20 +545,31 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FltkTpl_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = USING_APPLE_BUNDLE;
+				HEADER_SEARCH_PATHS = (
+					..,
+					/usr/local/include,
+					/usr/local/include/FL/images,
+					../../../newt0/src/,
+					../../../newt0/src/newt_core/incs,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					"$(LIBRARY_SEARCH_PATHS)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					../../../newt0/build,
 				);
-				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../../../newt0/build\"";
 				OTHER_LDFLAGS = (
-					"-lfltk",
 					"$(OTHER_LDFLAGS)",
+					"-lnewt",
+					"-liconv",
+					"-lfltk",
+					"-lfltk_images",
+					"-lfltk_jpeg",
+					"-lfltk_png",
 				);
 				PRODUCT_NAME = DyneTK;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
@@ -411,25 +579,36 @@
 		C0E91AC708A95435008D54AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = i386;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FltkTpl_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = USING_APPLE_BUNDLE;
+				HEADER_SEARCH_PATHS = (
+					..,
+					/usr/local/include,
+					/usr/local/include/FL/images,
+					../../../newt0/src/,
+					../../../newt0/src/newt_core/incs,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					"$(LIBRARY_SEARCH_PATHS)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+					../../../newt0/build,
 				);
-				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../../../newt0/build\"";
 				OTHER_LDFLAGS = (
-					"-lfltk",
 					"$(OTHER_LDFLAGS)",
+					"-lnewt",
+					"-liconv",
+					"-lfltk",
+					"-lfltk_images",
+					"-lfltk_jpeg",
+					"-lfltk_png",
 				);
-				PRODUCT_NAME = FltkTpl;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				PRODUCT_NAME = DyneTK;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				WRAPPER_EXTENSION = app;
 			};
