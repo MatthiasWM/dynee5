@@ -48,6 +48,7 @@
 #include "fltk/Flio_Serial_Port.h"
 #include "fltk/Fldtk_Editor.h"
 #include "fltk/Fldtk_Layout_View.h"
+#include "fltk/Fldtk_Slot_Editor_Group.h"
 
 #include "globals.h"
 #include "allNewt.h"
@@ -723,7 +724,7 @@ void UpdatePrevProjMenu()
 			mi->show();
 			if (mi->label()) {
 				if (strcmp(mi->label(), "")) // do not delete static labels (set to an emty string)
-          free((void*)mi->label());
+                    free((void*)mi->label());
 				mi->label("");
 			}
 			// FIXME Actually we should add the relative path if this file is "below" the current dir
@@ -977,6 +978,26 @@ Dtk_Slot *GetCurrentSlot()
 }
 
     
+/*---------------------------------------------------------------------------*/
+void DeleteSlot(Dtk_Slot *slot) 
+{
+    if (!slot) {
+        slot = GetCurrentSlot();
+        if (!slot)
+            return;
+    }
+    Dtk_Template *tmpl = slot->getTemplate();
+    Dtk_Layout_Document *lyt = slot->layout();
+    if (tmpl) {
+        tmpl->removeSlot(slot);
+    }
+    if (lyt) {
+        lyt->slotEditor()->blank();
+        lyt->updateMenus();
+    }
+    delete slot;
+}
+
 /*---------------------------------------------------------------------------*/
 int OpenLayoutView(Dtk_Layout_Document *lyt)
 {

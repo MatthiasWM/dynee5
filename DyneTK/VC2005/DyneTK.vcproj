@@ -1325,6 +1325,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\doxyfile.win32.dox"
+				>
+			</File>
+			<File
 				RelativePath="..\README"
 				>
 			</File>

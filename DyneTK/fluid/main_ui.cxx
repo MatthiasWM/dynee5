@@ -387,7 +387,7 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Preview", FL_COMMAND|0x79,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {0,0,0,0,0,0,0,0,0},
  {"Browser", 0,  0, 0, 64, FL_NORMAL_LABEL, 0, 12, 0},
- {"Template Info", FL_COMMAND|0x69,  (Fl_Callback*)Fldtk_Main_Window::cb_mBrowserTemplateInfo, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
+ {"Template Info...", FL_COMMAND|0x69,  (Fl_Callback*)Fldtk_Main_Window::cb_mBrowserTemplateInfo, 0, 129, FL_NORMAL_LABEL, 0, 12, 0},
  {"New Slot...", FL_COMMAND|0x1006e,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Rename Slot...", 0,  (Fl_Callback*)Fldtk_Main_Window::cb_mBrowserRenameSlot, 0, 129, FL_NORMAL_LABEL, 0, 12, 0},
  {"Templates by Type", 0,  0, 0, 3, FL_NORMAL_LABEL, 0, 12, 176},

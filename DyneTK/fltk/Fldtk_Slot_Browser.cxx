@@ -30,7 +30,7 @@
 
 #include "Fldtk_Slot_Browser.h"
 #include "dtk/Dtk_Slot.h"
-#include "dtk/Dtk_Template.h"
+#include "globals.h"
 #include <FL/Fl.H>
 
 
@@ -68,8 +68,7 @@ void Fldtk_Slot_Browser::deleteSelectedSlot()
     Dtk_Slot *slot = (Dtk_Slot*)data(ix);
     if (!slot) 
         return;
-    Dtk_Template *tmpl = slot->getTemplate();
-    tmpl->removeSlot(slot);
+    DeleteSlot(slot);
 }
 
 

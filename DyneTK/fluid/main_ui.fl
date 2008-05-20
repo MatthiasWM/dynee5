@@ -392,13 +392,13 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mBrowser {
-      label Browser
+      label Browser open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mBrowserTemplateInfo {
-        label {Template Info}
-        callback {ShowTemplateInfo();}
-        xywh {5 5 100 20} shortcut 0x40069 labelsize 12 deactivate
+        label {Template Info...}
+        callback {ShowTemplateInfo();} selected
+        xywh {5 5 100 20} shortcut 0x40069 labelsize 12 deactivate divider
       }
       MenuItem {} {
         label {New Slot...}
@@ -482,7 +482,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mHelp {
-      label Help open
+      label Help
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -587,7 +587,7 @@ wAboutDialog->show();}
       tooltip {Launch Package} image {../images/cog.png} deimage {../images/cog_da.png} xywh {445 30 25 25} labelsize 9 deactivate
     }
   }
-  Fl_Group {} {open
+  Fl_Group {} {
     xywh {0 60 785 35} box THIN_DOWN_BOX
   } {
     Fl_Button {} {
@@ -641,7 +641,7 @@ SetModeAddTemplate();} open
       xywh {615 65 15 25} deactivate resizable
     }
   }
-  Fl_Tile center {
+  Fl_Tile center {open
     xywh {0 95 785 475} box FLAT_BOX labelsize 12 resizable
   } {
     Fl_Group {} {
@@ -659,7 +659,7 @@ SetModeAddTemplate();} open
         }
       }
     }
-    Fl_Group {} {
+    Fl_Group {} {open
       xywh {150 95 635 305} box FLAT_BOX
     } {
       Fl_Tabs document_tabs {open
@@ -853,7 +853,7 @@ Function {create_connect_dialog()} {open
 } {
   Fl_Window {} {
     label Progress open
-    xywh {4 30 225 115} type Double modal visible
+    xywh {-32000 -32000 225 115} type Double hide modal
   } {
     Fl_Box {} {
       label {Tap the Toolkit icon on the Newton device, select "Connect via Serial", and tap Connect Inspector.}
@@ -871,7 +871,7 @@ Function {create_about_dialog()} {open
 } {
   Fl_Window wAboutDialog {
     label {About DyneTK} open
-    xywh {411 223 326 287} type Double modal visible
+    xywh {-32000 -32000 326 287} type Double hide modal
   } {
     Fl_Group {} {open
       xywh {5 5 315 250} box THIN_DOWN_BOX
@@ -897,7 +897,7 @@ Newton never dies, it just gets new tools.}
     }
     Fl_Button {} {
       label Close
-      callback {wAboutDialog->hide();} selected
+      callback {wAboutDialog->hide();}
       xywh {250 260 70 20} labelsize 12
     }
   }

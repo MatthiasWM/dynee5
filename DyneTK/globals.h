@@ -343,6 +343,15 @@ int ShowTemplateInfo(Dtk_Template *tmpl=0L);
 
 //      NewSlot()
 
+/** Immediatly remove the given Slot.
+ *
+ * Remove the Slot from any linkage to Templates and Layouts and
+ * delete it from memory. This call will update the GUI.
+ *
+ * \param slot Delete this slot, or the selected slot, if NULL
+ */
+void DeleteSlot(Dtk_Slot *slot=0L);
+
 /** Pop up a dialog that can be used to rename the selected slot.
  *
  * This will also update any GUI.
@@ -395,7 +404,7 @@ int OpenLayoutView(Dtk_Layout_Document *lyt=0L);
 //      HelpContents()
 //      HelpErrorCode()
 //      UsingHelp()
-//      HelpAbout()
+//      HelpAbout() implemented in Fluid
 
 /*---------------------------------------------------------------------------*/
 
