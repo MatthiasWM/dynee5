@@ -180,6 +180,20 @@ int		NewProject(const char *filename=0L);
  */
 int		OpenProject(const char *filename=0L);
 
+/** Open a Project from the Previous Projects list.
+ *
+ * If no filename is given, we ask the user for a filename by popping up a 
+ * file chooser dialog. We then close the current project and all its
+ * documents, and finally load the new project and all dependents.
+ *
+ * \param filename [in] path and file name of .ntk file to open
+ *
+ * \retval	0 if successful
+ * \retval  -1 (or an error code <0) if the function failed
+ * \retval  -2 if the user aborted anywhere in the process
+ */
+int		OpenPreviousProject(const char *filename=0L);
+
 /** Save the current project to a file.
  *
  * \todo We need much better error handling here!

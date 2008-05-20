@@ -445,7 +445,6 @@ int Dtk_Platform::findProto(const char *id)
     }
 }
 
-
 const char *platformStr1 = 
 "return {\n"
 "  MagicPointerTable: [\n"

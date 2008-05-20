@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 use_FL_COMMAND 
 header_name {.h} 
 code_name {.cxx}
@@ -123,28 +123,44 @@ widget_class Fldtk_Main_Window {
         xywh {0 0 63 20} labelsize 12 divider
       } {
         MenuItem {mPrevProj[0]} {
-          xywh {15 15 100 20} labelsize 12 labelcolor 176 hide
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {15 15 100 20} labelsize 12 hide
+          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[1]} {
-          xywh {25 25 100 20} labelsize 12 labelcolor 176 hide
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {25 25 100 20} labelsize 12 hide
+          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[2]} {
-          xywh {35 35 100 20} labelsize 12 labelcolor 176 hide
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {35 35 100 20} labelsize 12 hide
+          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[3]} {
-          xywh {45 45 100 20} labelsize 12 labelcolor 176 hide
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {45 45 100 20} labelsize 12 hide
+          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[4]} {
-          xywh {55 55 100 20} labelsize 12 labelcolor 176 hide
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {55 55 100 20} labelsize 12 hide
+          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[5]} {
-          xywh {65 65 100 20} labelsize 12 labelcolor 176 hide
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {65 65 100 20} labelsize 12 hide
+          code0 {o->label(0L);}
         }
         MenuItem {mPrevProj[6]} {
-          xywh {75 75 100 20} labelsize 12 labelcolor 176 hide
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {75 75 100 20} labelsize 12 hide
+          code0 {o->label(0L);}
         }
-        MenuItem {mPrevProj[7]} {selected
-          xywh {85 85 100 20} labelsize 12 labelcolor 176 hide
+        MenuItem {mPrevProj[7]} {
+          callback {OpenPreviousProject(o->mvalue()->label());} selected
+          xywh {85 85 100 20} labelsize 12 hide
+          code0 {o->label(0L);}
         }
       }
       MenuItem mFileExit {
@@ -233,7 +249,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project
+      label Project open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {

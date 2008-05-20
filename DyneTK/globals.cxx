@@ -227,6 +227,12 @@ int OpenProject(const char *filename)
 }
 
 /*-v2------------------------------------------------------------------------*/
+int OpenPreviousProject(const char *filename)
+{
+  return OpenProject(filename);
+}
+
+/*-v2------------------------------------------------------------------------*/
 int SaveAllDocuments()
 {
 	if (dtkProject) {
