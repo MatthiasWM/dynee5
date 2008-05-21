@@ -464,11 +464,11 @@ void    SetModeEditTemplate();
 void    SetModeAddTemplate();
 
 #ifdef WIN32
-# define  EnterDebugger() \
-            __asm { int 3 }
+# define  EnterDebugger() __asm { int 3 }
+#elif defined(__APPLE__)
+# define  EnterDebugger() Debugger()
 #else
-# define  EnterDebugger() \
-            __asm__("\n int3\n")
+# define  EnterDebugger() __asm__("\n int3\n")
 #endif
 
 

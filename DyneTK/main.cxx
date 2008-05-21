@@ -101,6 +101,19 @@ static void update_menus_cb(Fl_Widget*, void*)
  */
 int main(int argc, char **argv) {
 
+#ifdef USING_APPLE_BUNDLE
+  argc = 1;
+  {
+    char currpath[2048];
+    getcwd(currpath, 2048);
+    if (currpath && strcmp(currpath, "/")==0) {
+      char *homepath = getenv("HOME");
+      if (homepath)
+        chdir(homepath);
+    }
+  }
+#endif
+  
 	// initialize our GUI library
 	Fl::lock();
 	Fl::scheme("GTK+");

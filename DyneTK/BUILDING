@@ -1,0 +1,30 @@
+
+
+This file describes how to build DyneTK for Tiger as a universal binary
+
+We must build a few additional libraries:
+
+
+FLTK:
+This version uses FLTK 1.3 which can be downloaded from the fltk.org svn. 
+The build commands are:
+> autoconf
+> ./configure --with-archflags="-mmacosx-version-min=10.4 -arch i386 -arch ppc" --enable-quartz --enable-threads
+> make
+> sudo make install
+
+
+Newt0:
+The NewtonScript interpreter can be found at svn://so-kukan.com/gnue/NEWT0/branches/DyneTK.
+The build commands are:
+> setenv SDKROOT /Developer/SDKs/MacOSX10.4u.sdk
+> ./configure --enable-compat
+> make libnewt
+
+The Makefiel must be changed:
+The first line reads "DEBUG = -g -arch i386 -arch ppc"
+Around creating the archive, we must add:
+$(LIBNEWT): $(LIBOBJS)
+        rm -f $@
+        $(LIBCOMMAND) $@ $(LIBOBJS) 
+        ranlib $@

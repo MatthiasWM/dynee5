@@ -193,6 +193,11 @@
 		C9FB9BF60DE352BE00026BB1 /* Flmp_Image.H */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Flmp_Image.H; sourceTree = "<group>"; };
 		C9FBA0430DE3753800026BB1 /* Newton21.ptf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Newton21.ptf; path = ../test/platfrms/Newton21.ptf; sourceTree = SOURCE_ROOT; };
 		C9FBA0440DE3753800026BB1 /* Newton21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Newton21.txt; path = ../test/platfrms/Newton21.txt; sourceTree = SOURCE_ROOT; };
+		C9FBA09C0DE4BEFD00026BB1 /* allNewt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = allNewt.h; path = ../allNewt.h; sourceTree = SOURCE_ROOT; };
+		C9FBA09D0DE4BEFD00026BB1 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = ../main.h; sourceTree = SOURCE_ROOT; };
+		C9FBA09E0DE4BEFD00026BB1 /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = globals.h; path = ../globals.h; sourceTree = SOURCE_ROOT; };
+		C9FBA09F0DE4BEFD00026BB1 /* sandbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sandbox.h; path = ../sandbox.h; sourceTree = SOURCE_ROOT; };
+		C9FBA0A50DE4C01900026BB1 /* BUILDING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BUILDING; path = ../BUILDING; sourceTree = SOURCE_ROOT; };
 		C9FF05BC0BC6267E008673DF /* toolbox_closed.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_closed.xpm; sourceTree = "<group>"; };
 		C9FF05BD0BC6267E008673DF /* toolbox_inactive.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_inactive.xpm; sourceTree = "<group>"; };
 		C9FF05BE0BC6267E008673DF /* toolbox_open.xpm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolbox_open.xpm; sourceTree = "<group>"; };
@@ -225,6 +230,7 @@
 				20286C2CFDCF999611CA2CEA /* Resources */,
 				20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */,
 				195DF8CFFE9D517E11CA2CBB /* Products */,
+				C9FBA0A50DE4C01900026BB1 /* BUILDING */,
 			);
 			name = FltkTpl;
 			sourceTree = "<group>";
@@ -232,6 +238,10 @@
 		20286C2AFDCF999611CA2CEA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C9FBA09C0DE4BEFD00026BB1 /* allNewt.h */,
+				C9FBA09D0DE4BEFD00026BB1 /* main.h */,
+				C9FBA09E0DE4BEFD00026BB1 /* globals.h */,
+				C9FBA09F0DE4BEFD00026BB1 /* sandbox.h */,
 				C9FB9BA10DE352BE00026BB1 /* globals.cxx */,
 				C9FB9B9B0DE352BE00026BB1 /* main.cxx */,
 				C9FB9B540DE352BD00026BB1 /* sandbox.cxx */,
@@ -537,7 +547,10 @@
 		C0E91AC608A95435008D54AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
+				ARCHS = (
+					i386,
+					ppc,
+				);
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -546,6 +559,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FltkTpl_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = USING_APPLE_BUNDLE;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
 					..,
 					/usr/local/include,
@@ -569,7 +583,7 @@
 					"-lfltk_png",
 				);
 				PRODUCT_NAME = DyneTK;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
@@ -579,12 +593,16 @@
 		C0E91AC708A95435008D54AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = i386;
+				ARCHS = (
+					i386,
+					ppc,
+				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FltkTpl_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = USING_APPLE_BUNDLE;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = (
 					..,
 					/usr/local/include,
@@ -608,7 +626,7 @@
 					"-lfltk_png",
 				);
 				PRODUCT_NAME = DyneTK;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
 				WRAPPER_EXTENSION = app;
 			};
