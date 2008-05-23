@@ -63,8 +63,9 @@ Fl_Window *wConnect;
 Fl_Image *toolbox_open_pixmap;
 Fl_Image *toolbox_closed_pixmap;
 
-Fldtk_Document_Browser * dtkDocumentBrowser;
-Fldtk_Document_Tabs    * dtkDocumentTabs;
+Fldtk_Document_Browser  * dtkDocumentBrowser;
+Fldtk_Document_Tabs     * dtkDocumentTabs;
+Fl_Tabs                 * dtkBrowserTabs;
 
 // global dtk project and document roots
 Dtk_Project         * dtkProject;
@@ -174,9 +175,10 @@ int main(int argc, char **argv) {
 		dtkMain->size(w, h);
 
 	// link the functional elements to the visual elements
-	dtkDocumentBrowser = dtkMain->documents;
-    dtkDocumentTabs = dtkMain->document_tabs;
-    dtkDocumentTabs->callback(update_menus_cb);
+	dtkDocumentBrowser = dtkMain->wDocumentBrowser;
+  dtkDocumentTabs = dtkMain->wDocumentTabs;
+  dtkDocumentTabs->callback(update_menus_cb);
+  dtkBrowserTabs = dtkMain->wBrowserTabs;
 
 	UpdatePrevProjMenu();
 

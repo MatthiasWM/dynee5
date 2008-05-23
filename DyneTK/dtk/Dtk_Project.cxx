@@ -97,6 +97,8 @@ Dtk_Project::~Dtk_Project()
 		free(packagename_);
 	if (startdir_)
 		free(startdir_);
+  
+  if (guiManager) guiManager->projectRemoved();
 }
 
 
@@ -135,7 +137,7 @@ void Dtk_Project::setFilename(const char *filename)
             if (*s=='/') *s='\\';
         }
 	}
-	// FIXME I want the name of the current project in the main window title bar!
+  if (guiManager) guiManager->projectRenamed();
 }
 
 
@@ -1225,6 +1227,38 @@ int Dtk_Project::write(Dtk_Script_Writer &sw)
 }
 
 
+Dtk_Project_Manager::Dtk_Project_Manager(Dtk_Project *p)
+: project(p),
+  window(dtkMain),
+  browserTabs(dtkBrowserTabs)
+{
+  project->setGuiManager(this);
+  projectCreated();
+}
+
+void Dtk_Project_Manager::projectCreated()
+{
+  projectRenamed();
+  browserTabs->activate();
+}
+
+void Dtk_Project_Manager::projectRemoved()
+{
+  window->label("DyneTK");
+  browserTabs->deactivate();
+}
+
+void Dtk_Project_Manager::projectRenamed()
+{
+  const char *name = project->name();
+  if (name) {
+    char buffer[2048];
+    snprintf(buffer, 2047, "DyneTK: %s", project->name());
+    window->copy_label(buffer);
+  } else {
+    window->label("DyneTK: <unnamed project>");
+  }
+}
 
 //
 // End of "$Id$".

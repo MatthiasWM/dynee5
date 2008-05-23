@@ -67,7 +67,6 @@ Dtk_Document_List::Dtk_Document_List(Dtk_Project *proj)
 {
     if (project_) {
         browser_ = dtkDocumentBrowser;
-        browser_->activate();
         browser_->redraw();
         // allow user to click on a name to pop that document up
         browser_->callback((Fl_Callback*)browser_cb, this);
@@ -87,7 +86,6 @@ Dtk_Document_List::~Dtk_Document_List()
         delete doc;
     }
     if (project_) {
-        browser_->deactivate();
         browser_->redraw();
         browser_->callback(0L, 0L);
     }

@@ -220,6 +220,7 @@ int OpenProject(const char *filename)
 	}
     // create a new project and load it
 	dtkProject = new Dtk_Project();
+  new Dtk_Project_Manager(dtkProject);
 	dtkProject->setFilename(filename);
 	int ret = dtkProject->load();
 
@@ -270,7 +271,7 @@ int NewProject(const char *filename)
             "A file with that filename already exist. Creating "
             "a new project will eventually delete the original file.\n\n"
             "Do you want to delete the file\n%s?", 
-            "delete file", "keep file", 0L, filename);
+            "delete file", "cancel new project", 0L, filename);
         if (v==1)
             return -1;
     }
@@ -279,6 +280,7 @@ int NewProject(const char *filename)
 	    CloseProject();
     // finally we can create a brandnew project 
 	dtkProject = new Dtk_Project();
+  new Dtk_Project_Manager(dtkProject);
 	dtkProject->setFilename(filename);
 	dtkProject->setDefaults();
     // make sure the menus show the right settings

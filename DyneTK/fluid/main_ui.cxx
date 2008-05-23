@@ -3996,45 +3996,45 @@ this->when(FL_WHEN_RELEASE);
   center->labelsize(12);
   { Fl_Group* o = new Fl_Group(0, 95, 150, 305);
     o->box(FL_FLAT_BOX);
-    { browsers = new Fl_Tabs(3, 98, 144, 299);
-      browsers->box(FL_UP_BOX);
-      browsers->labelsize(12);
-      { documents = new Fldtk_Document_Browser(3, 123, 144, 274, "Files");
-        documents->box(FL_NO_BOX);
-        documents->color(FL_BACKGROUND2_COLOR);
-        documents->selection_color(FL_SELECTION_COLOR);
-        documents->labeltype(FL_NORMAL_LABEL);
-        documents->labelfont(0);
-        documents->labelsize(12);
-        documents->labelcolor(FL_FOREGROUND_COLOR);
-        documents->textsize(12);
-        documents->align(FL_ALIGN_BOTTOM);
-        documents->when(FL_WHEN_RELEASE_ALWAYS);
-        documents->deactivate();
-        Fl_Group::current()->resizable(documents);
+    { wBrowserTabs = new Fl_Tabs(3, 98, 144, 299);
+      wBrowserTabs->box(FL_UP_BOX);
+      wBrowserTabs->labelsize(12);
+      wBrowserTabs->deactivate();
+      { wDocumentBrowser = new Fldtk_Document_Browser(3, 123, 144, 274, "Files");
+        wDocumentBrowser->box(FL_NO_BOX);
+        wDocumentBrowser->color(FL_BACKGROUND2_COLOR);
+        wDocumentBrowser->selection_color(FL_SELECTION_COLOR);
+        wDocumentBrowser->labeltype(FL_NORMAL_LABEL);
+        wDocumentBrowser->labelfont(0);
+        wDocumentBrowser->labelsize(12);
+        wDocumentBrowser->labelcolor(FL_FOREGROUND_COLOR);
+        wDocumentBrowser->textsize(12);
+        wDocumentBrowser->align(FL_ALIGN_BOTTOM);
+        wDocumentBrowser->when(FL_WHEN_RELEASE_ALWAYS);
+        Fl_Group::current()->resizable(wDocumentBrowser);
         static int cw[] = { 12, 0 };
-        documents->column_widths(cw);
-      } // Fldtk_Document_Browser* documents
-      browsers->end();
-      Fl_Group::current()->resizable(browsers);
-    } // Fl_Tabs* browsers
+        wDocumentBrowser->column_widths(cw);
+      } // Fldtk_Document_Browser* wDocumentBrowser
+      wBrowserTabs->end();
+      Fl_Group::current()->resizable(wBrowserTabs);
+    } // Fl_Tabs* wBrowserTabs
     o->end();
   } // Fl_Group* o
   { Fl_Group* o = new Fl_Group(150, 95, 635, 305);
     o->box(FL_FLAT_BOX);
-    { document_tabs = new Fldtk_Document_Tabs(153, 98, 629, 299);
-      document_tabs->box(FL_UP_BOX);
-      document_tabs->color(FL_BACKGROUND_COLOR);
-      document_tabs->selection_color(FL_BACKGROUND_COLOR);
-      document_tabs->labeltype(FL_NORMAL_LABEL);
-      document_tabs->labelfont(0);
-      document_tabs->labelsize(12);
-      document_tabs->labelcolor(FL_FOREGROUND_COLOR);
-      document_tabs->align(FL_ALIGN_TOP);
-      document_tabs->when(FL_WHEN_RELEASE);
-      document_tabs->end();
-      Fl_Group::current()->resizable(document_tabs);
-    } // Fldtk_Document_Tabs* document_tabs
+    { wDocumentTabs = new Fldtk_Document_Tabs(153, 98, 629, 299);
+      wDocumentTabs->box(FL_UP_BOX);
+      wDocumentTabs->color(FL_BACKGROUND_COLOR);
+      wDocumentTabs->selection_color(FL_BACKGROUND_COLOR);
+      wDocumentTabs->labeltype(FL_NORMAL_LABEL);
+      wDocumentTabs->labelfont(0);
+      wDocumentTabs->labelsize(12);
+      wDocumentTabs->labelcolor(FL_FOREGROUND_COLOR);
+      wDocumentTabs->align(FL_ALIGN_TOP);
+      wDocumentTabs->when(FL_WHEN_RELEASE);
+      wDocumentTabs->end();
+      Fl_Group::current()->resizable(wDocumentTabs);
+    } // Fldtk_Document_Tabs* wDocumentTabs
     o->end();
   } // Fl_Group* o
   { Fl_Group* o = new Fl_Group(0, 400, 785, 170);

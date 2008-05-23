@@ -34,6 +34,10 @@ extern "C" {
 class Dtk_Document_List;
 class Dtk_Script_Writer;
 class Mgr_Project;
+class Dtk_Project_Manager;
+
+class Fl_Window;
+class Fl_Tabs;
 
 
 /*---------------------------------------------------------------------------*/
@@ -45,6 +49,8 @@ class Dtk_Project
 public:
 	Dtk_Project();
 	~Dtk_Project();
+  
+  void setGuiManager(Dtk_Project_Manager *mgr) { guiManager = mgr; }
 
     /** Check if the project has changed and needs to be saved.
      * \todo Implement me!
@@ -78,7 +84,10 @@ public:
     /// the pathname of the file with backslash separators and a trailing backslash
     char        * pathname();
 
-    const char  * name() { return name_; }
+  /** Return the short name of the project.
+   */
+  const char  * name() { return name_; }
+  
     const char  * filename() { return filename_; }
     Dtk_Document_List   * documentList() { return documentList_; }
 
@@ -98,8 +107,25 @@ private:
 
   /// Keep a list of all documents in the project.
   Dtk_Document_List   * documentList_;
+  
+  Dtk_Project_Manager * guiManager;
 };
 
+class Dtk_Project_Manager
+{
+public:
+  Dtk_Project_Manager(Dtk_Project*);
+  ~Dtk_Project_Manager();
+  void projectCreated();
+  void projectRemoved();
+  void projectRenamed();
+  
+private:
+  Dtk_Project *project;
+  Fl_Window *window;
+  Fl_Tabs *browserTabs;
+};
+    
 
 #endif
 

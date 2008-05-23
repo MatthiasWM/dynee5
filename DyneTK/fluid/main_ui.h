@@ -294,9 +294,9 @@ private:
   static Fl_Menu_Item menu_1[];
 public:
   Fl_Tile *center;
-  Fl_Tabs *browsers;
-  Fldtk_Document_Browser *documents;
-  Fldtk_Document_Tabs *document_tabs;
+  Fl_Tabs *wBrowserTabs;
+  Fldtk_Document_Browser *wDocumentBrowser;
+  Fldtk_Document_Tabs *wDocumentTabs;
   Fl_Tabs *consoles;
   Fldtk_Inspector *inspector;
   void activate_menus(unsigned int mask);
