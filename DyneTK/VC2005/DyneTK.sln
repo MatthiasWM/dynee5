@@ -8,6 +8,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DyneTK", "DyneTK.vcproj", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "newt_lib", "..\..\..\newt0\platform\VisualC6\newt_lib.vcproj", "{9529DD9D-BDBB-4974-BB35-666BCD214124}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DyneTK-1.7.0", "DyneTK-1.7.0\DyneTK-1.7.0.vdproj", "{3B1C27CF-8EA6-4C3F-A353-865FE6412A26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -22,6 +24,8 @@ Global
 		{9529DD9D-BDBB-4974-BB35-666BCD214124}.Debug|Win32.Build.0 = Debug|Win32
 		{9529DD9D-BDBB-4974-BB35-666BCD214124}.Release|Win32.ActiveCfg = Release|Win32
 		{9529DD9D-BDBB-4974-BB35-666BCD214124}.Release|Win32.Build.0 = Release|Win32
+		{3B1C27CF-8EA6-4C3F-A353-865FE6412A26}.Debug|Win32.ActiveCfg = Debug
+		{3B1C27CF-8EA6-4C3F-A353-865FE6412A26}.Release|Win32.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
