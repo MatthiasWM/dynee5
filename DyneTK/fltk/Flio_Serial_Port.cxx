@@ -160,6 +160,7 @@ int Flio_Serial_Port::open(const char *portname, int bps)
     DWORD fAbortOnError:1;     // abort reads/writes on error 
 */
   // 9Pin sub D: rxd txd dcd dsr rts cts ri dtr gnd
+  // FIXME: which flow control is actually used?
   arg.fOutxCtsFlow = TRUE;
   arg.fOutxDsrFlow = TRUE;
   arg.fDsrSensitivity = FALSE;
@@ -180,11 +181,6 @@ int Flio_Serial_Port::open(const char *portname, int bps)
   //EscapeCommFunction(port_, CLRRTS);
   //EscapeCommFunction(port_, SETDTR);
 
-  rxActive_ = txActive_ = 0;
-  pRxActive_ = pTxActive_ = 0;
-	redraw();
-  Fl::add_timeout(0.2, lights_cb, this);
-
   memset(&overlapped_, 0, sizeof(overlapped_));
   event_ = CreateEvent(0, true, 0, 0);
   overlapped_.hEvent = event_;
@@ -200,6 +196,7 @@ int Flio_Serial_Port::open(const char *portname, int bps)
   tcgetattr(port_, &tio);
   cfmakeraw(&tio);
   cfsetspeed(&tio, bps);
+  // FIXME: which flow control is actually used?
   //tio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL | CREAD;
   //tio.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
   //tio.c_iflag = IGNPAR | IGNBRK;
@@ -207,7 +204,7 @@ int Flio_Serial_Port::open(const char *portname, int bps)
   //tio.c_lflag = 0;
   tio.c_cc[VMIN] = 1;
   tio.c_cc[VTIME] = 0;
-  cfsetspeed(&tio, B38400);
+  //cfsetspeed(&tio, B38400);
   tcflush(port_, TCIFLUSH);
   int ret = tcsetattr(port_, TCSANOW, &tio);
   if (ret==-1)
@@ -215,7 +212,10 @@ int Flio_Serial_Port::open(const char *portname, int bps)
   Fl::add_fd(port_, FL_READ, reader_cb, this);
 #endif
   
-  redraw();
+  rxActive_ = txActive_ = 0;
+  pRxActive_ = pTxActive_ = 0;
+	redraw();
+  Fl::add_timeout(0.2, lights_cb, this);
 
 #if (defined DEBUG_SEND) || (defined DEBUG_RCV)
   printf("DEBUG: serial port \"%s\" at %dbps openend\n", portname, bps);
@@ -352,6 +352,8 @@ void Flio_Serial_Port::reader_thread()
     DWORD mask;
     WaitCommEvent(port_, &mask, &overlapped_);
     WaitForSingleObject(event_, INFINITE);
+    // FIXME: what happens when we close the COM port?
+    // Will we ever leave the thread?
     DWORD nc = 0, na;
     for (;;) {
       int n = free_to_end();

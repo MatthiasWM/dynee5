@@ -36,7 +36,7 @@
 
 
 Fldtk_Document_Browser::Fldtk_Document_Browser(int X, int Y, int W, int H, const char *L)
-:	Fl_Select_Browser(X, Y, W, H, L)
+:	Fl_Hold_Browser(X, Y, W, H, L)
 {
 }
 

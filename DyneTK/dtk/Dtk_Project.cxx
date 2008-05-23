@@ -33,6 +33,8 @@
 #include "dtk/Dtk_Script_Writer.h"
 #include "dtk/Dtk_Document_List.h"
 
+#include "mgr/Mgr_Project.h"
+
 #include "fluid/Fldtk_Proj_Settings.h"
 #include "fluid/main_ui.h"
 #include "main.h"

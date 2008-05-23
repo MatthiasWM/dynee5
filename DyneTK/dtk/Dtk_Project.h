@@ -33,6 +33,7 @@ extern "C" {
 
 class Dtk_Document_List;
 class Dtk_Script_Writer;
+class Mgr_Project;
 
 
 /*---------------------------------------------------------------------------*/
@@ -95,8 +96,8 @@ private:
 	char		* pathname_;
 	newtRef		package_;
 
-    /// Keep a list of all documents in the project.
-    Dtk_Document_List   * documentList_;
+  /// Keep a list of all documents in the project.
+  Dtk_Document_List   * documentList_;
 };
 
 

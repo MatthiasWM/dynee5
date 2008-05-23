@@ -376,7 +376,11 @@ void Dtk_Template::addSlot(Dtk_Slot *slot)
 /*---------------------------------------------------------------------------*/
 void Dtk_Template::removeSlot(Dtk_Slot *slot) 
 {
-    slotList()->remove(slot);
+  if (slot==viewBounds_)
+    viewBounds_ = 0L; // FIXME: this *will* cause a crash!
+  if (slot==viewJustify_)
+    viewJustify_ = 0L; 
+  slotList()->remove(slot);
 }
 
 /*---------------------------------------------------------------------------*/
