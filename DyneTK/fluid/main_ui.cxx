@@ -320,14 +320,14 @@ Fl_Menu_Item Fldtk_Main_Window::menu_[] = {
  {"Print One", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 176},
  {"Print...", FL_COMMAND|0x70,  0, 0, 129, FL_NORMAL_LABEL, 0, 12, 176},
  {"Previous Projects", 0,  0, 0, 192, FL_NORMAL_LABEL, 0, 12, 0},
- {"", 0x80031,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj, 0, 16, FL_NORMAL_LABEL, 0, 12, 0},
- {"", 0x80032,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj1, 0, 16, FL_NORMAL_LABEL, 0, 12, 0},
- {"", 0x80033,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj2, 0, 16, FL_NORMAL_LABEL, 0, 12, 0},
- {"", 0x80034,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj3, 0, 16, FL_NORMAL_LABEL, 0, 12, 0},
- {"", 0x80035,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj4, 0, 16, FL_NORMAL_LABEL, 0, 12, 0},
- {"", 0x80036,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj5, 0, 16, FL_NORMAL_LABEL, 0, 12, 0},
- {"", 0x80037,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj6, 0, 16, FL_NORMAL_LABEL, 0, 12, 0},
- {"", 0x80038,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj7, 0, 16, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<static>", 0x80031,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<static>", 0x80032,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj1, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<static>", 0x80033,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj2, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<static>", 0x80034,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj3, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<static>", 0x80035,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj4, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<static>", 0x80036,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj5, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<static>", 0x80037,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj6, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<static>", 0x80038,  (Fl_Callback*)Fldtk_Main_Window::cb_mPrevProj7, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0},
  {"Exit", FL_COMMAND|0x71,  (Fl_Callback*)Fldtk_Main_Window::cb_mFileExit, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0},
@@ -425,6 +425,7 @@ Fl_Menu_Item* Fldtk_Main_Window::mFileClose = Fldtk_Main_Window::menu_ + 6;
 Fl_Menu_Item* Fldtk_Main_Window::mFileSave = Fldtk_Main_Window::menu_ + 7;
 Fl_Menu_Item* Fldtk_Main_Window::mFileSaveAs = Fldtk_Main_Window::menu_ + 8;
 Fl_Menu_Item* Fldtk_Main_Window::mFileSaveAll = Fldtk_Main_Window::menu_ + 9;
+Fl_Menu_Item* Fldtk_Main_Window::mPrevProjects = Fldtk_Main_Window::menu_ + 14;
 Fl_Menu_Item* Fldtk_Main_Window::mPrevProj[8];
 Fl_Menu_Item* Fldtk_Main_Window::mFileExit = Fldtk_Main_Window::menu_ + 24;
 Fl_Menu_Item* Fldtk_Main_Window::mEdit = Fldtk_Main_Window::menu_ + 26;
@@ -4125,6 +4126,7 @@ void Fldtk_Main_Window::activate_menus(unsigned int mask) {
 
 // if a project is loaded...
 if ( (mask & 0x00000001) == 0x00000001 ) {
+  mPrevProjects->deactivate();
   mProjectNew->deactivate();
   mProjectOpen->deactivate();
   mProjectSave->activate();
@@ -4136,6 +4138,7 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectSettings->activate();
   mProjectExportToText->activate(); 
 } else {
+  mPrevProjects->activate();
   mProjectNew->activate();
   mProjectOpen->activate();
   mProjectSave->deactivate();

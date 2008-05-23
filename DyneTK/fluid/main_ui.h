@@ -80,6 +80,9 @@ public:
 private:
   void cb_mFileSaveAll_i(Fl_Menu_*, void*);
   static void cb_mFileSaveAll(Fl_Menu_*, void*);
+public:
+  static Fl_Menu_Item *mPrevProjects;
+private:
   void cb_mPrevProj_i(Fl_Menu_*, void*);
   static void cb_mPrevProj(Fl_Menu_*, void*);
   void cb_mPrevProj1_i(Fl_Menu_*, void*);

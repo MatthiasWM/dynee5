@@ -49,7 +49,7 @@ decl {\#include "main.h"} {public
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
-  xywh {457 178 785 595} type Double resizable
+  xywh {634 291 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
   Fl_Menu_Bar {} {open
@@ -118,41 +118,49 @@ widget_class Fldtk_Main_Window {
         label {Print...}
         xywh {5 5 100 20} shortcut 0x40070 labelsize 12 labelcolor 176 deactivate divider
       }
-      Submenu {} {
+      Submenu mPrevProjects {
         label {Previous Projects} open
         xywh {0 0 63 20} labelsize 12 divider
       } {
         MenuItem {mPrevProj[0]} {
+          label {<static>}
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {15 15 100 20} shortcut 0x80031 labelsize 12 hide
+          xywh {15 15 100 20} shortcut 0x80031 labelsize 12
         }
         MenuItem {mPrevProj[1]} {
+          label {<static>}
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {25 25 100 20} shortcut 0x80032 labelsize 12 hide
+          xywh {25 25 100 20} shortcut 0x80032 labelsize 12
         }
         MenuItem {mPrevProj[2]} {
+          label {<static>}
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {35 35 100 20} shortcut 0x80033 labelsize 12 hide
+          xywh {35 35 100 20} shortcut 0x80033 labelsize 12
         }
         MenuItem {mPrevProj[3]} {
+          label {<static>}
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {45 45 100 20} shortcut 0x80034 labelsize 12 hide
+          xywh {45 45 100 20} shortcut 0x80034 labelsize 12
         }
         MenuItem {mPrevProj[4]} {
+          label {<static>}
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {55 55 100 20} shortcut 0x80035 labelsize 12 hide
+          xywh {55 55 100 20} shortcut 0x80035 labelsize 12
         }
         MenuItem {mPrevProj[5]} {
+          label {<static>}
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {65 65 100 20} shortcut 0x80036 labelsize 12 hide
+          xywh {65 65 100 20} shortcut 0x80036 labelsize 12
         }
         MenuItem {mPrevProj[6]} {
+          label {<static>}
           callback {OpenPreviousProject(o->mvalue()->label());}
-          xywh {75 75 100 20} shortcut 0x80037 labelsize 12 hide
+          xywh {75 75 100 20} shortcut 0x80037 labelsize 12
         }
         MenuItem {mPrevProj[7]} {
-          callback {OpenPreviousProject(o->mvalue()->label());} selected
-          xywh {85 85 100 20} shortcut 0x80038 labelsize 12 hide
+          label {<static>}
+          callback {OpenPreviousProject(o->mvalue()->label());}
+          xywh {85 85 100 20} shortcut 0x80038 labelsize 12
         }
       }
       MenuItem mFileExit {
@@ -712,7 +720,7 @@ SetModeAddTemplate();} open
       xywh {590 570 15 25} resizable
     }
   }
-  Function {activate_menus(unsigned int mask)} {return_type void
+  Function {activate_menus(unsigned int mask)} {open return_type void
   } {
     code {// bits in the mask have the following meanings:
 //	bit 0: a project is loaded
@@ -735,6 +743,7 @@ SetModeAddTemplate();} open
 
 // if a project is loaded...
 if ( (mask & 0x00000001) == 0x00000001 ) {
+  mPrevProjects->deactivate();
   mProjectNew->deactivate();
   mProjectOpen->deactivate();
   mProjectSave->activate();
@@ -746,6 +755,7 @@ if ( (mask & 0x00000001) == 0x00000001 ) {
   mProjectSettings->activate();
   mProjectExportToText->activate(); 
 } else {
+  mPrevProjects->activate();
   mProjectNew->activate();
   mProjectOpen->activate();
   mProjectSave->deactivate();
@@ -845,7 +855,8 @@ if ( (mask & 0x00000080) == 0x00000080 ) {
   mBrowserRenameSlot->activate();
 } else {
   mBrowserRenameSlot->deactivate();
-}} {}
+}} {selected
+    }
   }
 } 
 

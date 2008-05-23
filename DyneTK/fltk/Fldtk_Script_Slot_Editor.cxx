@@ -48,7 +48,10 @@ Fldtk_Script_Slot_Editor::~Fldtk_Script_Slot_Editor()
 
 void Fldtk_Script_Slot_Editor::text(char *script) 
 {
+  if (script)
     buffer()->text(script);
+  else
+    buffer()->text("");
 }
 
 char *Fldtk_Script_Slot_Editor::text() 

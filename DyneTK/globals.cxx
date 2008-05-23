@@ -230,7 +230,12 @@ int OpenProject(const char *filename)
 /*-v2------------------------------------------------------------------------*/
 int OpenPreviousProject(const char *filename)
 {
-  return OpenProject(filename);
+  // '<' indicates an adminstrative menu entry like <empty> or <NULL>
+  // which we must not load. Pop up a file chooser instead.
+  if (filename && filename[0]=='<')
+    return OpenProject(0L);
+  else
+    return OpenProject(filename);
 }
 
 /*-v2------------------------------------------------------------------------*/
@@ -717,21 +722,32 @@ void UpdatePrevProjMenu()
 {
 	int i;
 	for (i=0; i<8; i++) {
-		if (i>dtkPrefs->nPrevProj) {
+		if (i>=dtkPrefs->nPrevProj) {
 			dtkMain->mPrevProj[i]->hide();
 		} else {
 			Fl_Menu_Item *mi = dtkMain->mPrevProj[i];
 			mi->show();
 			if (mi->label()) {
-				if (strcmp(mi->label(), "")) // do not delete static labels (set to an emty string)
-                    free((void*)mi->label());
-				mi->label("");
+				if (mi->label()[0]!='<') // static strings start with a '<' - do not free those!
+          free((void*)mi->label());
 			}
-			// FIXME Actually we should add the relative path if this file is "below" the current dir
-			if (dtkPrefs->prevProj[i] && *(dtkPrefs->prevProj[i]))
-				mi->label(strdup(dtkPrefs->prevProj[i]));
+      const char *path = dtkPrefs->prevProj[i];
+      if (path && *path) {
+        char buf[2048];
+        fl_filename_relative(buf, 2047, path);
+        if (buf[0]=='.' && buf[1]=='.')
+          mi->label(strdup(path)); // absolute path if we must go up in the hierarchy
+        else
+          mi->label(strdup(buf)); // relative path if it is a simple relation
+      } else {
+				mi->label("<null>"); // this merely sets a pointer in case the following function fails
+      }
 		}
 	}
+  if (dtkPrefs->nPrevProj==0) {
+    dtkMain->mPrevProj[0]->label("<empty>");
+    dtkMain->mPrevProj[0]->show();
+  }
 }
 
 /*---------------------------------------------------------------------------*/
@@ -740,11 +756,46 @@ void UpdatePrevProjMenu()
  */
 void AddPrevProj(const char *filename)
 {
-	// FIXME insanely oversimplified!
-	memmove(dtkPrefs->prevProj+1, dtkPrefs->prevProj, sizeof(void*)*7);
-	dtkPrefs->prevProj[0] = strdup(filename);
-	if (dtkPrefs->nPrevProj<8)
-		dtkPrefs->nPrevProj++;
+  int i;
+  int N = dtkPrefs->nPrevProj;
+  char buf[2048];
+  fl_filename_absolute(buf, 2047, filename);
+  filename = buf;
+  
+  // don't set empty filenames
+  if (!filename || !*filename)
+    return;
+  
+  // add the filename at the top
+  if (dtkPrefs->nPrevProj==0) {
+    // simplified condition if no entries exist yet
+    dtkPrefs->prevProj[0] = strdup(filename);
+    dtkPrefs->nPrevProj = 1;
+  } else {
+    // does this entry exist already?
+    for (i=0; i<N; i++) {
+      if (strcmp(filename, dtkPrefs->prevProj[i])==0)
+        break;
+    }
+    // if we are already at the top, there is nothing to do
+    if (i==0)
+      return;
+    // if this is not a dup, move *all* entries around
+    if (i==N) {
+      if (N<8)
+        dtkPrefs->nPrevProj++;
+      else
+        i = 7;
+    }
+    // now free the last entry
+    if (dtkPrefs->prevProj[i])
+      free(dtkPrefs->prevProj[i]);
+    // move all entries above down by one
+    for ( ; i>0; --i) 
+      dtkPrefs->prevProj[i] = dtkPrefs->prevProj[i-1];
+    // and set the new filename at the top
+    dtkPrefs->prevProj[0] = strdup(filename);
+  }
 	UpdatePrevProjMenu();
 }
 
