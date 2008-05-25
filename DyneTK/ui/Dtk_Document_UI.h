@@ -1,9 +1,9 @@
 //
 // "$Id$"
 //
-// Dtk_Project_UI header file for the Dyne Toolkit.
+// Dtk_Document_UI header file for the Dyne Toolkit.
 //
-// Copyright 2007 by Matthias Melcher.
+// Copyright 2008 by Matthias Melcher.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Library General Public
@@ -23,33 +23,34 @@
 // Please report all bugs and problems to "dtk@matthiasm.com".
 //
 
-#ifndef DTK_PROJECT_UI_H
-#define DTK_PROJECT_UI_H
-
-class Dtk_Project;
-
-class Fl_Window;
-class Fl_Tabs;
+#ifndef DTK_DOCUMENT_UI_H
+#define DTK_DOCUMENT_UI_H
 
 
-/*---------------------------------------------------------------------------*/
-/** Manage the connection betwen FLTK and Dtk_Project.
- */
-class Dtk_Project_UI
+class Dtk_Document_UI;
+
+class Dtk_Document;
+class Fldtk_Document_Browser;
+class Fldtk_Document_Tabs;
+
+
+class Dtk_Document_UI
 {
 public:
-                Dtk_Project_UI(Dtk_Project*);
-                ~Dtk_Project_UI();
-  void          projectCreated();
-  void          projectRemoved();
-  void          projectRenamed();
+  Dtk_Document_UI(Dtk_Document*);
+  ~Dtk_Document_UI();
+protected:
   
-private:
-  Dtk_Project   * project;
-  Fl_Window     * window;
-  Fl_Tabs       * browserTabs;
+  /// The document that we link with the UI.
+  Dtk_Document *document_;
+
+  /// this browser lists all documents in the project
+  Fldtk_Document_Browser * documentBrowser_;
+  
+  /// this Tab group contains all opened documents
+  Fldtk_Document_Tabs * documentTabs_;
 };
-    
+
 
 #endif
 

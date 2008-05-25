@@ -40,6 +40,8 @@
 #include "Dtk_Layout.h"
 #include "Dtk_Script.h"
 
+#include "ui/Dtk_Document_List_UI.h"
+
 #include "fltk/Fldtk_Document_Browser.h"
 
 #include "fluid/main_ui.h"
@@ -61,9 +63,10 @@
 
 /*---------------------------------------------------------------------------*/
 Dtk_Document_List::Dtk_Document_List(Dtk_Project *proj)
-:   project_(proj),
-    browser_(0L),
-    main_(0L)
+: project_(proj),
+  browser_(0L),
+  main_(0L),
+  ui(0L)
 {
     if (project_) {
         browser_ = dtkDocumentBrowser;
@@ -94,27 +97,36 @@ Dtk_Document_List::~Dtk_Document_List()
 }
 
 /*---------------------------------------------------------------------------*/
+void Dtk_Document_List::createUI()
+{
+  if (!ui)
+    ui = new Dtk_Document_List_UI(this);
+}
+
+/*---------------------------------------------------------------------------*/
 Dtk_Document *Dtk_Document_List::add(const char *filename)
 {
-    // determine the file type by loading the first few bytes
+  // determine the file type by loading the first few bytes
 	FILE *f = fopen(filename, "rb");
-    if (!f)
-        return 0L;
+  if (!f)
+    return 0L;
 	int id = fgetc(f);
 	fclose(f);
 	Dtk_Document *doc = 0L;
 	if (id==2) { 
-        // its NSOF, so for now we assume it is a layout
+    // its NSOF, so for now we assume it is a layout
 		doc = new Dtk_Layout(this);
 	} else { 
-        // otherwise, this is likely text
+    // otherwise, this is likely text
 		doc = new Dtk_Script(this);
 	}
-    // load the file
+  //if (ui)
+  //  doc->createUI();
+  // load the file
 	doc->setFilename(filename);
-    doc->load();
-    doc->edit();
-    append(doc);
+  doc->load();
+  doc->edit();
+  append(doc);
 	return doc;
 }
 

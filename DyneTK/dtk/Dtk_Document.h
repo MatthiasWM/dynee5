@@ -31,6 +31,7 @@
 
 
 class Dtk_Document_List;
+class Dtk_Document_UI;
 class Dtk_Project;
 class Dtk_Script_Writer;
 
@@ -207,6 +208,11 @@ public:
      */
     void            setMain();
 
+  /**
+   * Create the UI manager and have it create the UI.
+   */
+  void          createUI();
+
 protected:
 
     /// this is the name of the file without path or extension
@@ -226,6 +232,9 @@ protected:
 
     /// we must always be a member of exactly one list
     Dtk_Document_List   * list_;
+  
+  /// link to our usr interface manager
+  Dtk_Document_UI *ui;
 };
 
 

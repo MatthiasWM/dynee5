@@ -223,7 +223,7 @@ int OpenProject(const char *filename)
 	}
     // create a new project and load it
 	dtkProject = new Dtk_Project();
-  new Dtk_Project_UI(dtkProject);
+  dtkProject->createUI();
 	dtkProject->setFilename(filename);
 	int ret = dtkProject->load();
 

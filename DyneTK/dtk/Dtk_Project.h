@@ -54,9 +54,9 @@ public:
                 ~Dtk_Project();
   
   /**
-   * FIXME: create a link to a project UI manager
+   * Create the UI manager and have it create the UI.
    */
-  void          setGuiManager(Dtk_Project_UI *mgr) { ui = mgr; }
+  void          createUI();
 
   /**
    * Return true if the project was modified and needs to be saved.

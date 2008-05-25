@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Project_UI implementation for the Dyne Toolkit.
+// Dtk_Document_UI implementation for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -27,63 +27,22 @@
 #pragma warning(disable : 4996)
 #endif
 
-/*-- class header --*/
-#include "ui/Dtk_Project_UI.h"
-
-/*-- reference to project --*/
-#include "dtk/Dtk_Project.h"
-
-/*-- reference to UI --*/
-#include "fluid/Fldtk_Proj_Settings.h"
+#include "Dtk_Document_UI.h"
 #include "fluid/main_ui.h"
 
-/*-- other headers --*/
-
 
 /*----------------------------------------------------------------------------*/
-Dtk_Project_UI::Dtk_Project_UI(Dtk_Project *p)
-: project(p),
-  window(dtkMain),
-  browserTabs(dtkBrowserTabs)
-{
-  projectCreated();
-}
-
-
-/*----------------------------------------------------------------------------*/
-Dtk_Project_UI::~Dtk_Project_UI()
+Dtk_Document_UI::Dtk_Document_UI(Dtk_Document *document)
+: document_(document),
+  documentBrowser_(dtkDocumentBrowser),
+  documentTabs_(dtkDocumentTabs)
 {
 }
 
 
 /*----------------------------------------------------------------------------*/
-void Dtk_Project_UI::projectCreated()
+Dtk_Document_UI::~Dtk_Document_UI()
 {
-  projectRenamed();
-  browserTabs->activate();
-}
-
-
-/*----------------------------------------------------------------------------*/
-void Dtk_Project_UI::projectRemoved()
-{
-  window->label("DyneTK");
-  browserTabs->deactivate();
-  delete this;
-}
-
-
-/*----------------------------------------------------------------------------*/
-void Dtk_Project_UI::projectRenamed()
-{
-  const char *name = project->name();
-  if (name) {
-    char buffer[2048];
-    sprintf(buffer, "DyneTK: %s", project->name());
-    window->copy_label(buffer);
-  } else {
-    window->label("DyneTK: <unnamed project>");
-  }
 }
 
 //

@@ -35,6 +35,8 @@ extern "C" {
 
 class Dtk_Project;
 class Dtk_Document;
+class Dtk_Document_List_UI;
+
 class Fldtk_Document_Browser;
 
 
@@ -48,20 +50,20 @@ class Fldtk_Document_Browser;
  * document browser that is assigned to it.
  */
 class Dtk_Document_List
-{
-public:
-
+  {
+  public:
+    
     /** Initialize a document list
      * 
      * Documents lists ca be use in projects or stand-alone for 
      * globally available documents.
      */
-                    Dtk_Document_List(Dtk_Project *proj=0L);
-
+    Dtk_Document_List(Dtk_Project *proj=0L);
+    
     /** Remove a document list and all referenced documents.
      */
-                    ~Dtk_Document_List();
-
+    ~Dtk_Document_List();
+    
     /** Add any kind of existing document.
      * 
      * We use the filename and the first bytes of the file to determine
@@ -75,8 +77,8 @@ public:
      *
      * \todo The file type check is currently only minimal.
      */
-	Dtk_Document	* add(const char *filename);
-
+    Dtk_Document	* add(const char *filename);
+    
     /** Remove a document from the list.
      *
      * This function does not close or delete the document.
@@ -88,7 +90,7 @@ public:
      * \retval  -1 if the document was not in this list
      */
     int             remove(Dtk_Document *document);
-
+    
     /** Find a file based on a filename and path.
      *
      * If the returned value is not the same as the calling value, the buffer 
@@ -96,89 +98,96 @@ public:
      *
      * \todo We need this to avoid duplicate files, so please implement this.
      */
-	char		    * findFile(const char *filename);
-
+    char		    * findFile(const char *filename);
+    
     /** Create a new document that will contain a script.
      *
      * \param   [in] filename a path and filename for the new document
      *
      * \retval  address of the new document, or NULL if the operation failed
      */
-	Dtk_Document	* newScript(const char *filename);
-
+    Dtk_Document	* newScript(const char *filename);
+    
     /** Create a new document that will contain a layout.
      *
      * \param   [in] filename a path and filename for the new document
      *
      * \retval  address of the new document, or NULL if the operation failed
      */
-	Dtk_Document	* newLayout(const char *filename);
-
+    Dtk_Document	* newLayout(const char *filename);
+    
     /** Get a document by index.
      * 
      * \param   [in] i index number of document
      *
      * \retval  address of document, or NULL
      */
-	Dtk_Document	* getDocument(int i);
-
+    Dtk_Document	* getDocument(int i);
+    
     /** Create a Newt Array that conatins a list of all project documents.
      *
      * \retval  Newt reference to list of project items
      */
-	newtRef			getProjectItemsRef();
-
+    newtRef			getProjectItemsRef();
+    
     /** Return the address of the project that manages us.
      *
      * \retval  address of project or NULL
      */
     Dtk_Project     * project() { return project_; }
-
+    
     /** Add the document to the internal list and to the browser.
      * 
      * \param doc the document that we want to add to the list
      */
     void            append(Dtk_Document *doc);
-
+    
     /** A document tells us that its name changed.
      *
      * \param document the document that changed its name.
      */
     void            filenameChanged(Dtk_Document *document);
-
+    
     /** Return the number of documents in this list.
      */
     int             size() { return docList_.size(); }
-
+    
     /** Return a pointer to the document at index i.
      */
     Dtk_Document    * at(int i) { return docList_.at(i); }
-
+    
     /** Return the main document.
      */
     Dtk_Document    * getMain() { return main_; }
-
+    
     /** Change the main document.
      */
     void            setMain(Dtk_Document *doc);
-
-private:
-
+    
+    /**
+     * Create the UI manager and have it create the UI.
+     */
+    void          createUI();
+    
+  private:
+    
     /// back reference to the project that keeps this list
     Dtk_Project     * project_;
-
+    
     /// stdlib list of documents
-	std::vector<Dtk_Document*>	docList_;
-
+    std::vector<Dtk_Document*>	docList_;
+    
     /// we are in charge of keeping this browser updated and reacting to its messages
     Fldtk_Document_Browser      * browser_;
-
+    
     /// every project has a main document which describes the top level layout
     Dtk_Document                * main_;
-
+    
     /// this is an FLTK callback that is triggered when the browser is clicked
     static void browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d);
-};
+    
+    Dtk_Document_List_UI *ui;
+  };
 
 
 #endif

@@ -31,6 +31,8 @@
 #include "Dtk_Document_List.h"
 #include "Dtk_Project.h"
 
+#include "ui/Dtk_Document_UI.h"
+
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fltk/Fldtk_Editor.h"
 
@@ -48,7 +50,8 @@ Dtk_Document::Dtk_Document(Dtk_Document_List *list)
 	name_(0L),
     browserName_(0L),
 	askForFilename_(false),
-    list_(list)
+    list_(list),
+  ui(0L)
 {
 }
 
@@ -69,6 +72,15 @@ Dtk_Document::~Dtk_Document()
 	if (filename_)
 		free(filename_);
 }
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Document::createUI()
+{
+  if (!ui)
+    ui = new Dtk_Document_UI(this);
+}
+
 
 /*-v2------------------------------------------------------------------------*/
 const char *Dtk_Document::name() 

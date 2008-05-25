@@ -70,9 +70,12 @@ Dtk_Project::Dtk_Project()
   startdir_(0L),
   pathname_(0L),
   package_(kNewtRefNIL),
-  documentList_(0L)
+  documentList_(0L),
+  ui(0L)
 {
   documentList_ = new Dtk_Document_List(this);
+  if (ui)
+    documentList_->createUI();
 }
 
 
@@ -95,6 +98,15 @@ Dtk_Project::~Dtk_Project()
 		free(startdir_);
   
   if (ui) ui->projectRemoved();
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Project::createUI() 
+{
+  ui = new Dtk_Project_UI(this);
+  if (documentList_)
+    documentList_->createUI();
 }
 
 

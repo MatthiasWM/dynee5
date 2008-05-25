@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
+		C93244C80DE9F780008AA454 /* Dtk_Document_List_UI.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C93244C60DE9F780008AA454 /* Dtk_Document_List_UI.cxx */; };
+		C93245230DEA032F008AA454 /* Dtk_Document_UI.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C93245210DEA032F008AA454 /* Dtk_Document_UI.cxx */; };
 		C98949720DE9D58B0026565F /* toolbox_002.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = C98949690DE9D48F0026565F /* toolbox_002.icns */; };
 		C989497D0DE9E4CA0026565F /* Dtk_Layout.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C98949790DE9E4CA0026565F /* Dtk_Layout.cxx */; };
 		C989497E0DE9E4CA0026565F /* Dtk_Script.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C989497B0DE9E4CA0026565F /* Dtk_Script.cxx */; };
@@ -102,6 +104,10 @@
 		4A9504CAFFE6A41611CA0CBA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D0C4E970486CD37000505A6 /* DyneTK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DyneTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C93244C60DE9F780008AA454 /* Dtk_Document_List_UI.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dtk_Document_List_UI.cxx; path = ../ui/Dtk_Document_List_UI.cxx; sourceTree = SOURCE_ROOT; };
+		C93244C70DE9F780008AA454 /* Dtk_Document_List_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dtk_Document_List_UI.h; path = ../ui/Dtk_Document_List_UI.h; sourceTree = SOURCE_ROOT; };
+		C93245210DEA032F008AA454 /* Dtk_Document_UI.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dtk_Document_UI.cxx; path = ../ui/Dtk_Document_UI.cxx; sourceTree = SOURCE_ROOT; };
+		C93245220DEA032F008AA454 /* Dtk_Document_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dtk_Document_UI.h; path = ../ui/Dtk_Document_UI.h; sourceTree = SOURCE_ROOT; };
 		C98949690DE9D48F0026565F /* toolbox_002.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = toolbox_002.icns; sourceTree = SOURCE_ROOT; };
 		C98949790DE9E4CA0026565F /* Dtk_Layout.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Layout.cxx; sourceTree = "<group>"; };
 		C989497A0DE9E4CA0026565F /* Dtk_Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Layout.h; sourceTree = "<group>"; };
@@ -295,6 +301,10 @@
 		C989497F0DE9E4D70026565F /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				C93245210DEA032F008AA454 /* Dtk_Document_UI.cxx */,
+				C93245220DEA032F008AA454 /* Dtk_Document_UI.h */,
+				C93244C60DE9F780008AA454 /* Dtk_Document_List_UI.cxx */,
+				C93244C70DE9F780008AA454 /* Dtk_Document_List_UI.h */,
 				C98949830DE9E6230026565F /* Dtk_Project_UI.cxx */,
 				C98949840DE9E6230026565F /* Dtk_Project_UI.h */,
 			);
@@ -555,6 +565,8 @@
 				C989497D0DE9E4CA0026565F /* Dtk_Layout.cxx in Sources */,
 				C989497E0DE9E4CA0026565F /* Dtk_Script.cxx in Sources */,
 				C98949850DE9E6230026565F /* Dtk_Project_UI.cxx in Sources */,
+				C93244C80DE9F780008AA454 /* Dtk_Document_List_UI.cxx in Sources */,
+				C93245230DEA032F008AA454 /* Dtk_Document_UI.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
