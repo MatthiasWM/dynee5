@@ -927,6 +927,18 @@
 			Name="Images"
 			>
 			<File
+				RelativePath=".\toolbox_002_16x16.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\toolbox_002_32x32.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\toolbox_002_64x64.ico"
+				>
+			</File>
+			<File
 				RelativePath="..\images\toolbox_closed.xpm"
 				>
 			</File>
@@ -1368,6 +1380,18 @@
 			</Filter>
 		</Filter>
 		<File
+			RelativePath=".\app_icon.ico"
+			>
+		</File>
+		<File
+			RelativePath=".\app_icon_32x32.ico"
+			>
+		</File>
+		<File
+			RelativePath=".\DyneTK.rc"
+			>
+		</File>
+		<File
 			RelativePath="..\globals.cxx"
 			>
 			<FileConfiguration
@@ -1394,6 +1418,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\icon3.ico"
+			>
+		</File>
+		<File
+			RelativePath=".\icon4.ico"
+			>
+		</File>
+		<File
 			RelativePath="..\main.cxx"
 			>
 			<FileConfiguration
@@ -1417,6 +1449,10 @@
 		</File>
 		<File
 			RelativePath="..\main.h"
+			>
+		</File>
+		<File
+			RelativePath=".\resource.h"
 			>
 		</File>
 		<File

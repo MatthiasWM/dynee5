@@ -1253,7 +1253,7 @@ void Dtk_Project_Manager::projectRenamed()
   const char *name = project->name();
   if (name) {
     char buffer[2048];
-    snprintf(buffer, 2047, "DyneTK: %s", project->name());
+    sprintf(buffer, "DyneTK: %s", project->name());
     window->copy_label(buffer);
   } else {
     window->label("DyneTK: <unnamed project>");
