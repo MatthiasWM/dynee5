@@ -89,10 +89,6 @@ public:
 
     Dtk_Template    * addTemplate(int x, int y, int w, int h, char *proto=0L);
 
-    /** Remove a template from this layout.
-     */
-    void            removeTemplate(Dtk_Template*);
-
 private:
 
     void            setupEditors(); 

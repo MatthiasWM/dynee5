@@ -352,6 +352,16 @@ int ShowTemplateInfo(Dtk_Template *tmpl=0L);
  */
 void DeleteSlot(Dtk_Slot *slot=0L);
 
+/** Immediatly remove the given Template.
+ *
+ * Remove the Template from the parent layout. This also removes
+ * all template children of this template and all slots contained in these
+ * templates. This call will update the GUI.
+ *
+ * \param tmpl Delete this template, or the selected template, if NULL
+ */
+void DeleteTemplate(Dtk_Template *tmpl=0L);
+
 /** Pop up a dialog that can be used to rename the selected slot.
  *
  * This will also update any GUI.

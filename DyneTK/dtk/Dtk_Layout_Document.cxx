@@ -389,12 +389,6 @@ Dtk_Template *Dtk_Layout_Document::addTemplate(int x, int y, int w, int h, char 
     return tmpl;
 }
 
-/*---------------------------------------------------------------------------*/
-void Dtk_Layout_Document::removeTemplate(Dtk_Template *tmpl)
-{
-    fl_alert("Removing templates is not implemented yet");
-}
-
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Layout_Document::updateMenus()

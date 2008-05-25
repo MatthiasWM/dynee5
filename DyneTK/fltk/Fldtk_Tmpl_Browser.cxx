@@ -31,6 +31,7 @@
 #include "Fldtk_Tmpl_Browser.h"
 #include "dtk/Dtk_Template.h"
 #include "dtk/Dtk_Layout_Document.h"
+#include "globals.h"
 #include <FL/Fl.H>
 
 
@@ -68,8 +69,7 @@ void Fldtk_Tmpl_Browser::deleteSelectedTemplate()
     Dtk_Template *tmpl = (Dtk_Template*)data(ix);
     if (!tmpl) 
         return;
-    Dtk_Layout_Document *lyt = tmpl->layout();
-    lyt->removeTemplate(tmpl);
+  DeleteTemplate(tmpl);
 }
 
 

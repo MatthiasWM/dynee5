@@ -4283,7 +4283,7 @@ Fl_Double_Window* create_about_dialog() {
         o->labelcolor(FL_BACKGROUND2_COLOR);
         o->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* o
-      { Fl_Box* o = new Fl_Box(215, 80, 100, 20, "Version 1.7.0");
+      { Fl_Box* o = new Fl_Box(215, 80, 100, 20, "Version 1.7.1");
         o->labelfont(1);
         o->labelsize(13);
         o->align(FL_ALIGN_RIGHT|FL_ALIGN_INSIDE);

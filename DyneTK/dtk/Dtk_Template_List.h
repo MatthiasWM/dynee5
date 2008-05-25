@@ -52,6 +52,10 @@ public:
      */
     void add(Dtk_Template *tmpl);
 
+    /** Remove a template from this list and from the GUI.
+     */
+    void remove(Dtk_Template *tmpl);
+  
     /** Return the number of templates in the list.
      */
     int size() { return tmplList_.size(); }

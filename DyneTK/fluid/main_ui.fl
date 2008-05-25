@@ -52,11 +52,11 @@ widget_class Fldtk_Main_Window {
   xywh {634 291 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
-  Fl_Menu_Bar {} {
+  Fl_Menu_Bar {} {open
     xywh {0 0 785 25} box THIN_UP_BOX
   } {
     Submenu mFile {
-      label File open
+      label File
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mFileNewLayout {
@@ -249,7 +249,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project
+      label Project open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -659,7 +659,7 @@ SetModeAddTemplate();} open
         xywh {3 98 144 299} box UP_BOX labelsize 12 deactivate resizable
       } {
         Fl_Browser wDocumentBrowser {
-          label Files selected
+          label Files
           xywh {3 123 144 274} labelsize 12 textsize 12 resizable
           code0 {static int cw[] = { 12, 0 };}
           code1 {wDocumentBrowser->column_widths(cw);}
@@ -891,7 +891,7 @@ Function {create_about_dialog()} {open
         xywh {10 10 305 70} box FLAT_BOX color 137 labelfont 1 labelsize 41 labelcolor 7 align 16
       }
       Fl_Box {} {
-        label {Version 1.7.0}
+        label {Version 1.7.1} selected
         xywh {215 80 100 20} labelfont 1 labelsize 13 align 24
       }
       Fl_Box {} {

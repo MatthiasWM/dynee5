@@ -141,7 +141,15 @@ public:
      */
     void            removeSlot(Dtk_Slot *);
 
-    /** Return the associated Layout
+    /** Remove all slots from this template.
+     */
+    void removeAllSlots();
+  
+  /** Remove all template children from this template.
+   */
+  void removeAllChildren();
+  
+  /** Return the associated Layout
      */
     Dtk_Layout_Document * layout() { return layout_; }
 
@@ -199,6 +207,8 @@ public:
     /** Create a new widget in the template view.
      */
     Flnt_Widget         * newWidget();
+  
+  Dtk_Template_List     * list() { return list_; }
 
 private:
 

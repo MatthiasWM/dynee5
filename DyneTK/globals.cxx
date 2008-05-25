@@ -42,6 +42,7 @@
 #include "dtk/Dtk_Error.h"
 #include "dtk/Dtk_Script_Writer.h"
 #include "dtk/Dtk_Template.h"
+#include "dtk/Dtk_Template_List.h"
 #include "dtk/Dtk_Slot.h"
 
 #include "fltk/Flmm_Message.H"
@@ -1034,21 +1035,34 @@ Dtk_Slot *GetCurrentSlot()
 /*---------------------------------------------------------------------------*/
 void DeleteSlot(Dtk_Slot *slot) 
 {
-    if (!slot) {
-        slot = GetCurrentSlot();
-        if (!slot)
-            return;
-    }
-    Dtk_Template *tmpl = slot->getTemplate();
-    Dtk_Layout_Document *lyt = slot->layout();
-    if (tmpl) {
-        tmpl->removeSlot(slot);
-    }
-    if (lyt) {
-        lyt->slotEditor()->blank();
-        lyt->updateMenus();
-    }
-    delete slot;
+  if (!slot) {
+    slot = GetCurrentSlot();
+    if (!slot)
+      return;
+  }
+  Dtk_Template *tmpl = slot->getTemplate();
+  Dtk_Layout_Document *lyt = slot->layout();
+  if (tmpl) {
+    tmpl->removeSlot(slot);
+  }
+  if (lyt) {
+    lyt->slotEditor()->blank();
+    lyt->updateMenus();
+  }
+  delete slot;
+}
+
+/*---------------------------------------------------------------------------*/
+void DeleteTemplate(Dtk_Template *tmpl) 
+{
+  if (!tmpl) {
+    tmpl = GetCurrentTemplate();
+    if (!tmpl)
+      return;
+  }
+  Dtk_Template_List *list = tmpl->list();
+  list->remove(tmpl);
+  delete tmpl;
 }
 
 /*---------------------------------------------------------------------------*/

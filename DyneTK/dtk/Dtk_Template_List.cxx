@@ -31,6 +31,7 @@
 #include "Dtk_Template.h"
 #include "Dtk_Layout_Document.h"
 
+#include <FL/Fl_Hold_Browser.H>
 
 /*---------------------------------------------------------------------------*/
 Dtk_Template_List::Dtk_Template_List(Dtk_Template *parent)
@@ -53,6 +54,33 @@ Dtk_Template_List::~Dtk_Template_List()
 void Dtk_Template_List::add(Dtk_Template *tmpl)
 {
     tmplList_.push_back(tmpl);
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template_List::remove(Dtk_Template *tmpl) 
+{
+  tmpl->removeAllSlots();
+  tmpl->removeAllChildren();
+  
+  Dtk_Layout_Document *lyt = tmpl->layout();
+  int i, n = tmplList_.size();
+  for (i=n-1; i>=0; --i) {
+    if (tmplList_.at(i)==tmpl) {
+      tmplList_.erase(tmplList_.begin()+i);
+      Fl_Hold_Browser *browser = lyt->templateBrowser();
+      if (browser) {
+        int j, nb = browser->size();
+        for (j=nb; j>0; --j) {
+          if (browser->data(j)==tmpl) {
+            if (browser->value()==j)
+              browser->value(0);
+            browser->remove(j);
+          }
+        }
+      }
+      break;
+    }
+  }
 }
 
 //
