@@ -32,7 +32,7 @@
 
 class Dtk_Template;
 class Dtk_Slot;
-class Dtk_Layout_Document;
+class Dtk_Layout;
 class Fl_Hold_Browser;
 
 
@@ -52,7 +52,7 @@ public:
     
     /** Find our layout document.
      */
-    Dtk_Layout_Document * layout();
+    Dtk_Layout * layout();
 
     /** Add an existing slot to our list.
      */

@@ -27,7 +27,7 @@
 #define DTK_TEMPLATE_H
 
 
-class Dtk_Layout_Document;
+class Dtk_Layout;
 class Dtk_Template_List;
 
 extern "C" {
@@ -63,7 +63,7 @@ public:
      * \param proto a C-String naming the prototype for this template
      */
                     Dtk_Template(
-                        Dtk_Layout_Document *layout, 
+                        Dtk_Layout *layout, 
                         Dtk_Template_List *list=0L,
                         char *proto=0L);
 
@@ -151,7 +151,7 @@ public:
   
   /** Return the associated Layout
      */
-    Dtk_Layout_Document * layout() { return layout_; }
+    Dtk_Layout * layout() { return layout_; }
 
     /** This template was selected by the user for editing.
      *
@@ -225,7 +225,7 @@ private:
     void                viewJustifyChangedSignal();
 
     /// we must be part of a single layout
-    Dtk_Layout_Document * layout_;
+    Dtk_Layout * layout_;
 
     /// every template except the root is a member of exactly one list
     Dtk_Template_List   * list_;

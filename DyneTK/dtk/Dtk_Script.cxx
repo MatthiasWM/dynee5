@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Script_Document implementation for the Dyne Toolkit.
+// Dtk_Script implementation for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -27,7 +27,7 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "Dtk_Script_Document.h"
+#include "Dtk_Script.h"
 #include "Dtk_Script_Writer.h"
 #include "Dtk_Error.h"
 #include "fltk/Fldtk_Script_Editor.h"
@@ -54,20 +54,20 @@ extern "C" {
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Script_Document::Dtk_Script_Document(Dtk_Document_List *list)
+Dtk_Script::Dtk_Script(Dtk_Document_List *list)
 :   Dtk_Document(list),
     editor_(0L)
 {
 }
 
 /*---------------------------------------------------------------------------*/
-Dtk_Script_Document::~Dtk_Script_Document()
+Dtk_Script::~Dtk_Script()
 {
     delete editor_;
 }
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Script_Document::load()
+int Dtk_Script::load()
 {
 	if (!editor_)
 		edit();
@@ -76,7 +76,7 @@ int Dtk_Script_Document::load()
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Script_Document::close() 
+void Dtk_Script::close() 
 {
 	if (editor_) {
 		dtkDocumentTabs->remove(editor_);
@@ -87,7 +87,7 @@ void Dtk_Script_Document::close()
 }
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Script_Document::edit() 
+int Dtk_Script::edit() 
 {
 	if (!editor_) {
 		Fl_Group::current(0L);
@@ -100,7 +100,7 @@ int Dtk_Script_Document::edit()
 
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Script_Document::save()
+int Dtk_Script::save()
 {
 	if (askForFilename_) {
 		return saveAs();
@@ -111,7 +111,7 @@ int Dtk_Script_Document::save()
 
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Script_Document::saveAs()
+int Dtk_Script::saveAs()
 {
 	char *filename = fl_file_chooser("Save Document As...", "*.txt", filename_);
 	if (!filename) 
@@ -144,7 +144,7 @@ int Dtk_Script_Document::saveAs()
  *
  * Nevertheless, this is a neat start for something big!
  */
-newtRef Dtk_Script_Document::compile()
+newtRef Dtk_Script::compile()
 {
 	char *script = editor_->getText();
 #if 0
@@ -175,7 +175,7 @@ newtRef Dtk_Script_Document::compile()
 }
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Script_Document::write(Dtk_Script_Writer &sw) 
+int Dtk_Script::write(Dtk_Script_Writer &sw) 
 { 
     char buf[1024];
     sprintf(buf, "// Beginning of file %s\n", name());

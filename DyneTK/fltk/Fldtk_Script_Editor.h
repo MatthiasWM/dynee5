@@ -30,7 +30,7 @@
 #include "fltk/Fldtk_Editor.h"
 
 
-class Dtk_Script_Document;
+class Dtk_Script;
 class Flmm_Newt_Script_Editor;
 
 
@@ -39,7 +39,7 @@ class Flmm_Newt_Script_Editor;
 class Fldtk_Script_Editor : public Fldtk_Editor
 {
 public:
-	                        Fldtk_Script_Editor(Dtk_Script_Document *script);
+	                        Fldtk_Script_Editor(Dtk_Script *script);
 	virtual                 ~Fldtk_Script_Editor();
     virtual Dtk_Document    * document();
 
@@ -61,7 +61,7 @@ protected:
     Dtk_Document *document_;
 */
 protected:
-    Dtk_Script_Document         * script_;
+    Dtk_Script         * script_;
     Flmm_Newt_Script_Editor     * editor_;
 };
 

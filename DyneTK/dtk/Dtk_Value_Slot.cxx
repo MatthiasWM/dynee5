@@ -32,7 +32,7 @@ it as type real.
 */
 
 #include "Dtk_Value_Slot.h"
-#include "Dtk_Layout_Document.h"
+#include "Dtk_Layout.h"
 #include "Dtk_Script_Writer.h"
 #include "fltk/Fldtk_Value_Slot_Editor.h"
 #include "fltk/Fldtk_Format_Slot_Editor.h"

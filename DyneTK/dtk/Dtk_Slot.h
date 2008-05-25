@@ -28,7 +28,7 @@
 
 
 class Dtk_Slot_List;
-class Dtk_Layout_Document;
+class Dtk_Layout;
 class Dtk_Script_Writer;
 class Dtk_Template;
 
@@ -78,7 +78,7 @@ public:
 
     /** Find the address of the layout that manages this slot.
      */
-    Dtk_Layout_Document * layout();
+    Dtk_Layout * layout();
 
     /** Apply the changes in the editor to the slot.
      */

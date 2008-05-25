@@ -30,14 +30,9 @@ extern "C" {
 #include "NewtType.h"
 }
 
-
 class Dtk_Document_List;
 class Dtk_Script_Writer;
-class Mgr_Project;
-class Dtk_Project_Manager;
-
-class Fl_Window;
-class Fl_Tabs;
+class Dtk_Project_UI;
 
 
 /*---------------------------------------------------------------------------*/
@@ -47,84 +42,161 @@ class Fl_Tabs;
 class Dtk_Project
 {
 public:
-	Dtk_Project();
-	~Dtk_Project();
   
-  void setGuiManager(Dtk_Project_Manager *mgr) { guiManager = mgr; }
-
-    /** Check if the project has changed and needs to be saved.
-     * \todo Implement me!
-     */
-    int         isDirty() { return 0; }
-
-	void		setDefaults();
-	int			load();
-	int			loadMac();
-	int			loadWin();
-	int			save();
-
-	int			write(Dtk_Script_Writer &sw);
-
-    /** Save all dirty parts of the project.
-     */
-    int			saveAll();
-
-    /** Close and delete all dependent.
-     * \todo Implement me!
-     */
-	void		close() {}
-
-	int			buildPackage();
-	int			savePackage();
-
-	char		* getPackageName();
-	void		setFilename(const char *filename);
-	newtRef		makeFileRef(const char *filename);
-
-    /// the pathname of the file with backslash separators and a trailing backslash
-    char        * pathname();
-
-  /** Return the short name of the project.
+  /** 
+   * Create an empty project.
    */
-  const char  * name() { return name_; }
+                Dtk_Project();
   
-    const char  * filename() { return filename_; }
-    Dtk_Document_List   * documentList() { return documentList_; }
+  /** 
+   * Delete the project and all associated resources.
+   */
+                ~Dtk_Project();
+  
+  /**
+   * FIXME: create a link to a project UI manager
+   */
+  void          setGuiManager(Dtk_Project_UI *mgr) { ui = mgr; }
+
+  /**
+   * Return true if the project was modified and needs to be saved.
+   *
+   * \todo implement this function
+   */
+  int           isDirty() { return 0; }
+
+  /**
+   * Set all project settings to their default value.
+   */
+	void          setDefaults();
+  
+  /**
+   * Load any kind of project file.
+   */
+	int           load();
+  
+  /**
+   * Load a Mac style project file.
+   */
+	int           loadMac();
+  
+  /**
+   * Load a Windows style project file.
+   */
+	int           loadWin();
+  
+  /**
+   * Save a project in DyneTK format, which is derived from the MSWindows format.
+   */
+	int           save();
+
+  /**
+   * Create NewtonScript form this project.
+   */
+	int           write(Dtk_Script_Writer &sw);
+
+  /**
+   * Save all dirty parts of the project.
+   */
+  int           saveAll();
+
+  /** 
+   * Close the project and delete all dependent.
+   *
+   * \todo Implement me!
+   */
+	void          close() {}
+
+  /**
+   * Build a NewtonScript package from this project.
+   */
+	int           buildPackage();
+  
+  /**
+   * Save the package that we just created.
+   */
+	int           savePackage();
+
+  /**
+   * Return a pointer to a buffer containing the filename and path of the package.
+   */
+	char          * getPackageName();
+  
+  /**
+   * Change the filename of the project and all associated names.
+   */
+	void          setFilename(const char *filename);
+  
+  /**
+   * Create a Newt Frame referencing a file relative to the path of the project.
+   */
+	newtRef       makeFileRef(const char *filename);
+
+  /**
+   * Return a pointer to a buffer containing project file path with a trailing slash.
+   */
+  char          * pathname();
+
+  /** 
+   * Return the name of the project.
+   */
+  const char    * name() { return name_; }
+  
+  /**
+   * Return a pointer to a buffer containing project file path and name.
+   */
+  const char    * filename() { return filename_; }
+  
+  /**
+   * Return the list of documents in tis project.
+   */
+  Dtk_Document_List * documentList() { return documentList_; }
 
 protected:
-	void		pushDir();
-	void		popDir();
+  
+  /**
+   * Remember the current directory.
+   *
+   * Stack depth is one!
+   */
+	void          pushDir();
+  
+  /**
+   * Restore the previous directory.
+   */
+	void          popDir();
 
 private:
 
-	char		* packagename_;
-	char		* shortname_;
-	char		* filename_;
-	char		* name_;
-	char		* startdir_;
-	char		* pathname_;
-	newtRef		package_;
+  /// path and name of package
+	char          * packagename_;
+  
+  /// just the name of the project without file extension
+	char          * shortname_;
+  
+  /// path and name of the project
+	char          * filename_;
+  
+  /// name of the project
+	char          * name_;
+  
+  /// the directory which we were launched from
+	char          * startdir_;
+  
+  /// stack for pushing and popping a path
+	char          * pathname_;
+  
+  /// package as a Newton Database
+	newtRef       package_;
 
   /// Keep a list of all documents in the project.
-  Dtk_Document_List   * documentList_;
+  Dtk_Document_List * documentList_;
   
-  Dtk_Project_Manager * guiManager;
+  ///link to the user interface manager
+  Dtk_Project_UI * ui;
+  
 };
 
-class Dtk_Project_Manager
-{
-public:
-  Dtk_Project_Manager(Dtk_Project*);
-  ~Dtk_Project_Manager();
-  void projectCreated();
-  void projectRemoved();
-  void projectRenamed();
-  
-private:
-  Dtk_Project *project;
-  Fl_Window *window;
-  Fl_Tabs *browserTabs;
-};
     
 
 #endif

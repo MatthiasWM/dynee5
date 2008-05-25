@@ -38,7 +38,7 @@
 #include "Dtk_Slot_List.h"
 #include "Dtk_Slot.h"
 #include "Dtk_Template.h"
-#include "Dtk_Layout_Document.h"
+#include "Dtk_Layout.h"
 
 #include "allNewt.h"
 
@@ -69,7 +69,7 @@ Dtk_Slot_List::~Dtk_Slot_List()
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Layout_Document *Dtk_Slot_List::layout() 
+Dtk_Layout *Dtk_Slot_List::layout() 
 {
     return template_->layout();
 }

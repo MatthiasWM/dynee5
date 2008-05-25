@@ -28,7 +28,7 @@
 #endif
 
 #include "Fldtk_Script_Editor.h"
-#include "dtk/Dtk_Script_Document.h"
+#include "dtk/Dtk_Script.h"
 
 #include <FL/Fl.H>
 #include "fltk/Flmm_Newt_Script_Editor.h"
@@ -38,7 +38,7 @@
 #include <stdlib.h>
 
 
-Fldtk_Script_Editor::Fldtk_Script_Editor(Dtk_Script_Document *script)
+Fldtk_Script_Editor::Fldtk_Script_Editor(Dtk_Script *script)
 :   Fldtk_Editor(script->name()),
     script_(script),
     editor_(0L)

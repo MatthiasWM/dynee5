@@ -25,7 +25,7 @@
 
 
 #include "Dtk_Script_Slot.h"
-#include "Dtk_Layout_Document.h"
+#include "Dtk_Layout.h"
 #include "Dtk_Script_Writer.h"
 #include "fltk/Fldtk_Script_Slot_Editor.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"

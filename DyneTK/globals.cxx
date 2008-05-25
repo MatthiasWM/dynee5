@@ -37,13 +37,15 @@
 
 #include "dtk/Dtk_Document_List.h"
 #include "dtk/Dtk_Document.h"
-#include "dtk/Dtk_Layout_Document.h"
+#include "dtk/Dtk_Layout.h"
 #include "dtk/Dtk_Project.h"
 #include "dtk/Dtk_Error.h"
 #include "dtk/Dtk_Script_Writer.h"
 #include "dtk/Dtk_Template.h"
 #include "dtk/Dtk_Template_List.h"
 #include "dtk/Dtk_Slot.h"
+
+#include "ui/Dtk_Project_UI.h"
 
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
@@ -221,7 +223,7 @@ int OpenProject(const char *filename)
 	}
     // create a new project and load it
 	dtkProject = new Dtk_Project();
-  new Dtk_Project_Manager(dtkProject);
+  new Dtk_Project_UI(dtkProject);
 	dtkProject->setFilename(filename);
 	int ret = dtkProject->load();
 
@@ -281,8 +283,7 @@ int NewProject(const char *filename)
 	    CloseProject();
     // finally we can create a brandnew project 
 	dtkProject = new Dtk_Project();
-  new Dtk_Project_Manager(dtkProject);
-	dtkProject->setFilename(filename);
+    dtkProject->setFilename(filename);
 	dtkProject->setDefaults();
     // make sure the menus show the right settings
 	UpdateMainMenu();
@@ -699,7 +700,7 @@ void UpdateMainMenu()
         }
         if (doc->isLayout()) {
             mask |= 16;
-            Dtk_Layout_Document *layout = (Dtk_Layout_Document*)doc;
+            Dtk_Layout *layout = (Dtk_Layout*)doc;
             if (layout->editViewShown())
                 mask |= 32;
             if (GetCurrentTemplate()) {
@@ -993,11 +994,11 @@ Dtk_Document *GetCurrentDocument()
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Layout_Document *GetCurrentLayout()
+Dtk_Layout *GetCurrentLayout()
 {
     Dtk_Document *doc = GetCurrentDocument();
     if (doc && doc->isLayout())
-        return (Dtk_Layout_Document*)doc;
+        return (Dtk_Layout*)doc;
     return 0L;
 }
 
@@ -1005,7 +1006,7 @@ Dtk_Layout_Document *GetCurrentLayout()
 /*---------------------------------------------------------------------------*/
 Dtk_Template *GetCurrentTemplate()
 {
-    Dtk_Layout_Document *lyt = GetCurrentLayout();
+    Dtk_Layout *lyt = GetCurrentLayout();
     if (!lyt)
         return 0L;
     Fl_Hold_Browser *te = lyt->templateBrowser();
@@ -1020,7 +1021,7 @@ Dtk_Template *GetCurrentTemplate()
 /*---------------------------------------------------------------------------*/
 Dtk_Slot *GetCurrentSlot()
 {
-    Dtk_Layout_Document *lyt = GetCurrentLayout();
+    Dtk_Layout *lyt = GetCurrentLayout();
     if (!lyt)
         return 0L;
     Fl_Hold_Browser *se = lyt->slotBrowser();
@@ -1041,7 +1042,7 @@ void DeleteSlot(Dtk_Slot *slot)
       return;
   }
   Dtk_Template *tmpl = slot->getTemplate();
-  Dtk_Layout_Document *lyt = slot->layout();
+  Dtk_Layout *lyt = slot->layout();
   if (tmpl) {
     tmpl->removeSlot(slot);
   }
@@ -1066,7 +1067,7 @@ void DeleteTemplate(Dtk_Template *tmpl)
 }
 
 /*---------------------------------------------------------------------------*/
-int OpenLayoutView(Dtk_Layout_Document *lyt)
+int OpenLayoutView(Dtk_Layout *lyt)
 {
     if (!lyt) {
         lyt = GetCurrentLayout();

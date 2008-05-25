@@ -31,7 +31,7 @@
 #include "Fldtk_Slot_Editor_Group.h"
 #include "Fldtk_Slot_Browser.h"
 #include "Fldtk_Tmpl_Browser.h"
-#include "dtk/Dtk_Layout_Document.h"
+#include "dtk/Dtk_Layout.h"
 #include "dtk/Dtk_Platform.h"
 #include "dtk/Dtk_Template.h"
 #include "dtk/Dtk_Slot.h"
@@ -61,7 +61,7 @@ Fl_Menu_Item specificMenu[] = {
 
 
 /*---------------------------------------------------------------------------*/
-Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout_Document *layout)
+Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout *layout)
 :   Fldtk_Editor(layout->name()),
     layout_(layout),
     template_(0L),

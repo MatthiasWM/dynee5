@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Layout_Document implementation for the Dyne Toolkit.
+// Dtk_Layout implementation for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -27,7 +27,7 @@
 #pragma warning(disable : 4996)
 #endif
 
-#include "dtk/Dtk_Layout_Document.h"
+#include "dtk/Dtk_Layout.h"
 #include "dtk/Dtk_Template.h"
 #include "dtk/Dtk_Project.h"
 #include "dtk/Dtk_Slot.h"
@@ -60,7 +60,7 @@
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
+Dtk_Layout::Dtk_Layout(Dtk_Document_List *list)
 :   Dtk_Document(list),
     root_(0L),
     editor_(0L),
@@ -70,7 +70,7 @@ Dtk_Layout_Document::Dtk_Layout_Document(Dtk_Document_List *list)
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Layout_Document::~Dtk_Layout_Document()
+Dtk_Layout::~Dtk_Layout()
 {
     editor_->templateBrowser()->callback(0L, 0L);
     editor_->slotBrowser()->callback(0L, 0L);
@@ -81,7 +81,7 @@ Dtk_Layout_Document::~Dtk_Layout_Document()
 
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Layout_Document::load()
+int Dtk_Layout::load()
 {
 	if (!editor_)
 		edit();
@@ -119,7 +119,7 @@ int Dtk_Layout_Document::load()
 
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Layout_Document::edit() 
+int Dtk_Layout::edit() 
 {
 	if (!editor_) {
 		Fl_Group::current(0L);
@@ -135,14 +135,14 @@ int Dtk_Layout_Document::edit()
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout_Document::editView() 
+void Dtk_Layout::editView() 
 {
     view_->show();
     UpdateMainMenu();
 }
 
 /*---------------------------------------------------------------------------*/
-newtRef Dtk_Layout_Document::saveLayoutSettings()
+newtRef Dtk_Layout::saveLayoutSettings()
 {
     /// \todo the window rect is a useful setting; we shoudl support it
     newtRefVar windowRectA[] = {
@@ -198,7 +198,7 @@ newtRef Dtk_Layout_Document::saveLayoutSettings()
 
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Layout_Document::save()
+int Dtk_Layout::save()
 {
 	if (askForFilename_) {
 		return saveAs();
@@ -241,7 +241,7 @@ int Dtk_Layout_Document::save()
 
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Layout_Document::saveAs()
+int Dtk_Layout::saveAs()
 {
 	char *filename = fl_file_chooser("Save Document As...", "*.lyt", filename_);
 	if (!filename) 
@@ -253,13 +253,13 @@ int Dtk_Layout_Document::saveAs()
 
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout_Document::close() 
+void Dtk_Layout::close() 
 {
 	Dtk_Document::close();
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout_Document::setupEditors() 
+void Dtk_Layout::setupEditors() 
 {
     if (!editor_)
         return;
@@ -282,22 +282,22 @@ void Dtk_Layout_Document::setupEditors()
 }
 
 /*---------------------------------------------------------------------------*/
-Fl_Hold_Browser *Dtk_Layout_Document::templateBrowser() {
+Fl_Hold_Browser *Dtk_Layout::templateBrowser() {
     return editor_->templateBrowser();
 }
 
 /*---------------------------------------------------------------------------*/
-Fl_Hold_Browser *Dtk_Layout_Document::slotBrowser() {
+Fl_Hold_Browser *Dtk_Layout::slotBrowser() {
     return editor_->slotBrowser();
 }
 
 /*---------------------------------------------------------------------------*/
-Fldtk_Slot_Editor_Group *Dtk_Layout_Document::slotEditor() {
+Fldtk_Slot_Editor_Group *Dtk_Layout::slotEditor() {
     return editor_->slotEditor();
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Document *layout)
+void Dtk_Layout::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout *layout)
 {
     int i = browser->value();
     if (i) {
@@ -315,7 +315,7 @@ void Dtk_Layout_Document::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layou
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout_Document::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Document *layout)
+void Dtk_Layout::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout *layout)
 {
     int i = browser->value();
     if (i) {
@@ -328,7 +328,7 @@ void Dtk_Layout_Document::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout_Do
 }
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Layout_Document::write(Dtk_Script_Writer &sw) 
+int Dtk_Layout::write(Dtk_Script_Writer &sw) 
 { 
     char buf[1024];
     sprintf(buf, "// Beginning of file %s\n", name());
@@ -344,7 +344,7 @@ int Dtk_Layout_Document::write(Dtk_Script_Writer &sw)
 }
 
 /*---------------------------------------------------------------------------*/
-int Dtk_Layout_Document::writeTheForm(Dtk_Script_Writer &sw)
+int Dtk_Layout::writeTheForm(Dtk_Script_Writer &sw)
 {
     char buf[1204];
     sprintf(buf, "DefGlobalVar('theForm, |layout_%s|);\n", name());
@@ -353,7 +353,7 @@ int Dtk_Layout_Document::writeTheForm(Dtk_Script_Writer &sw)
 }
 
 /*---------------------------------------------------------------------------*/
-bool Dtk_Layout_Document::editViewShown()
+bool Dtk_Layout::editViewShown()
 {
     // FIXME update the menus when the view is shown
     // FIXME update the menus when the view is hidden
@@ -365,7 +365,7 @@ bool Dtk_Layout_Document::editViewShown()
 
 /*---------------------------------------------------------------------------*/
 // FIXME this is duplicate code from Dtk_Template::addTemplate! Fix that!
-Dtk_Template *Dtk_Layout_Document::addTemplate(int x, int y, int w, int h, char *proto)
+Dtk_Template *Dtk_Layout::addTemplate(int x, int y, int w, int h, char *proto)
 {
     if (!proto) {
         Fl_Choice *c = dtkMain->tTemplateChoice;
@@ -391,7 +391,7 @@ Dtk_Template *Dtk_Layout_Document::addTemplate(int x, int y, int w, int h, char 
 
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout_Document::updateMenus()
+void Dtk_Layout::updateMenus()
 {
     Fldtk_Layout_Editor *ed = (Fldtk_Layout_Editor*)editor_;
     if (ed) {

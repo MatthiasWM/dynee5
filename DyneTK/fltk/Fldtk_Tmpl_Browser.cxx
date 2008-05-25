@@ -30,7 +30,7 @@
 
 #include "Fldtk_Tmpl_Browser.h"
 #include "dtk/Dtk_Template.h"
-#include "dtk/Dtk_Layout_Document.h"
+#include "dtk/Dtk_Layout.h"
 #include "globals.h"
 #include <FL/Fl.H>
 

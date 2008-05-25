@@ -27,7 +27,7 @@
 #include "Dtk_Slot.h"
 #include "Dtk_Slot_List.h"
 #include "Dtk_Template.h"
-#include "Dtk_Layout_Document.h"
+#include "Dtk_Layout.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
 
 #include "allNewt.h"
@@ -61,7 +61,7 @@ void Dtk_Slot::edit()
 }
 
 /*---------------------------------------------------------------------------*/
-Dtk_Layout_Document *Dtk_Slot::layout()
+Dtk_Layout *Dtk_Slot::layout()
 {
     return list_->layout();
 }

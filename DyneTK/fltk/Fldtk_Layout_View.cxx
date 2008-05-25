@@ -37,7 +37,7 @@ int Fldtk_Layout_View::mode_ = 0;
 
 
 /*---------------------------------------------------------------------------*/
-Fldtk_Layout_View::Fldtk_Layout_View(Dtk_Layout_Document *layout, int width, int height)
+Fldtk_Layout_View::Fldtk_Layout_View(Dtk_Layout *layout, int width, int height)
 :   Fl_Double_Window(width, height),
     layout_(layout)
 {

@@ -26,7 +26,7 @@
 
 #include "Dtk_Proto_Slot.h"
 #include "Dtk_Slot_List.h"
-#include "Dtk_Layout_Document.h"
+#include "Dtk_Layout.h"
 #include "Dtk_Script_Writer.h"
 #include "Dtk_Template.h"
 #include "Dtk_Platform.h"

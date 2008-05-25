@@ -30,7 +30,7 @@
 #endif
 
 #include "Dtk_Template_List.h"
-#include "Dtk_Layout_Document.h"
+#include "Dtk_Layout.h"
 #include "Dtk_Slot_List.h"
 #include "Dtk_Template.h"
 #include "Dtk_Slot.h"
@@ -52,7 +52,7 @@
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Template::Dtk_Template(Dtk_Layout_Document *layout, 
+Dtk_Template::Dtk_Template(Dtk_Layout *layout, 
                            Dtk_Template_List *list,
                            char *proto)
 :   layout_(layout),

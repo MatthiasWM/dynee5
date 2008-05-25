@@ -32,7 +32,7 @@
 
 class Fl_Hold_Browser;
 class Fl_Menu_Button;
-class Dtk_Layout_Document;
+class Dtk_Layout;
 class Dtk_Template;
 class Fldtk_Slot_Editor_Group;
 class Fldtk_Slot_Browser;
@@ -44,7 +44,7 @@ class Fldtk_Tmpl_Browser;
 class Fldtk_Layout_Editor : public Fldtk_Editor
 {
 public:
-	                        Fldtk_Layout_Editor(Dtk_Layout_Document *layout);
+	                        Fldtk_Layout_Editor(Dtk_Layout *layout);
 	virtual                 ~Fldtk_Layout_Editor();
     virtual Dtk_Document    * document();
     Fldtk_Tmpl_Browser      * templateBrowser() { return tmplBrowser_; }
@@ -55,7 +55,7 @@ public:
     void                    userSelectedTemplate(Dtk_Template *tmpl);
 
 protected:
-    Dtk_Layout_Document     * layout_;
+    Dtk_Layout     * layout_;
 
     /// The currently selected template
     Dtk_Template            * template_;

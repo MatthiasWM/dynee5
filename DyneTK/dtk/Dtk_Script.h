@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Script_Document header file for the Dyne Toolkit.
+// Dtk_Script header file for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -37,18 +37,18 @@ class Fldtk_Script_Editor;
 /**
  * This class manages documents containing scripts.
  */
-class Dtk_Script_Document : public Dtk_Document
+class Dtk_Script : public Dtk_Document
 {
 public:
     /** Create a document container for Newt Scripts.
      *
      * \param list this is the list that we will be hooked into
      */
-					Dtk_Script_Document(Dtk_Document_List *list);
+					Dtk_Script(Dtk_Document_List *list);
     
     /** Remove all links and resources and delete this document.
      */
-	virtual			~Dtk_Script_Document();
+	virtual			~Dtk_Script();
 
     /** Load this document from disk.
      *

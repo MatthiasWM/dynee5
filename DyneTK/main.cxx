@@ -56,7 +56,7 @@ Fldtk_Proj_Settings *dtkProjSettings;
 Fldtk_Main_Window *dtkMain;
 
 Flio_Inspector *wInspectorSerial; 
-Flmm_Console *wConsole; 
+Flmm_Console *    wConsole; 
 Fl_Button *wInspectorConnect; 
 
 Fl_Window *wConnect;

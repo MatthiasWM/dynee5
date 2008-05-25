@@ -32,7 +32,7 @@
 #include <stdarg.h>
 
 class Dtk_Document;
-class Dtk_Layout_Document;
+class Dtk_Layout;
 class Dtk_Template;
 class Dtk_Slot;
 
@@ -402,7 +402,7 @@ void InspectorConnect();
  * If a Layout Document is selected, this function will pop up the related
  * visual layout editor.
  */
-int OpenLayoutView(Dtk_Layout_Document *lyt=0L);
+int OpenLayoutView(Dtk_Layout *lyt=0L);
 
 //      Cascade()
 //      Tile()
@@ -428,7 +428,7 @@ Dtk_Document *GetCurrentDocument();
  *
  * \retval   address of document or NULL if no doc is edited, or it's not a layout
  */
-Dtk_Layout_Document *GetCurrentLayout();
+Dtk_Layout *GetCurrentLayout();
 
 /** Find the template that is currently edited by the user.
  *

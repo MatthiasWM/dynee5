@@ -37,8 +37,8 @@
 
 #include "Dtk_Document_List.h"
 #include "Dtk_Document.h"
-#include "Dtk_Layout_Document.h"
-#include "Dtk_Script_Document.h"
+#include "Dtk_Layout.h"
+#include "Dtk_Script.h"
 
 #include "fltk/Fldtk_Document_Browser.h"
 
@@ -105,10 +105,10 @@ Dtk_Document *Dtk_Document_List::add(const char *filename)
 	Dtk_Document *doc = 0L;
 	if (id==2) { 
         // its NSOF, so for now we assume it is a layout
-		doc = new Dtk_Layout_Document(this);
+		doc = new Dtk_Layout(this);
 	} else { 
         // otherwise, this is likely text
-		doc = new Dtk_Script_Document(this);
+		doc = new Dtk_Script(this);
 	}
     // load the file
 	doc->setFilename(filename);
@@ -137,7 +137,7 @@ char *Dtk_Document_List::findFile(const char *filename)
 /*---------------------------------------------------------------------------*/
 Dtk_Document *Dtk_Document_List::newScript(const char *filename)
 {
-	Dtk_Script_Document *doc = new Dtk_Script_Document(this);
+	Dtk_Script *doc = new Dtk_Script(this);
 	doc->setFilename(filename);
 	doc->setAskForFilename();
     append(doc);
@@ -147,7 +147,7 @@ Dtk_Document *Dtk_Document_List::newScript(const char *filename)
 /*---------------------------------------------------------------------------*/
 Dtk_Document *Dtk_Document_List::newLayout(const char *filename)
 {
-	Dtk_Layout_Document *doc = new Dtk_Layout_Document(this);
+	Dtk_Layout *doc = new Dtk_Layout(this);
 	doc->setFilename(filename);
 	doc->setAskForFilename();
     append(doc);

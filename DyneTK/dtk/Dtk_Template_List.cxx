@@ -29,7 +29,7 @@
 
 #include "Dtk_Template_List.h"
 #include "Dtk_Template.h"
-#include "Dtk_Layout_Document.h"
+#include "Dtk_Layout.h"
 
 #include <FL/Fl_Hold_Browser.H>
 
@@ -62,7 +62,7 @@ void Dtk_Template_List::remove(Dtk_Template *tmpl)
   tmpl->removeAllSlots();
   tmpl->removeAllChildren();
   
-  Dtk_Layout_Document *lyt = tmpl->layout();
+  Dtk_Layout *lyt = tmpl->layout();
   int i, n = tmplList_.size();
   for (i=n-1; i>=0; --i) {
     if (tmplList_.at(i)==tmpl) {

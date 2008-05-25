@@ -1,7 +1,7 @@
 //
 // "$Id$"
 //
-// Dtk_Layout_Document header file for the Dyne Toolkit.
+// Dtk_Layout header file for the Dyne Toolkit.
 //
 // Copyright 2007 by Matthias Melcher.
 //
@@ -23,8 +23,8 @@
 // Please report all bugs and problems to "dtk@matthiasm.com".
 //
 
-#ifndef DTK_LAYOUT_DOCUMENT_H
-#define DTK_LAYOUT_DOCUMENT_H
+#ifndef DTK_LAYOUT_H
+#define DTK_LAYOUT_H
 
 
 #include <dtk/Dtk_Document.h>
@@ -41,11 +41,11 @@ class Fl_Wizard;
 /**
  * A document of the the type Layout.
  */
-class Dtk_Layout_Document : public Dtk_Document
+class Dtk_Layout : public Dtk_Document
 {
 public:
-					Dtk_Layout_Document(Dtk_Document_List *list);
-	virtual			~Dtk_Layout_Document();
+					Dtk_Layout(Dtk_Document_List *list);
+	virtual			~Dtk_Layout();
 
 	virtual int		load();
 	virtual int     edit();
@@ -107,10 +107,10 @@ private:
     // Fldtk_Visual_Layout * visualEditor_;
 
     /// GUI callback whenever a different template is selected
-    static void templateBrowser_cb(Fl_Hold_Browser*, Dtk_Layout_Document*);
+    static void templateBrowser_cb(Fl_Hold_Browser*, Dtk_Layout*);
 
     /// GUI callback whenever a different slot is selected
-    static void slotBrowser_cb(Fl_Hold_Browser*, Dtk_Layout_Document*);
+    static void slotBrowser_cb(Fl_Hold_Browser*, Dtk_Layout*);
 };
 
 

@@ -1,9 +1,9 @@
 //
 // "$Id$"
 //
-// Fldtk_Layout_View header file for the FLMM extension to FLTK.
+// Dtk_Project_UI header file for the Dyne Toolkit.
 //
-// Copyright 2002-2007 by Matthias Melcher.
+// Copyright 2007 by Matthias Melcher.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Library General Public
@@ -20,39 +20,36 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
 // USA.
 //
-// Please report all bugs and problems to "flmm@matthiasm.com".
+// Please report all bugs and problems to "dtk@matthiasm.com".
 //
 
-#ifndef FLDTK_LAYOUT_VIEW_H
-#define FLDTK_LAYOUT_VIEW_H
+#ifndef DTK_PROJECT_UI_H
+#define DTK_PROJECT_UI_H
+
+class Dtk_Project;
+
+class Fl_Window;
+class Fl_Tabs;
 
 
-#include <FL/Fl_Double_Window.H>
-
-
-class Dtk_Layout;
-class Fl_Widget;
-
-
-/** GUI element for visually editing layouts.
+/*---------------------------------------------------------------------------*/
+/** Manage the connection betwen FLTK and Dtk_Project.
  */
-class Fldtk_Layout_View : public Fl_Double_Window
+class Dtk_Project_UI
 {
 public:
-	                    Fldtk_Layout_View(Dtk_Layout *layout, int width, int height);
-	virtual             ~Fldtk_Layout_View();
-    static void         mode(int m);
-    static int          mode() { return mode_; }
-
-protected:
-    Dtk_Layout * layout_;
-
-    /// mode 0 is "edit", mode 1 is "add"
-    static int          mode_;
-
-    static void         hide_cb(Fl_Widget*, void*);
+              Dtk_Project_UI(Dtk_Project*);
+              ~Dtk_Project_UI();
+  void        projectCreated();
+  void        projectRemoved();
+  void        projectRenamed();
+  
+private:
+  Dtk_Project * project;
+  Fl_Window   * window;
+  Fl_Tabs     * browserTabs;
 };
-
+    
 
 #endif
 

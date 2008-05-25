@@ -31,7 +31,7 @@
 
 
 class Dtk_Template;
-class Dtk_Layout_Document;
+class Dtk_Layout;
 
 
 /** Keep a list of templates.

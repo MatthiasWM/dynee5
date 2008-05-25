@@ -26,7 +26,7 @@
 
 #include "Flnt_Widget.h"
 #include "dtk/Dtk_Template.h"
-#include "dtk/Dtk_Layout_Document.h"
+#include "dtk/Dtk_Layout.h"
 #include "fltk/Fldtk_Layout_View.h"
 #include "globals.h"
 
@@ -41,7 +41,7 @@ Flnt_Widget *Flnt_Widget::rubberband_ = 0L;
 
 
 /*---------------------------------------------------------------------------*/
-Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl, Dtk_Layout_Document *layout)
+Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl, Dtk_Layout *layout)
 :   Fl_Group(0, 0, 10, 10),
     top_(0), left_(0), bottom_(0), right_(0), justify_(0),
     template_(tmpl),
