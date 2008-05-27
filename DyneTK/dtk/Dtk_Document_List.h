@@ -35,7 +35,6 @@ extern "C" {
 
 class Dtk_Project;
 class Dtk_Document;
-class Dtk_Document_List_UI;
 
 class Fldtk_Document_Browser;
 
@@ -140,13 +139,13 @@ class Dtk_Document_List
      * 
      * \param doc the document that we want to add to the list
      */
-    void            append(Dtk_Document *doc);
+    void            add(Dtk_Document *doc);
     
     /** A document tells us that its name changed.
      *
      * \param document the document that changed its name.
      */
-    void            filenameChanged(Dtk_Document *document);
+    void            documentNameChanged(Dtk_Document *document);
     
     /** Return the number of documents in this list.
      */
@@ -165,9 +164,9 @@ class Dtk_Document_List
     void            setMain(Dtk_Document *doc);
     
     /**
-     * Create the UI manager and have it create the UI.
+     * Remove all documents in this list.
      */
-    void          createUI();
+    void clear();
     
   private:
     
@@ -177,16 +176,14 @@ class Dtk_Document_List
     /// stdlib list of documents
     std::vector<Dtk_Document*>	docList_;
     
-    /// we are in charge of keeping this browser updated and reacting to its messages
-    Fldtk_Document_Browser      * browser_;
-    
     /// every project has a main document which describes the top level layout
-    Dtk_Document                * main_;
+    Dtk_Document * main_;
+    
+    /// we are solely responsible for the document browser
+    Fldtk_Document_Browser *wDocumentBrowser_;
     
     /// this is an FLTK callback that is triggered when the browser is clicked
-    static void browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d);
-    
-    Dtk_Document_List_UI *ui;
+    static void wDocumentBrowser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d);
   };
 
 

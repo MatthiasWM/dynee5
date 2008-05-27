@@ -42,10 +42,10 @@ class Fldtk_Tmpl_Browser;
 /** GUI element for editing layouts.
  */
 class Fldtk_Layout_Editor : public Fldtk_Editor
-{
-public:
-	                        Fldtk_Layout_Editor(Dtk_Layout *layout);
-	virtual                 ~Fldtk_Layout_Editor();
+  {
+  public:
+    Fldtk_Layout_Editor(Dtk_Layout *layout);
+    virtual                 ~Fldtk_Layout_Editor();
     virtual Dtk_Document    * document();
     Fldtk_Tmpl_Browser      * templateBrowser() { return tmplBrowser_; }
     Fldtk_Slot_Browser      * slotBrowser() { return slotBrowser_; }
@@ -53,19 +53,19 @@ public:
     void                    userChangedSlots();
     void                    userDeselectedTemplates();
     void                    userSelectedTemplate(Dtk_Template *tmpl);
-
-protected:
+    
+  protected:
     Dtk_Layout     * layout_;
-
+    
     /// The currently selected template
     Dtk_Template            * template_;
-	Fldtk_Tmpl_Browser      * tmplBrowser_;
-	Fldtk_Slot_Browser      * slotBrowser_;
+    Fldtk_Tmpl_Browser      * tmplBrowser_;
+    Fldtk_Slot_Browser      * slotBrowser_;
     Fldtk_Slot_Editor_Group * slotEditor_;
     Fl_Menu_Button          * specificChoice_;
     Fl_Menu_Button          * methodsChoice_;
     Fl_Menu_Button          * attributesChoice_;
-
+    
     // slot menus
     //  specific
     //  methods
@@ -74,13 +74,13 @@ protected:
     // revert
     // slot editor
     //  ... (many)
-
+    
     static void apply_cb(Fl_Widget*, Fldtk_Layout_Editor*);
     static void revert_cb(Fl_Widget*, Fldtk_Layout_Editor*);
     static void specific_choice_cb(Fl_Menu_Button*, Fldtk_Layout_Editor*);
     static void methods_choice_cb(Fl_Menu_Button*, Fldtk_Layout_Editor*);
     static void attributes_choice_cb(Fl_Menu_Button*, Fldtk_Layout_Editor*);
-};
+  };
 
 
 #endif

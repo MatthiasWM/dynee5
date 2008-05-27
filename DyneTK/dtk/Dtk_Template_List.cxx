@@ -43,12 +43,21 @@ Dtk_Template_List::Dtk_Template_List(Dtk_Template *parent)
 /*---------------------------------------------------------------------------*/
 Dtk_Template_List::~Dtk_Template_List()
 {
-    int i, n = tmplList_.size();
-    for (i=n-1; i>=0; --i) {
-        Dtk_Template *tmpl = tmplList_.at(i);
-        delete tmpl;
-    }
+  clear();
 }
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template_List::clear()
+{
+  int i, n = tmplList_.size();
+  for (i=n-1; i>=0; --i) {
+    Dtk_Template *tmpl = tmplList_.at(i);
+    tmpl->clear();
+    delete tmpl;
+  }
+}
+
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Template_List::add(Dtk_Template *tmpl)

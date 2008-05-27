@@ -42,20 +42,37 @@ class Fl_Wizard;
  * A document of the the type Layout.
  */
 class Dtk_Layout : public Dtk_Document
-{
-public:
-					Dtk_Layout(Dtk_Document_List *list);
-	virtual			~Dtk_Layout();
-
-	virtual int		load();
-	virtual int     edit();
-	virtual int		save();
-	virtual int		saveAs();
-	virtual void	close();
-	virtual int		getID() { return 0; }
-
+  {
+  public:
+    
+    /**
+     * Create a new empty Layout Document.
+     *
+     * To be useful, the layout must be linked to a Document List.
+     */
+    Dtk_Layout();
+    
+    /**
+     * Clear the layout and all resources used by it.
+     */
+    virtual ~Dtk_Layout();
+    
+    /**
+     * Clear all references to children.
+     * 
+     * This call removes all templates from this layout.
+     */
+    virtual void clear();
+    
+    virtual int		load();
+    virtual int   edit();
+    virtual int		save();
+    virtual int		saveAs();
+    virtual void	close();
+    virtual int		getID() { return 0; }
+    
     virtual bool    isLayout() { return true; }
-
+    
     /** Write this document type as a Newt Script.
      *
      * Write the header, followed by all templates, followed
@@ -64,54 +81,54 @@ public:
      * \retval 0 if successful
      * \retval negative if an error occured
      */     
-	virtual int		write(Dtk_Script_Writer &sw);
-
+    virtual int		write(Dtk_Script_Writer &sw);
+    
     /** Write a script line that will make the main form public.
      *
      * \retval 0 if successful
      * \retval negative if an error occured
      */     
-	virtual int		writeTheForm(Dtk_Script_Writer &sw);
-
+    virtual int		writeTheForm(Dtk_Script_Writer &sw);
+    
     /** Return true if there is a layout view and it is visible.
      */
     bool            editViewShown();
-
+    
     /** Call this to update the pulldown menus in the layout editor.
      */ 
     void updateMenus();
-
+    
     void editView();
     Fl_Hold_Browser * templateBrowser();
     Fl_Hold_Browser * slotBrowser();
     Fldtk_Slot_Editor_Group * slotEditor();
     Fldtk_Layout_View * layoutView() { return view_; }
-
+    
     Dtk_Template    * addTemplate(int x, int y, int w, int h, char *proto=0L);
-
-private:
-
+    
+  private:
+    
     void            setupEditors(); 
     newtRef	        saveLayoutSettings();
-
+    
     /// The root element of the tree of all templates inside this layout.
     Dtk_Template    * root_;
-
+    
     /// Editor in the document tabs.
     Fldtk_Layout_Editor * editor_;
-
+    
     /// Visual layout editor.
     Fldtk_Layout_View * view_;
-
+    
     /// Visual layout editor.
     // Fldtk_Visual_Layout * visualEditor_;
-
+    
     /// GUI callback whenever a different template is selected
     static void templateBrowser_cb(Fl_Hold_Browser*, Dtk_Layout*);
-
+    
     /// GUI callback whenever a different slot is selected
     static void slotBrowser_cb(Fl_Hold_Browser*, Dtk_Layout*);
-};
+  };
 
 
 #endif

@@ -249,7 +249,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project open
+      label Project selected
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -891,7 +891,7 @@ Function {create_about_dialog()} {open
         xywh {10 10 305 70} box FLAT_BOX color 137 labelfont 1 labelsize 41 labelcolor 7 align 16
       }
       Fl_Box {} {
-        label {Version 1.7.1} selected
+        label {Version 1.7.1}
         xywh {215 80 100 20} labelfont 1 labelsize 13 align 24
       }
       Fl_Box {} {

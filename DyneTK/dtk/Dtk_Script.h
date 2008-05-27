@@ -40,14 +40,13 @@ class Fldtk_Script_Editor;
 class Dtk_Script : public Dtk_Document
 {
 public:
-    /** Create a document container for Newt Scripts.
-     *
-     * \param list this is the list that we will be hooked into
-     */
-					Dtk_Script(Dtk_Document_List *list);
+  
+  /** Create a document container for Newt Scripts.
+   */
+  Dtk_Script();
     
-    /** Remove all links and resources and delete this document.
-     */
+  /** Remove all links and resources and delete this document.
+   */
 	virtual			~Dtk_Script();
 
     /** Load this document from disk.
@@ -92,6 +91,15 @@ public:
      */
     virtual int		saveAs();
 
+  /** Close the editor window.
+   *
+   * This function closes any open editor window related to this doc 
+   * and then unlinks GUI ties. The document will remain in memory
+   * if it is part of a project.
+   * 
+   * To remove a document from a project, just call the documents
+   * destructor.
+   */
 	virtual void	close();
 
     /** Write this document type as a Newt Script.

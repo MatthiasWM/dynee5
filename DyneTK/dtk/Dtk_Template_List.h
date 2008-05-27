@@ -37,46 +37,51 @@ class Dtk_Layout;
 /** Keep a list of templates.
  */
 class Dtk_Template_List
-{
-public:
-
+  {
+  public:
+    
     /** Initialize a template list
      */
-                    Dtk_Template_List(Dtk_Template *parent);
-
+    Dtk_Template_List(Dtk_Template *parent);
+    
     /** Remove a template list and all its members.
      */
-                    ~Dtk_Template_List();
-
+    ~Dtk_Template_List();
+    
+    /**
+     * Remove all templates from the list.
+     */
+    void clear();
+    
     /** Add an existing template to this list.
      */
     void add(Dtk_Template *tmpl);
-
+    
     /** Remove a template from this list and from the GUI.
      */
     void remove(Dtk_Template *tmpl);
-  
+    
     /** Return the number of templates in the list.
      */
     int size() { return tmplList_.size(); }
-
+    
     /** Return the template pointer using an index.
      */
     Dtk_Template *at(int index) { return tmplList_.at(index); }
-
+    
     /** Return the the owner of this template list.
      */
     Dtk_Template *parent() { return parent_; }
-
-private:
-
+    
+  private:
+    
     /// back reference to the template that keeps this list
     Dtk_Template    * parent_;
-
+    
     /// stdlib list of documents
-	std::vector<Dtk_Template*>  tmplList_;
-
-};
+    std::vector<Dtk_Template*>  tmplList_;
+    
+  };
 
 
 #endif

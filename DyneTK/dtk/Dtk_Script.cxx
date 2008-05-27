@@ -54,9 +54,9 @@ extern "C" {
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Script::Dtk_Script(Dtk_Document_List *list)
-:   Dtk_Document(list),
-    editor_(0L)
+Dtk_Script::Dtk_Script() 
+: Dtk_Document(),
+  editor_(0L)
 {
 }
 
@@ -116,6 +116,13 @@ int Dtk_Script::saveAs()
 	char *filename = fl_file_chooser("Save Document As...", "*.txt", filename_);
 	if (!filename) 
 		return -1;
+  char buf[2048];
+  const char *ext = fl_filename_ext(filename);
+  if (ext==0L || *ext==0) {
+    strcpy(buf, filename);
+    fl_filename_setext(buf, 2047, ".txt");
+    filename = buf;
+  }
 	askForFilename_ = false;
 	setFilename(filename);
 	return save();
@@ -160,17 +167,20 @@ newtRef Dtk_Script::compile()
 		printf("***** Syntax error!\n");
 	}
 #else
-    newtErr	err;
-    newtRef form = NVMInterpretStr(script, &err);
+  newtErr	err;
+  newtRef form = NVMInterpretStr(script, &err);
 	//NewtPrintObject(stdout, form);
 	if (form==kNewtRefUnbind) {
 		printf("**** ERROR while compiling or interpreting\n");
-		printf("**** %s: %s\n", newt_error_class(err), newt_error(err));
+    if (err)
+      printf("**** %s: %s\n", newt_error_class(err), newt_error(err));
+    else 
+      printf("**** unknow or unsupported error\n");
 		return kNewtRefUnbind;
 	} else {
 	}
 #endif
-
+  
 	return form;
 }
 

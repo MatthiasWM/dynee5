@@ -34,17 +34,53 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+/*----------------------------------------------------------------------------*/
 Fldtk_Document_Browser::Fldtk_Document_Browser(int X, int Y, int W, int H, const char *L)
 :	Fl_Hold_Browser(X, Y, W, H, L)
 {
 }
 
 
+/*----------------------------------------------------------------------------*/
 Fldtk_Document_Browser::~Fldtk_Document_Browser()
 {
 }
 
+
+/*----------------------------------------------------------------------------*/
+void Fldtk_Document_Browser::add(const char *name, void *data, bool isMain)
+{
+  char buf[2048];
+  makeLabel_(buf, name, isMain);
+  Fl_Hold_Browser::add(buf, data);
+}
+
+
+/*----------------------------------------------------------------------------*/
+void Fldtk_Document_Browser::text(int i, const char *name, bool isMain)
+{  
+  char buf[2048];
+  makeLabel_(buf, name, isMain);
+  Fl_Hold_Browser::text(i, buf);
+}
+  
+/*----------------------------------------------------------------------------*/
+void Fldtk_Document_Browser::makeLabel_(char *buf, const char *name, bool isMain)
+{  
+  if (!name || !*name) 
+    name = " - unnamed - ";
+  if (isMain) {
+    sprintf(buf, "*\t%s", name);
+  } else {
+    sprintf(buf, "\t%s", name);
+  }
+}
+
+/*----------------------------------------------------------------------------*/
+void Fldtk_Document_Browser::remove(int i) 
+{
+  Fl_Hold_Browser::remove(i);
+}
 
 //
 // End of "$Id$".

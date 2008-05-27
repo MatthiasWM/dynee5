@@ -50,6 +50,11 @@ public:
      */
                     ~Dtk_Slot_List();
     
+  /**
+   * Remove all slots in this list.
+   */
+  void clear();
+  
     /** Find our layout document.
      */
     Dtk_Layout * layout();

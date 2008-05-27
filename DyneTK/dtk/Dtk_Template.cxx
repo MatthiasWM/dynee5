@@ -94,6 +94,16 @@ Dtk_Template::~Dtk_Template()
 
 
 /*---------------------------------------------------------------------------*/
+void Dtk_Template::clear()
+{
+  if (slotList_)
+    slotList_->clear();
+  if (tmplList_)
+    tmplList_->clear();
+}
+
+
+/*---------------------------------------------------------------------------*/
 int Dtk_Template::load(newtRef node)
 {
   //printf("===========\n");

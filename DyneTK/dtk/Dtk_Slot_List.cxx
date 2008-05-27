@@ -58,13 +58,20 @@ Dtk_Slot_List::Dtk_Slot_List(Dtk_Template *tmpl)
 /*---------------------------------------------------------------------------*/
 Dtk_Slot_List::~Dtk_Slot_List()
 {
-    int i, n = slotList_.size();
-    for (i=n-1; i>=0; --i) {
-        Dtk_Slot *slot = slotList_.at(i);
-        delete slot;
-    }
-    browser_ = 0L;
-    template_ = 0L;
+  clear();
+  browser_ = 0L;
+  template_ = 0L;
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Slot_List::clear()
+{
+  int i, n = slotList_.size();
+  for (i=n-1; i>=0; --i) {
+    Dtk_Slot *slot = slotList_.at(i);
+    delete slot;
+  }
 }
 
 

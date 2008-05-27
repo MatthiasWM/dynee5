@@ -60,11 +60,11 @@
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Layout::Dtk_Layout(Dtk_Document_List *list)
-:   Dtk_Document(list),
-    root_(0L),
-    editor_(0L),
-    view_(0L)
+Dtk_Layout::Dtk_Layout()
+: Dtk_Document(),
+  root_(0L),
+  editor_(0L),
+  view_(0L)
 {
 }
 
@@ -77,6 +77,15 @@ Dtk_Layout::~Dtk_Layout()
     delete editor_;
     delete view_;
     delete root_;
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Layout::clear()
+{
+  if (root_)
+    root_->clear();
+  Dtk_Document::clear();
 }
 
 
@@ -203,39 +212,39 @@ int Dtk_Layout::save()
 	if (askForFilename_) {
 		return saveAs();
 	}
-
-    newtRefVar hrc = kNewtRefNIL;
-    if (root_)
-        hrc = root_->save();
-
+  
+  newtRefVar hrc = kNewtRefNIL;
+  if (root_)
+    hrc = root_->save();
+  
 	newtRefVar lytFrame[] = {
 		NSSYM(layoutSettings),		saveLayoutSettings(),
 		NSSYM(templateHierarchy),	hrc
 	};
 	newtRef lyt = NewtMakeFrame2(sizeof(lytFrame) / (sizeof(newtRefVar) * 2), lytFrame);
-
-    NewtPrintObject(stdout, lyt);
-    
+  
+  NewtPrintObject(stdout, lyt);
+  
 	newtRef rcvr = kNewtRefNIL;
 	newtRef nsof = NsMakeNSOF(rcvr, lyt, NewtMakeInt30(2));
-    if (!NewtRefIsBinary(nsof))
-        return -1;
-
-  	int size = NewtBinaryLength(nsof);
+  if (!NewtRefIsBinary(nsof))
+    return -1;
+  
+  int size = NewtBinaryLength(nsof);
 	uint8_t *data = NewtRefToBinary(nsof);
-
-    // Open a file as a destination for our project
+  
+  // Open a file as a destination for our project
 	FILE *f = fopen(filename_, "wb");
-    if (!f) {
-        return -1;
-    }
-    // Write everything in a single block
-    if (fwrite(data, 1, size, f)!=(size_t)size) {
-        fclose(f);
-        return -1;
-    }
-    // Close the file and return indicating no error
+  if (!f) {
+    return -1;
+  }
+  // Write everything in a single block
+  if (fwrite(data, 1, size, f)!=(size_t)size) {
     fclose(f);
+    return -1;
+  }
+  // Close the file and return indicating no error
+  fclose(f);
 	return 0;
 }
 
@@ -246,6 +255,13 @@ int Dtk_Layout::saveAs()
 	char *filename = fl_file_chooser("Save Document As...", "*.lyt", filename_);
 	if (!filename) 
 		return -1;
+  char buf[2048];
+  const char *ext = fl_filename_ext(filename);
+  if (ext==0L || *ext==0) {
+    strcpy(buf, filename);
+    fl_filename_setext(buf, 2047, ".lyt");
+    filename = buf;
+  }  
 	askForFilename_ = false;
 	setFilename(filename);
 	return save();

@@ -415,8 +415,8 @@ deleteOnDownload->update_widget();
 }
 
 Fl_Menu_Item Fldtk_Proj_Project::menu_Platform[] = {
- {"Msgpad", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
- {"Newton20", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"Msgpad", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
+ {"Newton20", 0,  0, 0, 1, FL_NORMAL_LABEL, 0, 12, 0},
  {"Newton21", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
  {0,0,0,0,0,0,0,0,0}
 };
@@ -427,7 +427,6 @@ this->labelsize(12);
   o->down_box(FL_BORDER_BOX);
   o->labelsize(12);
   o->textsize(12);
-  o->deactivate();
   o->menu(menu_Platform);
 } // Fl_Choice* o
 { Fl_Input* o = new Fl_Input(100, 45, 145, 20, "Language:");

@@ -31,8 +31,6 @@
 #include "Dtk_Document_List.h"
 #include "Dtk_Project.h"
 
-#include "ui/Dtk_Document_UI.h"
-
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fltk/Fldtk_Editor.h"
 
@@ -44,41 +42,37 @@
 
 
 /*-v2------------------------------------------------------------------------*/
-Dtk_Document::Dtk_Document(Dtk_Document_List *list)
+Dtk_Document::Dtk_Document()
 :	shortname_(0L),
 	filename_(0L),
 	name_(0L),
-    browserName_(0L),
 	askForFilename_(false),
-    list_(list),
-  ui(0L)
+  list_(0L)
 {
 }
+
 
 /*-v2------------------------------------------------------------------------*/
 Dtk_Document::~Dtk_Document()
 {
-    // close all GUI elements
-    close();
+  // close all GUI elements
+  close();
 
-    // remove all references to this document
-    list_->remove(this);
-
-    // remove all our resources
-	if (browserName_)
-        free(browserName_);
+  // clear everything that we reference
+  clear();
+  
+  // remove all our resources
 	if (shortname_)
 		free(shortname_);
+  
 	if (filename_)
 		free(filename_);
 }
 
 
-/*---------------------------------------------------------------------------*/
-void Dtk_Document::createUI()
+/*-v2------------------------------------------------------------------------*/
+void Dtk_Document::clear()
 {
-  if (!ui)
-    ui = new Dtk_Document_UI(this);
 }
 
 
@@ -88,22 +82,6 @@ const char *Dtk_Document::name()
 	return name_;
 }
 
-/*-v2------------------------------------------------------------------------*/
-void Dtk_Document::updateBrowserName(bool tellTheList) 
-{
-	if (browserName_)
-        free(browserName_);
-    char buf[128];
-    buf[0] = 0;
-    if (list_ && list_->getMain()==this) {
-        strcpy(buf, "*");
-    }
-    strcat(buf, "\t");
-    strcat(buf, name_);
-    browserName_ = strdup(buf);
-    if (list_ && tellTheList)
-        list_->filenameChanged(this);
-}
 
 /*-v2------------------------------------------------------------------------*/
 void Dtk_Document::setFilename(const char *filename)
@@ -129,7 +107,6 @@ void Dtk_Document::setFilename(const char *filename)
 		int i, n = ext-name_;
 		shortname_ = (char*)calloc(n+1, 1);
 		memcpy(shortname_, name_, n);
-        updateBrowserName();
         // hack to update the corresponding Tab:
         n = dtkDocumentTabs->children();
         for (i=0; i<n; i++) {
@@ -141,7 +118,7 @@ void Dtk_Document::setFilename(const char *filename)
         }
         dtkDocumentTabs->parent()->redraw();
 	}
-    list_->filenameChanged(this);
+    list_->documentNameChanged(this);
 }
 
 

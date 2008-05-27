@@ -37,8 +37,36 @@
 class Fldtk_Document_Browser : public Fl_Hold_Browser
 {
 public:
-				Fldtk_Document_Browser(int X, int Y, int W, int H, const char *L=0L);
+  /**
+   * Create a new document browser based on a Hold Browser.
+   */
+  Fldtk_Document_Browser(int X, int Y, int W, int H, const char *L=0L);
+  
+  /**
+   * Delete the Document Browser.
+   */
 	virtual		~Fldtk_Document_Browser();
+  
+  /**
+   * Add a new entry with a name, data pointe, and an indicator for the main document.
+   */
+  void add(const char *name, void *data, bool isMain);
+  
+  /**
+   * Change the text on an existing entry.
+   */
+  void text(int i, const char *name, bool isMain);
+  
+  /**
+   * Remove an item form the browser.
+   */
+  void remove(int i);
+  
+private:
+  
+  // make a label from a give item name and a flag
+  void makeLabel_(char *buf, const char *name, bool isMain);
+  
 };
 
 

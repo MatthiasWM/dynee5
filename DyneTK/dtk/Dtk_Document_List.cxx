@@ -40,8 +40,6 @@
 #include "Dtk_Layout.h"
 #include "Dtk_Script.h"
 
-#include "ui/Dtk_Document_List_UI.h"
-
 #include "fltk/Fldtk_Document_Browser.h"
 
 #include "fluid/main_ui.h"
@@ -64,44 +62,34 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Document_List::Dtk_Document_List(Dtk_Project *proj)
 : project_(proj),
-  browser_(0L),
-  main_(0L),
-  ui(0L)
+main_(0L),
+wDocumentBrowser_(0L)
 {
-    if (project_) {
-        browser_ = dtkDocumentBrowser;
-        browser_->redraw();
-        // allow user to click on a name to pop that document up
-        browser_->callback((Fl_Callback*)browser_cb, this);
-    }
+  if (proj) {
+    wDocumentBrowser_ = dtkDocumentBrowser;
+    wDocumentBrowser_->callback((Fl_Callback*)wDocumentBrowser_cb, this);
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Document_List::~Dtk_Document_List()
 {
-    int i, n = docList_.size();
-    for (i=n-1; i>=0; --i) {
-        if (browser_) {
-            browser_->remove(i+1);
-        }
-        Dtk_Document *doc = docList_.at(i);
-        delete doc;
-    }
-    if (project_) {
-        browser_->redraw();
-        browser_->callback(0L, 0L);
-    }
-    browser_ = 0L;
-    project_ = 0L;
+  clear();
+  project_ = 0L;
 }
 
+
 /*---------------------------------------------------------------------------*/
-void Dtk_Document_List::createUI()
+void Dtk_Document_List::clear()
 {
-  if (!ui)
-    ui = new Dtk_Document_List_UI(this);
+  int i, n = docList_.size();
+  for (i=n-1; i>=0; --i) {
+    Dtk_Document *doc = docList_.at(i);
+    remove(doc);
+  }
 }
+
 
 /*---------------------------------------------------------------------------*/
 Dtk_Document *Dtk_Document_List::add(const char *filename)
@@ -115,18 +103,16 @@ Dtk_Document *Dtk_Document_List::add(const char *filename)
 	Dtk_Document *doc = 0L;
 	if (id==2) { 
     // its NSOF, so for now we assume it is a layout
-		doc = new Dtk_Layout(this);
+		doc = new Dtk_Layout();
 	} else { 
     // otherwise, this is likely text
-		doc = new Dtk_Script(this);
+		doc = new Dtk_Script();
 	}
-  //if (ui)
-  //  doc->createUI();
-  // load the file
+  // link the document to this doc list
+  add(doc);
 	doc->setFilename(filename);
   doc->load();
   doc->edit();
-  append(doc);
 	return doc;
 }
 
@@ -149,20 +135,20 @@ char *Dtk_Document_List::findFile(const char *filename)
 /*---------------------------------------------------------------------------*/
 Dtk_Document *Dtk_Document_List::newScript(const char *filename)
 {
-	Dtk_Script *doc = new Dtk_Script(this);
+	Dtk_Script *doc = new Dtk_Script();
+  add(doc);
 	doc->setFilename(filename);
 	doc->setAskForFilename();
-    append(doc);
 	return doc;
 }
 
 /*---------------------------------------------------------------------------*/
 Dtk_Document *Dtk_Document_List::newLayout(const char *filename)
 {
-	Dtk_Layout *doc = new Dtk_Layout(this);
+	Dtk_Layout *doc = new Dtk_Layout();
+  add(doc);
 	doc->setFilename(filename);
 	doc->setAskForFilename();
-    append(doc);
 	return doc;
 }
 
@@ -170,96 +156,97 @@ Dtk_Document *Dtk_Document_List::newLayout(const char *filename)
 newtRef Dtk_Document_List::getProjectItemsRef()
 {
 	int i = 0, n = docList_.size();
-
+  
 	newtRef items = NewtMakeArray(kNewtRefNIL, n);
-
-    for (i=0; i<n; ++i) {
-        Dtk_Document *doc = docList_.at(i);
+  
+  for (i=0; i<n; ++i) {
+    Dtk_Document *doc = docList_.at(i);
 		NewtSetArraySlot(items, i, doc->getProjectItemRef());
 	}
-
+  
 	return items;
 }
 
 /*---------------------------------------------------------------------------*/
 Dtk_Document *Dtk_Document_List::getDocument(int i)
 {
-    if (i<0 || i>=(int)docList_.size())
-        return 0L;
-    return docList_.at(i);
+  if (i<0 || i>=(int)docList_.size())
+    return 0L;
+  return docList_.at(i);
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Document_List::append(Dtk_Document *doc)
+void Dtk_Document_List::add(Dtk_Document *doc)
 {
-    docList_.push_back(doc);
-    if (browser_) {
-        browser_->add(doc->browserName(), doc);
-    }
+  docList_.push_back(doc);
+  doc->setList(this);
+  if (wDocumentBrowser_)
+    wDocumentBrowser_->add(doc->name(), doc, doc==main_);
 }
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Document_List::remove(Dtk_Document *doc)
 {
-    int i, n = docList_.size();
-    if (main_==doc) {
+  // search the list for this document
+  int i, n = docList_.size();
+  for (i=0; i<n; ++i) {
+    if (docList_.at(i)==doc) {
+      if (wDocumentBrowser_)
+        wDocumentBrowser_->remove(i+1);
+      doc->clear();
+      if (main_==doc) {
         setMain(0L);
+      }
+      docList_.erase(docList_.begin()+i);
+      delete doc;
+      return 0;
     }
-    // search the list for this document
-    for (i=0; i<n; ++i) {
-        if (docList_.at(i)==doc) {
-            docList_.erase(docList_.begin()+i);
-            if (browser_)
-                browser_->remove(i+1);
-            return 0;
-        }
-    }
-    // not found
-    return -1;
+  }
+  // not found
+  return -1;
 }
 
 /*-v2------------------------------------------------------------------------*/
-void Dtk_Document_List::browser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d)
+void Dtk_Document_List::wDocumentBrowser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d)
 {
-    int it = w->value();
-    if (it==0)
-        return;
-    Dtk_Document *doc = (Dtk_Document*)w->data(it);
-    if (doc)
-        doc->edit();
-    UpdateMainMenu();
+  int it = w->value();
+  if (it==0)
+    return;
+  Dtk_Document *doc = (Dtk_Document*)w->data(it);
+  if (doc)
+    doc->edit();
+  UpdateMainMenu();
 }
 
 /*-v2------------------------------------------------------------------------*/
-void Dtk_Document_List::filenameChanged(Dtk_Document *document)
+void Dtk_Document_List::documentNameChanged(Dtk_Document *document)
 {
-    // if we have no browser, we don't care
-    if (!browser_)
-        return;
-    int i, n = docList_.size();
-    // search the list for this document
-    for (i=0; i<n; ++i) {
-        if (docList_.at(i)==document) {
-            browser_->text(i+1, document->browserName());
-            return;
-        }
+  // if we have no browser, we don't care
+  int i, n = docList_.size();
+  // search the list for this document
+  for (i=0; i<n; ++i) {
+    if (docList_.at(i)==document) {
+      if (wDocumentBrowser_)
+        wDocumentBrowser_->text(i+1, document->name(), (document==main_));
+      return;
     }
+  }
 }
 
 /*-v2------------------------------------------------------------------------*/
 void Dtk_Document_List::setMain(Dtk_Document *document)
 {
-    if (main_==document)
-        return;
-    if (main_) {
-        Dtk_Document *doc = main_;
-        main_ = 0L;
-        doc->updateBrowserName();
-    }
-    main_ = document;
-    if (main_) {
-        main_->updateBrowserName();
-    }
+  if (main_==document)
+    return;
+  if (main_) {
+    Dtk_Document *doc = main_;
+    main_ = 0L;
+    documentNameChanged(doc);
+  }
+  main_ = document;
+  if (main_) {
+    documentNameChanged(main_);
+  }
 }
 
 

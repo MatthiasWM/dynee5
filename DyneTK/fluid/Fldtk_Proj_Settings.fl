@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -332,20 +332,20 @@ deleteOnDownload->update_widget();} {}
 } 
 
 widget_class Fldtk_Proj_Project {
-  label Project open selected
+  label Project open
   xywh {649 311 380 245} type Double labelsize 12 visible position_relative
 } {
   Fl_Choice {} {
-    label {&Platform:} open
-    xywh {100 15 145 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
+    label {&Platform:} open selected
+    xywh {100 15 145 20} down_box BORDER_BOX labelsize 12 textsize 12
   } {
     MenuItem {} {
       label Msgpad
-      xywh {0 0 100 20} labelsize 12
+      xywh {0 0 100 20} labelsize 12 deactivate
     }
     MenuItem {} {
       label Newton20
-      xywh {0 0 100 20} labelsize 12
+      xywh {0 0 100 20} labelsize 12 deactivate
     }
     MenuItem {} {
       label Newton21

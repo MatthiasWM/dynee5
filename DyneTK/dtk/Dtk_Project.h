@@ -32,8 +32,8 @@ extern "C" {
 
 class Dtk_Document_List;
 class Dtk_Script_Writer;
-class Dtk_Project_UI;
-
+class Fldtk_Main_Window;
+class Fl_Tabs;
 
 /*---------------------------------------------------------------------------*/
 /**
@@ -46,24 +46,19 @@ public:
   /** 
    * Create an empty project.
    */
-                Dtk_Project();
+  Dtk_Project();
   
   /** 
    * Delete the project and all associated resources.
    */
-                ~Dtk_Project();
+  ~Dtk_Project();
   
-  /**
-   * Create the UI manager and have it create the UI.
-   */
-  void          createUI();
-
   /**
    * Return true if the project was modified and needs to be saved.
    *
    * \todo implement this function
    */
-  int           isDirty() { return 0; }
+  int isDirty();
 
   /**
    * Set all project settings to their default value.
@@ -105,7 +100,7 @@ public:
    *
    * \todo Implement me!
    */
-	void          close() {}
+	void          close();
 
   /**
    * Build a NewtonScript package from this project.
@@ -152,7 +147,7 @@ public:
    */
   Dtk_Document_List * documentList() { return documentList_; }
 
-protected:
+private:
   
   /**
    * Remember the current directory.
@@ -165,8 +160,6 @@ protected:
    * Restore the previous directory.
    */
 	void          popDir();
-
-private:
 
   /// path and name of package
 	char          * packagename_;
@@ -190,11 +183,13 @@ private:
 	newtRef       package_;
 
   /// Keep a list of all documents in the project.
-  Dtk_Document_List * documentList_;
+  Dtk_Document_List * documentList_;  
   
-  ///link to the user interface manager
-  Dtk_Project_UI * ui;
+  /// we are responsible for the application window
+  Fldtk_Main_Window * wMainWindow;
   
+  /// the tab group that contains all project related browsers
+  Fl_Tabs *wBrowserTabs;
 };
 
     

@@ -45,7 +45,6 @@
 #include "dtk/Dtk_Template_List.h"
 #include "dtk/Dtk_Slot.h"
 
-#include "ui/Dtk_Project_UI.h"
 
 #include "fltk/Flmm_Message.H"
 #include "fltk/Flio_Serial_Port.h"
@@ -74,17 +73,17 @@ extern Fl_Window *wConnect;
 
 /*-v2------------------------------------------------------------------------*/
 int NewLayoutFile(const char *filename) {
-    // create a filename if we have none
-    if (!filename) {
-        filename = "layout.lyt";
-        /// \todo Make sure we choose a unique name here
-        /// \todo Add the current path to the filename
-        /// \todo Make sure that no file with that path and name exists
-    }
-    // add the new document to the global docs list
+  // create a filename if we have none
+  if (!filename) {
+    filename = "layout.lyt";
+    /// \todo Make sure we choose a unique name here
+    /// \todo Add the current path to the filename
+    /// \todo Make sure that no file with that path and name exists
+  }
+  // add the new document to the global docs list
 	Dtk_Document *doc = dtkGlobalDocuments->newLayout(filename);
 	doc->edit();
-    // keep the menubar in sync
+  // keep the menubar in sync
 	UpdateMainMenu();
 	return 0;
 }
@@ -92,17 +91,17 @@ int NewLayoutFile(const char *filename) {
 
 /*-v2------------------------------------------------------------------------*/
 int NewTextFile(const char *filename) {
-    // create a filename if we have none
-    if (!filename) {
-        filename = "script.txt";
-        /// \todo Make sure we choose a unique name here
-        /// \todo Add the current path to the filename
-        /// \todo Make sure that no file with that path and name exists
-    }
-    // add the new document to the global docs list
+  // create a filename if we have none
+  if (!filename) {
+    filename = "script.txt";
+    /// \todo Make sure we choose a unique name here
+    /// \todo Add the current path to the filename
+    /// \todo Make sure that no file with that path and name exists
+  }
+  // add the new document to the global docs list
 	Dtk_Document *doc = dtkGlobalDocuments->newScript(filename);
 	doc->edit();
-    // keep the menubar in sync
+  // keep the menubar in sync
 	UpdateMainMenu();
 	return 0;
 }
@@ -111,33 +110,33 @@ int NewTextFile(const char *filename) {
 /*-v2------------------------------------------------------------------------*/
 int CloseCurrentDocument()
 {
-    // find the right document
-    Dtk_Document *doc = GetCurrentDocument();
-    if (!doc)
-        return -1;
-    // if the document is dirty, we must ask the user before closing
-    if (doc->isDirty()) {
-        int v = fl_choice(
-            "Save changes to document %s?", 
-            "Abort", "Yes", "No", doc->name());
-        switch (v) {
-        case 0: // abort
-            return -2; 
-        case 1: // yes
-            doc->save(); break; 
-        case 2:  // no
-            break;
-        }
+  // find the right document
+  Dtk_Document *doc = GetCurrentDocument();
+  if (!doc)
+    return -1;
+  // if the document is dirty, we must ask the user before closing
+  if (doc->isDirty()) {
+    int v = fl_choice(
+                      "Save changes to document %s?", 
+                      "Abort", "Yes", "No", doc->name());
+    switch (v) {
+      case 0: // abort
+        return -2; 
+      case 1: // yes
+        doc->save(); break; 
+      case 2:  // no
+        break;
     }
-    // If we are part of a project, only close the editor, else discard the doc.
-    if (doc->project()) {
-        doc->close();
-    } else {
-        delete doc;
-    }
-    // correct menus
-    UpdateMainMenu();
-    return 0;
+  }
+  // If we are part of a project, only close the editor, else discard the doc.
+  if (doc->project()) {
+    doc->close();
+  } else {
+    delete doc;
+  }
+  // correct menus
+  UpdateMainMenu();
+  return 0;
 }
 
 
@@ -145,25 +144,25 @@ int CloseCurrentDocument()
 int OpenDocument(const char *filename)
 {
 	int ret = -1;
-    // if there is no file name, pop up a file dialog
+  // if there is no file name, pop up a file dialog
 	if (!filename) {
 		filename = fl_file_chooser("Open Document...",
-            "All Files(*)\t"
-			"Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
-			"Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
-			"Native Module Files (*.ntm)\tStream Files (*.stm)", 0L);
+                               "All Files(*)\t"
+                               "Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
+                               "Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
+                               "Native Module Files (*.ntm)\tStream Files (*.stm)", 0L);
 		if (!filename)
 			return -2;
 	}
-    // go ahead and add the document
-    Dtk_Document *doc = dtkGlobalDocuments->add(filename);
-    // update the menu bar
+  // go ahead and add the document
+  Dtk_Document *doc = dtkGlobalDocuments->add(filename);
+  // update the menu bar
 	UpdateMainMenu();
-    // show an error message if needed
-    if (!doc) {
-        SystemAlert("Can't open document");
-        return -1;
-    }
+  // show an error message if needed
+  if (!doc) {
+    SystemAlert("Can't open document");
+    return -1;
+  }
 	return ret;
 }
 
@@ -172,13 +171,13 @@ int OpenDocument(const char *filename)
 int SaveCurrentDocument()
 {
 	int ret = -1;
-    // find the current document and save it
+  // find the current document and save it
 	Dtk_Document *doc = GetCurrentDocument();
 	if (doc)
 		ret = doc->save();
 	else 
 		ret = -1;
-    // activate the correct menus
+  // activate the correct menus
 	UpdateMainMenu();
 	return ret;
 }
@@ -188,13 +187,13 @@ int SaveCurrentDocument()
 int SaveCurrentDocumentAs()
 {
 	int ret = -1;
-    // find the current document and save it
+  // find the current document and save it
 	Dtk_Document *doc = GetCurrentDocument();
 	if (doc)
 		ret = doc->saveAs();
 	else 
 		ret = -1;
-    // activate the correct menus
+  // activate the correct menus
 	UpdateMainMenu();
 	return ret;
 }
@@ -203,30 +202,29 @@ int SaveCurrentDocumentAs()
 /*-v2------------------------------------------------------------------------*/
 int OpenProject(const char *filename) 
 {
-    // close any dirty project first
-    if (dtkProject && dtkProject->isDirty()) {
-        CloseProject();
-        // abort if the user decided to not close the project
-        if (dtkProject) {
-            return -2;
-        }
+  // close any dirty project first
+  if (dtkProject && dtkProject->isDirty()) {
+    CloseProject();
+    // abort if the user decided to not close the project
+    if (dtkProject) {
+      return -2;
     }
-    // open a file chooser if there was no filename given
+  }
+  // open a file chooser if there was no filename given
 	if (!filename) {
 		filename = fl_file_chooser("Open Toolkit Project", "*.ntk", 0L);
 		if (!filename) 
 			return -2;
 	}
-    // now close the existing project, which can not be dirty
+  // now close the existing project, which can not be dirty
 	if (dtkProject) {
-        CloseProject();
+    CloseProject();
 	}
-    // create a new project and load it
+  // create a new project and load it
 	dtkProject = new Dtk_Project();
-  dtkProject->createUI();
 	dtkProject->setFilename(filename);
 	int ret = dtkProject->load();
-
+  
 	UpdateMainMenu();
 	return ret;
 }
@@ -246,46 +244,53 @@ int OpenPreviousProject(const char *filename)
 int SaveAllDocuments()
 {
 	if (dtkProject) {
-        return dtkProject->saveAll();
+    return dtkProject->saveAll();
 	}
-    return 0;
+  return 0;
 }
 
 /*-v2------------------------------------------------------------------------*/
 int NewProject(const char *filename) 
 {
-    // close any dirty project first
-    if (dtkProject && dtkProject->isDirty()) {
-        CloseProject();
-        // abort if the user decided to not close the project
-        if (dtkProject) {
-            return -2;
-        }
+  // close any dirty project first (clean projects are close later)
+  if (dtkProject && dtkProject->isDirty()) {
+    CloseProject();
+    // abort if the user decided to not close the project
+    if (dtkProject) {
+      return -2;
     }
-    // ask for a new filename where we will save this project, if none was given
+  }
+  // ask for a new filename where we will save this project, if none was given
+  char buf[2048];
 	if (!filename) {
 		filename = fl_file_chooser("New Toolkit Project", "*.ntk", 0L);
 		if (!filename) 
 			return 0;
-	}
-    // confirm that we want to overwrite this project file if it exists already
-    if (access(filename, 0004)==0) { // R_OK
-        int v = fl_choice(
-            "A file with that filename already exist. Creating "
-            "a new project will eventually delete the original file.\n\n"
-            "Do you want to delete the file\n%s?", 
-            "delete file", "cancel new project", 0L, filename);
-        if (v==1)
-            return -1;
+    const char *ext = fl_filename_ext(filename);
+    if (ext==0L || *ext==0) {
+      strcpy(buf, filename);
+      fl_filename_setext(buf, 2047, ".ntk");
+      filename = buf;
     }
-    // if there is still a (non-dirty) project, close it now
-    if (dtkProject)
-	    CloseProject();
-    // finally we can create a brandnew project 
+	}
+  // confirm that we want to overwrite this project file if it exists already
+  if (access(filename, 0004)==0) { // R_OK
+    int v = fl_choice(
+                      "A file with that filename already exist. Creating "
+                      "a new project will eventually delete the original file.\n\n"
+                      "Do you want to delete the file\n%s?", 
+                      "overwrite old project", "cancel new project", 0L, filename);
+    if (v==1)
+      return -1;
+  }
+  // if there is still a (non-dirty) project, close it now
+  if (dtkProject)
+    CloseProject();
+  // finally we can create a brand new project 
 	dtkProject = new Dtk_Project();
-    dtkProject->setFilename(filename);
-	dtkProject->setDefaults();
-    // make sure the menus show the right settings
+  dtkProject->setFilename(filename);
+  dtkProject->setDefaults();
+  // make sure the menus show the right settings
 	UpdateMainMenu();
 	return 0;
 }
@@ -294,37 +299,37 @@ int NewProject(const char *filename)
 /*-v2------------------------------------------------------------------------*/
 int CloseProject()
 {
-    // avoid failure
+  // avoid failure
 	if (!dtkProject)
 		return -1;
-    // confirm command if project is dirty
-    if (dtkProject->isDirty()) {
-        int v = fl_choice(
-            "Save changes to project %s?", 
-            "Abort", "Yes", "No", dtkProject->name());
-        switch (v) {
-        case 0: // abort
-            return -2; 
-        case 1: // yes
-            dtkProject->saveAll(); break; 
-        case 2:  // no
-            break;
-        }
+  // confirm command if project is dirty
+  if (dtkProject->isDirty()) {
+    int v = fl_choice(
+                      "Save changes to project %s?", 
+                      "Abort", "Yes", "No", dtkProject->name());
+    switch (v) {
+      case 0: // abort
+        return -2; 
+      case 1: // yes
+        dtkProject->saveAll(); break; 
+      case 2:  // no
+        break;
     }
-    // now close the project and remove all references
-    dtkProject->close();
+  }
+  // now close the project and remove all references
+  dtkProject->close();
 	delete dtkProject;
 	dtkProject = 0L;
 	UpdateMainMenu();
-    return 0;
+  return 0;
 }
 
 
 /*-v2------------------------------------------------------------------------*/
 void ShowProjectSettings()
 {
-    if (!dtkProject)
-        return;
+  if (!dtkProject)
+    return;
 	dtkProjSettings->updateDialog();
 	dtkProjSettings->show();
 }
@@ -333,61 +338,61 @@ void ShowProjectSettings()
 /*-v2------------------------------------------------------------------------*/
 int AddFileToProject(const char *filename)
 {
-    if (!dtkProject)
-        return -1;
-    // if there is no file name, pop up a file dialog
+  if (!dtkProject)
+    return -1;
+  // if there is no file name, pop up a file dialog
 	if (!filename) {
 		filename = fl_file_chooser("Open Document...",
-            "All Files(*)\t"
-			"Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
-			"Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
-			"Native Module Files (*.ntm)\tStream Files (*.stm)", 0L);
+                               "All Files(*)\t"
+                               "Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
+                               "Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
+                               "Native Module Files (*.ntm)\tStream Files (*.stm)", 0L);
 		if (!filename)
 			return -2;
 	}
-    // go ahead and add the document to the project
-    Dtk_Document *doc = dtkProject->documentList()->add(filename);
-    // if this is a layout and there is no main layout yet, use this one
-    if (doc->isLayout() && !dtkProject->documentList()->getMain()) {
-        dtkProject->documentList()->setMain(doc);
-    }
-    // update the menu bar
+  // go ahead and add the document to the project
+  Dtk_Document *doc = dtkProject->documentList()->add(filename);
+  // if this is a layout and there is no main layout yet, use this one
+  if (doc->isLayout() && !dtkProject->documentList()->getMain()) {
+    dtkProject->documentList()->setMain(doc);
+  }
+  // update the menu bar
 	UpdateMainMenu();
-    // show an error message if needed
-    if (!doc) {
-        SystemAlert("Can't open document");
-        return -1;
-    }
+  // show an error message if needed
+  if (!doc) {
+    SystemAlert("Can't open document");
+    return -1;
+  }
 	return 0;
 }
 
 /*-v2------------------------------------------------------------------------*/
 int AddCurrentDocToProject()
 {
-    if (!dtkProject)
-        return -1;
-    // which document are we talking about?
-    Dtk_Document *doc = GetCurrentDocument();
-    if (!doc)
-        return -1;
-    // if it is already in the project, don't bother
-    if (doc->project())
-        return 0;
-    // save the project to disk first, possibly renaming it
-    doc->setList(dtkProject->documentList());
-    int ret = doc->save();
-    doc->setList(0L);
-    if (ret!=0)
-        return -1;
-    // remove from globals and reattach to the project
-    dtkGlobalDocuments->remove(doc);
-    dtkProject->documentList()->append(doc);
-    doc->setList(dtkProject->documentList());
-    // if this is a layout and there is no main layout yet, use this one
-    if (doc->isLayout() && !dtkProject->documentList()->getMain()) {
-        dtkProject->documentList()->setMain(doc);
-    }
-    // update the menus
+  if (!dtkProject)
+    return -1;
+  // which document are we talking about?
+  Dtk_Document *doc = GetCurrentDocument();
+  if (!doc)
+    return -1;
+  // if it is already in the project, don't bother
+  if (doc->project())
+    return 0;
+  // save the project to disk first, possibly renaming it
+  doc->setList(dtkProject->documentList());
+  int ret = doc->save();
+  doc->setList(0L);
+  if (ret!=0)
+    return -1;
+  // remove from globals and reattach to the project
+  dtkGlobalDocuments->remove(doc);
+  dtkProject->documentList()->add(doc);
+  doc->setList(dtkProject->documentList());
+  // if this is a layout and there is no main layout yet, use this one
+  if (doc->isLayout() && !dtkProject->documentList()->getMain()) {
+    dtkProject->documentList()->setMain(doc);
+  }
+  // update the menus
 	UpdateMainMenu();
 	return 0;
 }
@@ -396,45 +401,45 @@ int AddCurrentDocToProject()
 /*-v2------------------------------------------------------------------------*/
 int	RemoveFileFromProject(Dtk_Document *doc)
 {
-    // use the current document if there is none specified
-    if (!doc) {
-        doc = GetCurrentDocument();
-        if (!doc) 
-            return -1;
+  // use the current document if there is none specified
+  if (!doc) {
+    doc = GetCurrentDocument();
+    if (!doc) 
+      return -1;
+  }
+  // see if it is part of a project
+  if (!doc->project())
+    return -1;
+  // if the document is dirty, we must ask the user before deleting
+  if (doc->isDirty()) {
+    int v = fl_choice(
+                      "Save changes to document %s?", 
+                      "Abort", "Yes", "No", doc->name());
+    switch (v) {
+      case 0: // abort
+        return -2; 
+      case 1: // yes
+        doc->save(); break; 
+      case 2:  // no
+        break;
     }
-    // see if it is part of a project
-    if (!doc->project())
-        return -1;
-    // if the document is dirty, we must ask the user before deleting
-    if (doc->isDirty()) {
-        int v = fl_choice(
-            "Save changes to document %s?", 
-            "Abort", "Yes", "No", doc->name());
-        switch (v) {
-        case 0: // abort
-            return -2; 
-        case 1: // yes
-            doc->save(); break; 
-        case 2:  // no
-            break;
-        }
-    }
-    // Now we can delete the document. It will unhook itself from lists and the GUI
-    delete doc;
-    return 0;
+  }
+  // Now we can delete the document. It will unhook itself from lists and the GUI
+  delete doc;
+  return 0;
 }
 
 
 /*-v2------------------------------------------------------------------------*/
 int SaveProject()
 {
-    if (!dtkProject)
-        return -1;
-    // save it
+  if (!dtkProject)
+    return -1;
+  // save it
 	int ret = dtkProject->save();
-    if (ret!=0)
-        SystemAlert("Unable to save project file!");
-    // keep the menus cool
+  if (ret!=0)
+    SystemAlert("Unable to save project file!");
+  // keep the menus cool
 	UpdateMainMenu();
 	return ret;
 }
@@ -443,18 +448,25 @@ int SaveProject()
 /*-v2------------------------------------------------------------------------*/
 int SaveProjectAs()
 {
-    if (!dtkProject)
-        return -1;
-    // get the filename form the user
+  if (!dtkProject)
+    return -1;
+  // get the filename form the user
+  char buf[2048];
 	const char *filename = fl_file_chooser("Save Toolkit Project", "*.ntk", 0L);
 	if (!filename) 
 		return -2;
-    // save it
+  const char *ext = fl_filename_ext(filename);
+  if (ext==0L || *ext==0) {
+    strcpy(buf, filename);
+    fl_filename_setext(buf, 2047, ".ntk");
+    filename = buf;
+  }
+  // save it
 	dtkProject->setFilename(filename);
 	int ret = dtkProject->save();
-    if (ret!=0)
-        SystemAlert("Unable to save project file!");
-    // keep the menus cool
+  if (ret!=0)
+    SystemAlert("Unable to save project file!");
+  // keep the menus cool
 	UpdateMainMenu();
 	return ret;
 }
@@ -463,8 +475,8 @@ int SaveProjectAs()
 /*-v2------------------------------------------------------------------------*/
 int BuildPackage()
 {
-    if (!dtkProject)
-        return -1;
+  if (!dtkProject)
+    return -1;
 	int err = dtkProject->buildPackage();
 	if (!err) {
 		err = dtkProject->savePackage();
@@ -480,14 +492,14 @@ int DownloadPackage()
 	assert(dtkProject);
 	InspectorPrintf("Sending package %s\n", dtkProject->getPackageName());
 	int ret = InspectorSendPackage(
-			dtkProject->getPackageName(),
-			dtkProjSettings->app->symbol->get());
+                                 dtkProject->getPackageName(),
+                                 dtkProjSettings->app->symbol->get());
 	UpdateMainMenu();
 	if (ret==-1) {
  		InspectorPrintf("Failed: %s\n", Flmm_Message::system_message());
 	} else {
  		InspectorPrintf("Done.\n");
-   	}
+  }
 	return ret;
 }
 
@@ -496,17 +508,17 @@ int DownloadPackage()
 int ExportPackageToText()
 {
 	assert(dtkProject);
-    Dtk_Script_Writer sw(dtkProject);
-    int ret = sw.open("testing_script_writer.txt");
-    if (ret) {
-        SystemAlert("Can't open file.");
-        return ret;
-    }
-    ret = dtkProject->write(sw);
-    if (ret) {
-        SystemAlert("Can't write to file.");
-        return ret;
-    }
+  Dtk_Script_Writer sw(dtkProject);
+  int ret = sw.open("testing_script_writer.txt");
+  if (ret) {
+    SystemAlert("Can't open file.");
+    return ret;
+  }
+  ret = dtkProject->write(sw);
+  if (ret) {
+    SystemAlert("Can't write to file.");
+    return ret;
+  }
 	return 0;
 }
 
@@ -524,12 +536,12 @@ int InspectorSendScript(const char *script)
 	newtRefVar nsof = NsMakeNSOF(0, obj, NewtMakeInt30(2));  
 	// FIXME test for error
 	//NewtPrintObject(stdout, nsof);
-
+  
 	// if it is a binary, send it to the inspector
 	if (NewtRefIsBinary(nsof)) {
 		uint32_t size = NewtBinaryLength(nsof);
 		uint8_t *data = NewtRefToBinary(nsof);
-
+    
 		wInspectorSerial->send_data_block((unsigned char*)"newt", 4);
 		wInspectorSerial->send_data_block((unsigned char*)"ntp ", 4);
 		wInspectorSerial->send_data_block((unsigned char*)"lscb", 4);
@@ -537,7 +549,7 @@ int InspectorSendScript(const char *script)
 		wInspectorSerial->send_data_block(b1, 4);
 		wInspectorSerial->send_data_block((unsigned char*)data, size);
 	}
-
+  
 	return 0;
 }
 
@@ -563,7 +575,7 @@ int InspectorSendPackage(const char *filename, const char *symbol)
 		const char *s = symbol;
 		char *d = sName;
 		while (*s) { *d++ = 0; *d++ = *s++; }
-
+    
 		// send "Delete Package"
 		wInspectorSerial->send_data_block((unsigned char*)"newt", 4);
 		wInspectorSerial->send_data_block((unsigned char*)"ntp ", 4);
@@ -571,14 +583,14 @@ int InspectorSendPackage(const char *filename, const char *symbol)
 		uint32_t len = htonl(sLen);
 		wInspectorSerial->send_data_block((unsigned char*)(&len), 4);
 		wInspectorSerial->send_data_block((unsigned char*)sName, sLen);
-
+    
 		Sleep(1000); // 1 sec.
 	}
-
+  
 	// read the package itself from disk
 	uint8_t *buffer;
 	FILE *f = fopen(filename, "rb");
-        if (!f) {
+  if (!f) {
 		InspectorPrintf("Can't open package %s\n", filename);
  	}
 	fseek(f, 0, SEEK_END);
@@ -587,7 +599,7 @@ int InspectorSendPackage(const char *filename, const char *symbol)
 	buffer = (uint8_t*)malloc(nn);
 	fread(buffer, 1, nn, f);
 	fclose(f);
-
+  
 	// send the package
 	wInspectorSerial->send_data_block((unsigned char*)"newt", 4);
 	wInspectorSerial->send_data_block((unsigned char*)"ntp ", 4);
@@ -596,9 +608,9 @@ int InspectorSendPackage(const char *filename, const char *symbol)
 	wInspectorSerial->send_data_block((unsigned char*)(&len), 4);
 	Sleep(1000);
 	wInspectorSerial->send_data_block((unsigned char*)buffer, nn);
-
+  
 	free(buffer);
-
+  
 	return 0;
 }
 
@@ -680,37 +692,37 @@ void EditPreferences()
  */
 void UpdateMainMenu()
 {
-    // bits in the mask have the following meanings:
-    //	bit 0: a project is loaded
-    //	bit 1: a document is active for editing
-    //	bit 2: the active document is part of the project
-    //  bit 3: Inspector is connected to a Newton device
-    //  bit 4: a layout is active for editing
-    //  bit 5: the current layout has a visible layout view
-    //  bit 6: a template is active for editing
-    //  bit 7: a slot is active for editing
+  // bits in the mask have the following meanings:
+  //	bit 0: a project is loaded
+  //	bit 1: a document is active for editing
+  //	bit 2: the active document is part of the project
+  //  bit 3: Inspector is connected to a Newton device
+  //  bit 4: a layout is active for editing
+  //  bit 5: the current layout has a visible layout view
+  //  bit 6: a template is active for editing
+  //  bit 7: a slot is active for editing
 	unsigned int mask = 0;
 	if (dtkProject)
 		mask |= 1;
-    Dtk_Document *doc = GetCurrentDocument();
-    if (doc) {
+  Dtk_Document *doc = GetCurrentDocument();
+  if (doc) {
 		mask |= 2;
-        if (doc->project()) {
+    if (doc->project()) {
 			mask |= 4;
-        }
-        if (doc->isLayout()) {
-            mask |= 16;
-            Dtk_Layout *layout = (Dtk_Layout*)doc;
-            if (layout->editViewShown())
-                mask |= 32;
-            if (GetCurrentTemplate()) {
-                mask |= 64;
-                if (GetCurrentSlot()) {
-                    mask |= 128;
-                }
-            }
-        }
     }
+    if (doc->isLayout()) {
+      mask |= 16;
+      Dtk_Layout *layout = (Dtk_Layout*)doc;
+      if (layout->editViewShown())
+        mask |= 32;
+      if (GetCurrentTemplate()) {
+        mask |= 64;
+        if (GetCurrentSlot()) {
+          mask |= 128;
+        }
+      }
+    }
+  }
 	if (wInspectorSerial->is_open()) {
 		mask |= 8;
 	}
@@ -891,7 +903,7 @@ void InspectorSnapshotUpdate(newtRef snapshot)
 	if (NewtRefIsFrame(snapshot)) {
 		newtRef data = NewtGetFrameSlot(snapshot, NewtFindSlotIndex(snapshot, NSSYM(data)));
 		if (NewtRefIsFrame(data)) {
-
+      
       // get the dimensions and data
       newtRef nRowbytes = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(rowbytes)));
       newtRef nTop      = NewtGetFrameSlot(data, NewtFindSlotIndex(data, NSSYM(top)));
@@ -907,7 +919,7 @@ void InspectorSnapshotUpdate(newtRef snapshot)
       int right    = NewtRefToInteger(nRight);
       int depth    = NewtRefToInteger(nDepth);
       unsigned char *theBits = (unsigned char*)NewtRefToData(nTheBits);
-
+      
       if (depth!=4) {
         printf("Unsupported pixel depth of %d bits\n", depth);
         return;
@@ -966,73 +978,73 @@ void DebugDumpRsrc() {
 
 void DebugDumpBuffer(uint8_t *src, int n)
 {
-        int i, j;
-        for (i=0; i<n; i+=16) {
-                char buf[78];
-                memset(buf, 32, 78); buf[76] = ' '; buf[77] = 0;
-                sprintf(buf, "%08x", i); buf[8] = ' ';
-                for (j=i; (j<i+16) && (j<n); j++) {
-                        uint8_t c = src[j];
-                        sprintf(buf+10+3*(j-i), "%02x", c); buf[12+3*(j-i)] = ' ';
-                        if (isprint(c))
-                                buf[59+j-i] = c;
-                        else
-                                buf[59+j-i] = '.';
-                }
-                puts(buf);
-        }
+  int i, j;
+  for (i=0; i<n; i+=16) {
+    char buf[78];
+    memset(buf, 32, 78); buf[76] = ' '; buf[77] = 0;
+    sprintf(buf, "%08x", i); buf[8] = ' ';
+    for (j=i; (j<i+16) && (j<n); j++) {
+      uint8_t c = src[j];
+      sprintf(buf+10+3*(j-i), "%02x", c); buf[12+3*(j-i)] = ' ';
+      if (isprint(c))
+        buf[59+j-i] = c;
+      else
+        buf[59+j-i] = '.';
+    }
+    puts(buf);
+  }
 }
 
 /*---------------------------------------------------------------------------*/
 Dtk_Document *GetCurrentDocument()
 {
-    Fldtk_Editor *ed = (Fldtk_Editor*)dtkDocumentTabs->value();
-    if (!ed) 
-        return 0L;
-    return ed->document();
+  Fldtk_Editor *ed = (Fldtk_Editor*)dtkDocumentTabs->value();
+  if (!ed) 
+    return 0L;
+  return ed->document();
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Layout *GetCurrentLayout()
 {
-    Dtk_Document *doc = GetCurrentDocument();
-    if (doc && doc->isLayout())
-        return (Dtk_Layout*)doc;
-    return 0L;
+  Dtk_Document *doc = GetCurrentDocument();
+  if (doc && doc->isLayout())
+    return (Dtk_Layout*)doc;
+  return 0L;
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Template *GetCurrentTemplate()
 {
-    Dtk_Layout *lyt = GetCurrentLayout();
-    if (!lyt)
-        return 0L;
-    Fl_Hold_Browser *te = lyt->templateBrowser();
-    int ix = te->value();
-    if (!ix) 
-        return 0L;
-    Dtk_Template *tmpl = (Dtk_Template*)te->data(ix);
-    return tmpl;
+  Dtk_Layout *lyt = GetCurrentLayout();
+  if (!lyt)
+    return 0L;
+  Fl_Hold_Browser *te = lyt->templateBrowser();
+  int ix = te->value();
+  if (!ix) 
+    return 0L;
+  Dtk_Template *tmpl = (Dtk_Template*)te->data(ix);
+  return tmpl;
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Slot *GetCurrentSlot()
 {
-    Dtk_Layout *lyt = GetCurrentLayout();
-    if (!lyt)
-        return 0L;
-    Fl_Hold_Browser *se = lyt->slotBrowser();
-    int ix = se->value();
-    if (!ix) 
-        return 0L;
-    Dtk_Slot *slot = (Dtk_Slot*)se->data(ix);
-    return slot;
+  Dtk_Layout *lyt = GetCurrentLayout();
+  if (!lyt)
+    return 0L;
+  Fl_Hold_Browser *se = lyt->slotBrowser();
+  int ix = se->value();
+  if (!ix) 
+    return 0L;
+  Dtk_Slot *slot = (Dtk_Slot*)se->data(ix);
+  return slot;
 }
 
-    
+
 /*---------------------------------------------------------------------------*/
 void DeleteSlot(Dtk_Slot *slot) 
 {
@@ -1069,83 +1081,83 @@ void DeleteTemplate(Dtk_Template *tmpl)
 /*---------------------------------------------------------------------------*/
 int OpenLayoutView(Dtk_Layout *lyt)
 {
-    if (!lyt) {
-        lyt = GetCurrentLayout();
-        if (!lyt)
-            return -1;
-    }
-    lyt->editView();
-    return 0;
+  if (!lyt) {
+    lyt = GetCurrentLayout();
+    if (!lyt)
+      return -1;
+  }
+  lyt->editView();
+  return 0;
 }
 
 /*---------------------------------------------------------------------------*/
 int SetMainLayout(Dtk_Document *doc)
 {
-    if (!doc) {
-        doc = GetCurrentDocument();
-        if (!doc) 
-            return -1;
-    }
-    if (!doc->project())
-        return -2;
-    doc->setMain();
-    return 0;
+  if (!doc) {
+    doc = GetCurrentDocument();
+    if (!doc) 
+      return -1;
+  }
+  if (!doc->project())
+    return -2;
+  doc->setMain();
+  return 0;
 }
 
 /*---------------------------------------------------------------------------*/
 void SetModeEditTemplate()
 {
-    Fldtk_Layout_View::mode(0);
-    UpdateMainMenu();
+  Fldtk_Layout_View::mode(0);
+  UpdateMainMenu();
 }
 
 /*---------------------------------------------------------------------------*/
 void SetModeAddTemplate()
 {
-    Fldtk_Layout_View::mode(1);
-    UpdateMainMenu();
+  Fldtk_Layout_View::mode(1);
+  UpdateMainMenu();
 }
 
 /*---------------------------------------------------------------------------*/
 int ShowTemplateInfo(Dtk_Template *tmpl)
 {
-    if (!tmpl) {
-        tmpl = GetCurrentTemplate();
-        if (!tmpl)
-            return -1;
-    }
-    const char *name = fl_input("Template name:", tmpl->getName());
-    if (!name)
-        return -2;
-    tmpl->setName(name);
-    return 0;
+  if (!tmpl) {
+    tmpl = GetCurrentTemplate();
+    if (!tmpl)
+      return -1;
+  }
+  const char *name = fl_input("Template name:", tmpl->getName());
+  if (!name)
+    return -2;
+  tmpl->setName(name);
+  return 0;
 }
 
 /*---------------------------------------------------------------------------*/
 int RenameSlot(Dtk_Slot *slot)
 {
-    if (!slot) {
-        slot = GetCurrentSlot();
-        if (!slot)
-            return -1;
-    }
-    const char *name = fl_input("Slot name:", slot->key());
-    if (!name)
-        return -2;
-    slot->setKey(name);
-    return 0;
+  if (!slot) {
+    slot = GetCurrentSlot();
+    if (!slot)
+      return -1;
+  }
+  const char *name = fl_input("Slot name:", slot->key());
+  if (!name)
+    return -2;
+  slot->setKey(name);
+  return 0;
 }
 
 /*---------------------------------------------------------------------------*/
 void InspectorPrintf(const char *msg, ...)
 {
-    char buffer[1024];
-    va_list args;
-    va_start(args, msg);
-    vsprintf(buffer, msg, args);
-    va_end(args);
-    wConsole->insert(buffer);
-    wConsole->show_insert_position();
+  char buffer[1024];
+  va_list args;
+  va_start(args, msg);
+  vsprintf(buffer, msg, args);
+  va_end(args);
+  wConsole->insert(buffer);
+  wConsole->show_insert_position();
 }
 
 

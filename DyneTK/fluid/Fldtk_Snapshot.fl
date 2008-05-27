@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -32,7 +32,7 @@ decl {\#include "fltk/Flmp_Image.H"} {public
 decl {\#include <FL/Fl_RGB_Image.H>} {public
 } 
 
-decl {\#include <FL/Fl_File_Chooser.H>} {selected public
+decl {\#include <FL/Fl_File_Chooser.H>} {public
 } 
 
 Function {show_snapshot_window()} {open return_type void
@@ -55,8 +55,15 @@ if (!img)
   
 const char *filename = fl_file_chooser("Save As JPEG", "*.jpg", 0);
 if (filename) {
+  char buf[2048];
+  const char *ext = fl_filename_ext(filename);
+  if (ext==0L || *ext==0) {
+    strcpy(buf, filename);
+    fl_filename_setext(buf, 2047, ".jpg");
+    filename = buf;
+  }
   img->save_jpeg(filename, 90);
-}}
+}} selected
         xywh {230 510 110 25} labelsize 12
       }
     }

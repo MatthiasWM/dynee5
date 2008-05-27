@@ -9,12 +9,9 @@
 /* Begin PBXBuildFile section */
 		8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */; };
 		8D0C4E920486CD37000505A6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
-		C93244C80DE9F780008AA454 /* Dtk_Document_List_UI.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C93244C60DE9F780008AA454 /* Dtk_Document_List_UI.cxx */; };
-		C93245230DEA032F008AA454 /* Dtk_Document_UI.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C93245210DEA032F008AA454 /* Dtk_Document_UI.cxx */; };
 		C98949720DE9D58B0026565F /* toolbox_002.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = C98949690DE9D48F0026565F /* toolbox_002.icns */; };
 		C989497D0DE9E4CA0026565F /* Dtk_Layout.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C98949790DE9E4CA0026565F /* Dtk_Layout.cxx */; };
 		C989497E0DE9E4CA0026565F /* Dtk_Script.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C989497B0DE9E4CA0026565F /* Dtk_Script.cxx */; };
-		C98949850DE9E6230026565F /* Dtk_Project_UI.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C98949830DE9E6230026565F /* Dtk_Project_UI.cxx */; };
 		C9FB9BF80DE352BE00026BB1 /* sandbox.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B540DE352BD00026BB1 /* sandbox.cxx */; };
 		C9FB9BF90DE352BE00026BB1 /* Dtk_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B560DE352BD00026BB1 /* Dtk_Document.cxx */; };
 		C9FB9BFB0DE352BE00026BB1 /* Dtk_Document_List.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B590DE352BE00026BB1 /* Dtk_Document_List.cxx */; };
@@ -104,17 +101,11 @@
 		4A9504CAFFE6A41611CA0CBA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D0C4E970486CD37000505A6 /* DyneTK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DyneTK.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C93244C60DE9F780008AA454 /* Dtk_Document_List_UI.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dtk_Document_List_UI.cxx; path = ../ui/Dtk_Document_List_UI.cxx; sourceTree = SOURCE_ROOT; };
-		C93244C70DE9F780008AA454 /* Dtk_Document_List_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dtk_Document_List_UI.h; path = ../ui/Dtk_Document_List_UI.h; sourceTree = SOURCE_ROOT; };
-		C93245210DEA032F008AA454 /* Dtk_Document_UI.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dtk_Document_UI.cxx; path = ../ui/Dtk_Document_UI.cxx; sourceTree = SOURCE_ROOT; };
-		C93245220DEA032F008AA454 /* Dtk_Document_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dtk_Document_UI.h; path = ../ui/Dtk_Document_UI.h; sourceTree = SOURCE_ROOT; };
 		C98949690DE9D48F0026565F /* toolbox_002.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = toolbox_002.icns; sourceTree = SOURCE_ROOT; };
 		C98949790DE9E4CA0026565F /* Dtk_Layout.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Layout.cxx; sourceTree = "<group>"; };
 		C989497A0DE9E4CA0026565F /* Dtk_Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Layout.h; sourceTree = "<group>"; };
 		C989497B0DE9E4CA0026565F /* Dtk_Script.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Script.cxx; sourceTree = "<group>"; };
 		C989497C0DE9E4CA0026565F /* Dtk_Script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Script.h; sourceTree = "<group>"; };
-		C98949830DE9E6230026565F /* Dtk_Project_UI.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Dtk_Project_UI.cxx; path = ../ui/Dtk_Project_UI.cxx; sourceTree = SOURCE_ROOT; };
-		C98949840DE9E6230026565F /* Dtk_Project_UI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dtk_Project_UI.h; path = ../ui/Dtk_Project_UI.h; sourceTree = SOURCE_ROOT; };
 		C9FB9B540DE352BD00026BB1 /* sandbox.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sandbox.cxx; path = ../sandbox.cxx; sourceTree = SOURCE_ROOT; };
 		C9FB9B560DE352BD00026BB1 /* Dtk_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Document.cxx; sourceTree = "<group>"; };
 		C9FB9B570DE352BD00026BB1 /* Dtk_Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Document.h; sourceTree = "<group>"; };
@@ -269,7 +260,6 @@
 				C9FBA0430DE3753800026BB1 /* Newton21.ptf */,
 				C9FBA0440DE3753800026BB1 /* Newton21.txt */,
 				C9FB9B550DE352BD00026BB1 /* dtk */,
-				C989497F0DE9E4D70026565F /* ui */,
 				C9FB9B860DE352BE00026BB1 /* fluid */,
 				C9FB9B9C0DE352BE00026BB1 /* flnt */,
 				C9FB9BA30DE352BE00026BB1 /* fltk */,
@@ -296,19 +286,6 @@
 				4A9504C8FFE6A3BC11CA0CBA /* ApplicationServices.framework */,
 			);
 			name = "External Frameworks and Libraries";
-			sourceTree = "<group>";
-		};
-		C989497F0DE9E4D70026565F /* ui */ = {
-			isa = PBXGroup;
-			children = (
-				C93245210DEA032F008AA454 /* Dtk_Document_UI.cxx */,
-				C93245220DEA032F008AA454 /* Dtk_Document_UI.h */,
-				C93244C60DE9F780008AA454 /* Dtk_Document_List_UI.cxx */,
-				C93244C70DE9F780008AA454 /* Dtk_Document_List_UI.h */,
-				C98949830DE9E6230026565F /* Dtk_Project_UI.cxx */,
-				C98949840DE9E6230026565F /* Dtk_Project_UI.h */,
-			);
-			name = ui;
 			sourceTree = "<group>";
 		};
 		C9FB9B550DE352BD00026BB1 /* dtk */ = {
@@ -564,9 +541,6 @@
 				C9FB9C630DE352BE00026BB1 /* Flmp_Image.cxx in Sources */,
 				C989497D0DE9E4CA0026565F /* Dtk_Layout.cxx in Sources */,
 				C989497E0DE9E4CA0026565F /* Dtk_Script.cxx in Sources */,
-				C98949850DE9E6230026565F /* Dtk_Project_UI.cxx in Sources */,
-				C93244C80DE9F780008AA454 /* Dtk_Document_List_UI.cxx in Sources */,
-				C93245230DEA032F008AA454 /* Dtk_Document_UI.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

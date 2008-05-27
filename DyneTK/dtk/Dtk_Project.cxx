@@ -33,14 +33,12 @@
 #include "dtk/Dtk_Script_Writer.h"
 #include "dtk/Dtk_Document_List.h"
 
-#include "ui/Dtk_Project_UI.h"
-
-#include "fluid/Fldtk_Proj_Settings.h"
 #include "fluid/main_ui.h"
 #include "main.h"
 
 #include <FL/filename.h>
 #include "fltk/Flmm_Message.h"
+#include "fluid/Fldtk_Proj_Settings.h"
 
 #include <assert.h>
 #include <stdlib.h>
@@ -71,11 +69,12 @@ Dtk_Project::Dtk_Project()
   pathname_(0L),
   package_(kNewtRefNIL),
   documentList_(0L),
-  ui(0L)
+  wMainWindow(dtkMain),
+  wBrowserTabs(dtkBrowserTabs)
 {
   documentList_ = new Dtk_Document_List(this);
-  if (ui)
-    documentList_->createUI();
+  wMainWindow->label("DyneTK: - unnamed -");
+  wBrowserTabs->activate();
 }
 
 
@@ -96,17 +95,8 @@ Dtk_Project::~Dtk_Project()
 		free(packagename_);
 	if (startdir_)
 		free(startdir_);
-  
-  if (ui) ui->projectRemoved();
-}
-
-
-/*---------------------------------------------------------------------------*/
-void Dtk_Project::createUI() 
-{
-  ui = new Dtk_Project_UI(this);
-  if (documentList_)
-    documentList_->createUI();
+  wMainWindow->label("DyneTK");
+  wBrowserTabs->deactivate();  
 }
 
 
@@ -142,7 +132,13 @@ void Dtk_Project::setFilename(const char *filename)
       if (*s=='/') *s='\\';
     }
 	}
-  if (ui) ui->projectRenamed();
+  if (name_ && *name_) {
+    char buf[1024];
+    sprintf(buf, "DyneTK: %s", name_);
+    wMainWindow->copy_label(buf);
+  } else {
+    wMainWindow->label("DyneTK: - unnamed -");
+  }
 }
 
 
@@ -1174,6 +1170,17 @@ int Dtk_Project::savePackage()
  streamFile_filename	A reference to the contents of a processed stream 
  file named filename
  */
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Project::close()
+{
+}
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Project::isDirty()
+{
+  return 0;
+}
 
 /*---------------------------------------------------------------------------*/
 /**
