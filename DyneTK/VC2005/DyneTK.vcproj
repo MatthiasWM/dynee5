@@ -50,14 +50,14 @@
 				Optimization="0"
 				AdditionalIncludeDirectories=".,..,..\..\..\Newt0\src\newt_core\incs,..\..\..\Newt0\src\newt_core\incs\VC6"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;VC_EXTRA_LEAN;WIN32_EXTRA_LEAN"
-				MinimalRebuild="true"
+				MinimalRebuild="false"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=".\DyneTK_Debug/DyneTK.pch"
 				AssemblerListingLocation=".\DyneTK_Debug/"
 				ObjectFile=".\DyneTK_Debug/"
 				ProgramDataBaseFileName=".\DyneTK_Debug/"
 				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -80,7 +80,7 @@
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\DyneTK_Debug/DyneTKd.pdb"
-				SubSystem="2"
+				SubSystem="1"
 			/>
 			<Tool
 				Name="VCALinkTool"

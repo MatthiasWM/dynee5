@@ -1013,12 +1013,33 @@ int Dtk_Project::buildPackage()
   fclose(f);
   // compile and run ir
   newtErr	err;
+  int prevDumpPC = NEWT_DUMPBC; NEWT_DUMPBC = 0;
+  //NEWT_DEBUG = 0;
+  //NEWT_TRACE = 1;
   theForm = NVMInterpretStr(script, &err);
+  NEWT_DUMPBC = prevDumpPC;
   // release the memory taken by the script
   free(script);
   // very simple error code output
 	if (theForm==kNewtRefUnbind) {
 		InspectorPrintf("**** ERROR while compiling or interpreting\n");
+    newtRef a = NVMSelf();
+    NewtPrintObject(stdout, a);
+    a = NVMCurrentFunction();
+    NewtPrintObject(stdout, a);
+    a = NVMCurrentException();
+    NewtPrintObject(stdout, a);
+/*
+newtRef		NVMSelf(void);
+newtRef		NVMCurrentFunction(void);
+newtRef		NVMCurrentImplementor(void);
+bool		NVMHasVar(newtRefArg name);
+void		NVMThrowData(newtRefArg name, newtRefArg data);
+void		NVMThrow(newtRefArg name, newtRefArg data);
+void		NVMRethrow(void);
+newtRef		NVMCurrentException(void);
+void		NVMClearException(void);
+*/
     if (err)
       InspectorPrintf("**** %s: %s\n", newt_error_class(err), newt_error(err));
     else 
@@ -1027,7 +1048,7 @@ int Dtk_Project::buildPackage()
 	} else {
 	}
   
-	NewtPrintObject(stdout, theForm);
+	//NewtPrintObject(stdout, theForm);
   
 	theForm = kNewtRefUnbind;
 	theForm = NcGetGlobalVar(NSSYM(theForm));
@@ -1047,8 +1068,8 @@ int Dtk_Project::buildPackage()
 		NcRemoveSlot(theBase, slot);
 	}
   
-	NewtPrintObject(stdout, theForm);
-	NewtPrintObject(stdout, theBase);
+	//NewtPrintObject(stdout, theForm);
+	//NewtPrintObject(stdout, theBase);
   
 	// create the package
 	newtRefVar iconBoundsA[] = {
@@ -1102,9 +1123,9 @@ int Dtk_Project::buildPackage()
   
 	newtRef rcvr = kNewtRefNIL;
   
-	NewtPrintObject(stdout, package);
+	//NewtPrintObject(stdout, package);
 	package_ = NsMakePkg(rcvr, package);
-	NewtPrintObject(stdout, package_);
+	//NewtPrintObject(stdout, package_);
   
   if (NewtRefIsBinary(package_)) {
     InspectorPrintf("Package build successfuly (%dkBytes)\n", NewtBinaryLength(package_)/1024+1);
@@ -1207,7 +1228,7 @@ int Dtk_Project::write(Dtk_Script_Writer &sw)
 # endif
   sw.put(buf);
   
-  // dtkPlatform->writeConstants(sw); // FIXME: how do we get to remeber the constants?
+  dtkPlatform->writeConstants(sw);
   
   int i, n = documentList_->size();
   for (i=0; i<n; ++i) {

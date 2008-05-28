@@ -75,15 +75,27 @@ Dtk_Platform        * dtkPlatform;
 
 
 /*---------------------------------------------------------------------------*/
+extern nps_env_t nps_env;
 /**
  * Output message from the compiler.
  * \todo	Move this where it belongs and be a bit more verbose.
  */
 extern "C" void yyerror(char * s)
 {
-	wConsole->insert(" // Error: ");
-	wConsole->insert(s);
-	wConsole->insert("\n");
+  /*
+  bool err = 1;
+	if (s[0]=='W' && s[1]==':')
+    err = 0; // it is only a warning
+
+  if (err)
+    nps_env.numerrs++;
+  else
+    nps_env.numwarns++;
+  */
+	if (nps_env.fname != NULL)
+		InspectorPrintf("\"%s\" ", nps_env.fname);
+  InspectorPrintf("line %d: %s:\n%s\n", nps_env.lineno, s, nps_env.linebuf);
+  InspectorPrintf("%*s\n", nps_env.tokenpos - nps_env.yyleng + 1, "^");
 }
 
 
@@ -117,7 +129,7 @@ newtRef nsMakeBinaryFromHex(newtRefArg rcvr, newtRefArg nHexStr, newtRefArg nSym
       else v = v*16 + (c-'0');
       *dst++ = v;
     }
-    newtRef ret = NewtMakeBinary(nSym, data, size, false);
+    newtRef ret = NewtMakeBinary(nSym, data, size, true); // true means: copy the array over!
     free(data);
     return ret;
   } else {
