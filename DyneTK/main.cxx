@@ -29,6 +29,7 @@
 #include <FL/Fl_Tooltip.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_XPM_Image.H>
+#include <FL/filename.h>
 
 #include "fltk/Flio_Serial_Port.h"
 
@@ -248,6 +249,24 @@ int main(int argc, char **argv) {
 	return 0;
 }
 
+char *dtkReleaseNotes =
+  "<html><head>DyneTK Release Notes</head><body>\n"
+  "<h2>DyneTK Release Notes</h2>\n"
+  "<h3>DyneTK 1.7.1</h3>\n"
+  "<ul>"
+  "<li>added compile-time function <tt>MakeBinaryFromHex</tt></li>\n"
+  "<li>added application icon</li>\n"
+  "<li>added function to delete templates</li>\n"
+  "<li>added function to delete slots</li>\n"
+  "<li>added automatic file extension</li>\n"
+  "<li>fixed Previous Project menu</li>\n"
+  "<li>fixed syntax highlighting of complex symbols</li>\n"
+  "</ul>"
+  "<h3>DyneTK 1.7.0</h3>\n"
+  "<ul>"
+  "<li>initial public release</li>\n"
+  "</ul>"
+  "</body></html>";
 
 // TODOs
 // Download Pkg is active even if no project is loaded:

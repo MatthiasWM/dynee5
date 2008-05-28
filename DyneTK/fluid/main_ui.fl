@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0108 
 use_FL_COMMAND 
 header_name {.h} 
 code_name {.cxx}
@@ -45,6 +45,12 @@ decl {\#include <FL/fl_ask.h>} {public
 } 
 
 decl {\#include "main.h"} {public
+} 
+
+decl {\#include <FL/Fl_Help_Dialog.H>} {public
+} 
+
+decl {Fl_Help_Dialog *wReleaseNotes;} {public
 } 
 
 widget_class Fldtk_Main_Window {
@@ -249,7 +255,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mProject {
-      label Project selected
+      label Project
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem mProjectNew {
@@ -490,7 +496,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mHelp {
-      label Help
+      label Help open
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -503,7 +509,16 @@ widget_class Fldtk_Main_Window {
       }
       MenuItem {} {
         label {Using Help}
-        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate divider
+        xywh {5 5 100 20} labelsize 12 labelcolor 176 deactivate
+      }
+      MenuItem mReleaseNotes {
+        label {Release Notes}
+        callback {if (!wReleaseNotes) {
+  wReleaseNotes = new Fl_Help_Dialog();
+  wReleaseNotes->value(dtkReleaseNotes);
+}
+wReleaseNotes->show();} selected
+        xywh {15 15 100 20} labelsize 12 divider
       }
       MenuItem mHelpAbout {
         label {About Dyne Toolkit...}

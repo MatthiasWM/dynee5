@@ -33,6 +33,8 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+
 
 /*----------------------------------------------------------------------------*/
 Fldtk_Document_Browser::Fldtk_Document_Browser(int X, int Y, int W, int H, const char *L)

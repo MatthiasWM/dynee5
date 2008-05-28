@@ -52,6 +52,7 @@ extern class Dtk_Document_List  * dtkGlobalDocuments;
 extern class Dtk_Project        * dtkProject;
 extern class Dtk_Platform       * dtkPlatform;
 
+extern char *dtkReleaseNotes;
 
 #endif
 

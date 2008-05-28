@@ -72,7 +72,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="newtd.lib fltk.lib fltkimages.lib fltkjpeg.lib wsock32.lib comctl32.lib"
+				AdditionalDependencies="newtd.lib fltk.lib fltkimages.lib fltkjpeg.lib  fltkpng.lib fltkz.lib wsock32.lib comctl32.lib"
 				OutputFile="../test/DyneTKd.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
@@ -166,7 +166,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="newt.lib fltkimages.lib fltkjpeg.lib fltk.lib wsock32.lib comctl32.lib"
+				AdditionalDependencies="newt.lib fltkimages.lib fltkjpeg.lib fltkpng.lib fltkz.lib fltk.lib wsock32.lib comctl32.lib"
 				OutputFile="../test/DyneTK.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
@@ -927,6 +927,14 @@
 			Name="Images"
 			>
 			<File
+				RelativePath="..\test\platfrms\Newton21.ptf"
+				>
+			</File>
+			<File
+				RelativePath="..\test\platfrms\Newton21.txt"
+				>
+			</File>
+			<File
 				RelativePath=".\toolbox_002_16x16.ico"
 				>
 			</File>
@@ -1021,26 +1029,8 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\dtk\Dtk_Layout_Document.cxx"
+				RelativePath="..\dtk\Dtk_Layout.cxx"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\dtk\Dtk_Platform.cxx"
@@ -1095,26 +1085,8 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\dtk\Dtk_Script_Document.cxx"
+				RelativePath="..\dtk\Dtk_Script.cxx"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\dtk\Dtk_Script_Slot.cxx"
@@ -1268,7 +1240,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\dtk\Dtk_Layout_Document.h"
+					RelativePath="..\dtk\Dtk_Layout.h"
 					>
 				</File>
 				<File
@@ -1288,7 +1260,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\dtk\Dtk_Script_Document.h"
+					RelativePath="..\dtk\Dtk_Script.h"
 					>
 				</File>
 				<File
@@ -1384,10 +1356,6 @@
 			>
 		</File>
 		<File
-			RelativePath=".\app_icon_32x32.ico"
-			>
-		</File>
-		<File
 			RelativePath=".\DyneTK.rc"
 			>
 		</File>
@@ -1415,14 +1383,6 @@
 		</File>
 		<File
 			RelativePath="..\globals.h"
-			>
-		</File>
-		<File
-			RelativePath=".\icon3.ico"
-			>
-		</File>
-		<File
-			RelativePath=".\icon4.ico"
 			>
 		</File>
 		<File

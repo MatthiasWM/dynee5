@@ -258,7 +258,7 @@ style_parse(const char *text,
     else *style++ = current;
     col ++;
     
-    last = isalnum(*text) || *text == '_' || *text == '.';
+    last = isalnum((unsigned char)*text) || *text == '_' || *text == '.';
     
     if (*text == '\n') {
       // Reset column and possibly reset the style
