@@ -29,7 +29,10 @@
 
 #include "Dtk_Platform.h"
 #include "Dtk_Template.h"
+#include "Dtk_Script_Writer.h"
+#include "Dtk_Error.h"
 
+#include "globals.h"
 #include "allNewt.h"
 
 #include <FL/fl_ask.h>
@@ -48,27 +51,30 @@ extern  const char *platformStr4;
 /*---------------------------------------------------------------------------*/
 bool Dtk_Platform::CStringSort::operator()(const char *a, const char *b) const
 {
-    return (strcmp(a, b)>0);
+  return (strcmp(a, b)>0);
 }
 
 /*---------------------------------------------------------------------------*/
-Dtk_Platform::Dtk_Platform(const char *filename)
+Dtk_Platform::Dtk_Platform(const char *ptfFilename, const char *constFilename)
 :   platform_(kNewtRefUnbind),
-    templateChoiceMenu_(0L),
-    methodsChoiceMenu_(0L),
-    attributesChoiceMenu_(0L)
+templateChoiceMenu_(0L),
+methodsChoiceMenu_(0L),
+attributesChoiceMenu_(0L),
+ptfFilename_(strdup(ptfFilename)),
+constFilename_(strdup(constFilename))
 {
-    load(filename);
+  loadPtfFile();
+  //loadConstFile(); // do this at compile time
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Platform::~Dtk_Platform()
 {
-    delete templateChoiceMenu_; // this should also delete all allocated menu labels
-    delete methodsChoiceMenu_;
-    delete attributesChoiceMenu_;
-    // the menus in the map are not deleted
+  delete templateChoiceMenu_; // this should also delete all allocated menu labels
+  delete methodsChoiceMenu_;
+  delete attributesChoiceMenu_;
+  // the menus in the map are not deleted
 }
 
 
@@ -85,378 +91,418 @@ Dtk_Platform::~Dtk_Platform()
  * The second file, 21DEFS.TXT, conatins a list of all constants that may be used in 
  * Newton Script files. It is included into the "big script" before compilation.
  */
-int Dtk_Platform::load(const char *filename)
+int Dtk_Platform::loadPtfFile()
 {
+  const char *filename = ptfFilename_;
 #if 1
-    // try to load the platform file:
-    struct stat st;
-    if (stat(filename, &st)) {
-        fl_alert(
-            "Platform file \"%s\" not found.\n\n"
-            "This file is required to edit DyneTK projects. It must be placed in the DyneTK start directory.\n"
-            "\"%s\" is part of the MSWindow NTK and should be available on Unna:\n\n"
-            "http://www.unna.org/view.php?/apple/development/NTK/winntk/1.6b10/NTK.ZIP",
-            filename, filename);
-        return -1;
-    }
-    // load the file
-    FILE *f = fopen(filename, "rb");
+  // try to load the platform file:
+  struct stat st;
+  if (stat(filename, &st)) {
+    fl_alert(
+             "Platform file \"%s\" not found.\n\n"
+             "This file is required to edit DyneTK projects. It must be placed in the DyneTK start directory.\n"
+             "\"%s\" is part of the MSWindow NTK and should be available on Unna:\n\n"
+             "http://www.unna.org/view.php?/apple/development/NTK/winntk/1.6b10/NTK.ZIP",
+             filename, filename);
+    return -1;
+  }
+  // load the file
+  FILE *f = fopen(filename, "rb");
 	uint8_t *pf = (uint8_t*)malloc(st.st_size);
-    fread(pf, 1, st.st_size, f);
-    fclose(f);
-    // interprete the NSOF stream
-    platform_ = NewtReadNSOF(pf, st.st_size);
-
+  fread(pf, 1, st.st_size, f);
+  fclose(f);
+  // interprete the NSOF stream
+  platform_ = NewtReadNSOF(pf, st.st_size);
+  
 #else
-    // assemble a long string from a few short strings. VisualC6 can not deal with 
-    // very long stringas and ends up in a buffer overflow (it is graceful enough
-    // to give us an error description, even with a recomendation to increase heap size,
-    // which does not fix the problem though)
-    int len = strlen(platformStr1) + strlen(platformStr2) + strlen(platformStr3) + strlen(platformStr4);
-    char *platformStr = (char*)malloc(len+10);
-    strcpy(platformStr, platformStr1);
-    strcat(platformStr, platformStr2);
-    strcat(platformStr, platformStr3);
-    strcat(platformStr, platformStr4);
-
-    newtErr	err;
-    NEWT_DUMPBC = 0;
-    platform_ = NVMInterpretStr(platformStr, &err);
-/*
-	NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
-	NcSetGlobalVar(NSSYM(printDepth), NSINT(8));
-	NEWT_DUMPBC = 0;
-	NEWT_INDENT = -2;
-    FILE *ff = fopen("platform2.txt", "wb");
-    NewtPrintObject(ff, platform_);
-    fclose(ff);
-*/
-    free(platformStr);
+  // assemble a long string from a few short strings. VisualC6 can not deal with 
+  // very long stringas and ends up in a buffer overflow (it is graceful enough
+  // to give us an error description, even with a recomendation to increase heap size,
+  // which does not fix the problem though)
+  int len = strlen(platformStr1) + strlen(platformStr2) + strlen(platformStr3) + strlen(platformStr4);
+  char *platformStr = (char*)malloc(len+10);
+  strcpy(platformStr, platformStr1);
+  strcat(platformStr, platformStr2);
+  strcat(platformStr, platformStr3);
+  strcat(platformStr, platformStr4);
+  
+  newtErr	err;
+  NEWT_DUMPBC = 0;
+  platform_ = NVMInterpretStr(platformStr, &err);
+  /*
+   NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
+   NcSetGlobalVar(NSSYM(printDepth), NSINT(8));
+   NEWT_DUMPBC = 0;
+   NEWT_INDENT = -2;
+   FILE *ff = fopen("platform2.txt", "wb");
+   NewtPrintObject(ff, platform_);
+   fclose(ff);
+   */
+  free(platformStr);
 #endif
+  
+  if (platform_==kNewtRefUnbind) {
+    fl_alert("Error reading platform file.");
+    return -1;
+  } else {
+    NcSetGlobalVar(NSSYM(DyneTK_Platform), platform_);
+    return 0;
+  }
+}
 
-    if (platform_==kNewtRefUnbind) {
-        fl_alert("Error reading platform file.");
-        return -1;
-    } else {
-        NcSetGlobalVar(NSSYM(DyneTK_Platform), platform_);
-        return 0;
-    }
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Platform::loadConstFile()
+{
+  // read it back into memory
+  struct stat st;
+  stat(constFilename_, &st);
+  FILE *f = fopen(constFilename_, "rb");
+	char *script = (char*)malloc(st.st_size);
+  fread(script, 1, st.st_size, f);
+  fclose(f);
+  // compile and run ir
+  newtErr	err;
+  NVMInterpretStr(script, &err);
+  // release the memory taken by the script
+  free(script);  
+  // handle any error
+  if (err) {
+    InspectorPrintf("**** Reading Platform Constants: %s: %s\n", newt_error_class(err), newt_error(err));
+    return -1;
+  }
+  return 0;
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Platform::writeConstants(Dtk_Script_Writer &sw)
+{
+  // read it back into memory
+  struct stat st;
+  stat(constFilename_, &st);
+  FILE *f = fopen(constFilename_, "rb");
+	char *script = (char*)malloc(st.st_size);
+  fread(script, 1, st.st_size, f);
+  fclose(f);
+  sw.put(script, st.st_size);
+  free(script);
 }
 
 
 /*---------------------------------------------------------------------------*/
 Fl_Menu_Item *Dtk_Platform::templateChoiceMenu()
 {
-    if (templateChoiceMenu_)
-        return templateChoiceMenu_;
-    if (platform_==kNewtRefUnbind)
-        return 0L;
-
-    newtRef ta = NewtGetArraySlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
-    if (ta==kNewtRefUnbind)
-        return 0L;
-
-    // create the choice of templates by finding all symbols inside the TemplateArray. 
-    // FIXME also add the contents of the ViewClassArray
-    int mi = 0, i, n = NewtArrayLength(ta);
-    templateChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
-    for (i=0; i<n; i++) {
-        newtRef sym = NewtSlotsGetSlot(ta, i);
-        if (NewtRefIsSymbol(sym)) {
-            templateChoiceMenu_[mi].label(strdup(NewtSymbolGetName(sym)));
-            newtRef tmplDB = NewtGetFrameSlot(ta, i+1);
-            newtRef proto = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(_proto)));
-            templateChoiceMenu_[mi].user_data((void*)NewtRefToInteger(proto));
-            mi++;
-        } else {
-            // ignore
-        }
-    }
-    templateChoiceMenu_ = (Fl_Menu_Item*)realloc(templateChoiceMenu_, (mi+1) * sizeof(Fl_Menu_Item));
-    
-    sort(templateChoiceMenu_);
-
+  if (templateChoiceMenu_)
     return templateChoiceMenu_;
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  
+  newtRef ta = NewtGetArraySlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+  if (ta==kNewtRefUnbind)
+    return 0L;
+  
+  // create the choice of templates by finding all symbols inside the TemplateArray. 
+  // FIXME also add the contents of the ViewClassArray
+  int mi = 0, i, n = NewtArrayLength(ta);
+  templateChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
+  for (i=0; i<n; i++) {
+    newtRef sym = NewtSlotsGetSlot(ta, i);
+    if (NewtRefIsSymbol(sym)) {
+      templateChoiceMenu_[mi].label(strdup(NewtSymbolGetName(sym)));
+      newtRef tmplDB = NewtGetFrameSlot(ta, i+1);
+      newtRef proto = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(_proto)));
+      templateChoiceMenu_[mi].user_data((void*)NewtRefToInteger(proto));
+      mi++;
+    } else {
+      // ignore
+    }
+  }
+  templateChoiceMenu_ = (Fl_Menu_Item*)realloc(templateChoiceMenu_, (mi+1) * sizeof(Fl_Menu_Item));
+  
+  sort(templateChoiceMenu_);
+  
+  return templateChoiceMenu_;
 }
 
 
 /*---------------------------------------------------------------------------*/
 Fl_Menu_Item *Dtk_Platform::specificChoiceMenu(Dtk_Template *tmpl)
 {
-    if (platform_==kNewtRefUnbind)
-        return 0L;
-    if (!tmpl)
-        return 0L;
-    char *id = tmpl->id();
-    if (!id)
-        return 0L;
-
-    Fl_Menu_Item *menu;
-    // have we previously created this menu?
-    std::map<char*,Fl_Menu_Item*,CStringSort>::iterator it = specificMenuMap_.find(id);
-    if (it == specificMenuMap_.end()) {
-        // find the id in the platform database
-        newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
-        int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
-        newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
-        newtRef opt = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
-        newtRef rqd = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
-        int i, mi = 0, no = NewtFrameLength(opt), nr = NewtFrameLength(rqd);
-
-        menu = (Fl_Menu_Item*)calloc(no+nr+1, sizeof(Fl_Menu_Item));
-        for (i=0; i<no; i++, mi++) {
-            newtRef sym = NewtGetFrameKey(opt, i);
-            menu[mi].label(strdup(NewtSymbolGetName(sym)));
-        }
-        sort(menu, no);
-        menu[mi-1].flags |= FL_MENU_DIVIDER;
-        for (i=0; i<nr; i++, mi++) {
-            newtRef sym = NewtGetFrameKey(rqd, i);
-            menu[mi].label(strdup(NewtSymbolGetName(sym)));
-        }
-        sort(menu+no, nr);
-        specificMenuMap_.insert(std::make_pair(strdup(id), menu));
-    } else {
-        menu = it->second;
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  if (!tmpl)
+    return 0L;
+  char *id = tmpl->id();
+  if (!id)
+    return 0L;
+  
+  Fl_Menu_Item *menu;
+  // have we previously created this menu?
+  std::map<char*,Fl_Menu_Item*,CStringSort>::iterator it = specificMenuMap_.find(id);
+  if (it == specificMenuMap_.end()) {
+    // find the id in the platform database
+    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+    int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+    newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
+    newtRef opt = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
+    newtRef rqd = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
+    int i, mi = 0, no = NewtFrameLength(opt), nr = NewtFrameLength(rqd);
+    
+    menu = (Fl_Menu_Item*)calloc(no+nr+1, sizeof(Fl_Menu_Item));
+    for (i=0; i<no; i++, mi++) {
+      newtRef sym = NewtGetFrameKey(opt, i);
+      menu[mi].label(strdup(NewtSymbolGetName(sym)));
     }
-    return menu;
+    sort(menu, no);
+    menu[mi-1].flags |= FL_MENU_DIVIDER;
+    for (i=0; i<nr; i++, mi++) {
+      newtRef sym = NewtGetFrameKey(rqd, i);
+      menu[mi].label(strdup(NewtSymbolGetName(sym)));
+    }
+    sort(menu+no, nr);
+    specificMenuMap_.insert(std::make_pair(strdup(id), menu));
+  } else {
+    menu = it->second;
+  }
+  return menu;
 }
 
 
 /*---------------------------------------------------------------------------*/
 Fl_Menu_Item *Dtk_Platform::methodsChoiceMenu()
 {
-    if (methodsChoiceMenu_)
-        return methodsChoiceMenu_;
-    if (platform_==kNewtRefUnbind)
-        return 0L;
-
-    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
-    if (ta==kNewtRefUnbind)
-        return 0L;
-
-    // create the choice of methods by finding all symbols inside the MethodsArray. 
-    int i, n = NewtFrameLength(ta);
-    methodsChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
-    for (i=0; i<n; i++) {
-        newtRef sym = NewtGetFrameKey(ta, i);
-        methodsChoiceMenu_[i].label(strdup(NewtSymbolGetName(sym)));
-    }
-
-    sort(methodsChoiceMenu_);
-
+  if (methodsChoiceMenu_)
     return methodsChoiceMenu_;
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  
+  newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
+  if (ta==kNewtRefUnbind)
+    return 0L;
+  
+  // create the choice of methods by finding all symbols inside the MethodsArray. 
+  int i, n = NewtFrameLength(ta);
+  methodsChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
+  for (i=0; i<n; i++) {
+    newtRef sym = NewtGetFrameKey(ta, i);
+    methodsChoiceMenu_[i].label(strdup(NewtSymbolGetName(sym)));
+  }
+  
+  sort(methodsChoiceMenu_);
+  
+  return methodsChoiceMenu_;
 }
 
 
 /*---------------------------------------------------------------------------*/
 Fl_Menu_Item *Dtk_Platform::attributesChoiceMenu()
 {
-    if (attributesChoiceMenu_)
-        return attributesChoiceMenu_;
-    if (platform_==kNewtRefUnbind)
-        return 0L;
-
-    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
-    if (ta==kNewtRefUnbind)
-        return 0L;
-
-    // create the choice of attributes by finding all symbols inside the AttributesArray. 
-    int i, n = NewtFrameLength(ta);
-    attributesChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
-    for (i=0; i<n; i++) {
-        newtRef sym = NewtGetFrameKey(ta, i);
-        attributesChoiceMenu_[i].label(strdup(NewtSymbolGetName(sym)));
-    }
-
-    sort(attributesChoiceMenu_);
-
+  if (attributesChoiceMenu_)
     return attributesChoiceMenu_;
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  
+  newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
+  if (ta==kNewtRefUnbind)
+    return 0L;
+  
+  // create the choice of attributes by finding all symbols inside the AttributesArray. 
+  int i, n = NewtFrameLength(ta);
+  attributesChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
+  for (i=0; i<n; i++) {
+    newtRef sym = NewtGetFrameKey(ta, i);
+    attributesChoiceMenu_[i].label(strdup(NewtSymbolGetName(sym)));
+  }
+  
+  sort(attributesChoiceMenu_);
+  
+  return attributesChoiceMenu_;
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Platform::updateActivation(Fl_Menu_Item *menu, Dtk_Template *tmpl)
 {
-    for (;;) {
-        const char *id = menu->label();
-        if (!id) 
-            break;
-        if (tmpl->findSlot(id)) {
-            menu->flags |= FL_MENU_INACTIVE;
-        } else {
-            menu->flags &= ~FL_MENU_INACTIVE;
-        }
-        ++menu;
+  for (;;) {
+    const char *id = menu->label();
+    if (!id) 
+      break;
+    if (tmpl->findSlot(id)) {
+      menu->flags |= FL_MENU_INACTIVE;
+    } else {
+      menu->flags &= ~FL_MENU_INACTIVE;
     }
+    ++menu;
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 static int cStringCompare(const void *a, const void *b) 
 {
-    return strcasecmp(((Fl_Menu_Item*)a)->label(), ((Fl_Menu_Item*)b)->label());
+  return strcasecmp(((Fl_Menu_Item*)a)->label(), ((Fl_Menu_Item*)b)->label());
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Platform::sort(Fl_Menu_Item *menu, int n)
 {
-    if (n==-1) {
-        Fl_Menu_Item *m = menu;
-        while (m->label()) m++;
-        n = m - menu;
-    }
-    qsort(menu, n, sizeof(Fl_Menu_Item), cStringCompare);
+  if (n==-1) {
+    Fl_Menu_Item *m = menu;
+    while (m->label()) m++;
+    n = m - menu;
+  }
+  qsort(menu, n, sizeof(Fl_Menu_Item), cStringCompare);
 }
 
 
 /*---------------------------------------------------------------------------*/
 newtRef Dtk_Platform::newtTemplate(char *id)
 {
-    if (platform_==kNewtRefUnbind)
-        return 0L;
-    if (!id)
-        return 0L;
-
-    // find the id in the platform database
-    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
-    int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
-    newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
-    newtRef rqd = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
-    int i, nr = NewtFrameLength(rqd), vi = 0, ai = 0, as = 0;
-
-    newtRefVar attr[100];    
-    newtRefVar val[100];
-    int p = findProto(id);
-    if (p!=-1) {
-        attr[ai++] = NSSYM(value);
-        attr[ai++] = NewtMakeInt30(p);
-        attr[ai++] = NSSYM(__ntDatatype);
-        attr[ai++] = NewtMakeString("PROT", true);
-        val[vi++] = NSSYM(__ntTemplate);
-        val[vi++] = NewtMakeFrame2(2, attr+ai-4);
-    }
-    for (i=0; i<nr; i++) {
-        newtRef sym = NewtGetFrameKey(rqd, i);
-        int def = NewtFindSlotIndex(tmplDB, sym);
-        as = ai;
-        attr[ai++] = NSSYM(value);
-        attr[ai++] = NewtGetFrameSlot(tmplDB, def);
-        attr[ai++] = NSSYM(__ntDatatype);
-        attr[ai++] = NewtGetFrameSlot(rqd, i);
-        val[vi++] = sym;
-        val[vi++] = NewtMakeFrame2((ai-as)/2, attr+as);
-        //menu[mi].label(strdup(NewtSymbolGetName(sym)));
-    }
-
-    newtRef value = NewtMakeFrame2(vi/2, val);
-
-    newtRefVar ret[] = { NSSYM(value), value, NSSYM(__ntId), NewtMakeSymbol(id) };
-    newtRef result = NewtMakeFrame2(2, ret);
-    NewtPrintObject(stdout, result);
-    return result;
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  if (!id)
+    return 0L;
+  
+  // find the id in the platform database
+  newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+  int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+  newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
+  newtRef rqd = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
+  int i, nr = NewtFrameLength(rqd), vi = 0, ai = 0, as = 0;
+  
+  newtRefVar attr[100];    
+  newtRefVar val[100];
+  int p = findProto(id);
+  if (p!=-1) {
+    attr[ai++] = NSSYM(value);
+    attr[ai++] = NewtMakeInt30(p);
+    attr[ai++] = NSSYM(__ntDatatype);
+    attr[ai++] = NewtMakeString("PROT", true);
+    val[vi++] = NSSYM(__ntTemplate);
+    val[vi++] = NewtMakeFrame2(2, attr+ai-4);
+  }
+  for (i=0; i<nr; i++) {
+    newtRef sym = NewtGetFrameKey(rqd, i);
+    int def = NewtFindSlotIndex(tmplDB, sym);
+    as = ai;
+    attr[ai++] = NSSYM(value);
+    attr[ai++] = NewtGetFrameSlot(tmplDB, def);
+    attr[ai++] = NSSYM(__ntDatatype);
+    attr[ai++] = NewtGetFrameSlot(rqd, i);
+    val[vi++] = sym;
+    val[vi++] = NewtMakeFrame2((ai-as)/2, attr+as);
+    //menu[mi].label(strdup(NewtSymbolGetName(sym)));
+  }
+  
+  newtRef value = NewtMakeFrame2(vi/2, val);
+  
+  newtRefVar ret[] = { NSSYM(value), value, NSSYM(__ntId), NewtMakeSymbol(id) };
+  newtRef result = NewtMakeFrame2(2, ret);
+  NewtPrintObject(stdout, result);
+  return result;
 }
 
 /*---------------------------------------------------------------------------*/
 newtRef Dtk_Platform::getSpecificSlotDescription(Dtk_Template *tmpl, newtRefArg key)
 {
-    char *id = tmpl->id();
-    if (!id)
-        return kNewtRefUnbind;
-    if (platform_==kNewtRefUnbind)
-        return kNewtRefUnbind;
-
-    // find the default settings for this slot in the given template
-    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
-    int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
-    if (ix==-1)
-        return kNewtRefUnbind;
-    newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
-    if (tmplDB==kNewtRefUnbind)
-        return kNewtRefUnbind;
-    newtRef def = kNewtRefUnbind, dt = kNewtRefUnbind;
-    newtRef val = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, key));
-    if (val==kNewtRefUnbind)
-        return kNewtRefUnbind;
-
-    // first, search the __ntOptional frame
-    def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
+  char *id = tmpl->id();
+  if (!id)
+    return kNewtRefUnbind;
+  if (platform_==kNewtRefUnbind)
+    return kNewtRefUnbind;
+  
+  // find the default settings for this slot in the given template
+  newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+  int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+  if (ix==-1)
+    return kNewtRefUnbind;
+  newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
+  if (tmplDB==kNewtRefUnbind)
+    return kNewtRefUnbind;
+  newtRef def = kNewtRefUnbind, dt = kNewtRefUnbind;
+  newtRef val = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, key));
+  if (val==kNewtRefUnbind)
+    return kNewtRefUnbind;
+  
+  // first, search the __ntOptional frame
+  def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
+  ix = NewtFindSlotIndex(def, key);
+  if (ix>=0) dt = NewtGetFrameSlot(def, ix);
+  
+  // next, search the __ntRequired frame
+  if (dt==kNewtRefUnbind) {
+    def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
     ix = NewtFindSlotIndex(def, key);
     if (ix>=0) dt = NewtGetFrameSlot(def, ix);
-
-    // next, search the __ntRequired frame
-    if (dt==kNewtRefUnbind) {
-        def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
-        ix = NewtFindSlotIndex(def, key);
-        if (ix>=0) dt = NewtGetFrameSlot(def, ix);
-    }
-
-    // if we still have not found it, where can we look next?
-    // make a guess:
-    if (dt==kNewtRefUnbind) {
-        // FIXME look at the type of 'val' to set this correctly
-        dt = NewtMakeString("NUMB", true);
-    }
-
-    newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), dt };
-    newtRef ret = NewtMakeFrame2(2, tmp);
-
-    return ret;
+  }
+  
+  // if we still have not found it, where can we look next?
+  // make a guess:
+  if (dt==kNewtRefUnbind) {
+    // FIXME look at the type of 'val' to set this correctly
+    dt = NewtMakeString("NUMB", true);
+  }
+  
+  newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), dt };
+  newtRef ret = NewtMakeFrame2(2, tmp);
+  
+  return ret;
 }
-    
+
 /*---------------------------------------------------------------------------*/
 newtRef Dtk_Platform::getScriptSlotDescription(newtRefArg key)
 {
-    if (platform_==kNewtRefUnbind)
-        return 0L;
-    newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
-    newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
-    newtRef val = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
-
-    newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), NewtMakeString("SCPT", true) };
-    newtRef ret = NewtMakeFrame2(2, tmp);
-
-    return ret;
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
+  newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+  newtRef val = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
+  
+  newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), NewtMakeString("SCPT", true) };
+  newtRef ret = NewtMakeFrame2(2, tmp);
+  
+  return ret;
 }
 
 
 /*---------------------------------------------------------------------------*/
 newtRef Dtk_Platform::getAttributesSlotDescription(newtRefArg key)
 {
-    if (platform_==kNewtRefUnbind)
-        return 0L;
-    newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
-    newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
-    newtRef val = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
-    newtRef dt = kNewtRefUnbind;
-
-    // what do we do if no 'val' was found?
-    if (val==kNewtRefUnbind)
-        val = NewtMakeString("nil", true);
-    if (dt==kNewtRefUnbind)
-        dt= NewtMakeString("SCPT", true);
-
-    // FIXME derive the __ntDatatype from the actual value (and possibly key)
-    newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), dt };
-    newtRef ret = NewtMakeFrame2(2, tmp);
-
-    return ret;
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
+  newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+  newtRef val = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
+  newtRef dt = kNewtRefUnbind;
+  
+  // what do we do if no 'val' was found?
+  if (val==kNewtRefUnbind)
+    val = NewtMakeString("nil", true);
+  if (dt==kNewtRefUnbind)
+    dt= NewtMakeString("SCPT", true);
+  
+  // FIXME derive the __ntDatatype from the actual value (and possibly key)
+  newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), dt };
+  newtRef ret = NewtMakeFrame2(2, tmp);
+  
+  return ret;
 }
 
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Platform::findProto(const char *id)
 {
-    const Fl_Menu_Item *mi = templateChoiceMenu();
-    for (;;++mi) {
-        const char *t = mi->label();
-        if (!t) {
-            return -1;
-        }
-        if (strcasecmp(t, id)==0) {
-            return (int)mi->user_data();
-        }
+  const Fl_Menu_Item *mi = templateChoiceMenu();
+  for (;;++mi) {
+    const char *t = mi->label();
+    if (!t) {
+      return -1;
     }
+    if (strcasecmp(t, id)==0) {
+      return (int)mi->user_data();
+    }
+  }
 }
 
 const char *platformStr1 = 
@@ -1234,16 +1280,16 @@ const char *platformStr2 =
 "      __proto: 176, \n"
 "      __ntAncestor: 'protoPictureButton, \n"
 /*
-"      icon: {\n"
-"        bits: <Binary, class \"bits\", length 60>, \n"
-"        bounds: {\n"
-"          top: 0, \n"
-"          left: 0, \n"
-"          bottom: 11, \n"
-"          right: 15\n"
-"        }\n"
-"      }, \n"
-*/
+ "      icon: {\n"
+ "        bits: <Binary, class \"bits\", length 60>, \n"
+ "        bounds: {\n"
+ "          top: 0, \n"
+ "          left: 0, \n"
+ "          bottom: 11, \n"
+ "          right: 15\n"
+ "        }\n"
+ "      }, \n"
+ */
 "      viewJustify: 2054, \n"
 "      viewBounds: {\n"
 "        left: -23, \n"
@@ -1400,16 +1446,16 @@ const char *platformStr2 =
 "        bottom: 15\n"
 "      }, \n"
 /*
-"      icon: {\n"
-"        bits: <Binary, class \"bits\", length 60>, \n"
-"        bounds: {\n"
-"          top: 0, \n"
-"          left: 0, \n"
-"          bottom: 11, \n"
-"          right: 13\n"
-"        }\n"
-"      }, \n"
-*/
+ "      icon: {\n"
+ "        bits: <Binary, class \"bits\", length 60>, \n"
+ "        bounds: {\n"
+ "          top: 0, \n"
+ "          left: 0, \n"
+ "          bottom: 11, \n"
+ "          right: 13\n"
+ "        }\n"
+ "      }, \n"
+ */
 "      ViewClickScript: \"func(unit)\\rbegin\\r\\tinherited:?viewClickScript(unit);\\t\\t// this method is defined internally\\r\\t// Return true if click has been completely handled, nil otherwise\\rend\", \n"
 "      buttonClickScript: \"func()\\rbegin\\r\\tinherited:?buttonClickScript();\\t\\t// this method is defined internally\\rend\", \n"
 "      PickActionScript: \"func(itemSelected)\\rbegin\\r\\tinherited:?pickActionScript(itemSelected);\\t\\t// this method is defined internally\\rend\", \n"
@@ -1606,7 +1652,7 @@ const char *platformStr2 =
 "      viewEffect: 393216, \n"
 "      PickActionScript: \"func(actionCode)\\rbegin\\r\\tnil;\\rend\", \n"
 "      pickBottomMargin: 2, \n"
-"      pickItems: \"[\\r\\\"one\\\",\\r{item:\\\"two\\\", pickable: nil, mark:$•},\\r\\\"three\\\",\\r'pickseparator,\\r{item:\\\"five\\\", pickable:true}\\r]\", \n"
+"      pickItems: \"[\\r\\\"one\\\",\\r{item:\\\"two\\\", pickable: nil, mark:$Ã¯},\\r\\\"three\\\",\\r'pickseparator,\\r{item:\\\"five\\\", pickable:true}\\r]\", \n"
 "      viewFont: \"ROM_fontSystem10Bold\", \n"
 "      pickAutoClose: TRUE, \n"
 "      SetItemMark: \"func(index, char)\\rbegin\\r\\tnil;\\rend\", \n"
@@ -1891,7 +1937,7 @@ const char *platformStr3 =
 "      appSymbol: \"kAppSymbol\", \n"
 "      title: \"kAppName\", \n"
 "      allDataDefs: \"// Required if your app supports stationery\\rnil\", \n"
-"      aboutInfo: \"{\\r\\ttagLine: \\\"NiftyApp\\uffffff9920\\uby Me\\\",\\r\\tversion: \\\"0.1d1\\\",\\r\\tcopyright: \\\"Copyright ©1996 By Me\\\",\\r\\ttrademarks: \\\"myTM\\\",\\r}\", \n"
+"      aboutInfo: \"{\\r\\ttagLine: \\\"NiftyApp\\uffffff9920\\uby Me\\\",\\r\\tversion: \\\"0.1d1\\\",\\r\\tcopyright: \\\"Copyright Â©1996 By Me\\\",\\r\\ttrademarks: \\\"myTM\\\",\\r}\", \n"
 "      ViewScrollUpScript: \"func()\\rbegin\\r\\tinherited:?ViewScrollUpScript();\\t\\t// this method is defined internally\\rend\", \n"
 "      __ntAncestor: 'protoDragger, \n"
 "      routeScripts: \"//newtApp supplied defaults\\r[\\r\\t{\\r\\t\\tGetTitle: func(item) if item then \\\"Duplicate\\\",\\r\\t\\ticon: ROM_routeDuplicateIcon,\\r\\t\\trouteScript: 'newtDuplicateScript,\\r\\t},\\r\\t{\\r\\t\\tGetTitle: func(item) if item then \\\"Delete\\\",\\r\\t\\ticon: ROM_routeDeleteIcon,\\r\\t\\trouteScript: 'newtDeleteScript,\\r\\t},\\r]\", \n"

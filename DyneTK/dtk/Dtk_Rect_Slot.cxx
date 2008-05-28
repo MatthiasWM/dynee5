@@ -38,115 +38,116 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Rect_Slot::Dtk_Rect_Slot(Dtk_Slot_List *list, const char *theKey, newtRef slot)
 :   Dtk_Slot(list, theKey, slot),
-    editor_(0L),
-    top_(0), left_(0), bottom_(0), right_(0)
+editor_(0L),
+top_(0), left_(0), bottom_(0), right_(0)
 {
-    // read the view bounds
-    if (slot != kNewtRefUnbind) {
-	    newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-	    if (NewtRefIsFrame(v)) {
-		     newtRef i;
-		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(top)));
-		     if (NewtRefIsInteger(i)) top_ = NewtRefToInteger(i);
-		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(left)));
-		     if (NewtRefIsInteger(i)) left_ = NewtRefToInteger(i);
-		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(bottom)));
-		     if (NewtRefIsInteger(i)) bottom_ = NewtRefToInteger(i);
-		     i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(right)));
-		     if (NewtRefIsInteger(i)) right_ = NewtRefToInteger(i);
-	    }
-	    newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
-	    if (NewtRefIsString(dt)) {
-            datatype_ = strdup(NewtRefToString(dt));
-        } else {
-            datatype_ = strdup("RECT");
-        }
+  // read the view bounds
+  if (slot != kNewtRefUnbind) {
+    newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
+    if (NewtRefIsFrame(v)) {
+      newtRef i;
+      i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(top)));
+      if (NewtRefIsInteger(i)) top_ = NewtRefToInteger(i);
+      i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(left)));
+      if (NewtRefIsInteger(i)) left_ = NewtRefToInteger(i);
+      i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(bottom)));
+      if (NewtRefIsInteger(i)) bottom_ = NewtRefToInteger(i);
+      i = NewtGetFrameSlot(v, NewtFindSlotIndex(v, NSSYM(right)));
+      if (NewtRefIsInteger(i)) right_ = NewtRefToInteger(i);
     }
+    newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
+    if (NewtRefIsString(dt)) {
+      datatype_ = strdup(NewtRefToString(dt));
+    } else {
+      datatype_ = strdup("RECT");
+    }
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Rect_Slot::~Dtk_Rect_Slot()
 {
-    if (editor_)
-        editor_->parent()->remove(editor_);
+  if (editor_)
+    editor_->parent()->remove(editor_);
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::edit()
 {
-    Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
-    if (!editor_) {
-        container->begin();
-        editor_ = new Fldtk_Rect_Slot_Editor(container, this);
-        container->end();
-        editor_->setRect(top_, left_, bottom_, right_);
-    }
-    container->value(editor_);
+  Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
+  if (!editor_) {
+    container->begin();
+    editor_ = new Fldtk_Rect_Slot_Editor(container, this);
+    container->end();
+    editor_->setRect(top_, left_, bottom_, right_);
+  }
+  container->value(editor_);
 }
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Rect_Slot::write(Dtk_Script_Writer &sw)
 {
-    char buf[1024];
-    sprintf(buf, "     %s: {left: %d, top: %d, bottom: %d, right: %d}",
-        key_, left_, top_, bottom_, right_);
-    sw.put(buf);
-    return 0;
+  char buf[1024];
+  sprintf(buf, "     %s: {left: %d, top: %d, bottom: %d, right: %d}",
+          key_, left_, top_, bottom_, right_);
+  sw.put(buf);
+  return 0;
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::set(int t, int l, int b, int r)
 {
-    top_ = t;
-    left_ = l;
-    right_ = r;
-    bottom_ = b;
+  top_ = t;
+  left_ = l;
+  right_ = r;
+  bottom_ = b;
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::get(int &t, int &l, int &b, int &r)
 {
-    t = top_;
-    l = left_;
-    r = right_;
-    b = bottom_;
+  t = top_;
+  l = left_;
+  r = right_;
+  b = bottom_;
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::apply() 
 { 
-    if (editor_) {
-        editor_->getRect(top_, left_, bottom_, right_);
-    }
+  if (editor_) {
+    editor_->getRect(top_, left_, bottom_, right_);
     signalRectChanged(this);
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::revert() 
 {
-    if (editor_) 
-        editor_->setRect(top_, left_, bottom_, right_);
+  if (editor_) {
+    editor_->setRect(top_, left_, bottom_, right_);
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 newtRef	Dtk_Rect_Slot::save()
 {
-    newtRefVar rectA[] = {
-        NSSYM(left),    NewtMakeInt30(left_),
-        NSSYM(top),     NewtMakeInt30(top_),
-        NSSYM(bottom),  NewtMakeInt30(bottom_),
-        NSSYM(right),   NewtMakeInt30(right_) };
-    newtRef rect = NewtMakeFrame2(4, rectA);
-
-    newtRefVar slotA[] = {
-        NSSYM(value),   rect,
-        NSSYM(__ntDataType), NewtMakeString(datatype_, false) };
-    newtRef slot = NewtMakeFrame2(2, slotA);
-
-    return slot;
+  newtRefVar rectA[] = {
+    NSSYM(left),    NewtMakeInt30(left_),
+    NSSYM(top),     NewtMakeInt30(top_),
+    NSSYM(bottom),  NewtMakeInt30(bottom_),
+  NSSYM(right),   NewtMakeInt30(right_) };
+  newtRef rect = NewtMakeFrame2(4, rectA);
+  
+  newtRefVar slotA[] = {
+    NSSYM(value),   rect,
+  NSSYM(__ntDataType), NewtMakeString(datatype_, false) };
+  newtRef slot = NewtMakeFrame2(2, slotA);
+  
+  return slot;
 }
 
 //

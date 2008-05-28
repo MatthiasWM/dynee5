@@ -175,7 +175,7 @@ newtRef Dtk_Script::compile()
     if (err)
       printf("**** %s: %s\n", newt_error_class(err), newt_error(err));
     else 
-      printf("**** unknow or unsupported error\n");
+      printf("**** unknow error\n");
 		return kNewtRefUnbind;
 	} else {
 	}

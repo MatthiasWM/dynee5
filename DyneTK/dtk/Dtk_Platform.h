@@ -35,86 +35,101 @@ extern "C" {
 
 struct Fl_Menu_Item;
 class Dtk_Template;
+class Dtk_Script_Writer;
 
 /** Read a platform file and provide database and GUI access.
  */
 class Dtk_Platform
-{
-public:
-
-    /** Initialize the platform.
+  {
+  public:
+    
+    /** 
+     * Initialize the platform.
      */
-                    Dtk_Platform(const char *filename);
-
-    /** Remove a platform.
+    Dtk_Platform(const char *ptfFilename, const char *constFilename);
+    
+    /** 
+     * Remove a platform.
      */
     virtual         ~Dtk_Platform();
-
-    /** Load a platform file from disk.
+    
+    /** 
+     *Load a platform file from disk.
      */
-    int             load(const char *filename);
-
-    /** Return the FLTK menu items for the template choice menu.
+    int loadPtfFile();
+    
+    /**
+     * Load the paltform constants from "Newton21.txt"
+     */
+    int loadConstFile();
+    void writeConstants(Dtk_Script_Writer &sw);
+    
+    /** 
+     * Return the FLTK menu items for the template choice menu.
      */
     Fl_Menu_Item    * templateChoiceMenu();
-
+    
     /** Return the FLTK menu items for the specific choice menu.
      */
     Fl_Menu_Item    * specificChoiceMenu(Dtk_Template *tmpl);
-
+    
     /** Return the FLTK menu items for the "Methods" choice menu.
      */
     Fl_Menu_Item    * methodsChoiceMenu();
-
+    
     /** Return the FLTK menu items for the "Attributes" choice menu.
      */
     Fl_Menu_Item    * attributesChoiceMenu();
-
+    
     /** Deactivate menu items with slots that already exist.
      */
     static void     updateActivation(Fl_Menu_Item *menu, Dtk_Template *tmpl);
-
+    
     /** Sort an FLTK menu array in alphabetic order.
      */
     static void     sort(Fl_Menu_Item *menu, int n=-1);
-
+    
     /** Create a form with the default attributes for a template.
      */
     newtRef         newtTemplate(char *id);
-
+    
     /** Create a newt frame containing a slot.
      */
     newtRef         getSpecificSlotDescription(Dtk_Template *tmpl, newtRefArg key);
-
+    
     /** Create a newt frame containing a slot.
      */
     newtRef         getScriptSlotDescription(newtRefArg key);
-
+    
     /** Create a newt frame containing a slot.
      */
     newtRef         getAttributesSlotDescription(newtRefArg key);
-
+    
     /** Convert the template id into a proto magic pointer number.
      */
     int             findProto(const char *id);
-
-protected:
-
+    
+  protected:
+    
     class CStringSort {
     public:
-        bool operator()(const char*, const char*) const;
+      bool operator()(const char*, const char*) const;
     };
-
+    
     newtRef         platform_;
-
+    
     Fl_Menu_Item    * templateChoiceMenu_;
-
+    
     Fl_Menu_Item    * methodsChoiceMenu_;
-
+    
     Fl_Menu_Item    * attributesChoiceMenu_;
-
+    
     std::map<char*,Fl_Menu_Item*,CStringSort> specificMenuMap_;
-};
+    
+    char * ptfFilename_;
+    
+    char * constFilename_;
+  };
 
 
 #endif

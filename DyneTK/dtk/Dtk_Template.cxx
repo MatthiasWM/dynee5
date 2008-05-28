@@ -561,6 +561,7 @@ newtRef	Dtk_Template::save()
   int i, n = slotList_->size();
   for (i=0; i<n; ++i) {
     Dtk_Slot *slot = slotList_->at(i);
+    slot->apply();
     newtRef newtSlot = slot->save();
     if (newtSlot!=kNewtRefUnbind) {
       valueA[vi++] = NewtMakeSymbol(slot->key());

@@ -1,5 +1,5 @@
 /*
- Copyright:	© 1993-1997 by Apple Computer, Inc., all rights reserved.
+ Copyright:	ï¿½ 1993-1997 by Apple Computer, Inc., all rights reserved.
 
  "Newton 2.1" Platform File Version 1.2b2 Constant Definitions
 
@@ -13,7 +13,7 @@
 	buildDate:		|5/2/97|,
 	buildTime:		|11:43:23 AM PST|,
 	timeOfBuild:	49090320        // the "Time()" the platform file was generated
-	}
+	};
 /* constant */ protoPeriodicAlarmEditor := @2;
 /* constant */ ROM_alarmWakeup := @4;
 /* constant */ protoAnalogClock := @5;
@@ -608,38 +608,38 @@ func vfRound(x)((x)*16777216);
 /* constant */ vNoSpaces := 1 << 1;
 /* constant */ fxColumnsShift := 0;
 func fxColumns(num)(num-1) << fxColumnsShift;
-/* constant */ fxColumnsMask := 0x1F << fxColumnsShift			// = 31;
+/* constant */ fxColumnsMask := 0x1F << fxColumnsShift;			// = 31;
 /* constant */ fxRowsShift := 5;
 func fxRows(num)(num-1) << fxRowsShift;
-/* constant */ fxRowsMask := 0x1F << fxRowsShift				// = 992;
+/* constant */ fxRowsMask := 0x1F << fxRowsShift;				// = 992;
 /* constant */ fxHStartPhaseShift := 10;
-/* constant */ fxHStartPhase := 1 << fxHStartPhaseShift		// = 1024;
+/* constant */ fxHStartPhase := 1 << fxHStartPhaseShift;		// = 1024;
 /* constant */ fxVStartPhaseShift := 11;
-/* constant */ fxVStartPhase := 1 << fxVStartPhaseShift		// = 2048;
+/* constant */ fxVStartPhase := 1 << fxVStartPhaseShift;		// = 2048;
 /* constant */ fxColAltHPhaseShift := 12;
-/* constant */ fxColAltHPhase := 1 << fxColAltHPhaseShift		// = 4096;
+/* constant */ fxColAltHPhase := 1 << fxColAltHPhaseShift;		// = 4096;
 /* constant */ fxColAltVPhaseShift := 13;
-/* constant */ fxColAltVPhase := 1 << fxColAltVPhaseShift		// = 8192;
+/* constant */ fxColAltVPhase := 1 << fxColAltVPhaseShift;		// = 8192;
 /* constant */ fxRowAltHPhaseShift := 14;
-/* constant */ fxRowAltHPhase := 1 << fxRowAltHPhaseShift		// = 16384;
+/* constant */ fxRowAltHPhase := 1 << fxRowAltHPhaseShift;		// = 16384;
 /* constant */ fxRowAltVPhaseShift := 15;
-/* constant */ fxRowAltVPhase := 1 << fxRowAltVPhaseShift		// = 32768;
+/* constant */ fxRowAltVPhase := 1 << fxRowAltVPhaseShift;		// = 32768;
 /* constant */ fxMoveHShift := 16;
-/* constant */ fxMoveH := 1 << fxMoveHShift					// = 65536;
+/* constant */ fxMoveH := 1 << fxMoveHShift;					// = 65536;
 /* constant */ fxMoveVShift := 17;
-/* constant */ fxMoveV := 1 << fxMoveVShift					// = 131072;
+/* constant */ fxMoveV := 1 << fxMoveVShift;					// = 131072;
 /* constant */ fxRevealLineShift := 18;
-/* constant */ fxRevealLine := 1 << fxRevealLineShift			// = 262144;
+/* constant */ fxRevealLine := 1 << fxRevealLineShift;			// = 262144;
 /* constant */ fxWipeShift := 19;
-/* constant */ fxWipe := 1 << fxWipeShift						// = 524288;
+/* constant */ fxWipe := 1 << fxWipeShift;						// = 524288;
 /* constant */ fxFromEdgeShift := 20;
-/* constant */ fxFromEdge := 1 << fxFromEdgeShift				// = 1048576;
+/* constant */ fxFromEdge := 1 << fxFromEdgeShift;				// = 1048576;
 /* constant */ fxStepsShift := 21;
 func fxSteps(num)((num-1) << fxStepsShift);
-/* constant */ fxStepsMask := 0x0F << fxStepsShift				// = 31457280;
+/* constant */ fxStepsMask := 0x0F << fxStepsShift;				// = 31457280;
 /* constant */ fxStepTimeShift := 25;
 func fxStepTime(num)((num) << fxStepTimeShift);
-/* constant */ fxStepTimeMask := 0x0F << fxStepTimeShift		// = 503316480;
+/* constant */ fxStepTimeMask := 0x0F << fxStepTimeShift;		// = 503316480;
 /* constant */ fxLeft := fxHStartPhase+fxMoveH;
 /* constant */ fxRight := fxMoveH;
 /* constant */ fxUp := fxVStartPhase+fxMoveV;
@@ -1238,7 +1238,7 @@ func GetSound11Deprecated(name)
 func ButtonBounds(width)
 	begin
 		if (width > 0) then
-			SetBounds(6, kstdButtonTop, 6 + width, kstdButtonBottom);
+			SetBounds(6, kstdButtonTop, 6 + width, kstdButtonBottom)
 		else
 			SetBounds(kfirstButtonLeft, kstdButtonTop, kfirstButtonLeft - width, kstdButtonBottom);
 	end
@@ -1250,7 +1250,7 @@ func ButtonBounds(width)
 /* constant */ kFaceOutline := 0x008;
 /* constant */ kFaceSuperScript := 0x080;
 /* constant */ kFaceSubScript := 0x100;
-func DefConst(sym,expr);
+func DefConst(sym,expr) begin end;
 /* constant */ kMacRomanEncoding := 1;
 /* constant */ kASCIIEncoding := 2;
 /* constant */ kPCRomanEncoding := 3;
@@ -1532,7 +1532,7 @@ func DefConst(sym,expr);
 func ButtonBounds(width)
 	begin
 		if (width > 0) then
-			SetBounds(7, kstdButtonTop, 7 + width, kstdButtonBottom);
+			SetBounds(7, kstdButtonTop, 7 + width, kstdButtonBottom)
 		else
 			SetBounds(kfirstButtonLeft, kstdButtonTop, kfirstButtonLeft - width, kstdButtonBottom);
 	end

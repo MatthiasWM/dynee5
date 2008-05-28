@@ -38,8 +38,8 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Slot::Dtk_Slot(Dtk_Slot_List *list, const char *theKey, newtRef)
 :   list_(list),
-    key_(strdup(theKey)),
-    datatype_(0L)
+key_(strdup(theKey)),
+datatype_(0L)
 {
 }
 
@@ -47,51 +47,51 @@ Dtk_Slot::Dtk_Slot(Dtk_Slot_List *list, const char *theKey, newtRef)
 /*---------------------------------------------------------------------------*/
 Dtk_Slot::~Dtk_Slot()
 {
-    if (key_)
-        free(key_);
-    if (datatype_)
-        free(datatype_);
-    list_ = 0L;
+  if (key_)
+    free(key_);
+  if (datatype_)
+    free(datatype_);
+  list_ = 0L;
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Slot::edit()
 {
-    layout()->slotEditor()->blank();
+  layout()->slotEditor()->blank();
 }
 
 /*---------------------------------------------------------------------------*/
 Dtk_Layout *Dtk_Slot::layout()
 {
-    return list_->layout();
+  return list_->layout();
 }
 
 /*---------------------------------------------------------------------------*/
 Dtk_Template *Dtk_Slot::getTemplate()
 {
-    return list_ ? list_->getTemplate() : 0L;
+  return list_ ? list_->getTemplate() : 0L;
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Slot::setKey(const char *name)
 {
-    // check if anything changed at all
-    if (name && key_ && strcmp(name, key_)==0)
-        return;
-
-    // remove the old key
-    if (key_) {
-        free(key_);
-        key_ = 0L;
-    }
-
-    // set the new key
-    if (name) {
-        key_ = strdup(name);
-    }
-
-    // update all GUIs (we should instead send a signal to all subscribed slots)
-    list_->updateKey(this);
+  // check if anything changed at all
+  if (name && key_ && strcmp(name, key_)==0)
+    return;
+  
+  // remove the old key
+  if (key_) {
+    free(key_);
+    key_ = 0L;
+  }
+  
+  // set the new key
+  if (name) {
+    key_ = strdup(name);
+  }
+  
+  // update all GUIs (we should instead send a signal to all subscribed slots)
+  list_->updateKey(this);
 }
 
 //

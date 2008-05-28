@@ -44,74 +44,78 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Proto_Slot::Dtk_Proto_Slot(Dtk_Slot_List *list, const char *theKey, newtRef slot)
 :   Dtk_Slot(list, theKey, slot),
-    editor_(0L)
+editor_(0L)
 {
-    datatype_ = strdup("PROT");
-    /*
-	newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-	if (NewtRefIsInteger(v)) {
-        value_ = NewtRefToInteger(v);
-    } else {
-        printf("############################# Can't read number!\n"); // FIXME
-        EnterDebugger();
-    }
-    */
+  datatype_ = strdup("PROT");
+  /*
+   newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
+   if (NewtRefIsInteger(v)) {
+   value_ = NewtRefToInteger(v);
+   } else {
+   printf("############################# Can't read number!\n"); // FIXME
+   EnterDebugger();
+   }
+   */
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Proto_Slot::~Dtk_Proto_Slot()
 {
-    if (editor_)
-        editor_->parent()->remove(editor_);
+  if (editor_)
+    editor_->parent()->remove(editor_);
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Proto_Slot::edit()
 {
-    Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
-    if (!editor_) {
-        container->begin();
-        editor_ = new Fldtk_Proto_Slot_Editor(container, this);
-        container->end();
-        editor_->value(value());
-    }
-    container->value(editor_);
+  Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
+  if (!editor_) {
+    container->begin();
+    editor_ = new Fldtk_Proto_Slot_Editor(container, this);
+    container->end();
+    editor_->value(value());
+  }
+  container->value(editor_);
 }
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Proto_Slot::write(Dtk_Script_Writer &sw)
 {
-    // the proto slot is only used as a place holder and link
-    // to the editor. Dtk_Template::write writes the '_proto slot.
-    return -2;
+  // the proto slot is only used as a place holder and link
+  // to the editor. Dtk_Template::write writes the '_proto slot.
+  return -2;
 }
 
 
 /*---------------------------------------------------------------------------*/
 char *Dtk_Proto_Slot::value()
 {
-    return getTemplate()->id();
+  return getTemplate()->id();
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Proto_Slot::value(char *id)
 {
-    getTemplate()->id(id);
+  getTemplate()->id(id);
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Proto_Slot::apply() { 
+  if (editor_) {
     value(editor_->value());
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Proto_Slot::revert() 
 { 
+  if (editor_) {
     editor_->value(value());
+  }
 }
 
 //

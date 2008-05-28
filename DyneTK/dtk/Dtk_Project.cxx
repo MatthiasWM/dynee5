@@ -30,6 +30,7 @@
 #include "dtk/Dtk_Project.h"
 #include "dtk/Dtk_Error.h"
 #include "dtk/Dtk_Document.h"
+#include "dtk/Dtk_Platform.h"
 #include "dtk/Dtk_Script_Writer.h"
 #include "dtk/Dtk_Document_List.h"
 
@@ -998,6 +999,8 @@ int Dtk_Project::buildPackage()
 	newtRefVar theForm = kNewtRefNIL;
 	newtRefVar theBase = kNewtRefNIL;
   
+  //dtkPlatform->loadConstFile();
+  
   // the new way which currently requires a script file on disk
   // write the package into a file
   ExportPackageToText();
@@ -1016,8 +1019,11 @@ int Dtk_Project::buildPackage()
   // very simple error code output
 	if (theForm==kNewtRefUnbind) {
 		InspectorPrintf("**** ERROR while compiling or interpreting\n");
-		InspectorPrintf("**** %s: %s\n", newt_error_class(err), newt_error(err));
-		return kNewtRefUnbind;
+    if (err)
+      InspectorPrintf("**** %s: %s\n", newt_error_class(err), newt_error(err));
+    else 
+      InspectorPrintf("**** unknow error\n");
+    return kNewtRefUnbind;
 	} else {
 	}
   
@@ -1200,6 +1206,8 @@ int Dtk_Project::write(Dtk_Script_Writer &sw)
   sprintf(buf, "// Text of project %s written on: %s\n", fn, ctime(&now));
 # endif
   sw.put(buf);
+  
+  // dtkPlatform->writeConstants(sw); // FIXME: how do we get to remeber the constants?
   
   int i, n = documentList_->size();
   for (i=0; i<n; ++i) {

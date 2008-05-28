@@ -40,126 +40,130 @@
 /*---------------------------------------------------------------------------*/
 Dtk_Script_Slot::Dtk_Script_Slot(Dtk_Slot_List *list, const char *theKey, newtRef slot)
 :   Dtk_Slot(list, theKey, slot),
-    editor_(0L),
-    script_(0L)
+editor_(0L),
+script_(0L)
 {
-    if (slot!=kNewtRefUnbind) {
-        newtRef value = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-        if (NewtRefIsString(value)) {
-            script_ = strdup(NewtRefToString(value));
-            char *s = script_;
-            for (;;s++) {
-                char c = *s;
-                if (!c) break;
-                if (c=='\r') *s = '\n';
-            }
-        }
-	    newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
-	    if (NewtRefIsString(dt)) {
-            datatype_ = strdup(NewtRefToString(dt));
-        } else {
-            datatype_ = strdup("SCPT");
-        }
+  if (slot!=kNewtRefUnbind) {
+    newtRef value = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
+    if (NewtRefIsString(value)) {
+      script_ = strdup(NewtRefToString(value));
+      char *s = script_;
+      for (;;s++) {
+        char c = *s;
+        if (!c) break;
+        if (c=='\r') *s = '\n';
+      }
     }
+    newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
+    if (NewtRefIsString(dt)) {
+      datatype_ = strdup(NewtRefToString(dt));
+    } else {
+      datatype_ = strdup("SCPT");
+    }
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Script_Slot::~Dtk_Script_Slot()
 {
-    if (editor_)
-        editor_->parent()->remove(editor_);
-    if (script_)
-        free(script_);
+  if (editor_)
+    editor_->parent()->remove(editor_);
+  if (script_)
+    free(script_);
 }
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Script_Slot::edit()
 {
-    Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
-    if (!editor_) {
-        container->begin();
-        editor_ = new Fldtk_Script_Slot_Editor(container, this);
-        container->end();
-        editor_->text(script_);
-    }
-    container->value(editor_);
+  Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
+  if (!editor_) {
+    container->begin();
+    editor_ = new Fldtk_Script_Slot_Editor(container, this);
+    container->end();
+    editor_->text(script_);
+  }
+  container->value(editor_);
 }
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Script_Slot::write(Dtk_Script_Writer &sw)
 {
-    char buf[1024];
-    if (strchr(script_, '\n')) {
-        sprintf(buf, "     %s:\n", key_);
-        sw.put(buf);
-        char *src = script_, *end = script_;
-        for (;;) {
-            if (*end==0) break;
-            src = end;
-            sw.put("        ");
-            for (;;) {
-                char c = *end;
-                if (c==0 || c=='\n') break;
-                end++;
-            }
-            sw.put(src, end-src);
-            if (*end==0) 
-                break;
-            sw.put("\n");
-            end++;
-        }
-        if (strstr(src, "//")) {
-            sw.put("\n        ");
-        }
-    } else {
-        sprintf(buf, "     %s: ", key_);
-        sw.put(buf);
-        sw.put(script_);
-        // if the last buffer contained a double-slash comment, we must add a new line
-        if (strstr(script_, "//"))
-            sw.put("\n        ");
+  char buf[1024];
+  if (strchr(script_, '\n')) {
+    sprintf(buf, "     %s:\n", key_);
+    sw.put(buf);
+    char *src = script_, *end = script_;
+    for (;;) {
+      if (*end==0) break;
+      src = end;
+      sw.put("        ");
+      for (;;) {
+        char c = *end;
+        if (c==0 || c=='\n') break;
+        end++;
+      }
+      sw.put(src, end-src);
+      if (*end==0) 
+        break;
+      sw.put("\n");
+      end++;
     }
-    return 0;
+    if (strstr(src, "//")) {
+      sw.put("\n        ");
+    }
+  } else {
+    sprintf(buf, "     %s: ", key_);
+    sw.put(buf);
+    sw.put(script_);
+    // if the last buffer contained a double-slash comment, we must add a new line
+    if (strstr(script_, "//"))
+      sw.put("\n        ");
+  }
+  return 0;
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Script_Slot::apply() 
 { 
+  if (editor_) {
     if (script_)
-        free(script_);
+      free(script_);
     script_ = editor_->text();
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Script_Slot::revert() 
 {
+  if (editor_) {
     editor_->text(script_);
+  }
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Script_Slot::set(const char *script) 
 {
-    if (script_)
-        free(script_);
-    script_ = strdup(script);
-    if (editor_)
-        revert();
+  if (script_)
+    free(script_);
+  script_ = strdup(script);
+  if (editor_)
+    revert();
 }
 
 
 /*---------------------------------------------------------------------------*/
 newtRef	Dtk_Script_Slot::save()
 {
-    newtRefVar slotA[] = {
-        NSSYM(value),           NewtMakeString(script_, false),
-        NSSYM(__ntDataType),    NewtMakeString(datatype_, false) };
-    newtRef slot = NewtMakeFrame2(2, slotA);
-
-    return slot;
+  newtRefVar slotA[] = {
+    NSSYM(value),           NewtMakeString(script_, false),
+  NSSYM(__ntDataType),    NewtMakeString(datatype_, false) };
+  newtRef slot = NewtMakeFrame2(2, slotA);
+  
+  return slot;
 }
 
 

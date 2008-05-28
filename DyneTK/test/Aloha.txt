@@ -1,4 +1,6 @@
 
+print("EEELS");
+
 v0 := 3;
 
 |abc.def| := 33;

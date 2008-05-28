@@ -477,6 +477,7 @@ int BuildPackage()
 {
   if (!dtkProject)
     return -1;
+  SaveAllDocuments();
 	int err = dtkProject->buildPackage();
 	if (!err) {
 		err = dtkProject->savePackage();
