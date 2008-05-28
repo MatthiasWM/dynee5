@@ -591,6 +591,7 @@
 					"-lfltk_images",
 					"-lfltk_jpeg",
 					"-lfltk_png",
+					"-lz",
 				);
 				PRODUCT_NAME = DyneTK;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
@@ -634,6 +635,7 @@
 					"-lfltk_images",
 					"-lfltk_jpeg",
 					"-lfltk_png",
+					"-lz",
 				);
 				PRODUCT_NAME = DyneTK;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
