@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_5BC6F2C241D841A5C7F00411FB050D65"
+        "MsmKey" = "8:_507C17B2C37540458C0EC88217E09059"
         "OwnerKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A81E432180054BC9976C2C07B5F729E2"
-        "OwnerKey" = "8:_E76CEAADFB744B99983D93BA993AB716"
+        "MsmKey" = "8:_5BC6F2C241D841A5C7F00411FB050D65"
+        "OwnerKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E76CEAADFB744B99983D93BA993AB716"
-        "OwnerKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -53,6 +47,12 @@
         {
         "MsmKey" = "8:_F38D92A9EF9946C68FEE05B07D10E4C1"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F3C17B2999814F2D9518FFA5CC064ADF"
+        "OwnerKey" = "8:_507C17B2C37540458C0EC88217E09059"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -73,6 +73,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
         "Release"
         {
@@ -89,6 +100,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -267,18 +289,18 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DyneTK"
-        "ProductCode" = "8:{4A13E95B-ED8E-45B4-8DE1-BE3A7C8B3376}"
-        "PackageCode" = "8:{DA519422-76AB-4C1B-B104-9B84A60CF804}"
+        "ProductCode" = "8:{FC68B262-78A2-4674-BEA2-D7C4FD8C4334}"
+        "PackageCode" = "8:{E20973FE-9E55-4B98-9407-3C0775688152}"
         "UpgradeCode" = "8:{F3FE0997-8656-4097-94BF-7B98FBB5B65A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.7.0"
+        "ProductVersion" = "8:1.7.1"
         "Manufacturer" = "8:DyneE5"
         "ARPHELPTELEPHONE" = "8:dynetk@matthiasm.com"
         "ARPHELPLINK" = "8:http://code.google.com/p/dynee5/"
-        "Title" = "8:DyneTK-1.7.0"
+        "Title" = "8:DyneTK-1.7.1"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Matthias Melcher"
         "Keywords" = "8:"
@@ -811,11 +833,11 @@
         }
         "MergeModule"
         {
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_A81E432180054BC9976C2C07B5F729E2"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_507C17B2C37540458C0EC88217E09059"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:policy_8_0_microsoft_vc80_crt_x86.msm"
+            "SourcePath" = "8:Microsoft_VC80_CRT_x86.msm"
                 "Properties"
                 {
                 }
@@ -825,11 +847,11 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_E76CEAADFB744B99983D93BA993AB716"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_F3C17B2999814F2D9518FFA5CC064ADF"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:Microsoft_VC80_CRT_x86.msm"
+            "SourcePath" = "8:policy_8_0_microsoft_vc80_crt_x86.msm"
                 "Properties"
                 {
                 }
@@ -928,7 +950,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
             {
-            "SourcePath" = "8:..\\..\\test\\DyneTK.exe"
+            "SourcePath" = "8:..\\..\\test\\DyneTKd.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B827252F1B90433CAFD0031F2FA441BD"
