@@ -81,14 +81,54 @@ Dtk_Document_List::~Dtk_Document_List()
 
 
 /*---------------------------------------------------------------------------*/
+void Dtk_Document_List::append(Dtk_Document *doc)
+{
+  docList_.push_back(doc);
+  doc->setList(this);
+  if (wDocumentBrowser_)
+    wDocumentBrowser_->add(doc->name(), doc, doc==main_);
+}
+
+
+/*---------------------------------------------------------------------------*/
+int Dtk_Document_List::remove(Dtk_Document *doc)
+{
+  // search the list for this document
+  int i, n = docList_.size();
+  for (i=n-1; i>=0; --i) {
+    if (docList_.at(i)==doc) {
+      // if found, make sure we do not reference this item anymore
+      if (main_==doc)
+        setMainDocument(0L);
+      // now remove it from the browser
+      if (wDocumentBrowser_)
+        wDocumentBrowser_->remove(i+1);
+      // take it out of the list
+      docList_.erase(docList_.begin()+i);
+      // and remove the documents link back to us
+      doc->setList(0L);
+      return 0;
+    }
+  }
+  // not found
+  return -1;
+}
+
+
+/*---------------------------------------------------------------------------*/
 void Dtk_Document_List::clear()
 {
   int i, n = docList_.size();
   for (i=n-1; i>=0; --i) {
     Dtk_Document *doc = docList_.at(i);
+    doc->clear();
     remove(doc);
+    delete doc;
   }
 }
+
+
+
 
 
 /*---------------------------------------------------------------------------*/
@@ -109,7 +149,7 @@ Dtk_Document *Dtk_Document_List::add(const char *filename)
 		doc = new Dtk_Script();
 	}
   // link the document to this doc list
-  add(doc);
+  append(doc);
 	doc->setFilename(filename);
   doc->load();
   doc->edit();
@@ -136,7 +176,7 @@ char *Dtk_Document_List::findFile(const char *filename)
 Dtk_Document *Dtk_Document_List::newScript(const char *filename)
 {
 	Dtk_Script *doc = new Dtk_Script();
-  add(doc);
+  append(doc);
 	doc->setFilename(filename);
 	doc->setAskForFilename();
 	return doc;
@@ -146,7 +186,7 @@ Dtk_Document *Dtk_Document_List::newScript(const char *filename)
 Dtk_Document *Dtk_Document_List::newLayout(const char *filename)
 {
 	Dtk_Layout *doc = new Dtk_Layout();
-  add(doc);
+  append(doc);
 	doc->setFilename(filename);
 	doc->setAskForFilename();
 	return doc;
@@ -168,43 +208,13 @@ newtRef Dtk_Document_List::getProjectItemsRef()
 }
 
 /*---------------------------------------------------------------------------*/
-Dtk_Document *Dtk_Document_List::getDocument(int i)
+Dtk_Document *Dtk_Document_List::at(int i)
 {
   if (i<0 || i>=(int)docList_.size())
     return 0L;
   return docList_.at(i);
 }
 
-/*---------------------------------------------------------------------------*/
-void Dtk_Document_List::add(Dtk_Document *doc)
-{
-  docList_.push_back(doc);
-  doc->setList(this);
-  if (wDocumentBrowser_)
-    wDocumentBrowser_->add(doc->name(), doc, doc==main_);
-}
-
-/*---------------------------------------------------------------------------*/
-int Dtk_Document_List::remove(Dtk_Document *doc)
-{
-  // search the list for this document
-  int i, n = docList_.size();
-  for (i=0; i<n; ++i) {
-    if (docList_.at(i)==doc) {
-      if (wDocumentBrowser_)
-        wDocumentBrowser_->remove(i+1);
-      doc->clear();
-      if (main_==doc) {
-        setMain(0L);
-      }
-      docList_.erase(docList_.begin()+i);
-      delete doc;
-      return 0;
-    }
-  }
-  // not found
-  return -1;
-}
 
 /*-v2------------------------------------------------------------------------*/
 void Dtk_Document_List::wDocumentBrowser_cb(Fldtk_Document_Browser *w, Dtk_Document_List *d)
@@ -234,7 +244,7 @@ void Dtk_Document_List::documentNameChanged(Dtk_Document *document)
 }
 
 /*-v2------------------------------------------------------------------------*/
-void Dtk_Document_List::setMain(Dtk_Document *document)
+void Dtk_Document_List::setMainDocument(Dtk_Document *document)
 {
   if (main_==document)
     return;

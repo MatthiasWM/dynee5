@@ -358,7 +358,7 @@ int Dtk_Project::loadMac()
   // FIXME mainLayout is an index, but not by the same sorting standard!
 	uint16_t mainLayout = readWord(data);
   if (mainLayout>0 && mainLayout<=documentList_->size())
-    documentList_->setMain(documentList_->at(mainLayout-1));
+    documentList_->setMainDocument(documentList_->at(mainLayout-1));
   
 	// read the resource fork
   
@@ -583,7 +583,7 @@ int Dtk_Project::loadWin()
 					}
 					ix = NewtFindSlotIndex(item, NSSYM(isMainLayout)); 
 					if (ix>=0 && doc) 
-            documentList_->setMain(doc);
+            documentList_->setMainDocument(doc);
 				}
 			}
 		}
@@ -1235,7 +1235,7 @@ int Dtk_Project::write(Dtk_Script_Writer &sw)
     documentList_->at(i)->write(sw);
   }
   
-  Dtk_Document *mm = documentList_->getMain();
+  Dtk_Document *mm = documentList_->getMainDocument();
   if (mm) {
     mm->writeTheForm(sw);
   }

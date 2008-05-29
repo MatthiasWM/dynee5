@@ -353,8 +353,8 @@ int AddFileToProject(const char *filename)
   // go ahead and add the document to the project
   Dtk_Document *doc = dtkProject->documentList()->add(filename);
   // if this is a layout and there is no main layout yet, use this one
-  if (doc->isLayout() && !dtkProject->documentList()->getMain()) {
-    dtkProject->documentList()->setMain(doc);
+  if (doc->isLayout() && !dtkProject->documentList()->getMainDocument()) {
+    dtkProject->documentList()->setMainDocument(doc);
   }
   // update the menu bar
 	UpdateMainMenu();
@@ -369,28 +369,31 @@ int AddFileToProject(const char *filename)
 /*-v2------------------------------------------------------------------------*/
 int AddCurrentDocToProject()
 {
-  if (!dtkProject)
+  if (!dtkProject) {
+    fl_alert("Can't add document. No project open.");
     return -1;
+  }
   // which document are we talking about?
   Dtk_Document *doc = GetCurrentDocument();
-  if (!doc)
+  if (!doc) {
+    fl_alert("Can't add document. No document selected.");
     return -1;
+  }
   // if it is already in the project, don't bother
-  if (doc->project())
+  if (doc->project()) {
+    fl_alert("This document is already part of the project.");
     return 0;
+  }
   // save the project to disk first, possibly renaming it
-  doc->setList(dtkProject->documentList());
   int ret = doc->save();
-  doc->setList(0L);
   if (ret!=0)
     return -1;
   // remove from globals and reattach to the project
   dtkGlobalDocuments->remove(doc);
-  dtkProject->documentList()->add(doc);
-  doc->setList(dtkProject->documentList());
+  dtkProject->documentList()->append(doc);
   // if this is a layout and there is no main layout yet, use this one
-  if (doc->isLayout() && !dtkProject->documentList()->getMain()) {
-    dtkProject->documentList()->setMain(doc);
+  if (doc->isLayout() && !dtkProject->documentList()->getMainDocument()) {
+    dtkProject->documentList()->setMainDocument(doc);
   }
   // update the menus
 	UpdateMainMenu();

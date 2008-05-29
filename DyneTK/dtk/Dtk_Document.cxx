@@ -153,7 +153,7 @@ Dtk_Project *Dtk_Document::project()
 void Dtk_Document::setMain()
 {
     assert(list_);
-    list_->setMain(this);
+    list_->setMainDocument(this);
 }
 
 /*-v2------------------------------------------------------------------------*/
