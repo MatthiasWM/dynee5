@@ -53,7 +53,7 @@ class Dtk_Document_List
   public:
     
     /**
-     * /defgroup constructor Constructor and destructor
+     * \name Constructor and Destructor
      */
     //@{
     
@@ -74,7 +74,7 @@ class Dtk_Document_List
     
     
     /**
-     * /defgroup listmanagement Basic List Management
+     * \name List Management
      */
     //@{
     
@@ -139,7 +139,7 @@ class Dtk_Document_List
      * \param   [in] filename of document that we will add
      *
      * \retval  0 if document was added successfully
-     * \retval  negative, if any part of the operation failed
+     * \retval  negative if any part of the operation failed
      *
      * \todo The file type check is currently only minimal.
      */
@@ -194,6 +194,12 @@ class Dtk_Document_List
      */
     void            documentNameChanged(Dtk_Document *document);
     
+    
+    /**
+     * \name Handling the main layout
+     */
+    //@{
+
     /** 
      * Return the main document.
      */
@@ -203,6 +209,8 @@ class Dtk_Document_List
      * Change the main document.
      */
     void            setMainDocument(Dtk_Document *doc);
+    
+    //@}
     
     
   private:

@@ -194,17 +194,22 @@ int Flio_Serial_Port::open(const char *portname, int bps)
   fcntl(port_, F_SETFL, FNDELAY);
   struct termios tio = { 0 };
   tcgetattr(port_, &tio);
-  cfmakeraw(&tio);
-  cfsetspeed(&tio, bps);
+  // no modem support at all please
+  //cfmakeraw(&tio);
+  // now set the remaining flags to allow handshake via DTR/DSR
+  tio.c_iflag = (IGNPAR | IGNBRK); // don't do any of the modem stuff
+  tio.c_oflag = 0; // nothing to change here
+  tio.c_cflag = (CS8 | CREAD); // tfr is 8n1, not setting CLOCAL should enable DTR/DSR handshake
+  tio.c_lflag = 0; // and no terminal stuff either
   // FIXME: which flow control is actually used?
   //tio.c_cflag = B38400 | CRTSCTS | CS8 | CLOCAL | CREAD;
   //tio.c_cflag = B38400 | CS8 | CLOCAL | CREAD;
   //tio.c_iflag = IGNPAR | IGNBRK;
   //tio.c_oflag = 0;
   //tio.c_lflag = 0;
+  cfsetspeed(&tio, bps);
   tio.c_cc[VMIN] = 1;
   tio.c_cc[VTIME] = 0;
-  //cfsetspeed(&tio, B38400);
   tcflush(port_, TCIFLUSH);
   int ret = tcsetattr(port_, TCSANOW, &tio);
   if (ret==-1)

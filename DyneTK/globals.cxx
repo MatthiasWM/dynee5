@@ -930,16 +930,16 @@ void InspectorSnapshotUpdate(newtRef snapshot)
       }
       // convert this to RGB (ah well)
       int wdt = right - left, hgt = bottom - top, x, y;
-      unsigned char *dst = new unsigned char[wdt*hgt*1], *imgData = dst;
+      unsigned char *dst = new unsigned char[wdt*hgt*3], *imgData = dst;
       for (y=0; y<hgt; y++) {
         unsigned char *src = theBits + y*rowbytes;
         for (x=0; x<wdt; x+=2) {
-          unsigned char d = *src++;
-          *dst++ = ((d&0xf0)|(d>>4))^0xff;
-          *dst++ = ((d<<4)|(d&0x0f))^0xff;
+          unsigned char pxl, d = *src++;
+          pxl = ((d&0xf0)|(d>>4))^0xff; *dst++ = pxl; *dst++ = pxl; *dst++ = pxl;
+          pxl = ((d<<4)|(d&0x0f))^0xff; *dst++ = pxl; *dst++ = pxl; *dst++ = pxl;
         }
       }
-      Flmp_Image *img = (Flmp_Image*)new Fl_RGB_Image(imgData, wdt, hgt, 1);
+      Flmp_Image *img = (Flmp_Image*)new Fl_RGB_Image(imgData, wdt, hgt, 3);
       img->alloc_array = 1;
       update_snapshot_window(img);
       //free(imgData);
