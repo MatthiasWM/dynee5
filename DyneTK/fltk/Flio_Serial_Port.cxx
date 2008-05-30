@@ -145,28 +145,12 @@ int Flio_Serial_Port::open(const char *portname, int bps)
   arg.BaudRate = speed;
   arg.fBinary = TRUE;
   arg.fParity = FALSE;
-  arg.fAbortOnError = FALSE;
-/*
-    DWORD fOutxCtsFlow:1;      // CTS output flow control 
-    DWORD fOutxDsrFlow:1;      // DSR output flow control 
-    DWORD fDtrControl:2;       // DTR flow control type 
-    DWORD fDsrSensitivity:1;   // DSR sensitivity 
-    DWORD fTXContinueOnXoff:1; // XOFF continues Tx 
-    DWORD fOutX: 1;            // XON/XOFF out flow control 
-    DWORD fInX: 1;             // XON/XOFF in flow control 
-    DWORD fErrorChar: 1;       // enable error replacement 
-    DWORD fNull: 1;            // enable null stripping 
-    DWORD fRtsControl:2;       // RTS flow control 
-    DWORD fAbortOnError:1;     // abort reads/writes on error 
-*/
-  // 9Pin sub D: rxd txd dcd dsr rts cts ri dtr gnd
-  // FIXME: which flow control is actually used?
-  arg.fOutxCtsFlow = TRUE;
+  arg.fOutxCtsFlow = FALSE;
   arg.fOutxDsrFlow = TRUE;
-  arg.fDsrSensitivity = FALSE;
   arg.fDtrControl = DTR_CONTROL_HANDSHAKE;
-  arg.fRtsControl = RTS_CONTROL_HANDSHAKE;
-
+  arg.fDsrSensitivity = TRUE;
+  arg.fRtsControl = RTS_CONTROL_DISABLE;
+  arg.fAbortOnError = FALSE;
   arg.ByteSize = 8;
   arg.Parity = NOPARITY;
   arg.StopBits = ONESTOPBIT;

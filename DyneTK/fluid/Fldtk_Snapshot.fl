@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0108 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -29,10 +29,19 @@ decl {\#include "allNewt.h"} {public
 decl {\#include "fltk/Flmp_Image.H"} {public
 } 
 
+decl {\#include "dtk/Dtk_Project.h"} {public
+} 
+
+decl {\#include "main.h"} {public
+} 
+
 decl {\#include <FL/Fl_RGB_Image.H>} {public
 } 
 
 decl {\#include <FL/Fl_File_Chooser.H>} {public
+} 
+
+decl {char *prevSnapshotPath;} {selected
 } 
 
 Function {show_snapshot_window()} {open return_type void
@@ -41,20 +50,27 @@ Function {show_snapshot_window()} {open return_type void
   } {
     Fl_Window snapshot {
       label {Snapshot Manager} open
-      xywh {529 326 350 547} type Double visible
+      xywh {529 326 350 542} type Double visible
     } {
       Fl_Box wImage {
         label {Loading Snapshot...}
-        xywh {10 10 330 490} box THIN_DOWN_BOX
+        xywh {10 10 330 490} box THIN_DOWN_BOX labelsize 12
       }
       Fl_Button {} {
-        label {Save As JPEG...}
+        label {Save As...}
         callback {Flmp_Image *img = (Flmp_Image*)wImage->image();
 if (!img) 
   return;
   
-const char *filename = fl_file_chooser("Save As JPEG", "*.jpg", 0);
+if (!prevSnapshotPath) {
+  if (dtkProject && dtkProject->pathname()) {
+    prevSnapshotPath = strdup(dtkProject->pathname());
+  }
+}
+  
+const char *filename = fl_file_chooser("Save As JPEG", "*.jpg", prevSnapshotPath);
 if (filename) {
+  // set the default extension to .jpg
   char buf[2048];
   const char *ext = fl_filename_ext(filename);
   if (ext==0L || *ext==0) {
@@ -63,8 +79,12 @@ if (filename) {
     filename = buf;
   }
   img->save_jpeg(filename, 90);
-}} selected
-        xywh {230 510 110 25} labelsize 12
+  // remember the path to this snapshot for later
+  if (prevSnapshotPath)
+    free(prevSnapshotPath);
+  prevSnapshotPath = strdup(filename);
+}}
+        xywh {230 510 110 20} labelsize 12
       }
     }
   }

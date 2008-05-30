@@ -73,9 +73,14 @@ extern Fl_Window *wConnect;
 
 /*-v2------------------------------------------------------------------------*/
 int NewLayoutFile(const char *filename) {
+  char buffer[2048];
   // create a filename if we have none
   if (!filename) {
-    filename = "layout.lyt";
+    if (dtkProject)
+      strcpy(buffer, dtkProject->pathname());
+    strcat(buffer, "layout.lyt");
+    fl_filename_absolute(buffer, 2047, buffer);
+    filename = buffer;
     /// \todo Make sure we choose a unique name here
     /// \todo Add the current path to the filename
     /// \todo Make sure that no file with that path and name exists
@@ -91,9 +96,14 @@ int NewLayoutFile(const char *filename) {
 
 /*-v2------------------------------------------------------------------------*/
 int NewTextFile(const char *filename) {
+  char buffer[2048];
   // create a filename if we have none
   if (!filename) {
-    filename = "script.txt";
+    if (dtkProject)
+      strcpy(buffer, dtkProject->pathname());
+    strcat(buffer, "script.txt");
+    fl_filename_absolute(buffer, 2047, buffer);
+    filename = buffer;
     /// \todo Make sure we choose a unique name here
     /// \todo Add the current path to the filename
     /// \todo Make sure that no file with that path and name exists
@@ -145,12 +155,15 @@ int OpenDocument(const char *filename)
 {
 	int ret = -1;
   // if there is no file name, pop up a file dialog
+  const char *path = 0L;
+  if (dtkProject)
+    path = dtkProject->pathname();
 	if (!filename) {
 		filename = fl_file_chooser("Open Document...",
                                "All Files(*)\t"
                                "Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
                                "Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
-                               "Native Module Files (*.ntm)\tStream Files (*.stm)", 0L);
+                               "Native Module Files (*.ntm)\tStream Files (*.stm)", path);
 		if (!filename)
 			return -2;
 	}
@@ -252,6 +265,10 @@ int SaveAllDocuments()
 /*-v2------------------------------------------------------------------------*/
 int NewProject(const char *filename) 
 {
+  // give a starting point for creating new projects
+  char path[2048]; path[0] = 0;
+  if (dtkProject && dtkProject->pathname())
+    strcpy(path, dtkProject->pathname());
   // close any dirty project first (clean projects are close later)
   if (dtkProject && dtkProject->isDirty()) {
     CloseProject();
@@ -263,7 +280,7 @@ int NewProject(const char *filename)
   // ask for a new filename where we will save this project, if none was given
   char buf[2048];
 	if (!filename) {
-		filename = fl_file_chooser("New Toolkit Project", "*.ntk", 0L);
+		filename = fl_file_chooser("New Toolkit Project", "*.ntk", path);
 		if (!filename) 
 			return 0;
     const char *ext = fl_filename_ext(filename);
@@ -346,7 +363,7 @@ int AddFileToProject(const char *filename)
                                "All Files(*)\t"
                                "Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
                                "Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
-                               "Native Module Files (*.ntm)\tStream Files (*.stm)", 0L);
+                               "Native Module Files (*.ntm)\tStream Files (*.stm)", dtkProject->pathname());
 		if (!filename)
 			return -2;
 	}
@@ -455,7 +472,7 @@ int SaveProjectAs()
     return -1;
   // get the filename form the user
   char buf[2048];
-	const char *filename = fl_file_chooser("Save Toolkit Project", "*.ntk", 0L);
+	const char *filename = fl_file_chooser("Save Toolkit Project", "*.ntk", dtkProject->filename());
 	if (!filename) 
 		return -2;
   const char *ext = fl_filename_ext(filename);
@@ -494,7 +511,8 @@ int BuildPackage()
 int DownloadPackage()
 {
 	assert(dtkProject);
-	InspectorPrintf("Sending package %s\n", dtkProject->getPackageName());
+	InspectorPrintf("Sending package %s...\n", dtkProject->getPackageName());
+  Fl::flush();
 	int ret = InspectorSendPackage(
                                  dtkProject->getPackageName(),
                                  dtkProjSettings->app->symbol->get());
@@ -504,6 +522,7 @@ int DownloadPackage()
 	} else {
  		InspectorPrintf("Done.\n");
   }
+  Fl::flush();
 	return ret;
 }
 
@@ -561,6 +580,8 @@ int InspectorSendScript(const char *script)
 /*-v2------------------------------------------------------------------------*/
 int LaunchPackage()
 {
+	InspectorPrintf("Launching package %s.\n", dtkProject->getPackageName());
+  Fl::flush();
 	return InspectorLaunchPackage(dtkProjSettings->app->symbol->get());
 }
 

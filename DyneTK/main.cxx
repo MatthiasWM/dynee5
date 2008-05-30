@@ -47,6 +47,9 @@
 
 #include <stdio.h>
 
+#ifdef WIN32
+#include "resource.h"
+#endif
 
 /*---------------------------------------------------------------------------*/
 /**
@@ -177,6 +180,7 @@ int main(int argc, char **argv) {
   Fl::set_font((Fl_Font)21, "BNu Casual");
   // font for all messages
 	fl_message_font(FL_HELVETICA, 12);
+  fl_register_images();
   
 	toolbox_open_pixmap = new Fl_Pixmap(toolbox_open_xpm);
 	toolbox_closed_pixmap = new Fl_Pixmap(toolbox_closed_xpm);
@@ -225,6 +229,9 @@ int main(int argc, char **argv) {
   
 	// create the main window
 	dtkMain = new Fldtk_Main_Window(785, 595);
+#ifdef WIN32
+  dtkMain->icon((char*)LoadIcon(fl_display, MAKEINTRESOURCE(IDI_ICON1)));
+#endif
 	int w = dtkPrefs->win_w, h = dtkPrefs->win_h;
 	int x = dtkPrefs->win_x, y = dtkPrefs->win_y;
 	if (x!=0xDECAFF && y!=0xDECAFF)
@@ -266,6 +273,9 @@ char *dtkReleaseNotes =
   "<h2>DyneTK Release Notes</h2>\n"
   "<h3>DyneTK 1.7.1</h3>\n"
   "<ul>"
+  "<li>added smarter paths presets for file choosers</tt></li>\n"
+  "<li>fixed wrong handshake for MSWindows serial connection</tt></li>\n"
+  "<li>fixed missing handshake on OS X serial connection</tt></li>\n"
   "<li>added compile-time function <tt>MakeBinaryFromHex</tt></li>\n"
   "<li>added application icon</li>\n"
   "<li>added function to delete templates</li>\n"
