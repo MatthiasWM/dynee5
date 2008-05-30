@@ -177,8 +177,8 @@ newtRef Dtk_Layout::saveLayoutSettings()
   char pathname[1024];
   pathname[0] = 0;
   getcwd(pathname, 1023);
-  if (project() && project()->pathname())
-    strcpy(pathname, project()->pathname());
+  if (project() && project()->dos_pathname())
+    strcpy(pathname, project()->dos_pathname());
   newtRefVar linkedToA[] = {
     NSSYM(class),               NSSYM(fileReference),
     NSSYM(projectPath),         NewtMakeString(pathname, false),

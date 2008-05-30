@@ -130,7 +130,8 @@ public:
   /**
    * Return a pointer to a buffer containing project file path with a trailing slash.
    */
-  char          * pathname();
+  char          * dos_pathname();
+  char          * posix_pathname();
 
   /** 
    * Return the name of the project.
@@ -177,7 +178,8 @@ private:
 	char          * startdir_;
   
   /// stack for pushing and popping a path
-	char          * pathname_;
+	char          * dos_pathname_;
+	char          * posix_pathname_;
   
   /// package as a Newton Database
 	newtRef       package_;

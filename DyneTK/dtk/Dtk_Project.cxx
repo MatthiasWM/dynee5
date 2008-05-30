@@ -67,7 +67,8 @@ Dtk_Project::Dtk_Project()
   filename_(0L),
   name_(0L),
   startdir_(0L),
-  pathname_(0L),
+  dos_pathname_(0L),
+  posix_pathname_(0L),
   package_(kNewtRefNIL),
   documentList_(0L),
   wMainWindow(dtkMain),
@@ -90,8 +91,10 @@ Dtk_Project::~Dtk_Project()
 		free(shortname_);
 	if (filename_)
 		free(filename_);
-	if (pathname_)
-		free(pathname_);
+	if (dos_pathname_)
+		free(dos_pathname_);
+	if (posix_pathname_)
+		free(posix_pathname_);
 	if (packagename_)
 		free(packagename_);
 	if (startdir_)
@@ -126,10 +129,12 @@ void Dtk_Project::setFilename(const char *filename)
 		shortname_ = (char*)calloc(n+1, 1);
 		memcpy(shortname_, name_, n);
     // The pathname is the path part of the filename with a trailing slash.
+    posix_pathname_ = (char*)calloc(1, name_-filename_+1);
+    memcpy(posix_pathname_, filename_, name_-filename_);
     // For compatibility with MSWindows, the path separators are backslashes!
-    pathname_ = (char*)calloc(1, name_-filename_+1);
-    memcpy(pathname_, filename_, name_-filename_);
-    for (char *s=pathname_; *s; ++s) {
+    dos_pathname_ = (char*)calloc(1, name_-filename_+1);
+    memcpy(dos_pathname_, filename_, name_-filename_);
+    for (char *s=dos_pathname_; *s; ++s) {
       if (*s=='/') *s='\\';
     }
 	}
@@ -144,9 +149,16 @@ void Dtk_Project::setFilename(const char *filename)
 
 
 /*---------------------------------------------------------------------------*/
-char *Dtk_Project::pathname()
+char *Dtk_Project::dos_pathname()
 {
-  return pathname_;
+  return dos_pathname_;
+}
+
+
+/*---------------------------------------------------------------------------*/
+char *Dtk_Project::posix_pathname()
+{
+  return posix_pathname_;
 }
 
 

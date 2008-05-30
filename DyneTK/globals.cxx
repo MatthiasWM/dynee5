@@ -77,7 +77,7 @@ int NewLayoutFile(const char *filename) {
   // create a filename if we have none
   if (!filename) {
     if (dtkProject)
-      strcpy(buffer, dtkProject->pathname());
+      strcpy(buffer, dtkProject->posix_pathname());
     strcat(buffer, "layout.lyt");
     fl_filename_absolute(buffer, 2047, buffer);
     filename = buffer;
@@ -100,7 +100,7 @@ int NewTextFile(const char *filename) {
   // create a filename if we have none
   if (!filename) {
     if (dtkProject)
-      strcpy(buffer, dtkProject->pathname());
+      strcpy(buffer, dtkProject->posix_pathname());
     strcat(buffer, "script.txt");
     fl_filename_absolute(buffer, 2047, buffer);
     filename = buffer;
@@ -157,7 +157,7 @@ int OpenDocument(const char *filename)
   // if there is no file name, pop up a file dialog
   const char *path = 0L;
   if (dtkProject)
-    path = dtkProject->pathname();
+    path = dtkProject->posix_pathname();
 	if (!filename) {
 		filename = fl_file_chooser("Open Document...",
                                "All Files(*)\t"
@@ -267,8 +267,8 @@ int NewProject(const char *filename)
 {
   // give a starting point for creating new projects
   char path[2048]; path[0] = 0;
-  if (dtkProject && dtkProject->pathname())
-    strcpy(path, dtkProject->pathname());
+  if (dtkProject && dtkProject->posix_pathname())
+    strcpy(path, dtkProject->posix_pathname());
   // close any dirty project first (clean projects are close later)
   if (dtkProject && dtkProject->isDirty()) {
     CloseProject();
@@ -363,7 +363,7 @@ int AddFileToProject(const char *filename)
                                "All Files(*)\t"
                                "Layout Files (*.lyt)\tTest Files (*.txt)\tBitmap Files (*.bmp)\t"
                                "Sound Files (*.wav)\tPackage Files (*.pkg)\tBook Files (*.lyt)\t"
-                               "Native Module Files (*.ntm)\tStream Files (*.stm)", dtkProject->pathname());
+                               "Native Module Files (*.ntm)\tStream Files (*.stm)", dtkProject->posix_pathname());
 		if (!filename)
 			return -2;
 	}

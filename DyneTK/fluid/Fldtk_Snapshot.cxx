@@ -32,8 +32,8 @@ if (!img)
   return;
   
 if (!prevSnapshotPath) {
-  if (dtkProject && dtkProject->pathname()) {
-    prevSnapshotPath = strdup(dtkProject->pathname());
+  if (dtkProject && dtkProject->posix_pathname()) {
+    prevSnapshotPath = strdup(dtkProject->posix_pathname());
   }
 }
   
