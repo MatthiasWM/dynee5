@@ -94,7 +94,7 @@ int Dtk_Layout::load()
 {
 	if (!editor_)
 		edit();
-	askForFilename_ = false; // FIXME only if the document was loaded successfuly
+	askForFilename_ = false; // FIXME only if the document was loaded successfully
   
   uint8_t *buffer;
   FILE *f = fopen(filename_, "rb");

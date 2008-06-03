@@ -71,7 +71,7 @@ int Dtk_Script::load()
 {
 	if (!editor_)
 		edit();
-	askForFilename_ = false; // FIXME only if the document was loaded successfuly
+	askForFilename_ = false; // FIXME only if the document was loaded successfully
 	return editor_->loadFile(filename_);
 }
 

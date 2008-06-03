@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_04F25F55FF324ABA84616DB8635076B2"
+        "OwnerKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_507C17B2C37540458C0EC88217E09059"
         "OwnerKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
         "MsmSig" = "8:_UNDEFINED"
@@ -35,6 +41,12 @@
         {
         "MsmKey" = "8:_CAD0F132B7E043AE87D0470E3C395C72"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DEA0F576A30E4B54A7E3A8B1BB944434"
+        "OwnerKey" = "8:_04F25F55FF324ABA84616DB8635076B2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -82,6 +94,11 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.2.0"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 2.0"
+                    "ProductCode" = "8:Microsoft.Net.Framework.2.0"
+                    }
                 }
             }
         }
@@ -90,7 +107,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\DyneTK-1.7.0.msi"
+        "OutputFilename" = "8:Release\\DyneTK-1.7.1.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -290,7 +307,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DyneTK"
         "ProductCode" = "8:{FC68B262-78A2-4674-BEA2-D7C4FD8C4334}"
-        "PackageCode" = "8:{E20973FE-9E55-4B98-9407-3C0775688152}"
+        "PackageCode" = "8:{E59A8ED1-624A-429D-A5AE-AF4C2A535BA3}"
         "UpgradeCode" = "8:{F3FE0997-8656-4097-94BF-7B98FBB5B65A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -833,11 +850,39 @@
         }
         "MergeModule"
         {
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_04F25F55FF324ABA84616DB8635076B2"
+            {
+            "UseDynamicProperties" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "SourcePath" = "8:Microsoft_VC80_DebugCRT_x86.msm"
+                "Properties"
+                {
+                }
+            "LanguageId" = "3:0"
+            "Exclude" = "11:FALSE"
+            "Folder" = "8:"
+            "Feature" = "8:"
+            "IsolateTo" = "8:"
+            }
             "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_507C17B2C37540458C0EC88217E09059"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "SourcePath" = "8:Microsoft_VC80_CRT_x86.msm"
+                "Properties"
+                {
+                }
+            "LanguageId" = "3:0"
+            "Exclude" = "11:FALSE"
+            "Folder" = "8:"
+            "Feature" = "8:"
+            "IsolateTo" = "8:"
+            }
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_DEA0F576A30E4B54A7E3A8B1BB944434"
+            {
+            "UseDynamicProperties" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "SourcePath" = "8:policy_8_0_microsoft_vc80_debugcrt_x86.msm"
                 "Properties"
                 {
                 }
@@ -950,7 +995,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
             {
-            "SourcePath" = "8:..\\..\\test\\DyneTKd.exe"
+            "SourcePath" = "8:..\\..\\test\\DyneTK.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B827252F1B90433CAFD0031F2FA441BD"

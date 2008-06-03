@@ -38,7 +38,7 @@
 #include "main.h"
 
 #include <FL/filename.h>
-#include "fltk/Flmm_Message.h"
+#include "fltk/Flmm_Message.H"
 #include "fluid/Fldtk_Proj_Settings.h"
 
 #include <assert.h>
@@ -1140,7 +1140,7 @@ void		NVMClearException(void);
 	//NewtPrintObject(stdout, package_);
   
   if (NewtRefIsBinary(package_)) {
-    InspectorPrintf("Package build successfuly (%dkBytes)\n", NewtBinaryLength(package_)/1024+1);
+    InspectorPrintf("Package build successfully (%dkBytes)\n", NewtBinaryLength(package_)/1024+1);
   } else {
     InspectorPrintf("Error assembling package\n");
     return -1;
