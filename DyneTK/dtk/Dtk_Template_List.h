@@ -34,40 +34,79 @@ class Dtk_Template;
 class Dtk_Layout;
 
 
-/** Keep a list of templates.
+/** 
+ * Keep a list of templates.
  */
 class Dtk_Template_List
   {
   public:
     
-    /** Initialize a template list
+    /** 
+     * Initialize a template list
      */
     Dtk_Template_List(Dtk_Template *parent);
     
-    /** Remove a template list and all its members.
+    /** 
+     * Delete a template list and all its members.
      */
     ~Dtk_Template_List();
     
+    
     /**
-     * Remove all templates from the list.
+     * \name List Management
      */
-    void clear();
-    
-    /** Add an existing template to this list.
+    //@{
+        
+    /** 
+     * Append an existing template to this list of templates.
+     * 
+     * This function will create a link to the given template and ask the template to link back here. 
+     *
+     * \todo It will also create a corresponding entry in the template browser if that exists.
+     *
+     * It will not open or show the template.
+     *
+     * \param[in] tmpl the templates that we want to append to the end of the list.
      */
-    void add(Dtk_Template *tmpl);
+    void append(Dtk_Template *tmpl);
     
-    /** Remove a template from this list and from the GUI.
+    /** 
+     * Remove a template from this list.
+     *
+     * This function removes all links from this list to the given template.
+     * It also updates the browser if required.
+     * It does not close, clear, or delete the document.
+     *
+     * \param   [in] tmpl address of template to be removed
+     *
+     * \todo FIXME: In the current version, this function *does* delete the template which causes a crash!
      */
     void remove(Dtk_Template *tmpl);
     
-    /** Return the number of templates in the list.
+    /**
+     * Remove all templates from the list.
+     *
+     * Go backwards through the list and tell all members to clear their 
+     * dependents, then remove the member from this list, and finally delete 
+     * the member.
+     *
+     * This function takes care of all UI links as well.
+     *
+     * \todo FIXME: Verify that this is really what this function does!
+     */
+    void clear();
+    
+    /** 
+     * Return the number of templates in the list.
      */
     int size() { return tmplList_.size(); }
     
-    /** Return the template pointer using an index.
+    /** 
+     * Return the template pointer using an index.
      */
     Dtk_Template *at(int index) { return tmplList_.at(index); }
+    
+    //@}
     
     /** Return the the owner of this template list.
      */

@@ -101,8 +101,11 @@ int Dtk_Document_List::remove(Dtk_Document *doc)
       if (main_==doc)
         setMainDocument(0L);
       // now remove it from the browser
-      if (wDocumentBrowser_)
+      if (wDocumentBrowser_) {
+        if (wDocumentBrowser_->value()==i+1)
+          wDocumentBrowser_->value(0);
         wDocumentBrowser_->remove(i+1);
+      }
       // take it out of the list
       docList_.erase(docList_.begin()+i);
       // and remove the documents link back to us

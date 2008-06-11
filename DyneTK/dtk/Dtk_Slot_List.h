@@ -39,65 +39,75 @@ class Fl_Hold_Browser;
 /** Keep a list of slots.
  */
 class Dtk_Slot_List
-{
-public:
-
-    /** Initialize a slot list
-     */
-                    Dtk_Slot_List(Dtk_Template *tmpl);
-
-    /** Remove a slot list and all referenced slots.
-     */
-                    ~Dtk_Slot_List();
+  {
+  public:
     
-  /**
-   * Remove all slots in this list.
-   */
-  void clear();
-  
-    /** Find our layout document.
+    /** 
+     * Initialize a slot list
+     */
+    Dtk_Slot_List(Dtk_Template *tmpl);
+    
+    /** 
+     * Remove a slot list and all referenced slots.
+     */
+    ~Dtk_Slot_List();
+    
+    /**
+     * Remove all slots in this list.
+     */
+    void clear();
+    
+    /** 
+     * Find our layout document.
      */
     Dtk_Layout * layout();
-
-    /** Add an existing slot to our list.
+    
+    /** 
+     * Add an existing slot to our list.
      */
     void add(Dtk_Slot *slot);
-
-    /** Remove a slot from this list and from the GUI.
+    
+    /** 
+     * Remove a slot from this list and from the GUI.
      */
     void remove(Dtk_Slot *slot);
-
-    /** Return the number of slots in the list
+    
+    /**
+     * Return the number of slots in the list
      */
     int size();
-
-    /** Return the slot at the specified index.
+    
+    /**
+     * Return the slot at the specified index.
      */
     Dtk_Slot *at(int index);
-
-    /** Return the slot with a given key.
+    
+    /**
+     * Return the slot with a given key.
      */
     Dtk_Slot *find(const char *key);
-
-    /** Return the tamplate that holds this slot list
+    
+    /**
+     * Return the tamplate that holds this slot list
      */
     Dtk_Template *getTemplate() { return template_; }
-
-    /** Update the entry in the listy that points to the specified slot.
+    
+    /** 
+     * Update the entry in the listy that points to the specified slot.
      */
     void updateKey(Dtk_Slot *slot);
-
-private:
-
+    
+  private:
+    
     /// back reference to the template that keeps this list
     Dtk_Template            * template_;
-
+    
     /// stdlib list of documents
-	std::vector<Dtk_Slot*>	slotList_;
-
+    std::vector<Dtk_Slot*>	slotList_;
+    
     /// we are in charge of keeping this browser updated and reacting to its messages
     Fl_Hold_Browser         * browser_;
-};
+  };
 
 
 #endif

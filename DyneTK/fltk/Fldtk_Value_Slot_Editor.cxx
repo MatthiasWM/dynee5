@@ -38,10 +38,12 @@ Fldtk_Value_Slot_Editor::Fldtk_Value_Slot_Editor(Fl_Group *container, Dtk_Value_
 :   Fl_Group(container->x(), container->y(), container->w(), container->h()),
     slot_(slot)
 {
-    wValue_ = new Fl_Float_Input(x()+50, y()+25, 120, 20, "Value:");
+    wValue_ = new Fl_Float_Input(x()+50, y()+20, 120, 20, "Value:");
     wValue_->textsize(12);
     wValue_->textfont(FL_COURIER);
     wValue_->labelsize(12);
+  Fl_Box *var = new Fl_Box(x()+170, y()+40, w()-170, h()-40);
+  resizable(var);
     end();
     callback((Fl_Callback*)editor_cb, this);
 }

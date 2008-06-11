@@ -83,9 +83,36 @@ Dtk_Layout::~Dtk_Layout()
 /*---------------------------------------------------------------------------*/
 void Dtk_Layout::clear()
 {
-  if (root_)
-    root_->clear();
+  Dtk_Template *tmpl = root_;
+  if (tmpl) {
+    tmpl->clear();
+    removeTemplates();
+    delete tmpl;
+  }
   Dtk_Document::clear();
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Layout::removeTemplates()
+{
+  if (root_) {
+    // remove the template from the browser
+    Fl_Hold_Browser *browser = templateBrowser();
+    if (browser) {
+      int j, nb = browser->size();
+      for (j=nb; j>0; --j) {
+        if (browser->data(j)==root_) {
+          if (browser->value()==j)
+            browser->value(0);
+          browser->remove(j);
+        }
+      }
+    }
+    // unlink the root template
+    root_->setLayout(0L);
+    root_ = 0L;
+  }
 }
 
 

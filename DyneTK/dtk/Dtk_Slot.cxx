@@ -36,8 +36,8 @@
 
 
 /*---------------------------------------------------------------------------*/
-Dtk_Slot::Dtk_Slot(Dtk_Slot_List *list, const char *theKey, newtRef)
-:   list_(list),
+Dtk_Slot::Dtk_Slot(Dtk_Slot_List *list, const char *theKey, newtRef) : 
+list_(list),
 key_(strdup(theKey)),
 datatype_(0L)
 {
@@ -54,11 +54,13 @@ Dtk_Slot::~Dtk_Slot()
   list_ = 0L;
 }
 
+
 /*---------------------------------------------------------------------------*/
 void Dtk_Slot::edit()
 {
   layout()->slotEditor()->blank();
 }
+
 
 /*---------------------------------------------------------------------------*/
 Dtk_Layout *Dtk_Slot::layout()
@@ -66,11 +68,13 @@ Dtk_Layout *Dtk_Slot::layout()
   return list_->layout();
 }
 
+
 /*---------------------------------------------------------------------------*/
 Dtk_Template *Dtk_Slot::getTemplate()
 {
   return list_ ? list_->getTemplate() : 0L;
 }
+
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Slot::setKey(const char *name)
@@ -93,6 +97,7 @@ void Dtk_Slot::setKey(const char *name)
   // update all GUIs (we should instead send a signal to all subscribed slots)
   list_->updateKey(this);
 }
+
 
 //
 // End of "$Id$".

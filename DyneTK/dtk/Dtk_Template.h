@@ -215,6 +215,9 @@ class Dtk_Template
     
     Dtk_Template_List     * list() { return list_; }
     
+    void setList(Dtk_Template_List *list) { list_ = list; }
+    void setLayout(Dtk_Layout *layout) { layout_ = layout; }
+    
   private:
     
     /** This slot is called if the widget is dragged or resized.

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -40,13 +40,19 @@ decl {class Dtk_Value_Slot;} {public global
 
 class Fldtk_Format_Slot_Editor {open : {public Fldtk_Value_Slot_Editor}
 } {
-  Function {Fldtk_Format_Slot_Editor(Fl_Group *container, Dtk_Value_Slot *slot) : Fldtk_Value_Slot_Editor(container, slot), value_(0)} {} {
+  Function {Fldtk_Format_Slot_Editor(Fl_Group *container, Dtk_Value_Slot *slot) : Fldtk_Value_Slot_Editor(container, slot), value_(0)} {open
+  } {
     code {wValue_->hide();
 position(0, 0);
 begin();
-buildUI_();
+Fl_Group *ct = buildUI_();
+int dx = ct->x() + ct->w();
+int dy = ct->y() + ct->h();
+Fl_Box *res = new Fl_Box(x()+dx, y()+dy, w()-dx, h()-dy);
+resizable(res);
 end();
-position(container->x(), container->y());} {}
+position(container->x(), container->y());} {selected
+    }
   }
   Function {~Fldtk_Format_Slot_Editor()} {} {}
   Function {value(double v)} {open return_type void
@@ -96,8 +102,7 @@ switch (value_&0xf000) {
   case 16384: wLines->value(4); break; // gray
   case 20480: wLines->value(5); break; // dk gray
   case 57344: wLines->value(6); break; // black
-}} {selected
-    }
+}} {}
   }
   Function {value()} {open return_type double
   } {

@@ -190,6 +190,8 @@ int main(int argc, char **argv) {
 	NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
 	NcSetGlobalVar(NSSYM(printDepth), NSINT(30));
   NewtDefGlobalFunc(NSSYM(MakeBinaryFromHex), (void*)nsMakeBinaryFromHex, 2, "MakeBinaryFromHex(hexString, class)");
+  // GetSoundFrame   MakeBinaryFromHex   MakeDitheredPattern 
+  // MakeExtrasIcons   MakePixFamily   UnpackRGB
 	NEWT_INDENT = 1;
 	NEWT_DUMPBC = 1;
   NEWT_MODE_NOS2 = true;

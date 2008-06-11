@@ -39,11 +39,13 @@ Fldtk_Proto_Slot_Editor::Fldtk_Proto_Slot_Editor(Fl_Group *container, Dtk_Proto_
 :   Fl_Group(container->x(), container->y(), container->w(), container->h()),
     slot_(slot)
 {
-    wProto_ = new Fl_Choice(x()+80, y()+25, 175, 20, "Templates:");
+    wProto_ = new Fl_Choice(x()+80, y()+20, 180, 20, "Templates:");
     wProto_->labelsize(12);
     wProto_->textsize(12);
     wProto_->menu(dtkPlatform->templateChoiceMenu());
     //wProto_->callback((Fl_Callback*)specific_choice_cb, this);
+  Fl_Box *var = new Fl_Box(x()+260, y()+40, w()-260, h()-40);
+  resizable(var);
     callback((Fl_Callback*)editor_cb);
     end();
 }

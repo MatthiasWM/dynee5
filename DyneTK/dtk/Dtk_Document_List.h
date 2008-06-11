@@ -85,7 +85,7 @@ class Dtk_Document_List
      * document to link back here. It will also create a corresponding entry
      * in the document browser if that exists.
      *
-     * It will not open the document or creata a vie in the tab group.
+     * It will neither open the document nor create a view in the tab group.
      *
      * \param doc the document that we want to append to the end of the list.
      */
@@ -95,8 +95,8 @@ class Dtk_Document_List
      * Remove a document from the list.
      *
      * This function removes all links from this list to the given document.
+     * It also updates the browser if required.
      * It does not close, clear, or delete the document.
-     * This also updates the browser if required.
      *
      * \param   [in] document address of doc to be removed
      *
@@ -109,7 +109,7 @@ class Dtk_Document_List
      * Delete all documents in this list.
      *
      * Go backwards through the list and tell all members to clear their 
-     * dependents, the remove the member from this list, and finally delete 
+     * dependents, then remove the member from this list, and finally delete 
      * the member.
      *
      * This function takes care of all UI links as well.

@@ -73,7 +73,11 @@ Fldtk_Rect_Slot_Editor::Fldtk_Rect_Slot_Editor(Fl_Group *container, Dtk_Rect_Slo
     wHeight_ = new Fl_Box(x()+260, y()+55, 100, 20, "Height: 0");
     wHeight_->labelsize(12);
     wHeight_->align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE);
-    end();
+  int dx = wHeight_->x() + wHeight_->w();
+  int dy = wHeight_->y() + wHeight_->h();
+  Fl_Box *res = new Fl_Box(x()+dx, y()+dy, w()-dx, h()-dy);
+  resizable(res);
+  end();
     callback((Fl_Callback*)editor_cb, this);
 }
 

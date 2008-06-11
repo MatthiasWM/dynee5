@@ -33,6 +33,7 @@
 
 #include <FL/Fl_Hold_Browser.H>
 
+
 /*---------------------------------------------------------------------------*/
 Dtk_Template_List::Dtk_Template_List(Dtk_Template *parent)
 :   parent_(parent)
@@ -48,24 +49,46 @@ Dtk_Template_List::~Dtk_Template_List()
 
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Template_List::clear()
+void Dtk_Template_List::append(Dtk_Template *tmpl)
 {
+  tmplList_.push_back(tmpl);
+  tmpl->setList(this);
+  /// \todo This class should be a part-owner of the template browser and update the browser to reflect the addition
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template_List::remove(Dtk_Template *tmpl) 
+{
+  // search the list for this template
   int i, n = tmplList_.size();
   for (i=n-1; i>=0; --i) {
-    Dtk_Template *tmpl = tmplList_.at(i);
-    tmpl->clear();
-    delete tmpl;
+    if (tmplList_.at(i)==tmpl) {
+      // remove the template from the browser
+      Dtk_Layout *lyt = tmpl->layout();
+      Fl_Hold_Browser *browser = lyt->templateBrowser();
+      if (browser) {
+        int j, nb = browser->size();
+        for (j=nb; j>0; --j) {
+          if (browser->data(j)==tmpl) {
+            if (browser->value()==j)
+              browser->value(0);
+            browser->remove(j);
+          }
+        }
+      }
+      // take the template out of the list
+      tmplList_.erase(tmplList_.begin()+i);
+      // and remove the link back to the list
+      tmpl->setList(0L);
+      break;
+    }
   }
 }
 
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Template_List::add(Dtk_Template *tmpl)
-{
-    tmplList_.push_back(tmpl);
-}
-
-/*---------------------------------------------------------------------------*/
+/*
 void Dtk_Template_List::remove(Dtk_Template *tmpl) 
 {
   tmpl->removeAllSlots();
@@ -91,6 +114,20 @@ void Dtk_Template_List::remove(Dtk_Template *tmpl)
     }
   }
 }
+*/
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Template_List::clear()
+{
+  int i, n = tmplList_.size();
+  for (i=n-1; i>=0; --i) {
+    Dtk_Template *tmpl = tmplList_.at(i);
+    tmpl->clear();
+    remove(tmpl);
+    delete tmpl;
+  }
+}
+
 
 //
 // End of "$Id$".

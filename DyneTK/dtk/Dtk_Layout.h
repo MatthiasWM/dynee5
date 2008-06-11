@@ -64,6 +64,8 @@ class Dtk_Layout : public Dtk_Document
      */
     virtual void clear();
     
+    void removeTemplates();
+    
     virtual int		load();
     virtual int   edit();
     virtual int		save();

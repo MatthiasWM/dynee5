@@ -138,7 +138,7 @@ int Dtk_Template::load(newtRef node)
           }
           for (i=0; i<n; i++) {
             Dtk_Template *tmpl = new Dtk_Template(layout_, tmplList_);
-            tmplList_->add(tmpl);
+            tmplList_->append(tmpl);
             tmpl->load(NewtGetArraySlot(a, i));
           }
         }
@@ -355,7 +355,7 @@ Dtk_Template *Dtk_Template::addTemplate(int x, int y, int w, int h, char *proto)
   
   if (!tmplList_)
     tmplList_ = new Dtk_Template_List(this);
-  tmplList_->add(tmpl);
+  tmplList_->append(tmpl);
   
   int indent = indent_, index = index_;
   updateBrowserLink(browser_, indent, index);

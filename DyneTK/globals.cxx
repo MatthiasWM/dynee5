@@ -1099,8 +1099,14 @@ void DeleteTemplate(Dtk_Template *tmpl)
       return;
   }
   Dtk_Template_List *list = tmpl->list();
-  list->remove(tmpl);
-  delete tmpl;
+  Dtk_Layout *layout = tmpl->layout();
+  if (list) {
+    list->remove(tmpl);
+    delete tmpl;
+  } else if (layout) {
+    layout->removeTemplates();
+    delete tmpl;
+  }
 }
 
 /*---------------------------------------------------------------------------*/
