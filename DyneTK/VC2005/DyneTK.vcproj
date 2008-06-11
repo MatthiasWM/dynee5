@@ -387,6 +387,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\fltk\Fldtk_Icon_Dropbox.cxx"
+				>
+			</File>
+			<File
 				RelativePath="..\fltk\Fldtk_Justify_Slot_Editor.cxx"
 				>
 			</File>
@@ -823,6 +827,10 @@
 				</File>
 				<File
 					RelativePath="..\fltk\Fldtk_Format_Slot_Editor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\fltk\Fldtk_Icon_Dropbox.h"
 					>
 				</File>
 				<File

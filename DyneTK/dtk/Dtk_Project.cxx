@@ -174,78 +174,85 @@ char *Dtk_Project::getPackageName()
  * D -> setting the default for this item is completed
  * X -> item is fully implemented 
  * U -> will remain unused
- {
- RWDU	ntkPlatform: 1, 
- RWDU	fileVersion: 2, 
- projectItems: {
- sortOrder: 0, 
- items: [ 
- { 
- file: { 'fileReference, }, 
- type: 0, 
- isMainLayout: NIL}
- ]
- }, 
- projectSettings: {
- PLATFORM: "Newton21", 
- language: "English", 
- debugBuild: TRUE, 
- ignoreNative: NIL, 
- checkglobalfunctions: TRUE, 
- oldBuildRules: NIL, 
- usestepchildren: TRUE, 
- suppressbytecodes: NIL,
- fasterFunctions: TRUE }, 
- outputSettings: {
+ 
+      {
+ RWDU	  ntkPlatform: 1, 
+ RWDU	  fileVersion: 2, 
+        projectItems: {
+          sortOrder: 0, 
+          items: [ 
+            { 
+              file: { 'fileReference, }, 
+              type: 0, 
+              isMainLayout: NIL
+            }
+          ]
+      }, 
+      projectSettings: {
+        PLATFORM: "Newton21", 
+        language: "English", 
+        debugBuild: TRUE, 
+        ignoreNative: NIL, 
+        checkglobalfunctions: TRUE, 
+        oldBuildRules: NIL, 
+        usestepchildren: TRUE, 
+        suppressbytecodes: NIL,
+        fasterFunctions: TRUE 
+      }, 
+      outputSettings: {
  RWDX		applicationName: "minimal", 
  RWDX		applicationSymbol: "Minimal:SIG", 
- partType: 0, 
- topFrameExpression: "", 
+        partType: 0, 
+        topFrameExpression: "", 
  RWDU		autoClose: TRUE,  // I can not find the corresponding flag in the Package file format
- customPartType: "UNKN", 
- fasterSoups: NIL, 
- iconpronormal: {
- __ntExternFile: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- __ntmaskfile: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- __ntCreateMask: 0, 
- imageinfo1: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- imageinfo2: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- imageinfo4: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- imageinfo8: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- maskinfo: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- maskoption: 0}, 
- iconprohighlighted: {
- __ntExternFile: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- __ntmaskfile: {class: 'fileReference, projectPath: "", deltaFromProject:""}, 
- __ntCreateMask: 0, 
- imageinfo1: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- imageinfo2: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- imageinfo4: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- imageinfo8: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- maskinfo: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
- maskoption: 0
- }, 
- iconFile: {class: 'fileReference, projectPath: "", deltaFromProject: ""}}, 
- packageSettings: {
+        customPartType: "UNKN", 
+        fasterSoups: NIL, 
+        iconpronormal: {
+          __ntExternFile: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          __ntmaskfile: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          __ntCreateMask: 0, 
+          imageinfo1: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          imageinfo2: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          imageinfo4: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          imageinfo8: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          maskinfo: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          maskoption: 0
+        }, 
+        iconprohighlighted: {
+          __ntExternFile: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          __ntmaskfile: {class: 'fileReference, projectPath: "", deltaFromProject:""}, 
+          __ntCreateMask: 0, 
+          imageinfo1: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          imageinfo2: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          imageinfo4: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          imageinfo8: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          maskinfo: {class: 'fileReference, projectPath: "", deltaFromProject: ""}, 
+          maskoption: 0
+        }, 
+        iconFile: {class: 'fileReference, projectPath: "", deltaFromProject: ""}
+      }, 
+      packageSettings: {
  RWDX		packageName: "Minimal:SIG", 
  RWDX		version: "1", 
  RWDX		copyright: "Æ1997 Apple Computer, Inc. All rights reserved.", 
- optimizeSpeed: TRUE, 
- copyProtected: NIL, 
+        optimizeSpeed: TRUE, 
+        copyProtected: NIL, 
  RWDX		deleteOnDownload: TRUE, 
- dispatchOnly: NIL, 
- fourByteAlignment: TRUE, 
- zippyCompression: TRUE, 
- newton20Only: NIL}, 
- profilerSettings: {
- memory: TRUE,
- percent: TRUE, 
- compileforprofiling: NIL, 
- compileForSpeed: NIL, 
- detailedSystemCalls: NIL, 
- detailedUserFunctions: TRUE}, 
+        dispatchOnly: NIL, 
+        fourByteAlignment: TRUE, 
+        zippyCompression: TRUE, 
+        newton20Only: NIL
+      }, 
+      profilerSettings: {
+        memory: TRUE,
+        percent: TRUE, 
+        compileforprofiling: NIL, 
+        compileForSpeed: NIL, 
+        detailedSystemCalls: NIL, 
+        detailedUserFunctions: TRUE
+      }, 
  RWDU	windowRect: {left: 3, top: 410, bottom:550, right: 730}
- }
+    }
  
  
  */

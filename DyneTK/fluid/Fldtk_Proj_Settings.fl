@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0108 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -27,6 +27,9 @@ decl {\#include "fltk/Flmm_Set_Input.h"} {public
 } 
 
 decl {\#include "fltk/Flmm_Set_Check_Button.h"} {public
+} 
+
+decl {\#include "fltk/Fldtk_Icon_Dropbox.h"} {public
 } 
 
 decl {\#include <string.h>} {} 
@@ -78,19 +81,21 @@ auto_close->update_widget();} {}
 } 
 
 widget_class Fldtk_Proj_Icon {
-  label Icon
+  label Icon open
   xywh {584 253 380 245} type Double labelsize 12 visible position_relative
 } {
-  Fl_Group {} {
-    xywh {5 25 50 195} deactivate
+  Fl_Group {} {open
+    xywh {5 25 50 195}
   } {
     Fl_Button {} {
       label Browse
       xywh {5 25 50 20} labelsize 12 deactivate
     }
-    Fl_Box {} {
+    Fl_Box wIcon1 {
       label Default
-      xywh {5 55 50 50} box BORDER_BOX color 54 labelsize 12 deactivate
+      xywh {5 55 50 50} box BORDER_BOX color 54 labelsize 12
+      code0 {wIcon1->depth(1);}
+      class Fldtk_Icon_Dropbox
     }
     Fl_Button {} {
       label Browse
@@ -102,7 +107,7 @@ widget_class Fldtk_Proj_Icon {
     }
     Fl_Box {} {
       label {Black & White}
-      xywh {5 105 50 35} labelsize 12 align 128 deactivate
+      xywh {5 105 50 35} labelsize 12 align 128
     }
   }
   Fl_Group {} {
@@ -242,8 +247,8 @@ widget_class Fldtk_Proj_Icon {
     }
   }
   Fl_Box {} {
-    label Normal
-    xywh {5 0 85 25} labelsize 12 align 20 deactivate
+    label Normal selected
+    xywh {5 0 85 25} labelsize 12 align 20
   }
   Fl_Box {} {
     label Highlighted
@@ -332,24 +337,24 @@ deleteOnDownload->update_widget();} {}
 } 
 
 widget_class Fldtk_Proj_Project {
-  label Project open
+  label Project
   xywh {649 311 380 245} type Double labelsize 12 visible position_relative
 } {
   Fl_Choice {} {
-    label {&Platform:} open selected
+    label {&Platform:} open
     xywh {100 15 145 20} down_box BORDER_BOX labelsize 12 textsize 12
   } {
     MenuItem {} {
-      label Msgpad
-      xywh {0 0 100 20} labelsize 12 deactivate
-    }
-    MenuItem {} {
       label Newton20
-      xywh {0 0 100 20} labelsize 12 deactivate
+      xywh {0 0 100 20} labelsize 12
     }
     MenuItem {} {
       label Newton21
-      xywh {0 0 100 20} labelsize 12
+      xywh {0 0 100 20} labelsize 12 deactivate
+    }
+    MenuItem {} {
+      label Msgpad
+      xywh {0 0 100 20} labelsize 12 deactivate
     }
   }
   Fl_Input {} {
