@@ -47,11 +47,19 @@ datatype_(0L)
 /*---------------------------------------------------------------------------*/
 Dtk_Slot::~Dtk_Slot()
 {
+  close();
   if (key_)
     free(key_);
   if (datatype_)
     free(datatype_);
   list_ = 0L;
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Slot::close()
+{
+  layout()->slotEditor()->blank();
 }
 
 
@@ -65,7 +73,7 @@ void Dtk_Slot::edit()
 /*---------------------------------------------------------------------------*/
 Dtk_Layout *Dtk_Slot::layout()
 {
-  return list_->layout();
+  return list_->getLayout();
 }
 
 

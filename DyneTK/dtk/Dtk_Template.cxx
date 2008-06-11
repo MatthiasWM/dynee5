@@ -45,9 +45,11 @@
 
 #include "fluid/main_ui.h"
 
+#include "fltk/Fldtk_Slot_Browser.H"
+#include "fltk/Fldtk_Tmpl_Browser.H"
+
 #include "allNewt.h"
 
-#include <FL/Fl_Hold_Browser.H>
 #include <FL/Fl_Group.H>
 
 
@@ -81,8 +83,9 @@ proto_(0L)
 /*---------------------------------------------------------------------------*/
 Dtk_Template::~Dtk_Template()
 {
-  if (widget_)
+  if (widget_) {
     widget_->parent()->remove(widget_);
+  }
   delete widget_;
   delete scriptName_;
   delete ntId_;
@@ -280,7 +283,7 @@ const char *Dtk_Template::browserName()
 /*---------------------------------------------------------------------------*/
 void Dtk_Template::edit()
 {
-  Fl_Hold_Browser *slotBrowser = layout()->slotBrowser();
+  Fldtk_Slot_Browser *slotBrowser = layout()->slotBrowser();
   slotBrowser->clear();
   if (slotList_) {
     int i, n = slotList_->size();
@@ -383,7 +386,7 @@ Dtk_Slot_List *Dtk_Template::slotList()
 /*---------------------------------------------------------------------------*/
 void Dtk_Template::addSlot(Dtk_Slot *slot) 
 {
-  slotList()->add(slot);
+  slotList()->append(slot);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -397,22 +400,18 @@ void Dtk_Template::removeSlot(Dtk_Slot *slot)
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Template::removeAllSlots()
+void Dtk_Template::deleteAllSlots()
 {
   if (slotList_) {
-    while (slotList_->size()) {
-      DeleteSlot(slotList_->at(0));
-    }
+    slotList_->clear();
   }
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Template::removeAllChildren()
+void Dtk_Template::deleteAllChildren()
 {
   if (tmplList_) {
-    while (tmplList_->size()) {
-      DeleteTemplate(tmplList_->at(0));
-    }
+    tmplList_->clear();
   }
 }
 
@@ -455,7 +454,7 @@ Dtk_Slot *Dtk_Template::addSlot(newtRef key, newtRef slot)
     viewJustify_->signalValueChanged.connect(this, (Flmm_Slot)&Dtk_Template::viewJustifyChangedSignal);
   }
   if (dSlot) {
-    slotList_->add(dSlot);
+    slotList_->append(dSlot);
   }
   return dSlot;
 }

@@ -33,53 +33,71 @@
 class Fldtk_Proto_Slot_Editor;
 
 
-/** Manage a prototype definition slot inside a template.
+/** 
+ * Manage a prototype definition slot inside a template.
  */
 class Dtk_Proto_Slot : public Dtk_Slot
-  {
-  public:
-    
-    /** Initialize a slot
-     */
-    Dtk_Proto_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
-    
-    /** Remove a slot and unlink it from the list.
-     */
-    virtual         ~Dtk_Proto_Slot();
-    
-    /** Pop up the script slot editor.
-     */
-    virtual void    edit();
-    
-    /** Return the value
-     */
-    char            * value();
-    void            value(char *id);
-    
-    /** Apply the changes in the editor to the slot.
-     */
-    virtual void    apply();
-    
-    /** Revert the changes in the editor to the current slot sttings.
-     */
-    virtual void    revert();
-    
-    /** Write this slot as a Newt Script.
-     *
-     * \retval 0 if successful
-     * \retval negative if an error occured
-     */     
-    virtual int		write(Dtk_Script_Writer &sw);
-    
-    /** Proto slots are written in Dtk_Template::save().
-     */
-    virtual newtRefVar save() { return kNewtRefUnbind; }
-    
-  private:
-    
-    /// this is the editor that we are using
-    Fldtk_Proto_Slot_Editor    * editor_;
-  };
+{
+public:
+  
+  /** 
+   * Initialize the _proto slot.
+   */
+  Dtk_Proto_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
+  
+  /** 
+   * Clear all allocated resources.
+   */
+  virtual ~Dtk_Proto_Slot();
+  
+  /** 
+   * Pop up the proto slot editor.
+   */
+  virtual void edit();
+
+  /**
+   * Close all open editors.
+   */
+  virtual void close();
+  
+  /** 
+   * Return the prototype of the template
+   */
+  char *value();
+
+  /**
+   * Set a new prototype for this template.
+   */
+  void value(char *id);
+  
+  /**
+   * Apply the changes in the editor to the slot.
+   */
+  virtual void    apply();
+  
+  /** 
+   * Revert the changes in the editor to the current slot sttings.
+   */
+  virtual void    revert();
+  
+  /** 
+   * Write this slot as a Newt Script.
+   *
+   * \retval 0 if successful
+   * \retval negative if an error occured
+   */     
+  virtual int		write(Dtk_Script_Writer &sw);
+  
+  /** 
+   * Proto slots are written in Dtk_Template::save().
+   */
+  virtual newtRefVar save() { return kNewtRefUnbind; }
+  
+private:
+  
+  /// this is the editor that we are using
+  Fldtk_Proto_Slot_Editor    * editor_;
+};
 
 
 #endif

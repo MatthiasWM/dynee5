@@ -33,60 +33,79 @@
 class Fldtk_Value_Slot_Editor;
 
 
-/** Manage a script slot inside a template.
+/** 
+ * Manage a value slot inside a template.
  */
 class Dtk_Value_Slot : public Dtk_Slot
-  {
-  public:
-    
-    /** Initialize a slot
-     */
-    Dtk_Value_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
-    
-    /** Remove a slot and unlink it from the list.
-     */
-    virtual         ~Dtk_Value_Slot();
-    
-    /** Pop up the script slot editor.
-     */
-    virtual void    edit();
-    
-    /** Return the value
-     */
-    double          value() { return value_; }
-    void            value(double v) { value_ = v; }
-    
-    /** Write this slot as a Newt Script.
-     *
-     * \retval 0 if successful
-     * \retval negative if an error occured
-     */     
-    virtual int		write(Dtk_Script_Writer &sw);
-    
-    /** Apply the changes in the editor to the slot.
-     */
-    virtual void    apply();
-    
-    /** Revert the changes in the editor to the current slot sttings.
-     */
-    virtual void    revert();
-    
-    /** This signal will be called whenever the user applies changes to the value.
-     */
-    Flmm_Signal     signalValueChanged;
-    
-    /** Create a frame that can be saved to a layout file.
-     */
-    virtual newtRefVar save();
-    
-  private:
-    
-    /// this is the editor that we are using
-    Fldtk_Value_Slot_Editor    * editor_;
-    
-    /// the rectangle iteslf
-    double          value_;
-  };
+{
+public:
+  
+  /** 
+   * Initialize a value slot
+   */
+  Dtk_Value_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
+  
+  /** 
+   * Destroy a value slot
+   */
+  virtual         ~Dtk_Value_Slot();
+  
+  /** 
+   * Pop up the value slot editor.
+   */
+  virtual void    edit();
+
+  /**
+   * Close the value slot editor.
+   */
+  virtual void close();
+  
+  /** 
+   * Return the value
+   */
+  double          value() { return value_; }
+
+  /**
+   * Set the value.
+   */
+  void            value(double v) { value_ = v; }
+  
+  /** 
+   * Write this slot as a Newt Script.
+   *
+   * \retval 0 if successful
+   * \retval negative if an error occured
+   */     
+  virtual int		write(Dtk_Script_Writer &sw);
+  
+  /**
+   * Apply the changes in the editor to the slot.
+   */
+  virtual void    apply();
+  
+  /** 
+   * Revert the changes in the editor to the current slot sttings.
+   */
+  virtual void    revert();
+  
+  /** 
+   * This signal will be called whenever the user applies changes to the value.
+   */
+  Flmm_Signal     signalValueChanged;
+  
+  /**
+   * Create a frame that can be saved to a layout file.
+   */
+  virtual newtRefVar save();
+  
+private:
+  
+  /// this is the editor that we are using
+  Fldtk_Value_Slot_Editor    * editor_;
+  
+  /// the rectangle iteslf
+  double          value_;
+};
 
 
 #endif

@@ -48,9 +48,9 @@
 
 /*---------------------------------------------------------------------------*/
 Dtk_Value_Slot::Dtk_Value_Slot(Dtk_Slot_List *list, const char *theKey, newtRef slot)
-:   Dtk_Slot(list, theKey, slot),
-editor_(0L),
-value_(0.0)
+: Dtk_Slot(list, theKey, slot),
+  editor_(0L),
+  value_(0.0)
 {
   if (slot!=kNewtRefUnbind) {
     newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
@@ -65,19 +65,19 @@ value_(0.0)
     newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
     if (NewtRefIsString(dt)) {
       datatype_ = strdup(NewtRefToString(dt));
-    } else {
-      datatype_ = strdup("NUMB");
     }
   }
+  if (!datatype_)
+    datatype_ = strdup("NUMB");
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Value_Slot::~Dtk_Value_Slot()
 {
-  if (editor_)
-    editor_->parent()->remove(editor_);
+  close();
 }
+
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Value_Slot::edit()
@@ -96,6 +96,19 @@ void Dtk_Value_Slot::edit()
   }
   container->value(editor_);
 }
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Value_Slot::close()
+{
+  Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
+  if (editor_) {
+    container->remove(editor_);
+    delete editor_;
+    editor_ = 0L;
+  }
+}
+
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Value_Slot::write(Dtk_Script_Writer &sw)

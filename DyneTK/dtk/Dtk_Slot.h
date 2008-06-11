@@ -31,89 +31,109 @@ class Dtk_Slot_List;
 class Dtk_Layout;
 class Dtk_Script_Writer;
 class Dtk_Template;
+class Fldtk_Slot_Browser;
+
 
 extern "C" {
 #include "NewtType.h"
 }
 
 
-/** Manage a slot inside a template.
+/** 
+ * A Slot is a named set of data within a template.
+ * 
+ * Slots are manged by Dtk_Slot_List. The Slot List takes care of 
+ * adding, removing, and renaming Slots in respect to the GUI.
+ * 
+ * Slots manage their own slot editor which is specific to the slot type.
+ * See derived classes for other slot types.
  */
 class Dtk_Slot
-  {
-  public:
-    
-    /** 
-     * Initialize a slot
-     */
-    Dtk_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
-    
-    /** 
-     * Remove a slot and unlink it from the list.
-     */
-    virtual         ~Dtk_Slot();
-    
-    /** 
-     * Return the key name of this slot as a C-String
-     */
-    const char      * key() const { return key_; }
-    
-    /** 
-     * Set the key name of this slot.
-     *
-     * This call also updates all GUI.
-     */
-    void            setKey(const char *name);
-    
-    /** 
-     * Pop up the editor for this slot.
-     */
-    virtual void    edit();
-    
-    /** 
-     * Create a frame that can be saved to a layout file.
-     */
-    virtual newtRefVar save() { return kNewtRefUnbind; }
-    
-    /** 
-     * Write this slot as a Newt Script.
-     *
-     * \retval 0 if successful
-     * \retval negative if an error occured
-     */     
-    virtual int		write(Dtk_Script_Writer &sw) { return -1; }
-    
-    /** 
-     * Find the address of the layout that manages this slot.
-     */
-    Dtk_Layout * layout();
-    
-    /** 
-     * Apply the changes in the editor to the slot.
-     */
-    virtual void    apply() { }
-    
-    /** 
-     * Revert the changes in the editor to the current slot sttings.
-     */
-    virtual void    revert() { }
-    
-    /**
-     * Return the template that manages this slot.
-     */
-    Dtk_Template    * getTemplate();
-    
-  protected:
-    
-    /// back reference to the slot list
-    Dtk_Slot_List   * list_;
-    
-    /// this is the key name of the slot as a C-String.
-    char            * key_;
-    
-    /// remember the datatype
-    char            * datatype_;
-  };
+{
+public:
+  
+  /** 
+   * Initialize a slot
+   */
+  Dtk_Slot(Dtk_Slot_List *list, const char *key, newtRef slot);
+  
+  /** 
+   * Clear all allocated resources.
+   */
+  virtual         ~Dtk_Slot();
+
+  /**
+   * Close any open connection to the outside world.
+   *
+   * Derived classes should close the slot editor here.
+   */
+  virtual void close();
+  
+  /** 
+   * Return the key name of this slot as a C-String
+   */
+  const char      *key() const { return key_; }
+  
+  /** 
+   * Set the key name of this slot.
+   *
+   * This call also updates all GUI.
+   */
+  void            setKey(const char *name);
+  
+  /** 
+   * Pop up the editor for this slot.
+   */
+  virtual void    edit();
+  
+  /** 
+   * Create a frame that can be saved to a layout file.
+   */
+  virtual newtRefVar save() { return kNewtRefUnbind; }
+  
+  /** 
+   * Write this slot as a Newt Script.
+   *
+   * \retval 0 if successful
+   * \retval negative if an error occured
+   */     
+  virtual int		write(Dtk_Script_Writer &sw) { return -1; }
+  
+  /** 
+   * Find the address of the layout that manages this slot.
+   */
+  Dtk_Layout * layout();
+  
+  /** 
+   * Apply the changes in the editor to the slot.
+   */
+  virtual void    apply() { }
+  
+  /** 
+   * Revert the changes in the editor to the current slot sttings.
+   */
+  virtual void    revert() { }
+  
+  /**
+   * Return the template that manages this slot.
+   */
+  Dtk_Template    * getTemplate();
+  
+protected:
+  
+  /// back reference to the slot list
+  Dtk_Slot_List   * list_;
+  
+  /// this is the key name of the slot as a C-String.
+  char            * key_;
+  
+  /// remember the datatype
+  char            * datatype_;
+
+  /// this browser manages all slots
+  Fldtk_Slot_Browser  *browser_;
+
+};
 
 
 #endif

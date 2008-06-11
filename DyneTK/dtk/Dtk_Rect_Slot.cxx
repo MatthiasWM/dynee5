@@ -37,9 +37,9 @@
 
 /*---------------------------------------------------------------------------*/
 Dtk_Rect_Slot::Dtk_Rect_Slot(Dtk_Slot_List *list, const char *theKey, newtRef slot)
-:   Dtk_Slot(list, theKey, slot),
-editor_(0L),
-top_(0), left_(0), bottom_(0), right_(0)
+: Dtk_Slot(list, theKey, slot),
+  editor_(0L),
+  top_(0), left_(0), bottom_(0), right_(0)
 {
   // read the view bounds
   if (slot != kNewtRefUnbind) {
@@ -58,19 +58,19 @@ top_(0), left_(0), bottom_(0), right_(0)
     newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
     if (NewtRefIsString(dt)) {
       datatype_ = strdup(NewtRefToString(dt));
-    } else {
-      datatype_ = strdup("RECT");
     }
   }
+  if (!datatype_)
+    datatype_ = strdup("RECT");
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Rect_Slot::~Dtk_Rect_Slot()
 {
-  if (editor_)
-    editor_->parent()->remove(editor_);
+  close();
 }
+
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::edit()
@@ -85,6 +85,19 @@ void Dtk_Rect_Slot::edit()
   container->value(editor_);
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Rect_Slot::close()
+{
+  Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
+  if (editor_) {
+    container->remove(editor_);
+    delete editor_;
+    editor_ = 0L;
+  }
+}
+
+
 /*---------------------------------------------------------------------------*/
 int Dtk_Rect_Slot::write(Dtk_Script_Writer &sw)
 {
@@ -95,6 +108,7 @@ int Dtk_Rect_Slot::write(Dtk_Script_Writer &sw)
   return 0;
 }
 
+
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::set(int t, int l, int b, int r)
 {
@@ -104,6 +118,7 @@ void Dtk_Rect_Slot::set(int t, int l, int b, int r)
   bottom_ = b;
 }
 
+
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::get(int &t, int &l, int &b, int &r)
 {
@@ -112,6 +127,7 @@ void Dtk_Rect_Slot::get(int &t, int &l, int &b, int &r)
   r = right_;
   b = bottom_;
 }
+
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Rect_Slot::apply() 
@@ -139,12 +155,12 @@ newtRef	Dtk_Rect_Slot::save()
     NSSYM(left),    NewtMakeInt30(left_),
     NSSYM(top),     NewtMakeInt30(top_),
     NSSYM(bottom),  NewtMakeInt30(bottom_),
-  NSSYM(right),   NewtMakeInt30(right_) };
+    NSSYM(right),   NewtMakeInt30(right_) };
   newtRef rect = NewtMakeFrame2(4, rectA);
   
   newtRefVar slotA[] = {
     NSSYM(value),   rect,
-  NSSYM(__ntDataType), NewtMakeString(datatype_, false) };
+    NSSYM(__ntDataType), NewtMakeString(datatype_, false) };
   newtRef slot = NewtMakeFrame2(2, slotA);
   
   return slot;

@@ -39,19 +39,20 @@
 #include "Dtk_Slot.h"
 #include "Dtk_Template.h"
 #include "Dtk_Layout.h"
+#include "fltk/Fldtk_Slot_Browser.h"
+
+#include "globals.h"
 
 #include "allNewt.h"
-
-#include <FL/Fl_Hold_Browser.H>
 
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Slot_List::Dtk_Slot_List(Dtk_Template *tmpl)
 :   template_(tmpl),
-    browser_(0L)
+browser_(0L)
 {
-    browser_ = layout()->slotBrowser();
+  browser_ = getLayout()->slotBrowser();
 }
 
 
@@ -65,85 +66,90 @@ Dtk_Slot_List::~Dtk_Slot_List()
 
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Slot_List::clear()
+void Dtk_Slot_List::append(Dtk_Slot *slot) 
 {
-  int i, n = slotList_.size();
-  for (i=n-1; i>=0; --i) {
-    Dtk_Slot *slot = slotList_.at(i);
-    delete slot;
+  slotList_.push_back(slot);
+  if (browser_ && GetCurrentTemplate()==getTemplate()) {
+    browser_->add(slot->key(), slot);      
   }
-}
-
-
-/*---------------------------------------------------------------------------*/
-Dtk_Layout *Dtk_Slot_List::layout() 
-{
-    return template_->layout();
-}
-
-
-/*---------------------------------------------------------------------------*/
-void Dtk_Slot_List::add(Dtk_Slot *slot) 
-{
-    slotList_.push_back(slot);
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Slot_List::remove(Dtk_Slot *slot) 
 {
-    int i, n = slotList_.size();
-    for (i=n-1; i>=0; --i) {
-        if (slotList_.at(i)==slot) {
-            slotList_.erase(slotList_.begin()+i);
-            if (browser_) {
-                browser_->remove(i+1);
-                browser_->value(0);
-            }
-            break;
-        }
+  int i, n = slotList_.size();
+  for (i=n-1; i>=0; --i) {
+    if (slotList_.at(i)==slot) {
+      slot->close();
+      slotList_.erase(slotList_.begin()+i);
+      if (browser_ && GetCurrentTemplate()==getTemplate()) 
+        browser_->remove(i+1);
+      break;
     }
+  }
+}
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Slot_List::clear()
+{
+  int i, n = slotList_.size();
+  for (i=n-1; i>=0; --i) {
+    Dtk_Slot *slot = slotList_.at(i);
+    remove(slot);
+    delete slot;
+  }
+}
+
+
+/*---------------------------------------------------------------------------*/
+Dtk_Layout *Dtk_Slot_List::getLayout() 
+{
+  return template_->layout();
 }
 
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Slot_List::size()
 {
-    return slotList_.size();
+  return slotList_.size();
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Slot *Dtk_Slot_List::at(int index)
 {
-    return slotList_.at(index);
+  return slotList_.at(index);
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Slot *Dtk_Slot_List::find(const char *key)
 {
-    int i, n = slotList_.size();
-    for (i=n-1; i>=0; --i) {
-        Dtk_Slot *slot = slotList_.at(i);
-        if (strcasecmp(slot->key(), key)==0)
-            return slot;
-    }
-    return 0L;
+  int i, n = slotList_.size();
+  for (i=n-1; i>=0; --i) {
+    Dtk_Slot *slot = slotList_.at(i);
+    if (strcasecmp(slot->key(), key)==0)
+      return slot;
+  }
+  return 0L;
 }
 
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Slot_List::updateKey(Dtk_Slot *slot)
 {
-    if (!browser_)
-        return;
-    int i, n = size();
-    for (i=0; i<n; ++i) {
-        if (slotList_.at(i)==slot) {
-            browser_->text(i+1, slot->key());
-        }
+  if (!browser_)
+    return;
+  if (GetCurrentTemplate()==getTemplate())
+    return;
+  int i, n = size();
+  for (i=0; i<n; ++i) {
+    if (slotList_.at(i)==slot) {
+      browser_->text(i+1, slot->key());
     }
+  }
 }
 
 

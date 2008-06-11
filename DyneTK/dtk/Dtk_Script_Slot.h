@@ -34,44 +34,58 @@ class Fldtk_Script_Slot_Editor;
 class Dtk_Script_Writer;
 
 
-/** Manage a script slot inside a template.
+/** 
+ * Manage a script slot inside a template.
  */
 class Dtk_Script_Slot : public Dtk_Slot
   {
   public:
     
-    /** Initialize a slot
+    /** 
+     * Initialize a script slot.
      */
     Dtk_Script_Slot(Dtk_Slot_List *list, const char *key, newtRef slot=kNewtRefUnbind);
     
-    /** Remove a slot and unlink it from the list.
+    /** 
+     * Detroy a script slot.
      */
     virtual         ~Dtk_Script_Slot();
     
-    /** Pop up the script slot editor.
+    /** 
+     * Pop up the script slot editor.
      */
     virtual void    edit();
+
+    /**
+     * Close the script slot editor.
+     */
+    virtual void close();
     
-    /** Write this slot as a Newt Script.
+    /** 
+     * Write this slot as a Newt Script.
      *
      * \retval 0 if successful
      * \retval negative if an error occured
      */     
     virtual int		write(Dtk_Script_Writer &sw);
     
-    /** Apply the changes in the editor to the slot.
+    /** 
+     * Apply the changes in the editor to the slot.
      */
     virtual void    apply();
     
-    /** Revert the changes in the editor to the current slot sttings.
+    /** 
+     * Revert the changes in the editor to the current slot sttings.
      */
     virtual void    revert();
     
-    /** Set the text of a new script.
+    /** 
+     * Set the text of a new script.
      */
     void            set(const char *text);
     
-    /** Create a frame that can be saved to a layout file.
+    /** 
+     * Create a frame that can be saved to a layout file.
      */
     virtual newtRefVar save();
     

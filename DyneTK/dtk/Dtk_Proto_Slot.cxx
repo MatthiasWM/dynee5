@@ -43,27 +43,29 @@
 
 /*---------------------------------------------------------------------------*/
 Dtk_Proto_Slot::Dtk_Proto_Slot(Dtk_Slot_List *list, const char *theKey, newtRef slot)
-:   Dtk_Slot(list, theKey, slot),
+: Dtk_Slot(list, theKey, slot),
 editor_(0L)
 {
+  // this is free'd in ~Dtk_Slot
   datatype_ = strdup("PROT");
-  /*
-   newtRef v = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
-   if (NewtRefIsInteger(v)) {
-   value_ = NewtRefToInteger(v);
-   } else {
-   printf("############################# Can't read number!\n"); // FIXME
-   EnterDebugger();
-   }
-   */
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Proto_Slot::~Dtk_Proto_Slot()
 {
-  if (editor_)
-    editor_->parent()->remove(editor_);
+  close();
+}
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Proto_Slot::close()
+{
+  Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
+  if (editor_) {
+    container->remove(editor_);
+    delete editor_;
+    editor_ = 0L;
+  }
 }
 
 /*---------------------------------------------------------------------------*/

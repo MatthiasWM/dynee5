@@ -273,8 +273,14 @@ int main(int argc, char **argv) {
 char *dtkReleaseNotes =
   "<html><head>DyneTK Release Notes</head><body>\n"
   "<h2>DyneTK Release Notes</h2>\n"
-  "<h3>DyneTK 1.7.1</h3>\n"
+  "<h3>DyneTK 1.7.2</h3>\n"
   "<ul>"
+  "<li>fixed deleting Templates</li>\n"
+  "<li>fixed deleting Slots</li>\n"
+  "<li>fixed resizing of Slot editors</li>\n"
+  "</ul>\n"
+  "<h3>DyneTK 1.7.1</h3>\n"
+  "<ul>\n"
   "<li>added smarter paths presets for file choosers</li>\n"
   "<li>fixed wrong handshake for MSWindows serial connection</li>\n"
   "<li>fixed missing handshake on OS X serial connection</li>\n"
@@ -287,9 +293,9 @@ char *dtkReleaseNotes =
   "<li>fixed syntax highlighting of complex symbols</li>\n"
   "</ul>"
   "<h3>DyneTK 1.7.0</h3>\n"
-  "<ul>"
+  "<ul>\n"
   "<li>initial public release</li>\n"
-  "</ul>"
+  "</ul>\n"
   "</body></html>";
 
 // TODOs

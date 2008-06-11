@@ -137,7 +137,7 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout *layout)
                 slotEditor_ = new Fldtk_Slot_Editor_Group(X, Y+H/4+2+30, W, H-H/4-2-30);
                 {
                     Fl_Box *box = new Fl_Box(X, Y+H/4+2+30, W, H-H/4-2-30);
-                    box->box(FL_DOWN_BOX);
+                    //box->box(FL_DOWN_BOX);
                 }
                 slotEditor_->box(FL_FLAT_BOX);
                 slotEditor_->end();
@@ -198,7 +198,7 @@ void Fldtk_Layout_Editor::specific_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Edi
     newtRef key = NewtMakeSymbol(name);
     newtRef descr = dtkPlatform->getSpecificSlotDescription(e->template_, key);
     Dtk_Slot *slot = e->template_->addSlot(key, descr);
-    e->slotBrowser()->add(slot->key(), slot);
+    // simulate a click to select this new slot
     e->slotBrowser()->value(e->slotBrowser()->size());
     e->slotBrowser()->do_callback();
     e->userChangedSlots();

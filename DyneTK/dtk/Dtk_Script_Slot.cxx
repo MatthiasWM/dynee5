@@ -39,9 +39,9 @@
 
 /*---------------------------------------------------------------------------*/
 Dtk_Script_Slot::Dtk_Script_Slot(Dtk_Slot_List *list, const char *theKey, newtRef slot)
-:   Dtk_Slot(list, theKey, slot),
-editor_(0L),
-script_(0L)
+: Dtk_Slot(list, theKey, slot),
+  editor_(0L),
+  script_(0L)
 {
   if (slot!=kNewtRefUnbind) {
     newtRef value = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(value)));
@@ -57,21 +57,21 @@ script_(0L)
     newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
     if (NewtRefIsString(dt)) {
       datatype_ = strdup(NewtRefToString(dt));
-    } else {
-      datatype_ = strdup("SCPT");
     }
   }
+  if (!datatype_)
+    datatype_ = strdup("SCPT");
 }
 
 
 /*---------------------------------------------------------------------------*/
 Dtk_Script_Slot::~Dtk_Script_Slot()
 {
-  if (editor_)
-    editor_->parent()->remove(editor_);
+  close();
   if (script_)
     free(script_);
 }
+
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Script_Slot::edit()
@@ -85,6 +85,19 @@ void Dtk_Script_Slot::edit()
   }
   container->value(editor_);
 }
+
+
+/*---------------------------------------------------------------------------*/
+void Dtk_Script_Slot::close()
+{
+  Fldtk_Slot_Editor_Group *container = layout()->slotEditor();
+  if (editor_) {
+    container->remove(editor_);
+    delete editor_;
+    editor_ = 0L;
+  }
+}
+
 
 /*---------------------------------------------------------------------------*/
 int Dtk_Script_Slot::write(Dtk_Script_Writer &sw)
@@ -160,7 +173,7 @@ newtRef	Dtk_Script_Slot::save()
 {
   newtRefVar slotA[] = {
     NSSYM(value),           NewtMakeString(script_, false),
-  NSSYM(__ntDataType),    NewtMakeString(datatype_, false) };
+    NSSYM(__ntDataType),    NewtMakeString(datatype_, false) };
   newtRef slot = NewtMakeFrame2(2, slotA);
   
   return slot;

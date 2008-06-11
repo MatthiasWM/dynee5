@@ -51,6 +51,8 @@
 #include "fltk/Fldtk_Editor.h"
 #include "fltk/Fldtk_Layout_View.h"
 #include "fltk/Fldtk_Slot_Editor_Group.h"
+#include "fltk/Fldtk_Slot_Browser.h"
+#include "fltk/Fldtk_Tmpl_Browser.h"
 
 #include "globals.h"
 #include "allNewt.h"
@@ -1046,7 +1048,7 @@ Dtk_Template *GetCurrentTemplate()
   Dtk_Layout *lyt = GetCurrentLayout();
   if (!lyt)
     return 0L;
-  Fl_Hold_Browser *te = lyt->templateBrowser();
+  Fldtk_Tmpl_Browser *te = lyt->templateBrowser();
   int ix = te->value();
   if (!ix) 
     return 0L;
@@ -1061,7 +1063,7 @@ Dtk_Slot *GetCurrentSlot()
   Dtk_Layout *lyt = GetCurrentLayout();
   if (!lyt)
     return 0L;
-  Fl_Hold_Browser *se = lyt->slotBrowser();
+  Fldtk_Slot_Browser *se = lyt->slotBrowser();
   int ix = se->value();
   if (!ix) 
     return 0L;
@@ -1079,16 +1081,12 @@ void DeleteSlot(Dtk_Slot *slot)
       return;
   }
   Dtk_Template *tmpl = slot->getTemplate();
-  Dtk_Layout *lyt = slot->layout();
   if (tmpl) {
     tmpl->removeSlot(slot);
   }
-  if (lyt) {
-    lyt->slotEditor()->blank();
-    lyt->updateMenus();
-  }
   delete slot;
 }
+
 
 /*---------------------------------------------------------------------------*/
 void DeleteTemplate(Dtk_Template *tmpl) 

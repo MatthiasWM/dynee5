@@ -31,7 +31,7 @@
 #include "Dtk_Template.h"
 #include "Dtk_Layout.h"
 
-#include <FL/Fl_Hold_Browser.H>
+#include "fltk/Fldtk_Tmpl_Browser.h"
 
 
 /*---------------------------------------------------------------------------*/
@@ -60,13 +60,15 @@ void Dtk_Template_List::append(Dtk_Template *tmpl)
 /*---------------------------------------------------------------------------*/
 void Dtk_Template_List::remove(Dtk_Template *tmpl) 
 {
+  tmpl->deleteAllSlots();
+  tmpl->deleteAllChildren();
   // search the list for this template
   int i, n = tmplList_.size();
   for (i=n-1; i>=0; --i) {
     if (tmplList_.at(i)==tmpl) {
       // remove the template from the browser
       Dtk_Layout *lyt = tmpl->layout();
-      Fl_Hold_Browser *browser = lyt->templateBrowser();
+      Fldtk_Tmpl_Browser *browser = lyt->templateBrowser();
       if (browser) {
         int j, nb = browser->size();
         for (j=nb; j>0; --j) {
@@ -86,35 +88,6 @@ void Dtk_Template_List::remove(Dtk_Template *tmpl)
   }
 }
 
-
-/*---------------------------------------------------------------------------*/
-/*
-void Dtk_Template_List::remove(Dtk_Template *tmpl) 
-{
-  tmpl->removeAllSlots();
-  tmpl->removeAllChildren();
-  
-  Dtk_Layout *lyt = tmpl->layout();
-  int i, n = tmplList_.size();
-  for (i=n-1; i>=0; --i) {
-    if (tmplList_.at(i)==tmpl) {
-      tmplList_.erase(tmplList_.begin()+i);
-      Fl_Hold_Browser *browser = lyt->templateBrowser();
-      if (browser) {
-        int j, nb = browser->size();
-        for (j=nb; j>0; --j) {
-          if (browser->data(j)==tmpl) {
-            if (browser->value()==j)
-              browser->value(0);
-            browser->remove(j);
-          }
-        }
-      }
-      break;
-    }
-  }
-}
-*/
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Template_List::clear()

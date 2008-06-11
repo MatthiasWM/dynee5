@@ -34,7 +34,8 @@ class Dtk_Template;
 class Fldtk_Layout_Editor;
 class Fldtk_Slot_Editor_Group;
 class Fldtk_Layout_View;
-class Fl_Hold_Browser;
+class Fldtk_Tmpl_Browser;
+class Fldtk_Slot_Browser;
 class Fl_Wizard;
 
 /*---------------------------------------------------------------------------*/
@@ -101,8 +102,8 @@ class Dtk_Layout : public Dtk_Document
     void updateMenus();
     
     void editView();
-    Fl_Hold_Browser * templateBrowser();
-    Fl_Hold_Browser * slotBrowser();
+    Fldtk_Tmpl_Browser * templateBrowser();
+    Fldtk_Slot_Browser * slotBrowser();
     Fldtk_Slot_Editor_Group * slotEditor();
     Fldtk_Layout_View * layoutView() { return view_; }
     
@@ -126,10 +127,10 @@ class Dtk_Layout : public Dtk_Document
     // Fldtk_Visual_Layout * visualEditor_;
     
     /// GUI callback whenever a different template is selected
-    static void templateBrowser_cb(Fl_Hold_Browser*, Dtk_Layout*);
+    static void templateBrowser_cb(Fldtk_Tmpl_Browser*, Dtk_Layout*);
     
     /// GUI callback whenever a different slot is selected
-    static void slotBrowser_cb(Fl_Hold_Browser*, Dtk_Layout*);
+    static void slotBrowser_cb(Fldtk_Slot_Browser*, Dtk_Layout*);
   };
 
 

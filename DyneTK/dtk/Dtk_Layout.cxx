@@ -85,7 +85,6 @@ void Dtk_Layout::clear()
 {
   Dtk_Template *tmpl = root_;
   if (tmpl) {
-    tmpl->clear();
     removeTemplates();
     delete tmpl;
   }
@@ -97,6 +96,8 @@ void Dtk_Layout::clear()
 void Dtk_Layout::removeTemplates()
 {
   if (root_) {
+    root_->deleteAllSlots();
+    root_->deleteAllChildren();
     // remove the template from the browser
     Fl_Hold_Browser *browser = templateBrowser();
     if (browser) {
@@ -306,7 +307,7 @@ void Dtk_Layout::setupEditors()
 {
   if (!editor_)
     return;
-  Fl_Hold_Browser *b = editor_->templateBrowser();
+  Fldtk_Tmpl_Browser *b = editor_->templateBrowser();
   b->clear();
   if (!root_)
     return;
@@ -325,12 +326,12 @@ void Dtk_Layout::setupEditors()
 }
 
 /*---------------------------------------------------------------------------*/
-Fl_Hold_Browser *Dtk_Layout::templateBrowser() {
+Fldtk_Tmpl_Browser *Dtk_Layout::templateBrowser() {
   return editor_->templateBrowser();
 }
 
 /*---------------------------------------------------------------------------*/
-Fl_Hold_Browser *Dtk_Layout::slotBrowser() {
+Fldtk_Slot_Browser *Dtk_Layout::slotBrowser() {
   return editor_->slotBrowser();
 }
 
@@ -340,7 +341,7 @@ Fldtk_Slot_Editor_Group *Dtk_Layout::slotEditor() {
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout *layout)
+void Dtk_Layout::templateBrowser_cb(Fldtk_Tmpl_Browser *browser, Dtk_Layout *layout)
 {
   int i = browser->value();
   if (i) {
@@ -358,7 +359,7 @@ void Dtk_Layout::templateBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout *layout
 }
 
 /*---------------------------------------------------------------------------*/
-void Dtk_Layout::slotBrowser_cb(Fl_Hold_Browser *browser, Dtk_Layout *layout)
+void Dtk_Layout::slotBrowser_cb(Fldtk_Slot_Browser *browser, Dtk_Layout *layout)
 {
   int i = browser->value();
   if (i) {
