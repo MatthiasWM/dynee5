@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -29,7 +29,10 @@ decl {\#include "allNewt.h"} {public
 decl {\#include "dtk/Dtk_Project.h"} {public
 } 
 
-decl {\#include "dtk/Dtk_Template.h"} {selected public
+decl {\#include "dtk/Dtk_Template.h"} {public
+} 
+
+decl {\#include "dtk/Dtk_Platform.h"} {public
 } 
 
 decl {\#include "main.h"} {public
@@ -37,7 +40,7 @@ decl {\#include "main.h"} {public
 
 widget_class Fldtk_New_Slot_Dialog {
   label {New Slot} open
-  xywh {814 197 400 220} type Double
+  xywh {412 89 400 220} type Double
   class Fl_Window modal visible
 } {
   Fl_Box wTemplateProto {
@@ -57,7 +60,13 @@ widget_class Fldtk_New_Slot_Dialog {
   } {}
   Fl_Input wSlotName {
     label {Slot Name:}
-    xywh {75 81 155 19} labelsize 12 textsize 12
+    callback {if (*wSlotName->value()) {
+  wAdd->activate();
+} else {
+  wAdd->deactivate();
+}
+wHelp->copy_label(dtkPlatform->getHelp(tmpl_, wSlotName->value()));}
+    xywh {75 81 155 19} labelsize 12 when 1 textsize 12
   }
   Fl_Choice wEditor {
     label {Editor:} open
@@ -65,30 +74,38 @@ widget_class Fldtk_New_Slot_Dialog {
   } {
     MenuItem {} {
       label Evaluate
+      user_data {"EVAL"} user_data_type {char*}
       xywh {0 0 30 20} labelsize 12
     }
     MenuItem {} {
       label Script
+      user_data {"SCPT"} user_data_type {char*}
       xywh {10 10 30 20} labelsize 12
     }
     MenuItem {} {
       label Text
+      user_data {"TEXT"} user_data_type {char*} selected
       xywh {20 20 30 20} labelsize 12
     }
     MenuItem {} {
       label Number
+      user_data {"NUMB"} user_data_type {char*}
+      callback {// FIXME: or INTG ?}
       xywh {30 30 30 20} labelsize 12
     }
     MenuItem {} {
       label Boolean
+      user_data {"BOOL"} user_data_type {char*}
       xywh {40 40 30 20} labelsize 12
     }
     MenuItem {} {
       label Rectangle
+      user_data {"RECT"} user_data_type {char*}
       xywh {50 50 30 20} labelsize 12
     }
     MenuItem {} {
       label Picture
+      user_data {"PICT"} user_data_type {char*}
       xywh {60 60 30 20} labelsize 12
     }
   }
@@ -106,8 +123,29 @@ widget_class Fldtk_New_Slot_Dialog {
   }
   Function {setTemplate(Dtk_Template *tmpl)} {open return_type void
   } {
-    code {wTemplateProto->copy_label(tmpl->id());} {}
+    code {tmpl_ = tmpl;
+
+wTemplateProto->copy_label(tmpl->id());
+Fl_Menu_Item *m;
+
+m = dtkPlatform->specificChoiceMenu(tmpl);
+dtkPlatform->updateActivation(m, tmpl);
+wSpecific->menu(m);
+
+m = dtkPlatform->methodsChoiceMenu();
+dtkPlatform->updateActivation(m, tmpl);
+wMethods->menu(m);
+
+m = dtkPlatform->attributesChoiceMenu();
+dtkPlatform->updateActivation(m, tmpl);
+wAttributes->menu(m);
+
+wSlotName->value("");
+wEditor->value(0);
+wHelp->label("");
+wAdd->deactivate();} {}
   }
+  decl {Dtk_Template *tmpl_;} {}
 } 
 
 comment {

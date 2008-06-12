@@ -109,6 +109,10 @@ class Dtk_Platform
      */
     int             findProto(const char *id);
     
+    /** Return the help text for a slot in a template.
+     */
+    const char *getHelp(Dtk_Template *tmpl, const char *slot);
+    
   protected:
     
     class CStringSort {

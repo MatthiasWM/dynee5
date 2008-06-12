@@ -505,6 +505,45 @@ int Dtk_Platform::findProto(const char *id)
   }
 }
 
+
+/*---------------------------------------------------------------------------*/
+const char *Dtk_Platform::getHelp(Dtk_Template *tmpl, const char *slot)
+{
+  return 0;
+  // FIXME: fix this
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  
+  char *id = tmpl->id();
+  if (!id)
+    return 0L;
+  
+  // find the default settings for this slot in the given template
+  newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+  int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+  if (ix==-1)
+    return 0L;
+  
+  newtRef tmplDB = NewtGetFrameSlot(ta, ix);
+  if (tmplDB==kNewtRefUnbind)
+    return 0L;
+  
+  newtRef help = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntHelp)));
+  if (help==kNewtRefUnbind)
+    return 0L;
+
+  ix = NewtFindArrayIndex(help, NewtMakeSymbol(slot), 0);
+  if (ix<0)
+    return 0L;
+
+  newtRef txt = NewtGetFrameSlot(help, ix);
+  if (NewtRefIsString(txt))
+    return NewtRefToString(txt);
+
+  return 0L;
+}
+
+
 const char *platformStr1 = 
 "return {\n"
 "  MagicPointerTable: [\n"

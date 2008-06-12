@@ -13,6 +13,7 @@
 		C989497D0DE9E4CA0026565F /* Dtk_Layout.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C98949790DE9E4CA0026565F /* Dtk_Layout.cxx */; };
 		C989497E0DE9E4CA0026565F /* Dtk_Script.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C989497B0DE9E4CA0026565F /* Dtk_Script.cxx */; };
 		C9AAFC770E006F3500A7CBAF /* Fldtk_Icon_Dropbox.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9AAFC750E006F3500A7CBAF /* Fldtk_Icon_Dropbox.cxx */; };
+		C9AAFCBB0E01BA4300A7CBAF /* Fldtk_Dialogs.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9AAFCB90E01BA4300A7CBAF /* Fldtk_Dialogs.cxx */; };
 		C9CD430F0DF83E8B0052DB5E /* doxyfile.osx.dox in Resources */ = {isa = PBXBuildFile; fileRef = C9CD430E0DF83E8B0052DB5E /* doxyfile.osx.dox */; };
 		C9FB9BF80DE352BE00026BB1 /* sandbox.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B540DE352BD00026BB1 /* sandbox.cxx */; };
 		C9FB9BF90DE352BE00026BB1 /* Dtk_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B560DE352BD00026BB1 /* Dtk_Document.cxx */; };
@@ -110,6 +111,8 @@
 		C989497C0DE9E4CA0026565F /* Dtk_Script.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dtk_Script.h; sourceTree = "<group>"; };
 		C9AAFC750E006F3500A7CBAF /* Fldtk_Icon_Dropbox.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Icon_Dropbox.cxx; sourceTree = "<group>"; };
 		C9AAFC760E006F3500A7CBAF /* Fldtk_Icon_Dropbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Icon_Dropbox.h; sourceTree = "<group>"; };
+		C9AAFCB90E01BA4300A7CBAF /* Fldtk_Dialogs.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fldtk_Dialogs.cxx; sourceTree = "<group>"; };
+		C9AAFCBA0E01BA4300A7CBAF /* Fldtk_Dialogs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fldtk_Dialogs.h; sourceTree = "<group>"; };
 		C9CD430E0DF83E8B0052DB5E /* doxyfile.osx.dox */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = doxyfile.osx.dox; path = ../doxyfile.osx.dox; sourceTree = SOURCE_ROOT; };
 		C9FB9B540DE352BD00026BB1 /* sandbox.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sandbox.cxx; path = ../sandbox.cxx; sourceTree = SOURCE_ROOT; };
 		C9FB9B560DE352BD00026BB1 /* Dtk_Document.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dtk_Document.cxx; sourceTree = "<group>"; };
@@ -337,6 +340,8 @@
 		C9FB9B860DE352BE00026BB1 /* fluid */ = {
 			isa = PBXGroup;
 			children = (
+				C9AAFCB90E01BA4300A7CBAF /* Fldtk_Dialogs.cxx */,
+				C9AAFCBA0E01BA4300A7CBAF /* Fldtk_Dialogs.h */,
 				C9FB9B870DE352BE00026BB1 /* Fldtk_Inspector.cxx */,
 				C9FB9B890DE352BE00026BB1 /* Fldtk_Inspector.h */,
 				C9FB9B8B0DE352BE00026BB1 /* Fldtk_Prefs.cxx */,
@@ -551,6 +556,7 @@
 				C989497D0DE9E4CA0026565F /* Dtk_Layout.cxx in Sources */,
 				C989497E0DE9E4CA0026565F /* Dtk_Script.cxx in Sources */,
 				C9AAFC770E006F3500A7CBAF /* Fldtk_Icon_Dropbox.cxx in Sources */,
+				C9AAFCBB0E01BA4300A7CBAF /* Fldtk_Dialogs.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

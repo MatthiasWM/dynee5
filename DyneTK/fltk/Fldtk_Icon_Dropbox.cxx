@@ -28,7 +28,11 @@
 
 #include <stdio.h>
 #include <string.h>
+#ifdef WIN32
 #include <io.h>
+#else
+#include <unistd.h>
+#endif
 
 #include <FL/Fl.H>
 #include <FL/Fl_Shared_image.H>
