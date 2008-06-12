@@ -25,6 +25,7 @@
 #include "fltk/Flmm_Set_Input.h"
 #include "fltk/Flmm_Set_Check_Button.h"
 #include "fltk/Fldtk_Icon_Dropbox.h"
+#include <FL/fl_file_chooser.h>
 void set_changed_cb(Fl_Widget*w, void*);
 #include <FL/Fl_Group.H>
 extern void set_changed_cb(Flmm_Set_Input*, void*);
@@ -40,6 +41,7 @@ public:
   void updateDialog();
 };
 #include <FL/Fl_Button.H>
+extern void set_changed_cb(Fldtk_Icon_Dropbox*, void*);
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Round_Button.H>
 #include <FL/Fl_Value_Output.H>
@@ -47,7 +49,16 @@ public:
 class Fldtk_Proj_Icon : public Fl_Group {
 public:
   Fldtk_Proj_Icon(int X, int Y, int W, int H, const char *L = 0);
+private:
+  void cb_Browse_i(Fl_Button*, void*);
+  static void cb_Browse(Fl_Button*, void*);
+public:
   Fldtk_Icon_Dropbox *wIcon1;
+private:
+  void cb_Browse1_i(Fl_Button*, void*);
+  static void cb_Browse1(Fl_Button*, void*);
+public:
+  Fldtk_Icon_Dropbox *wMask;
   void updateData();
   void updateDialog();
 };

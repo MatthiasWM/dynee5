@@ -85,13 +85,35 @@ void Fldtk_Proj_App::updateDialog() {
 symbol->update_widget();
 auto_close->update_widget();
 }
+
+void Fldtk_Proj_Icon::cb_Browse_i(Fl_Button*, void*) {
+  const char *fn = fl_file_chooser("Load Image", "Image Files (*.{bmp,gif,jpg,png})", wIcon1->getImageFilename());
+if (fn) {
+  wIcon1->setImageFilename(fn);
+  wIcon1->do_callback();
+};
+}
+void Fldtk_Proj_Icon::cb_Browse(Fl_Button* o, void* v) {
+  ((Fldtk_Proj_Icon*)(o->parent()->parent()))->cb_Browse_i(o,v);
+}
+
+void Fldtk_Proj_Icon::cb_Browse1_i(Fl_Button*, void*) {
+  const char *fn = fl_file_chooser("Load Mask", "Image Files (*.{bmp,gif,jpg,png})", wMask->getImageFilename());
+if (fn) {
+  wMask->setImageFilename(fn);
+  wMask->do_callback();
+};
+}
+void Fldtk_Proj_Icon::cb_Browse1(Fl_Button* o, void* v) {
+  ((Fldtk_Proj_Icon*)(o->parent()->parent()))->cb_Browse1_i(o,v);
+}
 Fldtk_Proj_Icon::Fldtk_Proj_Icon(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->labelsize(12);
 { Fl_Group* o = new Fl_Group(5, 25, 50, 195);
   { Fl_Button* o = new Fl_Button(5, 25, 50, 20, "Browse");
     o->labelsize(12);
-    o->deactivate();
+    o->callback((Fl_Callback*)cb_Browse);
   } // Fl_Button* o
   { wIcon1 = new Fldtk_Icon_Dropbox(5, 55, 50, 50, "Default");
     wIcon1->box(FL_BORDER_BOX);
@@ -101,6 +123,7 @@ this->labelsize(12);
     wIcon1->labelfont(0);
     wIcon1->labelsize(12);
     wIcon1->labelcolor(FL_FOREGROUND_COLOR);
+    wIcon1->callback((Fl_Callback*)set_changed_cb);
     wIcon1->align(FL_ALIGN_CENTER);
     wIcon1->when(FL_WHEN_RELEASE);
     wIcon1->depth(1);
@@ -209,17 +232,23 @@ this->labelsize(12);
   o->end();
 } // Fl_Group* o
 { Fl_Group* o = new Fl_Group(225, 25, 50, 195);
-  o->deactivate();
   { Fl_Button* o = new Fl_Button(225, 25, 50, 20, "Browse");
     o->labelsize(12);
-    o->deactivate();
+    o->callback((Fl_Callback*)cb_Browse1);
   } // Fl_Button* o
-  { Fl_Box* o = new Fl_Box(225, 55, 50, 50, "None");
-    o->box(FL_BORDER_BOX);
-    o->color(FL_LIGHT3);
-    o->labelsize(12);
-    o->deactivate();
-  } // Fl_Box* o
+  { wMask = new Fldtk_Icon_Dropbox(225, 55, 50, 50, "None");
+    wMask->box(FL_BORDER_BOX);
+    wMask->color(FL_LIGHT3);
+    wMask->selection_color(FL_BACKGROUND_COLOR);
+    wMask->labeltype(FL_NORMAL_LABEL);
+    wMask->labelfont(0);
+    wMask->labelsize(12);
+    wMask->labelcolor(FL_FOREGROUND_COLOR);
+    wMask->callback((Fl_Callback*)set_changed_cb);
+    wMask->align(FL_ALIGN_CENTER);
+    wMask->when(FL_WHEN_RELEASE);
+    wMask->depth(1);
+  } // Fldtk_Icon_Dropbox* wMask
   { Fl_Button* o = new Fl_Button(225, 200, 50, 20, "Browse");
     o->labelsize(12);
     o->deactivate();
@@ -233,7 +262,6 @@ this->labelsize(12);
   { Fl_Box* o = new Fl_Box(225, 105, 50, 35, "Mask");
     o->labelsize(12);
     o->align(FL_ALIGN_WRAP);
-    o->deactivate();
   } // Fl_Box* o
   o->end();
 } // Fl_Group* o
@@ -311,11 +339,13 @@ end();
 }
 
 void Fldtk_Proj_Icon::updateData() {
-  //setName(wName->value());
+  wIcon1->update_data();
+wMask->update_data();
 }
 
 void Fldtk_Proj_Icon::updateDialog() {
-  //wName->value(name_);
+  wIcon1->update_widget();
+wMask->update_widget();
 }
 Fldtk_Proj_Package::Fldtk_Proj_Package(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {

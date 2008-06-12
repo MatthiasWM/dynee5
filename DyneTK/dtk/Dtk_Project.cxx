@@ -485,6 +485,8 @@ int Dtk_Project::loadMac()
 /*---------------------------------------------------------------------------*/
 int Dtk_Project::loadWin()
 {
+  char buf[2048];
+
 	// read the project settings from disk
 	FILE *f = fopen(filename_, "rb");
 	if (!f) {
@@ -527,9 +529,41 @@ int Dtk_Project::loadWin()
 			// topFrameExpression (string)
 			// customPartType (string, fourCC)
 			// fasterSoups (bool)
+			// iconFile (fileRef): do this before loading any extended icons below
+		  newtRef iconFile = NewtGetFrameSlot(output, NewtFindSlotIndex(output, NSSYM(iconFile)));
+      if (NewtRefIsFrame(iconFile)) {
+        newtRef name = NewtGetFrameSlot(iconFile, NewtFindSlotIndex(iconFile, NSSYM(deltaFromProject)));
+        if (NewtRefIsString(name)) {
+			    char *filename = NewtRefToString(name);
+          fl_filename_absolute(buf, 2047, filename);
+          dtkProjSettings->icon->wIcon1->setImageFilename(buf);
+        }
+      }
 			// iconProNormal (Frame)
-			// iconProHighlighted (Frame)
-			// iconFile (fileRef)
+      newtRef iconProNormal = NewtGetFrameSlot(output, NewtFindSlotIndex(output, NSSYM(iconProNormal)));
+      if (NewtRefIsFrame(iconProNormal)) {
+        // load the icon if any
+        newtRef imageinfo1 = NewtGetFrameSlot(iconProNormal, NewtFindSlotIndex(iconProNormal, NSSYM(imageinfo1)));
+        if (NewtRefIsFrame(imageinfo1)) {
+          newtRef name = NewtGetFrameSlot(imageinfo1, NewtFindSlotIndex(imageinfo1, NSSYM(deltaFromProject)));
+          if (NewtRefIsString(name)) {
+				    char *filename = NewtRefToString(name);
+            fl_filename_absolute(buf, 2047, filename);
+            dtkProjSettings->icon->wIcon1->setImageFilename(buf);
+          }
+        }
+        // load the mask if any
+        newtRef maskinfo = NewtGetFrameSlot(iconProNormal, NewtFindSlotIndex(iconProNormal, NSSYM(maskinfo)));
+        if (NewtRefIsFrame(maskinfo)) {
+          newtRef name = NewtGetFrameSlot(maskinfo, NewtFindSlotIndex(maskinfo, NSSYM(deltaFromProject)));
+          if (NewtRefIsString(name)) {
+				    char *filename = NewtRefToString(name);
+            fl_filename_absolute(buf, 2047, filename);
+            dtkProjSettings->icon->wMask->setImageFilename(buf);
+          }
+        }
+      }
+			// iconProHighlighted (Frame): \\\todo Add highlight icon support
 		}
 		ix = NewtFindSlotIndex(p, NSSYM(packageSettings));
 		if (ix>=0) {
@@ -664,9 +698,9 @@ void Dtk_Project::setDefaults()
 newtRef Dtk_Project::makeFileRef(const char *filename)
 {
 	newtRefVar fileReferenceA[] = {
-		NSSYM(class),			NSSYM(fileReference),
-		NSSYM(projectPath),		kNewtRefNIL,
-		NSSYM(deltaFromProject),kNewtRefNIL
+		NSSYM(class),			        NSSYM(fileReference),
+		NSSYM(projectPath),		    kNewtRefNIL,
+		NSSYM(deltaFromProject),  kNewtRefNIL
 	};
   
 	if (filename) {
@@ -727,100 +761,100 @@ int Dtk_Project::save()
 	newtRef projectItems = NewtMakeFrame2(sizeof(projectItemsA) / (sizeof(newtRefVar) * 2), projectItemsA);
   
 	newtRefVar projectSettingsA[] = {
-		NSSYM(platform),			NewtMakeString("Newton21", false),
-		NSSYM(language),			NewtMakeString("English", false),
-		NSSYM(debugBuild),			kNewtRefTRUE,
-		NSSYM(ignoreNative),		kNewtRefNIL,
+		NSSYM(platform),			      NewtMakeString("Newton21", false),
+		NSSYM(language),			      NewtMakeString("English", false),
+		NSSYM(debugBuild),			    kNewtRefTRUE,
+		NSSYM(ignoreNative),		    kNewtRefNIL,
 		NSSYM(checkGlobalFunctions),kNewtRefTRUE,
-		NSSYM(oldBuildRules),		kNewtRefNIL,
-		NSSYM(useStepChildren),		kNewtRefTRUE,
-		NSSYM(suppressByteCodes),	kNewtRefNIL,
-		NSSYM(fasterFunctions),		kNewtRefTRUE
+		NSSYM(oldBuildRules),		    kNewtRefNIL,
+		NSSYM(useStepChildren),		  kNewtRefTRUE,
+		NSSYM(suppressByteCodes),	  kNewtRefNIL,
+		NSSYM(fasterFunctions),		  kNewtRefTRUE
 	};
 	newtRef projectSettings = NewtMakeFrame2(sizeof(projectSettingsA) / (sizeof(newtRefVar) * 2), projectSettingsA);
   
 	newtRefVar profilerSettingsA[] = {
-		NSSYM(memory),				kNewtRefTRUE,
-		NSSYM(percent),				kNewtRefTRUE,
+		NSSYM(memory),				      kNewtRefTRUE,
+		NSSYM(percent),				      kNewtRefTRUE,
 		NSSYM(compileForProfiling),	kNewtRefNIL,
-		NSSYM(compileForSpeed),		kNewtRefNIL,
+		NSSYM(compileForSpeed),		  kNewtRefNIL,
 		NSSYM(detailedSystemCalls),	kNewtRefNIL,
 		NSSYM(detailedUserFunctions),kNewtRefTRUE
 	};
 	newtRef profilerSettings = NewtMakeFrame2(sizeof(profilerSettingsA) / (sizeof(newtRefVar) * 2), profilerSettingsA);
   
 	newtRefVar packageSettingsA[] = {
-		NSSYM(packageName),			NewtMakeString(dtkProjSettings->package->name->get(), true),
-		NSSYM(version),				NewtMakeString(dtkProjSettings->package->version->get(), true),
-		NSSYM(copyright),			NewtMakeString(dtkProjSettings->package->copyright->get(), true),
-		NSSYM(optimizeSpeed),		kNewtRefTRUE,
-		NSSYM(copyProtected),		kNewtRefNIL,
-		NSSYM(deleteOnDownload),	dtkProjSettings->package->deleteOnDownload->get() ? kNewtRefTRUE : kNewtRefNIL,
-		NSSYM(dispatchOnly),		kNewtRefNIL,
-		NSSYM(fourByteAlignment),	kNewtRefTRUE,
-		NSSYM(zippyCompression),	kNewtRefTRUE,
-		NSSYM(newton20Only),		kNewtRefNIL
+		NSSYM(packageName),			    NewtMakeString(dtkProjSettings->package->name->get(), true),
+		NSSYM(version),				      NewtMakeString(dtkProjSettings->package->version->get(), true),
+		NSSYM(copyright),			      NewtMakeString(dtkProjSettings->package->copyright->get(), true),
+		NSSYM(optimizeSpeed),		    kNewtRefTRUE,
+		NSSYM(copyProtected),		    kNewtRefNIL,
+		NSSYM(deleteOnDownload),	  dtkProjSettings->package->deleteOnDownload->get() ? kNewtRefTRUE : kNewtRefNIL,
+		NSSYM(dispatchOnly),		    kNewtRefNIL,
+		NSSYM(fourByteAlignment),	  kNewtRefTRUE,
+		NSSYM(zippyCompression),	  kNewtRefTRUE,
+		NSSYM(newton20Only),		    kNewtRefNIL
 	};
 	newtRef packageSettings = NewtMakeFrame2(sizeof(packageSettingsA) / (sizeof(newtRefVar) * 2), packageSettingsA);
   
 	newtRefVar iconProNormalA[] = {
-		NSSYM(__ntExternFile),		makeFileRef(0), 
-		NSSYM(__ntmaskfile),		makeFileRef(0), 
-		NSSYM(__ntCreateMask),		NewtMakeInt30(0),
-		NSSYM(imageinfo1),			makeFileRef(0), 
-		NSSYM(imageinfo2),			makeFileRef(0), 
-		NSSYM(imageinfo4),			makeFileRef(0), 
-		NSSYM(imageinfo8),			makeFileRef(0), 
-		NSSYM(maskinfo),			makeFileRef(0), 
-		NSSYM(maskoption),			NewtMakeInt30(0),
+    NSSYM(__ntExternFile),		  makeFileRef(dtkProjSettings->icon->wIcon1->getImageFilename()), 
+		NSSYM(__ntmaskfile),		    makeFileRef(dtkProjSettings->icon->wMask->getImageFilename()), 
+		NSSYM(__ntCreateMask),		  NewtMakeInt30(0),
+		NSSYM(imageinfo1),			    makeFileRef(dtkProjSettings->icon->wIcon1->getImageFilename()), 
+		NSSYM(imageinfo2),			    makeFileRef(0), 
+		NSSYM(imageinfo4),			    makeFileRef(0), 
+		NSSYM(imageinfo8),			    makeFileRef(0), 
+		NSSYM(maskinfo),			      makeFileRef(dtkProjSettings->icon->wMask->getImageFilename()), 
+		NSSYM(maskoption),			    NewtMakeInt30(0),
 	};
 	newtRef iconProNormal = NewtMakeFrame2(sizeof(iconProNormalA) / (sizeof(newtRefVar) * 2), iconProNormalA);
   
 	newtRefVar iconProHighlightedA[] = {
-		NSSYM(__ntExternFile),		makeFileRef(0), 
-		NSSYM(__ntmaskfile),		makeFileRef(0), 
-		NSSYM(__ntCreateMask),		NewtMakeInt30(0),
-		NSSYM(imageinfo1),			makeFileRef(0), 
-		NSSYM(imageinfo2),			makeFileRef(0), 
-		NSSYM(imageinfo4),			makeFileRef(0), 
-		NSSYM(imageinfo8),			makeFileRef(0), 
-		NSSYM(maskinfo),			makeFileRef(0), 
-		NSSYM(maskoption),			NewtMakeInt30(0),
+		NSSYM(__ntExternFile),		  makeFileRef(0), 
+		NSSYM(__ntmaskfile),		    makeFileRef(0), 
+		NSSYM(__ntCreateMask),		  NewtMakeInt30(0),
+		NSSYM(imageinfo1),			    makeFileRef(0), 
+		NSSYM(imageinfo2),			    makeFileRef(0), 
+		NSSYM(imageinfo4),			    makeFileRef(0), 
+		NSSYM(imageinfo8),			    makeFileRef(0), 
+		NSSYM(maskinfo),			      makeFileRef(0), 
+		NSSYM(maskoption),			    NewtMakeInt30(0),
 	};
 	newtRef iconProHighlighted = NewtMakeFrame2(sizeof(iconProHighlightedA) / (sizeof(newtRefVar) * 2), iconProHighlightedA);
   
 	newtRefVar outputSettingsA[] = {
-		NSSYM(applicationName),		NewtMakeString(dtkProjSettings->app->name->get(), false),
-		NSSYM(applicationSymbol),	NewtMakeString(dtkProjSettings->app->symbol->get(), false),
-		NSSYM(partType),			NewtMakeInt30(0),
+		NSSYM(applicationName),		  NewtMakeString(dtkProjSettings->app->name->get(), false),
+		NSSYM(applicationSymbol),	  NewtMakeString(dtkProjSettings->app->symbol->get(), false),
+		NSSYM(partType),			      NewtMakeInt30(0),
 		NSSYM(topFrameExpression),	NewtMakeString("", false),
-		NSSYM(autoClose),			dtkProjSettings->app->symbol->get() ? kNewtRefTRUE : kNewtRefNIL,
-		NSSYM(customPartType),		NewtMakeString("UNKN", false),
-		NSSYM(fasterSoups),			kNewtRefNIL,
-		NSSYM(iconProNormal),		iconProNormal,
+		NSSYM(autoClose),			      dtkProjSettings->app->symbol->get() ? kNewtRefTRUE : kNewtRefNIL,
+		NSSYM(customPartType),		  NewtMakeString("UNKN", false),
+		NSSYM(fasterSoups),			    kNewtRefNIL,
+		NSSYM(iconProNormal),		    iconProNormal,
 		NSSYM(iconProHighlighted),	iconProHighlighted, 
-		NSSYM(iconFile),			makeFileRef(0)
+		NSSYM(iconFile),			      makeFileRef(dtkProjSettings->icon->wIcon1->getImageFilename())
 	};
 	newtRef outputSettings = NewtMakeFrame2(sizeof(outputSettingsA) / (sizeof(newtRefVar) * 2), outputSettingsA);
   
 	// this is the size of the Project subwindow which do not use in DTK, so we give this fixed values
 	newtRefVar windowRectA[] = {
-		NSSYM(left),				NewtMakeInt30(3),
-		NSSYM(top),					NewtMakeInt30(410),
-		NSSYM(bottom),				NewtMakeInt30(550),
-		NSSYM(right),				NewtMakeInt30(730)
+		NSSYM(left),				        NewtMakeInt30(3),
+		NSSYM(top),					        NewtMakeInt30(410),
+		NSSYM(bottom),				      NewtMakeInt30(550),
+		NSSYM(right),				        NewtMakeInt30(730)
 	};
 	newtRef windowRect = NewtMakeFrame2(sizeof(windowRectA) / (sizeof(newtRefVar) * 2), windowRectA);
   
 	newtRefVar ntkFrameA[] = {
-		NSSYM(ntkPlatform),			NewtMakeInt30(1),
-		NSSYM(fileVersion),			NewtMakeInt30(2),
-		NSSYM(projectItems),		projectItems,
-		NSSYM(projectSettings),		projectSettings,
-		NSSYM(outputSettings),		outputSettings,
-		NSSYM(packageSettings),		packageSettings,
-		NSSYM(profilerSettings),	profilerSettings,
-		NSSYM(windowRect),			windowRect
+		NSSYM(ntkPlatform),			    NewtMakeInt30(1),
+		NSSYM(fileVersion),			    NewtMakeInt30(2),
+		NSSYM(projectItems),		    projectItems,
+		NSSYM(projectSettings),		  projectSettings,
+		NSSYM(outputSettings),		  outputSettings,
+		NSSYM(packageSettings),		  packageSettings,
+		NSSYM(profilerSettings),	  profilerSettings,
+		NSSYM(windowRect),			    windowRect
 	};
 	newtRef ntkFrame = NewtMakeFrame2(sizeof(ntkFrameA) / (sizeof(newtRefVar) * 2), ntkFrameA);
   
@@ -846,60 +880,6 @@ int Dtk_Project::save()
   
 	return 0;
 }
-
-
-/*---------------------------------------------------------------------------*/
-/*
- * Default application icon
- */
-uint8_t bits[] = {
-	0x00, 0x00, 0x00, 0x00, // 0, 0
-	0x00, 0x04, 0x00, 0x00, // bytes per row, 0
-	0x00, 0x00, 0x00, 0x00, // 0, 4
-	0x00, 0x1b, 0x00, 0x18, // Height: 27, Width: 24 (probably need to align to 32 bit)
-	0x00, 0x00, 0x00, 0x00, // ................................
-	0x00, 0x00, 0x00, 0x00, // ................................
-	0x00, 0x00, 0x1c, 0x00, // ...................xxx..........
-	0x00, 0x00, 0x3f, 0x00, // ..................xxxxxx........
-	0x00, 0x00, 0x33, 0x00, // ..................xx..xx........
-	0x1f, 0xff, 0x7b, 0x00, // ...xxxxxxxxxxxxx.xxxx.xx........
-	0x3f, 0xff, 0x6e, 0x00, // ..xxxxxxxxxxxxxx.xx.xxx.........
-	0x30, 0x00, 0xce, 0x00, // ..xx............xx..xxx.........
-	0x37, 0xfc, 0xcc, 0x00, // ..xx.xxxxxxxxx..xx..xx..........
-	0x37, 0xfd, 0x9c, 0x00, 
-	0x34, 0x05, 0x98, 0x00, // etc. bitmap
-	0x35, 0x53, 0x38, 0x00, 
-	0x34, 0x03, 0x30, 0x00, 
-	0x35, 0x56, 0x70, 0x00, 
-	0x34, 0x06, 0x60, 0x00, 
-	0x35, 0x54, 0xe0, 0x00, 
-	0x34, 0x0c, 0xc0, 0x00, 
-	0x35, 0x4f, 0xc0, 0x00, 
-	0x34, 0x0b, 0x80, 0x00, 
-	0x36, 0x0f, 0x00, 0x00, 
-	0x37, 0xfe, 0x80, 0x00, 
-	0x37, 0xfd, 0x80, 0x00, 
-	0x30, 0x0b, 0x80, 0x00, 
-	0x18, 0x03, 0x00, 0x00, 
-	0x1f, 0xff, 0x00, 0x00, 
-	0x0f, 0xfe, 0x00, 0x00,
-	0x00, 0x00, 0x00, 0x00,
-};
-
-/*---------------------------------------------------------------------------*/
-/*
- * Default application icon mask bits
- */
-uint8_t mask[] = {
-	0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1b, 0x00, 0x18, 
-	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1c, 0x00, 0x00, 0x00, 0x3f, 0x00, 
-	0x00, 0x00, 0x3f, 0x00, 0x1f, 0xff, 0x7f, 0x00, 0x3f, 0xff, 0x7e, 0x00, 0x3f, 0xff, 0xfe, 0x00, 
-	0x3f, 0xff, 0xfc, 0x00, 0x3f, 0xff, 0xfc, 0x00, 0x3f, 0xff, 0xf8, 0x00, 0x3f, 0xff, 0xf8, 0x00, 
-	0x3f, 0xff, 0xf0, 0x00, 0x3f, 0xff, 0xf0, 0x00, 0x3f, 0xff, 0xe0, 0x00, 0x3f, 0xff, 0xe0, 0x00,
-	0x3f, 0xff, 0xc0, 0x00, 0x3f, 0xff, 0xc0, 0x00, 0x3f, 0xff, 0x80, 0x00, 0x3f, 0xff, 0x00, 0x00, 
-	0x3f, 0xff, 0x80, 0x00, 0x3f, 0xff, 0x80, 0x00, 0x3f, 0xff, 0x80, 0x00, 0x1f, 0xff, 0x00, 0x00, 
-	0x1f, 0xff, 0x00, 0x00, 0x0f, 0xfe, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-};
 
 
 /*---------------------------------------------------------------------------*/
@@ -1091,21 +1071,8 @@ void		NVMClearException(void);
 	//NewtPrintObject(stdout, theBase);
   
 	// create the package
-	newtRefVar iconBoundsA[] = {
-		NSSYM(left),			NewtMakeInt30(0),
-		NSSYM(top),				NewtMakeInt30(0),
-		NSSYM(bottom),			NewtMakeInt30(27),
-		NSSYM(right),			NewtMakeInt30(24)
-	};
-	newtRef iconBounds = NewtMakeFrame2(sizeof(iconBoundsA) / (sizeof(newtRefVar) * 2), iconBoundsA);
-	
-	newtRefVar iconA[] = {
-		NSSYM(bits),			NewtMakeBinary(NSSYM(bits), bits, sizeof(bits), false),
-		NSSYM(mask),			NewtMakeBinary(NSSYM(mask), mask, sizeof(mask), false),
-		NSSYM(bounds),			iconBounds,
-	};
-	newtRef icon = NewtMakeFrame2(sizeof(iconA) / (sizeof(newtRefVar) * 2), iconA);
-  
+  newtRef icon = Fldtk_Icon_Dropbox::buildIcon(dtkProjSettings->icon->wIcon1, dtkProjSettings->icon->wMask, 0);
+
 	newtRefVar dataA[] = {
 		NSSYM(app),				NewtMakeSymbol(dtkProjSettings->app->symbol->get()),
 		NSSYM(text),			NewtMakeString(dtkProjSettings->app->name->get(), false),

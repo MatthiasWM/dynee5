@@ -30,6 +30,8 @@
 #include <FL/Fl_Box.H>
 #include <FL/Fl_RGB_Image.H>
 
+#include "allNewt.h"
+
 
 /** 
  * An FLTK widget that will accept graphic files that are dropped on it,
@@ -39,6 +41,8 @@ class Fldtk_Icon_Dropbox : public Fl_Box
 {
 public:
 	Fldtk_Icon_Dropbox(int x, int y, int w, int h, const char *name=0L);
+
+	virtual ~Fldtk_Icon_Dropbox();
 
   /**
    * Set the bit depth for this image.
@@ -51,9 +55,103 @@ public:
   int handle(int event);
   
   /**
-   * Load a new image from diska.
+   * Set the main filename and load the image.
+   */
+  void setImageFilename(const char *filename);
+
+  /**
+   * Get the file name for this icon image.
+   */
+  const char *getImageFilename() { return filename_; }
+
+  /**
+   * Load a new image from disk.
    */
   void load(const char *filename);
+
+  /**
+   * Reload the image described by filename_.
+   */
+  void reload();
+
+  /**
+   * Update the internal data structure with the last change to the widget.
+   */
+  void update_data();
+
+  /**
+   * Restore the widget from the internal data structure.
+   */
+  void update_widget();
+
+  /**
+   * Convert the image file into a Newton bitmap.
+   *
+   * \param[out] w width of bitmap
+   * \param[out] h height of bitmap
+   * \param[in] isMask set this if you want to generate a mask instead
+   *
+   * \retval binary frame containing the bitmap
+   * \retval kNewtRefUnbind if there was an error
+   */
+  newtRef makeBitmap(int &w, int &h, bool isMask=false);
+
+  /**
+   * Convert the image file into a Newton mask.
+   *
+   * \param[out] w width of bitmap
+   * \param[out] h height of bitmap
+   *
+   * \retval binary frame containing the mask
+   * \retval kNewtRefUnbind if there was an error
+   */
+  newtRef makeMask(int &w, int &h) { return makeBitmap(w, h, true); }
+
+  /**
+   * Return the default icon bitmap (a PDA with a pen).
+   *
+   * \param[out] w width of bitmap
+   * \param[out] h height of bitmap
+   *
+   * \retval binary frame containing the bitmap
+   */
+  static newtRef defaultBitmap(int &w, int &h);
+
+  /**
+   * Return the default icon mask (a PDA with a pen).
+   *
+   * \param[out] w width of bitmap
+   * \param[out] h height of bitmap
+   *
+   * \retval binary frame containing the mask
+   */
+  static newtRef defaultMask(int &w, int &h);
+
+  /**
+   * Return the NTK pre 1.6.1 icon frame.
+   *
+   * \param[in] bits a dropbox containing the bitmap image
+   * \param[in] mask a dropbox containing the mask image
+   * \param mode[in] how to combine image and mask into the icon
+   *
+   * \retval frame containing the icon
+   * \retval if the process failed, this will return teh default icon
+   */
+  static newtRef buildIcon(Fldtk_Icon_Dropbox *bits, Fldtk_Icon_Dropbox *mask, int mode);
+
+  /**
+   * Update the temporary filename.
+   *
+   * This does not load the image file.
+   */
+  void tmpFilename(const char *fn);
+
+  /**
+   * Update the filename.
+   *
+   * This does not load the image file.
+   */
+  void filename(const char *fn);
 
 private:
 
@@ -62,6 +160,12 @@ private:
 
   /// icon image
   Fl_RGB_Image *image_;
+
+  /// file and path name of final image file.
+  char *filename_;
+  
+  /// file and path name of temporary image file.
+  char *tmpFilename_;
   
 };
 

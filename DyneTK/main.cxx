@@ -275,6 +275,7 @@ char *dtkReleaseNotes =
   "<h2>DyneTK Release Notes</h2>\n"
   "<h3>DyneTK 1.7.2</h3>\n"
   "<ul>"
+  "<li>added b&w application icons with mask</li>\n"
   "<li>fixed deleting Templates</li>\n"
   "<li>fixed deleting Slots</li>\n"
   "<li>fixed resizing of Slot editors</li>\n"
