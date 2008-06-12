@@ -1,0 +1,118 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0108 
+header_name {.h} 
+code_name {.cxx}
+comment {//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+} {in_source in_header
+} 
+
+decl {\#include "allNewt.h"} {public
+} 
+
+decl {\#include "dtk/Dtk_Project.h"} {public
+} 
+
+decl {\#include "dtk/Dtk_Template.h"} {selected public
+} 
+
+decl {\#include "main.h"} {public
+} 
+
+widget_class Fldtk_New_Slot_Dialog {
+  label {New Slot} open
+  xywh {814 197 400 220} type Double
+  class Fl_Window modal visible
+} {
+  Fl_Box wTemplateProto {
+    xywh {5 8 390 22} labelfont 1 labelsize 12
+  }
+  Fl_Menu_Button wSpecific {
+    label Specific open
+    xywh {65 40 84 20} labelsize 12 textsize 12
+  } {}
+  Fl_Menu_Button wMethods {
+    label Methods open
+    xywh {158 40 84 20} labelsize 12 textsize 12
+  } {}
+  Fl_Menu_Button wAttributes {
+    label Attributes open
+    xywh {250 40 84 20} labelsize 12 textsize 12
+  } {}
+  Fl_Input wSlotName {
+    label {Slot Name:}
+    xywh {75 81 155 19} labelsize 12 textsize 12
+  }
+  Fl_Choice wEditor {
+    label {Editor:} open
+    xywh {280 80 105 20} down_box BORDER_BOX labelsize 12 textsize 12
+  } {
+    MenuItem {} {
+      label Evaluate
+      xywh {0 0 30 20} labelsize 12
+    }
+    MenuItem {} {
+      label Script
+      xywh {10 10 30 20} labelsize 12
+    }
+    MenuItem {} {
+      label Text
+      xywh {20 20 30 20} labelsize 12
+    }
+    MenuItem {} {
+      label Number
+      xywh {30 30 30 20} labelsize 12
+    }
+    MenuItem {} {
+      label Boolean
+      xywh {40 40 30 20} labelsize 12
+    }
+    MenuItem {} {
+      label Rectangle
+      xywh {50 50 30 20} labelsize 12
+    }
+    MenuItem {} {
+      label Picture
+      xywh {60 60 30 20} labelsize 12
+    }
+  }
+  Fl_Box wHelp {
+    xywh {15 116 370 54} box BORDER_FRAME color 0 labelsize 12 align 21
+  }
+  Fl_Button wAdd {
+    label Add
+    xywh {240 185 64 20} labelsize 12
+  }
+  Fl_Button wDone {
+    label Done
+    callback {hide();}
+    xywh {320 185 64 20} labelsize 12
+  }
+  Function {setTemplate(Dtk_Template *tmpl)} {open return_type void
+  } {
+    code {wTemplateProto->copy_label(tmpl->id());} {}
+  }
+} 
+
+comment {
+//
+// DyneTK, the Dyne Toolkit
+// Copyright (C) 2007 Matthias Melcher
+//} {in_source in_header
+} 

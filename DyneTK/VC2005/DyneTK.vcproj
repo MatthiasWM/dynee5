@@ -209,6 +209,14 @@
 			Name="fluid"
 			>
 			<File
+				RelativePath="..\fluid\Fldtk_Dialogs.cxx"
+				>
+			</File>
+			<File
+				RelativePath="..\fluid\Fldtk_Dialogs.h"
+				>
+			</File>
+			<File
 				RelativePath="..\fluid\Fldtk_Inspector.cxx"
 				>
 				<FileConfiguration

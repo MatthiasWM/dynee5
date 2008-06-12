@@ -341,7 +341,19 @@ void	ShowProjectSettings();
  */
 int ShowTemplateInfo(Dtk_Template *tmpl=0L);
 
-//      NewSlot()
+/** Pop up a dialog for adding new slots to a template.
+ *
+ * This dialog allows the user to select a slot from three pulldown menus,
+ * rename the slot, or set the slot type. A help text for known slot names
+ * is displayed. If the user selects OK, the slot will be added and the
+ * slot editor is opened.
+ *
+ * This function returns immediatly. The dialog box however is set to modal,
+ * so the user can add multiple slots at once.
+ * 
+ * \param tmpl Add slots to this template, or the selected template, if NULL
+ */
+void NewSlot(Dtk_Template *tmpl=0L);
 
 /** Immediatly remove the given Slot.
  *

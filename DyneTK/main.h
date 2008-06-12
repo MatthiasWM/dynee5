@@ -46,6 +46,7 @@ extern class Flmm_Console       * wConsole;
 extern class Fldtk_Document_Browser * dtkDocumentBrowser;
 extern class Fldtk_Document_Tabs    * dtkDocumentTabs;
 extern class Fl_Tabs                * dtkBrowserTabs;
+extern class Fldtk_New_Slot_Dialog  * dtkNewSlotDialog;
 
 // global dtk project and document roots
 extern class Dtk_Document_List  * dtkGlobalDocuments;

@@ -70,6 +70,7 @@ Fl_Image *toolbox_closed_pixmap;
 Fldtk_Document_Browser  * dtkDocumentBrowser;
 Fldtk_Document_Tabs     * dtkDocumentTabs;
 Fl_Tabs                 * dtkBrowserTabs;
+Fldtk_New_Slot_Dialog   * dtkNewSlotDialog;
 
 // global dtk project and document roots
 Dtk_Project         * dtkProject;

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0108 
 use_FL_COMMAND 
 header_name {.h} 
 code_name {.cxx}
@@ -414,8 +414,9 @@ widget_class Fldtk_Main_Window {
         callback {ShowTemplateInfo();}
         xywh {5 5 100 20} shortcut 0x40069 labelsize 12 deactivate divider
       }
-      MenuItem {} {
+      MenuItem mBrowserNewSlot {
         label {New Slot...}
+        callback {NewSlot();}
         xywh {5 5 100 20} shortcut 0x5006e labelsize 12 labelcolor 176 deactivate
       }
       MenuItem mBrowserRenameSlot {
@@ -496,7 +497,7 @@ widget_class Fldtk_Main_Window {
       }
     }
     Submenu mHelp {
-      label Help open
+      label Help
       xywh {5 5 100 20} labelsize 12
     } {
       MenuItem {} {
@@ -670,7 +671,7 @@ SetModeAddTemplate();} open
     Fl_Group {} {open
       xywh {0 95 150 305} box FLAT_BOX
     } {
-      Fl_Tabs wBrowserTabs {open
+      Fl_Tabs wBrowserTabs {
         xywh {3 98 144 299} box UP_BOX labelsize 12 deactivate resizable
       } {
         Fl_Browser wDocumentBrowser {
@@ -690,10 +691,10 @@ SetModeAddTemplate();} open
         class Fldtk_Document_Tabs
       } {}
     }
-    Fl_Group {} {
+    Fl_Group {} {open
       xywh {0 400 785 170} box FLAT_BOX
     } {
-      Fl_Tabs consoles {open
+      Fl_Tabs consoles {
         xywh {3 403 779 164} box UP_BOX labelsize 12 resizable
       } {
         Fl_Group {} {
@@ -711,24 +712,23 @@ SetModeAddTemplate();} open
       xywh {150 95 635 305} hide deactivate resizable
     }
   }
-  Fl_Group {} {
-    label {For Help, press F1}
+  Fl_Group {} {open
     xywh {0 570 785 25} box THIN_UP_BOX labelsize 11 align 20 deactivate
   } {
     Fl_Group {} {open
       xywh {605 570 165 25}
     } {
       Fl_Box {} {
-        label CAPS
-        xywh {620 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50
+        label CAPS selected
+        xywh {620 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50 deactivate
       }
       Fl_Box {} {
-        label NUM
-        xywh {665 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50
+        label NUM selected
+        xywh {665 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50 deactivate
       }
       Fl_Box {} {
-        label SCRL
-        xywh {710 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50
+        label SCRL selected
+        xywh {710 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50 deactivate
       }
     }
     Fl_Box {} {
@@ -861,8 +861,10 @@ if ( (mask & 0x00000020) == 0x00000020 ) {
 // if there is any template selected
 if ( (mask & 0x00000040) == 0x00000040 ) {
   mBrowserTemplateInfo->activate();
+  mBrowserNewSlot->activate();
 } else {
   mBrowserTemplateInfo->deactivate();
+  mBrowserNewSlot->deactivate();
 }
 
 // if there is any slot selected
@@ -906,7 +908,7 @@ Function {create_about_dialog()} {open
         xywh {10 10 305 70} box FLAT_BOX color 137 labelfont 1 labelsize 41 labelcolor 7 align 16
       }
       Fl_Box {} {
-        label {Version 1.7.2} selected
+        label {Version 1.7.2}
         xywh {215 80 100 20} labelfont 1 labelsize 13 align 24
       }
       Fl_Box {} {

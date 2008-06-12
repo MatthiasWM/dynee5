@@ -33,6 +33,7 @@
 #include "fluid/Fldtk_Prefs.h"
 #include "fluid/Fldtk_Proj_Settings.h"
 #include "fluid/Fldtk_Snapshot.h"
+#include "fluid/Fldtk_Dialogs.h"
 #include "fluid/main_ui.h"
 
 #include "dtk/Dtk_Document_List.h"
@@ -1160,6 +1161,21 @@ int ShowTemplateInfo(Dtk_Template *tmpl)
     return -2;
   tmpl->setName(name);
   return 0;
+}
+
+/*---------------------------------------------------------------------------*/
+void NewSlot(Dtk_Template *tmpl)
+{
+  if (!tmpl) {
+    tmpl = GetCurrentTemplate();
+    if (!tmpl)
+      return;
+  }
+  if (!dtkNewSlotDialog) {
+    dtkNewSlotDialog = new Fldtk_New_Slot_Dialog(400, 220, "New Slot");
+  }
+  dtkNewSlotDialog->setTemplate(tmpl);
+  dtkNewSlotDialog->show();
 }
 
 /*---------------------------------------------------------------------------*/
