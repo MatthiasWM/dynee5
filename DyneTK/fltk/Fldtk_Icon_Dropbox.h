@@ -28,6 +28,7 @@
 
 
 #include <FL/Fl_Box.H>
+#include <FL/Fl_RGB_Image.H>
 
 
 /** 
@@ -48,12 +49,20 @@ public:
    * Handle drag and drop for this widget.
    */
   int handle(int event);
+  
+  /**
+   * Load a new image from diska.
+   */
+  void load(const char *filename);
 
 private:
 
   /// bits per pixel
   int bpp_; 
 
+  /// icon image
+  Fl_RGB_Image *image_;
+  
 };
 
 

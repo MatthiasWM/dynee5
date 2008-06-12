@@ -28,12 +28,14 @@
 
 #include <stdio.h>
 #include <FL/Fl.H>
+#include <FL/Fl_Shared_image.H>
 
 
 /*---------------------------------------------------------------------------*/
 Fldtk_Icon_Dropbox::Fldtk_Icon_Dropbox(int x, int y, int w, int h, const char *name)
 : Fl_Box(x, y, w, h, name),
-  bpp_(1)
+  bpp_(1),
+  image_(0L)
 {
 }
 
@@ -49,12 +51,33 @@ int Fldtk_Icon_Dropbox::handle(int event)
     case FL_DND_RELEASE:
       return 1;
     case FL_PASTE:
+      load(Fl::event_text());
       printf("Filename: %s\n", Fl::event_text());
       return 1;
   }
   return Fl_Box::handle(event);
 }
 
+
+/*---------------------------------------------------------------------------*/
+void Fldtk_Icon_Dropbox::load(const char *filename)
+{
+  Fl_Shared_Image *si = Fl_Shared_Image::get(filename);
+  Fl_Image *im = si->copy();
+  if (im->d()==3) {
+    Fl_RGB_Image *rgb = (Fl_RGB_Image*)im;
+    image(0L);
+    delete image_;
+    image_ = rgb;
+    image(image_);
+    label(0);
+  } else {
+    image(0L);
+    delete image_;
+    image_ = 0L;
+    label("default");
+  }
+}
 
 
 //
