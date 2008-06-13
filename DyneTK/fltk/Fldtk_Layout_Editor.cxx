@@ -213,7 +213,6 @@ void Fldtk_Layout_Editor::methods_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Edit
     if (descr==kNewtRefUnbind) 
         descr = dtkPlatform->getScriptSlotDescription(key);
     Dtk_Slot *slot = e->template_->addSlot(key, descr);
-    e->slotBrowser()->add(slot->key(), slot);
     e->slotBrowser()->value(e->slotBrowser()->size());
     e->slotBrowser()->do_callback();
     e->userChangedSlots();
@@ -228,7 +227,6 @@ void Fldtk_Layout_Editor::attributes_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_E
     if (descr==kNewtRefUnbind) 
         descr = dtkPlatform->getAttributesSlotDescription(key);
     Dtk_Slot *slot = e->template_->addSlot(key, descr);
-    e->slotBrowser()->add(slot->key(), slot);
     e->slotBrowser()->value(e->slotBrowser()->size());
     e->slotBrowser()->do_callback();
     e->userChangedSlots();
