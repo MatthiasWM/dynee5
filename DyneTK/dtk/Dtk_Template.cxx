@@ -437,13 +437,13 @@ Dtk_Slot *Dtk_Template::addSlot(newtRef key, newtRef slot)
     } else if (strcmp(dt, "PROT")==0) {
       dSlot = new Dtk_Proto_Slot(slotList_, "_proto", slot);
     } else {
-      // also: RECT, CLAS, NUMB, PICT, USER, any more?
+      // also: RECT, CLAS, NUMB, PICT, USER, TEXT, INTG, any more?
       // CLAS is __ntTemplate
       // PROT is __ntTemplate
       // USER is __ntTemplate
       // PICT is icon
       printf("Unsupported slot datatype \"%s\" (%s)\n", dt, keyname);
-      dSlot = new Dtk_Slot(slotList_, keyname, slot);
+      dSlot = new Dtk_Script_Slot(slotList_, keyname, slot);
     }
   }
   if (key==NSSYM(viewBounds)) {
