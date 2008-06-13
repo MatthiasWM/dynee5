@@ -8,12 +8,12 @@ SRCFILES = \
   dtk/Dtk_Document.cxx \
   dtk/Dtk_Document_List.cxx \
   dtk/Dtk_Error.cxx \
-  dtk/Dtk_Layout_Document.cxx \
+  dtk/Dtk_Layout.cxx \
   dtk/Dtk_Platform.cxx \
   dtk/Dtk_Project.cxx \
   dtk/Dtk_Proto_Slot.cxx \
   dtk/Dtk_Rect_Slot.cxx \
-  dtk/Dtk_Script_Document.cxx \
+  dtk/Dtk_Script.cxx \
   dtk/Dtk_Script_Slot.cxx \
   dtk/Dtk_Script_Writer.cxx \
   dtk/Dtk_Slot.cxx \
@@ -37,6 +37,7 @@ SRCFILES = \
   fltk/Fldtk_Document_Tabs.cxx \
   fltk/Fldtk_Editor.cxx \
   fltk/Fldtk_Format_Slot_Editor.cxx \
+  fltk/Fldtk_Icon_Dropbox.cxx \
   fltk/Fldtk_Justify_Slot_Editor.cxx \
   fltk/Fldtk_Layout_Editor.cxx \
   fltk/Fldtk_Layout_View.cxx \
@@ -49,6 +50,7 @@ SRCFILES = \
   fltk/Fldtk_Tmpl_Browser.cxx \
   fltk/Fldtk_Value_Slot_Editor.cxx \
   fluid/Fldtk_Inspector.cxx \
+  fluid/Fldtk_Dialogs.cxx \
   fluid/Fldtk_Proj_Settings.cxx \
   fluid/Fldtk_Prefs.cxx \
   fluid/Fldtk_Snapshot.cxx \
@@ -71,7 +73,7 @@ NEWTINCLUDES := -I../../newt0/src/ -I../../newt0/src/newt_core/incs/
 
 LDFLAGS := $(shell fltk-config --use-images --ldstaticflags) -L../../newt0/build
 
-LIBS := $(shell fltk-config --use-images --libs)
+LIBS := $(shell fltk-config --use-images --ldflags)
 
 
 dynetk: $(OBJFILES)

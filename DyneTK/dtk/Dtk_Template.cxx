@@ -45,8 +45,8 @@
 
 #include "fluid/main_ui.h"
 
-#include "fltk/Fldtk_Slot_Browser.H"
-#include "fltk/Fldtk_Tmpl_Browser.H"
+#include "fltk/Fldtk_Slot_Browser.h"
+#include "fltk/Fldtk_Tmpl_Browser.h"
 
 #include "allNewt.h"
 

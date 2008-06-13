@@ -35,7 +35,7 @@
 #endif
 
 #include <FL/Fl.H>
-#include <FL/Fl_Shared_image.H>
+#include <FL/Fl_Shared_Image.H>
 
 
 /*---------------------------------------------------------------------------*/
