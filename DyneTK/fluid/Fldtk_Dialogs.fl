@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
+version 1.0108 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -39,7 +39,7 @@ decl {\#include "main.h"} {public
 } 
 
 widget_class Fldtk_New_Slot_Dialog {
-  label {New Slot} open
+  label {New Slot} open selected
   xywh {412 89 400 220} type Double
   class Fl_Window modal visible
 } {
@@ -47,7 +47,9 @@ widget_class Fldtk_New_Slot_Dialog {
     xywh {5 8 390 22} labelfont 1 labelsize 12
   }
   Fl_Menu_Button wSpecific {
-    label Specific open
+    label Specific
+    callback {wSlotName->value(wSpecific->menu()[wSpecific->value()].label());
+wSlotName->do_callback();} open
     xywh {65 40 84 20} labelsize 12 textsize 12
   } {}
   Fl_Menu_Button wMethods {
@@ -65,7 +67,8 @@ widget_class Fldtk_New_Slot_Dialog {
 } else {
   wAdd->deactivate();
 }
-wHelp->copy_label(dtkPlatform->getHelp(tmpl_, wSlotName->value()));}
+const char *help = dtkPlatform->getHelp(tmpl_, wSlotName->value());
+wHelp->copy_label(help);}
     xywh {75 81 155 19} labelsize 12 when 1 textsize 12
   }
   Fl_Choice wEditor {
@@ -84,7 +87,7 @@ wHelp->copy_label(dtkPlatform->getHelp(tmpl_, wSlotName->value()));}
     }
     MenuItem {} {
       label Text
-      user_data {"TEXT"} user_data_type {char*} selected
+      user_data {"TEXT"} user_data_type {char*}
       xywh {20 20 30 20} labelsize 12
     }
     MenuItem {} {
@@ -110,7 +113,7 @@ wHelp->copy_label(dtkPlatform->getHelp(tmpl_, wSlotName->value()));}
     }
   }
   Fl_Box wHelp {
-    xywh {15 116 370 54} box BORDER_FRAME color 0 labelsize 12 align 21
+    xywh {15 116 370 54} box BORDER_BOX labelsize 12 align 21
   }
   Fl_Button wAdd {
     label Add
