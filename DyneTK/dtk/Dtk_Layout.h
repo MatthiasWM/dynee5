@@ -109,6 +109,8 @@ class Dtk_Layout : public Dtk_Document
     
     Dtk_Template    * addTemplate(int x, int y, int w, int h, char *proto=0L);
     
+    void userChangedSlots();
+    
   private:
     
     void            setupEditors(); 

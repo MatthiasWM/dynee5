@@ -65,7 +65,7 @@ public:
   /**
    * Close connection and return allocated resources.
    */
-  ~Flio_Inspector();
+  virtual ~Flio_Inspector();
 
   /**
    * Open a connection.
@@ -76,13 +76,26 @@ public:
    * \param[in] transfer rate in bits per second (38400bps)
    * \return 0 for success, -1 if failed
    */
-  int open(const char *port, int bps);
+  virtual int open(const char *port, int bps);
 
   /**
    * Close the serial connection.
    */
-  void close();
+  virtual void close();
+  
+  virtual void cancel();
 
+  virtual int is_open() { return Flio_Mnp4_Protocol::is_open(); }
+
+  virtual int sendScript(const char *script);
+  
+  virtual int deletePackage(const char *symbol);
+
+  virtual int sendPackage(const char *filename);
+  
+  virtual int is_serial() { return 1; }
+  virtual int is_einstein() { return 0; }
+  
 protected:
 
   /**
@@ -162,6 +175,7 @@ private:
   int NBuffer_;
   int nReceive_;
 };
+
 
 #endif
 

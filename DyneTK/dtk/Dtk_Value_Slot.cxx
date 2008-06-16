@@ -59,16 +59,19 @@ Dtk_Value_Slot::Dtk_Value_Slot(Dtk_Slot_List *list, const char *theKey, newtRef 
     } else if (NewtRefIsInteger(v)) {
       value_ = (double)NewtRefToInteger(v);
     } else {
-      printf("############################# Can't read number!\n"); // FIXME
-      EnterDebugger();
+      value_ = 0;
+      //printf("############################# Can't read number!\n"); // FIXME
+      //EnterDebugger();
     }
     newtRef dt = NewtGetFrameSlot(slot, NewtFindSlotIndex(slot, NSSYM(__ntDatatype)));
     if (NewtRefIsString(dt)) {
       datatype_ = strdup(NewtRefToString(dt));
     }
   }
-  if (!datatype_)
+  if (!datatype_) {
+    NewtPrintObject(stdout, slot);
     datatype_ = strdup("NUMB");
+  }
 }
 
 

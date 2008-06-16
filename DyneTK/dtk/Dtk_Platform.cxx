@@ -56,12 +56,12 @@ bool Dtk_Platform::CStringSort::operator()(const char *a, const char *b) const
 
 /*---------------------------------------------------------------------------*/
 Dtk_Platform::Dtk_Platform(const char *ptfFilename, const char *constFilename)
-:   platform_(kNewtRefUnbind),
-templateChoiceMenu_(0L),
-methodsChoiceMenu_(0L),
-attributesChoiceMenu_(0L),
-ptfFilename_(strdup(ptfFilename)),
-constFilename_(strdup(constFilename))
+: platform_(kNewtRefUnbind),
+  templateChoiceMenu_(0L),
+  methodsChoiceMenu_(0L),
+  attributesChoiceMenu_(0L),
+  ptfFilename_(strdup(ptfFilename)),
+  constFilename_(strdup(constFilename))
 {
   loadPtfFile();
   //loadConstFile(); // do this at compile time
@@ -199,24 +199,32 @@ Fl_Menu_Item *Dtk_Platform::templateChoiceMenu()
     return 0L;
   
   newtRef ta = NewtGetArraySlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
-  if (ta==kNewtRefUnbind)
-    return 0L;
+  int nta = NewtRefIsArray(ta) ? NewtArrayLength(ta) : 0;
+  newtRef va = NewtGetArraySlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ViewClassArray)));
+  int nva = NewtRefIsArray(va) ? NewtArrayLength(va) : 0;
   
-  // create the choice of templates by finding all symbols inside the TemplateArray. 
-  // FIXME also add the contents of the ViewClassArray
-  /// \todo Also search Templates: and ViewClassArray:
-  int mi = 0, i, n = NewtArrayLength(ta);
-  templateChoiceMenu_ = (Fl_Menu_Item*)calloc(n+1, sizeof(Fl_Menu_Item));
-  for (i=0; i<n; i++) {
+  // create the choice of templates by finding all symbols inside the arrays. 
+  int mi = 0, i;
+  templateChoiceMenu_ = (Fl_Menu_Item*)calloc(nta+nva+1, sizeof(Fl_Menu_Item));
+  for (i=0; i<nta; i++) {
     newtRef sym = NewtSlotsGetSlot(ta, i);
     if (NewtRefIsSymbol(sym)) {
       templateChoiceMenu_[mi].label(strdup(NewtSymbolGetName(sym)));
       newtRef tmplDB = NewtGetFrameSlot(ta, i+1);
       newtRef proto = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(_proto)));
       templateChoiceMenu_[mi].user_data((void*)NewtRefToInteger(proto));
-      mi++;
-    } else {
-      // ignore
+      mi++; i++;
+    }
+  }
+  for (i=0; i<nva; i++) {
+    newtRef sym = NewtSlotsGetSlot(va, i);
+    if (NewtRefIsSymbol(sym)) {
+      templateChoiceMenu_[mi].label(strdup(NewtSymbolGetName(sym)));
+      newtRef tmplDB = NewtGetFrameSlot(va, i+1);
+      newtRef proto = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(_proto)));
+      if (NewtRefIsInteger(proto))
+        templateChoiceMenu_[mi].user_data((void*)NewtRefToInteger(proto));
+      mi++; i++;
     }
   }
   templateChoiceMenu_ = (Fl_Menu_Item*)realloc(templateChoiceMenu_, (mi+1) * sizeof(Fl_Menu_Item));
@@ -245,23 +253,32 @@ Fl_Menu_Item *Dtk_Platform::specificChoiceMenu(Dtk_Template *tmpl)
     // find the id in the platform database
     newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
     int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+    if (ix==-1) {
+      ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ViewClassArray)));
+      ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+    }
     newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
     newtRef opt = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
     newtRef rqd = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
-    int i, mi = 0, no = NewtFrameLength(opt), nr = NewtFrameLength(rqd);
+    int i, mi = 0;
+    int no = NewtRefIsFrame(opt) ? NewtFrameLength(opt) : 0;
+    int nr = NewtRefIsFrame(rqd) ? NewtFrameLength(rqd) : 0;
     
     menu = (Fl_Menu_Item*)calloc(no+nr+1, sizeof(Fl_Menu_Item));
     for (i=0; i<no; i++, mi++) {
       newtRef sym = NewtGetFrameKey(opt, i);
       menu[mi].label(strdup(NewtSymbolGetName(sym)));
     }
-    sort(menu, no);
-    menu[mi-1].flags |= FL_MENU_DIVIDER;
+    if (no) {
+      sort(menu, no);
+      menu[mi-1].flags |= FL_MENU_DIVIDER;
+    }
     for (i=0; i<nr; i++, mi++) {
       newtRef sym = NewtGetFrameKey(rqd, i);
       menu[mi].label(strdup(NewtSymbolGetName(sym)));
     }
-    sort(menu+no, nr);
+    if (nr)
+      sort(menu+no, nr);
     specificMenuMap_.insert(std::make_pair(strdup(id), menu));
   } else {
     menu = it->second;
@@ -345,6 +362,7 @@ static int cStringCompare(const void *a, const void *b)
   return strcasecmp(((Fl_Menu_Item*)a)->label(), ((Fl_Menu_Item*)b)->label());
 }
 
+
 /*---------------------------------------------------------------------------*/
 void Dtk_Platform::sort(Fl_Menu_Item *menu, int n)
 {
@@ -361,17 +379,25 @@ void Dtk_Platform::sort(Fl_Menu_Item *menu, int n)
 newtRef Dtk_Platform::newtTemplate(char *id)
 {
   if (platform_==kNewtRefUnbind)
-    return 0L;
+    return kNewtRefUnbind;
   if (!id)
-    return 0L;
+    return kNewtRefUnbind;
+  newtRef idRef = NewtMakeSymbol(id);
   
   // find the id in the platform database
-  /// \todo Also search Templates: and ViewClassArray:
   newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
-  int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+  int ix = NewtFindArrayIndex(ta, idRef, 0);
+  if (ix==-1) {
+    ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ViewClassArray)));
+    ix = NewtFindArrayIndex(ta, idRef, 0);
+  }
+  if (ix==-1)
+    return kNewtRefUnbind;
+  
   newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
   newtRef rqd = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
-  int i, nr = NewtFrameLength(rqd), vi = 0, ai = 0, as = 0;
+  int i, vi = 0, ai = 0, as = 0;
+  int nr = NewtRefIsFrame(rqd) ? NewtFrameLength(rqd) : 0;
   
   newtRefVar attr[100];    
   newtRefVar val[100];
@@ -386,10 +412,11 @@ newtRef Dtk_Platform::newtTemplate(char *id)
   }
   for (i=0; i<nr; i++) {
     newtRef sym = NewtGetFrameKey(rqd, i);
-    int def = NewtFindSlotIndex(tmplDB, sym);
+//    int def = NewtFindSlotIndex(tmplDB, sym);
     as = ai;
     attr[ai++] = NSSYM(value);
-    attr[ai++] = NewtGetFrameSlot(tmplDB, def);
+//  attr[ai++] = NewtGetFrameSlot(tmplDB, def);
+    attr[ai++] = getSlotDefaultValue(idRef, sym);
     attr[ai++] = NSSYM(__ntDatatype);
     attr[ai++] = NewtGetFrameSlot(rqd, i);
     val[vi++] = sym;
@@ -405,49 +432,107 @@ newtRef Dtk_Platform::newtTemplate(char *id)
   return result;
 }
 
+
+/*---------------------------------------------------------------------------*/
+newtRef Dtk_Platform::getSlotDefaultValue(newtRefArg id, newtRefArg key)
+{
+  // abort if no database loaded
+  if (platform_==kNewtRefUnbind)
+    return kNewtRefUnbind;
+
+  if (NewtRefIsSymbol(id)) {
+    // if an id is given search the TemplateArray and the ViewClassArray
+    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+    int ix = NewtFindArrayIndex(ta, id, 0);
+    if (ix==-1) {
+      ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ViewClassArray)));
+      ix = NewtFindArrayIndex(ta, id, 0);
+    }
+    if (ix>=0) {
+      newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
+      if (NewtRefIsFrame(tmplDB)) {
+        newtRef value = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, key));
+        if (value!=kNewtRefUnbind)
+          return value;
+        // recurse into __ntAncestor and finally into the Script and Attribute Slots
+        newtRef ancestor = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntAncestor)));
+        return getSlotDefaultValue(ancestor, key); // it's ok if there is no ancestor!
+      }
+    }
+  }
+  // if no id was given or no entry was found, then search ScriptSlots and AttributeSlots
+  newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
+  if (NewtRefIsFrame(db)) {
+    newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+    if (NewtRefIsFrame(def)) {
+      newtRef value = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
+      if (value!=kNewtRefUnbind)
+        return value;
+    }
+  }
+  db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
+  if (NewtRefIsFrame(db)) {
+    newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+    if (NewtRefIsFrame(def)) {
+      newtRef value = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
+      if (value!=kNewtRefUnbind)
+        return value;
+    }
+  }
+  return kNewtRefUnbind;
+}
+
 /*---------------------------------------------------------------------------*/
 newtRef Dtk_Platform::getSpecificSlotDescription(Dtk_Template *tmpl, newtRefArg key)
 {
-  char *id = tmpl->id();
-  if (!id)
-    return kNewtRefUnbind;
+  // abort if no database loaded
   if (platform_==kNewtRefUnbind)
     return kNewtRefUnbind;
   
+  // abort if we have no id
+  char *idStr = tmpl->id();
+  if (!idStr)
+    return kNewtRefUnbind;
+  newtRef id = NewtMakeSymbol(idStr);
+  
   // find the default settings for this slot in the given template
-  /// \todo Also search Templates: and ViewClassArray:
   newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
-  int ix = NewtFindArrayIndex(ta, NewtMakeSymbol(id), 0);
+  int ix = NewtFindArrayIndex(ta, id, 0);
+  if (ix==-1) {
+    ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ViewClassArray)));
+    ix = NewtFindArrayIndex(ta, id, 0);
+  }
   if (ix==-1)
     return kNewtRefUnbind;
+  
   newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
-  if (tmplDB==kNewtRefUnbind)
+  if (!NewtRefIsFrame(tmplDB))
     return kNewtRefUnbind;
-  newtRef def = kNewtRefUnbind, dt = kNewtRefUnbind;
-  newtRef val = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, key));
-  if (val==kNewtRefUnbind)
+  /// \todo Also search __ntAncestor
+  
+  // now search for the type in the __ntRequired section
+  newtRef type = kNewtRefUnbind;
+  newtRef sect = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
+  if (NewtRefIsFrame(sect))
+    type = NewtGetFrameSlot(sect, NewtFindSlotIndex(sect, key));
+
+  // if we still don't know the type, try __ntOptional frame
+  sect = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
+  if (NewtRefIsFrame(sect))
+    type = NewtGetFrameSlot(sect, NewtFindSlotIndex(sect, key));
+  
+  // if we did not find the key at all, then this key is not part of the specific slots. Abort.
+  if (!NewtRefIsString(type))
     return kNewtRefUnbind;
-  
-  // first, search the __ntOptional frame
-  def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntOptional)));
-  ix = NewtFindSlotIndex(def, key);
-  if (ix>=0) dt = NewtGetFrameSlot(def, ix);
-  
-  // next, search the __ntRequired frame
-  if (dt==kNewtRefUnbind) {
-    def = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntRequired)));
-    ix = NewtFindSlotIndex(def, key);
-    if (ix>=0) dt = NewtGetFrameSlot(def, ix);
-  }
-  
-  // if we still have not found it, where can we look next?
-  // make a guess:
-  if (dt==kNewtRefUnbind) {
-    // FIXME look at the type of 'val' to set this correctly
-    dt = NewtMakeString("NUMB", true);
-  }
-  
-  newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), dt };
+
+  // find the default value for this key
+  newtRef value = getSlotDefaultValue(id, key);
+  /// \todo Do something smart if no default value was found
+    
+  newtRef tmp[] = { 
+    NSSYM(Value),         value, 
+    NSSYM(__ntDatatype),  type
+  };
   newtRef ret = NewtMakeFrame2(2, tmp);
   
   return ret;
@@ -456,13 +541,27 @@ newtRef Dtk_Platform::getSpecificSlotDescription(Dtk_Template *tmpl, newtRefArg 
 /*---------------------------------------------------------------------------*/
 newtRef Dtk_Platform::getScriptSlotDescription(newtRefArg key)
 {
+  // abort if no platform file
   if (platform_==kNewtRefUnbind)
-    return 0L;
-  newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
-  newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
-  newtRef val = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
+    return kNewtRefUnbind;
   
-  newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), NewtMakeString("SCPT", true) };
+  // get the script slot database
+  newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
+  if (!NewtRefIsFrame(db))
+    return kNewtRefUnbind;
+  
+  // find the description for this key
+  newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+  if (!NewtRefIsFrame(def))
+    return kNewtRefUnbind;
+
+  // find the default value for this slot
+  newtRef value = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
+    
+  newtRef tmp[] = { 
+    NSSYM(Value),         value, 
+    NSSYM(__ntDatatype),  NewtMakeString("SCPT", true) 
+  };
   newtRef ret = NewtMakeFrame2(2, tmp);
   
   return ret;
@@ -472,24 +571,21 @@ newtRef Dtk_Platform::getScriptSlotDescription(newtRefArg key)
 /*---------------------------------------------------------------------------*/
 newtRef Dtk_Platform::getAttributesSlotDescription(newtRefArg key)
 {
+  // abort if no platform file
   if (platform_==kNewtRefUnbind)
     return 0L;
+  
+  // get the attribute slot database
   newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
+  if (!NewtRefIsFrame(db))
+    return kNewtRefUnbind;
+
+  // find the description for this key
   newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
-  newtRef val = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(Value)));
-  newtRef dt = kNewtRefUnbind;
-  
-  // what do we do if no 'val' was found?
-  if (val==kNewtRefUnbind)
-    val = NewtMakeString("nil", true);
-  if (dt==kNewtRefUnbind)
-    dt= NewtMakeString("SCPT", true);
-  
-  // FIXME derive the __ntDatatype from the actual value (and possibly key)
-  newtRef tmp[] = { NSSYM(Value), val, NSSYM(__ntDatatype), dt };
-  newtRef ret = NewtMakeFrame2(2, tmp);
-  
-  return ret;
+  if (!NewtRefIsFrame(def))
+    return kNewtRefUnbind;
+
+  return def;
 }
 
 
@@ -510,6 +606,59 @@ int Dtk_Platform::findProto(const char *id)
 
 
 /*---------------------------------------------------------------------------*/
+const char *Dtk_Platform::getHelp(newtRefArg id, newtRefArg key)
+{
+  // abort if no database loaded
+  if (platform_==kNewtRefUnbind)
+    return 0L;
+  
+  if (NewtRefIsSymbol(id)) {
+    // if an id is given search the TemplateArray and the ViewClassArray
+    newtRef ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(TemplateArray)));
+    int ix = NewtFindArrayIndex(ta, id, 0);
+    if (ix==-1) {
+      ta = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ViewClassArray)));
+      ix = NewtFindArrayIndex(ta, id, 0);
+    }
+    if (ix>=0) {
+      newtRef tmplDB = NewtGetFrameSlot(ta, ix+1);
+      if (NewtRefIsFrame(tmplDB)) {
+        newtRef help = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntHelp)));
+        if (NewtRefIsFrame(help)) {
+          newtRef value = NewtGetFrameSlot(help, NewtFindSlotIndex(help, key));
+          if (NewtRefIsString(value))
+            return NewtRefToString(value);
+        }
+        // recurse into __ntAncestor and finally into the Script and Attribute Slots
+        newtRef ancestor = NewtGetFrameSlot(tmplDB, NewtFindSlotIndex(tmplDB, NSSYM(__ntAncestor)));
+        return getHelp(ancestor, key); // it's ok if there is no ancestor!
+      }
+    }
+  }
+  // if no id was given or no entry was found, then search ScriptSlots and AttributeSlots
+  newtRef db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(ScriptSlots)));
+  if (NewtRefIsFrame(db)) {
+    newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+    if (NewtRefIsFrame(def)) {
+      newtRef value = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(__ntHelp)));
+      if (NewtRefIsString(value))
+        return NewtRefToString(value);
+    }
+  }
+  db = NewtGetFrameSlot(platform_, NewtFindSlotIndex(platform_, NSSYM(AttributeSlots)));
+  if (NewtRefIsFrame(db)) {
+    newtRef def = NewtGetFrameSlot(db, NewtFindSlotIndex(db, key));
+    if (NewtRefIsFrame(def)) {
+      newtRef value = NewtGetFrameSlot(def, NewtFindSlotIndex(def, NSSYM(__ntHelp)));
+      if (NewtRefIsString(value))
+        return NewtRefToString(value);
+    }
+  }
+  return 0L;
+}
+
+
+/*---------------------------------------------------------------------------*/
 const char *Dtk_Platform::getHelp(Dtk_Template *tmpl, const char *slot)
 {
   if (platform_==kNewtRefUnbind)
@@ -519,6 +668,8 @@ const char *Dtk_Platform::getHelp(Dtk_Template *tmpl, const char *slot)
   char *id = tmpl->id();
   if (!id)
     return 0L;
+  
+  return getHelp(NewtMakeSymbol(id), NewtMakeSymbol(slot));
   
   // find the frame containing descriptions for template types
   /// \todo Also search Templates: and ViewClassArray:

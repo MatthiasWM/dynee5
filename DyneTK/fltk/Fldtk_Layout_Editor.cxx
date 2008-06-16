@@ -194,42 +194,22 @@ void Fldtk_Layout_Editor::revert_cb(Fl_Widget*, Fldtk_Layout_Editor *w)
 /*---------------------------------------------------------------------------*/
 void Fldtk_Layout_Editor::specific_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Editor *e)
 {
-    char *name = (char*)w->menu()[w->value()].label();
-    newtRef key = NewtMakeSymbol(name);
-    newtRef descr = dtkPlatform->getSpecificSlotDescription(e->template_, key);
-    Dtk_Slot *slot = e->template_->addSlot(key, descr);
-    // simulate a click to select this new slot
-    e->slotBrowser()->value(e->slotBrowser()->size());
-    e->slotBrowser()->do_callback();
-    e->userChangedSlots();
+  char *name = (char*)w->menu()[w->value()].label();
+  e->template_->addSlot(name);
 }
 
 /*---------------------------------------------------------------------------*/
 void Fldtk_Layout_Editor::methods_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Editor *e)
 {
-    char *name = (char*)w->menu()[w->value()].label();
-    newtRef key = NewtMakeSymbol(name);
-    newtRef descr = dtkPlatform->getSpecificSlotDescription(e->template_, key);
-    if (descr==kNewtRefUnbind) 
-        descr = dtkPlatform->getScriptSlotDescription(key);
-    Dtk_Slot *slot = e->template_->addSlot(key, descr);
-    e->slotBrowser()->value(e->slotBrowser()->size());
-    e->slotBrowser()->do_callback();
-    e->userChangedSlots();
+  char *name = (char*)w->menu()[w->value()].label();
+  e->template_->addSlot(name);
 }
 
 /*---------------------------------------------------------------------------*/
 void Fldtk_Layout_Editor::attributes_choice_cb(Fl_Menu_Button *w, Fldtk_Layout_Editor *e)
 {
-    char *name = (char*)w->menu()[w->value()].label();
-    newtRef key = NewtMakeSymbol(name);
-    newtRef descr = dtkPlatform->getSpecificSlotDescription(e->template_, key);
-    if (descr==kNewtRefUnbind) 
-        descr = dtkPlatform->getAttributesSlotDescription(key);
-    Dtk_Slot *slot = e->template_->addSlot(key, descr);
-    e->slotBrowser()->value(e->slotBrowser()->size());
-    e->slotBrowser()->do_callback();
-    e->userChangedSlots();
+  char *name = (char*)w->menu()[w->value()].label();
+  e->template_->addSlot(name);
 }
 
 /*---------------------------------------------------------------------------*/

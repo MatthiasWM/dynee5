@@ -109,6 +109,9 @@ void Dtk_Template::clear()
 /*---------------------------------------------------------------------------*/
 int Dtk_Template::load(newtRef node)
 {
+  if (!NewtRefIsFrame(node))
+    return -1;
+  
   //printf("===========\n");
   //NewtPrintObject(stdout, node);
   // find the name of this template
@@ -413,6 +416,31 @@ void Dtk_Template::deleteAllChildren()
   if (tmplList_) {
     tmplList_->clear();
   }
+}
+
+/*---------------------------------------------------------------------------*/
+Dtk_Slot *Dtk_Template::addSlot(const char *name, const char *type) 
+{
+  newtRef key = NewtMakeSymbol(name);
+  newtRef descr = dtkPlatform->getSpecificSlotDescription(this, key);
+  if (descr==kNewtRefUnbind) 
+    descr = dtkPlatform->getScriptSlotDescription(key);
+  if (descr==kNewtRefUnbind) 
+    descr = dtkPlatform->getAttributesSlotDescription(key);
+  if (descr==kNewtRefUnbind) {
+    newtRef tmp[] = { 
+      NSSYM(Value),         kNewtRefUnbind, /// \todo find a smart default value!
+      NSSYM(__ntDatatype),  NewtMakeString(type, false) 
+    };
+    descr = NewtMakeFrame2(2, tmp);
+  }
+  Dtk_Slot *slot = addSlot(key, descr);
+  if (GetCurrentTemplate()==this) {
+    Fldtk_Slot_Browser *brsr = layout()->slotBrowser();
+    brsr->value(brsr->size());
+    brsr->do_callback();
+  }
+  return slot;
 }
 
 /*---------------------------------------------------------------------------*/

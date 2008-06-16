@@ -70,7 +70,10 @@ void Dtk_Slot_List::append(Dtk_Slot *slot)
 {
   slotList_.push_back(slot);
   if (browser_ && GetCurrentTemplate()==getTemplate()) {
-    browser_->add(slot->key(), slot);      
+    browser_->add(slot->key(), slot);
+    Dtk_Layout *lyt = getLayout();
+    if (lyt)
+      lyt->userChangedSlots();
   }
 }
 

@@ -76,7 +76,10 @@ public:
    */
   void clear();
   
-  /** Load a template tree starting at the given newtRef
+  /** 
+   * Load a template tree starting at the given newtRef
+   *
+   * \retval -1 if the node was invalid
    */
   int             load(newtRef node);
   
@@ -138,9 +141,15 @@ public:
    */
   void            addSlot(Dtk_Slot *);
   
-  /** Add a named slot using a newt script description.
+  /** 
+   * Add a named slot using a newt script description.
    */
   Dtk_Slot        * addSlot(newtRef key, newtRef slot);
+  
+  /** 
+   * Add a named slot using a C-String description.
+   */
+  Dtk_Slot        * addSlot(const char *name, const char *type=0L);
   
   /** 
    * Remove a slot from this template.

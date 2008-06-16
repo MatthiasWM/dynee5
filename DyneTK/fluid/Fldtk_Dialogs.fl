@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -39,7 +39,7 @@ decl {\#include "main.h"} {public
 } 
 
 widget_class Fldtk_New_Slot_Dialog {
-  label {New Slot} open selected
+  label {New Slot} open
   xywh {412 89 400 220} type Double
   class Fl_Window modal visible
 } {
@@ -53,11 +53,15 @@ wSlotName->do_callback();} open
     xywh {65 40 84 20} labelsize 12 textsize 12
   } {}
   Fl_Menu_Button wMethods {
-    label Methods open
+    label Methods
+    callback {wSlotName->value(wMethods->menu()[wMethods->value()].label());
+wSlotName->do_callback();} open
     xywh {158 40 84 20} labelsize 12 textsize 12
   } {}
   Fl_Menu_Button wAttributes {
-    label Attributes open
+    label Attributes
+    callback {wSlotName->value(wAttributes->menu()[wAttributes->value()].label());
+wSlotName->do_callback();} open
     xywh {250 40 84 20} labelsize 12 textsize 12
   } {}
   Fl_Input wSlotName {
@@ -112,11 +116,12 @@ wHelp->copy_label(help);}
       xywh {60 60 30 20} labelsize 12
     }
   }
-  Fl_Box wHelp {
-    xywh {15 116 370 54} box BORDER_BOX labelsize 12 align 21
+  Fl_Box wHelp {selected
+    xywh {15 116 370 54} box BORDER_BOX labelsize 12 align 213
   }
   Fl_Button wAdd {
     label Add
+    callback {tmpl_->addSlot(wSlotName->value(), (char*)wEditor->menu()[wEditor->value()].user_data());}
     xywh {240 185 64 20} labelsize 12
   }
   Fl_Button wDone {

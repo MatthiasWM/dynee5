@@ -37,6 +37,14 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Image.H>
 
+#ifndef WIN32
+# define Sleep(a) sleep((a)/1000)
+//# define Sleep(a) usleep((a)*1000)
+# include <unistd.h>
+#else
+# include <windows.h>
+#endif
+
 extern Fl_Button *wInspectorConnect;
 extern Fl_Image *toolbox_open_pixmap;
 extern Fl_Image *toolbox_closed_pixmap;
@@ -64,6 +72,93 @@ Flio_Inspector::~Flio_Inspector()
 }
 
 
+/*---------------------------------------------------------------------------*/
+/**
+ * Compile and send a script command to the Newton.
+ */
+int Flio_Inspector::sendScript(const char *script)
+{
+	// compile the string
+	//NEWT_DUMPBC = 1;
+	newtRefVar obj = NBCCompileStr((char*)script, true);
+	// FIXME test for error
+	//NewtPrintObject(stdout, obj);
+	newtRefVar nsof = NsMakeNSOF(0, obj, NewtMakeInt30(2));  
+	// FIXME test for error
+	//NewtPrintObject(stdout, nsof);
+  
+	// if it is a binary, send it to the inspector
+	if (NewtRefIsBinary(nsof)) {
+		uint32_t size = NewtBinaryLength(nsof);
+		uint8_t *data = NewtRefToBinary(nsof);
+    
+		send_data_block((unsigned char*)"newt", 4);
+		send_data_block((unsigned char*)"ntp ", 4);
+		send_data_block((unsigned char*)"lscb", 4);
+		unsigned char b1[] = { size>>24, size>>16, size>>8, size };
+		send_data_block(b1, 4);
+		send_data_block((unsigned char*)data, size);
+	}
+  
+	return 0;
+}
+
+
+/*---------------------------------------------------------------------------*/
+int Flio_Inspector::deletePackage(const char *symbol) 
+{
+  // hack to convert the (usually ASCII) symbol into a UTF16BE
+  int sLen = 2*strlen(symbol)+2;
+  char *sName = (char*)calloc(sLen, 1);
+  const char *s = symbol;
+  char *d = sName;
+  while (*s) { *d++ = 0; *d++ = *s++; }
+  
+  // send "Delete Package"
+  send_data_block((unsigned char*)"newt", 4);
+  send_data_block((unsigned char*)"ntp ", 4);
+  send_data_block((unsigned char*)"pkgX", 4);
+  uint32_t len = htonl(sLen);
+  send_data_block((unsigned char*)(&len), 4);
+  send_data_block((unsigned char*)sName, sLen);
+  
+  free(sName);
+  
+  Sleep(1000); // 1 sec.
+  
+  return 0;
+}
+
+/*---------------------------------------------------------------------------*/
+int Flio_Inspector::sendPackage(const char *filename) 
+{
+  // read the package itself from disk
+  uint8_t *buffer;
+  FILE *f = fopen(filename, "rb");
+  if (!f) {
+    InspectorPrintf("Can't open package %s\n", filename);
+  }
+  fseek(f, 0, SEEK_END);
+  int nn = ftell(f);
+  fseek(f, 0, SEEK_SET);
+  buffer = (uint8_t*)malloc(nn);
+  fread(buffer, 1, nn, f);
+  fclose(f);
+  
+  // send the package
+  send_data_block((unsigned char*)"newt", 4);
+  send_data_block((unsigned char*)"ntp ", 4);
+  send_data_block((unsigned char*)"pkg ", 4);
+  uint32_t len = htonl(nn);
+  send_data_block((unsigned char*)(&len), 4);
+  Sleep(1000);
+  send_data_block((unsigned char*)buffer, nn);
+  
+  free(buffer);
+  
+  return 0;
+}
+
 int Flio_Inspector::open(const char *port, int bps)
 {
   int err = Flio_Mnp4_Protocol::open(port, bps);
@@ -87,6 +182,15 @@ unsigned char term4[4] = {
   0x00, 0x00, 0x00, 0x00, 
   // ....
 };
+
+
+void Flio_Inspector::cancel()
+{
+  close();
+  Sleep(1000);
+  Flio_Mnp4_Protocol::close();
+}
+
 
 void Flio_Inspector::close()
 {

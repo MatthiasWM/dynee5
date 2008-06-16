@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 header_name {.h} 
 code_name {.cxx}
 comment {//
@@ -38,19 +38,19 @@ widget_class Fldtk_Prefs_App {
 } {
   Fl_Check_Button {} {
     label {Show the &Standard Toolbar}
-    xywh {15 20 205 25} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {15 20 205 25} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Check_Button {} {
     label {Show the &Layout Toolbar}
-    xywh {15 45 205 25} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {15 45 205 25} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Check_Button {} {
     label {Show the &Inspector Toolbar}
-    xywh {15 70 205 25} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {15 70 205 25} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Check_Button {} {
     label {Show the S&tatus Toolbar}
-    xywh {15 95 205 25} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {15 95 205 25} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Box {} {
     label {All Toolbars:}
@@ -58,7 +58,7 @@ widget_class Fldtk_Prefs_App {
   }
   Fl_Check_Button {} {
     label {Show Tooltips}
-    xywh {240 45 155 25} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {240 45 155 25} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
 } 
 
@@ -71,7 +71,7 @@ widget_class Fldtk_Prefs_Layout {
     xywh {20 20 75 25} down_box DOWN_BOX labelsize 12 deactivate
   }
   Fl_Choice {} {
-    label {&Size:}
+    label {&Size:} open
     xywh {50 50 200 20} down_box BORDER_BOX labelsize 12 textsize 12 deactivate
   } {
     MenuItem {} {
@@ -84,7 +84,7 @@ widget_class Fldtk_Prefs_Layout {
     }
     MenuItem {} {
       label {Message Pad 2000}
-      xywh {10 10 100 20} labelsize 12 deactivate
+      xywh {10 10 100 20} labelsize 12
     }
     MenuItem {} {
       label {Message Pad 2000 Landscape}
@@ -105,11 +105,11 @@ widget_class Fldtk_Prefs_Layout {
   }
   Fl_Input {} {
     label {Arrow Keys Move By:}
-    xywh {375 20 45 20} labelsize 12 textsize 12 deactivate
+    xywh {375 20 45 20} type Int labelsize 12 textsize 12 deactivate
   }
   Fl_Input {} {
     label {With Shift Key:}
-    xywh {375 50 45 20} labelsize 12 textsize 12 deactivate
+    xywh {375 50 45 20} type Int labelsize 12 textsize 12 deactivate
   }
 } 
 
@@ -184,21 +184,27 @@ widget_class Fldtk_Prefs_Text {
 } 
 
 widget_class Fldtk_Prefs_Packages {
-  label Packages
+  label Packages open
   xywh {762 337 445 185} type Double labelsize 12 align 80 visible position_relative
 } {
-  code {portname_ = 0L;} {}
+  code {portname_ = 0L;
+porttype_ = 0;} {}
   Fl_Box {} {
     label Connection
     xywh {15 15 100 25} labelsize 12 align 20
   }
-  Fl_Choice {} {
+  Fl_Choice wPorttype {
     label {&Type}
-    xywh {85 50 100 20} down_box BORDER_BOX labelsize 12 deactivate
+    callback {((Fldtk_Prefs*)(o->window()))->set_changed();} open selected
+    xywh {85 50 100 20} down_box BORDER_BOX labelsize 12
   } {
     MenuItem {} {
       label Serial
-      xywh {5 5 100 20} labelsize 12 deactivate
+      xywh {5 5 100 20} labelsize 12
+    }
+    MenuItem {} {
+      label Einstein
+      xywh {15 15 100 20} labelsize 12
     }
   }
   Fl_Input_Choice wPortname {
@@ -254,7 +260,7 @@ wPortname->menu(wPortnameUnix->menu());
 \#endif} {}
   Fl_Check_Button {} {
     label {Auto &Save Before Building Package}
-    xywh {20 90 280 25} down_box DOWN_BOX labelsize 12 deactivate
+    xywh {20 90 280 25} down_box DOWN_BOX value 1 labelsize 12 deactivate
   }
   Fl_Check_Button {} {
     label {Auto &Download After Building Package}
@@ -263,6 +269,10 @@ wPortname->menu(wPortnameUnix->menu());
   Function {port()} {open return_type {char *}
   } {
     code {return portname_;} {}
+  }
+  Function {porttype()} {open return_type int
+  } {
+    code {return porttype_;} {}
   }
   Function {get_prefs(Fl_Preferences &prefs)} {open return_type void
   } {
@@ -273,23 +283,29 @@ wPortname->menu(wPortnameUnix->menu());
   prefs.get("Portname", portname_, "\\\\\\\\.\\\\COM1");
 \#else
   prefs.get("Portname", portname_, "/dev/ttyS0");
-\#endif} {}
+\#endif
+
+prefs.get("Porttype", porttype_, 0);} {}
   }
   Function {set_prefs(Fl_Preferences &prefs)} {open return_type void
   } {
-    code {prefs.set("Portname", portname_);} {}
+    code {prefs.set("Portname", portname_);
+prefs.set("Porttype", porttype_);} {}
   }
   Function {update_data()} {open return_type void
   } {
     code {if (portname_)
   free(portname_);
-portname_ = strdup(wPortname->value());} {}
+portname_ = strdup(wPortname->value());
+porttype_ = wPorttype->value();} {}
   }
   Function {update_dialog()} {open return_type void
   } {
-    code {wPortname->value(portname_);} {}
+    code {wPortname->value(portname_);
+wPorttype->value(porttype_);} {}
   }
   decl {char *portname_;} {}
+  decl {int porttype_;} {}
 } 
 
 widget_class Fldtk_Prefs_Heaps {
@@ -383,9 +399,9 @@ set_prefs();}
     xywh {375 235 80 25} labelsize 12 deactivate
   }
   code {get_prefs();
-update_dialog();} {selected
-  }
-  Function {Fldtk_Prefs(): Fl_Double_Window(470, 275)} {} {
+update_dialog();} {}
+  Function {Fldtk_Prefs(): Fl_Double_Window(470, 275)} {open
+  } {
     code {_Fldtk_Prefs();} {}
   }
   Function {get_prefs()} {open return_type void

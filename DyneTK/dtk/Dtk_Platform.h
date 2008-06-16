@@ -93,6 +93,11 @@ class Dtk_Platform
      */
     newtRef         newtTemplate(char *id);
     
+    /** 
+     * Search the database for the default value of the described slot.
+     */
+    newtRef         getSlotDefaultValue(newtRefArg tmpl, newtRefArg key);
+    
     /** Create a newt frame containing a slot.
      */
     newtRef         getSpecificSlotDescription(Dtk_Template *tmpl, newtRefArg key);
@@ -112,6 +117,7 @@ class Dtk_Platform
     /** Return the help text for a slot in a template.
      */
     const char *getHelp(Dtk_Template *tmpl, const char *slot);
+    const char *getHelp(newtRefArg tmpl, newtRefArg slot);
     
   protected:
     

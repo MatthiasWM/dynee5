@@ -54,6 +54,7 @@
 #include "fltk/Fldtk_Slot_Editor_Group.h"
 #include "fltk/Fldtk_Slot_Browser.h"
 #include "fltk/Fldtk_Tmpl_Browser.h"
+#include "fltk/Flio_Inspector_Einstein.h"
 
 #include "globals.h"
 #include "allNewt.h"
@@ -510,9 +511,60 @@ int BuildPackage()
 }
 
 
+/*---------------------------------------------------------------------------*/
+void DebugTestScripting()
+{
+  // THE CODE BELOW FRIGGIN' *WORKS*!!!!1!!11oneone
+  ComponentInstance cInst;
+  cInst = OpenDefaultComponent(kOSAComponentType, kOSAGenericScriptingComponentSubtype);
+  static char *txt = 
+    "tell application \"Einstein\"\r"
+    " do newton script \"AlarmUser(\\\"A\\\", \\\"b\\\")\"\r"
+    "end tell\r";
+  AEDesc script, result;
+  AECreateDesc(typeChar, txt, strlen(txt), &script);
+  AECreateDesc(typeChar, 0, 0, &result);
+  /*OSAError err = */ OSADoScript(cInst, &script, kOSANullScript, typeChar, 0, &result);
+}
+
 /*-v2------------------------------------------------------------------------*/
 int DownloadPackage()
 {
+  /// \todo We can control a little bit of Einstein:
+  ///       Apple Script: install package /file/
+  ///       Apple Script: do neton script /text/
+  /*
+   OSAError OSADoScript (
+    ComponentInstance scriptingComponent,
+    const AEDesc *sourceData,
+    OSAID contextID,
+    DescType desiredType,
+    SInt32 modeFlags,
+    AEDesc *resultingText
+   );
+   OSADispose(component, OSAID);
+   
+   - ComponentInstance a = OpenDefaultComponent('????', 0);
+   - typeChar or typeUTF8Text
+   - AECreateDesc(typeUTF8Text, "blabla", sizeof("blabla"), AEDesc *newDesc) AEDisposeDesc
+   - contextID is some ulong: kOSANullScript
+   - typeUTF8Text
+   - 0
+   - ptr to empty AEDesc
+   
+   if (gGenericComponent == NULL) {
+   gGenericComponent = OpenDefaultComponent(kOSAComponentType, kOSAGenericScriptingComponentSubtype);
+   
+   if (gGenericComponent == NULL)
+   failErr("No such component.");
+   else if (gGenericComponent == (ComponentInstance) badComponentInstance)
+   failErr("Bad component instance.");
+   else if (gGenericComponent == (ComponentInstance) badComponentSelector)
+   failErr("Bad component selector.");
+   }
+   
+   */
+  
 	assert(dtkProject);
 	InspectorPrintf("Sending package %s...\n", dtkProject->getPackageName());
   Fl::flush();
@@ -554,29 +606,7 @@ int ExportPackageToText()
  */
 int InspectorSendScript(const char *script)
 {
-	// compile the string
-	//NEWT_DUMPBC = 1;
-	newtRefVar obj = NBCCompileStr((char*)script, true);
-	// FIXME test for error
-	//NewtPrintObject(stdout, obj);
-	newtRefVar nsof = NsMakeNSOF(0, obj, NewtMakeInt30(2));  
-	// FIXME test for error
-	//NewtPrintObject(stdout, nsof);
-  
-	// if it is a binary, send it to the inspector
-	if (NewtRefIsBinary(nsof)) {
-		uint32_t size = NewtBinaryLength(nsof);
-		uint8_t *data = NewtRefToBinary(nsof);
-    
-		wInspectorSerial->send_data_block((unsigned char*)"newt", 4);
-		wInspectorSerial->send_data_block((unsigned char*)"ntp ", 4);
-		wInspectorSerial->send_data_block((unsigned char*)"lscb", 4);
-		unsigned char b1[] = { size>>24, size>>16, size>>8, size };
-		wInspectorSerial->send_data_block(b1, 4);
-		wInspectorSerial->send_data_block((unsigned char*)data, size);
-	}
-  
-	return 0;
+  return wInspectorSerial->sendScript(script);
 }
 
 
@@ -596,48 +626,10 @@ int LaunchPackage()
 int InspectorSendPackage(const char *filename, const char *symbol) 
 {
 	// delete the old package first if that is requested by the user
-	if (dtkProjSettings->package->deleteOnDownload->get()) {
-		// hack to convert the (usually ASCII) symbol into a UTF16BE
-		int sLen = 2*strlen(symbol)+2;
-		char *sName = (char*)calloc(sLen, 1);
-		const char *s = symbol;
-		char *d = sName;
-		while (*s) { *d++ = 0; *d++ = *s++; }
-    
-		// send "Delete Package"
-		wInspectorSerial->send_data_block((unsigned char*)"newt", 4);
-		wInspectorSerial->send_data_block((unsigned char*)"ntp ", 4);
-		wInspectorSerial->send_data_block((unsigned char*)"pkgX", 4);
-		uint32_t len = htonl(sLen);
-		wInspectorSerial->send_data_block((unsigned char*)(&len), 4);
-		wInspectorSerial->send_data_block((unsigned char*)sName, sLen);
-    
-		Sleep(1000); // 1 sec.
-	}
+	if (dtkProjSettings->package->deleteOnDownload->get())
+    wInspectorSerial->deletePackage(symbol);
   
-	// read the package itself from disk
-	uint8_t *buffer;
-	FILE *f = fopen(filename, "rb");
-  if (!f) {
-		InspectorPrintf("Can't open package %s\n", filename);
- 	}
-	fseek(f, 0, SEEK_END);
-	int nn = ftell(f);
-	fseek(f, 0, SEEK_SET);
-	buffer = (uint8_t*)malloc(nn);
-	fread(buffer, 1, nn, f);
-	fclose(f);
-  
-	// send the package
-	wInspectorSerial->send_data_block((unsigned char*)"newt", 4);
-	wInspectorSerial->send_data_block((unsigned char*)"ntp ", 4);
-	wInspectorSerial->send_data_block((unsigned char*)"pkg ", 4);
-	uint32_t len = htonl(nn);
-	wInspectorSerial->send_data_block((unsigned char*)(&len), 4);
-	Sleep(1000);
-	wInspectorSerial->send_data_block((unsigned char*)buffer, nn);
-  
-	free(buffer);
+  wInspectorSerial->sendPackage(filename);
   
 	return 0;
 }
@@ -664,6 +656,41 @@ void InspectorConnect()
 	if (wInspectorSerial->is_open()) {
 		wInspectorSerial->close();
 	} else {
+    switch (dtkPrefs->packages->porttype()) {
+      case 0: // serial port
+        if (!wInspectorSerial->is_serial()) {
+          Fl_Group *p = wInspectorSerial->parent();
+          p->begin();
+          Flio_Inspector *newInspector = new Flio_Inspector(
+            wInspectorSerial->x(), wInspectorSerial->y(),
+            wInspectorSerial->w(), wInspectorSerial->h(),
+            wInspectorSerial->label());
+          p->end();
+          p->remove(wInspectorSerial);
+          delete wInspectorSerial;
+          wInspectorSerial = newInspector;
+        }
+        break;
+      case 1: // Einstein via Apple Script
+        if (!wInspectorSerial->is_einstein()) {
+          Fl_Group *p = wInspectorSerial->parent();
+          p->begin();
+          Flio_Inspector *newInspector = new Flio_Inspector_Einstein(
+            wInspectorSerial->x(), wInspectorSerial->y(),
+            wInspectorSerial->w(), wInspectorSerial->h(),
+            wInspectorSerial->label());
+          p->end();
+          p->remove(wInspectorSerial);
+          delete wInspectorSerial;
+          wInspectorSerial = newInspector;
+        }
+        break;
+    }
+    
+		if (!wConnect) {
+			wConnect = create_connect_dialog();
+		}
+		wConnect->show();
 		wInspectorSerial->open(dtkPrefs->packages->port(), 38400);
 		if (!wInspectorSerial->is_open()) {
 			wInspectorSerial->close();
@@ -672,10 +699,6 @@ void InspectorConnect()
 			SystemAlert("Can't open serial port");
 			return;
 		}
-		if (!wConnect) {
-			wConnect = create_connect_dialog();
-		}
-		wConnect->show();
 	}
 }
 
@@ -686,8 +709,7 @@ void InspectorConnect()
  */
 void InspectorCancelConnect()
 {
-	wInspectorSerial->close();
-	wInspectorSerial->Flio_Mnp4_Protocol::close();
+	wInspectorSerial->cancel();
 	wConnect->hide();
 }
 

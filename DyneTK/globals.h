@@ -458,7 +458,6 @@ Dtk_Slot *GetCurrentSlot();
 int		InspectorSendScript(const char *script);
 int		InspectorSendPackage(const char *filename, const char *symbol);
 int		InspectorLaunchPackage(const char *symbol);
-void	InspectorConnect();
 void	InspectorCancelConnect();
 void	InspectorStopOnThrows();
 void	InspectorTraceOff();
@@ -481,6 +480,7 @@ void	DebugDumpPackage();
 void	DebugDumpNSOF();
 void	DebugDumpRsrc();
 void	DebugDumpBuffer(uint8_t*, int);
+void	DebugTestScripting();
 
 void    SetModeEditTemplate();
 void    SetModeAddTemplate();

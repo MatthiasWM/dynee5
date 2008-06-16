@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0108 
+version 1.0300 
 use_FL_COMMAND 
 header_name {.h} 
 code_name {.cxx}
@@ -44,7 +44,7 @@ decl {\#include "dtk/Dtk_Platform.h"} {}
 decl {\#include <FL/fl_ask.h>} {public
 } 
 
-decl {\#include "main.h"} {public
+decl {\#include "main.h"} {selected public
 } 
 
 decl {\#include <FL/Fl_Help_Dialog.H>} {public
@@ -251,7 +251,7 @@ widget_class Fldtk_Main_Window {
       MenuItem mEditPreferences {
         label {Toolkit Preferences...}
         callback {EditPreferences();}
-        xywh {5 5 100 20} labelsize 12
+        xywh {5 5 100 20} shortcut 0x40002c labelsize 12
       }
     }
     Submenu mProject {
@@ -359,6 +359,11 @@ widget_class Fldtk_Main_Window {
         callback {DebugDumpRsrc();}
         xywh {35 35 100 20} labelsize 12 labelcolor 59
       }
+      MenuItem {} {
+        label {Test scripting}
+        callback {DebugTestScripting();}
+        xywh {45 45 100 20} labelsize 12 labelcolor 59
+      }
     }
     Submenu mLayout {
       label Layout
@@ -417,7 +422,7 @@ widget_class Fldtk_Main_Window {
       MenuItem mBrowserNewSlot {
         label {New Slot...}
         callback {NewSlot();}
-        xywh {5 5 100 20} shortcut 0x5006e labelsize 12 labelcolor 176 deactivate
+        xywh {5 5 100 20} shortcut 0x5006e labelsize 12 deactivate
       }
       MenuItem mBrowserRenameSlot {
         label {Rename Slot...}
@@ -719,15 +724,15 @@ SetModeAddTemplate();} open
       xywh {605 570 165 25}
     } {
       Fl_Box {} {
-        label CAPS selected
+        label CAPS
         xywh {620 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50 deactivate
       }
       Fl_Box {} {
-        label NUM selected
+        label NUM
         xywh {665 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50 deactivate
       }
       Fl_Box {} {
-        label SCRL selected
+        label SCRL
         xywh {710 573 40 19} box DOWN_BOX labelsize 11 labelcolor 50 deactivate
       }
     }

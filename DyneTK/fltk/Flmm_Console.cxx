@@ -29,6 +29,9 @@
 
 #include "Flmm_Console.h"
 
+#include "main.h"
+#include "fltk/Flio_Inspector.h"
+
 #include <FL/Fl.H>
 #include <FL/fl_draw.h>
 
@@ -77,6 +80,7 @@ int Flmm_Console::handle(int event)
       insert_position(buffer()->line_end(p));
       insert("\n");
       if (cmd && *cmd) {
+        /*
         int err = getNSO(cmd, &nso, &nNso);
         if (!err && nso) {
           send_test(4);
@@ -84,6 +88,8 @@ int Flmm_Console::handle(int event)
           insert("ERROR\n");
         }
         free(cmd);
+         */
+        wInspectorSerial->sendScript(cmd);
         return 1;
       }
     }

@@ -341,6 +341,12 @@ Fldtk_Slot_Editor_Group *Dtk_Layout::slotEditor() {
 }
 
 /*---------------------------------------------------------------------------*/
+void Dtk_Layout::userChangedSlots() { 
+  if (editor_) 
+    editor_->userChangedSlots(); 
+}
+
+/*---------------------------------------------------------------------------*/
 void Dtk_Layout::templateBrowser_cb(Fldtk_Tmpl_Browser *browser, Dtk_Layout *layout)
 {
   int i = browser->value();
