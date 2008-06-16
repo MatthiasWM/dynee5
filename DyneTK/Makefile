@@ -22,6 +22,7 @@ SRCFILES = \
   dtk/Dtk_Template_List.cxx \
   dtk/Dtk_Value_Slot.cxx \
   fltk/Flio_Inspector.cxx \
+  fltk/Flio_Inspector_Einstein.cxx \
   fltk/Flio_MNP4_Protocol.cxx \
   fltk/Flio_Pipe.cxx \
   fltk/Flio_Serial_Port.cxx \
