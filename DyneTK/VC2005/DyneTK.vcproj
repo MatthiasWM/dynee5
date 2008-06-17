@@ -613,6 +613,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\fltk\Flio_Inspector_Einstein.cxx"
+				>
+			</File>
+			<File
 				RelativePath="..\fltk\Flio_MNP4_Protocol.cxx"
 				>
 				<FileConfiguration
@@ -891,6 +895,10 @@
 				</File>
 				<File
 					RelativePath="..\fltk\Flio_Inspector.h"
+					>
+				</File>
+				<File
+					RelativePath="..\fltk\Flio_Inspector_Einstein.h"
 					>
 				</File>
 				<File

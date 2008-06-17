@@ -51,9 +51,12 @@ public:
 private:
 
   virtual int sendCmd(const char *cmd, const char *script);
-
-  bool is_open_;
+#ifdef __APPLE__
   ComponentInstance cInst_;
+#elif defined WIN32
+#else
+#endif
+  bool is_open_;
 };
 
 

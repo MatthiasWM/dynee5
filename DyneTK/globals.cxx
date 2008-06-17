@@ -515,6 +515,7 @@ int BuildPackage()
 void DebugTestScripting()
 {
   // THE CODE BELOW FRIGGIN' *WORKS*!!!!1!!11oneone
+#ifdef __APPLE__
   ComponentInstance cInst;
   cInst = OpenDefaultComponent(kOSAComponentType, kOSAGenericScriptingComponentSubtype);
   static char *txt = 
@@ -525,6 +526,7 @@ void DebugTestScripting()
   AECreateDesc(typeChar, txt, strlen(txt), &script);
   AECreateDesc(typeChar, 0, 0, &result);
   /*OSAError err = */ OSADoScript(cInst, &script, kOSANullScript, typeChar, 0, &result);
+#endif
 }
 
 /*-v2------------------------------------------------------------------------*/

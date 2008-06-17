@@ -54,8 +54,10 @@ extern Fl_Window *wConnect;
 
 Flio_Inspector_Einstein::Flio_Inspector_Einstein(int X, int Y, int W, int H, const char *L)
 : Flio_Inspector(X, Y, W, H, L),
-  is_open_(false),
-  cInst_(0)
+#ifdef __APPLE__
+  cInst_(0),
+#endif
+  is_open_(false)
 {
 }
 
@@ -67,16 +69,23 @@ Flio_Inspector_Einstein::~Flio_Inspector_Einstein()
 
 int Flio_Inspector_Einstein::sendScript(const char *script)
 {
+#ifdef __APPLE__
   return sendCmd(
     "tell application \"Einstein\"\r"
     " do newton script \"%s\"\r"
     "end tell\r",
     script);
+#elif defined WIN32
+  return sendCmd("dons", script);
+#else
+#endif
+  return 0;
 }
     
 
 int Flio_Inspector_Einstein::sendCmd(const char *cmd, const char *script)
 {
+#ifdef __APPLE__
   if (script && cmd && cInst_) {
     int i, n = strlen(script), bs = 0;
     const char *s = script;
@@ -111,7 +120,30 @@ int Flio_Inspector_Einstein::sendCmd(const char *cmd, const char *script)
     free(esc);
     free(as);
   }
+#elif defined WIN32
+  char inbuf[4096];
+  char outbuf[4096];
+  strcpy(outbuf, cmd);
+  strcat(outbuf, script);
+  DWORD n;
+  LPTSTR name = TEXT("\\\\.\\pipe\\einstein"); 
+  CallNamedPipe(
+    name,
+    (void*)outbuf, strlen(outbuf)+1,
+    inbuf, 4096,
+    &n, 5000);
+  puts(inbuf);
+#else
+#endif
 	return 0;
+
+  /*
+WIN32 possibilities:
+  Scripting: no information found
+  Broadcast Message: RegisterWindowMessage, BroadcastSystemMessage
+  Named Pipes: complicated?
+  Using Copy Data: does that work across apps?
+  */
 }
 
 
@@ -127,17 +159,23 @@ int Flio_Inspector_Einstein::sendPackage(const char *filename)
 {
   char buf[2048];
   fl_filename_absolute(buf, 2048, filename);
+#ifdef __APPLE__
   return sendCmd(
                  "tell application \"Einstein\"\r"
                  " install package \"%s\"\r"
                  "end tell\r", buf);
+#else
+  return sendCmd("inst", filename);
+#endif
 }
 
 
 int Flio_Inspector_Einstein::open(const char *port, int bps)
 {
+#ifdef __APPLE__
   if (!cInst_)
     cInst_ = OpenDefaultComponent(kOSAComponentType, kOSAGenericScriptingComponentSubtype);
+#endif
   is_open_ = true;
   on_connect();
   return 0;
@@ -154,10 +192,12 @@ void Flio_Inspector_Einstein::close()
 {
   on_disconnect();
   is_open_ = false;
+#ifdef __APPLE__
   if (cInst_) {
     CloseComponent(cInst_);
     cInst_ = 0L;
   }
+#endif
 }
 
 //

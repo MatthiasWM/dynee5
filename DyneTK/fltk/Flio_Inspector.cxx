@@ -43,6 +43,7 @@
 # include <unistd.h>
 #else
 # include <windows.h>
+# include <winsock2.h>
 #endif
 
 extern Fl_Button *wInspectorConnect;
