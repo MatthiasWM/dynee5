@@ -41,6 +41,7 @@
 # define Sleep(a) sleep((a)/1000)
 //# define Sleep(a) usleep((a)*1000)
 # include <unistd.h>
+# include <arpa/inet.h>
 #else
 # include <windows.h>
 # include <winsock2.h>

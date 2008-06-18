@@ -1,0 +1,2 @@
+tar cvfz DyneTK-1.7.2.tgz ./dynetk ./Toolkit.pkg ./platfrms
+
