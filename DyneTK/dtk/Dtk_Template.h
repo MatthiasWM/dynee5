@@ -102,15 +102,21 @@ public:
    */
   void            updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int &index, bool add=false);
   
-  /** Return the name of the template as it will appear in the browser
+  /** Return the name of the template as it will appear in the browser.
    *
    * The text that is used in the browser is prepended with spaces to create 
    * a tree-style list of templates. The actual text is a composition
    * of the name, id, and prototype of the template.
    *
-   * \return creates and returns the name of the template as it appear in the browser
+   * \return creates and returns the name of the template as it appears in the browser
    */
   const char      * browserName();
+  
+  /** Return the name of the template as it will appear in the layout view widget.
+   *
+   * \return creates and returns the name of the template as it appears in the widget
+   */
+  const char      * widgetName();
   
   /** Return the name of this template.
    *
@@ -278,6 +284,9 @@ private:
   /// name of the template as it appears in the browser view
   char                * browserName_;
   
+  /// name of the template as it appears in the browser view
+  char                * widgetName_;
+  
   /// dtk name of template
   char                * ntName_;
   
@@ -304,6 +313,9 @@ private:
   
   /// slot containing the proto magic pointer 
   Dtk_Proto_Slot      * proto_;
+  
+  /// declare a slot to this template to the n'th parent (or 0 if no declaration)
+  int                 * declareTo_;
 };
 
 

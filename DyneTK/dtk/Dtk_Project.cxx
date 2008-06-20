@@ -1159,29 +1159,29 @@ int Dtk_Project::savePackage()
   return 0;
 }
 
-/* Prologue:
- home			The path name of the folder containing the open project file
- kAppName		The application name you specify through the Output section 
- of the Application tab of the Settings dialog box
+/* Prologue, predefined constants:
+ home         The path name of the folder containing the open project file
+ kAppName     The application name you specify through the Output section 
+              of the Application tab of the Settings dialog box
  kAppString		The application symbol, which you specify through the Output
- section of the Application tab of the Settings dialog box 
- stored as a string instead of as a symbol
+              section of the Application tab of the Settings dialog box 
+              stored as a string instead of as a symbol
  kAppSymbol		The application symbol you specify through the Output 
- section of the Application tab of the Settings dialog box 
- kDebugOn		True if Compile for Debugging is checked in the Project 
- tab of the Settings dialog box
+              section of the Application tab of the Settings dialog box 
+ kDebugOn     True if Compile for Debugging is checked in the Project 
+              tab of the Settings dialog box
  kIgnoreNativeKeyword	True if Ignore Native Keyword is checked in the 
- Project tab of the Settings dialog box
+              Project tab of the Settings dialog box
  kPackageName	The package name you specify through the Package tab of 
- the Settings dialog box
+              the Settings dialog box
  kProfileOn		True if Compile for Profiling is checked in the Project 
- tab of the Settings dialog box
- language		The Language string specified through the Project tab of 
- the Settings dialog box
- layout_filename	A reference to the view hierarchy of the processed layout
- file named filename
- streamFile_filename	A reference to the contents of a processed stream 
- file named filename
+              tab of the Settings dialog box
+ language     The Language string specified through the Project tab of 
+              the Settings dialog box
+ layout_/filename/	A reference to the view hierarchy of the processed layout
+              file named filename
+ streamFile_/filename/	A reference to the contents of a processed stream 
+              file named filename
  */
 
 /*---------------------------------------------------------------------------*/
@@ -1195,7 +1195,7 @@ int Dtk_Project::isDirty()
   return 0;
 }
 
-/*---------------------------------------------------------------------------*/
+/*----------------  -----------------------------------------------------------*/
 /**
  * Save the collected documents as a single Newt Script.
  */

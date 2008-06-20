@@ -80,6 +80,32 @@ private:
 public:
   void setTemplate(Dtk_Template *tmpl);
 };
+
+class Fldtk_Declare_To_Dialog : public Fl_Window {
+  void _Fldtk_Declare_To_Dialog();
+public:
+  Fldtk_Declare_To_Dialog(int X, int Y, int W, int H, const char *L = 0);
+  Fldtk_Declare_To_Dialog(int W, int H, const char *L = 0);
+  Fl_Input *wName;
+private:
+  void cb_wName_i(Fl_Input*, void*);
+  static void cb_wName(Fl_Input*, void*);
+public:
+  Fl_Choice *wParent;
+  static Fl_Menu_Item menu_wParent[];
+  Fl_Button *wCancel;
+private:
+  void cb_wCancel_i(Fl_Button*, void*);
+  static void cb_wCancel(Fl_Button*, void*);
+public:
+  Fl_Button *wOK;
+private:
+  void cb_wOK_i(Fl_Button*, void*);
+  static void cb_wOK(Fl_Button*, void*);
+  Dtk_Template *tmpl_; 
+public:
+  void setTemplate(Dtk_Template *tmpl);
+};
 #endif
 
 //

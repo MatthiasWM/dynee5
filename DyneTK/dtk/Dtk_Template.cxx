@@ -58,22 +58,24 @@ Dtk_Template::Dtk_Template(Dtk_Layout *layout,
                            Dtk_Template_List *list,
                            char *proto)
 :   layout_(layout),
-list_(list),
-tmplList_(0L),
-slotList_(0L),
-index_(0),
-indent_(0),
-browser_(0L),
-browserName_(0L),
-ntName_(0L),
-ntId_(0L),
-scriptName_(0L),
-autoScriptName_(true),
-widget_(0L),
-viewBounds_(0L),
-viewJustify_(0L),
-defaultJustify_(0),
-proto_(0L)
+  list_(list),
+  tmplList_(0L),
+  slotList_(0L),
+  index_(0),
+  indent_(0),
+  browser_(0L),
+  browserName_(0L),
+  widgetName_(0L),
+  ntName_(0L),
+  ntId_(0L),
+  scriptName_(0L),
+  autoScriptName_(true),
+  widget_(0L),
+  viewBounds_(0L),
+  viewJustify_(0L),
+  defaultJustify_(0),
+  proto_(0L),
+  declareTo_(0)
 {
   //if (proto && proto->setup)
   //proto->setup(this);
@@ -90,7 +92,8 @@ Dtk_Template::~Dtk_Template()
   delete scriptName_;
   delete ntId_;
   delete ntName_;
-  delete browserName_;
+  if (widgetName_) free(widgetName_);
+  if (browserName_) free(browserName_);
   delete slotList_;
   delete tmplList_;
 }
@@ -236,6 +239,10 @@ void Dtk_Template::updateBrowserLink(Fl_Hold_Browser *browser, int &indent, int 
     free(browserName_);
     browserName_ = 0L;
   }
+  if (widgetName_) {
+    free(widgetName_);
+    widgetName_ = 0L;
+  }
   browser_ = browser;
   indent_ = indent;
   index_ = index++;
@@ -280,6 +287,29 @@ const char *Dtk_Template::browserName()
   //       infoButton <userProto> (protoInfoButton.lyt)
   browserName_ = strdup(buf);
   return browserName_;
+}
+
+/*---------------------------------------------------------------------------*/
+const char *Dtk_Template::widgetName()
+{
+  if (widgetName_)
+    return widgetName_;
+  
+  char buf[512];
+  char *name = ntName_;
+  char *id = ntId_;
+  if (!id ||!*id)
+    id = "-unknown-";
+
+  if (name && *name) {
+    sprintf(buf, "%s", name);
+  } else {
+    sprintf(buf, "%s", id);
+  }
+  // FIXME there can also be a userProto. The Format is then
+  //       infoButton <userProto> (protoInfoButton.lyt)
+  widgetName_ = strdup(buf);
+  return widgetName_;
 }
 
 
@@ -470,6 +500,20 @@ Dtk_Slot *Dtk_Template::addSlot(newtRef key, newtRef slot)
       // PROT is __ntTemplate
       // USER is __ntTemplate
       // PICT is icon
+/*
+ NTK File Fomrat supports these according to the docs:
+ 'EVAL' Evaluate slot 
+ 'NUMB' Number 
+ 'INTG' Integer (same as Number) 
+ 'REAL' Floating point number 
+ 'BOOL' Boolean 
+ 'RECT' Rectangle 
+ 'TEXT' Text/string slot 
+ 'FONT' Font (unused) 
+ 'SCPT' Script slot 
+ 'ARAY' Array (only used internally for stepChildren slot) 
+ 'PICT' Picture 
+*/ 
       printf("Unsupported slot datatype \"%s\" (%s)\n", dt, keyname);
       dSlot = new Dtk_Script_Slot(slotList_, keyname, slot);
     }
@@ -505,9 +549,13 @@ void Dtk_Template::id(const char *cNewID)
     free(browserName_);
     browserName_ = 0L;
   }
+  if (widgetName_) {
+    free(widgetName_);
+    widgetName_ = 0L;
+  }
   layout()->templateBrowser()->text(index_, browserName());
   if (widget_)
-    widget_->copy_label(browserName());
+    widget_->copy_label(widgetName());
   
   // A few protos have a different default justify if no viewJustif slot exists
   if (strcasecmp(newID, "protoApp")==0) {
@@ -584,6 +632,7 @@ newtRef	Dtk_Template::save()
     valueA[vi++] = NSSYM(__ntTemplate);
     valueA[vi++] = NewtMakeFrame2(3, tmpA+ti-6);
   }
+  // FIXME __ntDeclare
   // now walk the slots
   int i, n = slotList_->size();
   for (i=0; i<n; ++i) {
@@ -662,6 +711,10 @@ void Dtk_Template::setName(const char *name)
     free(browserName_);
     browserName_ = 0L;
   }
+  if (widgetName_) {
+    free(widgetName_);
+    widgetName_ = 0L;
+  }
   if (scriptName_) {
     free(scriptName_);
     scriptName_ = 0L;
@@ -679,7 +732,7 @@ void Dtk_Template::setName(const char *name)
   if (browser_)
     browser_->text(index_, browserName());
   if (widget_)
-    widget_->copy_label(browserName());
+    widget_->copy_label(widgetName());
 }
 
 

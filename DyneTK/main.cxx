@@ -71,6 +71,7 @@ Fldtk_Document_Browser  * dtkDocumentBrowser;
 Fldtk_Document_Tabs     * dtkDocumentTabs;
 Fl_Tabs                 * dtkBrowserTabs;
 Fldtk_New_Slot_Dialog   * dtkNewSlotDialog;
+Fldtk_Declare_To_Dialog * dtkDeclareToDialog;
 
 // global dtk project and document roots
 Dtk_Project         * dtkProject;

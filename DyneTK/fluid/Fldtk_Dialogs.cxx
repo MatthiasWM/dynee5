@@ -182,6 +182,117 @@ wHelp->label("");
 wAdd->deactivate();
 }
 
+void Fldtk_Declare_To_Dialog::cb_wName_i(Fl_Input*, void*) {
+  if (*wName->value()) {
+  wParent->activate();
+} else {
+  wParent->deactivate();
+};
+}
+void Fldtk_Declare_To_Dialog::cb_wName(Fl_Input* o, void* v) {
+  ((Fldtk_Declare_To_Dialog*)(o->parent()))->cb_wName_i(o,v);
+}
+
+Fl_Menu_Item Fldtk_Declare_To_Dialog::menu_wParent[] = {
+ {"<don\'t declare>", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"<parent>", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {"...", 0,  0, 0, 0, FL_NORMAL_LABEL, 0, 12, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void Fldtk_Declare_To_Dialog::cb_wCancel_i(Fl_Button*, void*) {
+  hide();
+}
+void Fldtk_Declare_To_Dialog::cb_wCancel(Fl_Button* o, void* v) {
+  ((Fldtk_Declare_To_Dialog*)(o->parent()))->cb_wCancel_i(o,v);
+}
+
+void Fldtk_Declare_To_Dialog::cb_wOK_i(Fl_Button*, void*) {
+  tmpl_->setName(wName->value());
+// wDeclare
+// wParent
+hide();
+}
+void Fldtk_Declare_To_Dialog::cb_wOK(Fl_Button* o, void* v) {
+  ((Fldtk_Declare_To_Dialog*)(o->parent()))->cb_wOK_i(o,v);
+}
+Fldtk_Declare_To_Dialog::Fldtk_Declare_To_Dialog(int X, int Y, int W, int H, const char *L)
+  : Fl_Window(X, Y, W, H, L) {
+  _Fldtk_Declare_To_Dialog();
+}
+
+Fldtk_Declare_To_Dialog::Fldtk_Declare_To_Dialog(int W, int H, const char *L)
+  : Fl_Window(0, 0, W, H, L) {
+  clear_flag(16);
+  _Fldtk_Declare_To_Dialog();
+}
+
+void Fldtk_Declare_To_Dialog::_Fldtk_Declare_To_Dialog() {
+this->box(FL_FLAT_BOX);
+this->color(FL_BACKGROUND_COLOR);
+this->selection_color(FL_BACKGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
+this->align(FL_ALIGN_TOP);
+this->when(FL_WHEN_RELEASE);
+{ wName = new Fl_Input(75, 16, 205, 19, "Name:");
+  wName->labelsize(12);
+  wName->textsize(12);
+  wName->callback((Fl_Callback*)cb_wName);
+  wName->when(FL_WHEN_CHANGED);
+} // Fl_Input* wName
+{ wParent = new Fl_Choice(75, 45, 205, 20, "Declare To:");
+  wParent->down_box(FL_BORDER_BOX);
+  wParent->labelsize(12);
+  wParent->textsize(12);
+  wParent->menu(menu_wParent);
+} // Fl_Choice* wParent
+{ wCancel = new Fl_Button(135, 85, 64, 20, "Cancel");
+  wCancel->labelsize(12);
+  wCancel->callback((Fl_Callback*)cb_wCancel);
+} // Fl_Button* wCancel
+{ wOK = new Fl_Button(215, 85, 64, 20, "OK");
+  wOK->labelsize(12);
+  wOK->callback((Fl_Callback*)cb_wOK);
+} // Fl_Button* wOK
+set_modal();
+end();
+}
+
+void Fldtk_Declare_To_Dialog::setTemplate(Dtk_Template *tmpl) {
+  tmpl_ = tmpl;
+wName->value(tmpl->getName());
+// wDeclare
+// wParent
+
+
+#if 0
+
+wTemplateProto->copy_label(tmpl->id());
+Fl_Menu_Item *m;
+
+m = dtkPlatform->specificChoiceMenu(tmpl);
+dtkPlatform->updateActivation(m, tmpl);
+wSpecific->menu(m);
+
+m = dtkPlatform->methodsChoiceMenu();
+dtkPlatform->updateActivation(m, tmpl);
+wMethods->menu(m);
+
+m = dtkPlatform->attributesChoiceMenu();
+dtkPlatform->updateActivation(m, tmpl);
+wAttributes->menu(m);
+
+wSlotName->value("");
+wEditor->value(0);
+wHelp->label("");
+wAdd->deactivate();
+
+#endif
+}
+
 //
 // DyneTK, the Dyne Toolkit
 // Copyright (C) 2007 Matthias Melcher

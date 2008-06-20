@@ -1180,10 +1180,11 @@ int ShowTemplateInfo(Dtk_Template *tmpl)
     if (!tmpl)
       return -1;
   }
-  const char *name = fl_input("Template name:", tmpl->getName());
-  if (!name)
-    return -2;
-  tmpl->setName(name);
+  if (!dtkDeclareToDialog) {
+    dtkDeclareToDialog = new Fldtk_Declare_To_Dialog(300, 122, "Template Info");
+  }
+  dtkDeclareToDialog->setTemplate(tmpl);
+  dtkDeclareToDialog->show();
   return 0;
 }
 

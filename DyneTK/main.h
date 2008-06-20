@@ -36,17 +36,18 @@ extern void quit_cb(class Fl_Menu_*, void*);
 
 // global references to user interface elements
 // FIXME: sort this out and keep only the minimum
-extern class Fl_Button          * wInspectorConnect; 
-extern class Fldtk_Prefs        * dtkPrefs;
-extern class Fldtk_Proj_Settings * dtkProjSettings;
-extern class Fldtk_Main_Window  * dtkMain;
-extern class Flio_Inspector     * wInspectorSerial; 
-extern class Flmm_Console       * wConsole; 
+extern class Fl_Button            * wInspectorConnect; 
+extern class Fldtk_Prefs          * dtkPrefs;
+extern class Fldtk_Proj_Settings  * dtkProjSettings;
+extern class Fldtk_Main_Window    * dtkMain;
+extern class Flio_Inspector       * wInspectorSerial; 
+extern class Flmm_Console         * wConsole; 
 
-extern class Fldtk_Document_Browser * dtkDocumentBrowser;
-extern class Fldtk_Document_Tabs    * dtkDocumentTabs;
-extern class Fl_Tabs                * dtkBrowserTabs;
-extern class Fldtk_New_Slot_Dialog  * dtkNewSlotDialog;
+extern class Fldtk_Document_Browser   * dtkDocumentBrowser;
+extern class Fldtk_Document_Tabs      * dtkDocumentTabs;
+extern class Fl_Tabs                  * dtkBrowserTabs;
+extern class Fldtk_New_Slot_Dialog    * dtkNewSlotDialog;
+extern class Fldtk_Declare_To_Dialog  * dtkDeclareToDialog;
 
 // global dtk project and document roots
 extern class Dtk_Document_List  * dtkGlobalDocuments;

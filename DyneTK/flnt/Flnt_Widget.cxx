@@ -50,7 +50,7 @@ Flnt_Widget::Flnt_Widget(Dtk_Template *tmpl, Dtk_Layout *layout)
     if (!layout_ && template_)
         layout_ = template_->layout();
     if (tmpl)
-        copy_label(tmpl->browserName());
+        copy_label(tmpl->widgetName());
     screenToNewt();
     init_sizes();
     align(FL_ALIGN_INSIDE|FL_ALIGN_WRAP|FL_ALIGN_CLIP|FL_ALIGN_TOP|FL_ALIGN_LEFT);
