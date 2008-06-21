@@ -1181,6 +1181,7 @@ int ShowTemplateInfo(Dtk_Template *tmpl)
       return -1;
   }
   if (!dtkDeclareToDialog) {
+    Fl_Group::current(0L);
     dtkDeclareToDialog = new Fldtk_Declare_To_Dialog(300, 122, "Template Info");
   }
   dtkDeclareToDialog->setTemplate(tmpl);
@@ -1197,6 +1198,7 @@ void NewSlot(Dtk_Template *tmpl)
       return;
   }
   if (!dtkNewSlotDialog) {
+    Fl_Group::current(0L);
     dtkNewSlotDialog = new Fldtk_New_Slot_Dialog(400, 220, "New Slot");
   }
   dtkNewSlotDialog->setTemplate(tmpl);

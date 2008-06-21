@@ -251,7 +251,7 @@ int Dtk_Layout::save()
 	};
 	newtRef lyt = NewtMakeFrame2(sizeof(lytFrame) / (sizeof(newtRefVar) * 2), lytFrame);
   
-  NewtPrintObject(stdout, lyt);
+  //NewtPrintObject(stdout, lyt);
   
 	newtRef rcvr = kNewtRefNIL;
 	newtRef nsof = NsMakeNSOF(rcvr, lyt, NewtMakeInt30(2));
@@ -262,7 +262,9 @@ int Dtk_Layout::save()
 	uint8_t *data = NewtRefToBinary(nsof);
   
   // Open a file as a destination for our project
+  if (project()) project()->pushDir();
 	FILE *f = fopen(filename_, "wb");
+  if (project()) project()->popDir();
   if (!f) {
     return -1;
   }

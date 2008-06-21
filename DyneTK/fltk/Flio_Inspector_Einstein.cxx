@@ -165,7 +165,7 @@ int Flio_Inspector_Einstein::sendPackage(const char *filename)
                  " install package \"%s\"\r"
                  "end tell\r", buf);
 #else
-  return sendCmd("inst", filename);
+  return sendCmd("inst", buf);
 #endif
 }
 

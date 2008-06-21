@@ -75,7 +75,8 @@ Dtk_Template::Dtk_Template(Dtk_Layout *layout,
   viewJustify_(0L),
   defaultJustify_(0),
   proto_(0L),
-  declareTo_(0)
+  declareTo_(0),
+  save_(0)
 {
   //if (proto && proto->setup)
   //proto->setup(this);
@@ -115,15 +116,42 @@ int Dtk_Template::load(newtRef node)
   if (!NewtRefIsFrame(node))
     return -1;
   
-  //printf("===========\n");
+  // set __ntObjectPointer to the address of this template
+  NewtObjSetSlot(NewtRefToPointer(node), NSSYM(__ntObjectPointer), NewtMakeInt32((uint32_t)this));
+
   //NewtPrintObject(stdout, node);
+
   // find the name of this template
-  newtRef ntName = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntName)));
-  if (NewtRefIsString(ntName)) ntName_ = strdup(NewtRefToString(ntName));
+  newtRef ntName = NewtSlotsGetSlot(node, NewtFindSlotIndex(node, NSSYM(__ntName)));
+  if (NewtRefIsString(ntName)) //ntName_ = strdup(NewtRefToString(ntName));
+    setName(NewtRefToString(ntName));
   
   // find an ID; this does not mean too much as the ID can be changed later in the UI
   newtRef ntId = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntId)));
   if (NewtRefIsSymbol(ntId)) id(NewtSymbolGetName(ntId));
+
+  // find the 'DeclarTo' member and set our index accordingly
+  newtRef decl = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(__ntDeclare)));
+  if (NewtRefIsFrame(decl)) {
+    newtRef templRef = NewtGetFrameSlot(decl, NewtFindSlotIndex(decl, NSSYM(__ntObjectPointer)));
+    if (NewtRefIsInteger(templRef)) {
+      Dtk_Template *tmpl = (Dtk_Template*)NewtRefToInteger(templRef);
+      // now walk up the tree and find that parent
+      int i=0;
+      Dtk_Template *tp = parent();
+      while (tp) {
+        i++;
+        if (tmpl == tp) {
+          declareTo_ = i;
+          break;
+        }
+        tp = tp->parent();
+      }
+      if (declareTo_==0) {
+        printf("ERROR: __ntDeclare target of \"%s\" not found in parent list\n", ntName_);
+      }
+    }
+  }
   
   // now load all slots for this template
 	newtRef value = NewtGetFrameSlot(node, NewtFindSlotIndex(node, NSSYM(value)));
@@ -193,6 +221,21 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
     sw.put(buf);
     needComma = 1;
   }
+  if (scriptName_) {
+    if (needComma)
+      sw.put(",\n");
+    sprintf(buf, "     debug: \"%s\"", scriptName_);
+    sw.put(buf);
+    needComma = 1;
+  }
+  // write the preallocated context if we are declared in a parent view
+  if (declareTo_) {
+    if (needComma)
+      sw.put(",\n");
+    sprintf(buf, "     preallocatedContext: '%s", scriptName_);
+    sw.put(buf);
+    needComma = 1;
+  }
   // now write all the other slots
   if (slotList_) {
     int i, n = slotList_->size(), ret = 0;
@@ -205,15 +248,27 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
     if (needComma)
       sw.put("\n");
   }
-  
   sw.put("    };\n\n");
-  
+
+  // FIXME run the 'afterScript
+
+  if (parent()) {
+    sprintf(buf, "AddStepForm(%s, %s);\n", parent()->scriptName(), scriptName());
+    sw.put(buf);
+    if (declareTo_) {
+      sprintf(buf, "StepDeclare(%s, %s, '%s);\n", parent()->scriptName(), scriptName(), scriptName());
+      sw.put(buf);
+    }
+    sw.put("\n");
+  }
+
   if (tmplList_) {
     int i, n = tmplList_->size();
     if (n) {
       for (i=0; i<n; i++) {
         tmplList_->at(i)->write(sw);
       }
+      /*
       sprintf(buf, "%s.stepChildren := [ ", scriptName());
       sw.put(buf);
       for (i=0; i<n; i++) {
@@ -222,11 +277,9 @@ int Dtk_Template::write(Dtk_Script_Writer &sw)
           sw.put(", ");
       }
       sw.put(" ];\n\n");
-      // or "AddStepView"?
+      */
     }
   }
-  
-  // FIXME run the 'afterScript
   
   return 0;
 }
@@ -620,6 +673,8 @@ newtRef	Dtk_Template::save()
   newtRefVar tmpA[1024]; // ouch, no fixed sizes!
   int vi = 0, ti = 0;
   
+  save_ = NewtMakeFrame(kNewtRefNIL, 0);
+
   // the first slot is the template if we have one
   int v = dtkPlatform->findProto(id());
   if (v!=-1) {
@@ -632,7 +687,7 @@ newtRef	Dtk_Template::save()
     valueA[vi++] = NSSYM(__ntTemplate);
     valueA[vi++] = NewtMakeFrame2(3, tmpA+ti-6);
   }
-  // FIXME __ntDeclare
+
   // now walk the slots
   int i, n = slotList_->size();
   for (i=0; i<n; ++i) {
@@ -675,23 +730,20 @@ newtRef	Dtk_Template::save()
   
   int hi = 0;
   newtRefVar hrcA[20];
-  hrcA[hi++] = NSSYM(value);
-  hrcA[hi++] = value;
+  newtObjRef np = NewtRefToPointer(save_);
+  NewtObjSetSlot(np, NSSYM(value), value);
   if (ntId_ && *ntId_) {
-    hrcA[hi++] = NSSYM(__ntId);
-    hrcA[hi++] = NewtMakeSymbol(id());
+    NewtObjSetSlot(np, NSSYM(__ntId), NewtMakeSymbol(id()));
   }
   if (ntName_ && *ntName_) {
-    hrcA[hi++] = NSSYM(__ntName);
-    hrcA[hi++] = NewtMakeString(ntName_,true);
+    NewtObjSetSlot(np, NSSYM(__ntName), NewtMakeString(ntName_,false));
+    /// \todo FIXME we are assuming that we can only declare to the direct parent!
+    NewtObjSetSlot(np, NSSYM(__ntDeclare), declareTo_ ? parent()->save_ : kNewtRefNIL);
   };
   //NSSYM(__ntExternFile),  ...,
-  //NSSYM(__ntDeclare),     ...
-  newtRef hrc = NewtMakeFrame2(hi/2, hrcA);
+//  NewtPrintObject(stdout, save_);
   
-  NewtPrintObject(stdout, hrc);
-  
-  return hrc;
+  return save_;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -717,7 +769,13 @@ void Dtk_Template::setName(const char *name)
   }
   if (scriptName_) {
     free(scriptName_);
+  }
+  if (name) {
+    scriptName_ = strdup(name);
+    autoScriptName_ = false;
+  } else {
     scriptName_ = 0L;
+    autoScriptName_ = false;
   }
   if (ntName_) {
     free(ntName_);

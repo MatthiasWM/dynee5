@@ -246,6 +246,17 @@ public:
   void setList(Dtk_Template_List *list) { list_ = list; }
   void setLayout(Dtk_Layout *layout) { layout_ = layout; }
   
+  /**
+   * Change the declaration parent for this template.
+   *
+   * \param[in] i 0 will not declare this template, 1 will declare it in the 
+   *            next higher parent, 2 in the parent of the parent, etc.
+   * \see Fldtk_Declare_To_Dialog
+   * \todo this must update the widgetName and redraw the widget
+   */
+  void declareTo(int i) { declareTo_ = i; }
+  int getDeclareTo() { return declareTo_; }
+
 private:
   
   /** This slot is called if the widget is dragged or resized.
@@ -315,7 +326,10 @@ private:
   Dtk_Proto_Slot      * proto_;
   
   /// declare a slot to this template to the n'th parent (or 0 if no declaration)
-  int                 * declareTo_;
+  int                 declareTo_;
+
+  /// this is where we saved this structure
+  newtRefVar          save_;
 };
 
 

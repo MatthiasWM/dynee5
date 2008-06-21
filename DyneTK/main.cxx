@@ -142,6 +142,101 @@ newtRef nsMakeBinaryFromHex(newtRefArg rcvr, newtRefArg nHexStr, newtRefArg nSym
   }
 }
 
+newtRef nsAddStepForm(newtRefArg rcvr, newtRefArg parentTemplate, newtRefArg childTemplate)
+{
+  if (!NewtRefIsFrame(parentTemplate)) {
+    return kNewtRefNIL;
+  }
+  if (!NewtRefIsFrame(childTemplate)) {
+    return kNewtRefNIL;
+  }
+  newtObjRef pt = NewtRefToPointer(parentTemplate);
+
+  // find the 'stepChild array in the parent template
+  newtRef stepChildren;
+  int ix = NewtFindSlotIndex(parentTemplate, NSSYM(stepChildren));
+  if (ix==-1) {
+    stepChildren = NewtMakeArray(NSSYM(stepChildren), 0);
+    NewtObjSetSlot(pt, NSSYM(stepChildren), stepChildren);
+  } else {
+    stepChildren = NewtSlotsGetSlot(parentTemplate, ix);
+  }
+
+  // add the child template to it
+  newtObjRef sc = NewtRefToPointer(stepChildren);
+  NewtObjAddArraySlot(sc, childTemplate);
+
+  return kNewtRefNIL;
+}
+
+newtRef nsStepDeclare(newtRefArg rcvr, newtRefArg parentTemplate, newtRefArg childTemplate, newtRefArg childSymbol)
+{
+  if (!NewtRefIsFrame(parentTemplate)) {
+    return kNewtRefNIL;
+  }
+  if (!NewtRefIsFrame(childTemplate)) {
+    return kNewtRefNIL;
+  }
+  if (!NewtRefIsSymbol(childSymbol)) {
+    return kNewtRefNIL;
+  }
+  newtObjRef pt = NewtRefToPointer(parentTemplate);
+
+  // add a slot with the symbol to the parent and set it to nil
+  NewtObjSetSlot(pt, childSymbol, kNewtRefNIL);
+
+  // find the 'stepAllocateContext array in the parent template
+  newtRef stepAllocateContext;
+  int ix = NewtFindSlotIndex(parentTemplate, NSSYM(stepAllocateContext));
+  if (ix==-1) {
+    stepAllocateContext = NewtMakeArray(NSSYM(stepAllocateContext), 0);
+    NewtObjSetSlot(pt, NSSYM(stepAllocateContext), stepAllocateContext);
+  } else {
+    stepAllocateContext = NewtSlotsGetSlot(parentTemplate, ix);
+  }
+
+  // add the symbol and the child template to it
+  newtObjRef sc = NewtRefToPointer(stepAllocateContext);
+  NewtObjAddArraySlot(sc, childSymbol);
+  NewtObjAddArraySlot(sc, childTemplate);
+
+//NewtPrintObject(stdout, parentTemplate);
+  return kNewtRefNIL;
+
+//  NewtObjSetSlot(np, NSSYM(__ntId), NewtMakeSymbol(id()));
+/*
+  if (!NewtRefIsString(nHexStr)) {
+    return kNewtRefNIL;
+  }
+  if (!NewtRefIsSymbol(nSym)) {
+    return kNewtRefNIL;
+  }
+  const char *hexStr = NewtRefToString(nHexStr), *src = hexStr;
+  char c;
+  if (hexStr && *hexStr) {
+    uint32_t i, size = strlen(hexStr)/2;
+    uint8_t *data = (uint8_t*)malloc(size), *dst = data, v;
+    for (i=0; i<size; i++) {
+      c = *src++;
+      if (c>='a') v = c+10-'a';
+      else if (c>='A') v = c+10-'A';
+      else v = c-'0';
+      c = *src++;
+      if (c>='a') v = v*16 + (c+10-'a');
+      else if (c>='A') v = v*16 + (c+10-'A');
+      else v = v*16 + (c-'0');
+      *dst++ = v;
+    }
+    newtRef ret = NewtMakeBinary(nSym, data, size, true); // true means: copy the array over!
+    free(data);
+    return ret;
+  } else {
+    return kNewtRefNIL;
+  }
+  */
+    return kNewtRefNIL;
+}
+
 /*---------------------------------------------------------------------------*/
 /**
  * Main entry function.
@@ -192,6 +287,8 @@ int main(int argc, char **argv) {
 	NcSetGlobalVar(NSSYM(printLength), NSINT(9999));
 	NcSetGlobalVar(NSSYM(printDepth), NSINT(30));
   NewtDefGlobalFunc(NSSYM(MakeBinaryFromHex), (void*)nsMakeBinaryFromHex, 2, "MakeBinaryFromHex(hexString, class)");
+  NewtDefGlobalFunc(NSSYM(AddStepForm), (void*)nsAddStepForm, 2, "AddStepForm(parentTemplate, childTemplate)");
+  NewtDefGlobalFunc(NSSYM(StepDeclare), (void*)nsStepDeclare, 3, "StepDeclare(parentTemplate, childTemplate, childSymbol)");
   // GetSoundFrame   MakeBinaryFromHex   MakeDitheredPattern 
   // MakeExtrasIcons   MakePixFamily   UnpackRGB
 	NEWT_INDENT = 1;
@@ -277,6 +374,9 @@ char *dtkReleaseNotes =
   "<h2>DyneTK Release Notes</h2>\n"
   "<h3>DyneTK 1.7.2</h3>\n"
   "<ul>"
+  "<li>fixed bytecode generation bug in Newt/0</li>\n"
+  "<li>added NewtonScript functions to correctly build view template inheritance</li>\n"
+  "<li>added \"Declare To\" dialog and underlay</li>\n"
   "<li>added script and package support for Einstein on OS X and MSWindows</li>\n"
   "<li>added <b>New Slot</b> dialog box which allows the addition of slots with many types</li>\n"
   "<li>added b&w application icons with mask</li>\n"

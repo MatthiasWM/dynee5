@@ -428,7 +428,7 @@ newtRef Dtk_Platform::newtTemplate(char *id)
   
   newtRefVar ret[] = { NSSYM(value), value, NSSYM(__ntId), NewtMakeSymbol(id) };
   newtRef result = NewtMakeFrame2(2, ret);
-  NewtPrintObject(stdout, result);
+  //NewtPrintObject(stdout, result);
   return result;
 }
 

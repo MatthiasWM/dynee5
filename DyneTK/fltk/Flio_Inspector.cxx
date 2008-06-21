@@ -81,7 +81,8 @@ Flio_Inspector::~Flio_Inspector()
 int Flio_Inspector::sendScript(const char *script)
 {
 	// compile the string
-	//NEWT_DUMPBC = 1;
+	NEWT_DUMPBC = 1;
+  //NEWT_DUMPSYNTAX = 1;
 	newtRefVar obj = NBCCompileStr((char*)script, true);
 	// FIXME test for error
 	//NewtPrintObject(stdout, obj);

@@ -148,8 +148,6 @@ public:
    */
   Dtk_Document_List * documentList() { return documentList_; }
 
-private:
-  
   /**
    * Remember the current directory.
    *
@@ -162,6 +160,8 @@ private:
    */
 	void          popDir();
 
+private:
+  
   /// path and name of package
 	char          * packagename_;
   

@@ -535,8 +535,12 @@ int Dtk_Project::loadWin()
         newtRef name = NewtGetFrameSlot(iconFile, NewtFindSlotIndex(iconFile, NSSYM(deltaFromProject)));
         if (NewtRefIsString(name)) {
 			    char *filename = NewtRefToString(name);
-          fl_filename_absolute(buf, 2047, filename);
-          dtkProjSettings->icon->wIcon1->setImageFilename(buf);
+          if (filename && *filename) {
+            fl_filename_absolute(buf, 2047, filename);
+            dtkProjSettings->icon->wIcon1->setImageFilename(buf);
+          } else {
+            dtkProjSettings->icon->wIcon1->setImageFilename(0L);
+          }
         }
       }
 			// iconProNormal (Frame)
@@ -548,8 +552,12 @@ int Dtk_Project::loadWin()
           newtRef name = NewtGetFrameSlot(imageinfo1, NewtFindSlotIndex(imageinfo1, NSSYM(deltaFromProject)));
           if (NewtRefIsString(name)) {
 				    char *filename = NewtRefToString(name);
-            fl_filename_absolute(buf, 2047, filename);
-            dtkProjSettings->icon->wIcon1->setImageFilename(buf);
+            if (filename && *filename) {
+              fl_filename_absolute(buf, 2047, filename);
+              dtkProjSettings->icon->wIcon1->setImageFilename(buf);
+            } else {
+              dtkProjSettings->icon->wIcon1->setImageFilename(0L);
+            }
           }
         }
         // load the mask if any
@@ -558,8 +566,12 @@ int Dtk_Project::loadWin()
           newtRef name = NewtGetFrameSlot(maskinfo, NewtFindSlotIndex(maskinfo, NSSYM(deltaFromProject)));
           if (NewtRefIsString(name)) {
 				    char *filename = NewtRefToString(name);
-            fl_filename_absolute(buf, 2047, filename);
-            dtkProjSettings->icon->wMask->setImageFilename(buf);
+            if (filename && *filename) {
+              fl_filename_absolute(buf, 2047, filename);
+              dtkProjSettings->icon->wMask->setImageFilename(buf);
+            } else {
+              dtkProjSettings->icon->wMask->setImageFilename(0L);
+            }
           }
         }
       }
@@ -745,7 +757,10 @@ int Dtk_Project::saveAll()
   for (i=0; i<n; ++i) {
     documentList_->at(i)->save();
   }
-  return save();
+  pushDir();
+  int ret = save();
+  popDir();
+  return ret;
 }
 
 
