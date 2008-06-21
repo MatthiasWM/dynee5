@@ -15,20 +15,26 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_487399F95A2B45E8BF78EDD428498642"
-        "OwnerKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5BC6F2C241D841A5C7F00411FB050D65"
         "OwnerKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_661EDEED29124CD8AB39E55C28F324AA"
-        "OwnerKey" = "8:_487399F95A2B45E8BF78EDD428498642"
+        "MsmKey" = "8:_612E843FDAE54FF6A0DF940698056B13"
+        "OwnerKey" = "8:_F2EAB016BFE14E47BB0BAAD2B74CCAAF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_839DA210246D4604BA40061C6A933E32"
+        "OwnerKey" = "8:_612E843FDAE54FF6A0DF940698056B13"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B068EB08F2F34A0F9557A5CFA3FEC997"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -95,7 +101,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\DyneTK-1.7.2.msi"
+        "OutputFilename" = "8:Release\\DyneTK-1.7.3.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -155,6 +161,26 @@
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B068EB08F2F34A0F9557A5CFA3FEC997"
+            {
+            "SourcePath" = "8:..\\..\\test\\mpg.zip"
+            "TargetName" = "8:mpg.zip"
+            "Tag" = "8:"
+            "Folder" = "8:_B827252F1B90433CAFD0031F2FA441BD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B34DBD4CA6BB4E979596E94E2DF71216"
@@ -294,18 +320,18 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DyneTK"
-        "ProductCode" = "8:{DB7440FF-172B-42E7-8F4D-E78053FCFAF4}"
-        "PackageCode" = "8:{67CE7569-2675-4CBE-BB70-B0501D7DCBE4}"
+        "ProductCode" = "8:{D6EC5C0F-3AD5-487F-AA80-E8D0C0F8246E}"
+        "PackageCode" = "8:{B10F6879-548D-4F2A-A114-E190A88C1DAF}"
         "UpgradeCode" = "8:{F3FE0997-8656-4097-94BF-7B98FBB5B65A}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.7.2"
+        "ProductVersion" = "8:1.7.3"
         "Manufacturer" = "8:DyneE5"
         "ARPHELPTELEPHONE" = "8:dynetk@matthiasm.com"
         "ARPHELPLINK" = "8:http://code.google.com/p/dynee5/"
-        "Title" = "8:DyneTK-1.7.2"
+        "Title" = "8:DyneTK-1.7.3"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Matthias Melcher"
         "Keywords" = "8:"
@@ -838,7 +864,7 @@
         }
         "MergeModule"
         {
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_487399F95A2B45E8BF78EDD428498642"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_612E843FDAE54FF6A0DF940698056B13"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -852,7 +878,7 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_661EDEED29124CD8AB39E55C28F324AA"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_839DA210246D4604BA40061C6A933E32"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
