@@ -4307,8 +4307,8 @@ static void cb_Close(Fl_Button*, void*) {
 }
 
 Fl_Double_Window* create_about_dialog() {
-  { wAboutDialog = new Fl_Double_Window(326, 287, "About DyneTK");
-    { Fl_Group* o = new Fl_Group(5, 5, 315, 250);
+  { wAboutDialog = new Fl_Double_Window(326, 299, "About DyneTK");
+    { Fl_Group* o = new Fl_Group(5, 5, 315, 260);
       o->box(FL_THIN_DOWN_BOX);
       { Fl_Box* o = new Fl_Box(10, 10, 305, 70, "Dyne Toolkit");
         o->box(FL_FLAT_BOX);
@@ -4318,22 +4318,22 @@ Fl_Double_Window* create_about_dialog() {
         o->labelcolor(FL_BACKGROUND2_COLOR);
         o->align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE);
       } // Fl_Box* o
-      { Fl_Box* o = new Fl_Box(215, 80, 100, 20, "Version 1.7.2");
+      { Fl_Box* o = new Fl_Box(215, 80, 100, 20, "Version 1.7.3");
         o->labelfont(1);
         o->labelsize(13);
         o->align(FL_ALIGN_RIGHT|FL_ALIGN_INSIDE);
       } // Fl_Box* o
-      { Fl_Box* o = new Fl_Box(10, 100, 305, 150, "DyneTK (c) 2007, 2008 Matthias Melcher. DyneTK is licensed under GPL. Please \
+      { Fl_Box* o = new Fl_Box(10, 100, 305, 160, "DyneTK (c) 2007, 2008 Matthias Melcher. DyneTK is licensed under GPL. Please \
 visit http://code.google.com/p/dynee5/ for more information.\n\nDyneTK is base\
 d on the following GPL and LGPL licensed software:\n - Newt/0: http://www.so-k\
-ukan.com/\n - FLTK: http://www.fltk.org/\n\nNewton never dies, it just gets ne\
-w tools.");
+ukan.com/\n - FLTK: http://www.fltk.org/\n - libz, libpng, libjpeg\n\nNewton n\
+ever dies, it just gets new tools.");
         o->labelsize(11);
         o->align(132|FL_ALIGN_INSIDE);
       } // Fl_Box* o
       o->end();
     } // Fl_Group* o
-    { Fl_Button* o = new Fl_Button(250, 260, 70, 20, "Close");
+    { Fl_Button* o = new Fl_Button(250, 270, 70, 20, "Close");
       o->labelsize(12);
       o->callback((Fl_Callback*)cb_Close);
     } // Fl_Button* o
