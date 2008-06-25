@@ -3904,7 +3904,7 @@ this->when(FL_WHEN_RELEASE);
     o->labelsize(13);
     o->deactivate();
   } // Fl_Button* o
-  { Fl_Input* o = new Fl_Input(585, 31, 45, 23);
+  { Fl_Input* o = new Fl_Input(585, 31, 50, 23);
     o->tooltip("Enter an error code here to get the error message.");
     o->type(2);
     o->image(image_bug);

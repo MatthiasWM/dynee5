@@ -263,11 +263,11 @@
 			children = (
 				C9CD430E0DF83E8B0052DB5E /* doxyfile.osx.dox */,
 				C9FBA09C0DE4BEFD00026BB1 /* allNewt.h */,
-				C9FBA09D0DE4BEFD00026BB1 /* main.h */,
 				C9FBA09E0DE4BEFD00026BB1 /* globals.h */,
-				C9FBA09F0DE4BEFD00026BB1 /* sandbox.h */,
 				C9FB9BA10DE352BE00026BB1 /* globals.cxx */,
+				C9FBA09D0DE4BEFD00026BB1 /* main.h */,
 				C9FB9B9B0DE352BE00026BB1 /* main.cxx */,
+				C9FBA09F0DE4BEFD00026BB1 /* sandbox.h */,
 				C9FB9B540DE352BD00026BB1 /* sandbox.cxx */,
 				C9FBA0430DE3753800026BB1 /* Newton21.ptf */,
 				C9FBA0440DE3753800026BB1 /* Newton21.txt */,

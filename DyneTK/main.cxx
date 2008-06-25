@@ -372,6 +372,10 @@ int main(int argc, char **argv) {
 char *dtkReleaseNotes =
   "<html><head>DyneTK Release Notes</head><body>\n"
   "<h2>DyneTK Release Notes</h2>\n"
+  "<h3>DyneTK 1.7.4</h3>\n"
+  "<ul>"
+  "<li>added definition of project related constants</li>\n"
+  "</ul>\n"
   "<h3>DyneTK 1.7.3</h3>\n"
   "<ul>"
   "<li>fixed bytecode generation bug in Newt/0</li>\n"

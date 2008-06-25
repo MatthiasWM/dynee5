@@ -872,19 +872,26 @@ void AddPrevProj(const char *filename)
  * Toggle the 'breakOnThrows' flag on and off.
  * \todo should be a toggle
  */
-void InspectorStopOnThrows()
+void InspectorStopOnThrows(bool stop)
 {
-	InspectorSendScript("breakOnThrows := 1"); // TRUE or NIL
+  if (stop)
+    InspectorSendScript("breakOnThrows := 1"); // TRUE or NIL
+  else
+    InspectorSendScript("breakOnThrows := 0"); // TRUE or NIL
 }
 
 /*---------------------------------------------------------------------------*/
 /**
  * Set the 'trace' flag to "off".
  */
-void InspectorTraceOff()
+void InspectorTrace(bool trace)
 {
-	InspectorSendScript("trace := nil");
+  // Later comment: I don't know what the coment below means ;-)
 	// user may have set it to 'functions or true
+  if (trace)
+	  InspectorSendScript("trace := true");
+  else
+	  InspectorSendScript("trace := nil");
 }
 
 /*---------------------------------------------------------------------------*/

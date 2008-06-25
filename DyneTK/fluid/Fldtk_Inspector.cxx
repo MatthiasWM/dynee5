@@ -82,7 +82,7 @@ static const char *idata_toolbox_inactive[] = {
 static Fl_Pixmap image_toolbox_inactive(idata_toolbox_inactive);
 
 void Fldtk_Inspector::cb_tStopOnThrows_i(Fl_Button*, void*) {
-  InspectorStopOnThrows();
+  InspectorStopOnThrows(tStopOnThrows->value());
 }
 void Fldtk_Inspector::cb_tStopOnThrows(Fl_Button* o, void* v) {
   ((Fldtk_Inspector*)(o->parent()->parent()))->cb_tStopOnThrows_i(o,v);
@@ -194,11 +194,11 @@ static unsigned char idata_stop_da[] =
 255,0,255,255,255,0,255,255,255,0};
 static Fl_RGB_Image image_stop_da(idata_stop_da, 16, 16, 4, 0);
 
-void Fldtk_Inspector::cb_tTraceOff_i(Fl_Button*, void*) {
-  InspectorTraceOff();
+void Fldtk_Inspector::cb_tTrace_i(Fl_Button*, void*) {
+  InspectorTrace(tTrace->value());
 }
-void Fldtk_Inspector::cb_tTraceOff(Fl_Button* o, void* v) {
-  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_tTraceOff_i(o,v);
+void Fldtk_Inspector::cb_tTrace(Fl_Button* o, void* v) {
+  ((Fldtk_Inspector*)(o->parent()->parent()))->cb_tTrace_i(o,v);
 }
 
 static unsigned char idata_pencil[] =
@@ -623,6 +623,7 @@ Fldtk_Inspector::Fldtk_Inspector(int X, int Y, int W, int H, const char *L)
   } // Fl_Button* wConnect
   { tStopOnThrows = new Fl_Button(30, 5, 25, 25);
     tStopOnThrows->tooltip("Stop on throws");
+    tStopOnThrows->type(1);
     tStopOnThrows->image(image_stop);
     tStopOnThrows->deimage(image_stop_da);
     tStopOnThrows->labelsize(9);
@@ -630,15 +631,16 @@ Fldtk_Inspector::Fldtk_Inspector(int X, int Y, int W, int H, const char *L)
     tStopOnThrows->callback((Fl_Callback*)cb_tStopOnThrows);
     tStopOnThrows->deactivate();
   } // Fl_Button* tStopOnThrows
-  { tTraceOff = new Fl_Button(55, 5, 25, 25);
-    tTraceOff->tooltip("Trace off");
-    tTraceOff->image(image_pencil);
-    tTraceOff->deimage(image_pencil_da);
-    tTraceOff->labelsize(9);
-    tTraceOff->labelcolor(FL_GRAY0);
-    tTraceOff->callback((Fl_Callback*)cb_tTraceOff);
-    tTraceOff->deactivate();
-  } // Fl_Button* tTraceOff
+  { tTrace = new Fl_Button(55, 5, 25, 25);
+    tTrace->tooltip("Trace off");
+    tTrace->type(1);
+    tTrace->image(image_pencil);
+    tTrace->deimage(image_pencil_da);
+    tTrace->labelsize(9);
+    tTrace->labelcolor(FL_GRAY0);
+    tTrace->callback((Fl_Callback*)cb_tTrace);
+    tTrace->deactivate();
+  } // Fl_Button* tTrace
   { tStackTrace = new Fl_Button(80, 5, 25, 25);
     tStackTrace->tooltip("Stack trace");
     tStackTrace->image(image_layers);
@@ -707,13 +709,13 @@ void Fldtk_Inspector::activate_menus(unsigned int mask) {
 
 if ( (mask & 0x00000008) == 0x00000008 ) {
   tStopOnThrows->activate();
-  tTraceOff->activate();
+  tTrace->activate();
   tStackTrace->activate();
   tExitBreakLoop->activate();
   tPrintDepth->activate();
 } else {
   tStopOnThrows->deactivate();
-  tTraceOff->deactivate();
+  tTrace->deactivate();
   tStackTrace->deactivate();
   tExitBreakLoop->deactivate();
   tPrintDepth->deactivate();

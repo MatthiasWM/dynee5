@@ -33,7 +33,7 @@ decl {\#include "main.h"} {public
 } 
 
 widget_class Fldtk_Inspector {open
-  xywh {821 191 775 139} type Double resizable visible position_relative
+  xywh {414 98 775 139} type Double resizable visible position_relative
 } {
   Fl_Group {} {open
     xywh {0 0 775 35} box FLAT_BOX
@@ -44,12 +44,12 @@ widget_class Fldtk_Inspector {open
       code0 {wInspectorConnect = wConnect;}
     }
     Fl_Button tStopOnThrows {
-      callback {InspectorStopOnThrows();}
-      tooltip {Stop on throws} image {../images/stop.png} deimage {../images/stop_da.png} xywh {30 5 25 25} labelsize 9 labelcolor 32 deactivate
+      callback {InspectorStopOnThrows(tStopOnThrows->value());}
+      tooltip {Stop on throws} image {../images/stop.png} deimage {../images/stop_da.png} xywh {30 5 25 25} type Toggle labelsize 9 labelcolor 32 deactivate
     }
-    Fl_Button tTraceOff {
-      callback {InspectorTraceOff();}
-      tooltip {Trace off} image {../images/pencil.png} deimage {../images/pencil_da.png} xywh {55 5 25 25} labelsize 9 labelcolor 32 deactivate
+    Fl_Button tTrace {
+      callback {InspectorTrace(tTrace->value());} selected
+      tooltip {Trace off} image {../images/pencil.png} deimage {../images/pencil_da.png} xywh {55 5 25 25} type Toggle labelsize 9 labelcolor 32 deactivate
     }
     Fl_Button tStackTrace {
       callback {InspectorStackTrace();}
@@ -113,7 +113,7 @@ widget_class Fldtk_Inspector {open
         xywh {20 20 100 20} labelsize 11
       }
     }
-    Fl_Box {} {selected
+    Fl_Box {} {
       xywh {185 5 530 25} resizable
     }
     Fl_Box serial {

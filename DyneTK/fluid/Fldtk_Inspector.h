@@ -43,10 +43,10 @@ private:
   void cb_tStopOnThrows_i(Fl_Button*, void*);
   static void cb_tStopOnThrows(Fl_Button*, void*);
 public:
-  Fl_Button *tTraceOff;
+  Fl_Button *tTrace;
 private:
-  void cb_tTraceOff_i(Fl_Button*, void*);
-  static void cb_tTraceOff(Fl_Button*, void*);
+  void cb_tTrace_i(Fl_Button*, void*);
+  static void cb_tTrace(Fl_Button*, void*);
 public:
   Fl_Button *tStackTrace;
 private:

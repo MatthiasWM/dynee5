@@ -162,6 +162,11 @@ public:
 
 private:
   
+  /**
+   * Write all project rlated constants.
+   */
+	int           writeConstants(Dtk_Script_Writer &sw);
+  
   /// path and name of package
 	char          * packagename_;
   

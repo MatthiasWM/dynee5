@@ -728,8 +728,8 @@ newtRef	Dtk_Template::save()
    */
   newtRef value = NewtMakeFrame2(vi/2, valueA);
   
-  int hi = 0;
-  newtRefVar hrcA[20];
+  // int hi = 0;
+  // newtRefVar hrcA[20];
   newtObjRef np = NewtRefToPointer(save_);
   NewtObjSetSlot(np, NSSYM(value), value);
   if (ntId_ && *ntId_) {

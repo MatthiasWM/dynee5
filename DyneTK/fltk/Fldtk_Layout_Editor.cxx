@@ -136,7 +136,7 @@ Fldtk_Layout_Editor::Fldtk_Layout_Editor(Dtk_Layout *layout)
                 slotMenus->end();
                 slotEditor_ = new Fldtk_Slot_Editor_Group(X, Y+H/4+2+30, W, H-H/4-2-30);
                 {
-                    Fl_Box *box = new Fl_Box(X, Y+H/4+2+30, W, H-H/4-2-30);
+                    /*Fl_Box *box =*/ new Fl_Box(X, Y+H/4+2+30, W, H-H/4-2-30);
                     //box->box(FL_DOWN_BOX);
                 }
                 slotEditor_->box(FL_FLAT_BOX);

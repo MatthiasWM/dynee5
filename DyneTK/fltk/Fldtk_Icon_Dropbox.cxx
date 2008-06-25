@@ -237,7 +237,7 @@ newtRef Fldtk_Icon_Dropbox::buildIcon(Fldtk_Icon_Dropbox *bits, Fldtk_Icon_Dropb
   /// \todo \i mode is ignored for now
   newtRefVar bBits = kNewtRefUnbind;
   newtRefVar bMask = kNewtRefUnbind;
-  int bw=0, bh=0, mw=0, mh=0, isDefault = 0;
+  int bw=0, bh=0, mw=0, mh=0;
 
   // load the bitmap
   bBits = bits->makeBitmap(bw, bh);

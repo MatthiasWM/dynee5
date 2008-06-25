@@ -55,7 +55,7 @@ decl {Fl_Help_Dialog *wReleaseNotes;} {public
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
-  xywh {634 291 785 595} type Double resizable
+  xywh {484 214 785 595} type Double resizable
   class Fl_Double_Window visible
 } {
   Fl_Menu_Bar {} {open
@@ -605,8 +605,8 @@ wAboutDialog->show();}
       tooltip {Help Index} image {../images/help.png} deimage {../images/help_da.png} xywh {530 30 25 25} labelfont 1 labelsize 13 deactivate
     }
     Fl_Input {} {
-      callback {NewtAlert(atoi(o->value()));}
-      tooltip {Enter an error code here to get the error message.} image {../images/bug.png} deimage {../images/bug_da.png} xywh {585 31 45 23} type Int labelsize 11 textsize 12
+      callback {NewtAlert(atoi(o->value()));} selected
+      tooltip {Enter an error code here to get the error message.} image {../images/bug.png} deimage {../images/bug_da.png} xywh {585 31 50 23} type Int labelsize 11 textsize 12
     }
     Fl_Box {} {
       xywh {760 30 15 25} deactivate resizable
@@ -903,7 +903,7 @@ Function {create_about_dialog()} {open
 } {
   Fl_Window wAboutDialog {
     label {About DyneTK} open
-    xywh {500 342 326 299} type Double modal visible
+    xywh {390 374 326 299} type Double modal visible
   } {
     Fl_Group {} {open
       xywh {5 5 315 260} box THIN_DOWN_BOX
@@ -924,7 +924,7 @@ DyneTK is based on the following GPL and LGPL licensed software:
  - FLTK: http://www.fltk.org/
  - libz, libpng, libjpeg
 
-Newton never dies, it just gets new tools.} selected
+Newton never dies, it just gets new tools.}
         xywh {10 100 305 160} labelsize 11 align 148
       }
     }

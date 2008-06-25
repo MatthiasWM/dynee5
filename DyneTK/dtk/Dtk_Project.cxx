@@ -1174,30 +1174,49 @@ int Dtk_Project::savePackage()
   return 0;
 }
 
-/* Prologue, predefined constants:
- home         The path name of the folder containing the open project file
- kAppName     The application name you specify through the Output section 
-              of the Application tab of the Settings dialog box
- kAppString		The application symbol, which you specify through the Output
-              section of the Application tab of the Settings dialog box 
-              stored as a string instead of as a symbol
- kAppSymbol		The application symbol you specify through the Output 
-              section of the Application tab of the Settings dialog box 
- kDebugOn     True if Compile for Debugging is checked in the Project 
-              tab of the Settings dialog box
- kIgnoreNativeKeyword	True if Ignore Native Keyword is checked in the 
-              Project tab of the Settings dialog box
- kPackageName	The package name you specify through the Package tab of 
-              the Settings dialog box
- kProfileOn		True if Compile for Profiling is checked in the Project 
-              tab of the Settings dialog box
- language     The Language string specified through the Project tab of 
-              the Settings dialog box
- layout_/filename/	A reference to the view hierarchy of the processed layout
-              file named filename
- streamFile_/filename/	A reference to the contents of a processed stream 
-              file named filename
- */
+int Dtk_Project::writeConstants(Dtk_Script_Writer &sw)
+{
+  char buf[1024];
+  // home         The path name of the folder containing the open project file
+  sprintf(buf, "home := \"%s\";\n", dos_pathname());
+  sw.put(buf);
+  // kAppName     The application name you specify through the Output section 
+  //              of the Application tab of the Settings dialog box
+  sprintf(buf, "kAppName := \"%s\";\n", dtkProjSettings->app->name->get());
+  sw.put(buf);
+  // kAppString		The application symbol, which you specify through the Output
+  //              section of the Application tab of the Settings dialog box 
+  //              stored as a string instead of as a symbol
+  sprintf(buf, "kAppString :=\"%s\";\n", dtkProjSettings->app->symbol->get());
+  sw.put(buf);
+  // kAppSymbol		The application symbol you specify through the Output 
+  //              section of the Application tab of the Settings dialog box 
+  sprintf(buf, "kAppSymbol :='%s;\n", dtkProjSettings->app->symbol->get());
+  sw.put(buf);
+  // kDebugOn     True if Compile for Debugging is checked in the Project 
+  //              tab of the Settings dialog box
+  //sprintf(buf, "kDebugOn := %s;\n", dtkProjectSettings->app->symbol->get());
+  sw.put("kDebugOn := true;\n"); // \todo FIXME: implement this
+  // kIgnoreNativeKeyword	True if Ignore Native Keyword is checked in the 
+  //              Project tab of the Settings dialog box
+  sw.put("kIgnoreNativeKeyword := true;\n"); // \todo FIXME: implement this
+  // kPackageName	The package name you specify through the Package tab of 
+  //              the Settings dialog box
+  sprintf(buf, "kPackageName :=\"%s\";\n", dtkProjSettings->package->name->get());
+  sw.put(buf);
+  // kProfileOn		True if Compile for Profiling is checked in the Project 
+  //              tab of the Settings dialog box
+  sw.put("kProfileOn := nil;\n");
+  // language     The Language string specified through the Project tab of 
+  //              the Settings dialog box
+  sw.put("language := \"English\";\n");
+  // \todo FIXME: print this after writing a layout file
+  // layout_/filename/	A reference to the view hierarchy of the processed layout
+  //              file named filename
+  // streamFile_/filename/	A reference to the contents of a processed stream 
+  //              file named filename
+  return 0;
+}
 
 /*---------------------------------------------------------------------------*/
 void Dtk_Project::close()
@@ -1230,6 +1249,8 @@ int Dtk_Project::write(Dtk_Script_Writer &sw)
   sw.put(buf);
   
   dtkPlatform->writeConstants(sw);
+  
+  this->writeConstants(sw);
   
   int i, n = documentList_->size();
   for (i=0; i<n; ++i) {
