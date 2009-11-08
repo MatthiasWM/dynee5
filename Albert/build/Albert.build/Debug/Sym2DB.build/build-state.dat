@@ -1,7 +1,7 @@
 TSym2DB
 v7
 r0
-t279384207.102483
+t279385797.097254
 cCheck dependencies
 cCompileC build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o /Users/matt/dev/Albert/tools/sym2db.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 cLd /Users/matt/dev/Albert/build/Debug/Sym2DB normal x86_64
@@ -37,22 +37,22 @@ t1247548583
 s22078
 
 N/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/Sym2DB.LinkFileList
-c000000004AF5EB2C000000000000005C
-t1257630508
+c000000004AF6DE99000000000000005C
+t1257692825
 s92
 
 N/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o
-t1257691407
-s20084
+t1257692996
+s20176
 
 N/Users/matt/dev/Albert/build/Debug/Sym2DB
-t1257691407
+t1257692997
 s16032
 
 N/Users/matt/dev/Albert/tools/sym2db.cpp
-c000000004AF6D90E0000000000001D0D
-t1257691406
-s7437
+c000000004AF6DF0E0000000000001D34
+t1257692942
+s7476
 i"sym2db.h"
 i<stdio.h>
 i<unistd.h>
@@ -61,17 +61,17 @@ i<ctype.h>
 i<stdlib.h>
 
 N/Users/matt/dev/Albert/tools/sym2db.h
-c000000004AF5EA6300000000000000BB
-t1257630307
+c000000004AF6DE9B00000000000000BB
+t1257692827
 s187
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies279384206#279384206#0(0"0(0#1#0"4300882208#0"0#
+lSLF07#2@18"Check dependencies279385795#279385795#0(0"0(0#1#0"4300882208#0"0#
 
 CCompileC build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o /Users/matt/dev/Albert/tools/sym2db.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s279384206.826906
-e279384207.062794
+s279385795.457254
+e279385796.421093
 r1
 xCompileC
 xbuild/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o
@@ -80,15 +80,15 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@47"Compile /Users/matt/dev/Albert/tools/sym2db.cpp279384206#279384207#0(0"0(0#0#39"/Users/matt/dev/Albert/tools/sym2db.cpp4300882208#1107"    cd /Users/matt/dev/Albert    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-generated-files.hmap -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-own-target-headers.hmap -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-all-target-headers.hmap -iquote /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-project-headers.hmap -F/Users/matt/dev/Albert/build/Debug -I/Users/matt/dev/Albert/build/Debug/include -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/DerivedSources/x86_64 -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/DerivedSources -c /Users/matt/dev/Albert/tools/sym2db.cpp -o /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o0#
+lSLF07#2@47"Compile /Users/matt/dev/Albert/tools/sym2db.cpp279385795#279385796#0(0"0(0#0#39"/Users/matt/dev/Albert/tools/sym2db.cpp8660259774160596992#1107"    cd /Users/matt/dev/Albert    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-generated-files.hmap -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-own-target-headers.hmap -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-all-target-headers.hmap -iquote /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-project-headers.hmap -F/Users/matt/dev/Albert/build/Debug -I/Users/matt/dev/Albert/build/Debug/include -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/DerivedSources/x86_64 -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/DerivedSources -c /Users/matt/dev/Albert/tools/sym2db.cpp -o /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o0#
 
 CLd /Users/matt/dev/Albert/build/Debug/Sym2DB normal x86_64
-s279384207.062928
-e279384207.102427
+s279385796.421221
+e279385797.097029
 r1
 xLd
 x/Users/matt/dev/Albert/build/Debug/Sym2DB
 xnormal
 xx86_64
-lSLF07#2@46"Link /Users/matt/dev/Albert/build/Debug/Sym2DB279384207#279384207#0(0"0(0#0#0"4300882208#414"    cd /Users/matt/dev/Albert    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/matt/dev/Albert/build/Debug -F/Users/matt/dev/Albert/build/Debug -filelist /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/Sym2DB.LinkFileList -mmacosx-version-min=10.6 -o /Users/matt/dev/Albert/build/Debug/Sym2DB0#
+lSLF07#2@46"Link /Users/matt/dev/Albert/build/Debug/Sym2DB279385796#279385797#0(0"0(0#0#0"4300882208#414"    cd /Users/matt/dev/Albert    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/matt/dev/Albert/build/Debug -F/Users/matt/dev/Albert/build/Debug -filelist /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/Sym2DB.LinkFileList -mmacosx-version-min=10.6 -o /Users/matt/dev/Albert/build/Debug/Sym2DB0#
 

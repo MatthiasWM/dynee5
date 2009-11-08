@@ -1,6300 +1,7435 @@
+#
+# This file describes the class tree of the Apple Newton 717006 ROM
+#
+# Please note that all disassembly is done purely for research and to fix
+# bugs in the no longer supprted OS
+#
+
 begin class
+  # analysed ctor
   sym TADC
-  size FIXME
   base FIXME
+  size 372
+  datac FIXME
+  data 24 word
+  data 32 word
+  data 36 word
+  data 40 word
+  data 44 word
+  data 52 word
+  data 56 byte
+  data 57 byte
+  data 58 byte
+  data 59 byte
+  data 68 word
+  data 72 word
 end
 
 begin class
+  # analysed ::sizeof() and ::new()
   sym TADSPEndpoint
-  size FIXME
   base FIXME
+  size 48
+  datac FIXME
+  data 16 word
+  data 20 word
+  data 28 word
+  data 33 byte
+  data 36 word
 end
 
 begin class
+  # analysed ctor
   sym TADSPSendRequest
-  size FIXME
   base FIXME
+  size 72
+  datac FIXME
+  data 0 word
+  data 4 TSndCompleteEvent
 end
 
 begin class
+  # analysed ctor
   sym TADSPRecvRequest
-  size FIXME
   base FIXME
+  size 80
+  datac FIXME
+  data 0 word
+  data 4 TRcvCompleteEvent
 end
 
 begin class
+  # analysed ctor
   sym TADSPEndpointChunk
-  size FIXME
   base FIXME
+  size 556
+  datac FIXME
+  data 0 word
+  data 4 word
+  data 8 word
+  data 12 byte
+  data 16 word
+  data 20 word
+  data 24 TAddress
+  data 36 CList
+  data 60 CList
+  data 84 word 
+  data 88 CList
+  data 112 CList
+  data 136 word 
+  data 140 CList
+  data 164 byte
+  data 168 word
+  data 84 word 
+  data 172 byte
+  data 181 byte
+  data 182 byte
+  data 183 byte
+  data 184 byte
+  data 185 byte
+  data 186 byte
+  data 187 byte
+  data 188 byte
+  data 189 byte
+  data 320 TUAsyncMessage
+  data 336 TAEvent
+  data 336 word
+  data 340 word
+  data 344 word
+  data 348 word
+  data 352 word
+  data 360 TUAsyncMessage
+  data 376 TADSPSendBuffer
+  data 472 TADSPRecvBuffer
 end
 
 begin class
+  # analysed ctor
   sym TAEP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIdleTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAEHandlerComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAEHandlerIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSystemEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAEIdleTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAESystemEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPowerEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAEventComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATASimple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATPHeader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTransactionResponseBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATPInterface
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTransaction
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTransactionResponses
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTransactionManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAddress
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAirusIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAlertItem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAlertDialog
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOSErrorAlertDialog
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TErasePersistentDataAlert
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAlertGlyph
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAlertEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAlertEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAlertManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNoReuseAllocator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THeapAllocator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAppWorld
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAppWorldState
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATAsyncMsg
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAppleTalkStack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAppleTalkWorld
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOAppleTalkLink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSystemName
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOAppleTalkPart
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOAppleTalkBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAppleTalkService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PAppleTalkStack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TApplication
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TArithmeticCompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TArithmeticDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CArrayIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAsyncDebugLink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAsyncEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAsyncSerTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAsyncService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBankControlRegister
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CBaseRingBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBeamer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBeamerCallback
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPixelObj
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBits
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBitsPort
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym DragBits
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAnimate
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CBufferList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CBufferPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CBufferSegment
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCHDeviceInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCHMemModem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAsyncServiceMessage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPEOMTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPRequestIdTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPAbortTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPReadMessage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPNewtonIdTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPWriteMessage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPDeviceIdTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPServiceInfoRequestTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPServiceInfoResponseTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPRequestServiceTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCPChangeSpeedRequestTuple
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCRC16
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCRelocationGenerator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSimpleCRelocator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardATALoader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATAPartitionInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATABootParamBlock
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardAlertDialog
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardAlertEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardReinsertAlertDialog
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardAsyncMsg
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNewCardAsyncMsg
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardCISIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPCMCIA20Parser
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardDomains
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardSystemEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardProcessorEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardMessage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardDevice
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardPackage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardLongLink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardFunction
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardPCMCIA
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardConfiguration
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardPartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardSocketState
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardProcessor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardSocket
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCircleBuf
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PCirrusBatteryDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PCirrusSoundDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TResistiveTablet
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TProtocol
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClassInfoRegistryImpl
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClassInfoComparator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClassInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClassOneModemCmdReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClassOneModem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClipper
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMARouteAddress
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMAPhoneNumber
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMAAppleTalkAddr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMANamedAppleTalkAddr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TScriptEndpointClient
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMSCPAsyncMessage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMWorld
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStartInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TServiceInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMSystemEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOEndpointName
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTransportInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOServiceIdentifier
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolAEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOIdleTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOListenTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOCTConnectInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOToolSpecificOptions
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOPassiveClaim
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOPassiveState
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolProtocol
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolControlRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolConnectReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolDisconnectRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolBindRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolBindReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolOptionMgmtRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolGetProtAddrRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolGetEventReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolKillRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolStatusRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolResArbRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolMsgContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolOptionInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolPutRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolPutReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolGetRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolGetReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolOpenRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolOpenReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolConnectRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SCompactState
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCompletion
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCompletionClass
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TConnectionEnd
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TContainerView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TContainerHilite
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
+  file Frames/objects
   sym RefVar
-  size FIXME
-  base FIXME
+  size 4
+  datac 1
+  data RefHandle */h
 end
 
 begin class
   sym RefStruct
+  base RefVar
   size FIXME
-  base FIXME
+  datac 0
 end
 
 begin class
   sym TSocketComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSocket
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDDP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATSocket
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDMAManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDTMFCodec
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDate
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDelayTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDictPartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEzPipeProtocol
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDockerDynArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDocker
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCursorArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDoubleQItem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDoubleQContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClipboard
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDragInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCurrentBank
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CDynamicArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEditView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDataView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEndpoint
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEndpointClient
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEndpointEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEndpointEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEndpointTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSndCompleteEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRcvCompleteEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBindCompleteEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDefaultEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDisconnectEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGetProtAddrCompleteEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOptMgmtCompleteEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TConnectCompleteEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEndpointPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEnvironment
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TKDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMemArchManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEzEndpointPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFIQTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFaxTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxPageSetUp
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxPassThru
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxEnableProgressEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxDirection
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxSessionInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxRemoteId
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxLocalId
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxMinScanLineTime
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxStartPage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxConfigSendBand
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFaxEndMessage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFaxService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFaxToolInterface
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashAMD
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashBlock
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashStore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashPhysBlock
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym T32BitFlashRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym T16BitFlashRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym T8BitFlashRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashSeries2
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SFlashStoreLookupCacheEntry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashStoreLookupCache
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SFlashLogEntry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SDirEnt
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashTracker
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PFlattenPtr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PFlattenRef
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TForkWorld
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFormPartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAutoScriptPartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym MemoryPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CMPExportListNameComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CMPImportListSourceComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CMPImportListSourceTester
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PkgPendingImport
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym RExPendingImport
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFramePartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CMPExportListSourceComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFrameRelocationGenerator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFrameSoundCallback
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFrameSoundChannel
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFramedAsyncSerTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFramedAsyncService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGCSafeList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGCSafeSortedList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGSMCodec
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGeoPortDebugLink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TInkWordGlyph
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGrayShrink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUConfigServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THMOSerialVoyagerHardware
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THMOHiSpeedClockOption
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THMOGeoPortDebugConfig
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THMOSerDebugConfig
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THMOSerIRLinkConfig
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THMOSerialPCMCIAHardware
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PHammerInTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PHammerOutTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIMACodec
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym IRProbeService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIRQTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIRService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym IRSniffService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TInputStream
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStdioInputStream
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStringInputStream
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TICHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrCRC16
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrDAService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrDATool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrDscInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrGlue
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIASClient
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIASServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIASService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIASClass
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIASAttribute
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIASNamedList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIASElement
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrLAP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrLAPConn
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrLAPPutBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrLMP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLSAPConn
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrProbeTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrQOS
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrSIR
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIrStream
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CItemComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CItemTester
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym JournalReplayHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TKeyboardService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TKeyboardTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRawKeyIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TVisKeyIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TKeyboardView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLinkComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLinkMgr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TProtoComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLinkPacketBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TProtocolHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLZCompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLZCallbackCompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLZDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym LBData
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLOPackageStore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLOCallback
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLaserWriterLSDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLSEndpointClient
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLibrarian
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBookPartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CPackageArchivalPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym LineLoop
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
+  # from C++ include files
+  # no members except CDynamicArray
+  file UtilityClasses/List
   sym CList
-  size FIXME
-  base FIXME
+  base CDynamicArray
+  size 24
+  datac 0
 end
 
 begin class
   sym CListIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TListView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLiveInker
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLoader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLocalTalkTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PLocalTalkLink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLocalTalkService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPLookup
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPLookupManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXmitBufDscrptr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMNP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOMNPCompression
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOMNPAllocate
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOMNPDataRate
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOMNPSpeedNegotiation
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOMNPStatistics
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOMNPDebugConnect
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMNPService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMNP_CCB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMathExpView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMathOpView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMathLineView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CMemObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym MemObjManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym DomainInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym EnvironmentInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PersistentDBEntry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMemoryObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRAMTable
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMessageTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CMinBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemECType
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemConnectSpeed
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemPrefs_Ver_1
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemPrefs
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemProfile
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemFaxCapabilities
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemFaxEnabledCaps
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemFaxClassesSupported
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemFaxClass
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemFaxClass1Cap
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemVoiceSupport
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemConnectType
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOModemDialing
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TModemService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMonitor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMonthView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMuLawCodec
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMuxStore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMuxStoreMonitor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TConnectionEndEntry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMuxTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym NArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPHeader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPEntityName
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPLookupEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPRetryInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLookupRetryInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLookupNames
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRegisterName
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPName
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPReplyBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPReplyItem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTupleEquiv
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPString
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPZoneString
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPTupleHeader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym NBlockComparator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym NComparator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym NIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym NSortedArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TREPEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PNTKInTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PNTKOutTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNTKNub
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TKillEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TKillEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNTKTask
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNTKEndpointClient
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPNameEntry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNBPNameTable
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRegisterPending
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectNameList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TResArbitrationInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TResOwnerInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRPCInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNameServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUNameServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNameServerRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym EventMasterListItem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SysEventItemComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SysEventTester
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNameRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSystemEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSendSystemEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSysEventRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUGestalt
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGestaltRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TResArbitrationRequest
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNameServerReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNewScriptEndpointClient
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStreamingEndpointClient
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStreamingCallBack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommPartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNSConfigServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNewInternalFlash
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TULockingSemaphoreGrabber
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TListLoop
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBackwardLoop
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TxObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TScrubRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEventRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClickRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWRecRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TShapeRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym StrokeCentral
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStrokePublic
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TARMNotebook
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNotebook
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PNullInTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PNullOutTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CNullPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNumberParser
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjRef
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOnlineService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOption
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOptionIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSubArrayOption
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOptionArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOptionExtended
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym POptionDataIn
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym POptionDataOut
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOutline
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THelpOutline
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TP3OPassThru
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TP3Service
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TP3Packet
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TP3Tool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPAP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPAPInterface
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPAPTimer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPAPOpenConnPacket
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PCECallBackWrapper
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPCommTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PMuxCallBackWrapper
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PMuxServiceStarter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPSSManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPSSEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPSSSysEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SPSSStoreInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SPSSSlotInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPSPrinter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPMIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkBaseEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkRegisterEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkPartRemoveEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkSafeToDeactivate
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkUnregisterEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkBeginLoadEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkRemoveEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkBackupEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkPartInstallEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPkPartInstallEventReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPackageIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPackageLoader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CValidateBackupPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRegistryInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPackageBlock
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TInstalledPart
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPackageManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPackageEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CPackagePipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPackageStorePartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPackageStore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PackageRoot
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym LargeObjectRoot
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPacketBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPageManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUPageManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUPageManagerMonitor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPageTableManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWordRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TParagraphView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TParagraphHilite
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPartHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPartEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPipeApp
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CPartPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPackageLoaderEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPipeEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPipeEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPhys
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLittlePhys
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPickView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPictureView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGaugeView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPinPad
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PipeCallBack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPixelMapCompander
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPolygonView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PolygonShape
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPolygonHilite
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPort
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPowerManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPowerEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPrintView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPrDriverPart
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPrivatePackageIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUnblockEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPseudoSyncState
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CPtrPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TQDLibraryDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TQDScaler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTransform
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRect
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPoint
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRegionVar
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRegionStruct
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRegion
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRectangularRegion
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPattern
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStyleSave
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SaveLevel
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRTMPComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRTMP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRTMPTableEntry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym RealTimeAlarm
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRealTimeClock
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TURealTimeAlarm
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRecognitionManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRecognizerList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CRefPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRefStack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIntrpStack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRefStructStack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRemoteView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TReservedBlockHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym OSCalibrationParameters
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TReservedBlockAccessor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SReservedObjectHeader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TResponder
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFilter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TResponderSocket
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATPResponder
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATPRequestor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TResponseManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRichString
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CRingBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CRingPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TROMDomainManager1K
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym RDMParams
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym LOTransactionHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRootView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRosRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerToolReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSCPLoaderEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSCPLoader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SSafeHeapPage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SWiredHeapPage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SSafeHeapBlock
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SWiredHeapDescr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSaveScreenBits
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSliderView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMeetingView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TScheduler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PScriptDataIn
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PScriptDataOut
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSemaphore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSemaphoreGroup
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSemaphoreOpList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerialChip16450
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PTheSerChipRegistry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THermesIRControl
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerialChipVoyager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerialDMAEngine
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerialEndpoint
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolDisconnectPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolConnectPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolOptMgmtPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolEventPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolAbortPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolPutPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolGetPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolControlPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommToolBindPB
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PSerialInTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerialNumberROM
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialHWChipLoc
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialChipSpec
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialDiscard
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialMiscConfig
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOBreakFraming
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialDTRControl
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOPCMCIAModemSound
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialEventEnables
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialIOStats
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFlowControlParms
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOInputFlowControlParms
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOOutputFlowControlParms
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialCircuitControl
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFramingParms
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOFramedAsyncStats
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOKeyboardConfig
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOLocalTalkStats
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOLocalTalkNodeID
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOLocalTalkMiscConfig
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSlowIRProtocolType
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSlowIRStats
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSlowIRSniff
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSlowIRBitBang
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialHardware
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSlowIRConnect
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOIrDADiscovery
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOIrDAReceiveBuffers
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOIrDALinkDisconnect
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOIrDAConnectionInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOIrDAConnectUserData
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOIrDAConnectAttrName
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialBuffers
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialIOParms
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialBitRate
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialBreak
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialHalfDuplex
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOSerialBytesAvailable
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PSerialOutTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CShadowBufferSegment
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CShadowRingBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSharedMem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSharedMemMsg
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSharpIRTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSingleQContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSniffIRTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CSortedList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSoundChannel
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDMAChannel
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCodecChannel
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PSoundDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSoundServerHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSoundServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSoundPowerHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStackInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStackManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THeapDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStackObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStackPage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PStdioInTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PStdioOutTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CStdioPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLZStoreDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLZRelocStoreDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSimpleRelocStoreDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLZStoreCompander
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSimpleStoreCompander
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreCompanderWrapper
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSimpleStoreDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TZippyRelocStoreDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TZippyStoreDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStorePackageWriter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PStreamInRef
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PStreamOutRef
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym T28F016_SA_SVDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TT4FaxLine
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TADSPConnection
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPIHold
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPIUnhold
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPISpeaker
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOHandsetManagement
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPIOutGoing
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPIAnswer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPIDisconnect
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPIForward
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPIForwardClear
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPITransfer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPISendDigit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMOTAPIService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAgentReporter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TArbiter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCommServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TController
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDictChain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDotPrinter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEdgeListDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEdgeListUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFaxDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFaxDriverData
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGeneralShapeDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGeneralShapeUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TInkerEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TInker
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBusyBox
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMsg
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPSPAPDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPrinter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRecArea
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAreaList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRecObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSIUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSWGroupDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClickUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClickEventUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStdWordUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStrXrDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStrXrUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStrokeDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStrokeUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStroke
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSStroke
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym MemBufferPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTestAgent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TMessageQueue
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TtstpPart
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTestAgentEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNewtTestScriptEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TtspsPart
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTestCommandQueue
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTestStoreFileList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTestCaseTask
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTestCaseTaskEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTestReporter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTrend
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTypeAssoc
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTypeList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUnitList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUnitPublic
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TVRemoteIRTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TVRemoteService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWordList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXAdvancedRuler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXTabsArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXLongTagArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRanges
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXAttrObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXAttrValues
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXChars
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXChunkedChars
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXTextDescriptor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXCommand
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXEditCommand
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXKeyCommand
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXMoveTextCommand
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXReplaceTextCommand
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXLongRect
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXOffset
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXOffsetRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXTempReferences
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXTempRegions
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXPointingDevice
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXVirtualObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXContainerImportInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXStdContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXLocalContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXPrivateContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRegisteredObjects
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXTempLines
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXDisplay
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXFormatter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXLinesHeights
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXFormatReflowLines
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXFrameFormatter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXMonoFrameFormatter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXFramesEditInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXSectFrames
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXFrames
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXMonoSizeFrames
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXMonoFrame
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXDisplayChanges
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXGraphicsRun
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXHilite
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXLine
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtGraphicsRun
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXBinaryStream
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXBinaryChars
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXVBOChars
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtStreamFactory
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtTextRun
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtFontFamilyInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXObjectRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXObjectIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXPageFrames
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXMultiFrameFormatter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXPageFormatter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXParagCtrlChars
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRuler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRulerRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRulerUI
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRulerBar
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRulerIconsBar
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRulerTabsBar
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRulerBitMapCluster
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXLineSpacingCluster
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXBasicRuler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXTab
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRunRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRun
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXStream
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXHandleStream
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXTempStreamFactory
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXStyledText
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtPasteCommand
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtDisplay
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtRulerUI
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtHilite
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtPageFrames
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXNewtPen
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXRulerPixMaps
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXrWordDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXrWordUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTaskContainer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CTaskPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTaskSafeRingBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTaskSafeRingPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTask
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTextView
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXHandlers
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym Textension
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXReplaceParams
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTile
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTimerElement
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTimerQueue
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTimerPort
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTimerEngine
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUCTTable
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PUnFlattenPtr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PUnFlattenRef
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUnicodeCompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUnicodeDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStringToSort
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSortingTable
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSortTables
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUserAbortHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUDomainManager
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUEnvironment
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUMonitor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUObject
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUPhys
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUMsgToken
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUAsyncMessage
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUPort
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUSemaphoreOpList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUSemaphoreGroup
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TULockingSemaphore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TURdWrSemaphore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUSharedMem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUSharedMemMsg
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUSoundChannel
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUSoundCallback
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUSoundCallbackProc
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUTaskWorld
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUTask
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLicenseeVAddress
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDynArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRing
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGetRouterAddressReply
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TString255
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TString32
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TIDServer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPageTracker
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TExtPageTrackerMgr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TExtPageTracker
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBackwardViewListLoop
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THilite
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym HiliteLoop
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBIOInterface
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGPIOInterface
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TVoyagerMiscIntfImpl
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TVoyagerPlatform
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWRecDomain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWRecognizer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TRecUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWRecUnit
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWriteElement
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSharedWriteElement
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWriteChain
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym XIPParameterBlock
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXIPPackageStore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXIPStorePackageWriter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXIPCRelocationGenerator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXIPCRelocator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXIPPackageIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CXIPObjectPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TXIPStoreCompander
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TZIPInterface
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TZoneNameComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TZoneList
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TZippyCompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TZippyCallbackCompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TZippyDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TConnComparer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TADSP
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TADSPBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TADSPSendBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TADSPRecvBuffer
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCompiler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLoopState
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFunctionState
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CursorSoupInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCursor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCollectCursor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TagsBits
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNSDebugAPI
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TInterpreter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEWorldClient
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym CMemoryPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEphemeralTracker
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym THistoryCollector
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TEventCollector
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym StoreObjectHeader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreWritePipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreReadPipe
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreObjectWriter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TWordHintsHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreObjectReader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjTextDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TOldWordHintsHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFontPart
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectHeap
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym DeclawingRange
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym ThpPCL
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SKey
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSoupIndex
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym UnionIndexData
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TAbstractSoupIndex
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TUnionSoupIndex
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNodeCache
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TICache
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TExternalNewtEventListTypeTester
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TExternalNewtEventListHandlerTester
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNewtEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSCPEvent
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNewtCardEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TNewtWorld
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym SBankInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TGeneralizedTestFnVar
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectTable
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectTableIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectPtr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectIterator
-  size FIXME
-  base FIXME
+  base SingleObject
+  size 48
+  datac FIXME
+  data 4 RefStruct/fTag
+  data 8 RefStruct/fValue
+  data 12 RefStruct/fObj
+  #data 3 int/fIncludeSiblings
+  #data 4 long/fIndex
+  #data 5 long/fLength
+  data 28 RefStruct/fMapRef// NILREF indicates an Array iterator
+  data 32 word
+  data 40 word
+  data 44 word
 end
 
 begin class
   sym DataPtr
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym Pushpopper
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreHashTable
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreHashTableIterator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreWrapper
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCachedReadStore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TBucketArray
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPrecedentsForWriting
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPrecedentsForReading
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectWriter
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPrecedentsVar
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TObjectReader
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTaskQItem
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTaskQueue
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTime
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TReservedContiguousMemory
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCMService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PConnectionEnd
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PMuxCallBack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PMuxService
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PMuxTool
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PCECallBack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TKybdExtension
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlashDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerialChip
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PSerialChipRegistry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSerialDebugLink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PLink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PATStack
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TVersionString
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSplashScreenInfo
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TExternalNewtEventHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTabletDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PBatteryDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TClassInfoRegistry
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStartupDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TATA
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCardHandler
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TFlash
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreMonitor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TStoreCompander
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TLrgObjStore
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TValidatePackageDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPlatformDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDotPrinterDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPSPrinterDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TScreenDriver
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TPixelMapAntialias
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TSoundCodec
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TTestCase
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCallbackCompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym TCallbackDecompressor
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PInTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym POutTranslator
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PFrameSource
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 
 begin class
   sym PFrameSink
-  size FIXME
   base FIXME
+  size FIXME
+  datac FIXME
 end
 

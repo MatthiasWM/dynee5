@@ -1,0 +1,281 @@
+#
+# This file describes the source file hierarchy of the Apple Newton 717006 ROM
+#
+# Please note that all disassembly is done purely for research and to fix
+# bugs in the no longer supprted OS
+#
+
+begin file
+  name Newton
+end
+
+begin file
+  name NewtonDebug
+end
+
+begin file
+  name NewtonErrors
+end
+
+begin file
+  name NewtonExceptions
+end
+
+begin c_file
+  name NewtonMemory
+  h_include NewtonTypes
+  hdr typedef long Size;
+  // memory debugging types, from KernelTypes.h
+  hdr typedef unsigned char HeapBlockType;
+  // Opaque memory manager types
+  hdr typedef void *Heap;
+  hdr #define DisposeHandle DisposHandle
+  hdr #define DisposePtr    DisposPtr
+end
+
+begin file
+  name NewtonTypes
+  h_include ConfigGlobal
+  hdr class SingleObject { };
+end
+
+begin file
+  name NewtonWidgets
+end
+
+begin file
+  path CLibrary
+  name ctype
+end
+
+begin file
+  path CLibrary
+  name fenv
+end
+
+begin file
+  path CLibrary
+  name fp
+end
+
+begin file
+  path CLibrary
+  name limits
+end
+
+begin file
+  path CLibrary
+  name new
+end
+
+begin file
+  path CLibrary
+  name stdarg
+end
+
+begin file
+  path CLibrary
+  name stddef
+end
+
+begin file
+  path CLibrary
+  name stdio
+end
+
+begin file
+  path CLibrary
+  name stdlib
+end
+
+begin file
+  path CLibrary
+  name string
+end
+
+begin file
+  path CLibrary
+  name time
+end
+
+begin file
+  path Frames
+  name NewtonScript
+end
+
+begin file
+  path Frames
+  name Objects
+end
+
+begin file
+  path Utilities
+  name Unicode
+end
+
+begin file
+  path Utilities
+  name UStringUtils
+end
+
+begin file
+  path Frames
+  name objects
+  h_include ConfigFrames
+  h_include Newton
+  h_include OSErrors
+  hdr typedef long Ref;
+end
+
+/*
+ConfigGlobal.h
+HammerConfigBits.h
+NewtConfig.h
+NewtErrors.h
+NewtTypes.h
+Newton.h
+NewtonDebug.h
+NewtonExceptions.h
+NewtonMemory.h
+NewtonTime.h
+NewtonTypes.h
+NewtonWidgets.h
+historyCollectorMACRO.h
+
+data/DDKIncludes//Bootstrap:
+Hardware.h
+MemoryLanes.h
+
+data/DDKIncludes//CLibrary:
+New.h
+limits.h
+setjmp.h
+stdarg.h
+stddef.h
+stdio.h
+stdlib.h
+string.h
+
+data/DDKIncludes//CommAPI:
+CMService.h
+CommAddresses.h
+CommManagerInterface.h
+CommOptions.h
+CommServices.h
+Endpoint.h
+OptionArray.h
+Transport.h
+UserAbort.h
+
+data/DDKIncludes//Communications:
+CommErrors.h
+CommTool.h
+CommToolOptions.h
+CommToolProtocol.h
+CommToolProtocolV2.h
+ConfigCommunications.h
+MNPOptions.h
+PCECallBack.h
+PConnectionEnd.h
+PMuxCallBack.h
+PMuxService.h
+PMuxTool.h
+SerialOptions.h
+
+data/DDKIncludes//Frames:
+ConfigFrames.h
+// objects.h
+
+data/DDKIncludes//HAL:
+DelayTimer.h
+HALOptions.h
+RegisterRdWr.h
+SerialChip.h
+SerialChipRegistry.h
+SerialChipV2.h
+
+data/DDKIncludes//Lantern:
+LanternErrors.h
+LanternEvents.h
+LanternNS.f.h
+LanternNSEvents.f.h
+LanternTypes.h
+
+data/DDKIncludes//OS600:
+ConfigOS600.h
+HammerIO.h
+KernelTypes.h
+LongTime.h
+NameServer.h
+NewtonGestalt.h
+OSErrors.h
+Protocols.h
+ROMExtension.h
+SharedTypes.h
+SingleQ.h
+SystemEvents.h
+UserDomain.h
+UserGlobals.h
+UserMonitor.h
+UserObjects.h
+UserPhys.h
+UserPorts.h
+UserSemaphore.h
+UserSharedMem.h
+UserTasks.h
+VirtualMemory.h
+
+data/DDKIncludes//PCMCIA:
+CardDefines.h
+CardHandler.h
+CardPCMCIA.h
+CardSocket.h
+ConfigPCMCIA.h
+
+data/DDKIncludes//PSS:
+CompactState.h
+StoreDriver.h
+
+data/DDKIncludes//Packages:
+PackageTypes.h
+PartHandler.h
+
+data/DDKIncludes//Power:
+CardPower.h
+
+data/DDKIncludes//Printing:
+ConfigPrinting.h
+DotDrivers.h
+DriverCallbacks.h
+PrintErrors.h
+PrintTypes.h
+
+data/DDKIncludes//QD:
+ConfigQD.h
+NewtQD.h
+
+data/DDKIncludes//Toolbox:
+CompMath.h
+ConfigToolbox.h
+FixedMath.h
+NewtMemory.h
+
+data/DDKIncludes//UtilityClasses:
+AEventHandler.h
+AEvents.h
+ArrayIterator.h
+BufferList.h
+BufferSegment.h
+DebugMacros.h
+DynamicArray.h
+ItemComparer.h
+ItemTester.h
+List.h
+ListIterator.h
+MemObject.h
+TimerQueue.h
+TraceEvents.h
+UCErrors.h
+*/
+
+

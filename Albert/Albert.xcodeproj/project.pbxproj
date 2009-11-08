@@ -30,6 +30,9 @@
 		C9B3E21710A621940046C469 /* Sym2DB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sym2DB; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B3E21B10A621BE0046C469 /* sym2db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sym2db.h; path = tools/sym2db.h; sourceTree = "<group>"; };
 		C9B3E21C10A621BE0046C469 /* sym2db.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sym2db.cpp; path = tools/sym2db.cpp; sourceTree = "<group>"; };
+		C9B3E33310A716FF0046C469 /* classes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = classes.txt; sourceTree = "<group>"; };
+		C9B3E33410A716FF0046C469 /* symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = symbols.txt; sourceTree = "<group>"; };
+		C9B76BCB10A7314C004F9679 /* files.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = files.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +56,7 @@
 		08FB7794FE84155DC02AAC07 /* Albert */ = {
 			isa = PBXGroup;
 			children = (
+				C9B3E33210A716E10046C469 /* Database */,
 				08FB7795FE84155DC02AAC07 /* Tools */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -84,6 +88,16 @@
 				C6859E8B029090EE04C91782 /* Albert.1 */,
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		C9B3E33210A716E10046C469 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				C9B3E33310A716FF0046C469 /* classes.txt */,
+				C9B3E33410A716FF0046C469 /* symbols.txt */,
+				C9B76BCB10A7314C004F9679 /* files.txt */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
