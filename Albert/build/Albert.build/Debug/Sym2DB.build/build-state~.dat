@@ -1,0 +1,62 @@
+TSym2DB
+v7
+r0
+t279323308.437278
+cCheck dependencies
+cCompileC build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o /Users/matt/dev/Albert/tools/sym2db.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004A769DAB00000000000000EE
+t1249287595
+s238
+
+N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdio.h
+c000000004A5C14A70000000000004174
+t1247548583
+s16756
+
+N/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/Sym2DB.LinkFileList
+c000000004AF5EB2C000000000000005C
+t1257630508
+s92
+
+N/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o
+t2
+s0
+
+N/Users/matt/dev/Albert/build/Debug/Sym2DB
+t2
+s0
+
+N/Users/matt/dev/Albert/tools/sym2db.cpp
+c000000004AF5EB2B0000000000000180
+t1257630507
+s384
+i"sym2db.h"
+i<stdio.h>
+
+N/Users/matt/dev/Albert/tools/sym2db.h
+c000000004AF5EA6300000000000000BB
+t1257630307
+s187
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies279323308#279323308#0(0"0(0#1#0"7947009927035180032#0"0#
+
+CCompileC build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o /Users/matt/dev/Albert/tools/sym2db.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s279323308.361369
+e279323308.437212
+r0
+xCompileC
+xbuild/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o
+x/Users/matt/dev/Albert/tools/sym2db.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@47"Compile /Users/matt/dev/Albert/tools/sym2db.cpp279323308#279323308#0(169"/Users/matt/dev/Albert/tools/sym2db.cpp: In function 'int main(int, char**)':/Users/matt/dev/Albert/tools/sym2db.cpp:23: error: 'getcwd' was not declared in this scope1(4@39"'getcwd' was not declared in this scope279323308#78#91#0(6@39"/Users/matt/dev/Albert/tools/sym2db.cpp279323307#23#0#23#0#34"'*' was not declared in this scope0(0#0#39"/Users/matt/dev/Albert/tools/sym2db.cpp4300882208#1107"    cd /Users/matt/dev/Albert    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-generated-files.hmap -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-own-target-headers.hmap -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-all-target-headers.hmap -iquote /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Sym2DB-project-headers.hmap -F/Users/matt/dev/Albert/build/Debug -I/Users/matt/dev/Albert/build/Debug/include -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/DerivedSources/x86_64 -I/Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/DerivedSources -c /Users/matt/dev/Albert/tools/sym2db.cpp -o /Users/matt/dev/Albert/build/Albert.build/Debug/Sym2DB.build/Objects-normal/x86_64/sym2db.o1#
+
+CLd /Users/matt/dev/Albert/build/Debug/Sym2DB normal x86_64
+r0
+

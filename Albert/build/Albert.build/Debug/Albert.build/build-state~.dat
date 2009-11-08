@@ -1,0 +1,59 @@
+TAlbert
+v7
+r0
+t279322423.609677
+cCheck dependencies
+cCompileC build/Albert.build/Debug/Albert.build/Objects-normal/x86_64/main.o /Users/matt/dev/Albert/main.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cLd /Users/matt/dev/Albert/build/Debug/Albert normal x86_64
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004A769DAB00000000000000EE
+t1249287595
+s238
+
+N/Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/Objects-normal/x86_64/Albert.LinkFileList
+c000000004AF5E7B4000000000000005A
+t1257629620
+s90
+
+N/Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/Objects-normal/x86_64/main.o
+t1257629622
+s89732
+
+N/Users/matt/dev/Albert/build/Debug/Albert
+t1257629623
+s28816
+
+N/Users/matt/dev/Albert/main.cpp
+c000000004AF5E785000000000000008F
+t1257629573
+s143
+i<iostream>
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies279322420#279322420#0(0"0(0#1#0"7947009927035180032#0"0#
+
+CCompileC build/Albert.build/Debug/Albert.build/Objects-normal/x86_64/main.o /Users/matt/dev/Albert/main.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s279322420.411903
+e279322422.046446
+r1
+xCompileC
+xbuild/Albert.build/Debug/Albert.build/Objects-normal/x86_64/main.o
+x/Users/matt/dev/Albert/main.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@39"Compile /Users/matt/dev/Albert/main.cpp279322420#279322422#0(0"0(0#0#31"/Users/matt/dev/Albert/main.cpp8660259774160596992#1144"    cd /Users/matt/dev/Albert    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D_GLIBCXX_DEBUG=1 -D_GLIBCXX_DEBUG_PEDANTIC=1 -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/Albert-generated-files.hmap -I/Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/Albert-own-target-headers.hmap -I/Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/Albert-all-target-headers.hmap -iquote /Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/Albert-project-headers.hmap -F/Users/matt/dev/Albert/build/Debug -I/Users/matt/dev/Albert/build/Debug/include -I/Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/DerivedSources/x86_64 -I/Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/DerivedSources -c /Users/matt/dev/Albert/main.cpp -o /Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/Objects-normal/x86_64/main.o0#
+
+CLd /Users/matt/dev/Albert/build/Debug/Albert normal x86_64
+s279322422.046689
+e279322423.609566
+r1
+xLd
+x/Users/matt/dev/Albert/build/Debug/Albert
+xnormal
+xx86_64
+lSLF07#2@46"Link /Users/matt/dev/Albert/build/Debug/Albert279322422#279322423#0(0"0(0#0#0"32088581143134316#414"    cd /Users/matt/dev/Albert    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/g++-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/matt/dev/Albert/build/Debug -F/Users/matt/dev/Albert/build/Debug -filelist /Users/matt/dev/Albert/build/Albert.build/Debug/Albert.build/Objects-normal/x86_64/Albert.LinkFileList -mmacosx-version-min=10.6 -o /Users/matt/dev/Albert/build/Debug/Albert0#
+
