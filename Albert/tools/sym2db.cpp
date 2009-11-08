@@ -81,8 +81,9 @@ public:
     for (i=0; i<pn; i++) {
       fprintf(out, "begin class\n");
       fprintf(out, "  sym %s\n", pKlass[i]->pName);
-      fprintf(out, "  size FIXME\n");
       fprintf(out, "  base FIXME\n");
+      fprintf(out, "  size FIXME\n");
+      fprintf(out, "  datac FIXME\n");
       fprintf(out, "end\n\n");
     }
   }

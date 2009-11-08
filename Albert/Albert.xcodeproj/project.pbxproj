@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		8DD76F6C0486A84900D96B5E /* Albert */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Albert; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* Albert.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Albert.1; sourceTree = "<group>"; };
-		C9B3E21710A621940046C469 /* Sym2DB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = Sym2DB; path = build/Debug/Sym2DB; sourceTree = "<group>"; };
+		C9B3E21710A621940046C469 /* Sym2DB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sym2DB; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B3E21B10A621BE0046C469 /* sym2db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sym2db.h; path = tools/sym2db.h; sourceTree = "<group>"; };
 		C9B3E21C10A621BE0046C469 /* sym2db.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sym2db.cpp; path = tools/sym2db.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */

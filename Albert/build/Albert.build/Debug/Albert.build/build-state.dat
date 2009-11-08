@@ -1,10 +1,8 @@
 TAlbert
 v7
 r0
-t279322425.025283
+t279385743.770650
 cCheck dependencies
-cCompileC build/Albert.build/Debug/Albert.build/Objects-normal/x86_64/main.o /Users/matt/dev/Albert/main.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-cLd /Users/matt/dev/Albert/build/Debug/Albert normal x86_64
 
 N/Developer/SDKs/MacOSX10.6.sdk
 c000000004A769DAB00000000000000EE
@@ -21,7 +19,8 @@ t1257629622
 s89732
 
 N/Users/matt/dev/Albert/build/Debug/Albert
-t1257629623
+c000000004AF6DE990000000000007090
+t1257692825
 s28816
 
 N/Users/matt/dev/Albert/main.cpp
@@ -32,7 +31,7 @@ i<iostream>
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies279322424#279322424#0(0"0(0#1#0"4300882208#0"0#
+lSLF07#2@18"Check dependencies279385743#279385743#0(0"0(0#1#0"4300882208#0"0#
 
 CCompileC build/Albert.build/Debug/Albert.build/Objects-normal/x86_64/main.o /Users/matt/dev/Albert/main.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 s279322420.411903
