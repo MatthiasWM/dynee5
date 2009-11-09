@@ -106,6 +106,102 @@ char const *skipSpace(char const *s) {
 }
 
 
+
+class AlCString
+{
+public:
+  static AlCString **pCString;
+  static int pn, pN;
+  unsigned int pAt, pNext;
+  const char *pSym;
+  const char *pString;
+  const char *pComment;
+public:
+  AlCString(FILE *f) {
+    pAt = pNext = 0xffffffff;
+    pSym = 0;
+    pString = 0;
+    for (;;) {
+      char buf[256], cmd[32], arg[256];
+      char *s = fgets(buf, 256, f);
+      if (*s==0) break;
+      s = skipSpace(s);
+      if (sscanf(s, "%s", cmd)==0) continue;
+      if (strcmp(cmd, "end")==0) {
+        break;
+      } else if (strcmp(cmd, "//")==0) {
+        int sn = strlen(s);
+        if (s[sn-1]=='\n') s[sn-1]=0;
+        addComment(s+2);
+      } else if (strcmp(cmd, "at")==0) {
+        sscanf(s, "%s 0x%08x", cmd, &pAt);
+      } else if (strcmp(cmd, "next")==0) {
+        sscanf(s, "%s 0x%08x", cmd, &pNext);
+      } else if (strcmp(cmd, "sym")==0) {
+        sscanf(s, "%s %s", cmd, arg);
+        pSym = strdup(arg);
+        pComment = dupComment();
+      } else {
+        printf("WARNING: unsupported CString attribute '%s'\n", cmd);
+      }
+    }
+    add(this);
+  }
+  void write_h(FILE *f) {
+    // write the doxygen commentary
+    if (pComment) {    
+      fprintf(f, "\n/**\n");
+      printComment(f, pComment, " * ");
+      fprintf(f, " *\n");
+    }
+    // write cstring header
+    fprintf(f, "extern const char *%s;\n", pSym);
+  }
+  void write_c(FILE *f) {
+    int i, last, x = 0;
+    // write the C++ function
+    fprintf(f, "const char *%s = \n                \"", pSym);
+    for (last=pNext-1; last>pAt; last--) {
+      if (ROM[last]) break;
+    }
+    for (i=pAt; i<=last; i++,x++) {
+      if (x==63) { fprintf(f, "\"\n                \""); x=0; }
+      char c = ROM[i];
+      if (c==0) fprintf(f, "\\0");
+      else if (c=='\n') fprintf(f, "\\n");
+      else if (c=='\r') fprintf(f, "\\r");
+      else if (c=='"') fprintf(f, "\\\"");
+      else if (c=='\\') fprintf(f, "\\\\");
+      else if (c<32 || c>126) fprintf(f, "\\%03o", (unsigned char)c);
+      else fputc(c, f);
+    }
+    fprintf(f, "\";\n");
+  }
+  static AlCString *add(AlCString *str) {
+    if (pn==pN) {
+      pN += 100;
+      pCString = (AlCString**)realloc(pCString, sizeof(AlCString**)*pN);
+    }
+    pCString[pn++] = str;
+    return str;
+  }
+  static void write_all_h(FILE *f) {
+    int i;
+    for (i=0; i<pn; i++) 
+      pCString[i]->write_h(f);
+  }
+  static void write_all_c(FILE *f) {
+    int i;
+    for (i=0; i<pn; i++) 
+      pCString[i]->write_c(f);
+  }
+};
+
+AlCString **AlCString::pCString;
+int AlCString::pn, AlCString::pN;
+
+
+
 class AlClass
 {
 public:
@@ -407,6 +503,9 @@ void load_db(char const *path, char const *filename)
       if (strcmp(arg, "cpp_member_function")==0) {
         // create a cpp member function and read it
         new AlMemberFunction(f);
+      } else if (strcmp(arg, "cstring")==0) {
+        // create a "C"-style ASCII string
+        new AlCString(f);
       } else {
         // skip to "end"
         // FIXME printf("WARNING: unsupported class '%s'\n", arg);
@@ -450,6 +549,18 @@ int main(int argc, char **argv)
   load_db(db_path, "symbols.txt");
     
   AlClass::write_all(cpp_path);
+  
+  FILE *f;
+  
+  f = fopen("/Users/matt/dev/Albert/src/strings.h", "wb");
+  // FIXME add headers
+  AlCString::write_all_h(f);
+  fclose(f);
+  
+  f = fopen("/Users/matt/dev/Albert/src/strings.c", "wb");
+  // FIXME add includes
+  AlCString::write_all_c(f);
+  fclose(f);
   
   return 0;
 }
