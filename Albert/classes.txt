@@ -890,9 +890,13 @@ end
 
 begin class
   sym TProtocol
-  base FIXME
+  base NONE
   size FIXME
-  datac FIXME
+  datac 4
+  data 0 void*/fRuntime// runtime usage (e.g. Throw() cleanup of autos for exceptions)
+  data 4 const TProtocol*/fRealThis// -> true "this" for auto instances
+  data 8 const void**/fBTable// -> dispatch table
+  data 12 TObjectId/fMonitorId// for monitors, the monitor id
 end
 
 begin class

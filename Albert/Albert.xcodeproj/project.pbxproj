@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8DD76F6A0486A84900D96B5E /* Albert.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Albert.1 */; };
 		C9B3E21D10A621BE0046C469 /* sym2db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B3E21C10A621BE0046C469 /* sym2db.cpp */; };
+		C9B76C1710A75B17004F9679 /* db2src.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B76C1610A75B17004F9679 /* db2src.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,9 @@
 		C9B3E33310A716FF0046C469 /* classes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = classes.txt; sourceTree = "<group>"; };
 		C9B3E33410A716FF0046C469 /* symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = symbols.txt; sourceTree = "<group>"; };
 		C9B76BCB10A7314C004F9679 /* files.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = files.txt; sourceTree = "<group>"; };
+		C9B76C0C10A75AD3004F9679 /* db2src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = db2src; path = build/Debug/db2src; sourceTree = "<group>"; };
+		C9B76C1510A75B17004F9679 /* db2src.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = db2src.h; path = tools/db2src.h; sourceTree = "<group>"; };
+		C9B76C1610A75B17004F9679 /* db2src.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = db2src.cpp; path = tools/db2src.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C9B3E21510A621940046C469 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9B76C0A10A75AD3004F9679 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -69,6 +80,8 @@
 			children = (
 				C9B3E21B10A621BE0046C469 /* sym2db.h */,
 				C9B3E21C10A621BE0046C469 /* sym2db.cpp */,
+				C9B76C1510A75B17004F9679 /* db2src.h */,
+				C9B76C1610A75B17004F9679 /* db2src.cpp */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -78,6 +91,7 @@
 			children = (
 				8DD76F6C0486A84900D96B5E /* Albert */,
 				C9B3E21710A621940046C469 /* Sym2DB */,
+				C9B76C0C10A75AD3004F9679 /* db2src */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,6 +151,22 @@
 			productReference = C9B3E21710A621940046C469 /* Sym2DB */;
 			productType = "com.apple.product-type.tool";
 		};
+		C9B76C0B10A75AD3004F9679 /* db2src */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9B76C1410A75AF8004F9679 /* Build configuration list for PBXNativeTarget "db2src" */;
+			buildPhases = (
+				C9B76C0910A75AD3004F9679 /* Sources */,
+				C9B76C0A10A75AD3004F9679 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = db2src;
+			productName = db2src;
+			productReference = C9B76C0C10A75AD3004F9679 /* db2src */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -151,6 +181,7 @@
 			targets = (
 				8DD76F620486A84900D96B5E /* Albert */,
 				C9B3E21610A621940046C469 /* Sym2DB */,
+				C9B76C0B10A75AD3004F9679 /* db2src */,
 			);
 		};
 /* End PBXProject section */
@@ -168,6 +199,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9B3E21D10A621BE0046C469 /* sym2db.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9B76C0910A75AD3004F9679 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9B76C1710A75B17004F9679 /* db2src.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +298,36 @@
 			};
 			name = Release;
 		};
+		C9B76C0E10A75AD4004F9679 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = db2src;
+			};
+			name = Debug;
+		};
+		C9B76C0F10A75AD4004F9679 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = db2src;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -285,6 +354,15 @@
 			buildConfigurations = (
 				C9B3E21910A621960046C469 /* Debug */,
 				C9B3E21A10A621960046C469 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9B76C1410A75AF8004F9679 /* Build configuration list for PBXNativeTarget "db2src" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9B76C0E10A75AD4004F9679 /* Debug */,
+				C9B76C0F10A75AD4004F9679 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
