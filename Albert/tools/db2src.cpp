@@ -14,6 +14,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <map>
+
+#define BDISP(x) ((((x) & 0xffffff) ^ 0x800000) - 0x800000) /* 26 bit */
+
+extern int disarm(char *dst, unsigned int addr, unsigned int cmd);
 
 
 const char *db_path = "/Users/matt/dev/Albert/";
@@ -21,12 +26,76 @@ const char *src_path = "/Users/matt/dev/Albert/src/";
 const char *c_path = "/Users/matt/dev/Albert/src/"; 
 const char *cpp_path = "/Users/matt/dev/Albert/src/"; 
 
+
 unsigned char ROM[0x00800000];
+unsigned int ROM_flags[0x00200000];
+
+/**
+ * Return the 4-byte word in rom
+ */
+unsigned int rom_w(unsigned int addr)
+{
+  if (addr>=0x00800000-4)
+    return 0;
+  else
+    return (ROM[addr]<<24)|(ROM[addr+1]<<16)|(ROM[addr+2]<<8)|ROM[addr+3];
+}
+
+/**
+ * Return the 4-byte flag for a ROM word
+ */
+unsigned int rom_flags(unsigned int addr)
+{
+  if (addr>=0x00800000)
+    return 0;
+  else
+    return ROM_flags[addr/4];
+}
+
+void rom_flags_set(unsigned int addr, unsigned int f)
+{
+  if (addr<0x00800000)
+    ROM_flags[addr/4] |= f;
+}
+
+void rom_flags_clear(unsigned int addr, unsigned int f)
+{
+  if (addr<0x00800000)
+    ROM_flags[addr/4] &= ~f;
+}
+
+
 
 class AlClass;
 class AlArg;
 class AlMemberFunction;
 
+typedef std::map < unsigned int, const char* > AlSymbolList;
+AlSymbolList symbolList;
+
+const char *get_symbol_at(unsigned int addr)
+{
+  AlSymbolList::iterator s = symbolList.find(addr);
+  if (s==symbolList.end()) return 0L;
+  return s->second;
+}
+
+void readSymbols(const char *filename)
+{
+  FILE *f = fopen(filename, "rb");
+  if (!f) {
+    puts("ERROR opening symbol file");
+    return;
+  }
+  for (;;) {
+    char buf[80], sym[80];
+    unsigned int addr;
+    char *s = fgets(buf, 80, f);
+    if (!s) break;
+    int n = sscanf(s, "0x%08x %[^\n]\n", &addr, sym);
+    if (n==2) symbolList.insert(std::make_pair(addr, strdup(sym)));
+  }
+}
 
 char *gComment = 0;
 int gnComment = 0, gNComment = 0;
@@ -427,7 +496,27 @@ public:
     if (pIsConst)
       fprintf(f, " const");
     fprintf(f, "\n{\n");
-    fprintf(f, "  /* ARM code interpreter output here */\n"); // pAt to pNext
+    // find the program workflow (goto-stacking)
+    // a typical switch-case statement starts with "add pc, pc, r#, lsl #2" = E08FF101
+    //   any register r can be used, other logical shifts have been used
+    //   "add" is followed by a "nop" because the ip is already one instruction further down
+    //   "addls" is followed by a jump to the "default" branch
+    
+    // find all "b" instructions and tag the branch destinations
+    for (i=pAt; i<pNext; i+=4) {
+      unsigned int cmd = rom_w(i);
+      if ((cmd&0x0f000000)==0x0a000000) {
+        rom_flags_set(BDISP(cmd)*4+i+8, 1);
+      }
+    }
+    // write some simple C-style code (of course it is not real C code)
+    for (i=pAt; i<pNext; i+=4) {
+      char buf[256];
+      if (rom_flags(i)&1) 
+        fprintf(f, "L%08X:\n", i);
+      disarm(buf, i, rom_w(i));
+      fprintf(f, "  %s\n", buf);
+    }
     fprintf(f, "}\n\n");
   }
 };
@@ -459,18 +548,6 @@ void AlClass::write_cpp(char const *path) {
     pFn[i]->write_cpp(f);
   }
   fprintf(f, "\n\n");
-}
-
-
-/**
- * Return the 4-byte word in rom
- */
-unsigned int rom_w(unsigned int addr)
-{
-  if (addr>=0x00800000)
-    return 0;
-  else
-    return (ROM[addr]<<24)|(ROM[addr+1]<<16)|(ROM[addr+2]<<8)|ROM[addr+3];
 }
 
 
@@ -538,6 +615,8 @@ void load_db(char const *path, char const *filename)
  */
 int main(int argc, char **argv) 
 {
+  readSymbols("/Users/matt/dev/Albert/data/717006.symbols");
+  
   FILE *rom = fopen("/Users/matt/dev/Albert/data/717006", "rb");
   if (!rom) {
     puts("Can't read ROM!");

@@ -10,6 +10,7 @@
 		8DD76F6A0486A84900D96B5E /* Albert.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* Albert.1 */; };
 		C9B3E21D10A621BE0046C469 /* sym2db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B3E21C10A621BE0046C469 /* sym2db.cpp */; };
 		C9B76C1710A75B17004F9679 /* db2src.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B76C1610A75B17004F9679 /* db2src.cpp */; };
+		C9B76E6410A8C557004F9679 /* disarm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B76E6210A8C557004F9679 /* disarm.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,9 +35,12 @@
 		C9B3E33310A716FF0046C469 /* classes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = classes.txt; sourceTree = "<group>"; };
 		C9B3E33410A716FF0046C469 /* symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = symbols.txt; sourceTree = "<group>"; };
 		C9B76BCB10A7314C004F9679 /* files.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = files.txt; sourceTree = "<group>"; };
-		C9B76C0C10A75AD3004F9679 /* db2src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = db2src; path = build/Debug/db2src; sourceTree = "<group>"; };
+		C9B76C0C10A75AD3004F9679 /* db2src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = db2src; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B76C1510A75B17004F9679 /* db2src.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = db2src.h; path = tools/db2src.h; sourceTree = "<group>"; };
 		C9B76C1610A75B17004F9679 /* db2src.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = db2src.cpp; path = tools/db2src.cpp; sourceTree = "<group>"; };
+		C9B76E6210A8C557004F9679 /* disarm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disarm.cpp; path = tools/disarm.cpp; sourceTree = "<group>"; };
+		C9B76E6310A8C557004F9679 /* disarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = disarm.h; path = tools/disarm.h; sourceTree = "<group>"; };
+		C9B76EE410A8DCD1004F9679 /* Doxyfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Doxyfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 				C9B3E21C10A621BE0046C469 /* sym2db.cpp */,
 				C9B76C1510A75B17004F9679 /* db2src.h */,
 				C9B76C1610A75B17004F9679 /* db2src.cpp */,
+				C9B76E6210A8C557004F9679 /* disarm.cpp */,
+				C9B76E6310A8C557004F9679 /* disarm.h */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -99,6 +105,7 @@
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				C9B76EE410A8DCD1004F9679 /* Doxyfile */,
 				C6859E8B029090EE04C91782 /* Albert.1 */,
 			);
 			name = Documentation;
@@ -207,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9B76C1710A75B17004F9679 /* db2src.cpp in Sources */,
+				C9B76E6410A8C557004F9679 /* disarm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

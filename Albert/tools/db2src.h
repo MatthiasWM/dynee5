@@ -7,3 +7,5 @@
  *
  */
 
+const char *get_symbol_at(unsigned int addr);
+
