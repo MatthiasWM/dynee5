@@ -385,7 +385,7 @@ public:
   AlClass *pClass;
   AlArg **pArg;
   int pnArg;
-  char pIsStatic, pIsConst;
+  char pIsStatic, pIsConst, pIsCtor, pIsDtor;
 public:
   AlMemberFunction(FILE *f) {
     pAt = pNext = 0xffffffff;
@@ -395,7 +395,7 @@ public:
     pClass = 0;
     pArg = 0;
     pnArg = 0;
-    pIsStatic = pIsConst = 0;
+    pIsStatic = pIsConst = pIsCtor = pIsDtor = 0;
     for (;;) {
       char buf[256], cmd[32], arg[256];
       char *s = fgets(buf, 256, f);
@@ -420,11 +420,17 @@ public:
         sscanf(s, "%s %s", cmd, arg);
         pSym = strdup(arg);
         pComment = dupComment();
+        if (strcmp(pSym, pClass->pSym)==0)
+          pIsCtor = 1;
+        if (pSym[0]=='~' && strcmp(pSym+1, pClass->pSym)==0)
+          pIsDtor = 1;
       } else if (strcmp(cmd, "returns")==0) {
         sscanf(s, "%s %[^\n]", cmd, arg);
         if (strcmp(arg, "FIXME")==0) {
-          // ctor, dtor and some operators have no return type!
-          pReturns = strdup("t_unknown");
+          if (pIsCtor || pIsDtor)
+            pReturns = 0;
+          else
+            pReturns = strdup("t_unknown");
         } else if (strcmp(arg, "NONE")==0) {
           pReturns = 0;
         } else {
@@ -580,12 +586,38 @@ void load_db(char const *path, char const *filename)
       if (strcmp(arg, "cpp_member_function")==0) {
         // create a cpp member function and read it
         new AlMemberFunction(f);
+      } else if (strcmp(arg, "class")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "file")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "c_file")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "cpp_function")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "c_function")==0) {
+        goto skip; // FIXME:
       } else if (strcmp(arg, "cstring")==0) {
         // create a "C"-style ASCII string
         new AlCString(f);
+      } else if (strcmp(arg, "RAM")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "nsSymbol")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "data")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "stub")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "global_data")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "const_data")==0) {
+        goto skip; // FIXME:
+      } else if (strcmp(arg, "unknown")==0) {
+        goto skip; // FIXME:
       } else {
         // skip to "end"
-        // FIXME printf("WARNING: unsupported class '%s'\n", arg);
+        // FIXME 
+        printf("WARNING: unsupported class '%s'\n", arg);
+      skip:
         int depth = 1;
         for (;;) {
           s = fgets(buf, 1024, f);

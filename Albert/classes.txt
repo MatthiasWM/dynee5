@@ -6760,6 +6760,11 @@ begin class
   base FIXME
   size FIXME
   datac FIXME
+  data 0 CInterpreter */next
+  data 4 ULong/id
+  data 8 VMStack/ctrlStack
+  data 32 RefStructStack/dataStack
+  data FIXME
 end
 
 begin class
