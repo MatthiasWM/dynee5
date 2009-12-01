@@ -9,10 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		C9601DD510B1FA9C0018BADE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601DD410B1FA9C0018BADE /* Carbon.framework */; };
-		C9601E9910B1FAED0018BADE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9601E9810B1FAED0018BADE /* main.cpp */; };
 		C9601EA810B1FB5B0018BADE /* libfltk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601EA210B1FB5A0018BADE /* libfltk.a */; };
-		C9601EE410B2020B0018BADE /* ui.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9601EE310B2020B0018BADE /* ui.fl */; };
-		C9601EEC10B202440018BADE /* ui.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9601EEA10B202440018BADE /* ui.cxx */; };
 		C9F6E58F10C55881007C848E /* CArrayIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5810C5587F007C848E /* CArrayIterator.cpp */; };
 		C9F6E59010C55881007C848E /* CBaseRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5A10C5587F007C848E /* CBaseRingBuffer.cpp */; };
 		C9F6E59110C55881007C848E /* CBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5C10C5587F007C848E /* CBuffer.cpp */; };
@@ -1068,6 +1065,8 @@
 		C9F6EA0D10C5C56B007C848E /* sym2db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6EA0810C5C56B007C848E /* sym2db.cpp */; };
 		C9F6EA1810C5C5A5007C848E /* db2src.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6EA0A10C5C56B007C848E /* db2src.cpp */; };
 		C9F6EA1910C5C5A5007C848E /* disarm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6EA0B10C5C56B007C848E /* disarm.cpp */; };
+		C9F6EA9710C5C979007C848E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6EA9410C5C979007C848E /* main.cpp */; };
+		C9F6EA9810C5C979007C848E /* ui.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9F6EA9610C5C979007C848E /* ui.fl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -1092,8 +1091,6 @@
 		C9601DCB10B1FA890018BADE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		C9601DCC10B1FA890018BADE /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		C9601DD410B1FA9C0018BADE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		C9601E9710B1FAED0018BADE /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
-		C9601E9810B1FAED0018BADE /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C9601E9D10B1FB5A0018BADE /* libfltk_forms.a */ = {isa = PBXFileReference; lastKnownFileType = compiled.win32.library; name = libfltk_forms.a; path = /usr/local/lib/libfltk_forms.a; sourceTree = "<absolute>"; };
 		C9601E9E10B1FB5A0018BADE /* libfltk_gl.a */ = {isa = PBXFileReference; lastKnownFileType = compiled.win32.library; name = libfltk_gl.a; path = /usr/local/lib/libfltk_gl.a; sourceTree = "<absolute>"; };
 		C9601E9F10B1FB5A0018BADE /* libfltk_images.a */ = {isa = PBXFileReference; lastKnownFileType = compiled.win32.library; name = libfltk_images.a; path = /usr/local/lib/libfltk_images.a; sourceTree = "<absolute>"; };
@@ -1101,9 +1098,6 @@
 		C9601EA110B1FB5A0018BADE /* libfltk_png.a */ = {isa = PBXFileReference; lastKnownFileType = compiled.win32.library; name = libfltk_png.a; path = /usr/local/lib/libfltk_png.a; sourceTree = "<absolute>"; };
 		C9601EA210B1FB5A0018BADE /* libfltk.a */ = {isa = PBXFileReference; lastKnownFileType = compiled.win32.library; name = libfltk.a; path = /usr/local/lib/libfltk.a; sourceTree = "<absolute>"; };
 		C9601EB910B1FC150018BADE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = /usr/lib/libz.dylib; sourceTree = "<absolute>"; };
-		C9601EE310B2020B0018BADE /* ui.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ui.fl; sourceTree = "<group>"; };
-		C9601EEA10B202440018BADE /* ui.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ui.cxx; sourceTree = "<group>"; };
-		C9601EEB10B202440018BADE /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui.h; sourceTree = "<group>"; };
 		C9F6DD5810C5587F007C848E /* CArrayIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CArrayIterator.cpp; path = src/CArrayIterator.cpp; sourceTree = "<group>"; };
 		C9F6DD5910C5587F007C848E /* CArrayIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CArrayIterator.h; path = src/CArrayIterator.h; sourceTree = "<group>"; };
 		C9F6DD5A10C5587F007C848E /* CBaseRingBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBaseRingBuffer.cpp; path = src/CBaseRingBuffer.cpp; sourceTree = "<group>"; };
@@ -3215,6 +3209,12 @@
 		C9F6EA0B10C5C56B007C848E /* disarm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disarm.cpp; path = tools/disarm.cpp; sourceTree = "<group>"; };
 		C9F6EA0C10C5C56B007C848E /* disarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = disarm.h; path = tools/disarm.h; sourceTree = "<group>"; };
 		C9F6EA1410C5C582007C848E /* db2src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = db2src; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9F6EA9410C5C979007C848E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/albert/main.cpp; sourceTree = "<group>"; };
+		C9F6EA9510C5C979007C848E /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = main.h; path = src/albert/main.h; sourceTree = "<group>"; };
+		C9F6EA9610C5C979007C848E /* ui.fl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ui.fl; path = src/albert/ui.fl; sourceTree = "<group>"; };
+		C9F6EAA410C5C9CC007C848E /* classes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = classes.txt; sourceTree = "<group>"; };
+		C9F6EAA510C5C9CC007C848E /* files.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = files.txt; sourceTree = "<group>"; };
+		C9F6EAA610C5C9CC007C848E /* symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = symbols.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3274,6 +3274,7 @@
 		29B97314FDCFA39411CA2CEA /* Albert */ = {
 			isa = PBXGroup;
 			children = (
+				C9F6EAA310C5C9A4007C848E /* Database */,
 				C9F6DD4310C557C8007C848E /* Albert */,
 				C9F6EA0610C5C56B007C848E /* Tools */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -3319,7 +3320,7 @@
 		C9F6DD4310C557C8007C848E /* Albert */ = {
 			isa = PBXGroup;
 			children = (
-				C9F6DD4610C557E0007C848E /* Base */,
+				C9F6DD4610C557E0007C848E /* albert */,
 				C9F6DD4510C557D6007C848E /* Generated */,
 			);
 			name = Albert;
@@ -5435,16 +5436,14 @@
 			name = Generated;
 			sourceTree = "<group>";
 		};
-		C9F6DD4610C557E0007C848E /* Base */ = {
+		C9F6DD4610C557E0007C848E /* albert */ = {
 			isa = PBXGroup;
 			children = (
-				C9601E9710B1FAED0018BADE /* main.h */,
-				C9601E9810B1FAED0018BADE /* main.cpp */,
-				C9601EE310B2020B0018BADE /* ui.fl */,
-				C9601EEA10B202440018BADE /* ui.cxx */,
-				C9601EEB10B202440018BADE /* ui.h */,
+				C9F6EA9410C5C979007C848E /* main.cpp */,
+				C9F6EA9510C5C979007C848E /* main.h */,
+				C9F6EA9610C5C979007C848E /* ui.fl */,
 			);
-			name = Base;
+			name = albert;
 			sourceTree = "<group>";
 		};
 		C9F6EA0610C5C56B007C848E /* Tools */ = {
@@ -5458,6 +5457,16 @@
 				C9F6EA0C10C5C56B007C848E /* disarm.h */,
 			);
 			name = Tools;
+			sourceTree = "<group>";
+		};
+		C9F6EAA310C5C9A4007C848E /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				C9F6EAA410C5C9CC007C848E /* classes.txt */,
+				C9F6EAA510C5C9CC007C848E /* files.txt */,
+				C9F6EAA610C5C9CC007C848E /* symbols.txt */,
+			);
+			name = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -5539,8 +5548,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				C9601EE410B2020B0018BADE /* ui.fl in Resources */,
 				C9F6E7A110C55881007C848E /* TInterpreter.cpp~ in Resources */,
+				C9F6EA9810C5C979007C848E /* ui.fl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5551,8 +5560,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9601E9910B1FAED0018BADE /* main.cpp in Sources */,
-				C9601EEC10B202440018BADE /* ui.cxx in Sources */,
 				C9F6E58F10C55881007C848E /* CArrayIterator.cpp in Sources */,
 				C9F6E59010C55881007C848E /* CBaseRingBuffer.cpp in Sources */,
 				C9F6E59110C55881007C848E /* CBuffer.cpp in Sources */,
@@ -6604,6 +6611,7 @@
 				C9F6E9A810C55881007C848E /* TZoneNameComparer.cpp in Sources */,
 				C9F6E9A910C55881007C848E /* UnionIndexData.cpp in Sources */,
 				C9F6E9AA10C55881007C848E /* XIPParameterBlock.cpp in Sources */,
+				C9F6EA9710C5C979007C848E /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
