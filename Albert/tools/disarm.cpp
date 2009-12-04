@@ -142,7 +142,7 @@ static int print_insn_arm(unsigned int pc,
               }
               else
               {
-                sprintf(tmpStr, "[%s", arm_regnames[(given >> 16) & 0xf]);
+                sprintf(tmpStr, "%s", arm_regnames[(given >> 16) & 0xf]);
                 str = strcat(str, tmpStr);
                 if ((given & 0x01000000) != 0)
                 {
@@ -162,7 +162,7 @@ static int print_insn_arm(unsigned int pc,
                     arm_decode_shift(given, str);
                   }
 
-                  sprintf(tmpStr, "]%s", ((given & 0x00200000) != 0) ? "!" : "");
+                  sprintf(tmpStr, "%s", ((given & 0x00200000) != 0) ? "!" : "");
                   str = strcat(str, tmpStr);
                 }
                 else
@@ -277,7 +277,7 @@ static int print_insn_arm(unsigned int pc,
               {
                 const char *ts = arm_conditional[(given >> 28) & 0xf];
                 if (ts && *ts) {
-                  sprintf(tmpStr, "if (%s) ", ts);
+                  sprintf(tmpStr, "if (arm_is_%s()) ", ts);
                   str = strcat(str, tmpStr);
                 }
               }

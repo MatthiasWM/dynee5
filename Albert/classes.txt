@@ -6978,6 +6978,7 @@ begin class
 end
 
 begin class
+  // This object is part of the SGlobalsThatLiveAcrossReboot.
   sym SBankInfo
   base FIXME
   size FIXME
