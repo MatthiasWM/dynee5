@@ -51,6 +51,86 @@ FILE *in, *out;
 
 // 0x007ec7fc end of REX
 
+
+
+/*
+ 
+ Another attempt at the Newton 2100 memory map (ROM 717006):
+ 
+  0x0000.0000: ROM
+      00.0000: CODE reset
+      00.0004: CODE undefined instruction
+      00.0008: CODE software int
+      00.000c: CODE prefetch abort
+      00.0010: CODE data abort
+      00.0018: CODE IRQ
+      00.001c: CODE FIQ
+      00.0020: Data
+      00.2000: Begin of Patch tables (list of branch instructions) -> 01.285c
+      01.3000: Begin of Branch tables (branch instr.) -> 01.5e0c
+      01.6000: Begin of ROM page patch table
+      01.8400: CODE (Low level calls, intermixed with a few tables!)
+      02.1438: CODE C++
+      36.340c: Read Only Data
+      38.2324: CODE C++, ends in some low level functions
+      3a.f000: Magic Pointer Table (873 entries)
+      3a.fda8: Symbols
+      67.fa40: Binary Objects
+      71.fc4c: ROM code end, beginning of REX (ROM Extension, may contain code)
+      7e.c7fc: REX code end, rest is empty
+  0x0080.0000: End of ROM
+  0x01a0.0000: Jump Table in RAM
+  0x01c1.085c: End of Jump Table
+  0x0400.6400: Param Block From Image Physical ??
+  0x0c00.0000: ??
+  0x0c00.8400: system variables start RAM
+  0x0c10.7e14: end system variables RAM
+  0x0f00.0000: DMA registers
+  0x0f18.0000: start of GPIO registers
+  0x0f20.0000: other registers (reboot reason, etc.)
+  0x2000.0000: Flash RAM mapped to various channels (8 bit, 16 bit)
+  0x4000.0000: System RAM 32 bit wide
+  0x6000.0000: Current Application (Newton Script)
+  0xe000.0000: screen memory
+  0xe001.2c00: End of screen memory (320 x 280 x 4 bit)
+ 
+SWI's      
+ 00      GetPortSWI
+ 01      PortSendSWI
+ 02      PortReceiveSWI
+ 03      EnterAtomicSWI
+ 04      ExitAtomicSWI
+ 05      GenericSWI
+ 06      GenerateMessageIRQ
+ 07      PurgeMMUTBLEntry
+ 08      FlushMMU
+ 09      FlushCache
+ 0a      GetCPUVersion
+ 0b      SemaphoreOpGlue
+ 0c      SetDomainRegister
+ 0d      SMemSetBufferSWI
+ 0e      SMemGetSizeSWI
+ 0f      SMemCopyToSharedSWI
+ 10      SMemCopyFromSharedSWI
+ 11      SMemMsgSetTimerParmsSWI
+ 12      SMemMsgSetMsgAvailPortSWI
+ 13      SMemMsgGetSenderTaskIdSWI
+ 14      SMemMsgSetUserRefConSWI
+ 15      SMemMsgGetUserRefConSWI
+ 16      SMemMsgCheckForDoneSWI
+ 17      SMemMsgMsgDoneSWI
+ 18      TurnOffCache
+ 19      TurnOnCache
+ 1b      MonitorDispatchSWI
+ 1c      MonitorExitSWI
+ 1d      MonitorThrowSWI
+ 1e      EnterFIQAtomicSWI
+ 1f      ExitFIQAtomicSWI
+ 20      MonitorFlushSWI
+ 21      PortResetFilterSWI
+ 22      DoSchedulerSWI
+*/ 
+
 unsigned char ROM[0x00800000];
 
 class Klass {
@@ -104,19 +184,38 @@ unsigned int rom_w(unsigned int addr)
     return (ROM[addr]<<24)|(ROM[addr+1]<<16)|(ROM[addr+2]<<8)|ROM[addr+3];
 }
 
+/**
+ * Convert a string into its individual arguments.
+ * There is no leading bracket!
+ */
+void print_attributes(const char *args) 
+{
+  const char *ket = strrchr(args, ')');
+  if (ket) {
+    if (strstr(args, "static"))
+      fprintf(out, "  static\n");
+    if (strstr(args, "const"))
+      fprintf(out, "  const\n");
+  }
+}
 
 /**
  * Convert a string into its individual arguments.
  * There is no leading bracket!
  */
-void print_args(char *args) 
+void print_args(const char *line) 
 {
   int bc = 1;
   int argc = 0, i;
+  char *args = strdup(line);
   char *argv[20], *s = args;
-  // count the arguments an set seperating NUL's
+  // count the arguments and set seperating NUL's
   for (;;) {
-    if (*s==')' || *s==0) break;
+    if (*s==')') break;
+    if (*s==0) {
+      printf("Unexpected end of argument list in '(%s'\n", line);
+      break;
+    }
     if (isspace(*s)) s++;
     argv[argc] = s;
     argc++;
@@ -150,6 +249,7 @@ void print_args(char *args)
   for (i=0; i<argc; i++) {
     fprintf(out, "  arg %d %s\n", i, argv[i]);
   }
+  free(args);
 }
 
 
@@ -168,8 +268,31 @@ void convert(const char *s, unsigned int next)
   int l = strlen(sym);
   if (sym[l-1]=='\n')
     sym[l-1] = 0;
+  /*
+  00.0000: CODE reset
+  00.0004: CODE undefined instruction
+  00.0008: CODE software int
+  00.000c: CODE prefetch abort
+  00.0010: CODE data abort
+  00.0018: CODE IRQ
+  00.001c: CODE FIQ
+  00.0020: Data
+  00.2000: Begin of Patch tables (list of branch instructions) -> 01.285c
+  01.3000: Begin of Branch tables (branch instr.) -> 01.5e0c
+  01.6000: Begin of ROM page patch table
+  01.8400: CODE (Low level calls, intermixed with a few tables!)
+  02.1438: CODE C++
+  36.340c: Read Only Data
+  38.2324: CODE C++, ends in some low level functions
+  3a.f000: Magic Pointer Table (873 entries)
+  3a.fda8: Symbols
+  67.fa40: Binary Objects
+  71.fc4c: ROM code end, beginning of REX (ROM Extension, may contain code)
+  7e.c7fc: REX code end, rest is empty
+  */
   // lets interprete the different possible symbols that we can recognize at this point
   char *bra = strchr(sym, '(');
+  char *ket = strrchr(sym, ')');
   char *cpp = strstr(sym, "::");
   if (addr>=0x00800000) {
     fprintf(out, "begin RAM\n");
@@ -180,14 +303,18 @@ void convert(const char *s, unsigned int next)
   } else if (cpp && bra) { // this is a C++ class function
     *cpp = 0;
     *bra = 0;
+    char ret = 1;
     fprintf(out, "begin cpp_member_function\n");
     fprintf(out, "  at 0x%08X\n", addr);
     fprintf(out, "  next 0x%08X\n", next);
     fprintf(out, "  class %s\n", sym);
     Klass::add(sym);
     fprintf(out, "  sym %s\n", cpp+2);
+    if (strcmp(sym, cpp+2)==0) { fprintf(out, "  ctor\n"); ret = 0; }
+    if (cpp[2]=='~' && strcmp(sym, cpp+3)==0) { fprintf(out, "  dtor\n"); ret = 0; }
+    if (ket) print_attributes(ket+1);
     print_args(bra+1);
-    fprintf(out, "  returns FIXME\n"); // unknown return type
+    if (ret) fprintf(out, "  returns FIXME\n"); // unknown return type
     fprintf(out, "end\n\n");
   } else if (bra) { // this is a C++ function outside a class
     *bra = 0;
@@ -195,6 +322,7 @@ void convert(const char *s, unsigned int next)
     fprintf(out, "  at 0x%08X\n", addr);
     fprintf(out, "  next 0x%08X\n", next);
     fprintf(out, "  sym %s\n", sym);
+    if (ket) print_attributes(ket+1);
     print_args(bra+1);
     fprintf(out, "  returns FIXME\n"); // unknown return type
     fprintf(out, "end\n\n");
@@ -268,7 +396,7 @@ int main(int argc, char **argv)
     return -1;
   }
   fprintf(out, "\n");
-  fprintf(out, "#inport classes.txt\n");
+  fprintf(out, "#import classes.txt\n");
   fprintf(out, "\n");
   
   unsigned int next = 0;

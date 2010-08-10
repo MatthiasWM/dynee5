@@ -4797,7 +4797,7 @@ end
 
 begin class
   sym TSingleQContainer
-  base FIXME
+  base none
   size FIXME
   datac FIXME
 end
@@ -6301,22 +6301,23 @@ begin class
 end
 
 begin class
+  // used for receive to get info about sender
   sym TUMsgToken
-  base FIXME
+  base none
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TUAsyncMessage
-  base FIXME
+  base none
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TUPort
-  base FIXME
+  base TUObject
   size FIXME
   datac FIXME
 end

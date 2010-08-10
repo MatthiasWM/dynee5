@@ -19,6 +19,7 @@
 #define BDISP(x) ((((x) & 0xffffff) ^ 0x800000) - 0x800000) /* 26 bit */
 
 extern int disarm(char *dst, unsigned int addr, unsigned int cmd);
+extern int disarm_c(char *dst, unsigned int addr, unsigned int cmd);
 
 
 const char *db_path = "/Users/matt/dev/Albert/";
@@ -26,6 +27,12 @@ const char *src_path = "/Users/matt/dev/Albert/src/";
 const char *c_path = "/Users/matt/dev/Albert/src/"; 
 const char *cpp_path = "/Users/matt/dev/Albert/src/"; 
 
+const unsigned int flags_type_mask          = 0x000000ff;
+const unsigned int flags_type_arm_code      = 0x00000001;
+const unsigned int flags_type_patch_table   = 0x00000002;
+const unsigned int flags_type_jump_table    = 0x00000003;
+
+const unsigned int flags_is_target          = 0x10000000;
 
 unsigned char ROM[0x00800000];
 unsigned int ROM_flags[0x00200000];
@@ -64,6 +71,25 @@ void rom_flags_clear(unsigned int addr, unsigned int f)
     ROM_flags[addr/4] &= ~f;
 }
 
+char rom_flags_is_set(unsigned int addr, unsigned int f)
+{
+  if (addr>=0x00800000) return 0;
+  return ((ROM_flags[addr/4]&f) == f);
+}
+
+void rom_flags_type(unsigned int addr, unsigned int t)
+{
+  if (addr<0x00800000)
+    ROM_flags[addr/4] = (ROM_flags[addr/4]&~flags_type_mask) | t;
+}
+
+unsigned int rom_flags_type(unsigned int addr)
+{
+  if (addr<0x00800000)
+    return (ROM_flags[addr/4]&flags_type_mask);
+  else
+    return 0;
+}
 
 
 class AlClass;
@@ -520,7 +546,7 @@ public:
       char buf[256];
       if (rom_flags(i)&1) 
         fprintf(f, "L%08X:\n", i);
-      disarm(buf, i, rom_w(i));
+      disarm_c(buf, i, rom_w(i));
       fprintf(f, "  %s\n", buf);
     }
     fprintf(f, "}\n\n");
@@ -644,6 +670,236 @@ void load_db(char const *path, char const *filename)
   }
 }
 
+unsigned int branch_address(unsigned int addr, unsigned int cmd=0xffffffff)
+{
+  if (cmd==0xffffffff)
+    cmd = rom_w(addr);
+  if (cmd&0x00800000) { // jump backwards
+    return (((cmd&0x00ffffff)|0xff000000)<<2)+addr+8;
+  } else { // jump forward
+    return ((cmd&0x007fffff)<<2)+addr+8;
+  }
+}
+
+void check_code_coverage(unsigned int addr);
+
+void check_switch_case(unsigned int addr, int n_case) 
+{
+  int i;
+  printf("Switch/Case statement with %d cases starting at %08x\n", n_case, addr);
+  for (i=0; i<n_case; i++) { // nuber of cases plus default case
+    printf("case %d at %08x\n", i, addr+4*i);
+    check_code_coverage(addr+4*i);
+  }
+}
+
+// recursively dive into the ARM code from this point on and follow all possible
+// execution paths
+void check_code_coverage(unsigned int addr)
+{
+  // mark this as jump target
+  if (addr<0x00800000) rom_flags_set(addr, flags_is_target); // mark this as a jump target
+
+  for(;;) {
+    
+    if (addr>=0x00800000) {
+      // see: http://40hz.org/Pages/Newton%20Patches
+      if (addr>=0x01A00000 && addr<0x1D00000) {
+        unsigned int prev = addr;
+        unsigned int next = ( ((addr>>5)&0xffffff80) | (addr&0x0000007f) ) - 0xCE000;
+        addr = branch_address(addr, rom_w(next));
+        const char *prev_sym = get_symbol_at(prev);
+        const char *addr_sym = get_symbol_at(addr);
+        printf("Redirecting call from %08x to %08x (%s->%s)\n", prev, addr, prev_sym, addr_sym);
+        if (prev_sym==0 || addr_sym==0 || strcmp(prev_sym, addr_sym)!=0) {
+          printf("ERROR: Symbols don't match. Verify lookup table offsets!\n");
+          return;
+        }
+      } else {
+        printf("Can't follow addresses outside of ROM: %08x (%s)\n", addr, get_symbol_at(addr));
+        return;
+      }
+    }
+    
+    // hmm, this is a dead end!
+    if (addr==0x0001862C) return; // FIXME: dead end!
+    
+    // we verified this address already - leave
+    if (rom_flags_type(addr)) return;
+        
+    // mark this as executable
+    rom_flags_type(addr, flags_type_arm_code);
+    
+    // crude interpretation of commands
+    unsigned int cmd = rom_w(addr);
+    
+    {
+      char buf[1024]; memset(buf, 0, 1024);
+      sprintf(buf, ":  ", addr);
+      disarm(buf+3, addr, cmd);
+      puts(buf);
+    }
+    
+    if ( (cmd&0xf0000000) == 0xf0000000) {
+      // special treatment for 0xf... commands
+      printf("Aborting: Hit unknown command at %08x: %08x\n", addr, cmd);
+      return;
+    } else {
+      if ( (cmd&0x0fefffff)==0x01a0f00e) { // quick return command (mov pc,lr)
+        if ( (cmd&0xf0000000)==0xe0000000) return; // unconditional - we are done, otherwise continue
+      } else if ( (cmd&0x0f000000) == 0x0a000000) { // jump instruction
+        if ( (cmd&0xf0000000) == 0xe0000000) { // unconditional
+          printf("%08x: unconditional jump to %08x\n", addr, branch_address(addr));
+          addr = branch_address(addr);
+          continue;
+        } else { // conditional, follow both branches (finsih-thread-first recursion)
+          unsigned int next = branch_address(addr);
+          printf("%08x: conditional jump to %08x, follow later\n", addr, next);
+          check_code_coverage(addr+4);
+          printf("%08x: following up on conditional jump to %08x\n", addr, next);
+          addr = next; 
+          continue;
+        }
+      } else if ( (cmd&0x0f000000) == 0x0b000000) { // branch instruction, follow both branches (dive-first recursion)
+        unsigned int next = branch_address(addr);
+        printf("%08x: subroutine call to %08x, follow later\n", addr, next);
+        check_code_coverage(addr+4);
+        printf("%08x: following up on subroutine call to %08x\n", addr, next);
+        addr = next;
+        continue;
+      } else if ( (cmd&0x0ff0ff00) == 0x0280F000) { // add pc,r#,# (typical virtual call)
+        printf("Later: Virtual call at %08x: %08x\n", addr, cmd);
+        return;
+      } else if ( (cmd&0x0db6f000) == 0x0120f000) { // msr command does not modifiy pc
+      } else if ( (cmd&0x0c000000) == 0x00000000) { // data processing, only important if pc is changed
+        if ( (cmd&0x0000f000) == 0x0000f000) { // is the destination register the pc?
+          if ( (cmd&0x0ff0fff0) == 0x01A0F000 && (rom_w(addr-4)&0x0fffffff) == 0x01A0E00F) {
+            // mov lr,pc; mov pc,r#
+            // this is the  pattern for a function called via an address stored in a register
+            // I can't guess the call address, but we should nevertheless continue to check code coverage
+            printf("Later: Register based call at %08x: %08x\n", addr, cmd);
+            addr += 4; continue;
+          }
+          if ( (cmd&0xfffffff0) == 0x908FF100 && (rom_w(addr-4)&0xfff0fff0) == 0xE3500000) {
+            // cmp rx, #n; addls pc, pc, rx lsl 2
+            // This is the pattern for a switch/case statement with default clause. A jump table of size n+1 follows.
+            int n_case = rom_w(addr-4)&0x0000000f, i;
+            printf("Switch/Case statement with %d cases at %08x: %08x\n", n_case, addr, cmd);
+            addr+=4;
+            for (i=0; i<=n_case; i++) { // nuber of cases plus default case
+              printf("case %d at %08x\n", i-1, addr+4*i);
+              check_code_coverage(addr+4*i);
+            }
+            return;
+          }
+          if (addr==0x000456ec) { addr+=4; continue; } // FIXME: virtual call?
+          if (addr==0x00045700) { addr+=4; continue; } // FIXME: virtual call?
+          if (addr==0x00018624) { addr+=4; continue; } // FIXME: virtual call?
+          if (addr==0x00019984) { return; } // FIXME: virtual call? fancy return?
+          if (addr==0x000198CC) { return; } // FIXME: virtual call? fancy return?
+          if (addr==0x000198F4) { return; } // FIXME: virtual call? fancy return?
+          if (addr==0x0001991c) { return; } // FIXME: virtual call? fancy return?
+          if (addr==0x0001A0EC) { return; } // FIXME: virtual call? fancy return?
+          if (addr==0x00019ca0) { return; } // FIXME: virtual call? fancy return?
+          if (addr==0x0001a028) { return; } // FIXME: virtual call? fancy return?
+          if (addr==0x000D9938) { return; } // FIXME: ??
+          if (addr==0x0038fa50) { addr+=4; continue; } // FIXME: ??
+          if (addr==0x0038d9a4) { check_switch_case(0x0038d9ac, 33); return; }
+          if (addr==0x0038ec98) { check_switch_case(0x0038eca0,  9); return; }
+          printf("Aborting: Data processing command modifying R15 at %08x: %08x\n", addr, cmd);
+          //throw "abort";
+          return;
+        }          
+      } else if ( (cmd&0x0f000000) == 0x0e000000) { // mcr, mrc (FIXME: probably not changing pc)
+      } else if ( (cmd&0x0e000010) == 0x06000010) { // unknown (used to trigger interrupt, FIXME: and then?)
+        if (cmd==0xE6000510) { return; } // Kernel Panic!
+        if (addr==0x00392C2C) { return; } // FIXME: ??
+        if (addr==0x000188CC) { addr+=4; continue; } // FIXME: ??
+        if (addr==0x003ae188) { return; } // FIXME: ??
+        if (addr==0x003ae36c) { return; } // FIXME: ??
+        if (addr==0x000188F4) { return; } // FIXME: ??
+        if (addr==0x003ae2e4) { return; } // FIXME: ??
+        if (addr==0x0038ce6c) { return; } // DebugStr
+        if (addr==0x0038ce70) { return; } // Debugger
+        if (addr==0x0038ce74) { return; } // ExitToShell
+        if (addr==0x0038ce78) { return; } // SendTestResults
+        if (addr==0x0038ce7c) { return; } // TapFileCntl
+        if (addr==0x0038ce80) { return; } // RawDebugStr
+        if (addr==0x0038ce84) { return; } // RawDebugger
+        printf("Return: opcode 'undefined' found at %08x: %08x\n", addr, cmd);
+        return;
+      } else if ( (cmd&0x0c100000) == 0x04000000) { // str (store to memory)
+      } else if ( (cmd&0x0c100000) == 0x04100000) { // ldr (load from memory)
+        if ( (cmd&0x0000f000) == 0x0000f000) { // is the destination register the pc?
+          if (addr==0x000188d8) { addr += 4; continue; } // FIXME: this is a long branch to 0x01A6A520
+          if (addr==0x000455b4) { addr += 4; continue; } // FIXME: I do not know what this does!
+          if (addr==0x0019190C) { return; } // FIXME: 
+          if ( (cmd&0xfff0f000) == 0xE590F000 && (rom_w(addr-4)&0xffffffff) == 0xE1A0E00F) {
+            // mov lr,pc; ldr pc,r#
+            // this is the pattern for a function called via an address pointed to by a register
+            // I can't guess the call address, but we should nevertheless continue to check code coverage
+            printf("Later: Register pointer based call at %08x: %08x\n", addr, cmd);
+            addr += 4; continue;
+          }
+          printf("Aborting: LDR command modifying R15 at %08x: %08x\n", addr, cmd);
+          //throw "abort";
+          return;
+        }
+      } else if ( (cmd&0x0f000000) == 0x0f000000) { // swi (software interrupt)
+      } else if ( (cmd&0x0e000000) == 0x0c000000) { // (coprocessor dat transfer) FIXME: may actuall tfer to pc?!
+      } else if ( (cmd&0x0e100000) == 0x08000000) { // stm (store multiple to memory)
+      } else if ( (cmd&0x0e100000) == 0x08100000) { // ldm (load from memory)
+        if ( (cmd&0x00008000) == 0x00008000) { // is the pc among the destination registers?
+                                               // FIXME: we'll assume it's a return command
+          if ( (cmd&0xf0000000)==0xe0000000) return; // unconditional - we are done
+                                                     // conditional - continue to check
+        }
+      } else {
+        printf("Aborting: Hit unknown command at %08x: %08x\n", addr, cmd);
+        //throw "abort";
+        return;
+      }
+    }
+    addr += 4;
+  }
+}
+
+void preset_rom_use()
+{
+  int i;
+  for (i=0x00002000; i<0x0001285c; i++ ) {
+    rom_flags_type(i, flags_type_patch_table);
+  }
+  for (i=0x00013000; i<0x00015e0c; i++ ) {
+    rom_flags_type(i, flags_type_jump_table);
+  }
+  // another jump table from 0001a618 to <00021438, but it's code?
+}
+
+static unsigned int db_cpp[] = {
+#include "db_cpp.h"
+};
+
+void check_all_code_coverage()
+{
+  int i;
+  // system vectors
+  check_code_coverage(0x00000000);
+  check_code_coverage(0x00000004);
+  check_code_coverage(0x00000008);
+  check_code_coverage(0x0000000c);
+  check_code_coverage(0x00000010);
+  check_code_coverage(0x00000014);
+  check_code_coverage(0x00000018);
+  check_code_coverage(0x0000001c);
+  // known entry points (C++ functions)
+  for (i=0; i<sizeof(db_cpp)/sizeof(unsigned int); i++) {
+    check_code_coverage(db_cpp[i]);
+  }
+  // ROMBoot unclear positions
+  check_code_coverage(0x000188d0);
+}
+
 /**
  * Convert the data base into a bunch of (pseudo) C and C++ source files
  */
@@ -659,8 +915,30 @@ int main(int argc, char **argv)
   fread(ROM, 0x00800000, 1, rom);
   fclose(rom);
 
+#if 1
+  //FILE *rom_flags;
+  memset(ROM_flags, 0, 0x00200000*sizeof(int));
+#else
+  FILE *rom_flags = fopen("/Users/matt/dev/Albert/data/flags", "rb");
+  if (!rom_flags) {
+    puts("Can't read ROM flags, assuming zero!");
+    memset(ROM_flags, 0, 0x00200000*sizeof(int));
+  } else {
+    fread(ROM_flags, 0x00200000, sizeof(unsigned int), rom_flags);
+    fclose(rom_flags);
+  }
+#endif
+  
   load_db(db_path, "symbols.txt");
-    
+  
+  preset_rom_use();
+  try {
+    check_all_code_coverage();
+  } catch(char*) {
+  }
+  
+#if 0
+  
   AlClass::write_all(cpp_path);
   
   FILE *f;
@@ -674,6 +952,29 @@ int main(int argc, char **argv)
   // FIXME add includes
   AlCString::write_all_c(f);
   fclose(f);
+
+#endif
   
+#if 0  
+  rom_flags = fopen("/Users/matt/dev/Albert/data/flags", "wb");
+  if (!rom_flags) {
+    puts("Can't write ROM flags!");
+  }
+  fwrite(ROM_flags, 0x00200000, sizeof(int), rom_flags);
+  fclose(rom_flags);
+#endif
+  
+  int i, n=0;
+  for (i=0; i<0x00200000; i++) {
+    if (ROM_flags[i]) n++;
+  }
+  printf("\n====================\n");
+  printf("%7.3f%% of ROM words covered (%d of 2097152)\n", n/20971.52, n);
+  printf("====================\n\n");
+    
   return 0;
 }
+
+// Di 10 aug 2010, 15:05:   0.649% of ROM words covered (13604 of 2097152)
+//                 15:17:   1.106% of ROM words covered (23196 of 2097152)
+//                 20:12:  34.491% of ROM words covered (723334 of 2097152)

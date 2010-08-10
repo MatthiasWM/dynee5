@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		C95C2DBD1211B98100C87B33 /* disarm_c.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C95C2DBB1211B98100C87B33 /* disarm_c.cpp */; };
 		C9601DD510B1FA9C0018BADE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601DD410B1FA9C0018BADE /* Carbon.framework */; };
 		C9601EA810B1FB5B0018BADE /* libfltk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601EA210B1FB5A0018BADE /* libfltk.a */; };
 		C99F6ECC10C7ECB0003DEBD6 /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99F6ECB10C7ECB0003DEBD6 /* types.cpp */; };
@@ -69,6 +70,8 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Albert-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Albert-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Albert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Albert.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C95C2DBB1211B98100C87B33 /* disarm_c.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disarm_c.cpp; path = tools/disarm_c.cpp; sourceTree = "<group>"; };
+		C95C2DBC1211B98100C87B33 /* disarm_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = disarm_c.h; path = tools/disarm_c.h; sourceTree = "<group>"; };
 		C9601DCB10B1FA890018BADE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		C9601DCC10B1FA890018BADE /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		C9601DD410B1FA9C0018BADE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -352,12 +355,14 @@
 		C9F6EA0610C5C56B007C848E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				C95C2DBB1211B98100C87B33 /* disarm_c.cpp */,
+				C95C2DBC1211B98100C87B33 /* disarm_c.h */,
+				C9F6EA0B10C5C56B007C848E /* disarm.cpp */,
+				C9F6EA0C10C5C56B007C848E /* disarm.h */,
 				C9F6EA0810C5C56B007C848E /* sym2db.cpp */,
 				C9F6EA0710C5C56B007C848E /* sym2db.h */,
 				C9F6EA0A10C5C56B007C848E /* db2src.cpp */,
 				C9F6EA0910C5C56B007C848E /* db2src.h */,
-				C9F6EA0B10C5C56B007C848E /* disarm.cpp */,
-				C9F6EA0C10C5C56B007C848E /* disarm.h */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 			files = (
 				C9F6EA1810C5C5A5007C848E /* db2src.cpp in Sources */,
 				C9F6EA1910C5C5A5007C848E /* disarm.cpp in Sources */,
+				C95C2DBD1211B98100C87B33 /* disarm_c.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
