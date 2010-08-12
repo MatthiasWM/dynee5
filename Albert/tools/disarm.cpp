@@ -28,7 +28,7 @@ static const char* arm_conditional[] = {
   "eq", "ne", "cs", "cc", "mi", "pl", "vs", "vc", "hi", "ls", "ge", "lt", "gt", "le", "", "nv"};
 
 static const char* arm_regnames[] = {
-  "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "sl", "fp", "ip", "sp", "lr", "pc"};
+  "r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "sp", "lr", "pc"};
 
 static const char* arm_fp_const[] = {
   "0.0", "1.0", "2.0", "3.0", "4.0", "5.0", "0.5", "10.0"};

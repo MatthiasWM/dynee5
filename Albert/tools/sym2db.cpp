@@ -71,7 +71,7 @@ FILE *in, *out;
       01.6000: Begin of ROM page patch table
       01.8400: CODE (Low level calls, intermixed with a few tables!)
       02.1438: CODE C++
-      36.340c: Read Only Data
+      36.340c: Read Only Data, probaably HWR patterns
       38.2324: CODE C++, ends in some low level functions
       3a.f000: Magic Pointer Table (873 entries)
       3a.fda8: Symbols
@@ -93,6 +93,8 @@ FILE *in, *out;
   0x6000.0000: Current Application (Newton Script)
   0xe000.0000: screen memory
   0xe001.2c00: End of screen memory (320 x 280 x 4 bit)
+
+  0x0036.340C: 
  
 SWI's      
  00      GetPortSWI

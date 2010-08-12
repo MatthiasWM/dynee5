@@ -7,6 +7,12 @@
  *
  */
 
+#define VERB1
+#define VERB2 if (0) 
+#define VERB3 if (0) 
+#define VERB4 if (0) 
+#define VERB5 if (0) 
+
 #include "db2src.h"
 
 #include <stdio.h>
@@ -28,9 +34,18 @@ const char *c_path = "/Users/matt/dev/Albert/src/";
 const char *cpp_path = "/Users/matt/dev/Albert/src/"; 
 
 const unsigned int flags_type_mask          = 0x000000ff;
+const unsigned int flags_type_unknown       = 0x00000000;
 const unsigned int flags_type_arm_code      = 0x00000001;
-const unsigned int flags_type_patch_table   = 0x00000002;
-const unsigned int flags_type_jump_table    = 0x00000003;
+const unsigned int flags_type_arm_byte      = 0x00000002;
+const unsigned int flags_type_arm_word      = 0x00000003;
+const unsigned int flags_type_patch_table   = 0x00000004;
+const unsigned int flags_type_jump_table    = 0x00000005;
+const unsigned int flags_type_unused        = 0x00000006;
+const unsigned int flags_type_rex           = 0x00000007;
+const unsigned int flags_type_ns            = 0x00000008;
+const unsigned int flags_type_ns_obj        = 0x00000009;
+const unsigned int flags_type_ns_ref        = 0x0000000a;
+const unsigned int flags_type_dict          = 0x0000000b;
 
 const unsigned int flags_is_target          = 0x10000000;
 
@@ -688,7 +703,7 @@ void check_switch_case(unsigned int addr, int n_case)
   int i;
   printf("Switch/Case statement with %d cases starting at %08x\n", n_case, addr);
   for (i=0; i<n_case; i++) { // nuber of cases plus default case
-    printf("case %d at %08x\n", i, addr+4*i);
+    VERB4 printf("case %d at %08x\n", i, addr+4*i);
     check_code_coverage(addr+4*i);
   }
 }
@@ -710,13 +725,13 @@ void check_code_coverage(unsigned int addr)
         addr = branch_address(addr, rom_w(next));
         const char *prev_sym = get_symbol_at(prev);
         const char *addr_sym = get_symbol_at(addr);
-        printf("Redirecting call from %08x to %08x (%s->%s)\n", prev, addr, prev_sym, addr_sym);
+        VERB3 printf("Redirecting call from %08x to %08x (%s->%s)\n", prev, addr, prev_sym, addr_sym);
         if (prev_sym==0 || addr_sym==0 || strcmp(prev_sym, addr_sym)!=0) {
-          printf("ERROR: Symbols don't match. Verify lookup table offsets!\n");
+          VERB2 printf("ERROR: Symbols don't match. Verify lookup table offsets!\n");
           return;
         }
       } else {
-        printf("Can't follow addresses outside of ROM: %08x (%s)\n", addr, get_symbol_at(addr));
+        VERB2 printf("Can't follow addresses outside of ROM: %08x (%s)\n", addr, get_symbol_at(addr));
         return;
       }
     }
@@ -737,38 +752,48 @@ void check_code_coverage(unsigned int addr)
       char buf[1024]; memset(buf, 0, 1024);
       sprintf(buf, ":  ", addr);
       disarm(buf+3, addr, cmd);
-      puts(buf);
+      VERB4 puts(buf);
     }
     
     if ( (cmd&0xf0000000) == 0xf0000000) {
       // special treatment for 0xf... commands
-      printf("Aborting: Hit unknown command at %08x: %08x\n", addr, cmd);
+      VERB1 printf("Aborting: Hit unknown command at %08x: %08x\n", addr, cmd);
       return;
     } else {
+      
+      // ldr immediate test
+      if ( (cmd&0x0e5f0000) == 0x041f0000) { // test for word access inside the ROM
+        int offset = cmd & 0xfff;
+        if ((cmd & 0x00800000) == 0) offset = -offset;
+        VERB5 printf("  Read word at 0x%08X\n", addr+8+offset);
+        rom_flags_type(addr+8+offset, flags_type_arm_word);
+      }
+      
+      // follow execution threads
       if ( (cmd&0x0fefffff)==0x01a0f00e) { // quick return command (mov pc,lr)
         if ( (cmd&0xf0000000)==0xe0000000) return; // unconditional - we are done, otherwise continue
       } else if ( (cmd&0x0f000000) == 0x0a000000) { // jump instruction
         if ( (cmd&0xf0000000) == 0xe0000000) { // unconditional
-          printf("%08x: unconditional jump to %08x\n", addr, branch_address(addr));
+          VERB3 printf("%08x: unconditional jump to %08x\n", addr, branch_address(addr));
           addr = branch_address(addr);
           continue;
         } else { // conditional, follow both branches (finsih-thread-first recursion)
           unsigned int next = branch_address(addr);
-          printf("%08x: conditional jump to %08x, follow later\n", addr, next);
+          VERB3 printf("%08x: conditional jump to %08x, follow later\n", addr, next);
           check_code_coverage(addr+4);
-          printf("%08x: following up on conditional jump to %08x\n", addr, next);
+          VERB3 printf("%08x: following up on conditional jump to %08x\n", addr, next);
           addr = next; 
           continue;
         }
       } else if ( (cmd&0x0f000000) == 0x0b000000) { // branch instruction, follow both branches (dive-first recursion)
         unsigned int next = branch_address(addr);
-        printf("%08x: subroutine call to %08x, follow later\n", addr, next);
+        VERB3 printf("%08x: subroutine call to %08x, follow later\n", addr, next);
         check_code_coverage(addr+4);
-        printf("%08x: following up on subroutine call to %08x\n", addr, next);
+        VERB3 printf("%08x: following up on subroutine call to %08x\n", addr, next);
         addr = next;
         continue;
       } else if ( (cmd&0x0ff0ff00) == 0x0280F000) { // add pc,r#,# (typical virtual call)
-        printf("Later: Virtual call at %08x: %08x\n", addr, cmd);
+        VERB2 printf("Later: Virtual call at %08x: %08x\n", addr, cmd);
         return;
       } else if ( (cmd&0x0db6f000) == 0x0120f000) { // msr command does not modifiy pc
       } else if ( (cmd&0x0c000000) == 0x00000000) { // data processing, only important if pc is changed
@@ -777,17 +802,17 @@ void check_code_coverage(unsigned int addr)
             // mov lr,pc; mov pc,r#
             // this is the  pattern for a function called via an address stored in a register
             // I can't guess the call address, but we should nevertheless continue to check code coverage
-            printf("Later: Register based call at %08x: %08x\n", addr, cmd);
+            VERB2 printf("Later: Register based call at %08x: %08x\n", addr, cmd);
             addr += 4; continue;
           }
           if ( (cmd&0xfffffff0) == 0x908FF100 && (rom_w(addr-4)&0xfff0fff0) == 0xE3500000) {
             // cmp rx, #n; addls pc, pc, rx lsl 2
             // This is the pattern for a switch/case statement with default clause. A jump table of size n+1 follows.
             int n_case = rom_w(addr-4)&0x0000000f, i;
-            printf("Switch/Case statement with %d cases at %08x: %08x\n", n_case, addr, cmd);
+            VERB3 printf("Switch/Case statement with %d cases at %08x: %08x\n", n_case, addr, cmd);
             addr+=4;
             for (i=0; i<=n_case; i++) { // nuber of cases plus default case
-              printf("case %d at %08x\n", i-1, addr+4*i);
+              VERB4 printf("case %d at %08x\n", i-1, addr+4*i);
               check_code_coverage(addr+4*i);
             }
             return;
@@ -806,7 +831,7 @@ void check_code_coverage(unsigned int addr)
           if (addr==0x0038fa50) { addr+=4; continue; } // FIXME: ??
           if (addr==0x0038d9a4) { check_switch_case(0x0038d9ac, 33); return; }
           if (addr==0x0038ec98) { check_switch_case(0x0038eca0,  9); return; }
-          printf("Aborting: Data processing command modifying R15 at %08x: %08x\n", addr, cmd);
+          VERB1 printf("Aborting: Data processing command modifying R15 at %08x: %08x\n", addr, cmd);
           //throw "abort";
           return;
         }          
@@ -826,7 +851,7 @@ void check_code_coverage(unsigned int addr)
         if (addr==0x0038ce7c) { return; } // TapFileCntl
         if (addr==0x0038ce80) { return; } // RawDebugStr
         if (addr==0x0038ce84) { return; } // RawDebugger
-        printf("Return: opcode 'undefined' found at %08x: %08x\n", addr, cmd);
+        VERB2 printf("Return: opcode 'undefined' found at %08x: %08x\n", addr, cmd);
         return;
       } else if ( (cmd&0x0c100000) == 0x04000000) { // str (store to memory)
       } else if ( (cmd&0x0c100000) == 0x04100000) { // ldr (load from memory)
@@ -838,10 +863,10 @@ void check_code_coverage(unsigned int addr)
             // mov lr,pc; ldr pc,r#
             // this is the pattern for a function called via an address pointed to by a register
             // I can't guess the call address, but we should nevertheless continue to check code coverage
-            printf("Later: Register pointer based call at %08x: %08x\n", addr, cmd);
+            VERB2 printf("Later: Register pointer based call at %08x: %08x\n", addr, cmd);
             addr += 4; continue;
           }
-          printf("Aborting: LDR command modifying R15 at %08x: %08x\n", addr, cmd);
+          VERB1 printf("Aborting: LDR command modifying R15 at %08x: %08x\n", addr, cmd);
           //throw "abort";
           return;
         }
@@ -855,7 +880,7 @@ void check_code_coverage(unsigned int addr)
                                                      // conditional - continue to check
         }
       } else {
-        printf("Aborting: Hit unknown command at %08x: %08x\n", addr, cmd);
+        VERB1 printf("Aborting: Hit unknown command at %08x: %08x\n", addr, cmd);
         //throw "abort";
         return;
       }
@@ -873,7 +898,16 @@ void preset_rom_use()
   for (i=0x00013000; i<0x00015e0c; i++ ) {
     rom_flags_type(i, flags_type_jump_table);
   }
-  // another jump table from 0001a618 to <00021438, but it's code?
+  for (i=0x0071fc4c; i<0x007ec7fc; i++ ) {
+    rom_flags_type(i, flags_type_rex);
+  }
+  for (i=0x007ec7fc; i<0x00800000; i++ ) {
+    rom_flags_type(i, flags_type_unused);
+  }
+  // 006853dc to 0071a95c dictionaries
+  for (i=0x006853dc; i<0x0071a95c; i++ ) {
+    rom_flags_type(i, flags_type_dict);
+  }
 }
 
 static unsigned int db_cpp[] = {
@@ -898,13 +932,161 @@ void check_all_code_coverage()
   }
   // ROMBoot unclear positions
   check_code_coverage(0x000188d0);
+  // ROMPublicJumpTable
+  for (i=0x00013000; i<0x00015e0c; i+=4 ) {
+    check_code_coverage(i);
+  }  
+  // some jump vector table we found. These jumps all go into the ROM patch table
+  for (i=0x0001a618; i<0x00021438; i+=4 ) {
+    check_code_coverage(i);
+  }  
 }
+
+
+/*
+ 3a.f000: Magic Pointer Table (873 entries)
+   num_entries
+   pointer to entry[0]  NSRef: Pointer
+   ...
+ 
+ 67.fa40: Binary Objects
+ 71.fc4c: ROM code end, beginning of REX (ROM Extension, may contain code)
+ */
+
+unsigned int check_ns_obj(unsigned int addr);
+
+void ns_print_binary(unsigned int addr, unsigned int size) 
+{
+  int i;
+  switch (rom_w(addr+8)) {
+    case 0x00055552:
+      printf(":  Symbol '%s\n", ROM+addr+16);
+      break;
+    case 0x003c13a5:
+      printf(":  'string \"");
+      for (i=13; i<size; i+=2) putchar(ROM[addr+i]);
+      printf("\"\n");
+      i=0;
+      break;
+  }
+}
+
+
+void check_ns_ref(unsigned int addr)
+{
+  if (rom_flags_type(addr)) return;
+  rom_flags_type(addr, flags_type_ns_ref);
+  unsigned int val = rom_w(addr);
+  if ( (val&0xfff0000f) == 0x0000000a ) { // Character
+  } else if ( (val&0x00000003) == 0x00000000 ) { // Integer
+    int v = (int)val;
+    VERB3 printf("NSRef: Integer %d at %08x: %08x\n", v/4, addr, val);
+    // top 30 bit are a (small) integer
+  } else if ( (val&0x00000003) == 0x00000001 ) { // Pointer
+    VERB3 printf("NSRef: Pointer at %08x: %08x\n", addr, val);
+    check_ns_obj(val&0xfffffffc);
+  } else if ( (val&0x00000003) == 0x00000002 ) { // Special
+    // TODO: ...
+    if (val==0x1a) {
+      VERB3 printf("NSRef: TRUE %08x\n", addr);
+    } else if (val==0x02) {
+      VERB3 printf("NSRef: NIL at %08x\n", addr);
+    } else if (val==0x00055552) {
+      VERB3 printf("NSRef: symbol definition at %08x\n", addr);
+    } else {
+      VERB3 printf("NSRef: Special at %08x: %08x\n", addr, val); // 0x32 for functions?
+    }
+  } else if ( (val&0x00000003) == 0x00000003 ) { // Magic Pointer
+    // no need to follow, we have all magic pointers covered
+    VERB3 printf("NSRef: Magic %d:%d at %08x: %08x\n", (val&0xffffc000)>>14, (val&0x00003ffc)>>2, addr, val);
+  }
+}
+
+unsigned int check_ns_obj(unsigned int addr)
+{
+  unsigned int val = rom_w(addr);
+  unsigned int flags = rom_w(addr+4);
+  
+  if ( (val&0x0000007c) != 0x00000040 || flags!=0 ) {
+    VERB1 printf("ERROR: not an NS object at %08x: %08x\n", addr, val);
+    return 0;
+  }
+  unsigned int i, size = (val&0xffffff00)>>8;
+  if (rom_flags_type(addr)) return size;
+  rom_flags_type(addr, flags_type_ns_obj);
+  rom_flags_type(addr+4, flags_type_ns);
+  
+  // follow the members of the object
+  if ( (val&0x00000003) == 0x00000000 ) {
+    // binary object
+    VERB3 printf("NS Binary Object at %08x (%d bytes):\n", addr, size);
+    check_ns_ref(addr+8);
+    // mark the binary part as checked
+    for (i=12; i<size; i+=4) rom_flags_type(addr+i, flags_type_ns);
+    VERB4 ns_print_binary(addr, size);
+    // followed by binary data and optional fill bytes
+  } else if ( (val&0x00000003) == 0x00000001 ) {
+    // array
+    VERB3 printf("NS Array at %08x (%d bytes = %d entries):\n", addr, size, size/4-3);
+    VERB3 printf("class: %08x\n", rom_w(addr+8));
+    for (i=12; i<size; i+=4) {
+      VERB3 printf("%5d: %08x\n", i/4-3, rom_w(addr+i));
+    }
+    for (i=8; i<size; i+=4) {
+      check_ns_ref(addr+i);
+    }
+  } else if ( (val&0x00000003) == 0x00000003 ) {
+    // frame
+    VERB3 printf("NS Frame at %08x (%d bytes = %d entries):\n", addr, size, size/4-3);
+    VERB3 printf("  map: %08x\n", rom_w(addr+8));
+    for (i=12; i<size; i+=4) {
+      VERB3 printf("%5d: %08x\n", i/4-3, rom_w(addr+i));
+    }
+    for (i=8; i<size; i+=4) {
+      check_ns_ref(addr+i);          
+    }
+  } else {
+    VERB1 printf("ERROR: unsupported NS object at %08x: %08x\n", addr, val);
+    return 0;
+  }
+  return size;
+}
+
+void check_all_ns_coverage()
+{
+  int i, n_magic = rom_w(0x003af000);
+  for (i=0; i<n_magic; i++) {
+    check_ns_ref(0x003af004+4*i);
+  }
+  // 0x003afda8 gROMSoupData to 0x0067FA40 gROMSoupDataSize
+  for (i=0x003afda8; i<0x0067fa40; ) {
+    unsigned int size = check_ns_obj(i);
+    if (size>0) {
+      i+=(size+3)&0xfffffffc; // align to four bytes
+    } else {
+      VERB1 printf("ERROR: lost track of NS objects at %08x!\n", i);
+    }
+  }
+  // simple pointers, but what are they used for?
+  for (i=0x00681c9c; i<0x006853dc; i+=8) {
+    check_ns_ref(i);
+  }
+  // simple pointers, but what are they used for?
+  for (i=0x0067fa44; i<0x00681c9c; i+=8) {
+    check_ns_ref(i);
+  }  
+}
+
+// Dictionaries starting at 0x006853DC (InitROMDictionaryData)
+
 
 /**
  * Convert the data base into a bunch of (pseudo) C and C++ source files
  */
 int main(int argc, char **argv) 
 {
+  int i;
+  
   readSymbols("/Users/matt/dev/Albert/data/717006.symbols");
   
   FILE *rom = fopen("/Users/matt/dev/Albert/data/717006", "rb");
@@ -916,7 +1098,7 @@ int main(int argc, char **argv)
   fclose(rom);
 
 #if 1
-  //FILE *rom_flags;
+  FILE *rom_flags;
   memset(ROM_flags, 0, 0x00200000*sizeof(int));
 #else
   FILE *rom_flags = fopen("/Users/matt/dev/Albert/data/flags", "rb");
@@ -931,11 +1113,20 @@ int main(int argc, char **argv)
   
   load_db(db_path, "symbols.txt");
   
+#if 1
   preset_rom_use();
   try {
     check_all_code_coverage();
   } catch(char*) {
   }
+#endif
+  
+#if 1
+  try {
+    check_all_ns_coverage();
+  } catch(char*) {
+  }
+#endif
   
 #if 0
   
@@ -955,7 +1146,7 @@ int main(int argc, char **argv)
 
 #endif
   
-#if 0  
+#if 0
   rom_flags = fopen("/Users/matt/dev/Albert/data/flags", "wb");
   if (!rom_flags) {
     puts("Can't write ROM flags!");
@@ -963,8 +1154,69 @@ int main(int argc, char **argv)
   fwrite(ROM_flags, 0x00200000, sizeof(int), rom_flags);
   fclose(rom_flags);
 #endif
+#if 1
+  rom_flags = fopen("/Users/matt/dev/Albert/data/flags.rgb", "wb");
+  if (!rom_flags) {
+    puts("Can't write ROM flags!");
+  }
+  for (i=0; i<0x00800000; i+=4) {
+#define pix(n) { fputc((n>>16)&0xff, rom_flags); fputc((n>>8)&0xff, rom_flags); fputc(n&0xff, rom_flags); }
+    switch (rom_flags_type(i)) {
+      case flags_type_unknown:      pix(0x000000); break;
+      case flags_type_arm_code:     pix(0xff0000); break;
+      case flags_type_arm_word:     pix(0xff8800); break;
+      case flags_type_arm_byte:     pix(0xff0088); break;
+      case flags_type_patch_table:  pix(0xff8800); break;
+      case flags_type_jump_table:   pix(0xff0088); break;
+      case flags_type_unused:       pix(0x888888); break;
+      case flags_type_rex:          pix(0x0000ff); break;
+      case flags_type_ns:           pix(0x00ff00); break;
+      case flags_type_ns_obj:       pix(0x88ff00); break;
+      case flags_type_ns_ref:       pix(0x00ff88); break;
+      case flags_type_dict:         pix(0xffff00); break;
+      default: pix(0xffffff); break;
+    }
+#undef pix
+  }
+  fclose(rom_flags);
+#endif
+
+#if 1
+  FILE *code = fopen("/Users/matt/dev/Albert/data/code.txt", "wb");
+  if (!code) {
+    puts("Can't write code!");
+  } else {
+    for (i=0; i<0x00800000; i+=4) {
+      char buf[1024]; memset(buf, 0, 1024);
+      switch (rom_flags_type(i)) {
+        case flags_type_unknown:
+          strcpy(buf, "unknown         "); break;
+        case flags_type_arm_code:
+          strcpy(buf, "                "); break;
+        case flags_type_arm_word:
+          strcpy(buf, "word            "); break;
+        case flags_type_arm_byte:
+        case flags_type_patch_table:
+        case flags_type_jump_table:
+        case flags_type_unused:
+        case flags_type_rex:
+        case flags_type_ns:
+        case flags_type_ns_obj:
+        case flags_type_ns_ref:
+        case flags_type_dict:
+        default:
+          break;
+      }
+      if (buf[0]) {
+        disarm(buf+16, i, rom_w(i));
+        fprintf(code, "%s\n", buf);
+      }
+    }
+    fclose(code);
+  }
+#endif
   
-  int i, n=0;
+  int n=0;
   for (i=0; i<0x00200000; i++) {
     if (ROM_flags[i]) n++;
   }
@@ -977,4 +1229,12 @@ int main(int argc, char **argv)
 
 // Di 10 aug 2010, 15:05:   0.649% of ROM words covered (13604 of 2097152)
 //                 15:17:   1.106% of ROM words covered (23196 of 2097152)
-//                 20:12:  34.491% of ROM words covered (723334 of 2097152)
+//                 20:12:  34.491% of ROM words covered (723334 of 2097152) ARM
+// Mi 11 aug 2010, 01:31:  47.176% of ROM words covered (989357 of 2097152) ARM,NS
+//                 01:51:  47.874% of ROM words covered (1003989 of 2097152)
+//                 01:57:  50.384% of ROM words covered (1056626 of 2097152) +unused+rex
+//                 09:08:  50.792% of ROM words covered (1065179 of 2097152)
+//                 21:31:  82.094% of ROM words covered (1721642 of 2097152) +more NS
+// Do 12 aug 2010, 00:44:  89.386% of ROM words covered (1874570 of 2097152) +dictionaries
+//                 00:47:  89.938% of ROM words covered (1886141 of 2097152) +ldr word access
+
