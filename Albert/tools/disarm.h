@@ -159,7 +159,16 @@ static struct arm_opcode arm_opcodes[] = {
     {0x0e000010, 0x0f100010, "mcr%c\t%8-11d, %21-23d, %12-15r, cr%16-19d, cr%0-3d, {%5-7d}"},
     {0x0c000000, 0x0e100000, "stc%c%22'l\t%8-11d, cr%12-15d, %A"},
     {0x0c100000, 0x0e100000, "ldc%c%22'l\t%8-11d, cr%12-15d, %A"},
+  
     /* the rest */
+    {0x0fffffff, 0x06000010, "throw%c\tSystemBoot"},
+    {0x0fffffff, 0x06000110, "throw%\tExitToShell"},
+    {0x0fffffff, 0x06000210, "throw%\tDebugger"},
+    {0x0fffffff, 0x06000310, "throw%\tDebugStr"},
+    {0x0fffffff, 0x06000410, "throw%\tPublicFiller"},
+    {0x0fffffff, 0x06000510, "throw%\tSystemPanic"},
+    {0x0fffffff, 0x06000710, "throw%\tSendTestResults"},
+    {0x0fffffff, 0x06000810, "throw%\tTapFileCntl"},
     {0x00000000, 0x00000000, "undefined instruction %0-31x"},
     {0x00000000, 0x00000000, 0}
 };

@@ -165,6 +165,14 @@ static struct arm_opcode_c arm_opcodes_c[] = {
     {0x0c000000, 0x0e100000, "%carm_stc%22'l(%8-11d, cr%12-15d, %A);"},
     {0x0c100000, 0x0e100000, "%carm_ldc%22'l(%8-11d, cr%12-15d, %A);"},
     /* the rest */
+    {0x0fffffff, 0x06000010, "%creturn SystemBoot();"},
+    {0x0fffffff, 0x06000110, "%creturn ExitToShell();"},
+    {0x0fffffff, 0x06000210, "%creturn Debugger();"},
+    {0x0fffffff, 0x06000310, "%creturn DebugStr();"},
+    {0x0fffffff, 0x06000410, "%creturn PublicFiller();"},
+    {0x0fffffff, 0x06000510, "%cSystemPanic(text);"},
+    {0x0fffffff, 0x06000710, "%creturn SendTestResults();"},
+    {0x0fffffff, 0x06000810, "%creturn TapFileCntl();"},
     {0x00000000, 0x00000000, "%carm_undefined_instruction %0-31x);"},
     {0x00000000, 0x00000000, 0}
 };

@@ -7,11 +7,29 @@
  *
  */
 
+//#define VERBOSE
+
+#if VERBOSE
 #define VERB1
-#define VERB2 if (0) 
+#define VERB2 
+#define VERB3 
+#define VERB4 
+#define VERB5 if (0) 
+#else
+#define VERB1
+#define VERB2
 #define VERB3 if (0) 
 #define VERB4 if (0) 
 #define VERB5 if (0) 
+#endif
+
+#if 1
+#define ABORT_SCAN return
+#define ABORT_SCAN_0 return 0
+#else
+#define ABORT_SCAN throw "ERROR: aborting scan"
+#define ABORT_SCAN_0 throw "ERROR: aborting scan"
+#endif
 
 #include "db2src.h"
 
@@ -38,14 +56,16 @@ const unsigned int flags_type_unknown       = 0x00000000;
 const unsigned int flags_type_arm_code      = 0x00000001;
 const unsigned int flags_type_arm_byte      = 0x00000002;
 const unsigned int flags_type_arm_word      = 0x00000003;
-const unsigned int flags_type_patch_table   = 0x00000004;
-const unsigned int flags_type_jump_table    = 0x00000005;
-const unsigned int flags_type_unused        = 0x00000006;
-const unsigned int flags_type_rex           = 0x00000007;
-const unsigned int flags_type_ns            = 0x00000008;
-const unsigned int flags_type_ns_obj        = 0x00000009;
-const unsigned int flags_type_ns_ref        = 0x0000000a;
-const unsigned int flags_type_dict          = 0x0000000b;
+const unsigned int flags_type_arm_text      = 0x00000004;
+const unsigned int flags_type_patch_table   = 0x00000005;
+const unsigned int flags_type_jump_table    = 0x00000006;
+const unsigned int flags_type_unused        = 0x00000007;
+const unsigned int flags_type_rex           = 0x00000008;
+const unsigned int flags_type_ns            = 0x00000009;
+const unsigned int flags_type_ns_obj        = 0x0000000a;
+const unsigned int flags_type_ns_ref        = 0x0000000b;
+const unsigned int flags_type_dict          = 0x0000000c;
+const unsigned int flags_type_classinfo     = 0x0000000d;
 
 const unsigned int flags_is_target          = 0x10000000;
 
@@ -785,7 +805,7 @@ void check_code_coverage(unsigned int addr)
           addr = next; 
           continue;
         }
-      } else if ( (cmd&0x0f000000) == 0x0b000000) { // branch instruction, follow both branches (dive-first recursion)
+      } else if ( (cmd&0x0f000000) == 0x0b000000) { // branch instruction, follow both branches
         unsigned int next = branch_address(addr);
         VERB3 printf("%08x: subroutine call to %08x, follow later\n", addr, next);
         check_code_coverage(addr+4);
@@ -817,47 +837,51 @@ void check_code_coverage(unsigned int addr)
             }
             return;
           }
-          if (addr==0x000456ec) { addr+=4; continue; } // FIXME: virtual call?
-          if (addr==0x00045700) { addr+=4; continue; } // FIXME: virtual call?
-          if (addr==0x00018624) { addr+=4; continue; } // FIXME: virtual call?
-          if (addr==0x00019984) { return; } // FIXME: virtual call? fancy return?
-          if (addr==0x000198CC) { return; } // FIXME: virtual call? fancy return?
-          if (addr==0x000198F4) { return; } // FIXME: virtual call? fancy return?
-          if (addr==0x0001991c) { return; } // FIXME: virtual call? fancy return?
-          if (addr==0x0001A0EC) { return; } // FIXME: virtual call? fancy return?
-          if (addr==0x00019ca0) { return; } // FIXME: virtual call? fancy return?
-          if (addr==0x0001a028) { return; } // FIXME: virtual call? fancy return?
-          if (addr==0x000D9938) { return; } // FIXME: ??
+          if (addr==0x000456ec) { addr+=4; continue; } // TODO: virtual call?
+          if (addr==0x00045700) { addr+=4; continue; } // TODO: virtual call?
+          if (addr==0x00018624) { addr+=4; continue; } // TODO: virtual call?
+          if (addr==0x00019984) { return; } // TODO: virtual call? fancy return?
+          if (addr==0x000198CC) { return; } // TODO: virtual call? fancy return?
+          if (addr==0x000198F4) { return; } // TODO: virtual call? fancy return?
+          if (addr==0x0001991c) { return; } // TODO: virtual call? fancy return?
+          if (addr==0x0001A0EC) { return; } // TODO: virtual call? fancy return?
+          if (addr==0x00019ca0) { return; } // TODO: virtual call? fancy return?
+          if (addr==0x0001a028) { return; } // TODO: virtual call? fancy return?
+          if (addr==0x000D9938) { return; } // TODO: ??
           if (addr==0x0038fa50) { addr+=4; continue; } // FIXME: ??
           if (addr==0x0038d9a4) { check_switch_case(0x0038d9ac, 33); return; }
           if (addr==0x0038ec98) { check_switch_case(0x0038eca0,  9); return; }
           VERB1 printf("Aborting: Data processing command modifying R15 at %08x: %08x\n", addr, cmd);
-          //throw "abort";
-          return;
+          ABORT_SCAN;
         }          
       } else if ( (cmd&0x0f000000) == 0x0e000000) { // mcr, mrc (FIXME: probably not changing pc)
       } else if ( (cmd&0x0e000010) == 0x06000010) { // unknown (used to trigger interrupt, FIXME: and then?)
-        if (cmd==0xE6000510) { return; } // Kernel Panic!
-        if (addr==0x00392C2C) { return; } // FIXME: ??
-        if (addr==0x000188CC) { addr+=4; continue; } // FIXME: ??
-        if (addr==0x003ae188) { return; } // FIXME: ??
-        if (addr==0x003ae36c) { return; } // FIXME: ??
-        if (addr==0x000188F4) { return; } // FIXME: ??
-        if (addr==0x003ae2e4) { return; } // FIXME: ??
-        if (addr==0x0038ce6c) { return; } // DebugStr
-        if (addr==0x0038ce70) { return; } // Debugger
-        if (addr==0x0038ce74) { return; } // ExitToShell
-        if (addr==0x0038ce78) { return; } // SendTestResults
-        if (addr==0x0038ce7c) { return; } // TapFileCntl
-        if (addr==0x0038ce80) { return; } // RawDebugStr
-        if (addr==0x0038ce84) { return; } // RawDebugger
-        VERB2 printf("Return: opcode 'undefined' found at %08x: %08x\n", addr, cmd);
-        return;
+        int i;
+        switch ((cmd&0x00ffff00)>>8) {
+          case 0: // SystemBoot
+          case 1: // ExitToShell
+          case 2: // Debugger
+          case 3: // DebugStr
+          case 4: // PublicFiller
+          case 7: // SendTestResults
+          case 8: // TapFileCntl
+            return;
+          case 5: // SystemPanic
+            for (i=addr+4; i<0x00800000; i++) {
+              rom_flags_type(i, flags_type_arm_text);
+              if (ROM[i]==0) break;
+            }
+            addr = (i+1+3)&0xfffffffc; // align i+1 to 4
+            if (rom_w(addr)==0) return;
+            continue;
+        }
+        VERB2 printf("Aborting: opcode 'undefined' found at %08x: %08x\n", addr, cmd);
+        ABORT_SCAN;
       } else if ( (cmd&0x0c100000) == 0x04000000) { // str (store to memory)
       } else if ( (cmd&0x0c100000) == 0x04100000) { // ldr (load from memory)
         if ( (cmd&0x0000f000) == 0x0000f000) { // is the destination register the pc?
-          if (addr==0x000188d8) { addr += 4; continue; } // FIXME: this is a long branch to 0x01A6A520
-          if (addr==0x000455b4) { addr += 4; continue; } // FIXME: I do not know what this does!
+          if (addr==0x000188d8) { addr += 4; continue; } // TODO: this is a long branch to 0x01A6A520
+          if (addr==0x000455b4) { addr += 4; continue; } // TODO: I do not know what this does!
           if (addr==0x0019190C) { return; } // FIXME: 
           if ( (cmd&0xfff0f000) == 0xE590F000 && (rom_w(addr-4)&0xffffffff) == 0xE1A0E00F) {
             // mov lr,pc; ldr pc,r#
@@ -867,27 +891,26 @@ void check_code_coverage(unsigned int addr)
             addr += 4; continue;
           }
           VERB1 printf("Aborting: LDR command modifying R15 at %08x: %08x\n", addr, cmd);
-          //throw "abort";
-          return;
+          ABORT_SCAN;
         }
       } else if ( (cmd&0x0f000000) == 0x0f000000) { // swi (software interrupt)
       } else if ( (cmd&0x0e000000) == 0x0c000000) { // (coprocessor dat transfer) FIXME: may actuall tfer to pc?!
       } else if ( (cmd&0x0e100000) == 0x08000000) { // stm (store multiple to memory)
       } else if ( (cmd&0x0e100000) == 0x08100000) { // ldm (load from memory)
         if ( (cmd&0x00008000) == 0x00008000) { // is the pc among the destination registers?
-                                               // FIXME: we'll assume it's a return command
+                                               // we'll assume it's a return command
           if ( (cmd&0xf0000000)==0xe0000000) return; // unconditional - we are done
                                                      // conditional - continue to check
         }
       } else {
         VERB1 printf("Aborting: Hit unknown command at %08x: %08x\n", addr, cmd);
-        //throw "abort";
-        return;
+        ABORT_SCAN;
       }
     }
     addr += 4;
   }
 }
+
 
 void preset_rom_use()
 {
@@ -904,11 +927,118 @@ void preset_rom_use()
   for (i=0x007ec7fc; i<0x00800000; i++ ) {
     rom_flags_type(i, flags_type_unused);
   }
-  // 006853dc to 0071a95c dictionaries
   for (i=0x006853dc; i<0x0071a95c; i++ ) {
     rom_flags_type(i, flags_type_dict);
   }
 }
+
+
+/* Virtual calls:
+ ; TGeoPortDebugLink::ClassInfo(void) static -> contains virtual table
+ ; TSerialDebugLink::Remove(void)
+ 003850b8         ldr      r0, [r0, #4]                     | E5900004 - ....
+ 003850bc         ldr      r12, [r0, #8]                    | E590C008 - ....
+ 003850c0         add      pc, r12, #0x00000014             | E28CF014 - ....
+ 
+ All this is defined in the ::ClassInfo() calls!
+ 
+ This is the start of the ClassInfo block. Some offset is zero (it's in all(?) blocks, so don't worry)
+ 00387968         andeq    r0, r0, r0                       | 00000000 - ....
+ This is the offset from here to the name of this class in ASCIZ
+ 0038796c         andeq    r0, r0, r8, asr #32              | 00000048 - ...H
+ This is the offset from here to the name of the super class in ASCIZ
+ 00387970         andeq    r0, r0, r6, asr r0               | 00000056 - ...V
+ End of super class name from here
+ 00387974         andeq    r0, r0, r2, rrx                  | 00000062 - ...b
+ Start of Jump Table
+ 00387978         andeq    r0, r0, r0, rrx                  | 00000060 - ...`
+ End of jump table
+ 0038797c         andeq    r0, r0, r4, lsl #1               | 00000084 - ....
+ Pointer to Sizeof call
+ 00387980         b        0x01B12908 (TLZStoreCompander::Sizeof(void) static)  | EA5E2BE0 - .^+.
+ Always 0?
+ 00387984         andeq    r0, r0, r0                       | 00000000 - ....
+ Always 0?
+ 00387988         andeq    r0, r0, r0                       | 00000000 - ....
+ Pointer to ctor
+ 0038798c         b        0x01B11890 (TLZStoreCompander::New(void))  | EA5E27BF - .^'.
+ Pointer to dtor
+ 00387990         b        0x01B0C65C (TLZStoreCompander::Delete(void))  | EA5E1331 - .^.1
+ 00387994         andeq    r0, r0, r0                       | 00000000 - ....
+ 00387998         andeq    r0, r0, r0                       | 00000000 - ....
+ 0038799c         andeq    r0, r0, r0                       | 00000000 - ....
+ jump to ret 0?
+ 003879a0         b        0x003879AC                       | EA000001 - ....
+ ; TLZStoreCompander::ClassInfo(void) static
+ return address of ClassInfo struct
+ 003879a4         sub      r0, pc, #0x00000044              | E24F0044 - .O.D
+ 003879a8         mov      pc, lr                           | E1A0F00E - ....
+ return 0
+ 003879ac         mov      r0, #0x00000000                  | E3A00000 - ....
+ 003879b0         mov      pc, lr                           | E1A0F00E - ....
+ class name
+ 003879b4         strplb   r5, [r12], -#2643                | 544C5A53 - TLZS
+ 003879b8         strvcbt  r7, 0x0038775B                   | 746F7265 - tore
+ 003879bc         cmnmi    pc, #0x00001c00                  | 436F6D70 - Comp
+ 003879c0         cmnvs    lr, r5, ror #8                   | 616E6465 - ande
+ super class name
+ 003879c4         andvc    r5, r0, #0x53000000              | 72005453 - r.TS
+ 003879c8         strvcbt  r7, 0x0038776B                   | 746F7265 - tore
+ 003879cc         cmnmi    pc, #0x00001c00                  | 436F6D70 - Comp
+ 003879d0         cmnvs    lr, r5, ror #8                   | 616E6465 - ande
+ 003879d4         andvc    r0, r0, #0x00000000              | 72000000 - r...
+ 003879d8         andeq    r0, r0, r0                       | 00000000 - ....
+ vtable
+ 003879dc         b        0x003879A4 (TLZStoreCompander::ClassInfo(void) static)  | EAFFFFF0 - ....
+ 003879e0         b        0x01B11890 (TLZStoreCompander::New(void))  | EA5E27AA - .^'.
+ 003879e4         b        0x01B0C65C (TLZStoreCompander::Delete(void))  | EA5E131C - .^..
+ 003879e8         b        0x01B0C660 (TLZStoreCompander::Init(TStore *, unsigned long, unsigned long, unsigned char, unsigned char))  | EA5E131C - .^..
+ 003879ec         b        0x01B0D6D4 (TLZStoreCompander::BlockSize(void))  | EA5E1738 - .^.8
+ 003879f0         b        0x01B0C664 (TLZStoreCompander::Read(unsigned long, char *, long, unsigned long))  | EA5E131B - .^..
+ 003879f4         b        0x01B0C668 (TLZStoreCompander::Write(unsigned long, char *, long, unsigned long))  | EA5E131B - .^..
+ 003879f8         b        0x01B0F780 (TLZStoreCompander::DoTransactionAgainst(long, unsigned long))  | EA5E1F60 - .^.`
+ 003879fc         b        0x01B1082C (TLZStoreCompander::IsReadOnly(void))  | EA5E238A - .^#.
+ end of vtable
+ */ 
+void check_classinfo(unsigned int addr)
+{
+  unsigned int i;
+  if (rom_w(addr)!=0xE24F0044) {
+    printf("ClassInfo: unsupported offset at %08x: %08x\n", addr, rom_w(addr));
+    return;
+  }
+  unsigned int base = addr - 0x44 + 8;
+  unsigned int class_name = rom_w(base+4)+base+4;
+  unsigned int base_class = rom_w(base+8)+base+8;
+  printf("class \"%s\" is derived from \"%s\"\n", ROM+class_name, ROM+base_class);
+  unsigned int vtbl_start = rom_w(base+16)+base+16;
+  unsigned int vtbl_end   = rom_w(base+20)+base+20;
+  for (i=vtbl_start; i<vtbl_end; i+=4) {
+    if (rom_w(i)) check_code_coverage(i);
+  }
+  if (rom_w(base+24)) check_code_coverage(base+24); // sizeof
+  if (rom_w(base+28)) check_code_coverage(base+28); // ??
+  if (rom_w(base+32)) check_code_coverage(base+32); // ??
+  if (rom_w(base+36)) check_code_coverage(base+36); // ctor
+  if (rom_w(base+40)) check_code_coverage(base+40); // dtor
+  for (i=base; i<vtbl_end; i+=4) {
+    if (!rom_flags_type(i)) rom_flags_type(i, flags_type_classinfo);
+  }
+  return;
+}
+
+static unsigned int classinfo[] = {
+#include "classinfo.h"
+};
+
+void check_all_classinfos()
+{
+  int i;
+  for (i=0; i<sizeof(classinfo)/sizeof(unsigned int); i++) {
+    check_classinfo(classinfo[i]);
+  }
+}
+
 
 static unsigned int db_cpp[] = {
 #include "db_cpp.h"
@@ -917,6 +1047,8 @@ static unsigned int db_cpp[] = {
 void check_all_code_coverage()
 {
   int i;
+  // all ::CLassInfo functions and structures
+  check_all_classinfos();
   // system vectors
   check_code_coverage(0x00000000);
   check_code_coverage(0x00000004);
@@ -993,8 +1125,11 @@ void check_ns_ref(unsigned int addr)
       VERB3 printf("NSRef: NIL at %08x\n", addr);
     } else if (val==0x00055552) {
       VERB3 printf("NSRef: symbol definition at %08x\n", addr);
+    } else if (val==0x32) {
+      VERB3 printf("NSRef: native function (?) at %08x\n", addr);
     } else {
-      VERB3 printf("NSRef: Special at %08x: %08x\n", addr, val); // 0x32 for functions?
+      VERB3 printf("NSRef: unknown special at %08x: %08x\n", addr, val);
+      ABORT_SCAN;
     }
   } else if ( (val&0x00000003) == 0x00000003 ) { // Magic Pointer
     // no need to follow, we have all magic pointers covered
@@ -1009,7 +1144,7 @@ unsigned int check_ns_obj(unsigned int addr)
   
   if ( (val&0x0000007c) != 0x00000040 || flags!=0 ) {
     VERB1 printf("ERROR: not an NS object at %08x: %08x\n", addr, val);
-    return 0;
+    ABORT_SCAN_0;
   }
   unsigned int i, size = (val&0xffffff00)>>8;
   if (rom_flags_type(addr)) return size;
@@ -1047,7 +1182,7 @@ unsigned int check_ns_obj(unsigned int addr)
     }
   } else {
     VERB1 printf("ERROR: unsupported NS object at %08x: %08x\n", addr, val);
-    return 0;
+    ABORT_SCAN_0;
   }
   return size;
 }
@@ -1065,6 +1200,7 @@ void check_all_ns_coverage()
       i+=(size+3)&0xfffffffc; // align to four bytes
     } else {
       VERB1 printf("ERROR: lost track of NS objects at %08x!\n", i);
+      ABORT_SCAN;
     }
   }
   // simple pointers, but what are they used for?
@@ -1117,14 +1253,9 @@ int main(int argc, char **argv)
   preset_rom_use();
   try {
     check_all_code_coverage();
-  } catch(char*) {
-  }
-#endif
-  
-#if 1
-  try {
     check_all_ns_coverage();
-  } catch(char*) {
+  } catch(char *err) {
+    puts(err);
   }
 #endif
   
@@ -1237,4 +1368,4 @@ int main(int argc, char **argv)
 //                 21:31:  82.094% of ROM words covered (1721642 of 2097152) +more NS
 // Do 12 aug 2010, 00:44:  89.386% of ROM words covered (1874570 of 2097152) +dictionaries
 //                 00:47:  89.938% of ROM words covered (1886141 of 2097152) +ldr word access
-
+// Sa 14 aug 2010, 08:53:  90.163% of ROM words covered (1890855 of 2097152) +ClassInfo
