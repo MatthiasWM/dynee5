@@ -587,7 +587,7 @@ int disarm(char *dst, unsigned int addr, unsigned int cmd)
       memset(t, 32, dt-(t-theDisasmLine)+1);
     }
     
-    sprintf(dst, "%-32s  ; %.8X %.8X - %-5s", theDisasmLine, addr, given, theString);
+    sprintf(dst, "%-32s  ; 0x%.8X 0x%.8X - %-5s", theDisasmLine, addr, given, theString);
   }
   return incr;
 }

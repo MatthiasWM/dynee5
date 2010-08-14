@@ -52,6 +52,7 @@ const char *c_path = "/Users/matt/dev/Albert/src/";
 const char *cpp_path = "/Users/matt/dev/Albert/src/"; 
 
 const unsigned int flags_type_mask          = 0x000000ff;
+
 const unsigned int flags_type_unknown       = 0x00000000;
 const unsigned int flags_type_arm_code      = 0x00000001;
 const unsigned int flags_type_arm_byte      = 0x00000002;
@@ -116,6 +117,13 @@ void rom_flags_type(unsigned int addr, unsigned int t)
 {
   if (addr<0x00800000)
     ROM_flags[addr/4] = (ROM_flags[addr/4]&~flags_type_mask) | t;
+}
+
+void rom_flags_type(unsigned int addr, unsigned int end, unsigned int t)
+{
+  rom_flags_set(addr, flags_is_target);
+  for ( ; addr<end; addr++)
+    rom_flags_type(addr, t);
 }
 
 unsigned int rom_flags_type(unsigned int addr)
@@ -812,23 +820,16 @@ void check_code_coverage(unsigned int addr)
         VERB3 printf("%08x: following up on subroutine call to %08x\n", addr, next);
         addr = next;
         continue;
-      } else if ( (cmd&0x0ff0ff00) == 0x0280F000) { // add pc,r#,# (typical virtual call)
-        VERB2 printf("Later: Virtual call at %08x: %08x\n", addr, cmd);
-        return;
+      //} else if ( (cmd&0x0ff0ff00) == 0x0280F000) { // add pc,r#,# (typical virtual call)
+        //VERB2 printf("Later: Virtual call at %08x: %08x\n", addr, cmd);
+        //return;
       } else if ( (cmd&0x0db6f000) == 0x0120f000) { // msr command does not modifiy pc
       } else if ( (cmd&0x0c000000) == 0x00000000) { // data processing, only important if pc is changed
         if ( (cmd&0x0000f000) == 0x0000f000) { // is the destination register the pc?
-          if ( (cmd&0x0ff0fff0) == 0x01A0F000 && (rom_w(addr-4)&0x0fffffff) == 0x01A0E00F) {
-            // mov lr,pc; mov pc,r#
-            // this is the  pattern for a function called via an address stored in a register
-            // I can't guess the call address, but we should nevertheless continue to check code coverage
-            VERB2 printf("Later: Register based call at %08x: %08x\n", addr, cmd);
-            addr += 4; continue;
-          }
-          if ( (cmd&0xfffffff0) == 0x908FF100 && (rom_w(addr-4)&0xfff0fff0) == 0xE3500000) {
+          if ( (cmd&0xfffffff0) == 0x908FF100 && (rom_w(addr-4)&0xfff0f000) == 0xE3500000) {
             // cmp rx, #n; addls pc, pc, rx lsl 2
             // This is the pattern for a switch/case statement with default clause. A jump table of size n+1 follows.
-            int n_case = rom_w(addr-4)&0x0000000f, i;
+            int n_case = (rom_w(addr-4)&0x00000fff)+1, i; // FIXME: is this right?
             VERB3 printf("Switch/Case statement with %d cases at %08x: %08x\n", n_case, addr, cmd);
             addr+=4;
             for (i=0; i<=n_case; i++) { // nuber of cases plus default case
@@ -837,18 +838,11 @@ void check_code_coverage(unsigned int addr)
             }
             return;
           }
-          if (addr==0x000456ec) { addr+=4; continue; } // TODO: virtual call?
-          if (addr==0x00045700) { addr+=4; continue; } // TODO: virtual call?
-          if (addr==0x00018624) { addr+=4; continue; } // TODO: virtual call?
-          if (addr==0x00019984) { return; } // TODO: virtual call? fancy return?
-          if (addr==0x000198CC) { return; } // TODO: virtual call? fancy return?
-          if (addr==0x000198F4) { return; } // TODO: virtual call? fancy return?
-          if (addr==0x0001991c) { return; } // TODO: virtual call? fancy return?
-          if (addr==0x0001A0EC) { return; } // TODO: virtual call? fancy return?
-          if (addr==0x00019ca0) { return; } // TODO: virtual call? fancy return?
-          if (addr==0x0001a028) { return; } // TODO: virtual call? fancy return?
-          if (addr==0x000D9938) { return; } // TODO: ??
-          if (addr==0x0038fa50) { addr+=4; continue; } // FIXME: ??
+          if ( rom_w(addr-4)==0xE1A0E00F) { // mov lr,pc; ...
+            // The return address is written into the link register, so in all probability this is a function call
+            VERB2 printf("Later: Register based call at %08x: %08x\n", addr, cmd);
+            addr += 4; continue;
+          }
           if (addr==0x0038d9a4) { check_switch_case(0x0038d9ac, 33); return; }
           if (addr==0x0038ec98) { check_switch_case(0x0038eca0,  9); return; }
           VERB1 printf("Aborting: Data processing command modifying R15 at %08x: %08x\n", addr, cmd);
@@ -880,14 +874,9 @@ void check_code_coverage(unsigned int addr)
       } else if ( (cmd&0x0c100000) == 0x04000000) { // str (store to memory)
       } else if ( (cmd&0x0c100000) == 0x04100000) { // ldr (load from memory)
         if ( (cmd&0x0000f000) == 0x0000f000) { // is the destination register the pc?
-          if (addr==0x000188d8) { addr += 4; continue; } // TODO: this is a long branch to 0x01A6A520
-          if (addr==0x000455b4) { addr += 4; continue; } // TODO: I do not know what this does!
-          if (addr==0x0019190C) { return; } // FIXME: 
-          if ( (cmd&0xfff0f000) == 0xE590F000 && (rom_w(addr-4)&0xffffffff) == 0xE1A0E00F) {
-            // mov lr,pc; ldr pc,r#
-            // this is the pattern for a function called via an address pointed to by a register
-            // I can't guess the call address, but we should nevertheless continue to check code coverage
-            VERB2 printf("Later: Register pointer based call at %08x: %08x\n", addr, cmd);
+          if ( rom_w(addr-4)==0xE1A0E00F) { // mov lr,pc; ...
+            // The return address is writte into the link register, so in all probability this is a function call
+            VERB2 printf("Later: Register based call at %08x: %08x\n", addr, cmd);
             addr += 4; continue;
           }
           VERB1 printf("Aborting: LDR command modifying R15 at %08x: %08x\n", addr, cmd);
@@ -930,76 +919,63 @@ void preset_rom_use()
   for (i=0x006853dc; i<0x0071a95c; i++ ) {
     rom_flags_type(i, flags_type_dict);
   }
+  // kEntriesPerSlot
+  rom_flags_type(0x00000020, 0x00000034, flags_type_arm_word);
+  // gInitHardware
+  rom_flags_type(0x00000034, 0x0000003c, flags_type_arm_word);
+  // gPackageStart
+  rom_flags_type(0x0000003c, flags_type_arm_word);
+  // DataAreaTable
+  rom_flags_type(0x00000040, 0x00000100, flags_type_arm_word);
+  
+  // g8MegContinuousTableStart
+  rom_flags_type(0x00000100, 0x00000174, flags_type_arm_word);
+  // g8MegContinuousTableStartFor4MbK
+  rom_flags_type(0x00000174, 0x00000400, flags_type_arm_word);
+  // kEntriesPerPage
+  rom_flags_type(0x00000400, 0x00001000, flags_type_arm_word);
+  // gParamBlock
+  rom_flags_type(0x00001000, 0x000013D4, flags_type_arm_word);
+  // some filler data?
+  rom_flags_type(0x0001A0F0, 0x0001A0FC, flags_type_arm_word);
+  
+  rom_flags_type(0x000013D4, flags_type_arm_word); //  gOldCheckSumC
+  
+  rom_flags_type(0x000013D4, flags_type_arm_word); //  gOldCheckSumC
+  rom_flags_type(0x000013D8, flags_type_arm_word); //  gOldCheckSumD
+  rom_flags_type(0x000013DC, flags_type_arm_word); //  gROMVersion
+  rom_flags_type(0x000013E0, flags_type_arm_word); //  gROMStage
+  rom_flags_type(0x000013E4, flags_type_arm_word); //  gOldCheckSumA
+  rom_flags_type(0x000013E8, flags_type_arm_word); //  gOldCheckSumB
+  rom_flags_type(0x000013EC, flags_type_arm_word); //  gHardwareType
+  rom_flags_type(0x000013F0, flags_type_arm_word); //  gROMManufacturer
+  rom_flags_type(0x000013F4, flags_type_arm_word); //  gDebuggerBits
+  rom_flags_type(0x000013F8, flags_type_arm_word); //  gNewtTests
+  rom_flags_type(0x000013FC, 0x00002000, flags_type_arm_word); //  gNewtConfig
+  rom_flags_type(0x0001285C, 0x00013000, flags_type_unused); //  space for alignment
+  rom_flags_type(0x00015E0C, 0x00016000, flags_type_unused); //  space for alignment
+  rom_flags_type(0x00016000, 0x00018000, flags_type_arm_word); //  gROMPatchTablePageTable
+  rom_flags_type(0x00018000, 0x00018400, flags_type_arm_word); //  gROMPublicJumpTablePageTable
+  rom_flags_type(0x0001841C, flags_type_arm_word); //  gInitialCPUMode
+  rom_flags_type(0x00018420, flags_type_arm_word); //  gDiagCheckTag1
+  rom_flags_type(0x00018424, flags_type_arm_word); //  gDiagCheckTag2
+  rom_flags_type(0x00018428, flags_type_arm_word); //  gDiagCheckTag3
+  rom_flags_type(0x0001842C, flags_type_arm_word); //  gDiagType
+  rom_flags_type(0x00018430, flags_type_arm_word); //  gPhysROMAcsum
+  rom_flags_type(0x00018434, flags_type_arm_word); //  gPhysROMBcsum
+  rom_flags_type(0x00018438, flags_type_arm_word); //  gPhysROMCcsum
+  rom_flags_type(0x0001843C, flags_type_arm_word); //  gPhysROMDcsum
+  rom_flags_type(0x00018440, flags_type_arm_word); //  gPhysROMEcsum
+  rom_flags_type(0x00018444, flags_type_arm_word); //  gPhysROMFcsum
+  rom_flags_type(0x00018448, flags_type_arm_word); //  gPhysROMGcsum
+  rom_flags_type(0x0001844C, flags_type_arm_word); //  gPhysROMHcsum
+
+  // texts
+  rom_flags_type(0x00032688, 0x00032696, flags_type_arm_text);
+  rom_flags_type(0x00032A80, 0x00032A8a, flags_type_arm_text);
 }
 
 
-/* Virtual calls:
- ; TGeoPortDebugLink::ClassInfo(void) static -> contains virtual table
- ; TSerialDebugLink::Remove(void)
- 003850b8         ldr      r0, [r0, #4]                     | E5900004 - ....
- 003850bc         ldr      r12, [r0, #8]                    | E590C008 - ....
- 003850c0         add      pc, r12, #0x00000014             | E28CF014 - ....
- 
- All this is defined in the ::ClassInfo() calls!
- 
- This is the start of the ClassInfo block. Some offset is zero (it's in all(?) blocks, so don't worry)
- 00387968         andeq    r0, r0, r0                       | 00000000 - ....
- This is the offset from here to the name of this class in ASCIZ
- 0038796c         andeq    r0, r0, r8, asr #32              | 00000048 - ...H
- This is the offset from here to the name of the super class in ASCIZ
- 00387970         andeq    r0, r0, r6, asr r0               | 00000056 - ...V
- End of super class name from here
- 00387974         andeq    r0, r0, r2, rrx                  | 00000062 - ...b
- Start of Jump Table
- 00387978         andeq    r0, r0, r0, rrx                  | 00000060 - ...`
- End of jump table
- 0038797c         andeq    r0, r0, r4, lsl #1               | 00000084 - ....
- Pointer to Sizeof call
- 00387980         b        0x01B12908 (TLZStoreCompander::Sizeof(void) static)  | EA5E2BE0 - .^+.
- Always 0?
- 00387984         andeq    r0, r0, r0                       | 00000000 - ....
- Always 0?
- 00387988         andeq    r0, r0, r0                       | 00000000 - ....
- Pointer to ctor
- 0038798c         b        0x01B11890 (TLZStoreCompander::New(void))  | EA5E27BF - .^'.
- Pointer to dtor
- 00387990         b        0x01B0C65C (TLZStoreCompander::Delete(void))  | EA5E1331 - .^.1
- 00387994         andeq    r0, r0, r0                       | 00000000 - ....
- 00387998         andeq    r0, r0, r0                       | 00000000 - ....
- 0038799c         andeq    r0, r0, r0                       | 00000000 - ....
- jump to ret 0?
- 003879a0         b        0x003879AC                       | EA000001 - ....
- ; TLZStoreCompander::ClassInfo(void) static
- return address of ClassInfo struct
- 003879a4         sub      r0, pc, #0x00000044              | E24F0044 - .O.D
- 003879a8         mov      pc, lr                           | E1A0F00E - ....
- return 0
- 003879ac         mov      r0, #0x00000000                  | E3A00000 - ....
- 003879b0         mov      pc, lr                           | E1A0F00E - ....
- class name
- 003879b4         strplb   r5, [r12], -#2643                | 544C5A53 - TLZS
- 003879b8         strvcbt  r7, 0x0038775B                   | 746F7265 - tore
- 003879bc         cmnmi    pc, #0x00001c00                  | 436F6D70 - Comp
- 003879c0         cmnvs    lr, r5, ror #8                   | 616E6465 - ande
- super class name
- 003879c4         andvc    r5, r0, #0x53000000              | 72005453 - r.TS
- 003879c8         strvcbt  r7, 0x0038776B                   | 746F7265 - tore
- 003879cc         cmnmi    pc, #0x00001c00                  | 436F6D70 - Comp
- 003879d0         cmnvs    lr, r5, ror #8                   | 616E6465 - ande
- 003879d4         andvc    r0, r0, #0x00000000              | 72000000 - r...
- 003879d8         andeq    r0, r0, r0                       | 00000000 - ....
- vtable
- 003879dc         b        0x003879A4 (TLZStoreCompander::ClassInfo(void) static)  | EAFFFFF0 - ....
- 003879e0         b        0x01B11890 (TLZStoreCompander::New(void))  | EA5E27AA - .^'.
- 003879e4         b        0x01B0C65C (TLZStoreCompander::Delete(void))  | EA5E131C - .^..
- 003879e8         b        0x01B0C660 (TLZStoreCompander::Init(TStore *, unsigned long, unsigned long, unsigned char, unsigned char))  | EA5E131C - .^..
- 003879ec         b        0x01B0D6D4 (TLZStoreCompander::BlockSize(void))  | EA5E1738 - .^.8
- 003879f0         b        0x01B0C664 (TLZStoreCompander::Read(unsigned long, char *, long, unsigned long))  | EA5E131B - .^..
- 003879f4         b        0x01B0C668 (TLZStoreCompander::Write(unsigned long, char *, long, unsigned long))  | EA5E131B - .^..
- 003879f8         b        0x01B0F780 (TLZStoreCompander::DoTransactionAgainst(long, unsigned long))  | EA5E1F60 - .^.`
- 003879fc         b        0x01B1082C (TLZStoreCompander::IsReadOnly(void))  | EA5E238A - .^#.
- end of vtable
- */ 
 void check_classinfo(unsigned int addr)
 {
   unsigned int i;
@@ -1072,6 +1048,35 @@ void check_all_code_coverage()
   for (i=0x0001a618; i<0x00021438; i+=4 ) {
     check_code_coverage(i);
   }  
+  // some places that are not reached via static analysis
+  check_code_coverage(0x000189C8);  // CleanPageInIandDCacheSWIGlue
+  check_code_coverage(0x00018A3C);  // CleanDCandFlushICSWIGlue
+  check_code_coverage(0x00018A78);  // CleanPageInDCSWIGlue
+  check_code_coverage(0x00018D1C);  // LoadPhysicalByte
+  check_code_coverage(0x00018D58);  // StorePhysicalByte
+  check_code_coverage(0x00018EE0);  // SafeTouchCard
+  check_code_coverage(0x00021ED4);  // TADC::SampleMachine
+  check_code_coverage(0x0002C60C);  // DeletePrefix
+
+  check_code_coverage(0x000353EC);  // PrepRecConfig
+  check_code_coverage(0x0003540C);  // FBuildRecConfig
+  check_code_coverage(0x00036938);  // FRecognize
+  check_code_coverage(0x0003B6D4);  // StartIRSniffing
+  check_code_coverage(0x0003C38C);  // StopIRSniffing
+  check_code_coverage(0x0003D598);  // FOpenRemote
+  check_code_coverage(0x0003D640);  // FCloseRemote
+  check_code_coverage(0x0003D698);  // FSendCode
+  check_code_coverage(0x0003D818);  // ZapSend
+  check_code_coverage(0x0003D9B4);  // ZapReceive
+  check_code_coverage(0x0003DAC4);  // ZapCancel
+  check_code_coverage(0x0003E85C);  // FCopyBits
+  check_code_coverage(0x0003EC94);  // FGrayShrink
+  check_code_coverage(0x0003F074);  // FViewIntoBitmap
+  check_code_coverage(0x00041D94);  // FGetBitmapInfo
+  check_code_coverage(0x00053CCC);  // FGetCardInfo
+  check_code_coverage(0x000D8A64);  // GenericSWIHandler
+  
+#include "manual_checks.h"
 }
 
 
@@ -1108,6 +1113,7 @@ void check_ns_ref(unsigned int addr)
 {
   if (rom_flags_type(addr)) return;
   rom_flags_type(addr, flags_type_ns_ref);
+  rom_flags_set(addr, flags_is_target);
   unsigned int val = rom_w(addr);
   if ( (val&0xfff0000f) == 0x0000000a ) { // Character
   } else if ( (val&0x00000003) == 0x00000000 ) { // Integer
@@ -1150,7 +1156,8 @@ unsigned int check_ns_obj(unsigned int addr)
   if (rom_flags_type(addr)) return size;
   rom_flags_type(addr, flags_type_ns_obj);
   rom_flags_type(addr+4, flags_type_ns);
-  
+  rom_flags_set(addr, flags_is_target);
+                   
   // follow the members of the object
   if ( (val&0x00000003) == 0x00000000 ) {
     // binary object
@@ -1313,32 +1320,37 @@ int main(int argc, char **argv)
 #endif
 
 #if 1
-  FILE *code = fopen("/Users/matt/dev/Albert/data/code.txt", "wb");
+  FILE *code = fopen("/Users/matt/dev/Albert/data/code.a", "wb");
   if (!code) {
     puts("Can't write code!");
   } else {
     for (i=0; i<0x00800000; i+=4) {
+      const char *type = "";
       char buf[1024]; memset(buf, 0, 1024);
       switch (rom_flags_type(i)) {
-        case flags_type_unknown:
-          strcpy(buf, "unknown         "); break;
-        case flags_type_arm_code:
-          strcpy(buf, "                "); break;
-        case flags_type_arm_word:
-          strcpy(buf, "word            "); break;
-        case flags_type_arm_byte:
-        case flags_type_patch_table:
-        case flags_type_jump_table:
-        case flags_type_unused:
-        case flags_type_rex:
-        case flags_type_ns:
-        case flags_type_ns_obj:
-        case flags_type_ns_ref:
-        case flags_type_dict:
-        default:
-          break;
+        case flags_type_unknown:    type="unknown"; break;
+        case flags_type_arm_code:   type="arm_code"; break;
+        case flags_type_arm_byte:   type="arm_byte"; break;
+        case flags_type_arm_word:   type="arm_word"; break;
+        case flags_type_arm_text:   type="arm_text"; break;
+        case flags_type_patch_table:type="patch_table"; break;
+        case flags_type_jump_table: type="jump_table"; break;
+        case flags_type_unused:     type="unused"; continue;
+        case flags_type_rex:        break; type="rex"; break;
+        case flags_type_ns:         break; type="NS"; break;
+        case flags_type_ns_obj:     break; type="NSObj"; break;
+        case flags_type_ns_ref:     break; type="NSRef"; break;
+        case flags_type_dict:       break; type="dict"; break;
+        case flags_type_classinfo:  type="Class"; break;
+        default:                    type="???"; break; 
       }
-      if (buf[0]) {
+      sprintf(buf, "%s                  ", type);
+      if (buf[0]!=' ') {
+        const char *sym = get_symbol_at(i);
+        if (sym) 
+          fprintf(code, "            %s:\n", sym);
+        else if (rom_flags_is_set(i, flags_is_target)) 
+          fprintf(code, "            L%08X:\n", i);
         disarm(buf+16, i, rom_w(i));
         fprintf(code, "%s\n", buf);
       }
@@ -1358,6 +1370,13 @@ int main(int argc, char **argv)
   return 0;
 }
 
+/*
+:map <f1> kdwdwj$p052xi  rom_flags_type(<esc>11li, flags_type_arm_word); //  <esc>19xkddjj0
+:map <f2> 052xi  rom_flags_type(<esc>11li, flags_type_arm_word); // <esc>j0
+:map <f3> 052xi  rom_flags_type(<esc>11li, flags_type_arm_text); // <esc>j0
+:map <f4> 052xi  check_code_coverage(<esc>11li); // <esc>j0
+*/
+
 // Di 10 aug 2010, 15:05:   0.649% of ROM words covered (13604 of 2097152)
 //                 15:17:   1.106% of ROM words covered (23196 of 2097152)
 //                 20:12:  34.491% of ROM words covered (723334 of 2097152) ARM
@@ -1369,3 +1388,5 @@ int main(int argc, char **argv)
 // Do 12 aug 2010, 00:44:  89.386% of ROM words covered (1874570 of 2097152) +dictionaries
 //                 00:47:  89.938% of ROM words covered (1886141 of 2097152) +ldr word access
 // Sa 14 aug 2010, 08:53:  90.163% of ROM words covered (1890855 of 2097152) +ClassInfo
+//                 12:51:  92.562% of ROM words covered (1941167 of 2097152) +register based calls detection
+//                 22:23:  94.200% of ROM words covered (1975523 of 2097152) +manual additions
