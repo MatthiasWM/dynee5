@@ -1389,10 +1389,6 @@ int main(int argc, char **argv)
 :map <f4> 0df;xi  check_code_coverage(<esc>11li); // <esc>j0
 :map <f5> ma0k12lywj$p0df;xi  rom_flags_type(<esc>11li, , flags_type_data); // <esc>j0/:<cr>
 :map <f6> kmbjjf;llyw'af,lpj0V'bd/unknown<cr>
-
-:map <f2> 0df;xi  rom_flags_type(<esc>11li, flags_type_arm_word); // <esc>j0n
-
- 0x006853DC
 */
 
 // Di 10 aug 2010, 15:05:   0.649% of ROM words covered (13604 of 2097152)
@@ -1415,3 +1411,5 @@ int main(int argc, char **argv)
 //                 20:37:  98.305% of ROM words covered (2061610 of 2097152)
 //                 21:13:  99.591% of ROM words covered (2088566 of 2097152)
 //                 21:44:  99.987% of ROM words covered (2096871 of 2097152)
+//                 21:59: 100.000% of ROM words covered (2097152 of 2097152) PARTY!
+
