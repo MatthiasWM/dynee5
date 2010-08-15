@@ -67,6 +67,7 @@ const unsigned int flags_type_ns_obj        = 0x0000000a;
 const unsigned int flags_type_ns_ref        = 0x0000000b;
 const unsigned int flags_type_dict          = 0x0000000c;
 const unsigned int flags_type_classinfo     = 0x0000000d;
+const unsigned int flags_type_arm_wtext     = 0x0000000e;
 
 const unsigned int flags_is_target          = 0x10000000;
 
@@ -754,8 +755,10 @@ void check_code_coverage(unsigned int addr)
         const char *prev_sym = get_symbol_at(prev);
         const char *addr_sym = get_symbol_at(addr);
         VERB3 printf("Redirecting call from %08x to %08x (%s->%s)\n", prev, addr, prev_sym, addr_sym);
-        if (prev_sym==0 || addr_sym==0 || strcmp(prev_sym, addr_sym)!=0) {
-          VERB2 printf("ERROR: Symbols don't match. Verify lookup table offsets!\n");
+        if ( prev!=0x01bdef54 && prev!=0x01bb294c && prev!=0x01bb4a50 && prev!=0x01bdef64 && prev!=0x01b4c658
+            && (prev_sym==0 || addr_sym==0 || strcmp(prev_sym, addr_sym)!=0) ) {
+          VERB2 printf("ERROR: Symbols don't match. Verify lookup table offsets! At: 0x%08x (0x%08x)\n", prev, addr);
+          VERB2 printf("  (%s!=%s)\n", prev_sym, addr_sym);
           return;
         }
       } else {
@@ -820,9 +823,6 @@ void check_code_coverage(unsigned int addr)
         VERB3 printf("%08x: following up on subroutine call to %08x\n", addr, next);
         addr = next;
         continue;
-      //} else if ( (cmd&0x0ff0ff00) == 0x0280F000) { // add pc,r#,# (typical virtual call)
-        //VERB2 printf("Later: Virtual call at %08x: %08x\n", addr, cmd);
-        //return;
       } else if ( (cmd&0x0db6f000) == 0x0120f000) { // msr command does not modifiy pc
       } else if ( (cmd&0x0c000000) == 0x00000000) { // data processing, only important if pc is changed
         if ( (cmd&0x0000f000) == 0x0000f000) { // is the destination register the pc?
@@ -838,15 +838,20 @@ void check_code_coverage(unsigned int addr)
             }
             return;
           }
-          if ( rom_w(addr-4)==0xE1A0E00F) { // mov lr,pc; ...
+          unsigned int cmd1 = rom_w(addr-4);
+          if ( (cmd1&0x0fffffff)==0x01A0E00F && (cmd&0xf0000000)==(cmd1&0xf0000000)) { // mov lr,pc; ...
             // The return address is written into the link register, so in all probability this is a function call
             VERB2 printf("Later: Register based call at %08x: %08x\n", addr, cmd);
             addr += 4; continue;
           }
           if (addr==0x0038d9a4) { check_switch_case(0x0038d9ac, 33); return; }
           if (addr==0x0038ec98) { check_switch_case(0x0038eca0,  9); return; }
-          VERB1 printf("Aborting: Data processing command modifying R15 at %08x: %08x\n", addr, cmd);
-          ABORT_SCAN;
+          if ((cmd&0xf0000000)==0xe0000000) { // always
+            VERB1 printf("Aborting: Data processing command modifying R15 at %08x: %08x\n", addr, cmd);
+            ABORT_SCAN;
+          } else {
+            addr += 4; continue;
+          }
         }          
       } else if ( (cmd&0x0f000000) == 0x0e000000) { // mcr, mrc (FIXME: probably not changing pc)
       } else if ( (cmd&0x0e000010) == 0x06000010) { // unknown (used to trigger interrupt, FIXME: and then?)
@@ -874,13 +879,18 @@ void check_code_coverage(unsigned int addr)
       } else if ( (cmd&0x0c100000) == 0x04000000) { // str (store to memory)
       } else if ( (cmd&0x0c100000) == 0x04100000) { // ldr (load from memory)
         if ( (cmd&0x0000f000) == 0x0000f000) { // is the destination register the pc?
-          if ( rom_w(addr-4)==0xE1A0E00F) { // mov lr,pc; ...
+          unsigned int cmd1 = rom_w(addr-4);
+          if ( (cmd1&0x0fffffff)==0x01A0E00F && (cmd&0xf0000000)==(cmd1&0xf0000000)) { // mov lr,pc; ...
             // The return address is writte into the link register, so in all probability this is a function call
             VERB2 printf("Later: Register based call at %08x: %08x\n", addr, cmd);
             addr += 4; continue;
           }
-          VERB1 printf("Aborting: LDR command modifying R15 at %08x: %08x\n", addr, cmd);
-          ABORT_SCAN;
+          if ((cmd&0xf0000000)==0xe0000000) { // always
+            VERB1 printf("Aborting: LDR command modifying R15 at %08x: %08x\n", addr, cmd);
+            ABORT_SCAN;
+          } else {
+            addr += 4; continue;
+          }
         }
       } else if ( (cmd&0x0f000000) == 0x0f000000) { // swi (software interrupt)
       } else if ( (cmd&0x0e000000) == 0x0c000000) { // (coprocessor dat transfer) FIXME: may actuall tfer to pc?!
@@ -1149,7 +1159,7 @@ unsigned int check_ns_obj(unsigned int addr)
   unsigned int flags = rom_w(addr+4);
   
   if ( (val&0x0000007c) != 0x00000040 || flags!=0 ) {
-    VERB1 printf("ERROR: not an NS object at %08x: %08x\n", addr, val);
+    VERB1 printf("int: not an NS object at %08x: %08x\n", addr, val);
     ABORT_SCAN_0;
   }
   unsigned int i, size = (val&0xffffff00)>>8;
@@ -1390,3 +1400,7 @@ int main(int argc, char **argv)
 // Sa 14 aug 2010, 08:53:  90.163% of ROM words covered (1890855 of 2097152) +ClassInfo
 //                 12:51:  92.562% of ROM words covered (1941167 of 2097152) +register based calls detection
 //                 22:23:  94.200% of ROM words covered (1975523 of 2097152) +manual additions
+//                 23:14:  94.477% of ROM words covered (1981325 of 2097152) +more
+// So 15 aug 2010, 09:45:  94.499% of ROM words covered (1981780 of 2097152)
+//                 13:50:  94.885% of ROM words covered (1989887 of 2097152)
+
