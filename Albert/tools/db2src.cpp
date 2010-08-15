@@ -68,6 +68,7 @@ const unsigned int flags_type_ns_ref        = 0x0000000b;
 const unsigned int flags_type_dict          = 0x0000000c;
 const unsigned int flags_type_classinfo     = 0x0000000d;
 const unsigned int flags_type_arm_wtext     = 0x0000000e;
+const unsigned int flags_type_data          = 0x0000000f;
 
 const unsigned int flags_is_target          = 0x10000000;
 
@@ -1382,9 +1383,11 @@ int main(int argc, char **argv)
 
 /*
 :map <f1> kdwdwj$p052xi  rom_flags_type(<esc>11li, flags_type_arm_word); //  <esc>19xkddjj0
-:map <f2> 052xi  rom_flags_type(<esc>11li, flags_type_arm_word); // <esc>j0
-:map <f3> 052xi  rom_flags_type(<esc>11li, flags_type_arm_text); // <esc>j0
-:map <f4> 052xi  check_code_coverage(<esc>11li); // <esc>j0
+:map <f2> 0df;xi  rom_flags_type(<esc>11li, flags_type_arm_word); // <esc>j0
+:map <f3> 0df;xi  rom_flags_type(<esc>11li, flags_type_arm_text); // <esc>j0
+:map <f4> 0df;xi  check_code_coverage(<esc>11li); // <esc>j0
+:map <f5> ma0k12lywj$p0df;xi  rom_flags_type(<esc>11li, , flags_type_data); // <esc>j0/:<cr>
+:map <f6> kmbjjf;llyw'af,lpj0V'bd/unknown<cr>
 */
 
 // Di 10 aug 2010, 15:05:   0.649% of ROM words covered (13604 of 2097152)
@@ -1403,4 +1406,4 @@ int main(int argc, char **argv)
 //                 23:14:  94.477% of ROM words covered (1981325 of 2097152) +more
 // So 15 aug 2010, 09:45:  94.499% of ROM words covered (1981780 of 2097152)
 //                 13:50:  94.885% of ROM words covered (1989887 of 2097152)
-
+//                 15:04:  96.456% of ROM words covered (2022828 of 2097152) +more functions found

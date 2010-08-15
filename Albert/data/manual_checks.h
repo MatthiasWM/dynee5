@@ -4422,3 +4422,5741 @@
   rom_flags_type(0x00365E54, flags_type_arm_text); //  0x616D6D61 - amma 
   rom_flags_type(0x00365E58, flags_type_arm_text); //  0x72730000 - rs.. 
   rom_flags_type(0x00365E5C, 0x00365E94, flags_type_arm_word); //  0x00366388 - .6c. BiSLSharedAttrCommon1
+  check_code_coverage(0x002724EC); //  0xE3320007 - .2.. 
+  check_code_coverage(0x00319A70); //  0xE1A0F00E - .... 
+  rom_flags_type(0x001EA1BC, flags_type_arm_text); //  0x4E6F2056 - No.V 
+  rom_flags_type(0x001EA1C0, flags_type_arm_text); //  0x69657720 - iew. 
+  rom_flags_type(0x001EA1C4, flags_type_arm_text); //  0x666F756E - foun 
+  rom_flags_type(0x001EA1C8, flags_type_arm_text); //  0x64286869 - d(hi 
+  rom_flags_type(0x001EA1CC, flags_type_arm_text); //  0x6464656E - dden 
+  rom_flags_type(0x001EA1D0, flags_type_arm_text); //  0x3F290D00 - ?).. 
+  rom_flags_type(0x001EA20C, flags_type_arm_text); //  0x77000000 - w... 
+  rom_flags_type(0x001EA210, flags_type_arm_text); //  0x626F6F74 - boot 
+  rom_flags_type(0x001EA214, flags_type_arm_text); //  0x52657375 - Resu 
+  rom_flags_type(0x001EA218, flags_type_arm_text); //  0x6C747300 - lts. 
+  rom_flags_type(0x001EB8E0, flags_type_arm_text); //  0x696E6465 - inde 
+  rom_flags_type(0x001EB8E4, flags_type_arm_text); //  0x6E747800 - ntx. 
+  rom_flags_type(0x001EB8E8, flags_type_arm_text); //  0x696E6465 - inde 
+  rom_flags_type(0x001EB8EC, flags_type_arm_text); //  0x6E747900 - nty. 
+  rom_flags_type(0x001EDA28, flags_type_arm_text); //  0x6E696C20 - nil. 
+  rom_flags_type(0x001EDA2C, flags_type_arm_text); //  0x76696577 - view 
+  rom_flags_type(0x001EDA30, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001EDE64, flags_type_arm_text); //  0x6E696C20 - nil. 
+  rom_flags_type(0x001EDE68, flags_type_arm_text); //  0x76696577 - view 
+  rom_flags_type(0x001EDE6C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001EE250, flags_type_arm_text); //  0x6E6F7420 - not. 
+  rom_flags_type(0x001EE254, flags_type_arm_text); //  0x61207061 - a.pa 
+  rom_flags_type(0x001EE258, flags_type_arm_text); //  0x72616772 - ragr 
+  rom_flags_type(0x001EE25C, flags_type_arm_text); //  0x61706820 - aph. 
+  rom_flags_type(0x001EE260, flags_type_arm_text); //  0x76696577 - view 
+  rom_flags_type(0x001EE264, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001EE8EC, flags_type_arm_text); //  0x6E6F7420 - not. 
+  rom_flags_type(0x001EE8F0, flags_type_arm_text); //  0x61207061 - a.pa 
+  rom_flags_type(0x001EE8F4, flags_type_arm_text); //  0x72616772 - ragr 
+  rom_flags_type(0x001EE8F8, flags_type_arm_text); //  0x61706820 - aph. 
+  rom_flags_type(0x001EE8FC, flags_type_arm_text); //  0x76696577 - view 
+  rom_flags_type(0x001EE900, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001EED18, flags_type_arm_text); //  0x62616420 - bad. 
+  rom_flags_type(0x001EED1C, flags_type_arm_text); //  0x76696577 - view 
+  rom_flags_type(0x001EED20, flags_type_arm_text); //  0x20666F72 - .for 
+  rom_flags_type(0x001EED24, flags_type_arm_text); //  0x20636861 - .cha 
+  rom_flags_type(0x001EED28, flags_type_arm_text); //  0x6E676553 - ngeS 
+  rom_flags_type(0x001EED2C, flags_type_arm_text); //  0x74796C65 - tyle 
+  rom_flags_type(0x001EED30, flags_type_arm_text); //  0x734F6652 - sOfR 
+  rom_flags_type(0x001EED34, flags_type_arm_text); //  0x616E6765 - ange 
+  rom_flags_type(0x001EED38, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001EF344, flags_type_arm_text); //  0x6E6F7420 - not. 
+  rom_flags_type(0x001EF348, flags_type_arm_text); //  0x616E2065 - an.e 
+  rom_flags_type(0x001EF34C, flags_type_arm_text); //  0x64697420 - dit. 
+  rom_flags_type(0x001EF350, flags_type_arm_text); //  0x76696577 - view 
+  rom_flags_type(0x001EF354, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001EF358, flags_type_arm_text); //  0x72656164 - read 
+  rom_flags_type(0x001EF35C, flags_type_arm_text); //  0x2D6F6E6C - -onl 
+  rom_flags_type(0x001EF360, flags_type_arm_text); //  0x79207669 - y.vi 
+  rom_flags_type(0x001EF364, flags_type_arm_text); //  0x65770000 - ew.. 
+  rom_flags_type(0x001EFCB0, flags_type_arm_text); //  0x6E696C20 - nil. 
+  rom_flags_type(0x001EFCB4, flags_type_arm_text); //  0x76696577 - view 
+  rom_flags_type(0x001EFCB8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001F0B4C, flags_type_arm_text); //  0x6E6F7420 - not. 
+  rom_flags_type(0x001F0B50, flags_type_arm_text); //  0x61207265 - a.re 
+  rom_flags_type(0x001F0B54, flags_type_arm_text); //  0x6374616E - ctan 
+  rom_flags_type(0x001F0B58, flags_type_arm_text); //  0x676C6500 - gle. 
+  rom_flags_type(0x001F14F0, flags_type_arm_text); //  0x62616420 - bad. 
+  rom_flags_type(0x001F14F4, flags_type_arm_text); //  0x70696374 - pict 
+  rom_flags_type(0x001F14F8, flags_type_arm_text); //  0x20667261 - .fra 
+  rom_flags_type(0x001F14FC, flags_type_arm_text); //  0x6D650000 - me.. 
+  rom_flags_type(0x001F1508, flags_type_arm_text); //  0x62616420 - bad. 
+  rom_flags_type(0x001F150C, flags_type_arm_text); //  0x7374726F - stro 
+  rom_flags_type(0x001F1510, flags_type_arm_text); //  0x6B652064 - ke.d 
+  rom_flags_type(0x001F1514, flags_type_arm_text); //  0x65737400 - est. 
+  rom_flags_type(0x001F1C90, 0x001F40A4, flags_type_arm_text); //  0x61000000 - a... 
+  rom_flags_type(0x001F57A8, flags_type_arm_text); //  0x56455249 - VERI 
+  rom_flags_type(0x001F57AC, flags_type_arm_text); //  0x46494544 - FIED 
+  rom_flags_type(0x001F57B0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001F57B4, flags_type_arm_text); //  0x4E4F5420 - NOT. 
+  rom_flags_type(0x001F57B8, flags_type_arm_text); //  0x56455249 - VERI 
+  rom_flags_type(0x001F57BC, flags_type_arm_text); //  0x46494544 - FIED 
+  rom_flags_type(0x001F57C0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001F57C4, flags_type_arm_text); //  0x25732025 - %s.% 
+  rom_flags_type(0x001F57C8, flags_type_arm_text); //  0x730D0000 - s... 
+  rom_flags_type(0x001F5FCC, flags_type_arm_text); //  0x54727920 - Try. 
+  rom_flags_type(0x001F5FD0, flags_type_arm_text); //  0x696E7365 - inse 
+  rom_flags_type(0x001F5FD4, flags_type_arm_text); //  0x7274696E - rtin 
+  rom_flags_type(0x001F5FD8, flags_type_arm_text); //  0x67202573 - g.%s 
+  rom_flags_type(0x001F5FDC, flags_type_arm_text); //  0x2E0D0000 - .... 
+  rom_flags_type(0x001F5FE0, flags_type_arm_text); //  0x4D617463 - Matc 
+  rom_flags_type(0x001F5FE4, flags_type_arm_text); //  0x68656420 - hed. 
+  rom_flags_type(0x001F5FE8, flags_type_arm_text); //  0x776F7264 - word 
+  rom_flags_type(0x001F5FEC, flags_type_arm_text); //  0x20257320 - .%s. 
+  rom_flags_type(0x001F5FF0, flags_type_arm_text); //  0x73686172 - shar 
+  rom_flags_type(0x001F5FF4, flags_type_arm_text); //  0x65642E0D - ed.. 
+  rom_flags_type(0x001F5FF8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001F60F0, flags_type_arm_text); //  0x4D617463 - Matc 
+  rom_flags_type(0x001F60F4, flags_type_arm_text); //  0x68656420 - hed. 
+  rom_flags_type(0x001F60F8, flags_type_arm_text); //  0x776F7264 - word 
+  rom_flags_type(0x001F60FC, flags_type_arm_text); //  0x20257320 - .%s. 
+  rom_flags_type(0x001F6100, flags_type_arm_text); //  0x64656C65 - dele 
+  rom_flags_type(0x001F6104, flags_type_arm_text); //  0x7465642E - ted. 
+  rom_flags_type(0x001F6108, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x001F610C, flags_type_arm_text); //  0x496E7365 - Inse 
+  rom_flags_type(0x001F6110, flags_type_arm_text); //  0x72742077 - rt.w 
+  rom_flags_type(0x001F6114, flags_type_arm_text); //  0x6F726420 - ord. 
+  rom_flags_type(0x001F6118, flags_type_arm_text); //  0x25732061 - %s.a 
+  rom_flags_type(0x001F611C, flags_type_arm_text); //  0x7420706F - t.po 
+  rom_flags_type(0x001F6120, flags_type_arm_text); //  0x73697469 - siti 
+  rom_flags_type(0x001F6124, flags_type_arm_text); //  0x6F6E2025 - on.% 
+  rom_flags_type(0x001F6128, flags_type_arm_text); //  0x642E0D00 - d... 
+  rom_flags_type(0x001F98B0, flags_type_arm_text); //  0x456E7465 - Ente 
+  rom_flags_type(0x001F98B4, flags_type_arm_text); //  0x72696E67 - ring 
+  rom_flags_type(0x001F98B8, flags_type_arm_text); //  0x20627265 - .bre 
+  rom_flags_type(0x001F98BC, flags_type_arm_text); //  0x616B206C - ak.l 
+  rom_flags_type(0x001F98C0, flags_type_arm_text); //  0x6F6F700D - oop. 
+  rom_flags_type(0x001F98C4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x001F98D0, flags_type_arm_text); //  0x45786974 - Exit 
+  rom_flags_type(0x001F98D4, flags_type_arm_text); //  0x696E6720 - ing. 
+  rom_flags_type(0x001F98D8, flags_type_arm_text); //  0x62726561 - brea 
+  rom_flags_type(0x001F98DC, flags_type_arm_text); //  0x6B206C6F - k.lo 
+  rom_flags_type(0x001F98E0, flags_type_arm_text); //  0x6F700D00 - op.. 
+  rom_flags_type(0x001F9DAC, flags_type_arm_text); //  0x544C5A44 - TLZD 
+  rom_flags_type(0x001F9DB0, flags_type_arm_text); //  0x65636F6D - ecom 
+  rom_flags_type(0x001F9DB4, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x001F9DB8, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x001F9DBC, flags_type_arm_text); //  0x54446563 - TDec 
+  rom_flags_type(0x001F9DC0, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x001F9DC4, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x001F9DC8, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FA18C, flags_type_arm_text); //  0x544C5A43 - TLZC 
+  rom_flags_type(0x001FA190, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x001FA194, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x001FA198, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FA19C, flags_type_arm_text); //  0x54436F6D - TCom 
+  rom_flags_type(0x001FA1A0, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x001FA1A4, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x001FA1A8, flags_type_arm_text); //  0x544C5A44 - TLZD 
+  rom_flags_type(0x001FA1AC, flags_type_arm_text); //  0x65636F6D - ecom 
+  rom_flags_type(0x001FA1B0, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x001FA1B4, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x001FA1B8, flags_type_arm_text); //  0x54446563 - TDec 
+  rom_flags_type(0x001FA1BC, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x001FA1C0, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x001FA1C4, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FA3DC, flags_type_arm_text); //  0x544C5A44 - TLZD 
+  rom_flags_type(0x001FA3E0, flags_type_arm_text); //  0x65636F6D - ecom 
+  rom_flags_type(0x001FA3E4, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x001FA3E8, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x001FA3EC, flags_type_arm_text); //  0x54446563 - TDec 
+  rom_flags_type(0x001FA3F0, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x001FA3F4, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x001FA3F8, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FA704, flags_type_arm_text); //  0x2573436C - %sCl 
+  rom_flags_type(0x001FA708, flags_type_arm_text); //  0x65616E75 - eanu 
+  rom_flags_type(0x001FA70C, flags_type_arm_text); //  0x70000000 - p... 
+  rom_flags_type(0x001FA710, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x001FA714, flags_type_arm_text); //  0x72654465 - reDe 
+  rom_flags_type(0x001FA718, flags_type_arm_text); //  0x636F6D70 - comp 
+  rom_flags_type(0x001FA71C, flags_type_arm_text); //  0x72657373 - ress 
+  rom_flags_type(0x001FA720, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x001FA7D4, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x001FA7D8, flags_type_arm_text); //  0x72654465 - reDe 
+  rom_flags_type(0x001FA7DC, flags_type_arm_text); //  0x636F6D70 - comp 
+  rom_flags_type(0x001FA7E0, flags_type_arm_text); //  0x72657373 - ress 
+  rom_flags_type(0x001FA7E4, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x001FA92C, flags_type_arm_text); //  0x544C5A43 - TLZC 
+  rom_flags_type(0x001FA930, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x001FA934, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x001FA938, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FA93C, flags_type_arm_text); //  0x54436F6D - TCom 
+  rom_flags_type(0x001FA940, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x001FA944, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x001FAA98, flags_type_arm_text); //  0x544C5A44 - TLZD 
+  rom_flags_type(0x001FAA9C, flags_type_arm_text); //  0x65636F6D - ecom 
+  rom_flags_type(0x001FAAA0, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x001FAAA4, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x001FAAA8, flags_type_arm_text); //  0x54446563 - TDec 
+  rom_flags_type(0x001FAAAC, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x001FAAB0, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x001FAAB4, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FAB54, flags_type_arm_text); //  0x545A6970 - TZip 
+  rom_flags_type(0x001FAB58, flags_type_arm_text); //  0x70794465 - pyDe 
+  rom_flags_type(0x001FAB5C, flags_type_arm_text); //  0x636F6D70 - comp 
+  rom_flags_type(0x001FAB60, flags_type_arm_text); //  0x72657373 - ress 
+  rom_flags_type(0x001FAB64, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x001FAB68, flags_type_arm_text); //  0x54446563 - TDec 
+  rom_flags_type(0x001FAB6C, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x001FAB70, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x001FAB74, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FAD54, flags_type_arm_text); //  0x545A6970 - TZip 
+  rom_flags_type(0x001FAD58, flags_type_arm_text); //  0x70794465 - pyDe 
+  rom_flags_type(0x001FAD5C, flags_type_arm_text); //  0x636F6D70 - comp 
+  rom_flags_type(0x001FAD60, flags_type_arm_text); //  0x72657373 - ress 
+  rom_flags_type(0x001FAD64, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x001FAD68, flags_type_arm_text); //  0x54446563 - TDec 
+  rom_flags_type(0x001FAD6C, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x001FAD70, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x001FAD74, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FB948, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FB978, flags_type_arm_text); //  0x6465763A - dev: 
+  rom_flags_type(0x001FB97C, flags_type_arm_text); //  0x53746447 - StdG 
+  rom_flags_type(0x001FB980, flags_type_arm_text); //  0x65744669 - etFi 
+  rom_flags_type(0x001FB984, flags_type_arm_text); //  0x6C650000 - le.. 
+  rom_flags_type(0x001FBAA4, flags_type_arm_text); //  0x636F756C - coul 
+  rom_flags_type(0x001FBAA8, flags_type_arm_text); //  0x646E2774 - dn't 
+  rom_flags_type(0x001FBAAC, flags_type_arm_text); //  0x20666F72 - .for 
+  rom_flags_type(0x001FBAB0, flags_type_arm_text); //  0x6B206974 - k.it 
+  rom_flags_type(0x001FBAB4, flags_type_arm_text); //  0x206F7665 - .ove 
+  rom_flags_type(0x001FBAB8, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FBBC8, flags_type_arm_text); //  0x636F756C - coul 
+  rom_flags_type(0x001FBBCC, flags_type_arm_text); //  0x646E2774 - dn't 
+  rom_flags_type(0x001FBBD0, flags_type_arm_text); //  0x20666F72 - .for 
+  rom_flags_type(0x001FBBD4, flags_type_arm_text); //  0x6B206974 - k.it 
+  rom_flags_type(0x001FBBD8, flags_type_arm_text); //  0x206F7665 - .ove 
+  rom_flags_type(0x001FBBDC, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x001FF6F4, flags_type_arm_text); //  0x3C3C3C3C - <<<< 
+  rom_flags_type(0x001FF6F8, flags_type_arm_text); //  0x6E6F706F - nopo 
+  rom_flags_type(0x001FF6FC, flags_type_arm_text); //  0x696E7473 - ints 
+  rom_flags_type(0x001FF700, flags_type_arm_text); //  0x74726F6B - trok 
+  rom_flags_type(0x001FF704, flags_type_arm_text); //  0x650D0000 - e... 
+  rom_flags_type(0x0020004C, flags_type_arm_text); //  0x5374726F - Stro 
+  rom_flags_type(0x00200050, flags_type_arm_text); //  0x6B654365 - keCe 
+  rom_flags_type(0x00200054, flags_type_arm_text); //  0x6E74726F - ntro 
+  rom_flags_type(0x00200058, flags_type_arm_text); //  0x69642063 - id.c 
+  rom_flags_type(0x0020005C, flags_type_arm_text); //  0x616C6C65 - alle 
+  rom_flags_type(0x00200060, flags_type_arm_text); //  0x6420666F - d.fo 
+  rom_flags_type(0x00200064, flags_type_arm_text); //  0x72204E55 - r.NU 
+  rom_flags_type(0x00200068, flags_type_arm_text); //  0x4C4C206F - LL.o 
+  rom_flags_type(0x0020006C, flags_type_arm_text); //  0x7220302D - r.0- 
+  rom_flags_type(0x00200070, flags_type_arm_text); //  0x70742073 - pt.s 
+  rom_flags_type(0x00200074, flags_type_arm_text); //  0x74726F6B - trok 
+  rom_flags_type(0x00200078, flags_type_arm_text); //  0x650D0000 - e... 
+  rom_flags_type(0x002003D0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002007C4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002008A4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00200A0C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00200AB0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00200BBC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002011FC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00201580, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00201AD8, flags_type_arm_text); //  0x6576656E - even 
+  rom_flags_type(0x00201ADC, flags_type_arm_text); //  0x74706175 - tpau 
+  rom_flags_type(0x00201AE0, flags_type_arm_text); //  0x73650000 - se.. 
+  rom_flags_type(0x00202384, flags_type_arm_word); //  0x47800000 - G... 
+  rom_flags_type(0x00203424, flags_type_arm_text); //  0x67617262 - garb 
+  rom_flags_type(0x00203428, flags_type_arm_text); //  0x61676543 - ageC 
+  rom_flags_type(0x0020342C, flags_type_arm_text); //  0x6F6C6C65 - olle 
+  rom_flags_type(0x00203430, flags_type_arm_text); //  0x63744672 - ctFr 
+  rom_flags_type(0x00203434, flags_type_arm_text); //  0x616D6573 - ames 
+  rom_flags_type(0x00203438, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0020343C, flags_type_arm_text); //  0x696E636C - incl 
+  rom_flags_type(0x00203440, flags_type_arm_text); //  0x75646553 - udeS 
+  rom_flags_type(0x00203444, flags_type_arm_text); //  0x79737465 - yste 
+  rom_flags_type(0x00203448, flags_type_arm_text); //  0x6D52656C - mRel 
+  rom_flags_type(0x0020344C, flags_type_arm_text); //  0x65617361 - easa 
+  rom_flags_type(0x00203450, flags_type_arm_text); //  0x626C6500 - ble. 
+  rom_flags_type(0x00203454, flags_type_arm_text); //  0x70747248 - ptrH 
+  rom_flags_type(0x00203458, flags_type_arm_text); //  0x65617053 - eapS 
+  rom_flags_type(0x0020345C, flags_type_arm_text); //  0x74617274 - tart 
+  rom_flags_type(0x00203460, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00203464, flags_type_arm_text); //  0x70747248 - ptrH 
+  rom_flags_type(0x00203468, flags_type_arm_text); //  0x65617053 - eapS 
+  rom_flags_type(0x0020346C, flags_type_arm_text); //  0x697A6500 - ize. 
+  rom_flags_type(0x00203470, flags_type_arm_text); //  0x70747246 - ptrF 
+  rom_flags_type(0x00203474, flags_type_arm_text); //  0x72656553 - reeS 
+  rom_flags_type(0x00203478, flags_type_arm_text); //  0x697A6500 - ize. 
+  rom_flags_type(0x0020347C, flags_type_arm_text); //  0x68616E64 - hand 
+  rom_flags_type(0x00203480, flags_type_arm_text); //  0x6C654865 - leHe 
+  rom_flags_type(0x00203484, flags_type_arm_text); //  0x61705374 - apSt 
+  rom_flags_type(0x00203488, flags_type_arm_text); //  0x61727400 - art. 
+  rom_flags_type(0x0020348C, flags_type_arm_text); //  0x68616E64 - hand 
+  rom_flags_type(0x00203490, flags_type_arm_text); //  0x6C654865 - leHe 
+  rom_flags_type(0x00203494, flags_type_arm_text); //  0x61705369 - apSi 
+  rom_flags_type(0x00203498, flags_type_arm_text); //  0x7A650000 - ze.. 
+  rom_flags_type(0x0020349C, flags_type_arm_text); //  0x68616E64 - hand 
+  rom_flags_type(0x002034A0, flags_type_arm_text); //  0x6C654672 - leFr 
+  rom_flags_type(0x002034A4, flags_type_arm_text); //  0x65655369 - eeSi 
+  rom_flags_type(0x002034A8, flags_type_arm_text); //  0x7A650000 - ze.. 
+  rom_flags_type(0x002034AC, flags_type_arm_text); //  0x6672616D - fram 
+  rom_flags_type(0x002034B0, flags_type_arm_text); //  0x65734865 - esHe 
+  rom_flags_type(0x002034B4, flags_type_arm_text); //  0x61705374 - apSt 
+  rom_flags_type(0x002034B8, flags_type_arm_text); //  0x61727400 - art. 
+  rom_flags_type(0x002034BC, flags_type_arm_text); //  0x6672616D - fram 
+  rom_flags_type(0x002034C0, flags_type_arm_text); //  0x65734865 - esHe 
+  rom_flags_type(0x002034C4, flags_type_arm_text); //  0x61705369 - apSi 
+  rom_flags_type(0x002034C8, flags_type_arm_text); //  0x7A650000 - ze.. 
+  rom_flags_type(0x002034CC, flags_type_arm_text); //  0x6672616D - fram 
+  rom_flags_type(0x002034D0, flags_type_arm_text); //  0x65734672 - esFr 
+  rom_flags_type(0x002034D4, flags_type_arm_text); //  0x65655369 - eeSi 
+  rom_flags_type(0x002034D8, flags_type_arm_text); //  0x7A650000 - ze.. 
+  rom_flags_type(0x002034DC, flags_type_arm_text); //  0x73797374 - syst 
+  rom_flags_type(0x002034E0, flags_type_arm_text); //  0x656D4672 - emFr 
+  rom_flags_type(0x002034E4, flags_type_arm_text); //  0x65655369 - eeSi 
+  rom_flags_type(0x002034E8, flags_type_arm_text); //  0x7A650000 - ze.. 
+  rom_flags_type(0x00203BE8, flags_type_arm_word); //  0x47800000 - G... 
+  rom_flags_type(0x00206930, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x00206934, flags_type_arm_text); //  0x4167656E - Agen 
+  rom_flags_type(0x00206938, flags_type_arm_text); //  0x74204552 - t.ER 
+  rom_flags_type(0x0020693C, flags_type_arm_text); //  0x52092564 - R.%d 
+  rom_flags_type(0x00206940, flags_type_arm_text); //  0x09257309 - .%s. 
+  rom_flags_type(0x00206944, flags_type_arm_text); //  0x25730D00 - %s.. 
+  rom_flags_type(0x00206A50, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00206A54, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x00206A58, flags_type_arm_text); //  0x4167656E - Agen 
+  rom_flags_type(0x00206A5C, flags_type_arm_text); //  0x74204D53 - t.MS 
+  rom_flags_type(0x00206A60, flags_type_arm_text); //  0x473A2074 - G:.t 
+  rom_flags_type(0x00206A64, flags_type_arm_text); //  0x65737420 - est. 
+  rom_flags_type(0x00206A68, flags_type_arm_text); //  0x25732066 - %s.f 
+  rom_flags_type(0x00206A6C, flags_type_arm_text); //  0x696E6973 - inis 
+  rom_flags_type(0x00206A70, flags_type_arm_text); //  0x68656420 - hed. 
+  rom_flags_type(0x00206A74, flags_type_arm_text); //  0x61742025 - at.% 
+  rom_flags_type(0x00206A78, flags_type_arm_text); //  0x732C2025 - s,.% 
+  rom_flags_type(0x00206A7C, flags_type_arm_text); //  0x730D0000 - s... 
+  rom_flags_type(0x00206A80, flags_type_arm_word); //  0x2E2E2E2E - .... 
+  rom_flags_type(0x00206A84, flags_type_arm_text); //  0x2E256420 - .%d. 
+  rom_flags_type(0x00206A88, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x00206A8C, flags_type_arm_text); //  0x72732072 - rs.r 
+  rom_flags_type(0x00206A90, flags_type_arm_text); //  0x65706F72 - epor 
+  rom_flags_type(0x00206A94, flags_type_arm_text); //  0x7465642C - ted, 
+  rom_flags_type(0x00206A98, flags_type_arm_text); //  0x20256420 - .%d. 
+  rom_flags_type(0x00206A9C, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x00206AA0, flags_type_arm_text); //  0x7273206C - rs.l 
+  rom_flags_type(0x00206AA4, flags_type_arm_text); //  0x6F676765 - ogge 
+  rom_flags_type(0x00206AA8, flags_type_arm_text); //  0x640D0000 - d... 
+  rom_flags_type(0x00206AE4, flags_type_arm_text); //  0x6E657774 - newt 
+  rom_flags_type(0x00206AE8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00206AEC, flags_type_arm_text); //  0x7474736B - ttsk 
+  rom_flags_type(0x00206AF0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00206AF4, flags_type_arm_word); //  0x2E2E2E2E - .... 
+  rom_flags_type(0x00206AF8, flags_type_arm_word); //  0x2E2E2E2E - .... 
+  rom_flags_type(0x00206AFC, flags_type_arm_word); //  0x2E2E2E2E - .... 
+  rom_flags_type(0x00206B00, flags_type_arm_word); //  0x2E2E2E2E - .... 
+  rom_flags_type(0x00206B04, flags_type_arm_word); //  0x2E2E2E2E - .... 
+  rom_flags_type(0x00206B08, flags_type_arm_text); //  0x0D546573 - .Tes 
+  rom_flags_type(0x00206B0C, flags_type_arm_text); //  0x74416765 - tAge 
+  rom_flags_type(0x00206B10, flags_type_arm_text); //  0x6E74204D - nt.M 
+  rom_flags_type(0x00206B14, flags_type_arm_text); //  0x53473A20 - SG:. 
+  rom_flags_type(0x00206B18, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x00206B1C, flags_type_arm_text); //  0x20257320 - .%s. 
+  rom_flags_type(0x00206B20, flags_type_arm_text); //  0x73746172 - star 
+  rom_flags_type(0x00206B24, flags_type_arm_text); //  0x74656420 - ted. 
+  rom_flags_type(0x00206B28, flags_type_arm_text); //  0x696E2025 - in.% 
+  rom_flags_type(0x00206B2C, flags_type_arm_text); //  0x73206174 - s.at 
+  rom_flags_type(0x00206B30, flags_type_arm_text); //  0x2025732C - .%s, 
+  rom_flags_type(0x00206B34, flags_type_arm_text); //  0x2025730D - .%s. 
+  rom_flags_type(0x00206B38, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00206BCC, flags_type_arm_word); //  0x54657374 - Test 
+  rom_flags_type(0x00206BD0, flags_type_arm_word); //  0x4167656E - Agen 
+  rom_flags_type(0x00206BD4, flags_type_arm_word); //  0x74204D53 - t.MS 
+  rom_flags_type(0x00206BD8, flags_type_arm_word); //  0x4709546F - G.To 
+  rom_flags_type(0x00206BDC, flags_type_arm_word); //  0x74616C53 - talS 
+  rom_flags_type(0x00206BE0, flags_type_arm_word); //  0x79737465 - yste 
+  rom_flags_type(0x00206BE4, flags_type_arm_word); //  0x6D467265 - mFre 
+  rom_flags_type(0x00206BE8, flags_type_arm_word); //  0x653D2564 - e=%d 
+  rom_flags_type(0x00206BEC, flags_type_arm_word); //  0x0D000000 - .... 
+  rom_flags_type(0x0020958C, flags_type_arm_word); //  0x0D096573 - ..es 
+  rom_flags_type(0x00209590, flags_type_arm_word); //  0x3A20256C - :.%l 
+  rom_flags_type(0x00209594, flags_type_arm_word); //  0x64202063 - d..c 
+  rom_flags_type(0x00209598, flags_type_arm_word); //  0x6E743A20 - nt:. 
+  rom_flags_type(0x0020959C, flags_type_arm_word); //  0x256C6420 - %ld. 
+  rom_flags_type(0x002095A0, flags_type_arm_word); //  0x20667265 - .fre 
+  rom_flags_type(0x002095A4, flags_type_arm_word); //  0x653A2025 - e:.% 
+  rom_flags_type(0x002095A8, flags_type_arm_word); //  0x6C640000 - ld.. 
+  rom_flags_type(0x00209AC8, flags_type_arm_word); //  0x002A0000 - .*.. 
+  rom_flags_type(0x00209ACC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0020CE90, flags_type_arm_text); //  0x0D09466C - ..Fl 
+  rom_flags_type(0x0020CE94, flags_type_arm_text); //  0x6167733A - ags: 
+  rom_flags_type(0x0020CE98, flags_type_arm_text); //  0x2020256C - ..%l 
+  rom_flags_type(0x0020CE9C, flags_type_arm_text); //  0x64200D00 - d... 
+  rom_flags_type(0x0020CEA0, flags_type_arm_text); //  0x2020256C - ..%l 
+  rom_flags_type(0x0020CEA4, flags_type_arm_text); //  0x64205069 - d.Pi 
+  rom_flags_type(0x0020CEA8, flags_type_arm_text); //  0x65636554 - eceT 
+  rom_flags_type(0x0020CEAC, flags_type_arm_text); //  0x79706573 - ypes 
+  rom_flags_type(0x0020CEB0, flags_type_arm_text); //  0x200D0000 - .... 
+  rom_flags_type(0x0020CEB4, flags_type_arm_text); //  0x20200000 - .... 
+  rom_flags_type(0x0020CF08, flags_type_arm_text); //  0x444F4D41 - DOMA 
+  rom_flags_type(0x0020CF0C, flags_type_arm_text); //  0x494E3A20 - IN:. 
+  rom_flags_type(0x0020CF10, flags_type_arm_text); //  0x25732000 - %s.. 
+  rom_flags_type(0x0020CF64, flags_type_arm_text); //  0x446F6D61 - Doma 
+  rom_flags_type(0x0020CF68, flags_type_arm_text); //  0x696E5061 - inPa 
+  rom_flags_type(0x0020CF6C, flags_type_arm_text); //  0x72616D65 - rame 
+  rom_flags_type(0x0020CF70, flags_type_arm_text); //  0x74657228 - ter( 
+  rom_flags_type(0x0020CF74, flags_type_arm_text); //  0x256C642C - %ld, 
+  rom_flags_type(0x0020CF78, flags_type_arm_text); //  0x20256C64 - .%ld 
+  rom_flags_type(0x0020CF7C, flags_type_arm_text); //  0x2C20256C - ,.%l 
+  rom_flags_type(0x0020CF80, flags_type_arm_text); //  0x64290D00 - d).. 
+  rom_flags_type(0x0020D184, flags_type_arm_text); //  0x54446F74 - TDot 
+  rom_flags_type(0x0020D188, flags_type_arm_text); //  0x5072696E - Prin 
+  rom_flags_type(0x0020D18C, flags_type_arm_text); //  0x74657244 - terD 
+  rom_flags_type(0x0020D190, flags_type_arm_text); //  0x72697665 - rive 
+  rom_flags_type(0x0020D194, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x0020E8C4, flags_type_arm_text); //  0x45646765 - Edge 
+  rom_flags_type(0x0020E8C8, flags_type_arm_text); //  0x4C697374 - List 
+  rom_flags_type(0x0020E8CC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0020EF38, flags_type_arm_text); //  0x45646765 - Edge 
+  rom_flags_type(0x0020EF3C, flags_type_arm_text); //  0x4C697374 - List 
+  rom_flags_type(0x0020EF40, flags_type_arm_text); //  0x3A200000 - :... 
+  rom_flags_type(0x0020EF44, flags_type_arm_text); //  0x20256C64 - .%ld 
+  rom_flags_type(0x0020EF48, flags_type_arm_text); //  0x20636F72 - .cor 
+  rom_flags_type(0x0020EF4C, flags_type_arm_text); //  0x6E657273 - ners 
+  rom_flags_type(0x0020EF50, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00215FB4, flags_type_arm_text); //  0x47656E65 - Gene 
+  rom_flags_type(0x00215FB8, flags_type_arm_text); //  0x72616C53 - ralS 
+  rom_flags_type(0x00215FBC, flags_type_arm_text); //  0x68617065 - hape 
+  rom_flags_type(0x00215FC0, flags_type_arm_text); //  0x20446F6D - .Dom 
+  rom_flags_type(0x00215FC4, flags_type_arm_text); //  0x61696E00 - ain. 
+  rom_flags_type(0x00219F90, flags_type_arm_text); //  0x64756D70 - dump 
+  rom_flags_type(0x00219F94, flags_type_arm_text); //  0x65720000 - er.. 
+  rom_flags_type(0x0021A350, flags_type_arm_text); //  0x6C696D69 - limi 
+  rom_flags_type(0x0021A354, flags_type_arm_text); //  0x74636865 - tche 
+  rom_flags_type(0x0021A358, flags_type_arm_text); //  0x636B0000 - ck.. 
+  rom_flags_type(0x0021A35C, flags_type_arm_text); //  0x64696374 - dict 
+  rom_flags_type(0x0021A360, flags_type_arm_text); //  0x66756C6C - full 
+  rom_flags_type(0x0021A364, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021A368, flags_type_arm_text); //  0x466C7573 - Flus 
+  rom_flags_type(0x0021A36C, flags_type_arm_text); //  0x68696E67 - hing 
+  rom_flags_type(0x0021A370, flags_type_arm_text); //  0x3A207265 - :.re 
+  rom_flags_type(0x0021A374, flags_type_arm_text); //  0x7374206F - st.o 
+  rom_flags_type(0x0021A378, flags_type_arm_text); //  0x66206A6F - f.jo 
+  rom_flags_type(0x0021A37C, flags_type_arm_text); //  0x62000000 - b... 
+  rom_flags_type(0x0021A380, flags_type_arm_text); //  0x6F757420 - out. 
+  rom_flags_type(0x0021A384, flags_type_arm_text); //  0x6F662070 - of.p 
+  rom_flags_type(0x0021A388, flags_type_arm_text); //  0x61706572 - aper 
+  rom_flags_type(0x0021A38C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021A390, flags_type_arm_text); //  0x6E6F2070 - no.p 
+  rom_flags_type(0x0021A394, flags_type_arm_text); //  0x61706572 - aper 
+  rom_flags_type(0x0021A398, flags_type_arm_text); //  0x20747261 - .tra 
+  rom_flags_type(0x0021A39C, flags_type_arm_text); //  0x79000000 - y... 
+  rom_flags_type(0x0021A3A0, flags_type_arm_text); //  0x72696E74 - rint 
+  rom_flags_type(0x0021A3A4, flags_type_arm_text); //  0x65722072 - er.r 
+  rom_flags_type(0x0021A3A8, flags_type_arm_text); //  0x65736574 - eset 
+  rom_flags_type(0x0021A3AC, flags_type_arm_text); //  0x74696E67 - ting 
+  rom_flags_type(0x0021A3B0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021A3B4, flags_type_arm_text); //  0x74696D65 - time 
+  rom_flags_type(0x0021A3B8, flags_type_arm_text); //  0x6F757400 - out. 
+  rom_flags_type(0x0021A3BC, flags_type_arm_text); //  0x61726D69 - armi 
+  rom_flags_type(0x0021A3C0, flags_type_arm_text); //  0x6E672075 - ng.u 
+  rom_flags_type(0x0021A3C4, flags_type_arm_text); //  0x70000000 - p... 
+  rom_flags_type(0x0021A3C8, flags_type_arm_text); //  0x6F766572 - over 
+  rom_flags_type(0x0021A3CC, flags_type_arm_text); //  0x206F7065 - .ope 
+  rom_flags_type(0x0021A3D0, flags_type_arm_text); //  0x6E000000 - n... 
+  rom_flags_type(0x0021A3D4, flags_type_arm_text); //  0x6A616D00 - jam. 
+  rom_flags_type(0x0021A3D8, flags_type_arm_text); //  0x6E6F2074 - no.t 
+  rom_flags_type(0x0021A3DC, flags_type_arm_text); //  0x6F6E6572 - oner 
+  rom_flags_type(0x0021A3E0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021A3E4, flags_type_arm_text); //  0x69646C65 - idle 
+  rom_flags_type(0x0021A3E8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021A3EC, flags_type_arm_text); //  0x62757379 - busy 
+  rom_flags_type(0x0021A3F0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021A3F4, flags_type_arm_text); //  0x77616974 - wait 
+  rom_flags_type(0x0021A3F8, flags_type_arm_text); //  0x696E6700 - ing. 
+  rom_flags_type(0x0021A3FC, flags_type_arm_text); //  0x7072696E - prin 
+  rom_flags_type(0x0021A400, flags_type_arm_text); //  0x74696E67 - ting 
+  rom_flags_type(0x0021A404, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021AB94, flags_type_arm_text); //  0x73746174 - stat 
+  rom_flags_type(0x0021AB98, flags_type_arm_text); //  0x75733A00 - us:. 
+  rom_flags_type(0x0021AB9C, flags_type_arm_text); //  0x5072696E - Prin 
+  rom_flags_type(0x0021ABA0, flags_type_arm_text); //  0x74657245 - terE 
+  rom_flags_type(0x0021ABA4, flags_type_arm_text); //  0x72726F72 - rror 
+  rom_flags_type(0x0021ABA8, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0021ABAC, flags_type_arm_text); //  0x4572726F - Erro 
+  rom_flags_type(0x0021ABB0, flags_type_arm_text); //  0x723A0000 - r:.. 
+  rom_flags_type(0x0021B2C8, flags_type_arm_text); //  0x0D0D2525 - ..%% 
+  rom_flags_type(0x0021B2CC, flags_type_arm_text); //  0x25255061 - %%Pa 
+  rom_flags_type(0x0021B2D0, flags_type_arm_text); //  0x67653A20 - ge:. 
+  rom_flags_type(0x0021B2D4, flags_type_arm_text); //  0x25642025 - %d.% 
+  rom_flags_type(0x0021B2D8, flags_type_arm_text); //  0x640D0D00 - d... 
+  rom_flags_type(0x0021B380, flags_type_arm_text); //  0x2F25732D - /%s- 
+  rom_flags_type(0x0021B384, flags_type_arm_text); //  0x4D616320 - Mac. 
+  rom_flags_type(0x0021B388, flags_type_arm_text); //  0x2F257320 - /%s. 
+  rom_flags_type(0x0021B38C, flags_type_arm_text); //  0x456E636F - Enco 
+  rom_flags_type(0x0021B390, flags_type_arm_text); //  0x6465466F - deFo 
+  rom_flags_type(0x0021B394, flags_type_arm_text); //  0x6E740D00 - nt.. 
+  rom_flags_type(0x0021B6DC, flags_type_arm_text); //  0x25215053 - %!PS 
+  rom_flags_type(0x0021B6E0, flags_type_arm_text); //  0x2D41646F - -Ado 
+  rom_flags_type(0x0021B6E4, flags_type_arm_text); //  0x62652D33 - be-3 
+  rom_flags_type(0x0021B6E8, flags_type_arm_text); //  0x2E300D00 - .0.. 
+  rom_flags_type(0x0021B6EC, flags_type_arm_text); //  0x25252525 - %%%% 
+  rom_flags_type(0x0021B6F0, flags_type_arm_text); //  0x5469746C - Titl 
+  rom_flags_type(0x0021B6F4, flags_type_arm_text); //  0x653A2025 - e:.% 
+  rom_flags_type(0x0021B6F8, flags_type_arm_text); //  0x730D0000 - s... 
+  rom_flags_type(0x0021B6FC, flags_type_arm_text); //  0x25254372 - %%Cr 
+  rom_flags_type(0x0021B700, flags_type_arm_text); //  0x6561746F - eato 
+  rom_flags_type(0x0021B704, flags_type_arm_text); //  0x723A204F - r:.O 
+  rom_flags_type(0x0021B708, flags_type_arm_text); //  0x75742042 - ut.B 
+  rom_flags_type(0x0021B70C, flags_type_arm_text); //  0x6F780D00 - ox.. 
+  rom_flags_type(0x0021B710, flags_type_arm_text); //  0x25252525 - %%%% 
+  rom_flags_type(0x0021B714, flags_type_arm_text); //  0x43726561 - Crea 
+  rom_flags_type(0x0021B718, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x0021B71C, flags_type_arm_text); //  0x44617465 - Date 
+  rom_flags_type(0x0021B720, flags_type_arm_text); //  0x3A202573 - :.%s 
+  rom_flags_type(0x0021B724, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0021B728, flags_type_arm_text); //  0x25255061 - %%Pa 
+  rom_flags_type(0x0021B72C, flags_type_arm_text); //  0x6765733A - ges: 
+  rom_flags_type(0x0021B730, flags_type_arm_text); //  0x20286174 - .(at 
+  rom_flags_type(0x0021B734, flags_type_arm_text); //  0x656E6429 - end) 
+  rom_flags_type(0x0021B738, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0021B73C, flags_type_arm_text); //  0x25252525 - %%%% 
+  rom_flags_type(0x0021B740, flags_type_arm_text); //  0x466F723A - For: 
+  rom_flags_type(0x0021B744, flags_type_arm_text); //  0x2025730D - .%s. 
+  rom_flags_type(0x0021B748, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021B774, flags_type_arm_text); //  0x2525456E - %%En 
+  rom_flags_type(0x0021B778, flags_type_arm_text); //  0x6450726F - dPro 
+  rom_flags_type(0x0021B77C, flags_type_arm_text); //  0x6C6F670D - log. 
+  rom_flags_type(0x0021B780, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021B784, flags_type_arm_text); //  0x25254265 - %%Be 
+  rom_flags_type(0x0021B788, flags_type_arm_text); //  0x67696E53 - ginS 
+  rom_flags_type(0x0021B78C, flags_type_arm_text); //  0x65747570 - etup 
+  rom_flags_type(0x0021B790, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0021B794, flags_type_arm_text); //  0x2825733B - (%s; 
+  rom_flags_type(0x0021B798, flags_type_arm_text); //  0x20646F63 - .doc 
+  rom_flags_type(0x0021B79C, flags_type_arm_text); //  0x756D656E - umen 
+  rom_flags_type(0x0021B7A0, flags_type_arm_text); //  0x743A2025 - t:.% 
+  rom_flags_type(0x0021B7A4, flags_type_arm_text); //  0x7329206A - s).j 
+  rom_flags_type(0x0021B7A8, flags_type_arm_text); //  0x6E0D0000 - n... 
+  rom_flags_type(0x0021B7AC, flags_type_arm_text); //  0x2525456E - %%En 
+  rom_flags_type(0x0021B7B0, flags_type_arm_text); //  0x64536574 - dSet 
+  rom_flags_type(0x0021B7B4, flags_type_arm_text); //  0x75700D00 - up.. 
+  rom_flags_type(0x0021B80C, flags_type_arm_text); //  0x25255472 - %%Tr 
+  rom_flags_type(0x0021B810, flags_type_arm_text); //  0x61696C65 - aile 
+  rom_flags_type(0x0021B814, flags_type_arm_text); //  0x720D0000 - r... 
+  rom_flags_type(0x0021B818, flags_type_arm_text); //  0x25252525 - %%%% 
+  rom_flags_type(0x0021B81C, flags_type_arm_text); //  0x50616765 - Page 
+  rom_flags_type(0x0021B820, flags_type_arm_text); //  0x733A2025 - s:.% 
+  rom_flags_type(0x0021B824, flags_type_arm_text); //  0x640D0000 - d... 
+  rom_flags_type(0x0021B828, flags_type_arm_text); //  0x2525454F - %%EO 
+  rom_flags_type(0x0021B82C, flags_type_arm_text); //  0x460D0000 - F... 
+  rom_flags_type(0x0021BA6C, flags_type_arm_text); //  0x54505350 - TPSP 
+  rom_flags_type(0x0021BA70, flags_type_arm_text); //  0x72696E74 - rint 
+  rom_flags_type(0x0021BA74, flags_type_arm_text); //  0x65724472 - erDr 
+  rom_flags_type(0x0021BA78, flags_type_arm_text); //  0x69766572 - iver 
+  rom_flags_type(0x0021BA7C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021D4F8, flags_type_arm_text); //  0x0D090000 - .... 
+  rom_flags_type(0x0021D4FC, flags_type_arm_text); //  0x256C6420 - %ld. 
+  rom_flags_type(0x0021D500, flags_type_arm_text); //  0x53756273 - Subs 
+  rom_flags_type(0x0021D504, flags_type_arm_text); //  0x2028256C - .(%l 
+  rom_flags_type(0x0021D508, flags_type_arm_text); //  0x642C2025 - d,.% 
+  rom_flags_type(0x0021D50C, flags_type_arm_text); //  0x6C642900 - ld). 
+  rom_flags_type(0x0021D510, flags_type_arm_text); //  0x09256C64 - .%ld 
+  rom_flags_type(0x0021D514, flags_type_arm_text); //  0x20496E74 - .Int 
+  rom_flags_type(0x0021D518, flags_type_arm_text); //  0x65727072 - erpr 
+  rom_flags_type(0x0021D51C, flags_type_arm_text); //  0x65746174 - etat 
+  rom_flags_type(0x0021D520, flags_type_arm_text); //  0x696F6E73 - ions 
+  rom_flags_type(0x0021D524, flags_type_arm_text); //  0x200D0000 - .... 
+  rom_flags_type(0x0021DE88, flags_type_arm_text); //  0x53570D00 - SW.. 
+  rom_flags_type(0x0021DE8C, flags_type_arm_text); //  0x5357330D - SW3. 
+  rom_flags_type(0x0021DE90, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021DE94, flags_type_arm_text); //  0x43530D00 - CS.. 
+  rom_flags_type(0x0021DF00, flags_type_arm_text); //  0x494A3130 - IJ10 
+  rom_flags_type(0x0021DF04, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0021F2DC, flags_type_arm_text); //  0x436C6963 - Clic 
+  rom_flags_type(0x0021F2E0, flags_type_arm_text); //  0x6B3A2000 - k:.. 
+  rom_flags_type(0x0021F4B8, flags_type_arm_text); //  0x436C6963 - Clic 
+  rom_flags_type(0x0021F4BC, flags_type_arm_text); //  0x6B457665 - kEve 
+  rom_flags_type(0x0021F4C0, flags_type_arm_text); //  0x6E743A20 - nt:. 
+  rom_flags_type(0x0021F4C4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021F4C8, flags_type_arm_text); //  0x6B50726F - kPro 
+  rom_flags_type(0x0021F4CC, flags_type_arm_text); //  0x63657373 - cess 
+  rom_flags_type(0x0021F4D0, flags_type_arm_text); //  0x6564436C - edCl 
+  rom_flags_type(0x0021F4D4, flags_type_arm_text); //  0x69636B00 - ick. 
+  rom_flags_type(0x0021F4D8, flags_type_arm_text); //  0x6B546170 - kTap 
+  rom_flags_type(0x0021F4DC, flags_type_arm_text); //  0x436C6963 - Clic 
+  rom_flags_type(0x0021F4E0, flags_type_arm_text); //  0x6B000000 - k... 
+  rom_flags_type(0x0021F4E4, flags_type_arm_text); //  0x6B446F75 - kDou 
+  rom_flags_type(0x0021F4E8, flags_type_arm_text); //  0x626C6554 - bleT 
+  rom_flags_type(0x0021F4EC, flags_type_arm_text); //  0x6170436C - apCl 
+  rom_flags_type(0x0021F4F0, flags_type_arm_text); //  0x69636B00 - ick. 
+  rom_flags_type(0x0021F4F4, flags_type_arm_text); //  0x6B48696C - kHil 
+  rom_flags_type(0x0021F4F8, flags_type_arm_text); //  0x69746543 - iteC 
+  rom_flags_type(0x0021F4FC, flags_type_arm_text); //  0x6C69636B - lick 
+  rom_flags_type(0x0021F500, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0021F504, flags_type_arm_text); //  0x556E6B6E - Unkn 
+  rom_flags_type(0x0021F508, flags_type_arm_text); //  0x6F776E20 - own. 
+  rom_flags_type(0x0021F50C, flags_type_arm_text); //  0x6576656E - even 
+  rom_flags_type(0x0021F510, flags_type_arm_text); //  0x74207479 - t.ty 
+  rom_flags_type(0x0021F514, flags_type_arm_text); //  0x70650000 - pe.. 
+  rom_flags_type(0x0021FD50, flags_type_arm_text); //  0x5374726F - Stro 
+  rom_flags_type(0x0021FD54, flags_type_arm_text); //  0x6B657320 - kes. 
+  rom_flags_type(0x0021FD58, flags_type_arm_text); //  0x746F2058 - to.X 
+  rom_flags_type(0x0021FD5C, flags_type_arm_text); //  0x72732044 - rs.D 
+  rom_flags_type(0x0021FD60, flags_type_arm_text); //  0x6F6D6169 - omai 
+  rom_flags_type(0x0021FD64, flags_type_arm_text); //  0x6E000000 - n... 
+  rom_flags_type(0x00220720, flags_type_arm_text); //  0x6176702E - avp. 
+  rom_flags_type(0x00220724, flags_type_arm_text); //  0x64746500 - dte. 
+  rom_flags_type(0x00220DFC, flags_type_arm_text); //  0x53747258 - StrX 
+  rom_flags_type(0x00220E00, flags_type_arm_text); //  0x723A2000 - r:.. 
+  rom_flags_type(0x00220E04, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x00220F18, flags_type_arm_text); //  0x5374726F - Stro 
+  rom_flags_type(0x00220F1C, flags_type_arm_text); //  0x6B650000 - ke.. 
+  rom_flags_type(0x00226B78, flags_type_arm_text); //  0x4E657774 - Newt 
+  rom_flags_type(0x00226B7C, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x00226B80, flags_type_arm_text); //  0x53657276 - Serv 
+  rom_flags_type(0x00226B84, flags_type_arm_text); //  0x65720000 - er.. 
+  rom_flags_type(0x00226DF8, flags_type_arm_text); //  0x5455506F - TUPo 
+  rom_flags_type(0x00226DFC, flags_type_arm_text); //  0x72740000 - rt.. 
+  rom_flags_type(0x00226E00, flags_type_arm_text); //  0x7474736B - ttsk 
+  rom_flags_type(0x00226E04, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002270D0, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x002270D4, flags_type_arm_text); //  0x72206672 - r.fr 
+  rom_flags_type(0x002270D8, flags_type_arm_text); //  0x6F6D204C - om.L 
+  rom_flags_type(0x002270DC, flags_type_arm_text); //  0x6F616450 - oadP 
+  rom_flags_type(0x002270E0, flags_type_arm_text); //  0x61636B61 - acka 
+  rom_flags_type(0x002270E4, flags_type_arm_text); //  0x67650000 - ge.. 
+  rom_flags_type(0x00227158, flags_type_arm_text); //  0x6C6F6164 - load 
+  rom_flags_type(0x0022715C, flags_type_arm_text); //  0x65642074 - ed.t 
+  rom_flags_type(0x00227160, flags_type_arm_text); //  0x65737420 - est. 
+  rom_flags_type(0x00227164, flags_type_arm_text); //  0x63617365 - case 
+  rom_flags_type(0x00227168, flags_type_arm_text); //  0x20506163 - .Pac 
+  rom_flags_type(0x0022716C, flags_type_arm_text); //  0x6B616765 - kage 
+  rom_flags_type(0x00227170, flags_type_arm_text); //  0x49643D20 - Id=. 
+  rom_flags_type(0x00227174, flags_type_arm_text); //  0x25640D00 - %d.. 
+  rom_flags_type(0x002273CC, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x002273D0, flags_type_arm_text); //  0x72206672 - r.fr 
+  rom_flags_type(0x002273D4, flags_type_arm_text); //  0x6F6D204C - om.L 
+  rom_flags_type(0x002273D8, flags_type_arm_text); //  0x6F616450 - oadP 
+  rom_flags_type(0x002273DC, flags_type_arm_text); //  0x61636B61 - acka 
+  rom_flags_type(0x002273E0, flags_type_arm_text); //  0x67650D00 - ge.. 
+  rom_flags_type(0x002273E4, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x002273E8, flags_type_arm_text); //  0x72207365 - r.se 
+  rom_flags_type(0x002273EC, flags_type_arm_text); //  0x6E64696E - ndin 
+  rom_flags_type(0x002273F0, flags_type_arm_text); //  0x67206576 - g.ev 
+  rom_flags_type(0x002273F4, flags_type_arm_text); //  0x656E7420 - ent. 
+  rom_flags_type(0x002273F8, flags_type_arm_text); //  0x746F204E - to.N 
+  rom_flags_type(0x002273FC, flags_type_arm_text); //  0x65777400 - ewt. 
+  rom_flags_type(0x002274F0, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x002274F4, flags_type_arm_text); //  0x72650000 - re.. 
+  rom_flags_type(0x002274F8, flags_type_arm_text); //  0x496E5241 - InRA 
+  rom_flags_type(0x002274FC, flags_type_arm_text); //  0x4D53746F - MSto 
+  rom_flags_type(0x00227500, flags_type_arm_text); //  0x72650000 - re.. 
+  rom_flags_type(0x00227558, flags_type_arm_text); //  0x6661696C - fail 
+  rom_flags_type(0x0022755C, flags_type_arm_text); //  0x65642069 - ed.i 
+  rom_flags_type(0x00227560, flags_type_arm_text); //  0x6E206D61 - n.ma 
+  rom_flags_type(0x00227564, flags_type_arm_text); //  0x6B696E67 - king 
+  rom_flags_type(0x00227568, flags_type_arm_text); //  0x20612073 - .a.s 
+  rom_flags_type(0x0022756C, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x00227570, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00227618, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x0022761C, flags_type_arm_text); //  0x7220456E - r.En 
+  rom_flags_type(0x00227620, flags_type_arm_text); //  0x71756575 - queu 
+  rom_flags_type(0x00227624, flags_type_arm_text); //  0x65546573 - eTes 
+  rom_flags_type(0x00227628, flags_type_arm_text); //  0x74436173 - tCas 
+  rom_flags_type(0x0022762C, flags_type_arm_text); //  0x65000000 - e... 
+  rom_flags_type(0x00227784, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x00227788, flags_type_arm_text); //  0x72206164 - r.ad 
+  rom_flags_type(0x0022778C, flags_type_arm_text); //  0x64207465 - d.te 
+  rom_flags_type(0x00227790, flags_type_arm_text); //  0x73742063 - st.c 
+  rom_flags_type(0x00227794, flags_type_arm_text); //  0x61736520 - ase. 
+  rom_flags_type(0x00227798, flags_type_arm_text); //  0x66696C65 - file 
+  rom_flags_type(0x0022779C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00227AF8, flags_type_arm_text); //  0x5455506F - TUPo 
+  rom_flags_type(0x00227AFC, flags_type_arm_text); //  0x72740000 - rt.. 
+  rom_flags_type(0x00227B00, flags_type_arm_text); //  0x6E657774 - newt 
+  rom_flags_type(0x00227B04, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00227BE8, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x00227BEC, flags_type_arm_text); //  0x4D677243 - MgrC 
+  rom_flags_type(0x00227BF0, flags_type_arm_text); //  0x6F6E6E65 - onne 
+  rom_flags_type(0x00227BF4, flags_type_arm_text); //  0x6374546F - ctTo 
+  rom_flags_type(0x00227BF8, flags_type_arm_text); //  0x53657276 - Serv 
+  rom_flags_type(0x00227BFC, flags_type_arm_text); //  0x65720000 - er.. 
+  rom_flags_type(0x00227C00, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x00227C04, flags_type_arm_text); //  0x4D677243 - MgrC 
+  rom_flags_type(0x00227C08, flags_type_arm_text); //  0x6F6E6E65 - onne 
+  rom_flags_type(0x00227C0C, flags_type_arm_text); //  0x63746564 - cted 
+  rom_flags_type(0x00227C10, flags_type_arm_text); //  0x546F5365 - ToSe 
+  rom_flags_type(0x00227C14, flags_type_arm_text); //  0x72766572 - rver 
+  rom_flags_type(0x00227C18, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00227CD0, flags_type_arm_text); //  0x25642025 - %d.% 
+  rom_flags_type(0x00227CD4, flags_type_arm_text); //  0x73202573 - s.%s 
+  rom_flags_type(0x00227CD8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00227E1C, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x00227E20, flags_type_arm_text); //  0x20647572 - .dur 
+  rom_flags_type(0x00227E24, flags_type_arm_text); //  0x6174696F - atio 
+  rom_flags_type(0x00227E28, flags_type_arm_text); //  0x6E3D2025 - n=.% 
+  rom_flags_type(0x00227E2C, flags_type_arm_text); //  0x64206D73 - d.ms 
+  rom_flags_type(0x00227E30, flags_type_arm_text); //  0x2C207461 - ,.ta 
+  rom_flags_type(0x00227E34, flags_type_arm_text); //  0x736B2064 - sk.d 
+  rom_flags_type(0x00227E38, flags_type_arm_text); //  0x75726174 - urat 
+  rom_flags_type(0x00227E3C, flags_type_arm_text); //  0x696F6E3D - ion= 
+  rom_flags_type(0x00227E40, flags_type_arm_text); //  0x20256420 - .%d. 
+  rom_flags_type(0x00227E44, flags_type_arm_text); //  0x6D730D00 - ms.. 
+  rom_flags_type(0x00227EB0, flags_type_arm_text); //  0x25640000 - %d.. 
+  rom_flags_type(0x00227F14, flags_type_arm_text); //  0x7474736B - ttsk 
+  rom_flags_type(0x00227F18, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00228198, flags_type_arm_text); //  0x746F2072 - to.r 
+  rom_flags_type(0x0022819C, flags_type_arm_text); //  0x656D6F76 - emov 
+  rom_flags_type(0x002281A0, flags_type_arm_text); //  0x65207465 - e.te 
+  rom_flags_type(0x002281A4, flags_type_arm_text); //  0x73742063 - st.c 
+  rom_flags_type(0x002281A8, flags_type_arm_text); //  0x61736520 - ase. 
+  rom_flags_type(0x002281AC, flags_type_arm_text); //  0x5061636B - Pack 
+  rom_flags_type(0x002281B0, flags_type_arm_text); //  0x61676549 - ageI 
+  rom_flags_type(0x002281B4, flags_type_arm_text); //  0x643D2025 - d=.% 
+  rom_flags_type(0x002281B8, flags_type_arm_text); //  0x640D0000 - d... 
+  rom_flags_type(0x00228344, flags_type_arm_text); //  0x25642025 - %d.% 
+  rom_flags_type(0x00228348, flags_type_arm_text); //  0x64202564 - d.%d 
+  rom_flags_type(0x0022834C, flags_type_arm_text); //  0x20256400 - .%d. 
+  rom_flags_type(0x00228720, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x00228724, flags_type_arm_text); //  0x4167656E - Agen 
+  rom_flags_type(0x00228728, flags_type_arm_text); //  0x74204552 - t.ER 
+  rom_flags_type(0x0022872C, flags_type_arm_text); //  0x52092573 - R.%s 
+  rom_flags_type(0x00228730, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x00228810, flags_type_arm_text); //  0x43616E6E - Cann 
+  rom_flags_type(0x00228814, flags_type_arm_text); //  0x6F742066 - ot.f 
+  rom_flags_type(0x00228818, flags_type_arm_text); //  0x696E6420 - ind. 
+  rom_flags_type(0x0022881C, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x00228820, flags_type_arm_text); //  0x20636173 - .cas 
+  rom_flags_type(0x00228824, flags_type_arm_text); //  0x65202573 - e.%s 
+  rom_flags_type(0x00228828, flags_type_arm_text); //  0x2066726F - .fro 
+  rom_flags_type(0x0022882C, flags_type_arm_text); //  0x6D207374 - m.st 
+  rom_flags_type(0x00228830, flags_type_arm_text); //  0x6F726500 - ore. 
+  rom_flags_type(0x002289F0, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x002289F4, flags_type_arm_text); //  0x72206672 - r.fr 
+  rom_flags_type(0x002289F8, flags_type_arm_text); //  0x6F6D204C - om.L 
+  rom_flags_type(0x002289FC, flags_type_arm_text); //  0x6F616450 - oadP 
+  rom_flags_type(0x00228A00, flags_type_arm_text); //  0x61636B61 - acka 
+  rom_flags_type(0x00228A04, flags_type_arm_text); //  0x67650000 - ge.. 
+  rom_flags_type(0x00228AC0, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x00228AC4, flags_type_arm_text); //  0x72207365 - r.se 
+  rom_flags_type(0x00228AC8, flags_type_arm_text); //  0x6E64696E - ndin 
+  rom_flags_type(0x00228ACC, flags_type_arm_text); //  0x67206576 - g.ev 
+  rom_flags_type(0x00228AD0, flags_type_arm_text); //  0x656E7420 - ent. 
+  rom_flags_type(0x00228AD4, flags_type_arm_text); //  0x746F204E - to.N 
+  rom_flags_type(0x00228AD8, flags_type_arm_text); //  0x65777400 - ewt. 
+  rom_flags_type(0x00228F04, flags_type_arm_text); //  0x5455506F - TUPo 
+  rom_flags_type(0x00228F08, flags_type_arm_text); //  0x72740000 - rt.. 
+  rom_flags_type(0x00228F0C, flags_type_arm_text); //  0x74616774 - tagt 
+  rom_flags_type(0x00228F10, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00229210, flags_type_arm_text); //  0x53657475 - Setu 
+  rom_flags_type(0x00229214, flags_type_arm_text); //  0x70000000 - p... 
+  rom_flags_type(0x00229218, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022921C, flags_type_arm_text); //  0x20636173 - .cas 
+  rom_flags_type(0x00229220, flags_type_arm_text); //  0x65206572 - e.er 
+  rom_flags_type(0x00229224, flags_type_arm_text); //  0x726F7200 - ror. 
+  rom_flags_type(0x0022924C, flags_type_arm_text); //  0x45786563 - Exec 
+  rom_flags_type(0x00229250, flags_type_arm_text); //  0x75746500 - ute. 
+  rom_flags_type(0x00229280, flags_type_arm_text); //  0x436C6561 - Clea 
+  rom_flags_type(0x00229284, flags_type_arm_text); //  0x6E757000 - nup. 
+  rom_flags_type(0x002294B0, flags_type_arm_text); //  0x61727261 - arra 
+  rom_flags_type(0x002294B4, flags_type_arm_text); //  0x79000000 - y... 
+  rom_flags_type(0x002294B8, flags_type_arm_text); //  0x25642025 - %d.% 
+  rom_flags_type(0x002294BC, flags_type_arm_text); //  0x64202564 - d.%d 
+  rom_flags_type(0x002294C0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002294C4, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x002294C8, flags_type_arm_text); //  0x4D677252 - MgrR 
+  rom_flags_type(0x002294CC, flags_type_arm_text); //  0x65616444 - eadD 
+  rom_flags_type(0x002294D0, flags_type_arm_text); //  0x61746146 - ataF 
+  rom_flags_type(0x002294D4, flags_type_arm_text); //  0x696C6500 - ile. 
+  rom_flags_type(0x002296BC, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x002296C0, flags_type_arm_text); //  0x73637269 - scri 
+  rom_flags_type(0x002296C4, flags_type_arm_text); //  0x70740000 - pt.. 
+  rom_flags_type(0x002296C8, flags_type_arm_text); //  0x43616E6E - Cann 
+  rom_flags_type(0x002296CC, flags_type_arm_text); //  0x6F742066 - ot.f 
+  rom_flags_type(0x002296D0, flags_type_arm_text); //  0x696E6420 - ind. 
+  rom_flags_type(0x002296D4, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x002296D8, flags_type_arm_text); //  0x73637269 - scri 
+  rom_flags_type(0x002296DC, flags_type_arm_text); //  0x70742073 - pt.s 
+  rom_flags_type(0x002296E0, flags_type_arm_text); //  0x6C6F7400 - lot. 
+  rom_flags_type(0x0022974C, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x00229750, flags_type_arm_text); //  0x53637269 - Scri 
+  rom_flags_type(0x00229754, flags_type_arm_text); //  0x70740000 - pt.. 
+  rom_flags_type(0x00229868, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x0022986C, flags_type_arm_text); //  0x72636F64 - rcod 
+  rom_flags_type(0x00229870, flags_type_arm_text); //  0x65000000 - e... 
+  rom_flags_type(0x00229874, flags_type_arm_text); //  0x73796D62 - symb 
+  rom_flags_type(0x00229878, flags_type_arm_text); //  0x6F6C0000 - ol.. 
+  rom_flags_type(0x002298AC, flags_type_arm_text); //  0x28756E6B - (unk 
+  rom_flags_type(0x002298B0, flags_type_arm_text); //  0x6E6F776E - nown 
+  rom_flags_type(0x002298B4, flags_type_arm_text); //  0x29000000 - )... 
+  rom_flags_type(0x002298D4, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x002298D8, flags_type_arm_text); //  0x20736372 - .scr 
+  rom_flags_type(0x002298DC, flags_type_arm_text); //  0x69707420 - ipt. 
+  rom_flags_type(0x002298E0, flags_type_arm_text); //  0x6661696C - fail 
+  rom_flags_type(0x002298E4, flags_type_arm_text); //  0x65642121 - ed!! 
+  rom_flags_type(0x002298E8, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x002299B0, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x002299B4, flags_type_arm_text); //  0x4D677243 - MgrC 
+  rom_flags_type(0x002299B8, flags_type_arm_text); //  0x61736544 - aseD 
+  rom_flags_type(0x002299BC, flags_type_arm_text); //  0x6F6E6553 - oneS 
+  rom_flags_type(0x002299C0, flags_type_arm_text); //  0x63726970 - crip 
+  rom_flags_type(0x002299C4, flags_type_arm_text); //  0x74000000 - t... 
+  rom_flags_type(0x00229A2C, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x00229A30, flags_type_arm_text); //  0x4D677246 - MgrF 
+  rom_flags_type(0x00229A34, flags_type_arm_text); //  0x72616D65 - rame 
+  rom_flags_type(0x00229A38, flags_type_arm_text); //  0x446F6E65 - Done 
+  rom_flags_type(0x00229A3C, flags_type_arm_text); //  0x53637269 - Scri 
+  rom_flags_type(0x00229A40, flags_type_arm_text); //  0x70740000 - pt.. 
+  rom_flags_type(0x00229B60, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0022A1F0, flags_type_arm_text); //  0x25642025 - %d.% 
+  rom_flags_type(0x0022A1F4, flags_type_arm_text); //  0x73202573 - s.%s 
+  rom_flags_type(0x0022A1F8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0022A4AC, flags_type_arm_text); //  0x25640000 - %d.. 
+  rom_flags_type(0x0022A534, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x0022A538, flags_type_arm_text); //  0x73637269 - scri 
+  rom_flags_type(0x0022A53C, flags_type_arm_text); //  0x70740000 - pt.. 
+  rom_flags_type(0x0022A540, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0022A544, flags_type_arm_text); //  0x43616E6E - Cann 
+  rom_flags_type(0x0022A548, flags_type_arm_text); //  0x6F742066 - ot.f 
+  rom_flags_type(0x0022A54C, flags_type_arm_text); //  0x696E6420 - ind. 
+  rom_flags_type(0x0022A550, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x0022A554, flags_type_arm_text); //  0x73637269 - scri 
+  rom_flags_type(0x0022A558, flags_type_arm_text); //  0x70742073 - pt.s 
+  rom_flags_type(0x0022A55C, flags_type_arm_text); //  0x6C6F7400 - lot. 
+  rom_flags_type(0x0022A5C4, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x0022A5C8, flags_type_arm_text); //  0x53637269 - Scri 
+  rom_flags_type(0x0022A5CC, flags_type_arm_text); //  0x70740000 - pt.. 
+  rom_flags_type(0x0022A6E0, flags_type_arm_text); //  0x6572726F - erro 
+  rom_flags_type(0x0022A6E4, flags_type_arm_text); //  0x72636F64 - rcod 
+  rom_flags_type(0x0022A6E8, flags_type_arm_text); //  0x65000000 - e... 
+  rom_flags_type(0x0022A6EC, flags_type_arm_text); //  0x73796D62 - symb 
+  rom_flags_type(0x0022A6F0, flags_type_arm_text); //  0x6F6C0000 - ol.. 
+  rom_flags_type(0x0022A724, flags_type_arm_text); //  0x28756E6B - (unk 
+  rom_flags_type(0x0022A728, flags_type_arm_text); //  0x6E6F776E - nown 
+  rom_flags_type(0x0022A72C, flags_type_arm_text); //  0x29000000 - )... 
+  rom_flags_type(0x0022A74C, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022A750, flags_type_arm_text); //  0x20736372 - .scr 
+  rom_flags_type(0x0022A754, flags_type_arm_text); //  0x69707420 - ipt. 
+  rom_flags_type(0x0022A758, flags_type_arm_text); //  0x6661696C - fail 
+  rom_flags_type(0x0022A75C, flags_type_arm_text); //  0x65642121 - ed!! 
+  rom_flags_type(0x0022A760, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0022A818, flags_type_arm_text); //  0x25640000 - %d.. 
+  rom_flags_type(0x0022B308, flags_type_arm_text); //  0x53657475 - Setu 
+  rom_flags_type(0x0022B30C, flags_type_arm_text); //  0x70000000 - p... 
+  rom_flags_type(0x0022B310, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B314, flags_type_arm_text); //  0x20636173 - .cas 
+  rom_flags_type(0x0022B318, flags_type_arm_text); //  0x65206572 - e.er 
+  rom_flags_type(0x0022B31C, flags_type_arm_text); //  0x726F7200 - ror. 
+  rom_flags_type(0x0022B344, flags_type_arm_text); //  0x45786563 - Exec 
+  rom_flags_type(0x0022B348, flags_type_arm_text); //  0x75746500 - ute. 
+  rom_flags_type(0x0022B388, flags_type_arm_text); //  0x436C6561 - Clea 
+  rom_flags_type(0x0022B38C, flags_type_arm_text); //  0x6E757000 - nup. 
+  rom_flags_type(0x0022B3CC, flags_type_arm_text); //  0x696E2054 - in.T 
+  rom_flags_type(0x0022B3D0, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B3D4, flags_type_arm_text); //  0x43617365 - Case 
+  rom_flags_type(0x0022B3D8, flags_type_arm_text); //  0x5461736B - Task 
+  rom_flags_type(0x0022B3DC, flags_type_arm_text); //  0x4576656E - Even 
+  rom_flags_type(0x0022B3E0, flags_type_arm_text); //  0x7448616E - tHan 
+  rom_flags_type(0x0022B3E4, flags_type_arm_text); //  0x646C6572 - dler 
+  rom_flags_type(0x0022B3E8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0022B3EC, flags_type_arm_text); //  0x4145436F - AECo 
+  rom_flags_type(0x0022B3F0, flags_type_arm_text); //  0x6D706C65 - mple 
+  rom_flags_type(0x0022B3F4, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x0022B3F8, flags_type_arm_text); //  0x50726F63 - Proc 
+  rom_flags_type(0x0022B3FC, flags_type_arm_text); //  0x2063616C - .cal 
+  rom_flags_type(0x0022B400, flags_type_arm_text); //  0x6C656420 - led. 
+  rom_flags_type(0x0022B404, flags_type_arm_text); //  0x756E6578 - unex 
+  rom_flags_type(0x0022B408, flags_type_arm_text); //  0x70656374 - pect 
+  rom_flags_type(0x0022B40C, flags_type_arm_text); //  0x65646C79 - edly 
+  rom_flags_type(0x0022B410, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0022B5AC, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B5B0, flags_type_arm_text); //  0x20436173 - .Cas 
+  rom_flags_type(0x0022B5B4, flags_type_arm_text); //  0x65204552 - e.ER 
+  rom_flags_type(0x0022B5B8, flags_type_arm_text); //  0x523A2025 - R:.% 
+  rom_flags_type(0x0022B5BC, flags_type_arm_text); //  0x64092573 - d.%s 
+  rom_flags_type(0x0022B5C0, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0022B5D8, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B5DC, flags_type_arm_text); //  0x20436173 - .Cas 
+  rom_flags_type(0x0022B5E0, flags_type_arm_text); //  0x65204552 - e.ER 
+  rom_flags_type(0x0022B5E4, flags_type_arm_text); //  0x523A2009 - R:.. 
+  rom_flags_type(0x0022B5E8, flags_type_arm_text); //  0x25730D00 - %s.. 
+  rom_flags_type(0x0022B624, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B628, flags_type_arm_text); //  0x20436173 - .Cas 
+  rom_flags_type(0x0022B62C, flags_type_arm_text); //  0x65204552 - e.ER 
+  rom_flags_type(0x0022B630, flags_type_arm_text); //  0x523A2025 - R:.% 
+  rom_flags_type(0x0022B634, flags_type_arm_text); //  0x64092573 - d.%s 
+  rom_flags_type(0x0022B638, flags_type_arm_text); //  0x0925730D - .%s. 
+  rom_flags_type(0x0022B63C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0022B6C8, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x0022B6CC, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x0022B6D0, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x0022B6D4, flags_type_arm_text); //  0x20202067 - ...g 
+  rom_flags_type(0x0022B6D8, flags_type_arm_text); //  0x6F743A20 - ot:. 
+  rom_flags_type(0x0022B6DC, flags_type_arm_text); //  0x25642028 - %d.( 
+  rom_flags_type(0x0022B6E0, flags_type_arm_text); //  0x30782578 - 0x%x 
+  rom_flags_type(0x0022B6E4, flags_type_arm_text); //  0x292C2065 - ),.e 
+  rom_flags_type(0x0022B6E8, flags_type_arm_text); //  0x78706563 - xpec 
+  rom_flags_type(0x0022B6EC, flags_type_arm_text); //  0x74202564 - t.%d 
+  rom_flags_type(0x0022B6F0, flags_type_arm_text); //  0x20283078 - .(0x 
+  rom_flags_type(0x0022B6F4, flags_type_arm_text); //  0x25782900 - %x). 
+  rom_flags_type(0x0022B6F8, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B6FC, flags_type_arm_text); //  0x20436173 - .Cas 
+  rom_flags_type(0x0022B700, flags_type_arm_text); //  0x65204552 - e.ER 
+  rom_flags_type(0x0022B704, flags_type_arm_text); //  0x523A2009 - R:.. 
+  rom_flags_type(0x0022B708, flags_type_arm_text); //  0x25730D25 - %s.% 
+  rom_flags_type(0x0022B70C, flags_type_arm_text); //  0x730D0000 - s... 
+  rom_flags_type(0x0022B744, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B748, flags_type_arm_text); //  0x20436173 - .Cas 
+  rom_flags_type(0x0022B74C, flags_type_arm_text); //  0x65204552 - e.ER 
+  rom_flags_type(0x0022B750, flags_type_arm_text); //  0x523A2025 - R:.% 
+  rom_flags_type(0x0022B754, flags_type_arm_text); //  0x73092573 - s.%s 
+  rom_flags_type(0x0022B758, flags_type_arm_text); //  0x0D25730D - .%s. 
+  rom_flags_type(0x0022B75C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0022B7AC, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B7B0, flags_type_arm_text); //  0x20436173 - .Cas 
+  rom_flags_type(0x0022B7B4, flags_type_arm_text); //  0x65204D53 - e.MS 
+  rom_flags_type(0x0022B7B8, flags_type_arm_text); //  0x473A2025 - G:.% 
+  rom_flags_type(0x0022B7BC, flags_type_arm_text); //  0x730D0000 - s... 
+  rom_flags_type(0x0022B7EC, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0022B7F0, flags_type_arm_text); //  0x20436173 - .Cas 
+  rom_flags_type(0x0022B7F4, flags_type_arm_text); //  0x65204D53 - e.MS 
+  rom_flags_type(0x0022B7F8, flags_type_arm_text); //  0x473A2025 - G:.% 
+  rom_flags_type(0x0022B7FC, flags_type_arm_text); //  0x73092573 - s.%s 
+  rom_flags_type(0x0022B800, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0022B930, flags_type_arm_word); //  0x72000000 - r... 
+  rom_flags_type(0x0022BAA8, flags_type_arm_text); //  0x61727261 - arra 
+  rom_flags_type(0x0022BAAC, flags_type_arm_text); //  0x79000000 - y... 
+  rom_flags_type(0x0022BAB0, flags_type_arm_text); //  0x74657374 - test 
+  rom_flags_type(0x0022BAB4, flags_type_arm_text); //  0x4D677252 - MgrR 
+  rom_flags_type(0x0022BAB8, flags_type_arm_text); //  0x65616444 - eadD 
+  rom_flags_type(0x0022BABC, flags_type_arm_text); //  0x61746146 - ataF 
+  rom_flags_type(0x0022BAC0, flags_type_arm_text); //  0x696C6500 - ile. 
+  rom_flags_type(0x0022BEE8, flags_type_arm_text); //  0x44656275 - Debu 
+  rom_flags_type(0x0022BEEC, flags_type_arm_text); //  0x674D7367 - gMsg 
+  rom_flags_type(0x0022BEF0, flags_type_arm_text); //  0x3A206675 - :.fu 
+  rom_flags_type(0x0022BEF4, flags_type_arm_text); //  0x6E6B790D - nky. 
+  rom_flags_type(0x0022BEF8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0022BEFC, flags_type_arm_text); //  0x44656275 - Debu 
+  rom_flags_type(0x0022BF00, flags_type_arm_text); //  0x674D7367 - gMsg 
+  rom_flags_type(0x0022BF04, flags_type_arm_text); //  0x3A206675 - :.fu 
+  rom_flags_type(0x0022BF08, flags_type_arm_text); //  0x6E6B7920 - nky. 
+  rom_flags_type(0x0022BF0C, flags_type_arm_text); //  0x746F7461 - tota 
+  rom_flags_type(0x0022BF10, flags_type_arm_text); //  0x6C566172 - lVar 
+  rom_flags_type(0x0022BF14, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0022CA90, flags_type_arm_text); //  0x29200000 - )... 
+  rom_flags_type(0x0022E0D4, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0022E170, flags_type_arm_text); //  0x20494E56 - .INV 
+  rom_flags_type(0x0022E174, flags_type_arm_text); //  0x414C4944 - ALID 
+  rom_flags_type(0x0022E178, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0022E17C, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x0022E180, flags_type_arm_text); //  0x53697A65 - Size 
+  rom_flags_type(0x0022E184, flags_type_arm_text); //  0x3A203078 - :.0x 
+  rom_flags_type(0x0022E188, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0022E18C, flags_type_arm_text); //  0x20200000 - .... 
+  rom_flags_type(0x0022E194, flags_type_arm_text); //  0x0D090000 - .... 
+  rom_flags_type(0x0022E1E8, flags_type_arm_text); //  0x4E6F2044 - No.D 
+  rom_flags_type(0x0022E1EC, flags_type_arm_text); //  0x6F6D6169 - omai 
+  rom_flags_type(0x0022E1F0, flags_type_arm_text); //  0x6E000000 - n... 
+  rom_flags_type(0x0022E1F4, flags_type_arm_text); //  0x0D09466C - ..Fl 
+  rom_flags_type(0x0022E1F8, flags_type_arm_text); //  0x6167733A - ags: 
+  rom_flags_type(0x0022E1FC, flags_type_arm_text); //  0x20307800 - .0x. 
+  rom_flags_type(0x0022E200, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x0022E204, flags_type_arm_text); //  0x5072696F - Prio 
+  rom_flags_type(0x0022E208, flags_type_arm_text); //  0x72697479 - rity 
+  rom_flags_type(0x0022E20C, flags_type_arm_text); //  0x3A200000 - :... 
+  rom_flags_type(0x0022E674, flags_type_arm_text); //  0x54565265 - TVRe 
+  rom_flags_type(0x0022E678, flags_type_arm_text); //  0x6D6F7465 - mote 
+  rom_flags_type(0x0022E67C, flags_type_arm_text); //  0x49520000 - IR.. 
+  rom_flags_type(0x0023EE08, flags_type_arm_text); //  0x544C5A53 - TLZS 
+  rom_flags_type(0x0023EE0C, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x0023EE10, flags_type_arm_text); //  0x436F6D70 - Comp 
+  rom_flags_type(0x0023EE14, flags_type_arm_text); //  0x616E6465 - ande 
+  rom_flags_type(0x0023EE18, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x0023F10C, flags_type_arm_text); //  0x544C5A53 - TLZS 
+  rom_flags_type(0x0023F110, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x0023F114, flags_type_arm_text); //  0x436F6D70 - Comp 
+  rom_flags_type(0x0023F118, flags_type_arm_text); //  0x616E6465 - ande 
+  rom_flags_type(0x0023F11C, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x0023F390, flags_type_arm_text); //  0x544C5A53 - TLZS 
+  rom_flags_type(0x0023F394, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x0023F398, flags_type_arm_text); //  0x436F6D70 - Comp 
+  rom_flags_type(0x0023F39C, flags_type_arm_text); //  0x616E6465 - ande 
+  rom_flags_type(0x0023F3A0, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x0024A394, flags_type_arm_text); //  0x6E6F7420 - not. 
+  rom_flags_type(0x0024A398, flags_type_arm_text); //  0x61205458 - a.TX 
+  rom_flags_type(0x0024A39C, flags_type_arm_text); //  0x20766965 - .vie 
+  rom_flags_type(0x0024A3A0, flags_type_arm_text); //  0x77000000 - w... 
+  rom_flags_type(0x0024E080, flags_type_arm_text); //  0x58727320 - Xrs. 
+  rom_flags_type(0x0024E084, flags_type_arm_text); //  0x746F2057 - to.W 
+  rom_flags_type(0x0024E088, flags_type_arm_text); //  0x6F726420 - ord. 
+  rom_flags_type(0x0024E08C, flags_type_arm_text); //  0x446F6D61 - Doma 
+  rom_flags_type(0x0024E090, flags_type_arm_text); //  0x696E0000 - in.. 
+  rom_flags_type(0x0024EF04, flags_type_arm_text); //  0x45726E69 - Erni 
+  rom_flags_type(0x0024EF08, flags_type_arm_text); //  0x65277320 - e's. 
+  rom_flags_type(0x0024EF0C, flags_type_arm_text); //  0x766F6300 - voc. 
+  rom_flags_type(0x0024FAA8, flags_type_arm_text); //  0x6176702E - avp. 
+  rom_flags_type(0x0024FAAC, flags_type_arm_text); //  0x64746500 - dte. 
+  rom_flags_type(0x0024FAB0, flags_type_arm_text); //  0x4E455754 - NEWT 
+  rom_flags_type(0x0024FAB4, flags_type_arm_text); //  0x4F4E312E - ON1. 
+  rom_flags_type(0x0024FAB8, flags_type_arm_text); //  0x4C535400 - LST. 
+  rom_flags_type(0x0024FABC, flags_type_arm_text); //  0x4E455754 - NEWT 
+  rom_flags_type(0x0024FAC0, flags_type_arm_text); //  0x4F4E302E - ON0. 
+  rom_flags_type(0x0024FAC4, flags_type_arm_text); //  0x4C535400 - LST. 
+  rom_flags_type(0x002506C4, flags_type_arm_text); //  0x544D6169 - TMai 
+  rom_flags_type(0x002506C8, flags_type_arm_text); //  0x6E546162 - nTab 
+  rom_flags_type(0x002506CC, flags_type_arm_text); //  0x6C657444 - letD 
+  rom_flags_type(0x002506D0, flags_type_arm_text); //  0x72697665 - rive 
+  rom_flags_type(0x002506D4, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x002506D8, flags_type_arm_text); //  0x54546162 - TTab 
+  rom_flags_type(0x002506DC, flags_type_arm_text); //  0x6C657444 - letD 
+  rom_flags_type(0x002506E0, flags_type_arm_text); //  0x72697665 - rive 
+  rom_flags_type(0x002506E4, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x002506EC, flags_type_arm_text); //  0x54526573 - TRes 
+  rom_flags_type(0x002506F0, flags_type_arm_text); //  0x69737469 - isti 
+  rom_flags_type(0x002506F4, flags_type_arm_text); //  0x76655461 - veTa 
+  rom_flags_type(0x002506F8, flags_type_arm_text); //  0x626C6574 - blet 
+  rom_flags_type(0x002506FC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0025766C, flags_type_arm_text); //  0x556E6B6E - Unkn 
+  rom_flags_type(0x00257670, flags_type_arm_text); //  0x6F776E20 - own. 
+  rom_flags_type(0x00257674, flags_type_arm_text); //  0x63686172 - char 
+  rom_flags_type(0x00257678, flags_type_arm_text); //  0x61637465 - acte 
+  rom_flags_type(0x0025767C, flags_type_arm_text); //  0x7220656E - r.en 
+  rom_flags_type(0x00257680, flags_type_arm_text); //  0x636F6469 - codi 
+  rom_flags_type(0x00257684, flags_type_arm_text); //  0x6E670000 - ng.. 
+  rom_flags_type(0x0025F810, flags_type_arm_text); //  0x62616420 - bad. 
+  rom_flags_type(0x0025F814, flags_type_arm_text); //  0x626F756E - boun 
+  rom_flags_type(0x0025F818, flags_type_arm_text); //  0x64732066 - ds.f 
+  rom_flags_type(0x0025F81C, flags_type_arm_text); //  0x72616D65 - rame 
+  rom_flags_type(0x0025F820, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00260718, 0x002609A8, flags_type_arm_text); //  0x7C000000 - |... 
+  rom_flags_type(0x00260B58, 0x00260C30, flags_type_arm_text); //  0x20764E6F - .vNo 
+  rom_flags_type(0x00264298, flags_type_arm_text); //  0x62616420 - bad. 
+  rom_flags_type(0x0026429C, flags_type_arm_text); //  0x626F756E - boun 
+  rom_flags_type(0x002642A0, flags_type_arm_text); //  0x64732066 - ds.f 
+  rom_flags_type(0x002642A4, flags_type_arm_text); //  0x72616D65 - rame 
+  rom_flags_type(0x002642A8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00266980, flags_type_arm_text); //  0x62616420 - bad. 
+  rom_flags_type(0x00266984, flags_type_arm_text); //  0x626F756E - boun 
+  rom_flags_type(0x00266988, flags_type_arm_text); //  0x64732066 - ds.f 
+  rom_flags_type(0x0026698C, flags_type_arm_text); //  0x72616D65 - rame 
+  rom_flags_type(0x00266990, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0026D8F8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026D9E4, flags_type_arm_text); //  0x50726F74 - Prot 
+  rom_flags_type(0x0026D9E8, flags_type_arm_text); //  0x6F636F6C - ocol 
+  rom_flags_type(0x0026D9EC, flags_type_arm_text); //  0x2D626173 - -bas 
+  rom_flags_type(0x0026D9F0, flags_type_arm_text); //  0x65642057 - ed.W 
+  rom_flags_type(0x0026D9F4, flags_type_arm_text); //  0x6F72642D - ord- 
+  rom_flags_type(0x0026D9F8, flags_type_arm_text); //  0x72656300 - rec. 
+  rom_flags_type(0x0026DA08, flags_type_arm_text); //  0x54575265 - TWRe 
+  rom_flags_type(0x0026DA0C, flags_type_arm_text); //  0x636F676E - cogn 
+  rom_flags_type(0x0026DA10, flags_type_arm_text); //  0x697A6572 - izer 
+  rom_flags_type(0x0026DA14, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0026DAAC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026DB50, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026DBF8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026DCAC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026DD78, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026E18C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026E3CC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026E500, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026E680, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026E740, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0026E7F4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00272720, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x00272724, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00274A04, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00274BF0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00274F44, flags_type_arm_text); //  0x67524F53 - gROS 
+  rom_flags_type(0x00274F48, flags_type_arm_text); //  0x7365674F - segO 
+  rom_flags_type(0x00274F4C, flags_type_arm_text); //  0x6E6C7900 - nly. 
+  rom_flags_type(0x00275D20, flags_type_arm_text); //  0x47656E65 - Gene 
+  rom_flags_type(0x00275D24, flags_type_arm_text); //  0x72616C00 - ral. 
+  rom_flags_type(0x00277320, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00277454, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00277624, flags_type_arm_text); //  0x253C7374 - %<st 
+  rom_flags_type(0x00277628, flags_type_arm_text); //  0x64696E3E - din> 
+  rom_flags_type(0x0027762C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00277C1C, flags_type_arm_text); //  0x5455506F - TUPo 
+  rom_flags_type(0x00277C20, flags_type_arm_text); //  0x72740000 - rt.. 
+  rom_flags_type(0x00277C24, flags_type_arm_text); //  0x616C7274 - alrt 
+  rom_flags_type(0x00277C28, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00277F34, flags_type_arm_text); //  0x5453696D - TSim 
+  rom_flags_type(0x00277F38, flags_type_arm_text); //  0x706C6553 - pleS 
+  rom_flags_type(0x00277F3C, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x00277F40, flags_type_arm_text); //  0x4465636F - Deco 
+  rom_flags_type(0x00277F44, flags_type_arm_text); //  0x6D707265 - mpre 
+  rom_flags_type(0x00277F48, flags_type_arm_text); //  0x73736F72 - ssor 
+  rom_flags_type(0x00277F4C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002781CC, flags_type_arm_text); //  0x54584950 - TXIP 
+  rom_flags_type(0x002781D0, flags_type_arm_text); //  0x53746F72 - Stor 
+  rom_flags_type(0x002781D4, flags_type_arm_text); //  0x65436F6D - eCom 
+  rom_flags_type(0x002781D8, flags_type_arm_text); //  0x70616E64 - pand 
+  rom_flags_type(0x002781DC, flags_type_arm_text); //  0x65720000 - er.. 
+  rom_flags_type(0x0027970C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00279FA8, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x00279FAC, flags_type_arm_text); //  0x7265436F - reCo 
+  rom_flags_type(0x00279FB0, flags_type_arm_text); //  0x6D70616E - mpan 
+  rom_flags_type(0x00279FB4, flags_type_arm_text); //  0x64657200 - der. 
+  rom_flags_type(0x00280790, flags_type_arm_text); //  0x50617261 - Para 
+  rom_flags_type(0x00280794, flags_type_arm_text); //  0x47726170 - Grap 
+  rom_flags_type(0x00280798, flags_type_arm_text); //  0x68436F64 - hCod 
+  rom_flags_type(0x0028079C, flags_type_arm_text); //  0x65000000 - e... 
+  rom_flags_type(0x002807A0, flags_type_arm_text); //  0x2E62696E - .bin 
+  rom_flags_type(0x002807A4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002807A8, flags_type_arm_text); //  0x0D43616E - .Can 
+  rom_flags_type(0x002807AC, flags_type_arm_text); //  0x6E6F7420 - not. 
+  rom_flags_type(0x002807B0, flags_type_arm_text); //  0x6C6F6164 - load 
+  rom_flags_type(0x002807B4, flags_type_arm_text); //  0x20746865 - .the 
+  rom_flags_type(0x002807B8, flags_type_arm_text); //  0x20636F64 - .cod 
+  rom_flags_type(0x002807BC, flags_type_arm_text); //  0x6520626F - e.bo 
+  rom_flags_type(0x002807C0, flags_type_arm_text); //  0x6F6B2021 - ok.! 
+  rom_flags_type(0x002807C4, flags_type_arm_text); //  0x21210D00 - !!.. 
+  rom_flags_type(0x00280904, flags_type_arm_text); //  0x626F6F6B - book 
+  rom_flags_type(0x00280908, flags_type_arm_text); //  0x31000000 - 1... 
+  rom_flags_type(0x0028090C, flags_type_arm_text); //  0x626F6F6B - book 
+  rom_flags_type(0x00280910, flags_type_arm_text); //  0x32000000 - 2... 
+  rom_flags_type(0x00284440, flags_type_arm_text); //  0x0D536563 - .Sec 
+  rom_flags_type(0x00284444, flags_type_arm_text); //  0x75726974 - urit 
+  rom_flags_type(0x00284448, flags_type_arm_text); //  0x795A6F6E - yZon 
+  rom_flags_type(0x0028444C, flags_type_arm_text); //  0x655F0000 - e_.. 
+  rom_flags_type(0x00284818, flags_type_arm_text); //  0x545A6970 - TZip 
+  rom_flags_type(0x0028481C, flags_type_arm_text); //  0x7079436F - pyCo 
+  rom_flags_type(0x00284820, flags_type_arm_text); //  0x6D707265 - mpre 
+  rom_flags_type(0x00284824, flags_type_arm_text); //  0x73736F72 - ssor 
+  rom_flags_type(0x00284828, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0028482C, flags_type_arm_text); //  0x54436F6D - TCom 
+  rom_flags_type(0x00284830, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x00284834, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x002963C0, flags_type_arm_word); //  0x40000000 - @... 
+  rom_flags_type(0x0029641C, flags_type_arm_word); //  0x39000000 - 9... 
+  rom_flags_type(0x0029646C, flags_type_arm_word); //  0x33000000 - 3... 
+  rom_flags_type(0x002A5474, flags_type_arm_text); //  0x37290000 - 7).. 
+  rom_flags_type(0x002A5478, flags_type_arm_text); //  0x312F2829 - 1/() 
+  rom_flags_type(0x002A547C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002A54C8, flags_type_arm_word); //  0x6A290000 - j).. 
+  rom_flags_type(0x002A54CC, flags_type_arm_word); //  0x43283100 - C(1. 
+  rom_flags_type(0x002A54D0, flags_type_arm_word); //  0x5A320000 - Z2.. 
+  rom_flags_type(0x002A54D4, flags_type_arm_word); //  0x63283100 - c(1. 
+  rom_flags_type(0x002A5508, flags_type_arm_word); //  0x72320000 - r2.. 
+  rom_flags_type(0x002A550C, flags_type_arm_word); //  0x7A320000 - z2.. 
+  rom_flags_type(0x002A551C, flags_type_arm_word); //  0x28312F00 - (1/. 
+  rom_flags_type(0x002A552C, flags_type_arm_word); //  0x292F3700 - )/7. 
+  rom_flags_type(0x002A553C, flags_type_arm_word); //  0x2F312829 - /1() 
+  rom_flags_type(0x002A5540, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002A5550, flags_type_arm_word); //  0x2E2C2D00 - .,-. 
+  rom_flags_type(0x002A5560, flags_type_arm_word); //  0x2C2E0000 - ,... 
+  rom_flags_type(0x002A5570, flags_type_arm_word); //  0x272D0000 - '-.. 
+  rom_flags_type(0x002AA800, flags_type_arm_word); //  0x40200000 - @... 
+  rom_flags_type(0x002AA804, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002AA808, flags_type_arm_word); //  0x40600000 - @`.. 
+  rom_flags_type(0x002AA80C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002ABAF0, flags_type_arm_word); //  0x3FF55555 - ?.UU 
+  rom_flags_type(0x002ABAF4, flags_type_arm_word); //  0x55555555 - UUUU 
+  rom_flags_type(0x002ADC4C, flags_type_arm_text); //  0x54477261 - TGra 
+  rom_flags_type(0x002ADC50, flags_type_arm_text); //  0x79536872 - yShr 
+  rom_flags_type(0x002ADC54, flags_type_arm_text); //  0x696E6B00 - ink. 
+  rom_flags_type(0x002ADC58, flags_type_arm_text); //  0x54506978 - TPix 
+  rom_flags_type(0x002ADC5C, flags_type_arm_text); //  0x656C4D61 - elMa 
+  rom_flags_type(0x002ADC60, flags_type_arm_text); //  0x70416E74 - pAnt 
+  rom_flags_type(0x002ADC64, flags_type_arm_text); //  0x69616C69 - iali 
+  rom_flags_type(0x002ADC68, flags_type_arm_text); //  0x61730000 - as.. 
+  rom_flags_type(0x002AF7A0, flags_type_arm_text); //  0x30313233 - 0123 
+  rom_flags_type(0x002AF7A4, flags_type_arm_text); //  0x34353637 - 4567 
+  rom_flags_type(0x002AF7A8, flags_type_arm_text); //  0x38390000 - 89.. 
+  rom_flags_type(0x002B5B18, flags_type_arm_word); //  0xC1C00000 - .... 
+  rom_flags_type(0x002B5B1C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002B5B20, flags_type_arm_word); //  0x41BFFFFF - A... 
+  rom_flags_type(0x002B5B24, flags_type_arm_word); //  0xFF000000 - .... 
+  rom_flags_type(0x002B5CD0, flags_type_arm_word); //  0xC1C00000 - .... 
+  rom_flags_type(0x002B5CD4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002B5CD8, flags_type_arm_word); //  0x41BFFFFF - A... 
+  rom_flags_type(0x002B5CDC, flags_type_arm_word); //  0xFF000000 - .... 
+  rom_flags_type(0x002B6974, flags_type_arm_text); //  0x256C6400 - %ld. 
+  rom_flags_type(0x002B69B0, flags_type_arm_text); //  0x302E3000 - 0.0. 
+  rom_flags_type(0x002B69F8, flags_type_arm_text); //  0x25670000 - %g.. 
+  rom_flags_type(0x002B7F14, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x002B7FC4, flags_type_arm_text); //  0x25550000 - %U.. 
+  rom_flags_type(0x002B836C, flags_type_arm_text); //  0x46726565 - Free 
+  rom_flags_type(0x002B8370, flags_type_arm_text); //  0x3A202564 - :.%d 
+  rom_flags_type(0x002B8374, flags_type_arm_text); //  0x2C204C61 - ,.La 
+  rom_flags_type(0x002B8378, flags_type_arm_text); //  0x72676573 - rges 
+  rom_flags_type(0x002B837C, flags_type_arm_text); //  0x743A2025 - t:.% 
+  rom_flags_type(0x002B8380, flags_type_arm_text); //  0x640D0000 - d... 
+  rom_flags_type(0x002BF0E4, 0x002BF18C, flags_type_arm_text); //  0x2B000000 - +... 
+  rom_flags_type(0x002BF3A4, flags_type_arm_text); //  0x636F6E73 - cons 
+  rom_flags_type(0x002BF3A8, flags_type_arm_text); //  0x74616E74 - tant 
+  rom_flags_type(0x002BF3AC, flags_type_arm_text); //  0x66756E63 - func 
+  rom_flags_type(0x002BF3B0, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x002BF3B4, flags_type_arm_text); //  0x73000000 - s... 
+  rom_flags_type(0x002BF550, flags_type_arm_text); //  0x46696C65 - File 
+  rom_flags_type(0x002BF554, flags_type_arm_text); //  0x20222573 - ."%s 
+  rom_flags_type(0x002BF558, flags_type_arm_text); //  0x223B204C - ";.L 
+  rom_flags_type(0x002BF55C, flags_type_arm_text); //  0x696E6520 - ine. 
+  rom_flags_type(0x002BF560, flags_type_arm_text); //  0x25642023 - %d.# 
+  rom_flags_type(0x002BF564, flags_type_arm_text); //  0x23232057 - ##.W 
+  rom_flags_type(0x002BF568, flags_type_arm_text); //  0x61726E69 - arni 
+  rom_flags_type(0x002BF56C, flags_type_arm_text); //  0x6E673A20 - ng:. 
+  rom_flags_type(0x002BF570, flags_type_arm_text); //  0x25730D00 - %s.. 
+  rom_flags_type(0x002BF6F0, flags_type_arm_text); //  0x52656665 - Refe 
+  rom_flags_type(0x002BF6F4, flags_type_arm_text); //  0x72656E63 - renc 
+  rom_flags_type(0x002BF6F8, flags_type_arm_text); //  0x65732074 - es.t 
+  rom_flags_type(0x002BF6FC, flags_type_arm_text); //  0x6F207468 - o.th 
+  rom_flags_type(0x002BF700, flags_type_arm_text); //  0x65207661 - e.va 
+  rom_flags_type(0x002BF704, flags_type_arm_text); //  0x72696162 - riab 
+  rom_flags_type(0x002BF708, flags_type_arm_text); //  0x6C652022 - le." 
+  rom_flags_type(0x002BF70C, flags_type_arm_text); //  0x5F706172 - _par 
+  rom_flags_type(0x002BF710, flags_type_arm_text); //  0x656E7422 - ent" 
+  rom_flags_type(0x002BF714, flags_type_arm_text); //  0x20686176 - .hav 
+  rom_flags_type(0x002BF718, flags_type_arm_text); //  0x6520756E - e.un 
+  rom_flags_type(0x002BF71C, flags_type_arm_text); //  0x64656669 - defi 
+  rom_flags_type(0x002BF720, flags_type_arm_text); //  0x6E656420 - ned. 
+  rom_flags_type(0x002BF724, flags_type_arm_text); //  0x62656861 - beha 
+  rom_flags_type(0x002BF728, flags_type_arm_text); //  0x76696F72 - vior 
+  rom_flags_type(0x002BF72C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002BF78C, flags_type_arm_text); //  0x63616E27 - can' 
+  rom_flags_type(0x002BF790, flags_type_arm_text); //  0x7420636C - t.cl 
+  rom_flags_type(0x002BF794, flags_type_arm_text); //  0x6F736520 - ose. 
+  rom_flags_type(0x002BF798, flags_type_arm_text); //  0x6F766572 - over 
+  rom_flags_type(0x002BF79C, flags_type_arm_text); //  0x20612066 - .a.f 
+  rom_flags_type(0x002BF7A0, flags_type_arm_text); //  0x6F722D6C - or-l 
+  rom_flags_type(0x002BF7A4, flags_type_arm_text); //  0x6F6F7020 - oop. 
+  rom_flags_type(0x002BF7A8, flags_type_arm_text); //  0x696E6465 - inde 
+  rom_flags_type(0x002BF7AC, flags_type_arm_text); //  0x78207661 - x.va 
+  rom_flags_type(0x002BF7B0, flags_type_arm_text); //  0x72696162 - riab 
+  rom_flags_type(0x002BF7B4, flags_type_arm_text); //  0x6C650000 - le.. 
+  rom_flags_type(0x002BFF18, flags_type_arm_text); //  0x6462676E - dbgn 
+  rom_flags_type(0x002BFF1C, flags_type_arm_text); //  0x6F766172 - ovar 
+  rom_flags_type(0x002BFF20, flags_type_arm_text); //  0x6E616D65 - name 
+  rom_flags_type(0x002BFF24, flags_type_arm_text); //  0x73000000 - s... 
+  rom_flags_type(0x002BFF78, flags_type_arm_text); //  0x6462676B - dbgk 
+  rom_flags_type(0x002BFF7C, flags_type_arm_text); //  0x65657076 - eepv 
+  rom_flags_type(0x002BFF80, flags_type_arm_text); //  0x61726E61 - arna 
+  rom_flags_type(0x002BFF84, flags_type_arm_text); //  0x6D657300 - mes. 
+  rom_flags_type(0x002C0D78, flags_type_arm_text); //  0x636C6F73 - clos 
+  rom_flags_type(0x002C0D7C, flags_type_arm_text); //  0x65640000 - ed.. 
+  rom_flags_type(0x002C11B8, flags_type_arm_text); //  0x64626731 - dbg1 
+  rom_flags_type(0x002C11BC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C1318, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x002C13A0, flags_type_arm_text); //  0x42524541 - BREA 
+  rom_flags_type(0x002C13A4, flags_type_arm_text); //  0x4B207374 - K.st 
+  rom_flags_type(0x002C13A8, flags_type_arm_text); //  0x6174656D - atem 
+  rom_flags_type(0x002C13AC, flags_type_arm_text); //  0x656E7420 - ent. 
+  rom_flags_type(0x002C13B0, flags_type_arm_text); //  0x6F757473 - outs 
+  rom_flags_type(0x002C13B4, flags_type_arm_text); //  0x69646520 - ide. 
+  rom_flags_type(0x002C13B8, flags_type_arm_text); //  0x61206C6F - a.lo 
+  rom_flags_type(0x002C13BC, flags_type_arm_text); //  0x6F700000 - op.. 
+  rom_flags_type(0x002C1658, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x002C165C, flags_type_arm_text); //  0x636F756C - coul 
+  rom_flags_type(0x002C1660, flags_type_arm_text); //  0x646E2774 - dn't 
+  rom_flags_type(0x002C1664, flags_type_arm_text); //  0x206F7065 - .ope 
+  rom_flags_type(0x002C1668, flags_type_arm_text); //  0x6E206669 - n.fi 
+  rom_flags_type(0x002C166C, flags_type_arm_text); //  0x6C650000 - le.. 
+  rom_flags_type(0x002C167C, flags_type_arm_text); //  0x73686F77 - show 
+  rom_flags_type(0x002C1680, flags_type_arm_text); //  0x436F6465 - Code 
+  rom_flags_type(0x002C1684, flags_type_arm_text); //  0x426C6F63 - Bloc 
+  rom_flags_type(0x002C1688, flags_type_arm_text); //  0x6B730000 - ks.. 
+  rom_flags_type(0x002C168C, flags_type_arm_text); //  0x28232558 - (#%X 
+  rom_flags_type(0x002C1690, flags_type_arm_text); //  0x29200000 - )... 
+  rom_flags_type(0x002C1694, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x002C1704, flags_type_arm_text); //  0x73686F77 - show 
+  rom_flags_type(0x002C1708, flags_type_arm_text); //  0x4C6F6164 - Load 
+  rom_flags_type(0x002C170C, flags_type_arm_text); //  0x52657375 - Resu 
+  rom_flags_type(0x002C1710, flags_type_arm_text); //  0x6C747300 - lts. 
+  rom_flags_type(0x002C1714, flags_type_arm_text); //  0x5B23252D - [#%- 
+  rom_flags_type(0x002C1718, flags_type_arm_text); //  0x36585D20 - 6X]. 
+  rom_flags_type(0x002C171C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C1854, 0x002C19D8, flags_type_arm_text); //  0x756E6172 - unar 
+  rom_flags_type(0x002C1A68, flags_type_arm_text); //  0x3C496E73 - <Ins 
+  rom_flags_type(0x002C1A6C, flags_type_arm_text); //  0x7472733A - trs: 
+  rom_flags_type(0x002C1A70, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x002C1A7C, flags_type_arm_text); //  0x25730000 - %s.. 
+  rom_flags_type(0x002C1B08, flags_type_arm_text); //  0x20256C64 - .%ld 
+  rom_flags_type(0x002C1B0C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C1B10, flags_type_arm_text); //  0x2C200000 - ,... 
+  rom_flags_type(0x002C1B14, flags_type_arm_text); //  0x3E000000 - >... 
+  rom_flags_type(0x002C1C18, flags_type_arm_text); //  0x25730000 - %s.. 
+  rom_flags_type(0x002C1C20, flags_type_arm_text); //  0x25732000 - %s.. 
+  rom_flags_type(0x002C1CC0, flags_type_arm_text); //  0x256C6420 - %ld. 
+  rom_flags_type(0x002C1CC4, flags_type_arm_text); //  0x5B25735D - [%s] 
+  rom_flags_type(0x002C1CC8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C1D30, flags_type_arm_text); //  0x256C6400 - %ld. 
+  rom_flags_type(0x002C1D68, flags_type_arm_text); //  0x256C6420 - %ld. 
+  rom_flags_type(0x002C1D6C, flags_type_arm_text); //  0x5B25732F - [%s/ 
+  rom_flags_type(0x002C1D70, flags_type_arm_text); //  0x256C645D - %ld] 
+  rom_flags_type(0x002C1D74, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C2068, flags_type_arm_text); //  0x6E6F7420 - not. 
+  rom_flags_type(0x002C206C, flags_type_arm_text); //  0x6120636F - a.co 
+  rom_flags_type(0x002C2070, flags_type_arm_text); //  0x6465626C - debl 
+  rom_flags_type(0x002C2074, flags_type_arm_text); //  0x6F636B00 - ock. 
+  rom_flags_type(0x002C2078, flags_type_arm_text); //  0x64626731 - dbg1 
+  rom_flags_type(0x002C207C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C2084, flags_type_arm_text); //  0x2534643A - %4d: 
+  rom_flags_type(0x002C2088, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x002C208C, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x002C22C0, 0x002C39E8, flags_type_arm_text); //  0x656E642D - end- 
+  rom_flags_type(0x002C3E1C, flags_type_arm_text); //  0x636F6D70 - comp 
+  rom_flags_type(0x002C3E20, flags_type_arm_text); //  0x696C6572 - iler 
+  rom_flags_type(0x002C3E24, flags_type_arm_text); //  0x636F6D70 - comp 
+  rom_flags_type(0x002C3E28, flags_type_arm_text); //  0x61746962 - atib 
+  rom_flags_type(0x002C3E2C, flags_type_arm_text); //  0x696C6974 - ilit 
+  rom_flags_type(0x002C3E30, flags_type_arm_text); //  0x79000000 - y... 
+  rom_flags_type(0x002C3F74, flags_type_arm_text); //  0x3D206174 - =.at 
+  rom_flags_type(0x002C3F78, flags_type_arm_text); //  0x20746F70 - .top 
+  rom_flags_type(0x002C3F7C, flags_type_arm_text); //  0x206C6576 - .lev 
+  rom_flags_type(0x002C3F80, flags_type_arm_text); //  0x656C2E2E - el.. 
+  rom_flags_type(0x002C3F84, flags_type_arm_text); //  0x2E646964 - .did 
+  rom_flags_type(0x002C3F88, flags_type_arm_text); //  0x20796F75 - .you 
+  rom_flags_type(0x002C3F8C, flags_type_arm_text); //  0x206D6561 - .mea 
+  rom_flags_type(0x002C3F90, flags_type_arm_text); //  0x6E203A3D - n.:= 
+  rom_flags_type(0x002C3F94, flags_type_arm_text); //  0x203F0000 - .?.. 
+  rom_flags_type(0x002C4648, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x002C4AE0, flags_type_arm_text); //  0x7C6C696D - |lim 
+  rom_flags_type(0x002C4AE4, flags_type_arm_text); //  0x69740000 - it.. 
+  rom_flags_type(0x002C4AE8, flags_type_arm_text); //  0x7C696E63 - |inc 
+  rom_flags_type(0x002C4AEC, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x002C57E4, flags_type_arm_text); //  0x26262075 - &&.u 
+  rom_flags_type(0x002C57E8, flags_type_arm_text); //  0x73656420 - sed. 
+  rom_flags_type(0x002C57EC, flags_type_arm_text); //  0x696E2049 - in.I 
+  rom_flags_type(0x002C57F0, flags_type_arm_text); //  0x46207374 - F.st 
+  rom_flags_type(0x002C57F4, flags_type_arm_text); //  0x6174656D - atem 
+  rom_flags_type(0x002C57F8, flags_type_arm_text); //  0x656E742E - ent. 
+  rom_flags_type(0x002C57FC, flags_type_arm_text); //  0x2E2E6469 - ..di 
+  rom_flags_type(0x002C5800, flags_type_arm_text); //  0x6420796F - d.yo 
+  rom_flags_type(0x002C5804, flags_type_arm_text); //  0x75206D65 - u.me 
+  rom_flags_type(0x002C5808, flags_type_arm_text); //  0x616E2041 - an.A 
+  rom_flags_type(0x002C580C, flags_type_arm_text); //  0x4E443F00 - ND?. 
+  rom_flags_type(0x002C5C18, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C5C1C, flags_type_arm_text); //  0x7C697465 - |ite 
+  rom_flags_type(0x002C5C20, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x002C5C24, flags_type_arm_text); //  0x7C696E64 - |ind 
+  rom_flags_type(0x002C5C28, flags_type_arm_text); //  0x65780000 - ex.. 
+  rom_flags_type(0x002C5C2C, flags_type_arm_text); //  0x7C726573 - |res 
+  rom_flags_type(0x002C5C30, flags_type_arm_text); //  0x756C7400 - ult. 
+  rom_flags_type(0x002C639C, flags_type_arm_text); //  0x53747269 - Stri 
+  rom_flags_type(0x002C63A0, flags_type_arm_text); //  0x6E676572 - nger 
+  rom_flags_type(0x002C63A4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C6818, flags_type_arm_text); //  0x3D207769 - =.wi 
+  rom_flags_type(0x002C681C, flags_type_arm_text); //  0x7468206E - th.n 
+  rom_flags_type(0x002C6820, flags_type_arm_text); //  0x6F206566 - o.ef 
+  rom_flags_type(0x002C6824, flags_type_arm_text); //  0x66656374 - fect 
+  rom_flags_type(0x002C6828, flags_type_arm_text); //  0x2E2E2E64 - ...d 
+  rom_flags_type(0x002C682C, flags_type_arm_text); //  0x69642079 - id.y 
+  rom_flags_type(0x002C6830, flags_type_arm_text); //  0x6F75206D - ou.m 
+  rom_flags_type(0x002C6834, flags_type_arm_text); //  0x65616E20 - ean. 
+  rom_flags_type(0x002C6838, flags_type_arm_text); //  0x3A3D203F - :=.? 
+  rom_flags_type(0x002C683C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002C6840, flags_type_arm_text); //  0x53746174 - Stat 
+  rom_flags_type(0x002C6844, flags_type_arm_text); //  0x656D656E - emen 
+  rom_flags_type(0x002C6848, flags_type_arm_text); //  0x74206861 - t.ha 
+  rom_flags_type(0x002C684C, flags_type_arm_text); //  0x73206E6F - s.no 
+  rom_flags_type(0x002C6850, flags_type_arm_text); //  0x20656666 - .eff 
+  rom_flags_type(0x002C6854, flags_type_arm_text); //  0x65637400 - ect. 
+  rom_flags_type(0x002C74A0, flags_type_arm_text); //  0x7C6C696D - |lim 
+  rom_flags_type(0x002C74A4, flags_type_arm_text); //  0x69740000 - it.. 
+  rom_flags_type(0x002C74A8, flags_type_arm_text); //  0x7C696E63 - |inc 
+  rom_flags_type(0x002C74AC, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x002C7644, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002C7648, flags_type_arm_text); //  0x7C697465 - |ite 
+  rom_flags_type(0x002C764C, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x002C7654, flags_type_arm_text); //  0x7C696E64 - |ind 
+  rom_flags_type(0x002C7658, flags_type_arm_text); //  0x65780000 - ex.. 
+  rom_flags_type(0x002C765C, flags_type_arm_text); //  0x7C726573 - |res 
+  rom_flags_type(0x002C7660, flags_type_arm_text); //  0x756C7400 - ult. 
+  rom_flags_type(0x002D2870, flags_type_arm_text); //  0x76617273 - vars 
+  rom_flags_type(0x002D2874, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002D28EC, flags_type_arm_text); //  0x66756E63 - func 
+  rom_flags_type(0x002D28F0, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x002D28F4, flags_type_arm_text); //  0x73000000 - s... 
+  rom_flags_type(0x002D3178, flags_type_arm_text); //  0x28257329 - (%s) 
+  rom_flags_type(0x002D317C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002D31AC, flags_type_arm_text); //  0x2823256C - (#%l 
+  rom_flags_type(0x002D31B0, flags_type_arm_text); //  0x58292000 - X).. 
+  rom_flags_type(0x002D3694, flags_type_arm_text); //  0x73746163 - stac 
+  rom_flags_type(0x002D3698, flags_type_arm_text); //  0x6B547261 - kTra 
+  rom_flags_type(0x002D369C, flags_type_arm_text); //  0x63655072 - cePr 
+  rom_flags_type(0x002D36A0, flags_type_arm_text); //  0x696E7444 - intD 
+  rom_flags_type(0x002D36A4, flags_type_arm_text); //  0x65707468 - epth 
+  rom_flags_type(0x002D36A8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002D3848, flags_type_arm_text); //  0x0D574152 - .WAR 
+  rom_flags_type(0x002D384C, flags_type_arm_text); //  0x4E494E47 - NING 
+  rom_flags_type(0x002D3850, flags_type_arm_text); //  0x3A202049 - :..I 
+  rom_flags_type(0x002D3854, flags_type_arm_text); //  0x6E616363 - nacc 
+  rom_flags_type(0x002D3858, flags_type_arm_text); //  0x75726174 - urat 
+  rom_flags_type(0x002D385C, flags_type_arm_text); //  0x65207374 - e.st 
+  rom_flags_type(0x002D3860, flags_type_arm_text); //  0x61636B20 - ack. 
+  rom_flags_type(0x002D3864, flags_type_arm_text); //  0x74726163 - trac 
+  rom_flags_type(0x002D3868, flags_type_arm_text); //  0x652E2020 - e... 
+  rom_flags_type(0x002D386C, flags_type_arm_text); //  0x55736520 - Use. 
+  rom_flags_type(0x002D3870, flags_type_arm_text); //  0x53657444 - SetD 
+  rom_flags_type(0x002D3874, flags_type_arm_text); //  0x65627567 - ebug 
+  rom_flags_type(0x002D3878, flags_type_arm_text); //  0x4D6F6465 - Mode 
+  rom_flags_type(0x002D387C, flags_type_arm_text); //  0x28747275 - (tru 
+  rom_flags_type(0x002D3880, flags_type_arm_text); //  0x65292066 - e).f 
+  rom_flags_type(0x002D3884, flags_type_arm_text); //  0x6F722061 - or.a 
+  rom_flags_type(0x002D3888, flags_type_arm_text); //  0x63637572 - ccur 
+  rom_flags_type(0x002D388C, flags_type_arm_text); //  0x61746520 - ate. 
+  rom_flags_type(0x002D3890, flags_type_arm_text); //  0x73746163 - stac 
+  rom_flags_type(0x002D3894, flags_type_arm_text); //  0x6B207472 - k.tr 
+  rom_flags_type(0x002D3898, flags_type_arm_text); //  0x61636573 - aces 
+  rom_flags_type(0x002D389C, flags_type_arm_text); //  0x2E0D0000 - .... 
+  rom_flags_type(0x002D38A0, flags_type_arm_text); //  0x0D537461 - .Sta 
+  rom_flags_type(0x002D38A4, flags_type_arm_text); //  0x636B2074 - ck.t 
+  rom_flags_type(0x002D38A8, flags_type_arm_text); //  0x72616365 - race 
+  rom_flags_type(0x002D38AC, flags_type_arm_text); //  0x3A0D0000 - :... 
+  rom_flags_type(0x002D38B4, flags_type_arm_text); //  0x25346420 - %4d. 
+  rom_flags_type(0x002D38B8, flags_type_arm_text); //  0x3A200000 - :... 
+  rom_flags_type(0x002D38BC, flags_type_arm_text); //  0x5B696E63 - [inc 
+  rom_flags_type(0x002D38C0, flags_type_arm_text); //  0x6F6D706C - ompl 
+  rom_flags_type(0x002D38C4, flags_type_arm_text); //  0x65746520 - ete. 
+  rom_flags_type(0x002D38C8, flags_type_arm_text); //  0x73746163 - stac 
+  rom_flags_type(0x002D38CC, flags_type_arm_text); //  0x6B206672 - k.fr 
+  rom_flags_type(0x002D38D0, flags_type_arm_text); //  0x616D655D - ame] 
+  rom_flags_type(0x002D38D4, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x002D38D8, flags_type_arm_text); //  0x23256C58 - #%lX 
+  rom_flags_type(0x002D38DC, flags_type_arm_text); //  0x2E000000 - .... 
+  rom_flags_type(0x002D390C, flags_type_arm_text); //  0x205B6E61 - .[na 
+  rom_flags_type(0x002D3910, flags_type_arm_text); //  0x74697665 - tive 
+  rom_flags_type(0x002D3914, flags_type_arm_text); //  0x5D0D0000 - ]... 
+  rom_flags_type(0x002D3AD8, flags_type_arm_text); //  0x203A2025 - .:.% 
+  rom_flags_type(0x002D3ADC, flags_type_arm_text); //  0x6C640D00 - ld.. 
+  rom_flags_type(0x002D3AE0, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002D3AE4, flags_type_arm_text); //  0x20202052 - ...R 
+  rom_flags_type(0x002D3AE8, flags_type_arm_text); //  0x65636569 - ecei 
+  rom_flags_type(0x002D3AEC, flags_type_arm_text); //  0x7665723A - ver: 
+  rom_flags_type(0x002D3AF0, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x002D3AF8, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002D3AFC, flags_type_arm_text); //  0x20202025 - ...% 
+  rom_flags_type(0x002D3B00, flags_type_arm_text); //  0x6C642025 - ld.% 
+  rom_flags_type(0x002D3B04, flags_type_arm_text); //  0x73000000 - s... 
+  rom_flags_type(0x002D3B08, flags_type_arm_text); //  0x205B6172 - .[ar 
+  rom_flags_type(0x002D3B0C, flags_type_arm_text); //  0x6720256C - g.%l 
+  rom_flags_type(0x002D3B10, flags_type_arm_text); //  0x645D0000 - d].. 
+  rom_flags_type(0x002D3BE0, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002D3BE4, flags_type_arm_text); //  0x20202025 - ...% 
+  rom_flags_type(0x002D3BE8, flags_type_arm_text); //  0x6C640000 - ld.. 
+  rom_flags_type(0x002D3C14, flags_type_arm_text); //  0x20202A2A - ..** 
+  rom_flags_type(0x002D3C18, flags_type_arm_text); //  0x2A20536B - *.Sk 
+  rom_flags_type(0x002D3C1C, flags_type_arm_text); //  0x69707069 - ippi 
+  rom_flags_type(0x002D3C20, flags_type_arm_text); //  0x6E672062 - ng.b 
+  rom_flags_type(0x002D3C24, flags_type_arm_text); //  0x61642073 - ad.s 
+  rom_flags_type(0x002D3C28, flags_type_arm_text); //  0x7461636B - tack 
+  rom_flags_type(0x002D3C2C, flags_type_arm_text); //  0x20667261 - .fra 
+  rom_flags_type(0x002D3C30, flags_type_arm_text); //  0x6D650D00 - me.. 
+  rom_flags_type(0x002D570C, flags_type_arm_text); //  0x78640000 - xd.. 
+  rom_flags_type(0x002D5978, flags_type_arm_text); //  0x78650000 - xe.. 
+  rom_flags_type(0x002D597C, flags_type_arm_text); //  0x78620000 - xb.. 
+  rom_flags_type(0x002D5B40, flags_type_arm_text); //  0x41540000 - AT.. 
+  rom_flags_type(0x002D5C70, flags_type_arm_text); //  0x6E696C20 - nil. 
+  rom_flags_type(0x002D5C74, flags_type_arm_text); //  0x656E6470 - endp 
+  rom_flags_type(0x002D5C78, flags_type_arm_text); //  0x6F696E74 - oint 
+  rom_flags_type(0x002D5C7C, flags_type_arm_text); //  0x20706173 - .pas 
+  rom_flags_type(0x002D5C80, flags_type_arm_text); //  0x73656420 - sed. 
+  rom_flags_type(0x002D5C84, flags_type_arm_text); //  0x746F2049 - to.I 
+  rom_flags_type(0x002D5C88, flags_type_arm_text); //  0x6E697453 - nitS 
+  rom_flags_type(0x002D5C8C, flags_type_arm_text); //  0x63726970 - crip 
+  rom_flags_type(0x002D5C90, flags_type_arm_text); //  0x74456E64 - tEnd 
+  rom_flags_type(0x002D5C94, flags_type_arm_text); //  0x706F696E - poin 
+  rom_flags_type(0x002D5C98, flags_type_arm_text); //  0x74436C69 - tCli 
+  rom_flags_type(0x002D5C9C, flags_type_arm_text); //  0x656E7400 - ent. 
+  rom_flags_type(0x002D7A7C, flags_type_arm_text); //  0x25640000 - %d.. 
+  rom_flags_type(0x002D7AC0, flags_type_arm_text); //  0x25313064 - %10d 
+  rom_flags_type(0x002D7AC4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002DBFD4, flags_type_arm_word); //  0x3FDE0000 - ?... 
+  rom_flags_type(0x002DBFD8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002DBFDC, flags_type_arm_word); //  0x3C9FFE5A - <..Z 
+  rom_flags_type(0x002DBFE0, flags_type_arm_word); //  0xB7E8AD5E - ...^ 
+  rom_flags_type(0x002DC054, flags_type_arm_word); //  0x40300000 - @0.. 
+  rom_flags_type(0x002DC058, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002DCCE4, flags_type_arm_text); //  0x54556E69 - TUni 
+  rom_flags_type(0x002DCCE8, flags_type_arm_text); //  0x636F6465 - code 
+  rom_flags_type(0x002DCCEC, flags_type_arm_text); //  0x436F6D70 - Comp 
+  rom_flags_type(0x002DCCF0, flags_type_arm_text); //  0x72657373 - ress 
+  rom_flags_type(0x002DCCF4, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x002DCCF8, flags_type_arm_text); //  0x5443616C - TCal 
+  rom_flags_type(0x002DCCFC, flags_type_arm_text); //  0x6C626163 - lbac 
+  rom_flags_type(0x002DCD00, flags_type_arm_text); //  0x6B436F6D - kCom 
+  rom_flags_type(0x002DCD04, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x002DCD08, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x002DCD0C, flags_type_arm_text); //  0x436F756C - Coul 
+  rom_flags_type(0x002DCD10, flags_type_arm_text); //  0x646E2774 - dn't 
+  rom_flags_type(0x002DCD14, flags_type_arm_text); //  0x20637265 - .cre 
+  rom_flags_type(0x002DCD18, flags_type_arm_text); //  0x61746520 - ate. 
+  rom_flags_type(0x002DCD1C, flags_type_arm_text); //  0x636F6D70 - comp 
+  rom_flags_type(0x002DCD20, flags_type_arm_text); //  0x72657373 - ress 
+  rom_flags_type(0x002DCD24, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x002DD1DC, flags_type_arm_text); //  0x54556E69 - TUni 
+  rom_flags_type(0x002DD1E0, flags_type_arm_text); //  0x636F6465 - code 
+  rom_flags_type(0x002DD1E4, flags_type_arm_text); //  0x4465636F - Deco 
+  rom_flags_type(0x002DD1E8, flags_type_arm_text); //  0x6D707265 - mpre 
+  rom_flags_type(0x002DD1EC, flags_type_arm_text); //  0x73736F72 - ssor 
+  rom_flags_type(0x002DD1F0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002DD1F4, flags_type_arm_text); //  0x5443616C - TCal 
+  rom_flags_type(0x002DD1F8, flags_type_arm_text); //  0x6C626163 - lbac 
+  rom_flags_type(0x002DD1FC, flags_type_arm_text); //  0x6B446563 - kDec 
+  rom_flags_type(0x002DD200, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x002DD204, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x002DD208, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x002DD20C, flags_type_arm_text); //  0x436F756C - Coul 
+  rom_flags_type(0x002DD210, flags_type_arm_text); //  0x646E2774 - dn't 
+  rom_flags_type(0x002DD214, flags_type_arm_text); //  0x20637265 - .cre 
+  rom_flags_type(0x002DD218, flags_type_arm_text); //  0x61746520 - ate. 
+  rom_flags_type(0x002DD21C, flags_type_arm_text); //  0x6465636F - deco 
+  rom_flags_type(0x002DD220, flags_type_arm_text); //  0x6D707265 - mpre 
+  rom_flags_type(0x002DD224, flags_type_arm_text); //  0x73736F72 - ssor 
+  rom_flags_type(0x002DD228, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002E0CAC, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x002E0CB0, flags_type_arm_text); //  0x72650000 - re.. 
+  rom_flags_type(0x002E0CB4, flags_type_arm_text); //  0x496E5241 - InRA 
+  rom_flags_type(0x002E0CB8, flags_type_arm_text); //  0x4D53746F - MSto 
+  rom_flags_type(0x002E0CBC, flags_type_arm_text); //  0x72650000 - re.. 
+  rom_flags_type(0x002E0E10, flags_type_arm_word); //  0x6974E718 - it.. 
+  rom_flags_type(0x002E0E14, flags_type_arm_word); //  0xD7D7625A - ..bZ 
+  rom_flags_type(0x002E0E18, flags_type_arm_word); //  0x16687E92 - .h~. 
+  rom_flags_type(0x002E0E1C, flags_type_arm_word); //  0x154EF7AC - .N.. 
+  rom_flags_type(0x002E0E20, flags_type_arm_word); //  0x37A16C26 - 7.l& 
+  rom_flags_type(0x002E0E24, flags_type_arm_word); //  0x2777579C - 'wW. 
+  rom_flags_type(0x002E2D2C, flags_type_arm_word); //  0x3FE62E42 - ?..B 
+  rom_flags_type(0x002E2D30, flags_type_arm_word); //  0xFEFA39EF - ..9. 
+  rom_flags_type(0x002E2D60, flags_type_arm_word); //  0x3FE62E42 - ?..B 
+  rom_flags_type(0x002E2D64, flags_type_arm_word); //  0xFEFA39EF - ..9. 
+  rom_flags_type(0x002E31E8, flags_type_arm_word); //  0x40280000 - @(.. 
+  rom_flags_type(0x002E31EC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002E3E08, flags_type_arm_text); //  0x5B204743 - [.GC 
+  rom_flags_type(0x002E3E0C, flags_type_arm_text); //  0x21207374 - !.st 
+  rom_flags_type(0x002E3E10, flags_type_arm_text); //  0x61727420 - art. 
+  rom_flags_type(0x002E3E14, flags_type_arm_text); //  0x256C642F - %ld/ 
+  rom_flags_type(0x002E3E18, flags_type_arm_text); //  0x256C642E - %ld. 
+  rom_flags_type(0x002E3E1C, flags_type_arm_text); //  0x2E2E0000 - .... 
+  rom_flags_type(0x002E3E24, flags_type_arm_text); //  0x66696E69 - fini 
+  rom_flags_type(0x002E3E28, flags_type_arm_text); //  0x73682025 - sh.% 
+  rom_flags_type(0x002E3E2C, flags_type_arm_text); //  0x6C642F25 - ld/% 
+  rom_flags_type(0x002E3E30, flags_type_arm_text); //  0x6C64205D - ld.] 
+  rom_flags_type(0x002E3E34, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x002E58D8, flags_type_arm_text); //  0x49724C50 - IrLP 
+  rom_flags_type(0x002E58DC, flags_type_arm_text); //  0x54000000 - T... 
+  rom_flags_type(0x002E5AEC, flags_type_arm_text); //  0x7072696E - prin 
+  rom_flags_type(0x002E5AF0, flags_type_arm_text); //  0x74657200 - ter. 
+  rom_flags_type(0x002E5AF4, flags_type_arm_text); //  0x70726D6F - prmo 
+  rom_flags_type(0x002E5AF8, flags_type_arm_text); //  0x64656C00 - del. 
+  rom_flags_type(0x002E5DA8, flags_type_arm_text); //  0x1B252D31 - .%-1 
+  rom_flags_type(0x002E5DAC, flags_type_arm_text); //  0x32333435 - 2345 
+  rom_flags_type(0x002E5DB0, flags_type_arm_text); //  0x58000000 - X... 
+  rom_flags_type(0x002E5DB4, flags_type_arm_text); //  0x1B450000 - .E.. 
+  rom_flags_type(0x002E5DB8, flags_type_arm_text); //  0x1B2A7433 - .*t3 
+  rom_flags_type(0x002E5DBC, flags_type_arm_text); //  0x30305200 - 00R. 
+  rom_flags_type(0x002E5DC0, flags_type_arm_text); //  0x1B2A7225 - .*r% 
+  rom_flags_type(0x002E5DC4, flags_type_arm_text); //  0x64540000 - dT.. 
+  rom_flags_type(0x002E5DC8, flags_type_arm_text); //  0x1B2A7225 - .*r% 
+  rom_flags_type(0x002E5DCC, flags_type_arm_text); //  0x64530000 - dS.. 
+  rom_flags_type(0x002E5E40, flags_type_arm_text); //  0x1B2A7230 - .*r0 
+  rom_flags_type(0x002E5E44, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002E5E48, flags_type_arm_text); //  0x1B2A6225 - .*b% 
+  rom_flags_type(0x002E5E4C, flags_type_arm_text); //  0x64570000 - dW.. 
+  rom_flags_type(0x002E5E88, flags_type_arm_text); //  0x1B2A7243 - .*rC 
+  rom_flags_type(0x002E5E8C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002E5E90, flags_type_arm_text); //  0x1B450000 - .E.. 
+  rom_flags_type(0x002E5E94, flags_type_arm_text); //  0x1B252D31 - .%-1 
+  rom_flags_type(0x002E5E98, flags_type_arm_text); //  0x32333435 - 2345 
+  rom_flags_type(0x002E5E9C, flags_type_arm_text); //  0x58000000 - X... 
+  rom_flags_type(0x002E5F14, flags_type_arm_text); //  0x1B2A6225 - .*b% 
+  rom_flags_type(0x002E5F18, flags_type_arm_text); //  0x64590000 - dY.. 
+  rom_flags_type(0x002E6018, flags_type_arm_text); //  0x1B2A6232 - .*b2 
+  rom_flags_type(0x002E601C, flags_type_arm_text); //  0x6D256457 - m%dW 
+  rom_flags_type(0x002E6020, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002F56FC, flags_type_arm_text); //  0x74797065 - type 
+  rom_flags_type(0x002F5700, flags_type_arm_text); //  0x2E726566 - .ref 
+  rom_flags_type(0x002F5704, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002F5BE0, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002F5BE4, flags_type_arm_text); //  0x21212120 - !!!. 
+  rom_flags_type(0x002F5BE8, flags_type_arm_text); //  0x45786365 - Exce 
+  rom_flags_type(0x002F5BEC, flags_type_arm_text); //  0x7074696F - ptio 
+  rom_flags_type(0x002F5BF0, flags_type_arm_text); //  0x6E3A2025 - n:.% 
+  rom_flags_type(0x002F5BF4, flags_type_arm_text); //  0x730D0000 - s... 
+  rom_flags_type(0x002F5C08, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002F5C0C, flags_type_arm_text); //  0x46696C65 - File 
+  rom_flags_type(0x002F5C10, flags_type_arm_text); //  0x20222573 - ."%s 
+  rom_flags_type(0x002F5C14, flags_type_arm_text); //  0x223B204C - ";.L 
+  rom_flags_type(0x002F5C18, flags_type_arm_text); //  0x696E6520 - ine. 
+  rom_flags_type(0x002F5C1C, flags_type_arm_text); //  0x256C6420 - %ld. 
+  rom_flags_type(0x002F5C20, flags_type_arm_text); //  0x21212120 - !!!. 
+  rom_flags_type(0x002F5C24, flags_type_arm_text); //  0x45786365 - Exce 
+  rom_flags_type(0x002F5C28, flags_type_arm_text); //  0x7074696F - ptio 
+  rom_flags_type(0x002F5C2C, flags_type_arm_text); //  0x6E3A2000 - n:.. 
+  rom_flags_type(0x002F5C7C, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002F5C80, flags_type_arm_text); //  0x46696C65 - File 
+  rom_flags_type(0x002F5C84, flags_type_arm_text); //  0x20222573 - ."%s 
+  rom_flags_type(0x002F5C88, flags_type_arm_text); //  0x223B204C - ";.L 
+  rom_flags_type(0x002F5C8C, flags_type_arm_text); //  0x696E6520 - ine. 
+  rom_flags_type(0x002F5C90, flags_type_arm_text); //  0x256C6420 - %ld. 
+  rom_flags_type(0x002F5C94, flags_type_arm_text); //  0x21212120 - !!!. 
+  rom_flags_type(0x002F5C98, flags_type_arm_text); //  0x45786365 - Exce 
+  rom_flags_type(0x002F5C9C, flags_type_arm_text); //  0x7074696F - ptio 
+  rom_flags_type(0x002F5CA0, flags_type_arm_text); //  0x6E3A2025 - n:.% 
+  rom_flags_type(0x002F5CA4, flags_type_arm_text); //  0x73200000 - s... 
+  rom_flags_type(0x002F5CEC, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002F5CF0, flags_type_arm_text); //  0x21212120 - !!!. 
+  rom_flags_type(0x002F5CF4, flags_type_arm_text); //  0x45786365 - Exce 
+  rom_flags_type(0x002F5CF8, flags_type_arm_text); //  0x7074696F - ptio 
+  rom_flags_type(0x002F5CFC, flags_type_arm_text); //  0x6E3A2000 - n:.. 
+  rom_flags_type(0x002F5D3C, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002F5D40, flags_type_arm_text); //  0x21212120 - !!!. 
+  rom_flags_type(0x002F5D44, flags_type_arm_text); //  0x45786365 - Exce 
+  rom_flags_type(0x002F5D48, flags_type_arm_text); //  0x7074696F - ptio 
+  rom_flags_type(0x002F5D4C, flags_type_arm_text); //  0x6E3A2025 - n:.% 
+  rom_flags_type(0x002F5D50, flags_type_arm_text); //  0x73200000 - s... 
+  rom_flags_type(0x002F5D88, flags_type_arm_word); //  0x0D000000 - .... 
+  rom_flags_type(0x002F5DC8, flags_type_arm_text); //  0x20202020 - .... 
+  rom_flags_type(0x002F5DCC, flags_type_arm_text); //  0x21212120 - !!!. 
+  rom_flags_type(0x002F5DD0, flags_type_arm_text); //  0x45786365 - Exce 
+  rom_flags_type(0x002F5DD4, flags_type_arm_text); //  0x7074696F - ptio 
+  rom_flags_type(0x002F5DD8, flags_type_arm_text); //  0x6E3A2025 - n:.% 
+  rom_flags_type(0x002F5DDC, flags_type_arm_text); //  0x73202825 - s.(% 
+  rom_flags_type(0x002F5DE0, flags_type_arm_text); //  0x6C64290D - ld). 
+  rom_flags_type(0x002F5DE4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002F69C0, flags_type_arm_text); //  0x4346756E - CFun 
+  rom_flags_type(0x002F69C4, flags_type_arm_text); //  0x6374696F - ctio 
+  rom_flags_type(0x002F69C8, flags_type_arm_text); //  0x6E000000 - n... 
+  rom_flags_type(0x002F7464, flags_type_arm_word); //  0x3FF80000 - ?... 
+  rom_flags_type(0x002F7468, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002F75E8, flags_type_arm_word); //  0x40280000 - @(.. 
+  rom_flags_type(0x002F75EC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002FDA70, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FDA74, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FDA78, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FDA7C, flags_type_arm_text); //  0x44617461 - Data 
+  rom_flags_type(0x002FDA80, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FDA84, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FDBBC, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FDBC0, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FDBC4, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FDBC8, flags_type_arm_text); //  0x44617461 - Data 
+  rom_flags_type(0x002FDBCC, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FDBD0, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FDD10, flags_type_arm_text); //  0x6176702E - avp. 
+  rom_flags_type(0x002FDD14, flags_type_arm_text); //  0x64746500 - dte. 
+  rom_flags_type(0x002FDEA8, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FDEAC, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FDEB0, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FDEB4, flags_type_arm_text); //  0x54524941 - TRIA 
+  rom_flags_type(0x002FDEB8, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FDEBC, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FDF00, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FDF04, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FDF08, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FDF0C, flags_type_arm_text); //  0x4454454D - DTEM 
+  rom_flags_type(0x002FDF10, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FDF14, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FDF60, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FDF64, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FDF68, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FDF6C, flags_type_arm_text); //  0x50504442 - PPDB 
+  rom_flags_type(0x002FDF70, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FDF74, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE224, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE228, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE22C, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE230, flags_type_arm_text); //  0x54524941 - TRIA 
+  rom_flags_type(0x002FE234, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE238, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE338, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE33C, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE340, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE344, flags_type_arm_text); //  0x4454454D - DTEM 
+  rom_flags_type(0x002FE348, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE34C, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE38C, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE390, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE394, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE398, flags_type_arm_text); //  0x50504442 - PPDB 
+  rom_flags_type(0x002FE39C, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE3A0, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE418, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE41C, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE420, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE424, flags_type_arm_text); //  0x54524941 - TRIA 
+  rom_flags_type(0x002FE428, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE42C, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE45C, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE460, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE464, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE468, flags_type_arm_text); //  0x4454454D - DTEM 
+  rom_flags_type(0x002FE46C, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE470, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE4D0, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE4D4, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE4D8, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE4DC, flags_type_arm_text); //  0x50504442 - PPDB 
+  rom_flags_type(0x002FE4E0, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE4E4, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE594, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE598, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE59C, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE5A0, flags_type_arm_text); //  0x54524941 - TRIA 
+  rom_flags_type(0x002FE5A4, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE5A8, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE5D8, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE5DC, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE5E0, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE5E4, flags_type_arm_text); //  0x4454454D - DTEM 
+  rom_flags_type(0x002FE5E8, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE5EC, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE658, flags_type_arm_text); //  0x52616D50 - RamP 
+  rom_flags_type(0x002FE65C, flags_type_arm_text); //  0x61726147 - araG 
+  rom_flags_type(0x002FE660, flags_type_arm_text); //  0x72617068 - raph 
+  rom_flags_type(0x002FE664, flags_type_arm_text); //  0x50504442 - PPDB 
+  rom_flags_type(0x002FE668, flags_type_arm_text); //  0x3A504152 - :PAR 
+  rom_flags_type(0x002FE66C, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x002FE904, flags_type_arm_text); //  0x2E616972 - .air 
+  rom_flags_type(0x002FE908, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x002FEAC0, flags_type_arm_word); //  0x3FDBCB7B - ?..{ 
+  rom_flags_type(0x002FEAC4, flags_type_arm_word); //  0x1526E50E - .&.. 
+  rom_flags_type(0x002FEB88, flags_type_arm_word); //  0xC08FF800 - .... 
+  rom_flags_type(0x002FEB8C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x002FEBD0, flags_type_arm_word); //  0x40340000 - @4.. 
+  rom_flags_type(0x002FEBD4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0030B780, flags_type_arm_text); //  0x74797065 - type 
+  rom_flags_type(0x0030B784, flags_type_arm_text); //  0x2E726566 - .ref 
+  rom_flags_type(0x0030B788, flags_type_arm_text); //  0x2E667261 - .fra 
+  rom_flags_type(0x0030B78C, flags_type_arm_text); //  0x6D650000 - me.. 
+  rom_flags_type(0x0030B98C, flags_type_arm_text); //  0x54457874 - TExt 
+  rom_flags_type(0x0030B990, flags_type_arm_text); //  0x65726E61 - erna 
+  rom_flags_type(0x0030B994, flags_type_arm_text); //  0x6C4E6577 - lNew 
+  rom_flags_type(0x0030B998, flags_type_arm_text); //  0x74457665 - tEve 
+  rom_flags_type(0x0030B99C, flags_type_arm_text); //  0x6E744861 - ntHa 
+  rom_flags_type(0x0030B9A0, flags_type_arm_text); //  0x6E646C65 - ndle 
+  rom_flags_type(0x0030B9A4, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x0030C1C8, flags_type_arm_text); //  0x5455506F - TUPo 
+  rom_flags_type(0x0030C1CC, flags_type_arm_text); //  0x72740000 - rt.. 
+  rom_flags_type(0x0030CFAC, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x0030CFB0, flags_type_arm_text); //  0x626F6F74 - boot 
+  rom_flags_type(0x0030CFB4, flags_type_arm_text); //  0x54657374 - Test 
+  rom_flags_type(0x0030CFB8, flags_type_arm_text); //  0x53637269 - Scri 
+  rom_flags_type(0x0030CFBC, flags_type_arm_text); //  0x70740000 - pt.. 
+  rom_flags_type(0x0030CFC0, flags_type_arm_word); //  0x0C105744 - ..WD 
+  rom_flags_type(0x0030CFC4, flags_type_arm_text); //  0x77000000 - w... 
+  rom_flags_type(0x0030CFC8, flags_type_arm_text); //  0x626F6F74 - boot 
+  rom_flags_type(0x0030CFCC, flags_type_arm_text); //  0x434F7574 - COut 
+  rom_flags_type(0x0030CFD0, flags_type_arm_text); //  0x70757400 - put. 
+  rom_flags_type(0x0030CFD4, flags_type_arm_word); //  0x0C107BB4 - ..{. 
+  rom_flags_type(0x0030CFD8, flags_type_arm_text); //  0x5048616D - PHam 
+  rom_flags_type(0x0030CFDC, flags_type_arm_text); //  0x6D65724F - merO 
+  rom_flags_type(0x0030CFE0, flags_type_arm_text); //  0x75745472 - utTr 
+  rom_flags_type(0x0030CFE4, flags_type_arm_text); //  0x616E736C - ansl 
+  rom_flags_type(0x0030CFE8, flags_type_arm_text); //  0x61746F72 - ator 
+  rom_flags_type(0x0030CFEC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0030CFF0, flags_type_arm_text); //  0x504F7574 - POut 
+  rom_flags_type(0x0030CFF4, flags_type_arm_text); //  0x5472616E - Tran 
+  rom_flags_type(0x0030CFF8, flags_type_arm_text); //  0x736C6174 - slat 
+  rom_flags_type(0x0030CFFC, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x0030D000, flags_type_arm_word); //  0x0C105514 - ..U. 
+  rom_flags_type(0x0030D004, flags_type_arm_text); //  0x626F6F74 - boot 
+  rom_flags_type(0x0030D008, flags_type_arm_text); //  0x626F6F74 - boot 
+  rom_flags_type(0x0030D00C, flags_type_arm_text); //  0x53637269 - Scri 
+  rom_flags_type(0x0030D010, flags_type_arm_text); //  0x70744F75 - ptOu 
+  rom_flags_type(0x0030D014, flags_type_arm_text); //  0x74707574 - tput 
+  rom_flags_type(0x0030D018, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0030D0F0, flags_type_arm_word); //  0x77000000 - w... 
+  rom_flags_type(0x0030D0F4, flags_type_arm_word); //  0x626F6F74 - boot 
+  rom_flags_type(0x0030D0F8, flags_type_arm_word); //  0x52657375 - Resu 
+  rom_flags_type(0x0030D0FC, flags_type_arm_word); //  0x6C747300 - lts. 
+  rom_flags_type(0x0030D174, flags_type_arm_word); //  0x626F6F74 - boot 
+  rom_flags_type(0x0030D178, flags_type_arm_word); //  0x4661696C - Fail 
+  rom_flags_type(0x0030D17C, flags_type_arm_word); //  0x75726500 - ure. 
+  rom_flags_type(0x0030D188, flags_type_arm_word); //  0x253C7374 - %<st 
+  rom_flags_type(0x0030D18C, flags_type_arm_word); //  0x64696E3E - din> 
+  rom_flags_type(0x0030D190, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0030E340, flags_type_arm_word); //  0x636F756C - coul 
+  rom_flags_type(0x0030E344, flags_type_arm_word); //  0x646E2774 - dn't 
+  rom_flags_type(0x0030E348, flags_type_arm_word); //  0x20666F72 - .for 
+  rom_flags_type(0x0030E34C, flags_type_arm_word); //  0x6B206974 - k.it 
+  rom_flags_type(0x0030E350, flags_type_arm_word); //  0x206F7665 - .ove 
+  rom_flags_type(0x0030E354, flags_type_arm_word); //  0x72000000 - r... 
+  rom_flags_type(0x00313694, flags_type_arm_word); //  0x54526573 - TRes 
+  rom_flags_type(0x00313698, flags_type_arm_word); //  0x65727665 - erve 
+  rom_flags_type(0x0031369C, flags_type_arm_word); //  0x64436F6E - dCon 
+  rom_flags_type(0x003136A0, flags_type_arm_word); //  0x74696775 - tigu 
+  rom_flags_type(0x003136A4, flags_type_arm_word); //  0x6F75734D - ousM 
+  rom_flags_type(0x003136A8, flags_type_arm_word); //  0x656D6F72 - emor 
+  rom_flags_type(0x003136AC, flags_type_arm_word); //  0x79000000 - y... 
+  rom_flags_type(0x0031B2AC, flags_type_arm_text); //  0x76696577 - view 
+  rom_flags_type(0x0031B2B0, flags_type_arm_text); //  0x636F626A - cobj 
+  rom_flags_type(0x0031B2B4, flags_type_arm_text); //  0x65637400 - ect. 
+  rom_flags_type(0x0031B2CC, flags_type_arm_text); //  0x50537464 - PStd 
+  rom_flags_type(0x0031B2D0, flags_type_arm_text); //  0x696F4F75 - ioOu 
+  rom_flags_type(0x0031B2D4, flags_type_arm_text); //  0x74547261 - tTra 
+  rom_flags_type(0x0031B2D8, flags_type_arm_text); //  0x6E736C61 - nsla 
+  rom_flags_type(0x0031B2DC, flags_type_arm_text); //  0x746F7200 - tor. 
+  rom_flags_type(0x0031B2E0, flags_type_arm_text); //  0x504F7574 - POut 
+  rom_flags_type(0x0031B2E4, flags_type_arm_text); //  0x5472616E - Tran 
+  rom_flags_type(0x0031B2E8, flags_type_arm_text); //  0x736C6174 - slat 
+  rom_flags_type(0x0031B2EC, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x0031B2F0, flags_type_arm_text); //  0x77000000 - w... 
+  rom_flags_type(0x0031B2F4, flags_type_arm_text); //  0x55726961 - Uria 
+  rom_flags_type(0x0031B2F8, flags_type_arm_text); //  0x68204F75 - h.Ou 
+  rom_flags_type(0x0031B2FC, flags_type_arm_text); //  0x74707574 - tput 
+  rom_flags_type(0x0031B300, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0031B304, flags_type_arm_text); //  0x25303858 - %08X 
+  rom_flags_type(0x0031B308, flags_type_arm_text); //  0x20776163 - .wac 
+  rom_flags_type(0x0031B30C, flags_type_arm_text); //  0x6B6F2073 - ko.s 
+  rom_flags_type(0x0031B310, flags_type_arm_text); //  0x697A6520 - ize. 
+  rom_flags_type(0x0031B314, flags_type_arm_text); //  0x2558210D - %X!. 
+  rom_flags_type(0x0031B318, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0031B38C, flags_type_arm_text); //  0x25303858 - %08X 
+  rom_flags_type(0x0031B390, flags_type_arm_text); //  0x206C6F63 - .loc 
+  rom_flags_type(0x0031B394, flags_type_arm_text); //  0x6B656420 - ked. 
+  rom_flags_type(0x0031B398, flags_type_arm_text); //  0x28636F75 - (cou 
+  rom_flags_type(0x0031B39C, flags_type_arm_text); //  0x6E742025 - nt.% 
+  rom_flags_type(0x0031B3A0, flags_type_arm_text); //  0x64290D00 - d).. 
+  rom_flags_type(0x0031B3A4, flags_type_arm_text); //  0x25303858 - %08X 
+  rom_flags_type(0x0031B3A8, flags_type_arm_text); //  0x20686173 - .has 
+  rom_flags_type(0x0031B3AC, flags_type_arm_text); //  0x206C6F63 - .loc 
+  rom_flags_type(0x0031B3B0, flags_type_arm_text); //  0x6B206269 - k.bi 
+  rom_flags_type(0x0031B3B4, flags_type_arm_text); //  0x74207769 - t.wi 
+  rom_flags_type(0x0031B3B8, flags_type_arm_text); //  0x7468207A - th.z 
+  rom_flags_type(0x0031B3BC, flags_type_arm_text); //  0x65726F20 - ero. 
+  rom_flags_type(0x0031B3C0, flags_type_arm_text); //  0x636F756E - coun 
+  rom_flags_type(0x0031B3C4, flags_type_arm_text); //  0x74210D00 - t!.. 
+  rom_flags_type(0x0031B46C, flags_type_arm_text); //  0x25303858 - %08X 
+  rom_flags_type(0x0031B470, flags_type_arm_text); //  0x206C6F63 - .loc 
+  rom_flags_type(0x0031B474, flags_type_arm_text); //  0x6B206269 - k.bi 
+  rom_flags_type(0x0031B478, flags_type_arm_text); //  0x7420636C - t.cl 
+  rom_flags_type(0x0031B47C, flags_type_arm_text); //  0x65617220 - ear. 
+  rom_flags_type(0x0031B480, flags_type_arm_text); //  0x77697468 - with 
+  rom_flags_type(0x0031B484, flags_type_arm_text); //  0x20636F75 - .cou 
+  rom_flags_type(0x0031B488, flags_type_arm_text); //  0x6E742025 - nt.% 
+  rom_flags_type(0x0031B48C, flags_type_arm_text); //  0x64210D00 - d!.. 
+  rom_flags_type(0x0031B504, flags_type_arm_word); //  0x0D000000 - .... 
+  rom_flags_type(0x0031B6FC, flags_type_arm_text); //  0x4D415020 - MAP. 
+  rom_flags_type(0x0031B700, flags_type_arm_text); //  0x23256C58 - #%lX 
+  rom_flags_type(0x0031B704, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0031B708, flags_type_arm_text); //  0x20200000 - .... 
+  rom_flags_type(0x0031B70C, flags_type_arm_text); //  0x2A200000 - *... 
+  rom_flags_type(0x0031B710, flags_type_arm_text); //  0x73757020 - sup. 
+  rom_flags_type(0x0031B714, flags_type_arm_text); //  0x23256C58 - #%lX 
+  rom_flags_type(0x0031B718, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0031B71C, flags_type_arm_text); //  0x25732000 - %s.. 
+  rom_flags_type(0x0031B91C, 0x0031BA40, flags_type_arm_text); //  0x746F7461 - tota 
+  rom_flags_type(0x0031BABC, flags_type_arm_text); //  0x4F543A20 - OT:. 
+  rom_flags_type(0x0031BAC0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0031BAC4, flags_type_arm_text); //  0x256C6420 - %ld. 
+  rom_flags_type(0x0031BAC8, flags_type_arm_text); //  0x75736564 - used 
+  rom_flags_type(0x0031BACC, flags_type_arm_text); //  0x2C20256C - ,.%l 
+  rom_flags_type(0x0031BAD0, flags_type_arm_text); //  0x64206861 - d.ha 
+  rom_flags_type(0x0031BAD4, flags_type_arm_text); //  0x6E646C65 - ndle 
+  rom_flags_type(0x0031BAD8, flags_type_arm_text); //  0x73000000 - s... 
+  rom_flags_type(0x0031BADC, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0031BC24, flags_type_arm_text); //  0x77000000 - w... 
+  rom_flags_type(0x0031BC28, flags_type_arm_text); //  0x55726961 - Uria 
+  rom_flags_type(0x0031BC2C, flags_type_arm_text); //  0x68205374 - h.St 
+  rom_flags_type(0x0031BC30, flags_type_arm_text); //  0x72696E67 - ring 
+  rom_flags_type(0x0031BC34, flags_type_arm_text); //  0x73000000 - s... 
+  rom_flags_type(0x0031BDA4, flags_type_arm_text); //  0x25730D00 - %s.. 
+  rom_flags_type(0x0031BDAC, flags_type_arm_text); //  0x53756D6D - Summ 
+  rom_flags_type(0x0031BDB0, flags_type_arm_text); //  0x61727920 - ary. 
+  rom_flags_type(0x0031BDB4, flags_type_arm_text); //  0x6F662073 - of.s 
+  rom_flags_type(0x0031BDB8, flags_type_arm_text); //  0x697A6573 - izes 
+  rom_flags_type(0x0031BDBC, flags_type_arm_text); //  0x206F6620 - .of. 
+  rom_flags_type(0x0031BDC0, flags_type_arm_text); //  0x62696E61 - bina 
+  rom_flags_type(0x0031BDC4, flags_type_arm_text); //  0x7279206F - ry.o 
+  rom_flags_type(0x0031BDC8, flags_type_arm_text); //  0x626A6563 - bjec 
+  rom_flags_type(0x0031BDCC, flags_type_arm_text); //  0x74733A0D - ts:. 
+  rom_flags_type(0x0031BDD0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0031BDD4, flags_type_arm_text); //  0x3A202564 - :.%d 
+  rom_flags_type(0x0031BDD8, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x003211D4, flags_type_arm_text); //  0x544C5A43 - TLZC 
+  rom_flags_type(0x003211D8, flags_type_arm_text); //  0x616C6C62 - allb 
+  rom_flags_type(0x003211DC, flags_type_arm_text); //  0x61636B43 - ackC 
+  rom_flags_type(0x003211E0, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x003211E4, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x003211E8, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x003211EC, flags_type_arm_text); //  0x5443616C - TCal 
+  rom_flags_type(0x003211F0, flags_type_arm_text); //  0x6C626163 - lbac 
+  rom_flags_type(0x003211F4, flags_type_arm_text); //  0x6B436F6D - kCom 
+  rom_flags_type(0x003211F8, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x003211FC, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x00321200, flags_type_arm_text); //  0x544C5A53 - TLZS 
+  rom_flags_type(0x00321204, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x00321208, flags_type_arm_text); //  0x4465636F - Deco 
+  rom_flags_type(0x0032120C, flags_type_arm_text); //  0x6D707265 - mpre 
+  rom_flags_type(0x00321210, flags_type_arm_text); //  0x73736F72 - ssor 
+  rom_flags_type(0x00321214, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00321658, flags_type_arm_text); //  0x544C5A53 - TLZS 
+  rom_flags_type(0x0032165C, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x00321660, flags_type_arm_text); //  0x4465636F - Deco 
+  rom_flags_type(0x00321664, flags_type_arm_text); //  0x6D707265 - mpre 
+  rom_flags_type(0x00321668, flags_type_arm_text); //  0x73736F72 - ssor 
+  rom_flags_type(0x0032166C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003216D4, flags_type_arm_text); //  0x5453696D - TSim 
+  rom_flags_type(0x003216D8, flags_type_arm_text); //  0x706C6553 - pleS 
+  rom_flags_type(0x003216DC, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x003216E0, flags_type_arm_text); //  0x4465636F - Deco 
+  rom_flags_type(0x003216E4, flags_type_arm_text); //  0x6D707265 - mpre 
+  rom_flags_type(0x003216E8, flags_type_arm_text); //  0x73736F72 - ssor 
+  rom_flags_type(0x003216EC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003216F0, flags_type_arm_text); //  0x5453696D - TSim 
+  rom_flags_type(0x003216F4, flags_type_arm_text); //  0x706C6552 - pleR 
+  rom_flags_type(0x003216F8, flags_type_arm_text); //  0x656C6F63 - eloc 
+  rom_flags_type(0x003216FC, flags_type_arm_text); //  0x53746F72 - Stor 
+  rom_flags_type(0x00321700, flags_type_arm_text); //  0x65446563 - eDec 
+  rom_flags_type(0x00321704, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x00321708, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x0032170C, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x00321734, flags_type_arm_text); //  0x545A6970 - TZip 
+  rom_flags_type(0x00321738, flags_type_arm_text); //  0x70795374 - pySt 
+  rom_flags_type(0x0032173C, flags_type_arm_text); //  0x6F726544 - oreD 
+  rom_flags_type(0x00321740, flags_type_arm_text); //  0x65636F6D - ecom 
+  rom_flags_type(0x00321744, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x00321748, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x0032174C, flags_type_arm_text); //  0x545A6970 - TZip 
+  rom_flags_type(0x00321750, flags_type_arm_text); //  0x70795265 - pyRe 
+  rom_flags_type(0x00321754, flags_type_arm_text); //  0x6C6F6353 - locS 
+  rom_flags_type(0x00321758, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x0032175C, flags_type_arm_text); //  0x4465636F - Deco 
+  rom_flags_type(0x00321760, flags_type_arm_text); //  0x6D707265 - mpre 
+  rom_flags_type(0x00321764, flags_type_arm_text); //  0x73736F72 - ssor 
+  rom_flags_type(0x00321768, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003217DC, flags_type_arm_text); //  0x544C5A52 - TLZR 
+  rom_flags_type(0x003217E0, flags_type_arm_text); //  0x656C6F63 - eloc 
+  rom_flags_type(0x003217E4, flags_type_arm_text); //  0x53746F72 - Stor 
+  rom_flags_type(0x003217E8, flags_type_arm_text); //  0x65446563 - eDec 
+  rom_flags_type(0x003217EC, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x003217F0, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x003217F4, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x003217F8, flags_type_arm_text); //  0x54584950 - TXIP 
+  rom_flags_type(0x003217FC, flags_type_arm_text); //  0x53746F72 - Stor 
+  rom_flags_type(0x00321800, flags_type_arm_text); //  0x65436F6D - eCom 
+  rom_flags_type(0x00321804, flags_type_arm_text); //  0x70616E64 - pand 
+  rom_flags_type(0x00321808, flags_type_arm_text); //  0x65720000 - er.. 
+  rom_flags_type(0x00322F24, flags_type_arm_text); //  0x696C6C65 - ille 
+  rom_flags_type(0x00322F28, flags_type_arm_text); //  0x67616C2D - gal- 
+  rom_flags_type(0x00322F2C, flags_type_arm_text); //  0x73796D62 - symb 
+  rom_flags_type(0x00322F30, flags_type_arm_text); //  0x6F6C0000 - ol.. 
+  rom_flags_type(0x00322F34, flags_type_arm_text); //  0x79796465 - yyde 
+  rom_flags_type(0x00322F38, flags_type_arm_text); //  0x6275673A - bug: 
+  rom_flags_type(0x00322F3C, flags_type_arm_text); //  0x20737461 - .sta 
+  rom_flags_type(0x00322F40, flags_type_arm_text); //  0x74652025 - te.% 
+  rom_flags_type(0x00322F44, flags_type_arm_text); //  0x642C2072 - d,.r 
+  rom_flags_type(0x00322F48, flags_type_arm_text); //  0x65616469 - eadi 
+  rom_flags_type(0x00322F4C, flags_type_arm_text); //  0x6E672025 - ng.% 
+  rom_flags_type(0x00322F50, flags_type_arm_text); //  0x64202825 - d.(% 
+  rom_flags_type(0x00322F54, flags_type_arm_text); //  0x73290D00 - s).. 
+  rom_flags_type(0x00322F58, flags_type_arm_text); //  0x79796465 - yyde 
+  rom_flags_type(0x00322F5C, flags_type_arm_text); //  0x6275673A - bug: 
+  rom_flags_type(0x00322F60, flags_type_arm_text); //  0x20737461 - .sta 
+  rom_flags_type(0x00322F64, flags_type_arm_text); //  0x74652025 - te.% 
+  rom_flags_type(0x00322F68, flags_type_arm_text); //  0x642C2073 - d,.s 
+  rom_flags_type(0x00322F6C, flags_type_arm_text); //  0x68696674 - hift 
+  rom_flags_type(0x00322F70, flags_type_arm_text); //  0x696E6720 - ing. 
+  rom_flags_type(0x00322F74, flags_type_arm_text); //  0x746F2073 - to.s 
+  rom_flags_type(0x00322F78, flags_type_arm_text); //  0x74617465 - tate 
+  rom_flags_type(0x00322F7C, flags_type_arm_text); //  0x2025640D - .%d. 
+  rom_flags_type(0x00322F80, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0032332C, flags_type_arm_text); //  0x79796465 - yyde 
+  rom_flags_type(0x00323330, flags_type_arm_text); //  0x6275673A - bug: 
+  rom_flags_type(0x00323334, flags_type_arm_text); //  0x20737461 - .sta 
+  rom_flags_type(0x00323338, flags_type_arm_text); //  0x74652025 - te.% 
+  rom_flags_type(0x0032333C, flags_type_arm_text); //  0x642C2072 - d,.r 
+  rom_flags_type(0x00323340, flags_type_arm_text); //  0x65647563 - educ 
+  rom_flags_type(0x00323344, flags_type_arm_text); //  0x696E6720 - ing. 
+  rom_flags_type(0x00323348, flags_type_arm_text); //  0x62792072 - by.r 
+  rom_flags_type(0x0032334C, flags_type_arm_text); //  0x756C6520 - ule. 
+  rom_flags_type(0x00323350, flags_type_arm_text); //  0x25642028 - %d.( 
+  rom_flags_type(0x00323354, flags_type_arm_text); //  0x2573290D - %s). 
+  rom_flags_type(0x00323358, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0032335C, flags_type_arm_text); //  0x6475706C - dupl 
+  rom_flags_type(0x00323360, flags_type_arm_text); //  0x69636174 - icat 
+  rom_flags_type(0x00323364, flags_type_arm_text); //  0x6520736C - e.sl 
+  rom_flags_type(0x00323368, flags_type_arm_text); //  0x6F74206E - ot.n 
+  rom_flags_type(0x0032336C, flags_type_arm_text); //  0x616D653A - ame: 
+  rom_flags_type(0x00323370, flags_type_arm_text); //  0x20257300 - .%s. 
+  rom_flags_type(0x00323494, flags_type_arm_text); //  0x73796E74 - synt 
+  rom_flags_type(0x00323498, flags_type_arm_text); //  0x61782065 - ax.e 
+  rom_flags_type(0x0032349C, flags_type_arm_text); //  0x72726F72 - rror 
+  rom_flags_type(0x003234A0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003234A4, flags_type_arm_text); //  0x79796465 - yyde 
+  rom_flags_type(0x003234A8, flags_type_arm_text); //  0x6275673A - bug: 
+  rom_flags_type(0x003234AC, flags_type_arm_text); //  0x20737461 - .sta 
+  rom_flags_type(0x003234B0, flags_type_arm_text); //  0x74652025 - te.% 
+  rom_flags_type(0x003234B4, flags_type_arm_text); //  0x642C2065 - d,.e 
+  rom_flags_type(0x003234B8, flags_type_arm_text); //  0x72726F72 - rror 
+  rom_flags_type(0x003234BC, flags_type_arm_text); //  0x20726563 - .rec 
+  rom_flags_type(0x003234C0, flags_type_arm_text); //  0x6F766572 - over 
+  rom_flags_type(0x003234C4, flags_type_arm_text); //  0x79207368 - y.sh 
+  rom_flags_type(0x003234C8, flags_type_arm_text); //  0x69667469 - ifti 
+  rom_flags_type(0x003234CC, flags_type_arm_text); //  0x6E672074 - ng.t 
+  rom_flags_type(0x003234D0, flags_type_arm_text); //  0x6F207374 - o.st 
+  rom_flags_type(0x003234D4, flags_type_arm_text); //  0x61746520 - ate. 
+  rom_flags_type(0x003234D8, flags_type_arm_text); //  0x25640D00 - %d.. 
+  rom_flags_type(0x00323518, flags_type_arm_text); //  0x79796465 - yyde 
+  rom_flags_type(0x0032351C, flags_type_arm_text); //  0x6275673A - bug: 
+  rom_flags_type(0x00323520, flags_type_arm_text); //  0x20657272 - .err 
+  rom_flags_type(0x00323524, flags_type_arm_text); //  0x6F722072 - or.r 
+  rom_flags_type(0x00323528, flags_type_arm_text); //  0x65636F76 - ecov 
+  rom_flags_type(0x0032352C, flags_type_arm_text); //  0x65727920 - ery. 
+  rom_flags_type(0x00323530, flags_type_arm_text); //  0x64697363 - disc 
+  rom_flags_type(0x00323534, flags_type_arm_text); //  0x61726469 - ardi 
+  rom_flags_type(0x00323538, flags_type_arm_text); //  0x6E672073 - ng.s 
+  rom_flags_type(0x0032353C, flags_type_arm_text); //  0x74617465 - tate 
+  rom_flags_type(0x00323540, flags_type_arm_text); //  0x2025640D - .%d. 
+  rom_flags_type(0x00323544, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003235A8, flags_type_arm_text); //  0x79796465 - yyde 
+  rom_flags_type(0x003235AC, flags_type_arm_text); //  0x6275673A - bug: 
+  rom_flags_type(0x003235B0, flags_type_arm_text); //  0x20737461 - .sta 
+  rom_flags_type(0x003235B4, flags_type_arm_text); //  0x74652025 - te.% 
+  rom_flags_type(0x003235B8, flags_type_arm_text); //  0x642C2065 - d,.e 
+  rom_flags_type(0x003235BC, flags_type_arm_text); //  0x72726F72 - rror 
+  rom_flags_type(0x003235C0, flags_type_arm_text); //  0x20726563 - .rec 
+  rom_flags_type(0x003235C4, flags_type_arm_text); //  0x6F766572 - over 
+  rom_flags_type(0x003235C8, flags_type_arm_text); //  0x79206469 - y.di 
+  rom_flags_type(0x003235CC, flags_type_arm_text); //  0x73636172 - scar 
+  rom_flags_type(0x003235D0, flags_type_arm_text); //  0x64732074 - ds.t 
+  rom_flags_type(0x003235D4, flags_type_arm_text); //  0x6F6B656E - oken 
+  rom_flags_type(0x003235D8, flags_type_arm_text); //  0x20256420 - .%d. 
+  rom_flags_type(0x003235DC, flags_type_arm_text); //  0x28257329 - (%s) 
+  rom_flags_type(0x003235E0, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x00324C54, flags_type_arm_text); //  0x464F5245 - FORE 
+  rom_flags_type(0x00324C58, flags_type_arm_text); //  0x41434820 - ACH. 
+  rom_flags_type(0x00324C5C, flags_type_arm_text); //  0x72657175 - requ 
+  rom_flags_type(0x00324C60, flags_type_arm_text); //  0x69726573 - ires 
+  rom_flags_type(0x00324C64, flags_type_arm_text); //  0x20444F20 - .DO. 
+  rom_flags_type(0x00324C68, flags_type_arm_text); //  0x6F722043 - or.C 
+  rom_flags_type(0x00324C6C, flags_type_arm_text); //  0x4F4C4C45 - OLLE 
+  rom_flags_type(0x00324C70, flags_type_arm_text); //  0x43540000 - CT.. 
+  rom_flags_type(0x003253AC, flags_type_arm_text); //  0x4475706C - Dupl 
+  rom_flags_type(0x003253B0, flags_type_arm_text); //  0x69636174 - icat 
+  rom_flags_type(0x003253B4, flags_type_arm_text); //  0x65206172 - e.ar 
+  rom_flags_type(0x003253B8, flags_type_arm_text); //  0x67756D65 - gume 
+  rom_flags_type(0x003253BC, flags_type_arm_text); //  0x6E74206E - nt.n 
+  rom_flags_type(0x003253C0, flags_type_arm_text); //  0x616D653A - ame: 
+  rom_flags_type(0x003253C4, flags_type_arm_text); //  0x2025730D - .%s. 
+  rom_flags_type(0x003253C8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003256AC, flags_type_arm_text); //  0x4475706C - Dupl 
+  rom_flags_type(0x003256B0, flags_type_arm_text); //  0x69636174 - icat 
+  rom_flags_type(0x003256B4, flags_type_arm_text); //  0x65207661 - e.va 
+  rom_flags_type(0x003256B8, flags_type_arm_text); //  0x72696162 - riab 
+  rom_flags_type(0x003256BC, flags_type_arm_text); //  0x6C65206E - le.n 
+  rom_flags_type(0x003256C0, flags_type_arm_text); //  0x616D653A - ame: 
+  rom_flags_type(0x003256C4, flags_type_arm_text); //  0x2025730D - .%s. 
+  rom_flags_type(0x003256C8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00325DC0, flags_type_arm_text); //  0x79796465 - yyde 
+  rom_flags_type(0x00325DC4, flags_type_arm_text); //  0x6275673A - bug: 
+  rom_flags_type(0x00325DC8, flags_type_arm_text); //  0x20616674 - .aft 
+  rom_flags_type(0x00325DCC, flags_type_arm_text); //  0x65722072 - er.r 
+  rom_flags_type(0x00325DD0, flags_type_arm_text); //  0x65647563 - educ 
+  rom_flags_type(0x00325DD4, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x00325DD8, flags_type_arm_text); //  0x2C207368 - ,.sh 
+  rom_flags_type(0x00325DDC, flags_type_arm_text); //  0x69667469 - ifti 
+  rom_flags_type(0x00325DE0, flags_type_arm_text); //  0x6E672066 - ng.f 
+  rom_flags_type(0x00325DE4, flags_type_arm_text); //  0x726F6D20 - rom. 
+  rom_flags_type(0x00325DE8, flags_type_arm_text); //  0x73746174 - stat 
+  rom_flags_type(0x00325DEC, flags_type_arm_text); //  0x65203020 - e.0. 
+  rom_flags_type(0x00325DF0, flags_type_arm_text); //  0x746F2073 - to.s 
+  rom_flags_type(0x00325DF4, flags_type_arm_text); //  0x74617465 - tate 
+  rom_flags_type(0x00325DF8, flags_type_arm_text); //  0x2025640D - .%d. 
+  rom_flags_type(0x00325DFC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00325EE4, flags_type_arm_text); //  0x79796465 - yyde 
+  rom_flags_type(0x00325EE8, flags_type_arm_text); //  0x6275673A - bug: 
+  rom_flags_type(0x00325EEC, flags_type_arm_text); //  0x20616674 - .aft 
+  rom_flags_type(0x00325EF0, flags_type_arm_text); //  0x65722072 - er.r 
+  rom_flags_type(0x00325EF4, flags_type_arm_text); //  0x65647563 - educ 
+  rom_flags_type(0x00325EF8, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x00325EFC, flags_type_arm_text); //  0x2C207368 - ,.sh 
+  rom_flags_type(0x00325F00, flags_type_arm_text); //  0x69667469 - ifti 
+  rom_flags_type(0x00325F04, flags_type_arm_text); //  0x6E672066 - ng.f 
+  rom_flags_type(0x00325F08, flags_type_arm_text); //  0x726F6D20 - rom. 
+  rom_flags_type(0x00325F0C, flags_type_arm_text); //  0x73746174 - stat 
+  rom_flags_type(0x00325F10, flags_type_arm_text); //  0x65202564 - e.%d 
+  rom_flags_type(0x00325F14, flags_type_arm_text); //  0x20746F20 - .to. 
+  rom_flags_type(0x00325F18, flags_type_arm_text); //  0x73746174 - stat 
+  rom_flags_type(0x00325F1C, flags_type_arm_text); //  0x65202564 - e.%d 
+  rom_flags_type(0x00325F20, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x00325F38, flags_type_arm_text); //  0x79616363 - yacc 
+  rom_flags_type(0x00325F3C, flags_type_arm_text); //  0x20737461 - .sta 
+  rom_flags_type(0x00325F40, flags_type_arm_text); //  0x636B206F - ck.o 
+  rom_flags_type(0x00325F44, flags_type_arm_text); //  0x76657266 - verf 
+  rom_flags_type(0x00325F48, flags_type_arm_text); //  0x6C6F7700 - low. 
+  rom_flags_type(0x00326144, flags_type_arm_text); //  0x696C6C65 - ille 
+  rom_flags_type(0x00326148, flags_type_arm_text); //  0x67616C20 - gal. 
+  rom_flags_type(0x0032614C, flags_type_arm_text); //  0x73796D62 - symb 
+  rom_flags_type(0x00326150, flags_type_arm_text); //  0x6F6C0000 - ol.. 
+  rom_flags_type(0x00326154, flags_type_arm_text); //  0x20252367 - .%#g 
+  rom_flags_type(0x00326158, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0032615C, flags_type_arm_text); //  0x25732D2D - %s-- 
+  rom_flags_type(0x00326160, flags_type_arm_text); //  0x72656164 - read 
+  rom_flags_type(0x00326164, flags_type_arm_text); //  0x20257325 - .%s% 
+  rom_flags_type(0x00326168, flags_type_arm_text); //  0x732C2062 - s,.b 
+  rom_flags_type(0x0032616C, flags_type_arm_text); //  0x75742077 - ut.w 
+  rom_flags_type(0x00326170, flags_type_arm_text); //  0x616E7465 - ante 
+  rom_flags_type(0x00326174, flags_type_arm_text); //  0x64200000 - d... 
+  rom_flags_type(0x003261A0, flags_type_arm_text); //  0x20222573 - ."%s 
+  rom_flags_type(0x003261A4, flags_type_arm_text); //  0x22000000 - "... 
+  rom_flags_type(0x003261D4, flags_type_arm_text); //  0x20256C64 - .%ld 
+  rom_flags_type(0x003261D8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003262E4, flags_type_arm_text); //  0x2C200000 - ,... 
+  rom_flags_type(0x003262E8, flags_type_arm_text); //  0x25730000 - %s.. 
+  rom_flags_type(0x0032634C, flags_type_arm_text); //  0x203C454F - .<EO 
+  rom_flags_type(0x00326350, flags_type_arm_text); //  0x463E2000 - F>.. 
+  rom_flags_type(0x00326354, flags_type_arm_text); //  0x203C2563 - .<%c 
+  rom_flags_type(0x00326358, flags_type_arm_text); //  0x3E200000 - >... 
+  rom_flags_type(0x0032635C, flags_type_arm_text); //  0x203C5C25 - .<\% 
+  rom_flags_type(0x00326360, flags_type_arm_text); //  0x2E336F3E - .3o> 
+  rom_flags_type(0x00326364, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x00326394, flags_type_arm_text); //  0x203C2573 - .<%s 
+  rom_flags_type(0x00326398, flags_type_arm_text); //  0x3E200000 - >... 
+  rom_flags_type(0x00326480, flags_type_arm_text); //  0x436F6D70 - Comp 
+  rom_flags_type(0x00326484, flags_type_arm_text); //  0x696C6572 - iler 
+  rom_flags_type(0x00326488, flags_type_arm_text); //  0x2063616E - .can 
+  rom_flags_type(0x0032648C, flags_type_arm_text); //  0x27742067 - 't.g 
+  rom_flags_type(0x00326490, flags_type_arm_text); //  0x65742062 - et.b 
+  rom_flags_type(0x00326494, flags_type_arm_text); //  0x75666665 - uffe 
+  rom_flags_type(0x00326498, flags_type_arm_text); //  0x72207370 - r.sp 
+  rom_flags_type(0x0032649C, flags_type_arm_text); //  0x61636500 - ace. 
+  rom_flags_type(0x00326638, flags_type_arm_text); //  0x756E0000 - un.. 
+  rom_flags_type(0x00326770, 0x00326860, flags_type_arm_text); //  0x616E6400 - and. 
+  rom_flags_type(0x00326A2C, flags_type_arm_text); //  0x2F2F0000 - //.. 
+  rom_flags_type(0x00326A64, flags_type_arm_text); //  0x2F2A0000 - /*.. 
+  rom_flags_type(0x00326AB8, flags_type_arm_text); //  0x756E0000 - un.. 
+  rom_flags_type(0x00326C40, flags_type_arm_text); //  0x53796D62 - Symb 
+  rom_flags_type(0x00326C44, flags_type_arm_text); //  0x6F6C2074 - ol.t 
+  rom_flags_type(0x00326C48, flags_type_arm_text); //  0x6F6F2062 - oo.b 
+  rom_flags_type(0x00326C4C, flags_type_arm_text); //  0x69670000 - ig.. 
+  rom_flags_type(0x00326C50, flags_type_arm_text); //  0x4E494C00 - NIL. 
+  rom_flags_type(0x00326C54, flags_type_arm_text); //  0x54525545 - TRUE 
+  rom_flags_type(0x00326C58, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00326F94, flags_type_arm_text); //  0x756E0000 - un.. 
+  rom_flags_type(0x00327304, flags_type_arm_text); //  0x2B2D2A2F - +-*/ 
+  rom_flags_type(0x00327308, flags_type_arm_text); //  0x2829272E - ()'. 
+  rom_flags_type(0x0032730C, flags_type_arm_text); //  0x5B5D2C3B - [],; 
+  rom_flags_type(0x00327310, flags_type_arm_text); //  0x7B7D0000 - {}.. 
+  rom_flags_type(0x003274B8, flags_type_arm_text); //  0x756E0000 - un.. 
+  rom_flags_type(0x00337D7C, flags_type_arm_text); //  0x2B3D2500 - +=%. 
+  rom_flags_type(0x0033BB24, flags_type_arm_text); //  0x27223B3A - '";: 
+  rom_flags_type(0x0033BB28, flags_type_arm_text); //  0x2C2E7454 - ,.tT 
+  rom_flags_type(0x0033BB2C, flags_type_arm_text); //  0x66460000 - fF.. 
+  rom_flags_type(0x0033C7C8, flags_type_arm_text); //  0x25550000 - %U.. 
+  rom_flags_type(0x0033C90C, flags_type_arm_text); //  0x25640000 - %d.. 
+  rom_flags_type(0x0033C9E0, flags_type_arm_text); //  0x54525545 - TRUE 
+  rom_flags_type(0x0033C9E4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033C9E8, flags_type_arm_text); //  0x4E494C00 - NIL. 
+  rom_flags_type(0x0033C9EC, flags_type_arm_text); //  0x245C7525 - $\u% 
+  rom_flags_type(0x0033C9F0, flags_type_arm_text); //  0x30346C58 - 04lX 
+  rom_flags_type(0x0033C9F4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033C9F8, flags_type_arm_text); //  0x245C0000 - $\.. 
+  rom_flags_type(0x0033C9FC, flags_type_arm_text); //  0x24090000 - $... 
+  rom_flags_type(0x0033CA00, flags_type_arm_text); //  0x240D0000 - $... 
+  rom_flags_type(0x0033CA04, flags_type_arm_text); //  0x24256300 - $%c. 
+  rom_flags_type(0x0033CA14, flags_type_arm_text); //  0x245C2530 - $\%0 
+  rom_flags_type(0x0033CA18, flags_type_arm_text); //  0x326C5800 - 2lX. 
+  rom_flags_type(0x0033CA68, flags_type_arm_text); //  0x3C73796D - <sym 
+  rom_flags_type(0x0033CA6C, flags_type_arm_text); //  0x626F6C20 - bol. 
+  rom_flags_type(0x0033CA70, flags_type_arm_text); //  0x636C6173 - clas 
+  rom_flags_type(0x0033CA74, flags_type_arm_text); //  0x733E0000 - s>.. 
+  rom_flags_type(0x0033CA78, flags_type_arm_text); //  0x3C776561 - <wea 
+  rom_flags_type(0x0033CA7C, flags_type_arm_text); //  0x6B206172 - k.ar 
+  rom_flags_type(0x0033CA80, flags_type_arm_text); //  0x72617920 - ray. 
+  rom_flags_type(0x0033CA84, flags_type_arm_text); //  0x636C6173 - clas 
+  rom_flags_type(0x0033CA88, flags_type_arm_text); //  0x733E0000 - s>.. 
+  rom_flags_type(0x0033CA8C, flags_type_arm_text); //  0x23256C58 - #%lX 
+  rom_flags_type(0x0033CA90, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033CA94, flags_type_arm_text); //  0x3C626164 - <bad 
+  rom_flags_type(0x0033CA98, flags_type_arm_text); //  0x20706B67 - .pkg 
+  rom_flags_type(0x0033CA9C, flags_type_arm_text); //  0x20726566 - .ref 
+  rom_flags_type(0x0033CAA0, flags_type_arm_text); //  0x3E000000 - >... 
+  rom_flags_type(0x0033CB8C, flags_type_arm_text); //  0x3C25643E - <%d> 
+  rom_flags_type(0x0033CB90, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033CC3C, flags_type_arm_text); //  0x3C66756E - <fun 
+  rom_flags_type(0x0033CC40, flags_type_arm_text); //  0x6374696F - ctio 
+  rom_flags_type(0x0033CC44, flags_type_arm_text); //  0x6E2C2000 - n,.. 
+  rom_flags_type(0x0033CC48, flags_type_arm_text); //  0x3C6E6174 - <nat 
+  rom_flags_type(0x0033CC4C, flags_type_arm_text); //  0x69766520 - ive. 
+  rom_flags_type(0x0033CC50, flags_type_arm_text); //  0x66756E63 - func 
+  rom_flags_type(0x0033CC54, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x0033CC58, flags_type_arm_text); //  0x2C200000 - ,... 
+  rom_flags_type(0x0033CC5C, flags_type_arm_text); //  0x256C6420 - %ld. 
+  rom_flags_type(0x0033CC60, flags_type_arm_text); //  0x61726728 - arg( 
+  rom_flags_type(0x0033CC64, flags_type_arm_text); //  0x73292023 - s).# 
+  rom_flags_type(0x0033CC68, flags_type_arm_text); //  0x256C583E - %lX> 
+  rom_flags_type(0x0033CC6C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033CCA0, flags_type_arm_text); //  0x7B23256C - {#%l 
+  rom_flags_type(0x0033CCA4, flags_type_arm_text); //  0x587D0000 - X}.. 
+  rom_flags_type(0x0033CCA8, flags_type_arm_text); //  0x7B40256C - {@%l 
+  rom_flags_type(0x0033CCAC, flags_type_arm_text); //  0x647D0000 - d}.. 
+  rom_flags_type(0x0033CCB0, flags_type_arm_text); //  0xEB62217D - .b!} 
+  rom_flags_type(0x0033CD04, flags_type_arm_text); //  0x7B000000 - {... 
+  rom_flags_type(0x0033CDB0, flags_type_arm_text); //  0x2E2E2E00 - .... 
+  rom_flags_type(0x0033CE1C, flags_type_arm_text); //  0x25733A20 - %s:. 
+  rom_flags_type(0x0033CE20, flags_type_arm_text); //  0x3078256C - 0x%l 
+  rom_flags_type(0x0033CE24, flags_type_arm_text); //  0x58000000 - X... 
+  rom_flags_type(0x0033CF14, flags_type_arm_text); //  0x25733A20 - %s:. 
+  rom_flags_type(0x0033CF18, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033CF1C, flags_type_arm_text); //  0x0D252A73 - .%*s 
+  rom_flags_type(0x0033CF20, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033CF24, flags_type_arm_text); //  0x7D000000 - }... 
+  rom_flags_type(0x0033CF44, flags_type_arm_text); //  0x3C666F72 - <for 
+  rom_flags_type(0x0033CF48, flags_type_arm_text); //  0x77617264 - ward 
+  rom_flags_type(0x0033CF4C, flags_type_arm_text); //  0x696E6720 - ing. 
+  rom_flags_type(0x0033CF50, flags_type_arm_text); //  0x706F696E - poin 
+  rom_flags_type(0x0033CF54, flags_type_arm_text); //  0x74657220 - ter. 
+  rom_flags_type(0x0033CF58, flags_type_arm_text); //  0x2325582E - #%X. 
+  rom_flags_type(0x0033CF5C, flags_type_arm_text); //  0x2E2E5754 - ..WT 
+  rom_flags_type(0x0033CF60, flags_type_arm_text); //  0x46212121 - F!!! 
+  rom_flags_type(0x0033CF64, flags_type_arm_text); //  0x3E000000 - >... 
+  rom_flags_type(0x0033D064, flags_type_arm_text); //  0x2E000000 - .... 
+  rom_flags_type(0x0033D0EC, flags_type_arm_text); //  0x5B706174 - [pat 
+  rom_flags_type(0x0033D0F0, flags_type_arm_text); //  0x68457870 - hExp 
+  rom_flags_type(0x0033D0F4, flags_type_arm_text); //  0x723A2000 - r:.. 
+  rom_flags_type(0x0033D0F8, flags_type_arm_text); //  0x2C200000 - ,... 
+  rom_flags_type(0x0033D0FC, flags_type_arm_text); //  0x5D000000 - ]... 
+  rom_flags_type(0x0033D130, flags_type_arm_text); //  0x5B23256C - [#%l 
+  rom_flags_type(0x0033D134, flags_type_arm_text); //  0x585D0000 - X].. 
+  rom_flags_type(0x0033D138, flags_type_arm_text); //  0x5B40256C - [@%l 
+  rom_flags_type(0x0033D13C, flags_type_arm_text); //  0x645D0000 - d].. 
+  rom_flags_type(0x0033D19C, flags_type_arm_text); //  0x5B000000 - [... 
+  rom_flags_type(0x0033D29C, flags_type_arm_text); //  0x3A200D25 - :..% 
+  rom_flags_type(0x0033D2A0, flags_type_arm_text); //  0x2A730000 - *s.. 
+  rom_flags_type(0x0033D308, flags_type_arm_text); //  0x3A200000 - :... 
+  rom_flags_type(0x0033D30C, flags_type_arm_text); //  0x2E2E2E00 - .... 
+  rom_flags_type(0x0033D394, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0033D398, flags_type_arm_text); //  0x0D252A73 - .%*s 
+  rom_flags_type(0x0033D39C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033D4AC, flags_type_arm_text); //  0x25730000 - %s.. 
+  rom_flags_type(0x0033D4B0, flags_type_arm_text); //  0x7C000000 - |... 
+  rom_flags_type(0x0033D4B4, flags_type_arm_text); //  0x5C755C5C - \u\\ 
+  rom_flags_type(0x0033D4B8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033D4BC, flags_type_arm_text); //  0x5C755C7C - \u\| 
+  rom_flags_type(0x0033D4C0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033D4D4, flags_type_arm_text); //  0x5C752563 - \u%c 
+  rom_flags_type(0x0033D4D8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033D4E8, flags_type_arm_text); //  0x25303258 - %02X 
+  rom_flags_type(0x0033D4EC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033D52C, flags_type_arm_text); //  0x5C5C0000 - \\.. 
+  rom_flags_type(0x0033D530, flags_type_arm_text); //  0x5C7C0000 - \|.. 
+  rom_flags_type(0x0033D534, flags_type_arm_text); //  0x25630000 - %c.. 
+  rom_flags_type(0x0033D560, flags_type_arm_text); //  0x5C6E0000 - \n.. 
+  rom_flags_type(0x0033D564, flags_type_arm_text); //  0x5C740000 - \t.. 
+  rom_flags_type(0x0033D58C, flags_type_arm_text); //  0x5C752530 - \u%0 
+  rom_flags_type(0x0033D590, flags_type_arm_text); //  0x32580000 - 2X.. 
+  rom_flags_type(0x0033D5D4, flags_type_arm_text); //  0x25236700 - %#g. 
+  rom_flags_type(0x0033D68C, flags_type_arm_text); //  0x22000000 - "... 
+  rom_flags_type(0x0033D6C4, flags_type_arm_text); //  0x3C25732C - <%s, 
+  rom_flags_type(0x0033D6C8, flags_type_arm_text); //  0x206C656E - .len 
+  rom_flags_type(0x0033D6CC, flags_type_arm_text); //  0x67746820 - gth. 
+  rom_flags_type(0x0033D6D0, flags_type_arm_text); //  0x25643E00 - %d>. 
+  rom_flags_type(0x0033D734, flags_type_arm_text); //  0x3C42696E - <Bin 
+  rom_flags_type(0x0033D738, flags_type_arm_text); //  0x6172792C - ary, 
+  rom_flags_type(0x0033D73C, flags_type_arm_text); //  0x20636C61 - .cla 
+  rom_flags_type(0x0033D740, flags_type_arm_text); //  0x73732000 - ss.. 
+  rom_flags_type(0x0033D744, flags_type_arm_text); //  0x2C206C65 - ,.le 
+  rom_flags_type(0x0033D748, flags_type_arm_text); //  0x6E677468 - ngth 
+  rom_flags_type(0x0033D74C, flags_type_arm_text); //  0x2025643E - .%d> 
+  rom_flags_type(0x0033D750, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033D7A8, flags_type_arm_text); //  0x2A2A2A20 - ***. 
+  rom_flags_type(0x0033D7AC, flags_type_arm_text); //  0x2573202A - %s.* 
+  rom_flags_type(0x0033D7B0, flags_type_arm_text); //  0x2A2A0000 - **.. 
+  rom_flags_type(0x0033E360, flags_type_arm_text); //  0x30313233 - 0123 
+  rom_flags_type(0x0033E364, flags_type_arm_text); //  0x34353637 - 4567 
+  rom_flags_type(0x0033E368, flags_type_arm_text); //  0x38394142 - 89AB 
+  rom_flags_type(0x0033E36C, flags_type_arm_text); //  0x43444546 - CDEF 
+  rom_flags_type(0x0033E370, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033E374, flags_type_arm_text); //  0x30580000 - 0X.. 
+  rom_flags_type(0x0033E3B8, flags_type_arm_text); //  0x30313233 - 0123 
+  rom_flags_type(0x0033E3BC, flags_type_arm_text); //  0x34353637 - 4567 
+  rom_flags_type(0x0033E3C0, flags_type_arm_text); //  0x38396162 - 89ab 
+  rom_flags_type(0x0033E3C4, flags_type_arm_text); //  0x63646566 - cdef 
+  rom_flags_type(0x0033E3C8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033E3CC, flags_type_arm_text); //  0x30780000 - 0x.. 
+  rom_flags_type(0x0033E404, flags_type_arm_text); //  0x40000000 - @... 
+  rom_flags_type(0x0033E444, flags_type_arm_text); //  0x30000000 - 0... 
+  rom_flags_type(0x0033E4D8, flags_type_arm_text); //  0x2D000000 - -... 
+  rom_flags_type(0x0033E4DC, flags_type_arm_text); //  0x2B000000 - +... 
+  rom_flags_type(0x0033E4E0, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0033EB3C, flags_type_arm_text); //  0x2D000000 - -... 
+  rom_flags_type(0x0033EB40, flags_type_arm_text); //  0x2B000000 - +... 
+  rom_flags_type(0x0033EB44, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033EB48, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0033F040, flags_type_arm_text); //  0x2D000000 - -... 
+  rom_flags_type(0x0033F044, flags_type_arm_text); //  0x2B000000 - +... 
+  rom_flags_type(0x0033F048, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0033F04C, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0033F388, flags_type_arm_text); //  0x4E4F5445 - NOTE 
+  rom_flags_type(0x0033F38C, flags_type_arm_text); //  0x3A207075 - :.pu 
+  rom_flags_type(0x0033F390, flags_type_arm_text); //  0x73686269 - shbi 
+  rom_flags_type(0x0033F394, flags_type_arm_text); //  0x74732825 - ts(% 
+  rom_flags_type(0x0033F398, flags_type_arm_text); //  0x642C2564 - d,%d 
+  rom_flags_type(0x0033F39C, flags_type_arm_text); //  0x29206172 - ).ar 
+  rom_flags_type(0x0033F3A0, flags_type_arm_text); //  0x67756D65 - gume 
+  rom_flags_type(0x0033F3A4, flags_type_arm_text); //  0x6E742069 - nt.i 
+  rom_flags_type(0x0033F3A8, flags_type_arm_text); //  0x73206F75 - s.ou 
+  rom_flags_type(0x0033F3AC, flags_type_arm_text); //  0x74206F66 - t.of 
+  rom_flags_type(0x0033F3B0, flags_type_arm_text); //  0x2072616E - .ran 
+  rom_flags_type(0x0033F3B4, flags_type_arm_text); //  0x67650000 - ge.. 
+  rom_flags_type(0x0033F3B8, flags_type_arm_text); //  0x4E4F5445 - NOTE 
+  rom_flags_type(0x0033F3BC, flags_type_arm_text); //  0x3A206279 - :.by 
+  rom_flags_type(0x0033F3C0, flags_type_arm_text); //  0x7465636F - teco 
+  rom_flags_type(0x0033F3C4, flags_type_arm_text); //  0x756E743D - unt= 
+  rom_flags_type(0x0033F3C8, flags_type_arm_text); //  0x2564206F - %d.o 
+  rom_flags_type(0x0033F3CC, flags_type_arm_text); //  0x76657266 - verf 
+  rom_flags_type(0x0033F3D0, flags_type_arm_text); //  0x6C6F7720 - low. 
+  rom_flags_type(0x0033F3D4, flags_type_arm_text); //  0x696E2070 - in.p 
+  rom_flags_type(0x0033F3D8, flags_type_arm_text); //  0x75736862 - ushb 
+  rom_flags_type(0x0033F3DC, flags_type_arm_text); //  0x69747328 - its( 
+  rom_flags_type(0x0033F3E0, flags_type_arm_text); //  0x29000000 - )... 
+  rom_flags_type(0x0033F45C, flags_type_arm_text); //  0x4E4F5445 - NOTE 
+  rom_flags_type(0x0033F460, flags_type_arm_text); //  0x3A206279 - :.by 
+  rom_flags_type(0x0033F464, flags_type_arm_text); //  0x7465636F - teco 
+  rom_flags_type(0x0033F468, flags_type_arm_text); //  0x756E743D - unt= 
+  rom_flags_type(0x0033F46C, flags_type_arm_text); //  0x2564206F - %d.o 
+  rom_flags_type(0x0033F470, flags_type_arm_text); //  0x76657266 - verf 
+  rom_flags_type(0x0033F474, flags_type_arm_text); //  0x6C6F7720 - low. 
+  rom_flags_type(0x0033F478, flags_type_arm_text); //  0x696E2070 - in.p 
+  rom_flags_type(0x0033F47C, flags_type_arm_text); //  0x75736862 - ushb 
+  rom_flags_type(0x0033F480, flags_type_arm_text); //  0x69747328 - its( 
+  rom_flags_type(0x0033F484, flags_type_arm_text); //  0x29000000 - )... 
+  rom_flags_type(0x003442EC, flags_type_arm_word); //  0xC1E00000 - .... 
+  rom_flags_type(0x003442F0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003442F4, flags_type_arm_word); //  0x41DFFFFF - A... 
+  rom_flags_type(0x003442F8, flags_type_arm_word); //  0xFFC00000 - .... 
+  rom_flags_type(0x00344374, flags_type_arm_text); //  0x3FE00000 - ?... 
+  rom_flags_type(0x00344378, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00344404, flags_type_arm_word); //  0xC1E00000 - .... 
+  rom_flags_type(0x00344408, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0034440C, flags_type_arm_word); //  0x41DFFFFF - A... 
+  rom_flags_type(0x00344410, flags_type_arm_word); //  0xFFC00000 - .... 
+  rom_flags_type(0x00344FB8, flags_type_arm_text); //  0x0D43616C - .Cal 
+  rom_flags_type(0x00344FBC, flags_type_arm_text); //  0x6C207468 - l.th 
+  rom_flags_type(0x00344FC0, flags_type_arm_text); //  0x726F7567 - roug 
+  rom_flags_type(0x00344FC4, flags_type_arm_text); //  0x68206120 - h.a. 
+  rom_flags_type(0x00344FC8, flags_type_arm_text); //  0x70757265 - pure 
+  rom_flags_type(0x00344FCC, flags_type_arm_text); //  0x20766972 - .vir 
+  rom_flags_type(0x00344FD0, flags_type_arm_text); //  0x7475616C - tual 
+  rom_flags_type(0x00344FD4, flags_type_arm_text); //  0x2066756E - .fun 
+  rom_flags_type(0x00344FD8, flags_type_arm_text); //  0x6374696F - ctio 
+  rom_flags_type(0x00344FDC, flags_type_arm_text); //  0x6E0D0D00 - n... 
+  rom_flags_type(0x003456EC, flags_type_arm_text); //  0x256C6625 - %lf% 
+  rom_flags_type(0x003456F0, flags_type_arm_text); //  0x6E000000 - n... 
+  rom_flags_type(0x00346408, flags_type_arm_text); //  0x3FD00000 - ?... 
+  rom_flags_type(0x0034640C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003472A0, flags_type_arm_word); //  0x3FD00000 - ?... 
+  rom_flags_type(0x003472A4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003472A8, flags_type_arm_word); //  0x3FEC0000 - ?... 
+  rom_flags_type(0x003472AC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00347560, flags_type_arm_word); //  0x3FD00000 - ?... 
+  rom_flags_type(0x00347564, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00347568, flags_type_arm_word); //  0x3FEC0000 - ?... 
+  rom_flags_type(0x0034756C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0034F088, flags_type_arm_text); //  0x436F756C - Coul 
+  rom_flags_type(0x0034F08C, flags_type_arm_text); //  0x646E2774 - dn't 
+  rom_flags_type(0x0034F090, flags_type_arm_text); //  0x20777269 - .wri 
+  rom_flags_type(0x0034F094, flags_type_arm_text); //  0x74652000 - te.. 
+  rom_flags_type(0x0034F154, flags_type_arm_text); //  0x253C7374 - %<st 
+  rom_flags_type(0x0034F158, flags_type_arm_text); //  0x64696E3E - din> 
+  rom_flags_type(0x0034F15C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0034F164, flags_type_arm_text); //  0x77000000 - w... 
+  rom_flags_type(0x0034F168, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x0034F218, flags_type_arm_text); //  0x253C7374 - %<st 
+  rom_flags_type(0x0034F21C, flags_type_arm_text); //  0x64696E3E - din> 
+  rom_flags_type(0x0034F220, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0034F224, flags_type_arm_text); //  0x77000000 - w... 
+  rom_flags_type(0x0034F22C, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x003543E8, flags_type_arm_text); //  0x556E7469 - Unti 
+  rom_flags_type(0x003543EC, flags_type_arm_text); //  0x746C6564 - tled 
+  rom_flags_type(0x003543F0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003590EC, flags_type_arm_text); //  0x40400000 - @@.. 
+  rom_flags_type(0x003590F0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003593D8, flags_type_arm_text); //  0x40400000 - @@.. 
+  rom_flags_type(0x003593DC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0035965C, flags_type_arm_text); //  0x40600000 - @`.. 
+  rom_flags_type(0x00359660, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00359850, flags_type_arm_text); //  0x40600000 - @`.. 
+  rom_flags_type(0x00359854, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0035994C, flags_type_arm_text); //  0x40200000 - @... 
+  rom_flags_type(0x00359950, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0035E2E8, flags_type_arm_text); //  0x3FD00000 - ?... 
+  rom_flags_type(0x0035E2EC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0035E374, flags_type_arm_text); //  0x3FE80000 - ?... 
+  rom_flags_type(0x0035E378, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0035E578, flags_type_arm_text); //  0x23256C58 - #%lX 
+  rom_flags_type(0x0035E57C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0035E654, flags_type_arm_text); //  0x2D2D2D00 - ---. 
+  rom_flags_type(0x0035E734, flags_type_arm_text); //  0x5B63616C - [cal 
+  rom_flags_type(0x0035E738, flags_type_arm_text); //  0x6C207769 - l.wi 
+  rom_flags_type(0x0035E73C, flags_type_arm_text); //  0x74685D00 - th]. 
+  rom_flags_type(0x0035EB38, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0035EB3C, flags_type_arm_text); //  0x252A7300 - %*s. 
+  rom_flags_type(0x0035EBEC, flags_type_arm_text); //  0x203C3D20 - .<=. 
+  rom_flags_type(0x0035EBF0, flags_type_arm_text); //  0x28000000 - (... 
+  rom_flags_type(0x0035EBF4, flags_type_arm_text); //  0x2F000000 - /... 
+  rom_flags_type(0x0035EBF8, flags_type_arm_text); //  0x292E0000 - )... 
+  rom_flags_type(0x0035EBFC, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0035ED48, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0035ED4C, flags_type_arm_text); //  0x252A7328 - %*s( 
+  rom_flags_type(0x0035ED50, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0035ED58, flags_type_arm_text); //  0x2F000000 - /... 
+  rom_flags_type(0x0035ED5C, flags_type_arm_text); //  0x292E0000 - )... 
+  rom_flags_type(0x0035ED60, flags_type_arm_text); //  0x203A3D20 - .:=. 
+  rom_flags_type(0x0035ED64, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0035ED68, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0035EE20, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0035EE24, flags_type_arm_text); //  0x252A733D - %*s= 
+  rom_flags_type(0x0035EE28, flags_type_arm_text); //  0x3E200000 - >... 
+  rom_flags_type(0x0035EE2C, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0035EEC4, flags_type_arm_text); //  0x2C200000 - ,... 
+  rom_flags_type(0x0035F018, flags_type_arm_text); //  0x20000000 - .... 
+  rom_flags_type(0x0035F01C, flags_type_arm_text); //  0x252A7300 - %*s. 
+  rom_flags_type(0x0035F020, flags_type_arm_text); //  0x28000000 - (... 
+  rom_flags_type(0x0035F024, flags_type_arm_text); //  0x293A0000 - ):.. 
+  rom_flags_type(0x0035F028, flags_type_arm_text); //  0x25732800 - %s(. 
+  rom_flags_type(0x0035F02C, flags_type_arm_text); //  0x290D0000 - )... 
+  check_code_coverage(0x00319A74); //  0xE59F0000 - .... 
+  rom_flags_type(0x0033D4B8, flags_type_arm_word); //  0x00000000 - .... 
+  check_code_coverage(0x00382364); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00382418); //  0xE3110007 - .... 
+  check_code_coverage(0x003829D8); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00382A4C); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x0038348C); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003837BC); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00383990); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00383AFC); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00383B00); //  0xEA613B95 - .a;. 
+  check_code_coverage(0x00383BE4); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00383CAC); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003840E8); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00384724); //  0xE1A0000F - .... 
+  check_code_coverage(0x00384B4C); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00384E80); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003850A4); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00385464); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003855BC); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003857F4); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00385864); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00385B60); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00385BCC); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00385DD8); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003860FC); //  0xE1110001 - .... 
+  check_code_coverage(0x00386140); //  0xEA00001C - .... 
+  check_code_coverage(0x00386144); //  0xEA5DE7A9 - .].. 
+  check_code_coverage(0x00386148); //  0xEA00001A - .... 
+  check_code_coverage(0x0038614C); //  0xEA5DC26F - .].o 
+  check_code_coverage(0x00386150); //  0xEA000018 - .... 
+  check_code_coverage(0x00386154); //  0xEA5DF409 - .].. 
+  check_code_coverage(0x00386158); //  0xEA000016 - .... 
+  check_code_coverage(0x0038615C); //  0xEA5DC27F - .]. 
+  check_code_coverage(0x00386160); //  0xEA000014 - .... 
+  check_code_coverage(0x00386164); //  0xEA5DE369 - .].i 
+  check_code_coverage(0x00386168); //  0xEA000012 - .... 
+  check_code_coverage(0x0038616C); //  0xEA5DFC47 - .].G 
+  check_code_coverage(0x00386170); //  0xEA000010 - .... 
+  check_code_coverage(0x00386174); //  0xEA5DFC4E - .].N 
+  check_code_coverage(0x00386178); //  0xEA00000E - .... 
+  check_code_coverage(0x0038617C); //  0xEA5DCAA7 - .].. 
+  check_code_coverage(0x00386180); //  0xEA00000C - .... 
+  check_code_coverage(0x00386184); //  0xEA5DE7A5 - .].. 
+  check_code_coverage(0x00386188); //  0xEA00000A - .... 
+  check_code_coverage(0x0038618C); //  0xEA5DC69A - .].. 
+  check_code_coverage(0x00386190); //  0xEA000008 - .... 
+  check_code_coverage(0x00386194); //  0xEA5E3A33 - .^:3 
+  check_code_coverage(0x00386198); //  0xEA000006 - .... 
+  check_code_coverage(0x0038619C); //  0xEA5E3A32 - .^:2 
+  check_code_coverage(0x003861A0); //  0xEA000004 - .... 
+  check_code_coverage(0x003861A4); //  0xEA5E3A31 - .^:1 
+  check_code_coverage(0x003861A8); //  0xEA000002 - .... 
+  check_code_coverage(0x003861AC); //  0xEA5E3A30 - .^:0 
+  check_code_coverage(0x003861B0); //  0xEA000000 - .... 
+  check_code_coverage(0x003861B4); //  0xEA5E2580 - .^%. 
+  check_code_coverage(0x003861B8); //  0xE3A03008 - ..0. 
+  check_code_coverage(0x00386258); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x0038639C); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003864B4); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00386A48); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00387038); //  0xE1110001 - .... 
+  check_code_coverage(0x0038707C); //  0xEA00003A - ...: 
+  check_code_coverage(0x00387080); //  0xEA5DE3D8 - .].. 
+  check_code_coverage(0x00387084); //  0xEA000038 - ...8 
+  check_code_coverage(0x00387088); //  0xEA5DBE9E - .].. 
+  check_code_coverage(0x0038708C); //  0xEA000036 - ...6 
+  check_code_coverage(0x00387090); //  0xEA5DD75D - .].] 
+  check_code_coverage(0x00387094); //  0xEA000034 - ...4 
+  check_code_coverage(0x00387098); //  0xEA5DE3CC - .].. 
+  check_code_coverage(0x0038709C); //  0xEA000032 - ...2 
+  check_code_coverage(0x003870A0); //  0xEA5DCAF6 - .].. 
+  check_code_coverage(0x003870A4); //  0xEA000030 - ...0 
+  check_code_coverage(0x003870A8); //  0xEA5DCF1C - .].. 
+  check_code_coverage(0x003870AC); //  0xEA00002E - .... 
+  check_code_coverage(0x003870B0); //  0xEA5DE3D5 - .].. 
+  check_code_coverage(0x003870B4); //  0xEA00002C - ..., 
+  check_code_coverage(0x003870B8); //  0xEA5DC2C4 - .].. 
+  check_code_coverage(0x003870BC); //  0xEA00002A - ...* 
+  check_code_coverage(0x003870C0); //  0xEA5DBE9B - .].. 
+  check_code_coverage(0x003870C4); //  0xEA000028 - ...( 
+  check_code_coverage(0x003870C8); //  0xEA5DFC93 - .].. 
+  check_code_coverage(0x003870CC); //  0xEA000026 - ...& 
+  check_code_coverage(0x003870D0); //  0xEA5DCB09 - .].. 
+  check_code_coverage(0x003870D4); //  0xEA000024 - ...$ 
+  check_code_coverage(0x003870D8); //  0xEA5E0907 - .^.. 
+  check_code_coverage(0x003870DC); //  0xEA000022 - ..." 
+  check_code_coverage(0x003870E0); //  0xEA5DEC13 - .].. 
+  check_code_coverage(0x003870E4); //  0xEA000020 - .... 
+  check_code_coverage(0x003870E8); //  0xEA5DCF16 - .].. 
+  check_code_coverage(0x003870EC); //  0xEA00001E - .... 
+  check_code_coverage(0x003870F0); //  0xEA5DDF83 - .].. 
+  check_code_coverage(0x003870F4); //  0xEA00001C - .... 
+  check_code_coverage(0x003870F8); //  0xEA5DDF96 - .].. 
+  check_code_coverage(0x003870FC); //  0xEA00001A - .... 
+  check_code_coverage(0x00387100); //  0xEA5E04DA - .^.. 
+  check_code_coverage(0x00387104); //  0xEA000018 - .... 
+  check_code_coverage(0x00387108); //  0xEA5DA9E6 - .].. 
+  check_code_coverage(0x0038710C); //  0xEA000016 - .... 
+  check_code_coverage(0x00387110); //  0xEA5DD322 - .]." 
+  check_code_coverage(0x00387114); //  0xEA000014 - .... 
+  check_code_coverage(0x00387118); //  0xEA5DE3C6 - .].. 
+  check_code_coverage(0x0038711C); //  0xEA000012 - .... 
+  check_code_coverage(0x00387120); //  0xEA5DB643 - .].C 
+  check_code_coverage(0x00387124); //  0xEA000010 - .... 
+  check_code_coverage(0x00387128); //  0xEAF674CB - ..t. 
+  check_code_coverage(0x0038712C); //  0xEA00000E - .... 
+  check_code_coverage(0x00387130); //  0xEAF674CB - ..t. 
+  check_code_coverage(0x00387134); //  0xEA00000C - .... 
+  check_code_coverage(0x00387138); //  0xEAF674CB - ..t. 
+  check_code_coverage(0x0038713C); //  0xEA00000A - .... 
+  check_code_coverage(0x00387140); //  0xEAF674CB - ..t. 
+  check_code_coverage(0x00387144); //  0xEA000008 - .... 
+  check_code_coverage(0x00387148); //  0xEAF674CB - ..t. 
+  check_code_coverage(0x0038714C); //  0xEA000006 - .... 
+  check_code_coverage(0x00387150); //  0xEAF674CB - ..t. 
+  check_code_coverage(0x00387154); //  0xEA000004 - .... 
+  check_code_coverage(0x00387158); //  0xEAF674CC - ..t. 
+  check_code_coverage(0x0038715C); //  0xEA000002 - .... 
+  check_code_coverage(0x00387160); //  0xEAF674CC - ..t. 
+  check_code_coverage(0x00387164); //  0xEA000000 - .... 
+  check_code_coverage(0x00387168); //  0xEAF674ED - ..t. 
+  check_code_coverage(0x0038716C); //  0xE3A03008 - ..0. 
+  check_code_coverage(0x00387170); //  0xE04DD103 - .M.. 
+  check_code_coverage(0x00387174); //  0xE2822010 - .... 
+  check_code_coverage(0x00387178); //  0xEA000001 - .... 
+  check_code_coverage(0x0038717C); //  0xE7921103 - .... 
+  check_code_coverage(0x00387180); //  0xE78D1103 - .... 
+  check_code_coverage(0x00387184); //  0xE2533001 - .S0. 
+  check_code_coverage(0x00387188); //  0x5AFFFFFB - Z... 
+  check_code_coverage(0x0038718C); //  0xE242200C - .B.. 
+  check_code_coverage(0x00387190); //  0xE892000E - .... 
+  check_code_coverage(0x00387194); //  0xE28CF004 - .... 
+  check_code_coverage(0x00387324); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x0038739C); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00387444); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00387B14); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00387E38); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00387F18); //  0xE1A0000F - .... 
+  check_code_coverage(0x00387F4C); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00388058); //  0xE1A0000F - .... 
+  check_code_coverage(0x00388088); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003881A0); //  0xE1A0000F - .... 
+  check_code_coverage(0x003881D0); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00388588); //  0xE1A0000F - .... 
+  check_code_coverage(0x003885B4); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00388B18); //  0xE1A0000F - .... 
+  check_code_coverage(0x00388C10); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00388DE8); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003890E0); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x0038959C); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00389624); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x003896B4); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00389734); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00389C94); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00389DE4); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00389E74); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00389F58); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x00389FC0); //  0xE8BD4001 - ..@. 
+  check_code_coverage(0x0038A4A4); //  0xE59F0000 - .... 
+  check_code_coverage(0x0038A4A8); //  0xEA61CE87 - .a.. 
+  check_code_coverage(0x0038A4AC); //  0x0C100EC4 - .... 
+  check_code_coverage(0x0038A4B0); //  0xE1A0F00E - .... 
+  check_code_coverage(0x0038A4B4); //  0xE1A0F00E - .... 
+  check_code_coverage(0x0038A4B8); //  0xE59F0000 - .... 
+  check_code_coverage(0x0038A4BC); //  0xEA5BF3C9 - .[.. 
+  check_code_coverage(0x0038A4C0); //  0x0C1018CC - .... 
+  check_code_coverage(0x0038A7A0); //  0xE59F0004 - .... 
+  check_code_coverage(0x0038ABFC); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038B140); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038B250); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038B3AC); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038B4F4); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038B690); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038B728); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038BD30); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038C550); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038C848); //  0xE1A0C00D - .... 
+  check_code_coverage(0x0038CD14); //  0xE92D000F - .-.. 
+  check_code_coverage(0x0038D288); //  0xE5D20000 - .... 
+  check_code_coverage(0x0038D290); //  0xE5C23000 - ..0. 
+  check_code_coverage(0x0038D298); //  0xE5920000 - .... 
+  check_code_coverage(0x0038D2A4); //  0xE5823000 - ..0. 
+  check_code_coverage(0x0038D2AC); //  0xE2870D06 - .... 
+  check_code_coverage(0x0038D41C); //  0xE8BD000F - .... 
+  check_code_coverage(0x0038D430); //  0xE59F1298 - .... 
+  check_code_coverage(0x0038E7AC); //  0xE3100101 - .... 
+  check_code_coverage(0x0038E848); //  0xE24FE06C - .O.l 
+  check_code_coverage(0x0038E984); //  0xEA00094E - ...N 
+  check_code_coverage(0x0038E988); //  0xEA0009B2 - .... 
+  check_code_coverage(0x0038E98C); //  0xEA00094C - ...L 
+  check_code_coverage(0x0038E990); //  0xEA00094B - ...K 
+  check_code_coverage(0x0038E994); //  0xEA000A4F - ...O 
+  check_code_coverage(0x0038E998); //  0xEA000A4E - ...N 
+  check_code_coverage(0x0038E99C); //  0xEA0001A1 - .... 
+  check_code_coverage(0x0038E9A0); //  0xEA0001A0 - .... 
+  check_code_coverage(0x0038E9A4); //  0xEA000B82 - .... 
+  check_code_coverage(0x0038E9A8); //  0xEA0009AA - .... 
+  check_code_coverage(0x0038E9AC); //  0xEA000A49 - ...I 
+  check_code_coverage(0x0038E9B0); //  0xEA000A48 - ...H 
+  check_code_coverage(0x0038E9B4); //  0xEA00019B - .... 
+  check_code_coverage(0x0038E9B8); //  0xEA00019A - .... 
+  check_code_coverage(0x0038E9BC); //  0xEA000199 - .... 
+  check_code_coverage(0x0038E9C0); //  0xEA000198 - .... 
+  check_code_coverage(0x0038E9E8); //  0xEA000C1E - .... 
+  check_code_coverage(0x0038E9EC); //  0xEA000C1D - .... 
+  check_code_coverage(0x0038E9F0); //  0xEA000C1C - .... 
+  check_code_coverage(0x0038E9F4); //  0xEA000C5A - ...Z 
+  check_code_coverage(0x0038E9F8); //  0xEA000B94 - .... 
+  check_code_coverage(0x0038E9FC); //  0xEA000189 - .... 
+  check_code_coverage(0x0038EA00); //  0xEA000188 - .... 
+  check_code_coverage(0x0038EA04); //  0xEA000187 - .... 
+  check_code_coverage(0x0038EA08); //  0xEA000186 - .... 
+  check_code_coverage(0x0038EA0C); //  0xEA000185 - .... 
+  check_code_coverage(0x0038EA10); //  0xEA000184 - .... 
+  check_code_coverage(0x0038EA14); //  0xEA000183 - .... 
+  check_code_coverage(0x0038EA18); //  0xEA000182 - .... 
+  check_code_coverage(0x0038EA1C); //  0xEA000181 - .... 
+  check_code_coverage(0x0038EA20); //  0xEA000C2B - ...+ 
+  check_code_coverage(0x0038EA24); //  0xEA000C19 - .... 
+  check_code_coverage(0x0038EA34); //  0xEA000055 - ...U 
+  check_code_coverage(0x0038EA38); //  0xEA00000D - .... 
+  check_code_coverage(0x0038EA3C); //  0xEA00003A - ...: 
+  check_code_coverage(0x0038EA40); //  0xEA000024 - ...$ 
+  check_code_coverage(0x0038EA44); //  0xEA000177 - ...w 
+  check_code_coverage(0x0038EA48); //  0xEA000176 - ...v 
+  check_code_coverage(0x0038EA4C); //  0xEA000175 - ...u 
+  check_code_coverage(0x0038EA50); //  0xEA000174 - ...t 
+  check_code_coverage(0x0038EA54); //  0xEA000173 - ...s 
+  check_code_coverage(0x0038EA58); //  0xEA00000C - .... 
+  check_code_coverage(0x0038EA5C); //  0xEA000171 - ...q 
+  check_code_coverage(0x0038EA60); //  0xEA00000A - .... 
+  check_code_coverage(0x0038EA64); //  0xEA00016F - ...o 
+  check_code_coverage(0x0038EA68); //  0xEA000008 - .... 
+  check_code_coverage(0x0038EA6C); //  0xEA00016D - ...m 
+  check_code_coverage(0x0038EA70); //  0xEA000006 - .... 
+  check_code_coverage(0x0038EA74); //  0xE1B09E8B - .... 
+  check_code_coverage(0x003905A8); //  0xE1A083A5 - .... 
+  check_code_coverage(0x003905FC); //  0xE92D4C28 - .-L( 
+  check_code_coverage(0x0039070C); //  0xE3C08103 - .... 
+  check_code_coverage(0x00390C8C); //  0xE2033102 - ..1. 
+  check_code_coverage(0x00390DFC); //  0xE3340000 - .4.. 
+  check_code_coverage(0x00392558); //  0xE24F2B13 - .O+. 
+  check_code_coverage(0x003926DC); //  0xE92D4007 - .-@. 
+  check_code_coverage(0x0039276C); //  0xE51F0020 - .... 
+  check_code_coverage(0x00393298); //  0xE1A00000 - .... 
+  check_code_coverage(0x0039329C); //  0xEA00000E - .... 
+  check_code_coverage(0x003932A0); //  0xEA000015 - .... 
+  check_code_coverage(0x003932A4); //  0xEA00000C - .... 
+  check_code_coverage(0x003932A8); //  0xEA000013 - .... 
+  check_code_coverage(0x003932AC); //  0xEA00003A - ...: 
+  check_code_coverage(0x003932B0); //  0xEA000017 - .... 
+  check_code_coverage(0x003932B4); //  0xEA000038 - ...8 
+  check_code_coverage(0x003932B8); //  0xEA000015 - .... 
+  check_code_coverage(0x003932BC); //  0xEA000036 - ...6 
+  check_code_coverage(0x003932C0); //  0xEA000013 - .... 
+  check_code_coverage(0x003932C4); //  0xEA000034 - ...4 
+  check_code_coverage(0x003932C8); //  0xEA000011 - .... 
+  check_code_coverage(0x003932CC); //  0xEA000032 - ...2 
+  check_code_coverage(0x003932D0); //  0xEA000031 - ...1 
+  check_code_coverage(0x003932D4); //  0xEA000030 - ...0 
+  check_code_coverage(0x003932D8); //  0xEA00002F - .../ 
+  rom_flags_type(0x00365E94, 0x00365EB0 , flags_type_data); //  0x00FF0259 - ...Y BiSPSharedAttrCommon1
+  rom_flags_type(0x00365EB0, 0x00365EB8 , flags_type_data); //  0x003663B8 - .6c. BiSLendpunct1
+  rom_flags_type(0x00365EB8, flags_type_arm_data); //  0x015A015A - .Z.Z 
+  rom_flags_type(0x00365EBC, 0x00365EC4 , flags_type_data); //  0x003663B8 - .6c. BiSLclosequote1
+  rom_flags_type(0x00365EC4, flags_type_arm_word); //  0x015A015A - .Z.Z 
+  rom_flags_type(0x00365EC8, 0x00365F00 , flags_type_data); //  0x00366358 - .6cX BiSLhyphen1
+  rom_flags_type(0x00365F00, 0x00365F1C , flags_type_data); //  0x01CA020C - .... BiSPhyphen1
+  rom_flags_type(0x00365F1C, 0x00365F28 , flags_type_data); //  0x00366418 - .6d. BiSLSuffixes1
+  rom_flags_type(0x00365F28, 0x00365F30 , flags_type_data); //  0x03240259 - .$.Y BiSPSuffixes1
+  rom_flags_type(0x00365F30, 0x00365F68 , flags_type_data); //  0x00366388 - .6c. BiSLSharedCommons1
+  rom_flags_type(0x00365F68, 0x00365F84 , flags_type_data); //  0x00FF0259 - ...Y BiSPSharedCommons1
+  rom_flags_type(0x00365F84, 0x00365FBC , flags_type_data); //  0x00366388 - .6c. BiSLSpellCheckIgnore1
+  rom_flags_type(0x00365FBC, 0x00365FD8 , flags_type_data); //  0x00FF0259 - ...Y BiSPSpellCheckIgnore1
+  rom_flags_type(0x00365FD8, 0x00366010 , flags_type_data); //  0x00366388 - .6c. BiSLuser1
+  rom_flags_type(0x00366010, 0x0036602C , flags_type_data); //  0x00FF0259 - ...Y BiSPuser1
+  rom_flags_type(0x0036602C, 0x00366064 , flags_type_data); //  0x00366388 - .6c. BiSLnull11
+  rom_flags_type(0x00366064, 0x00366080 , flags_type_data); //  0x00FF0259 - ...Y BiSPnull11
+  rom_flags_type(0x00366080, 0x003660B8 , flags_type_data); //  0x00366388 - .6c. BiSLnull21
+  rom_flags_type(0x003660B8, 0x003660D4 , flags_type_data); //  0x00FF0259 - ...Y BiSPnull21
+  rom_flags_type(0x003660D4, 0x0036610C , flags_type_data); //  0x00366388 - .6c. BiSLnull31
+  rom_flags_type(0x0036610C, 0x00366128 , flags_type_data); //  0x00FF0259 - ...Y BiSPnull31
+  rom_flags_type(0x00366128, 0x00366160 , flags_type_data); //  0x00366388 - .6c. BiSLnull41
+  rom_flags_type(0x00366160, 0x0036617C , flags_type_data); //  0x00FF0259 - ...Y BiSPnull41
+  rom_flags_type(0x0036617C, 0x003661B4 , flags_type_data); //  0x00366388 - .6c. BiSLnull51
+  rom_flags_type(0x003661B4, 0x003661D0 , flags_type_data); //  0x00FF0259 - ...Y BiSPnull51
+  rom_flags_type(0x003661D0, 0x00366200 , flags_type_data); //  0x00366358 - .6cX BiSLnumbers1
+  rom_flags_type(0x00366200, 0x00366218 , flags_type_data); //  0x050F050F - .... BiSPnumbers1
+  rom_flags_type(0x00366218, 0x0036624C , flags_type_data); //  0x003663E8 - .6c. BiSLPrefixes1
+  rom_flags_type(0x0036624C, 0x00366268 , flags_type_data); //  0x02B5047F - ... BiSPPrefixes1
+  rom_flags_type(0x00366268, 0x00366274 , flags_type_data); //  0x00366388 - .6c. BiSLmoney1
+  rom_flags_type(0x00366274, 0x0036627C , flags_type_data); //  0x02590259 - .Y.Y BiSPmoney1
+  rom_flags_type(0x0036627C, 0x00366284 , flags_type_data); //  0x00366388 - .6c. BiSLTimeR_US_B_C_X1
+  rom_flags_type(0x00366284, flags_type_arm_word); //  0x02590259 - .Y.Y 
+  rom_flags_type(0x00366288, 0x00366290 , flags_type_data); //  0x00366388 - .6c. BiSLDateR_US1
+  rom_flags_type(0x00366290, flags_type_arm_word); //  0x02590259 - .Y.Y 
+  rom_flags_type(0x00366294, 0x0036629C , flags_type_data); //  0x00366388 - .6c. BiSLPhoneR_US_C1
+  rom_flags_type(0x0036629C, flags_type_arm_word); //  0x02590259 - .Y.Y 
+  rom_flags_type(0x003662A0, 0x003662A8 , flags_type_data); //  0x00366388 - .6c. BiSLPostalCode1
+  rom_flags_type(0x003662A8, flags_type_arm_word); //  0x02590259 - .Y.Y 
+  rom_flags_type(0x003662AC, 0x003662B8 , flags_type_data); //  0x003663E8 - .6c. BiSLIDNumbers1
+  rom_flags_type(0x003662B8, 0x003662C0 , flags_type_data); //  0x02590259 - .Y.Y BiSPIDNumbers1
+  rom_flags_type(0x003662C0, 0x0036630C , flags_type_data); //  0x00366358 - .6cX BiSLopenquote1
+  rom_flags_type(0x0036630C, 0x00366334 , flags_type_data); //  0x01CA020C - .... BiSPopenquote1
+  rom_flags_type(0x00366334, 0x00366340 , flags_type_data); //  0x00366388 - .6c. BiSLwordlike1
+  rom_flags_type(0x00366340, 0x00366348 , flags_type_data); //  0x00FF0259 - ...Y BiSPwordlike1
+  rom_flags_type(0x00366348, flags_type_arm_word); //  0x003667D8 - .6g. 
+  rom_flags_type(0x0036634C, flags_type_arm_word); //  0x012A0000 - .*.. 
+  rom_flags_type(0x00366350, flags_type_arm_word); //  0x003667A8 - .6g. 
+  rom_flags_type(0x00366354, flags_type_arm_word); //  0x012A0000 - .*.. 
+  rom_flags_type(0x00366358, 0x00366388 , flags_type_data); //  0x0003DC14 - .... BiGSSharedAttrCommon1
+  rom_flags_type(0x00366388, 0x003663B8 , flags_type_data); //  0x0003DC28 - ...( BiGSendpunct1
+  rom_flags_type(0x003663B8, 0x003663E8 , flags_type_data); //  0x0003DC34 - ...4 BiGSclosequote1
+  rom_flags_type(0x003663E8, 0x00366418 , flags_type_data); //  0x0003DC40 - ...@ BiGShyphen1
+  rom_flags_type(0x00366418, 0x00366448 , flags_type_data); //  0x0003DC48 - ...H BiGSSuffixes1
+  rom_flags_type(0x00366448, 0x00366478 , flags_type_data); //  0x0003DC54 - ...T BiGSSharedCommons1
+  rom_flags_type(0x00366478, 0x003664A8 , flags_type_data); //  0x0003DC64 - ...d BiGSSpellCheckIgnore1
+  rom_flags_type(0x003664A8, 0x003664D8 , flags_type_data); //  0x0003DC78 - ...x BiGSuser1
+  rom_flags_type(0x003664D8, 0x00366508 , flags_type_data); //  0x0003DC80 - .... BiGSnull11
+  rom_flags_type(0x00366508, 0x00366538 , flags_type_data); //  0x0003DC88 - .... BiGSnull21
+  rom_flags_type(0x00366538, 0x00366568 , flags_type_data); //  0x0003DC90 - .... BiGSnull31
+  rom_flags_type(0x00366568, 0x00366598 , flags_type_data); //  0x0003DC98 - .... BiGSnull41
+  rom_flags_type(0x00366598, 0x003665C8 , flags_type_data); //  0x0003DCA0 - .... BiGSnull51
+  rom_flags_type(0x003665C8, 0x003665F8 , flags_type_data); //  0x0003DCA8 - .... BiGSnumbers1
+  rom_flags_type(0x003665F8, 0x00366628 , flags_type_data); //  0x0003DCB0 - .... BiGSPrefixes1
+  rom_flags_type(0x00366628, 0x00366658 , flags_type_data); //  0x0003DCBC - .... BiGSmoney1
+  rom_flags_type(0x00366658, 0x00366688 , flags_type_data); //  0x0003DCC4 - .... BiGSTimeR_US_B_C_X1
+  rom_flags_type(0x00366688, 0x003666B8 , flags_type_data); //  0x0003DCD4 - .... BiGSDateR_US1
+  rom_flags_type(0x003666B8, 0x003666E8 , flags_type_data); //  0x0003DCE0 - .... BiGSPhoneR_US_C1
+  rom_flags_type(0x003666E8, 0x00366718 , flags_type_data); //  0x0003DCEC - .... BiGSPostalCode1
+  rom_flags_type(0x00366718, 0x00366748 , flags_type_data); //  0x0003DCF8 - .... BiGSIDNumbers1
+  rom_flags_type(0x00366748, 0x00366778 , flags_type_data); //  0x0003DD04 - .... BiGSopenquote1
+  rom_flags_type(0x00366778, 0x003667A8 , flags_type_data); //  0x0003DD10 - .... BiGSwordlike1
+  rom_flags_type(0x003667A8, 0x003667D8 , flags_type_data); //  0x0003DD1C - .... BiGSLexicalSymbols11
+  rom_flags_type(0x003667D8, 0x00366808 , flags_type_data); //  0x0003DD2C - ..., BiGSLexicalSymbols21
+  rom_flags_type(0x00366808, 0x0036686C , flags_type_data); //  0x00366358 - .6cX BiGSLGeneral1
+  rom_flags_type(0x0036686C, 0x0036688C , flags_type_data); //  0x0003DD3C - ...< BiGGeneral
+  rom_flags_type(0x0036688C, flags_type_arm_word); //  0x003668CC - .6h. 
+  rom_flags_type(0x00366890, flags_type_arm_word); //  0x02590000 - .Y.. 
+  rom_flags_type(0x00366894, flags_type_arm_word); //  0x003668CC - .6h. 
+  rom_flags_type(0x00366898, flags_type_arm_word); //  0x00FF0000 - .... 
+  rom_flags_type(0x0036689C, 0x003668CC , flags_type_data); //  0x0003DD44 - ...D BiGSDateR_US2
+  rom_flags_type(0x003668CC, 0x003668FC , flags_type_data); //  0x0003DD50 - ...P BiGSendpunct2
+  rom_flags_type(0x003668FC, 0x0036692C , flags_type_data); //  0x0003DD5C - ...\ BiGSdaymonth2
+  rom_flags_type(0x0036692C, 0x0036695C , flags_type_data); //  0x0003DD68 - ...h BiGSLexicalSymbols2
+  rom_flags_type(0x0036695C, 0x0036696C , flags_type_data); //  0x0036689C - .6h. BiGSLDate2
+  rom_flags_type(0x0036696C, 0x0036698C , flags_type_data); //  0x0003DD78 - ...x BiGDate
+  rom_flags_type(0x0036698C, 0x003669BC , flags_type_data); //  0x0003DD80 - .... BiGSnumbers3
+  rom_flags_type(0x003669BC, 0x003669EC , flags_type_data); //  0x0003DD88 - .... BiGSmoney3
+  rom_flags_type(0x003669EC, 0x00366A1C , flags_type_data); //  0x0003DD90 - .... BiGSLexicalSymbols3
+  rom_flags_type(0x00366A1C, 0x00366A28 , flags_type_data); //  0x0036698C - .6i. BiGSLNumbersAndMoney3
+  rom_flags_type(0x00366A28, 0x00366A48 , flags_type_data); //  0x0003DDA0 - .... BiGNumbersAndMoney
+  rom_flags_type(0x00366A48, 0x00366A78 , flags_type_data); //  0x0003DDB0 - .... BiGSnumbers4
+  rom_flags_type(0x00366A78, 0x00366AA8 , flags_type_data); //  0x0003DDB8 - .... BiGSLexicalSymbols4
+  rom_flags_type(0x00366AA8, 0x00366AB0 , flags_type_data); //  0x00366A48 - .6jH BiGSLNumbers4
+  rom_flags_type(0x00366AB0, 0x00366AD0 , flags_type_data); //  0x0003DDC8 - .... BiGNumbers
+  rom_flags_type(0x00366AD0, flags_type_arm_word); //  0x00366B2C - .6k, 
+  rom_flags_type(0x00366AD4, flags_type_arm_word); //  0x01CA0000 - .... 
+  rom_flags_type(0x00366AD8, 0x00366AE4 , flags_type_data); //  0x00366AFC - .6j. BiSLhyphen5
+  rom_flags_type(0x00366AE4, 0x00366AEC , flags_type_data); //  0x000001CA - .... BiSPhyphen5
+  rom_flags_type(0x00366AEC, flags_type_arm_word); //  0x00366B2C - .6k, 
+  rom_flags_type(0x00366AF0, flags_type_arm_word); //  0x01CA0000 - .... 
+  rom_flags_type(0x00366AF4, flags_type_arm_word); //  0x00366B2C - .6k, 
+  rom_flags_type(0x00366AF8, flags_type_arm_word); //  0x01CA0000 - .... 
+  rom_flags_type(0x00366AFC, 0x00366B2C , flags_type_data); //  0x0003DDD0 - .... BiGSPhoneR_US_C5
+  rom_flags_type(0x00366B2C, 0x00366B5C , flags_type_data); //  0x0003DDDC - .... BiGShyphen5
+  rom_flags_type(0x00366B5C, 0x00366B8C , flags_type_data); //  0x0003DDE4 - .... BiGSWorldPhone5
+  rom_flags_type(0x00366B8C, 0x00366BBC , flags_type_data); //  0x0003DDF0 - .... BiGSFunnyPhone5
+  rom_flags_type(0x00366BBC, 0x00366BEC , flags_type_data); //  0x0003DDFC - .... BiGSLexicalSymbols5
+  rom_flags_type(0x00366BEC, 0x00366C00 , flags_type_data); //  0x00366AFC - .6j. BiGSLPhone5
+  rom_flags_type(0x00366C00, 0x00366C20 , flags_type_data); //  0x0003DE0C - .... BiGPhone
+  rom_flags_type(0x00366C20, 0x00366C50 , flags_type_data); //  0x0003DE14 - .... BiGSTimeR_US_B_C_X6
+  rom_flags_type(0x00366C50, 0x00366C80 , flags_type_data); //  0x0003DE24 - ...$ BiGSLexicalSymbols6
+  rom_flags_type(0x00366C80, 0x00366C88 , flags_type_data); //  0x00366C20 - .6l. BiGSLTime6
+  rom_flags_type(0x00366C88, 0x00366CA8 , flags_type_data); //  0x0003DE34 - ...4 BiGTime
+  rom_flags_type(0x00366CA8, 0x00366CD8 , flags_type_data); //  0x0003DE3C - ...< BiGSmoney7
+  rom_flags_type(0x00366CD8, 0x00366D08 , flags_type_data); //  0x0003DE44 - ...D BiGSLexicalSymbols7
+  rom_flags_type(0x00366D08, 0x00366D10 , flags_type_data); //  0x00366CA8 - .6l. BiGSLMoney7
+  rom_flags_type(0x00366D10, 0x00366D30 , flags_type_data); //  0x0003DE54 - ...T BiGMoney
+  rom_flags_type(0x00366D30, 0x00366D60 , flags_type_data); //  0x0003DE5C - ...\ BiGSnumbers8
+  rom_flags_type(0x00366D60, 0x00366D90 , flags_type_data); //  0x0003DE64 - ...d BiGSPostalCode8
+  rom_flags_type(0x00366D90, 0x00366DC0 , flags_type_data); //  0x0003DE70 - ...p BiGSLexicalSymbols8
+  rom_flags_type(0x00366DC0, 0x00366DCC , flags_type_data); //  0x00366D30 - .6m0 BiGSLPostalCode8
+  rom_flags_type(0x00366DCC, 0x00366DEC , flags_type_data); //  0x0003DE80 - .... BiGPostalCode
+  rom_flags_type(0x00366DEC, 0x00366E0C , flags_type_data); //  0x0036686C - .6hl ROMGList
+  rom_flags_type(0x00366E0C, 0x00366E18 , flags_type_data); //  0x00000008 - .... ROMGrammar
+  rom_flags_type(0x00366E18, 0x00366E38 , flags_type_data); //  0x0000C0C1 - .... kCrc16LTbl
+  rom_flags_type(0x00366E38, 0x00366E88 , flags_type_data); //  0x0000CC01 - .... kCrc16HTbl
+  rom_flags_type(0x00366E88, 0x00366E94 , flags_type_data); //  0x4170706C - Appl kParType_Apple_MFS
+  rom_flags_type(0x00366E94, 0x00366EA0 , flags_type_data); //  0x4170706C - Appl kParType_Apple_HFS
+  rom_flags_type(0x00366EA0, 0x00366EB0 , flags_type_data); //  0x4170706C - Appl kParType_Apple_Unix_SVR2
+  rom_flags_type(0x00366EB0, 0x00366EC4 , flags_type_data); //  0x4170706C - Appl kParType_Apple_partition_map
+  rom_flags_type(0x00366EC4, 0x00366ED4 , flags_type_data); //  0x4170706C - Appl kParType_Apple_Driver
+  rom_flags_type(0x00366ED4, 0x00366EE4 , flags_type_data); //  0x4170706C - Appl kParType_Apple_PRODOS
+  rom_flags_type(0x00366EE4, 0x00366EF0 , flags_type_data); //  0x4170706C - Appl kParType_Apple_Free
+  rom_flags_type(0x00366EF0, 0x00366F00 , flags_type_data); //  0x4170706C - Appl kParType_Apple_Scratch
+  rom_flags_type(0x00366F00, 0x00366F10 , flags_type_data); //  0x4170706C - Appl kParType_Apple_Newton
+  rom_flags_type(0x00366F10, 0x00366F24 , flags_type_data); //  0x4170706C - Appl kParType_Apple_Newton_Driver
+  rom_flags_type(0x00366F24, 0x00366F2C , flags_type_data); //  0x41524D36 - ARM6 kProcType_ARM610
+  rom_flags_type(0x00366F2C, 0x00366F3C , flags_type_data); //  0x43686172 - Char CharActeristics
+  rom_flags_type(0x00366F3C, flags_type_arm_word); //  0x00000010 - .... 
+  rom_flags_type(0x00366F40, 0x00366F60 , flags_type_data); //  0x00000000 - .... rosCharLegalNet
+  rom_flags_type(0x00366F60, 0x00366F80 , flags_type_data); //  0x00000000 - .... rosCharLegalUse
+  rom_flags_type(0x00366F80, 0x00367080 , flags_type_data); //  0x21232425 - !#$% rosCharOfNetNode
+  rom_flags_type(0x00367080, 0x00367180 , flags_type_data); //  0x00000000 - .... rosCharToNetNode
+  rom_flags_type(0x00367180, 0x00367280 , flags_type_data); //  0x00000000 - .... rosCharCompoundPart1
+  rom_flags_type(0x00367280, 0x00367380 , flags_type_data); //  0x00000000 - .... rosCharCompoundPart2
+  rom_flags_type(0x00367380, 0x00367480 , flags_type_data); //  0x00000000 - .... rosCapHackCaseFlags
+  rom_flags_type(0x00367480, 0x00367580 , flags_type_data); //  0x00000000 - .... rosCapHackAltCase1
+  rom_flags_type(0x00367580, 0x00367680 , flags_type_data); //  0x00000000 - .... rosCapHackAltCase2
+  rom_flags_type(0x00367680, 0x00367A80 , flags_type_data); //  0x00000000 - .... rosCharParam0
+  rom_flags_type(0x00367A80, 0x00367E80 , flags_type_data); //  0x00010000 - .... rosCharParam1
+  rom_flags_type(0x00367E80, 0x00368280 , flags_type_data); //  0x00010000 - .... rosCharParam2
+  rom_flags_type(0x00368280, 0x00368680 , flags_type_data); //  0x00010000 - .... rosCharParam3
+  rom_flags_type(0x00368680, 0x00368A80 , flags_type_data); //  0x00010000 - .... rosCharParam4
+  rom_flags_type(0x00368A80, 0x00368E80 , flags_type_data); //  0x00000000 - .... rosCharParam5
+  rom_flags_type(0x00368E80, 0x00369280 , flags_type_data); //  0x00000000 - .... rosCharParam6
+  rom_flags_type(0x00369280, 0x00369680 , flags_type_data); //  0x00000000 - .... rosCharParam7
+  rom_flags_type(0x00369680, 0x00369A80 , flags_type_data); //  0x00000000 - .... rosCharParam8
+  rom_flags_type(0x00369A80, 0x00369E80 , flags_type_data); //  0x00000000 - .... rosCharParam9
+  rom_flags_type(0x00369E80, 0x0036A280 , flags_type_data); //  0x00000000 - .... rosCharParam10
+  rom_flags_type(0x0036A280, 0x0036A680 , flags_type_data); //  0x00000000 - .... rosCharParam11
+  rom_flags_type(0x0036A680, 0x0036AA80 , flags_type_data); //  0x00000000 - .... rosCharParam12
+  rom_flags_type(0x0036AA80, 0x0036AE80 , flags_type_data); //  0x00000000 - .... rosCharParam13
+  rom_flags_type(0x0036AE80, 0x0036B280 , flags_type_data); //  0x00010000 - .... rosCharParam14
+  rom_flags_type(0x0036B280, 0x0036B680 , flags_type_data); //  0x00010000 - .... rosCharParam15
+  rom_flags_type(0x0036B680, 0x0036B6C0 , flags_type_data); //  0x00367680 - .6v. rosCharParams
+  rom_flags_type(0x0036B6C0, 0x0036B7CC , flags_type_data); //  0x00000000 - .... rosCI
+  rom_flags_type(0x0036B7CC, 0x0036B7D4 , flags_type_data); //  0x00000000 - .... rat0000
+  rom_flags_type(0x0036B7D4, 0x0036B7DC , flags_type_data); //  0xFF000000 - .... rat0001
+  rom_flags_type(0x0036B7DC, 0x0036B7E4 , flags_type_data); //  0x00FF0000 - .... rat0002
+  rom_flags_type(0x0036B7E4, 0x0036B7EC , flags_type_data); //  0xFFFF0000 - .... rat0003
+  rom_flags_type(0x0036B7EC, 0x0036B7F4 , flags_type_data); //  0x0000FF00 - .... rat0004
+  rom_flags_type(0x0036B7F4, 0x0036B7FC , flags_type_data); //  0xFF00FF00 - .... rat0005
+  rom_flags_type(0x0036B7FC, 0x0036B804 , flags_type_data); //  0x00FFFF00 - .... rat0006
+  rom_flags_type(0x0036B804, 0x0036B80C , flags_type_data); //  0xFFFFFF00 - .... rat0007
+  rom_flags_type(0x0036B80C, 0x0036B814 , flags_type_data); //  0x000000FF - .... rat0008
+  rom_flags_type(0x0036B814, 0x0036B81C , flags_type_data); //  0xFF0000FF - .... rat0009
+  rom_flags_type(0x0036B81C, 0x0036B824 , flags_type_data); //  0x00FF00FF - .... rat0010
+  rom_flags_type(0x0036B824, 0x0036B82C , flags_type_data); //  0xFFFF00FF - .... rat0011
+  rom_flags_type(0x0036B82C, 0x0036B834 , flags_type_data); //  0x0000FFFF - .... rat0012
+  rom_flags_type(0x0036B834, 0x0036B83C , flags_type_data); //  0xFF00FFFF - .... rat0013
+  rom_flags_type(0x0036B83C, 0x0036B844 , flags_type_data); //  0x00FFFFFF - .... rat0014
+  rom_flags_type(0x0036B844, 0x0036B84C , flags_type_data); //  0xFFFFFFFF - .... rat0015
+  rom_flags_type(0x0036B84C, 0x0036B854 , flags_type_data); //  0x00000000 - .... rat0016
+  rom_flags_type(0x0036B854, 0x0036B85C , flags_type_data); //  0xFF000000 - .... rat0017
+  rom_flags_type(0x0036B85C, 0x0036B864 , flags_type_data); //  0x00FF0000 - .... rat0018
+  rom_flags_type(0x0036B864, 0x0036B86C , flags_type_data); //  0xFFFF0000 - .... rat0019
+  rom_flags_type(0x0036B86C, 0x0036B874 , flags_type_data); //  0x0000FF00 - .... rat0020
+  rom_flags_type(0x0036B874, 0x0036B87C , flags_type_data); //  0xFF00FF00 - .... rat0021
+  rom_flags_type(0x0036B87C, 0x0036B884 , flags_type_data); //  0x00FFFF00 - .... rat0022
+  rom_flags_type(0x0036B884, 0x0036B88C , flags_type_data); //  0xFFFFFF00 - .... rat0023
+  rom_flags_type(0x0036B88C, 0x0036B894 , flags_type_data); //  0x000000FF - .... rat0024
+  rom_flags_type(0x0036B894, 0x0036B89C , flags_type_data); //  0xFF0000FF - .... rat0025
+  rom_flags_type(0x0036B89C, 0x0036B8A4 , flags_type_data); //  0x00FF00FF - .... rat0026
+  rom_flags_type(0x0036B8A4, 0x0036B8AC , flags_type_data); //  0xFFFF00FF - .... rat0027
+  rom_flags_type(0x0036B8AC, 0x0036B8B4 , flags_type_data); //  0x0000FFFF - .... rat0028
+  rom_flags_type(0x0036B8B4, 0x0036B8BC , flags_type_data); //  0xFF00FFFF - .... rat0029
+  rom_flags_type(0x0036B8BC, 0x0036B8C4 , flags_type_data); //  0x00FFFFFF - .... rat0030
+  rom_flags_type(0x0036B8C4, 0x0036B8CC , flags_type_data); //  0xFFFFFFFF - .... rat0031
+  rom_flags_type(0x0036B8CC, 0x0036B8D4 , flags_type_data); //  0x00000000 - .... rat0032
+  rom_flags_type(0x0036B8D4, 0x0036B8DC , flags_type_data); //  0xFF000000 - .... rat0033
+  rom_flags_type(0x0036B8DC, 0x0036B8E4 , flags_type_data); //  0x00FF0000 - .... rat0034
+  rom_flags_type(0x0036B8E4, 0x0036B8EC , flags_type_data); //  0xFFFF0000 - .... rat0035
+  rom_flags_type(0x0036B8EC, 0x0036B8F4 , flags_type_data); //  0x0000FF00 - .... rat0036
+  rom_flags_type(0x0036B8F4, 0x0036B8FC , flags_type_data); //  0xFF00FF00 - .... rat0037
+  rom_flags_type(0x0036B8FC, 0x0036B904 , flags_type_data); //  0x00FFFF00 - .... rat0038
+  rom_flags_type(0x0036B904, 0x0036B90C , flags_type_data); //  0xFFFFFF00 - .... rat0039
+  rom_flags_type(0x0036B90C, 0x0036B914 , flags_type_data); //  0x000000FF - .... rat0040
+  rom_flags_type(0x0036B914, 0x0036B91C , flags_type_data); //  0xFF0000FF - .... rat0041
+  rom_flags_type(0x0036B91C, 0x0036B924 , flags_type_data); //  0x00FF00FF - .... rat0042
+  rom_flags_type(0x0036B924, 0x0036B92C , flags_type_data); //  0xFFFF00FF - .... rat0043
+  rom_flags_type(0x0036B92C, 0x0036B934 , flags_type_data); //  0x0000FFFF - .... rat0044
+  rom_flags_type(0x0036B934, 0x0036B93C , flags_type_data); //  0xFF00FFFF - .... rat0045
+  rom_flags_type(0x0036B93C, 0x0036B944 , flags_type_data); //  0x00FFFFFF - .... rat0046
+  rom_flags_type(0x0036B944, 0x0036B94C , flags_type_data); //  0xFFFFFFFF - .... rat0047
+  rom_flags_type(0x0036B94C, 0x0036B954 , flags_type_data); //  0x00000000 - .... rat0048
+  rom_flags_type(0x0036B954, 0x0036B95C , flags_type_data); //  0xFF000000 - .... rat0049
+  rom_flags_type(0x0036B95C, 0x0036B964 , flags_type_data); //  0x00FF0000 - .... rat0050
+  rom_flags_type(0x0036B964, 0x0036B96C , flags_type_data); //  0xFFFF0000 - .... rat0051
+  rom_flags_type(0x0036B96C, 0x0036B974 , flags_type_data); //  0x0000FF00 - .... rat0052
+  rom_flags_type(0x0036B974, 0x0036B97C , flags_type_data); //  0xFF00FF00 - .... rat0053
+  rom_flags_type(0x0036B97C, 0x0036B984 , flags_type_data); //  0x00FFFF00 - .... rat0054
+  rom_flags_type(0x0036B984, 0x0036B98C , flags_type_data); //  0xFFFFFF00 - .... rat0055
+  rom_flags_type(0x0036B98C, 0x0036B994 , flags_type_data); //  0x000000FF - .... rat0056
+  rom_flags_type(0x0036B994, 0x0036B99C , flags_type_data); //  0xFF0000FF - .... rat0057
+  rom_flags_type(0x0036B99C, 0x0036B9A4 , flags_type_data); //  0x00FF00FF - .... rat0058
+  rom_flags_type(0x0036B9A4, 0x0036B9AC , flags_type_data); //  0xFFFF00FF - .... rat0059
+  rom_flags_type(0x0036B9AC, 0x0036B9B4 , flags_type_data); //  0x0000FFFF - .... rat0060
+  rom_flags_type(0x0036B9B4, 0x0036B9BC , flags_type_data); //  0xFF00FFFF - .... rat0061
+  rom_flags_type(0x0036B9BC, 0x0036B9C4 , flags_type_data); //  0x00FFFFFF - .... rat0062
+  rom_flags_type(0x0036B9C4, 0x0036B9CC , flags_type_data); //  0xFFFFFFFF - .... rat0063
+  rom_flags_type(0x0036B9CC, 0x0036B9D4 , flags_type_data); //  0x00000000 - .... rat0064
+  rom_flags_type(0x0036B9D4, 0x0036B9DC , flags_type_data); //  0xFF000000 - .... rat0065
+  rom_flags_type(0x0036B9DC, 0x0036B9E4 , flags_type_data); //  0x00FF0000 - .... rat0066
+  rom_flags_type(0x0036B9E4, 0x0036B9EC , flags_type_data); //  0xFFFF0000 - .... rat0067
+  rom_flags_type(0x0036B9EC, 0x0036B9F4 , flags_type_data); //  0x0000FF00 - .... rat0068
+  rom_flags_type(0x0036B9F4, 0x0036B9FC , flags_type_data); //  0xFF00FF00 - .... rat0069
+  rom_flags_type(0x0036B9FC, 0x0036BA04 , flags_type_data); //  0x00FFFF00 - .... rat0070
+  rom_flags_type(0x0036BA04, 0x0036BA0C , flags_type_data); //  0xFFFFFF00 - .... rat0071
+  rom_flags_type(0x0036BA0C, 0x0036BA14 , flags_type_data); //  0x000000FF - .... rat0072
+  rom_flags_type(0x0036BA14, 0x0036BA1C , flags_type_data); //  0xFF0000FF - .... rat0073
+  rom_flags_type(0x0036BA1C, 0x0036BA24 , flags_type_data); //  0x00FF00FF - .... rat0074
+  rom_flags_type(0x0036BA24, 0x0036BA2C , flags_type_data); //  0xFFFF00FF - .... rat0075
+  rom_flags_type(0x0036BA2C, 0x0036BA34 , flags_type_data); //  0x0000FFFF - .... rat0076
+  rom_flags_type(0x0036BA34, 0x0036BA3C , flags_type_data); //  0xFF00FFFF - .... rat0077
+  rom_flags_type(0x0036BA3C, 0x0036BA44 , flags_type_data); //  0x00FFFFFF - .... rat0078
+  rom_flags_type(0x0036BA44, 0x0036BA4C , flags_type_data); //  0xFFFFFFFF - .... rat0079
+  rom_flags_type(0x0036BA4C, 0x0036BA54 , flags_type_data); //  0x00000000 - .... rat0080
+  rom_flags_type(0x0036BA54, 0x0036BA5C , flags_type_data); //  0xFF000000 - .... rat0081
+  rom_flags_type(0x0036BA5C, 0x0036BA64 , flags_type_data); //  0x00FF0000 - .... rat0082
+  rom_flags_type(0x0036BA64, 0x0036BA6C , flags_type_data); //  0xFFFF0000 - .... rat0083
+  rom_flags_type(0x0036BA6C, 0x0036BA74 , flags_type_data); //  0x0000FF00 - .... rat0084
+  rom_flags_type(0x0036BA74, 0x0036BA7C , flags_type_data); //  0xFF00FF00 - .... rat0085
+  rom_flags_type(0x0036BA7C, 0x0036BA84 , flags_type_data); //  0x00FFFF00 - .... rat0086
+  rom_flags_type(0x0036BA84, 0x0036BA8C , flags_type_data); //  0xFFFFFF00 - .... rat0087
+  rom_flags_type(0x0036BA8C, 0x0036BA94 , flags_type_data); //  0x000000FF - .... rat0088
+  rom_flags_type(0x0036BA94, 0x0036BA9C , flags_type_data); //  0xFF0000FF - .... rat0089
+  rom_flags_type(0x0036BA9C, 0x0036BAA4 , flags_type_data); //  0x00FF00FF - .... rat0090
+  rom_flags_type(0x0036BAA4, 0x0036BAAC , flags_type_data); //  0xFFFF00FF - .... rat0091
+  rom_flags_type(0x0036BAAC, 0x0036BAB4 , flags_type_data); //  0x0000FFFF - .... rat0092
+  rom_flags_type(0x0036BAB4, 0x0036BABC , flags_type_data); //  0xFF00FFFF - .... rat0093
+  rom_flags_type(0x0036BABC, 0x0036BAC4 , flags_type_data); //  0x00FFFFFF - .... rat0094
+  rom_flags_type(0x0036BAC4, 0x0036BACC , flags_type_data); //  0xFFFFFFFF - .... rat0095
+  rom_flags_type(0x0036BACC, 0x0036BAD4 , flags_type_data); //  0x00000000 - .... rat0096
+  rom_flags_type(0x0036BAD4, 0x0036BADC , flags_type_data); //  0xFF000000 - .... rat0097
+  rom_flags_type(0x0036BADC, 0x0036BAE4 , flags_type_data); //  0x00FF0000 - .... rat0098
+  rom_flags_type(0x0036BAE4, 0x0036BAEC , flags_type_data); //  0xFFFF0000 - .... rat0099
+  rom_flags_type(0x0036BAEC, 0x0036BAF4 , flags_type_data); //  0x0000FF00 - .... rat0100
+  rom_flags_type(0x0036BAF4, 0x0036BAFC , flags_type_data); //  0xFF00FF00 - .... rat0101
+  rom_flags_type(0x0036BAFC, 0x0036BB04 , flags_type_data); //  0x00FFFF00 - .... rat0102
+  rom_flags_type(0x0036BB04, 0x0036BB0C , flags_type_data); //  0xFFFFFF00 - .... rat0103
+  rom_flags_type(0x0036BB0C, 0x0036BB14 , flags_type_data); //  0x000000FF - .... rat0104
+  rom_flags_type(0x0036BB14, 0x0036BB1C , flags_type_data); //  0xFF0000FF - .... rat0105
+  rom_flags_type(0x0036BB1C, 0x0036BB24 , flags_type_data); //  0x00FF00FF - .... rat0106
+  rom_flags_type(0x0036BB24, 0x0036BB2C , flags_type_data); //  0xFFFF00FF - .... rat0107
+  rom_flags_type(0x0036BB2C, 0x0036BB34 , flags_type_data); //  0x0000FFFF - .... rat0108
+  rom_flags_type(0x0036BB34, 0x0036BB3C , flags_type_data); //  0xFF00FFFF - .... rat0109
+  rom_flags_type(0x0036BB3C, 0x0036BB44 , flags_type_data); //  0x00FFFFFF - .... rat0110
+  rom_flags_type(0x0036BB44, 0x0036BB4C , flags_type_data); //  0xFFFFFFFF - .... rat0111
+  rom_flags_type(0x0036BB4C, 0x0036BB54 , flags_type_data); //  0x00000000 - .... rat0112
+  rom_flags_type(0x0036BB54, 0x0036BB5C , flags_type_data); //  0xFF000000 - .... rat0113
+  rom_flags_type(0x0036BB5C, 0x0036BB64 , flags_type_data); //  0x00FF0000 - .... rat0114
+  rom_flags_type(0x0036BB64, 0x0036BB6C , flags_type_data); //  0xFFFF0000 - .... rat0115
+  rom_flags_type(0x0036BB6C, 0x0036BB74 , flags_type_data); //  0x0000FF00 - .... rat0116
+  rom_flags_type(0x0036BB74, 0x0036BB7C , flags_type_data); //  0xFF00FF00 - .... rat0117
+  rom_flags_type(0x0036BB7C, 0x0036BB84 , flags_type_data); //  0x00FFFF00 - .... rat0118
+  rom_flags_type(0x0036BB84, 0x0036BB8C , flags_type_data); //  0xFFFFFF00 - .... rat0119
+  rom_flags_type(0x0036BB8C, 0x0036BB94 , flags_type_data); //  0x000000FF - .... rat0120
+  rom_flags_type(0x0036BB94, 0x0036BB9C , flags_type_data); //  0xFF0000FF - .... rat0121
+  rom_flags_type(0x0036BB9C, 0x0036BBA4 , flags_type_data); //  0x00FF00FF - .... rat0122
+  rom_flags_type(0x0036BBA4, 0x0036BBAC , flags_type_data); //  0xFFFF00FF - .... rat0123
+  rom_flags_type(0x0036BBAC, 0x0036BBB4 , flags_type_data); //  0x0000FFFF - .... rat0124
+  rom_flags_type(0x0036BBB4, 0x0036BBBC , flags_type_data); //  0xFF00FFFF - .... rat0125
+  rom_flags_type(0x0036BBBC, 0x0036BBC4 , flags_type_data); //  0x00FFFFFF - .... rat0126
+  rom_flags_type(0x0036BBC4, 0x0036BBCC , flags_type_data); //  0xFFFFFFFF - .... rat0127
+  rom_flags_type(0x0036BBCC, 0x0036BBD4 , flags_type_data); //  0x00000000 - .... rat0128
+  rom_flags_type(0x0036BBD4, 0x0036BBDC , flags_type_data); //  0xFF000000 - .... rat0129
+  rom_flags_type(0x0036BBDC, 0x0036BBE4 , flags_type_data); //  0x00FF0000 - .... rat0130
+  rom_flags_type(0x0036BBE4, 0x0036BBEC , flags_type_data); //  0xFFFF0000 - .... rat0131
+  rom_flags_type(0x0036BBEC, 0x0036BBF4 , flags_type_data); //  0x0000FF00 - .... rat0132
+  rom_flags_type(0x0036BBF4, 0x0036BBFC , flags_type_data); //  0xFF00FF00 - .... rat0133
+  rom_flags_type(0x0036BBFC, 0x0036BC04 , flags_type_data); //  0x00FFFF00 - .... rat0134
+  rom_flags_type(0x0036BC04, 0x0036BC0C , flags_type_data); //  0xFFFFFF00 - .... rat0135
+  rom_flags_type(0x0036BC0C, 0x0036BC14 , flags_type_data); //  0x000000FF - .... rat0136
+  rom_flags_type(0x0036BC14, 0x0036BC1C , flags_type_data); //  0xFF0000FF - .... rat0137
+  rom_flags_type(0x0036BC1C, 0x0036BC24 , flags_type_data); //  0x00FF00FF - .... rat0138
+  rom_flags_type(0x0036BC24, 0x0036BC2C , flags_type_data); //  0xFFFF00FF - .... rat0139
+  rom_flags_type(0x0036BC2C, 0x0036BC34 , flags_type_data); //  0x0000FFFF - .... rat0140
+  rom_flags_type(0x0036BC34, 0x0036BC3C , flags_type_data); //  0xFF00FFFF - .... rat0141
+  rom_flags_type(0x0036BC3C, 0x0036BC44 , flags_type_data); //  0x00FFFFFF - .... rat0142
+  rom_flags_type(0x0036BC44, 0x0036BC4C , flags_type_data); //  0xFFFFFFFF - .... rat0143
+  rom_flags_type(0x0036BC4C, 0x0036BC54 , flags_type_data); //  0x00000000 - .... rat0144
+  rom_flags_type(0x0036BC54, 0x0036BC5C , flags_type_data); //  0xFF000000 - .... rat0145
+  rom_flags_type(0x0036BC5C, 0x0036BC64 , flags_type_data); //  0x00FF0000 - .... rat0146
+  rom_flags_type(0x0036BC64, 0x0036BC6C , flags_type_data); //  0xFFFF0000 - .... rat0147
+  rom_flags_type(0x0036BC6C, 0x0036BC74 , flags_type_data); //  0x0000FF00 - .... rat0148
+  rom_flags_type(0x0036BC74, 0x0036BC7C , flags_type_data); //  0xFF00FF00 - .... rat0149
+  rom_flags_type(0x0036BC7C, 0x0036BC84 , flags_type_data); //  0x00FFFF00 - .... rat0150
+  rom_flags_type(0x0036BC84, 0x0036BC8C , flags_type_data); //  0xFFFFFF00 - .... rat0151
+  rom_flags_type(0x0036BC8C, 0x0036BC94 , flags_type_data); //  0x000000FF - .... rat0152
+  rom_flags_type(0x0036BC94, 0x0036BC9C , flags_type_data); //  0xFF0000FF - .... rat0153
+  rom_flags_type(0x0036BC9C, 0x0036BCA4 , flags_type_data); //  0x00FF00FF - .... rat0154
+  rom_flags_type(0x0036BCA4, 0x0036BCAC , flags_type_data); //  0xFFFF00FF - .... rat0155
+  rom_flags_type(0x0036BCAC, 0x0036BCB4 , flags_type_data); //  0x0000FFFF - .... rat0156
+  rom_flags_type(0x0036BCB4, 0x0036BCBC , flags_type_data); //  0xFF00FFFF - .... rat0157
+  rom_flags_type(0x0036BCBC, 0x0036BCC4 , flags_type_data); //  0x00FFFFFF - .... rat0158
+  rom_flags_type(0x0036BCC4, 0x0036BCCC , flags_type_data); //  0xFFFFFFFF - .... rat0159
+  rom_flags_type(0x0036BCCC, 0x0036BCD4 , flags_type_data); //  0x00000000 - .... rat0160
+  rom_flags_type(0x0036BCD4, 0x0036BCDC , flags_type_data); //  0xFF000000 - .... rat0161
+  rom_flags_type(0x0036BCDC, 0x0036BCE4 , flags_type_data); //  0x00FF0000 - .... rat0162
+  rom_flags_type(0x0036BCE4, 0x0036BCEC , flags_type_data); //  0xFFFF0000 - .... rat0163
+  rom_flags_type(0x0036BCEC, 0x0036BCF4 , flags_type_data); //  0x0000FF00 - .... rat0164
+  rom_flags_type(0x0036BCF4, 0x0036BCFC , flags_type_data); //  0xFF00FF00 - .... rat0165
+  rom_flags_type(0x0036BCFC, 0x0036BD04 , flags_type_data); //  0x00FFFF00 - .... rat0166
+  rom_flags_type(0x0036BD04, 0x0036BD0C , flags_type_data); //  0xFFFFFF00 - .... rat0167
+  rom_flags_type(0x0036BD0C, 0x0036BD14 , flags_type_data); //  0x000000FF - .... rat0168
+  rom_flags_type(0x0036BD14, 0x0036BD1C , flags_type_data); //  0xFF0000FF - .... rat0169
+  rom_flags_type(0x0036BD1C, 0x0036BD24 , flags_type_data); //  0x00FF00FF - .... rat0170
+  rom_flags_type(0x0036BD24, 0x0036BD2C , flags_type_data); //  0xFFFF00FF - .... rat0171
+  rom_flags_type(0x0036BD2C, 0x0036BD34 , flags_type_data); //  0x0000FFFF - .... rat0172
+  rom_flags_type(0x0036BD34, 0x0036BD3C , flags_type_data); //  0xFF00FFFF - .... rat0173
+  rom_flags_type(0x0036BD3C, 0x0036BD44 , flags_type_data); //  0x00FFFFFF - .... rat0174
+  rom_flags_type(0x0036BD44, 0x0036BD4C , flags_type_data); //  0xFFFFFFFF - .... rat0175
+  rom_flags_type(0x0036BD4C, 0x0036BD54 , flags_type_data); //  0x00000000 - .... rat0176
+  rom_flags_type(0x0036BD54, 0x0036BD5C , flags_type_data); //  0xFF000000 - .... rat0177
+  rom_flags_type(0x0036BD5C, 0x0036BD64 , flags_type_data); //  0x00FF0000 - .... rat0178
+  rom_flags_type(0x0036BD64, 0x0036BD6C , flags_type_data); //  0xFFFF0000 - .... rat0179
+  rom_flags_type(0x0036BD6C, 0x0036BD74 , flags_type_data); //  0x0000FF00 - .... rat0180
+  rom_flags_type(0x0036BD74, 0x0036BD7C , flags_type_data); //  0xFF00FF00 - .... rat0181
+  rom_flags_type(0x0036BD7C, 0x0036BD84 , flags_type_data); //  0x00FFFF00 - .... rat0182
+  rom_flags_type(0x0036BD84, 0x0036BD8C , flags_type_data); //  0xFFFFFF00 - .... rat0183
+  rom_flags_type(0x0036BD8C, 0x0036BD94 , flags_type_data); //  0x000000FF - .... rat0184
+  rom_flags_type(0x0036BD94, 0x0036BD9C , flags_type_data); //  0xFF0000FF - .... rat0185
+  rom_flags_type(0x0036BD9C, 0x0036BDA4 , flags_type_data); //  0x00FF00FF - .... rat0186
+  rom_flags_type(0x0036BDA4, 0x0036BDAC , flags_type_data); //  0xFFFF00FF - .... rat0187
+  rom_flags_type(0x0036BDAC, 0x0036BDB4 , flags_type_data); //  0x0000FFFF - .... rat0188
+  rom_flags_type(0x0036BDB4, 0x0036BDBC , flags_type_data); //  0xFF00FFFF - .... rat0189
+  rom_flags_type(0x0036BDBC, 0x0036BDC4 , flags_type_data); //  0x00FFFFFF - .... rat0190
+  rom_flags_type(0x0036BDC4, 0x0036BDCC , flags_type_data); //  0xFFFFFFFF - .... rat0191
+  rom_flags_type(0x0036BDCC, 0x0036BDD4 , flags_type_data); //  0x00000000 - .... rat0192
+  rom_flags_type(0x0036BDD4, 0x0036BDDC , flags_type_data); //  0xFF000000 - .... rat0193
+  rom_flags_type(0x0036BDDC, 0x0036BDE4 , flags_type_data); //  0x00FF0000 - .... rat0194
+  rom_flags_type(0x0036BDE4, 0x0036BDEC , flags_type_data); //  0xFFFF0000 - .... rat0195
+  rom_flags_type(0x0036BDEC, 0x0036BDF4 , flags_type_data); //  0x0000FF00 - .... rat0196
+  rom_flags_type(0x0036BDF4, 0x0036BDFC , flags_type_data); //  0xFF00FF00 - .... rat0197
+  rom_flags_type(0x0036BDFC, 0x0036BE04 , flags_type_data); //  0x00FFFF00 - .... rat0198
+  rom_flags_type(0x0036BE04, 0x0036BE0C , flags_type_data); //  0xFFFFFF00 - .... rat0199
+  rom_flags_type(0x0036BE0C, 0x0036BE14 , flags_type_data); //  0x000000FF - .... rat0200
+  rom_flags_type(0x0036BE14, 0x0036BE1C , flags_type_data); //  0xFF0000FF - .... rat0201
+  rom_flags_type(0x0036BE1C, 0x0036BE24 , flags_type_data); //  0x00FF00FF - .... rat0202
+  rom_flags_type(0x0036BE24, 0x0036BE2C , flags_type_data); //  0xFFFF00FF - .... rat0203
+  rom_flags_type(0x0036BE2C, 0x0036BE34 , flags_type_data); //  0x0000FFFF - .... rat0204
+  rom_flags_type(0x0036BE34, 0x0036BE3C , flags_type_data); //  0xFF00FFFF - .... rat0205
+  rom_flags_type(0x0036BE3C, 0x0036BE44 , flags_type_data); //  0x00FFFFFF - .... rat0206
+  rom_flags_type(0x0036BE44, 0x0036BE4C , flags_type_data); //  0xFFFFFFFF - .... rat0207
+  rom_flags_type(0x0036BE4C, 0x0036BE54 , flags_type_data); //  0x00000000 - .... rat0208
+  rom_flags_type(0x0036BE54, 0x0036BE5C , flags_type_data); //  0xFF000000 - .... rat0209
+  rom_flags_type(0x0036BE5C, 0x0036BE64 , flags_type_data); //  0x00FF0000 - .... rat0210
+  rom_flags_type(0x0036BE64, 0x0036BE6C , flags_type_data); //  0xFFFF0000 - .... rat0211
+  rom_flags_type(0x0036BE6C, 0x0036BE74 , flags_type_data); //  0x0000FF00 - .... rat0212
+  rom_flags_type(0x0036BE74, 0x0036BE7C , flags_type_data); //  0xFF00FF00 - .... rat0213
+  rom_flags_type(0x0036BE7C, 0x0036BE84 , flags_type_data); //  0x00FFFF00 - .... rat0214
+  rom_flags_type(0x0036BE84, 0x0036BE8C , flags_type_data); //  0xFFFFFF00 - .... rat0215
+  rom_flags_type(0x0036BE8C, 0x0036BE94 , flags_type_data); //  0x000000FF - .... rat0216
+  rom_flags_type(0x0036BE94, 0x0036BE9C , flags_type_data); //  0xFF0000FF - .... rat0217
+  rom_flags_type(0x0036BE9C, 0x0036BEA4 , flags_type_data); //  0x00FF00FF - .... rat0218
+  rom_flags_type(0x0036BEA4, 0x0036BEAC , flags_type_data); //  0xFFFF00FF - .... rat0219
+  rom_flags_type(0x0036BEAC, 0x0036BEB4 , flags_type_data); //  0x0000FFFF - .... rat0220
+  rom_flags_type(0x0036BEB4, 0x0036BEBC , flags_type_data); //  0xFF00FFFF - .... rat0221
+  rom_flags_type(0x0036BEBC, 0x0036BEC4 , flags_type_data); //  0x00FFFFFF - .... rat0222
+  rom_flags_type(0x0036BEC4, 0x0036BECC , flags_type_data); //  0xFFFFFFFF - .... rat0223
+  rom_flags_type(0x0036BECC, 0x0036BED4 , flags_type_data); //  0x00000000 - .... rat0224
+  rom_flags_type(0x0036BED4, 0x0036BEDC , flags_type_data); //  0xFF000000 - .... rat0225
+  rom_flags_type(0x0036BEDC, 0x0036BEE4 , flags_type_data); //  0x00FF0000 - .... rat0226
+  rom_flags_type(0x0036BEE4, 0x0036BEEC , flags_type_data); //  0xFFFF0000 - .... rat0227
+  rom_flags_type(0x0036BEEC, 0x0036BEF4 , flags_type_data); //  0x0000FF00 - .... rat0228
+  rom_flags_type(0x0036BEF4, 0x0036BEFC , flags_type_data); //  0xFF00FF00 - .... rat0229
+  rom_flags_type(0x0036BEFC, 0x0036BF04 , flags_type_data); //  0x00FFFF00 - .... rat0230
+  rom_flags_type(0x0036BF04, 0x0036BF0C , flags_type_data); //  0xFFFFFF00 - .... rat0231
+  rom_flags_type(0x0036BF0C, 0x0036BF14 , flags_type_data); //  0x000000FF - .... rat0232
+  rom_flags_type(0x0036BF14, 0x0036BF1C , flags_type_data); //  0xFF0000FF - .... rat0233
+  rom_flags_type(0x0036BF1C, 0x0036BF24 , flags_type_data); //  0x00FF00FF - .... rat0234
+  rom_flags_type(0x0036BF24, 0x0036BF2C , flags_type_data); //  0xFFFF00FF - .... rat0235
+  rom_flags_type(0x0036BF2C, 0x0036BF34 , flags_type_data); //  0x0000FFFF - .... rat0236
+  rom_flags_type(0x0036BF34, 0x0036BF3C , flags_type_data); //  0xFF00FFFF - .... rat0237
+  rom_flags_type(0x0036BF3C, 0x0036BF44 , flags_type_data); //  0x00FFFFFF - .... rat0238
+  rom_flags_type(0x0036BF44, 0x0036BF4C , flags_type_data); //  0xFFFFFFFF - .... rat0239
+  rom_flags_type(0x0036BF4C, 0x0036BF54 , flags_type_data); //  0x00000000 - .... rat0240
+  rom_flags_type(0x0036BF54, 0x0036BF5C , flags_type_data); //  0xFF000000 - .... rat0241
+  rom_flags_type(0x0036BF5C, 0x0036BF64 , flags_type_data); //  0x00FF0000 - .... rat0242
+  rom_flags_type(0x0036BF64, 0x0036BF6C , flags_type_data); //  0xFFFF0000 - .... rat0243
+  rom_flags_type(0x0036BF6C, 0x0036BF74 , flags_type_data); //  0x0000FF00 - .... rat0244
+  rom_flags_type(0x0036BF74, 0x0036BF7C , flags_type_data); //  0xFF00FF00 - .... rat0245
+  rom_flags_type(0x0036BF7C, 0x0036BF84 , flags_type_data); //  0x00FFFF00 - .... rat0246
+  rom_flags_type(0x0036BF84, 0x0036BF8C , flags_type_data); //  0xFFFFFF00 - .... rat0247
+  rom_flags_type(0x0036BF8C, 0x0036BF94 , flags_type_data); //  0x000000FF - .... rat0248
+  rom_flags_type(0x0036BF94, 0x0036BF9C , flags_type_data); //  0xFF0000FF - .... rat0249
+  rom_flags_type(0x0036BF9C, 0x0036BFA4 , flags_type_data); //  0x00FF00FF - .... rat0250
+  rom_flags_type(0x0036BFA4, 0x0036BFAC , flags_type_data); //  0xFFFF00FF - .... rat0251
+  rom_flags_type(0x0036BFAC, 0x0036BFB4 , flags_type_data); //  0x0000FFFF - .... rat0252
+  rom_flags_type(0x0036BFB4, 0x0036BFBC , flags_type_data); //  0xFF00FFFF - .... rat0253
+  rom_flags_type(0x0036BFBC, 0x0036BFC4 , flags_type_data); //  0x00FFFFFF - .... rat0254
+  rom_flags_type(0x0036BFC4, 0x0036BFCC , flags_type_data); //  0xFFFFFFFF - .... rat0255
+  rom_flags_type(0x0036BFCC, 0x0036C3D0 , flags_type_data); //  0x00000003 - .... rat0
+  rom_flags_type(0x0036C3D0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0036C3D4, flags_type_arm_word); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036C3D8, flags_type_arm_word); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036C3DC, flags_type_arm_word); //  0x7E000000 - ~... 
+  rom_flags_type(0x0036C3E0, flags_type_arm_word); //  0x003F0000 - .?.. 
+  rom_flags_type(0x0036C3E4, flags_type_arm_word); //  0x3F3F0000 - ??.. 
+  rom_flags_type(0x0036C3E8, flags_type_arm_word); //  0x3F3F0000 - ??.. 
+  rom_flags_type(0x0036C3EC, flags_type_arm_word); //  0x7E3F0000 - ~?.. 
+  rom_flags_type(0x0036C3F0, flags_type_arm_word); //  0x003F0000 - .?.. 
+  rom_flags_type(0x0036C3F4, flags_type_arm_word); //  0x3F3F0000 - ??.. 
+  rom_flags_type(0x0036C3F8, flags_type_arm_word); //  0x3F3F0000 - ??.. 
+  rom_flags_type(0x0036C3FC, flags_type_arm_word); //  0x7E3F0000 - ~?.. 
+  rom_flags_type(0x0036C400, flags_type_arm_word); //  0x007E0000 - .~.. 
+  rom_flags_type(0x0036C404, flags_type_arm_word); //  0x3F7E0000 - ?~.. 
+  rom_flags_type(0x0036C408, flags_type_arm_word); //  0x3F7E0000 - ?~.. 
+  rom_flags_type(0x0036C40C, flags_type_arm_word); //  0x7E7E0000 - ~~.. 
+  rom_flags_type(0x0036C410, flags_type_arm_word); //  0x00003F00 - ..?. 
+  rom_flags_type(0x0036C414, flags_type_arm_word); //  0x3F003F00 - ?.?. 
+  rom_flags_type(0x0036C418, flags_type_arm_word); //  0x3F003F00 - ?.?. 
+  rom_flags_type(0x0036C41C, flags_type_arm_word); //  0x7E003F00 - ~.?. 
+  rom_flags_type(0x0036C420, flags_type_arm_word); //  0x003F3F00 - .??. 
+  rom_flags_type(0x0036C424, flags_type_arm_word); //  0x3F3F3F00 - ???. 
+  rom_flags_type(0x0036C428, flags_type_arm_word); //  0x3F3F3F00 - ???. 
+  rom_flags_type(0x0036C42C, flags_type_arm_word); //  0x7E3F3F00 - ~??. 
+  rom_flags_type(0x0036C430, flags_type_arm_word); //  0x003F3F00 - .??. 
+  rom_flags_type(0x0036C434, flags_type_arm_word); //  0x3F3F3F00 - ???. 
+  rom_flags_type(0x0036C438, flags_type_arm_word); //  0x3F3F3F00 - ???. 
+  rom_flags_type(0x0036C43C, flags_type_arm_word); //  0x7E3F3F00 - ~??. 
+  rom_flags_type(0x0036C440, flags_type_arm_word); //  0x007E3F00 - .~?. 
+  rom_flags_type(0x0036C444, flags_type_arm_word); //  0x3F7E3F00 - ?~?. 
+  rom_flags_type(0x0036C448, flags_type_arm_word); //  0x3F7E3F00 - ?~?. 
+  rom_flags_type(0x0036C44C, flags_type_arm_word); //  0x7E7E3F00 - ~~?. 
+  rom_flags_type(0x0036C450, flags_type_arm_word); //  0x00003F00 - ..?. 
+  rom_flags_type(0x0036C454, flags_type_arm_word); //  0x3F003F00 - ?.?. 
+  rom_flags_type(0x0036C458, flags_type_arm_word); //  0x3F003F00 - ?.?. 
+  rom_flags_type(0x0036C45C, flags_type_arm_word); //  0x7E003F00 - ~.?. 
+  rom_flags_type(0x0036C460, flags_type_arm_word); //  0x003F3F00 - .??. 
+  rom_flags_type(0x0036C464, flags_type_arm_word); //  0x3F3F3F00 - ???. 
+  rom_flags_type(0x0036C468, flags_type_arm_word); //  0x3F3F3F00 - ???. 
+  rom_flags_type(0x0036C46C, flags_type_arm_word); //  0x7E3F3F00 - ~??. 
+  rom_flags_type(0x0036C470, flags_type_arm_word); //  0x003F3F00 - .??. 
+  rom_flags_type(0x0036C474, flags_type_arm_word); //  0x3F3F3F00 - ???. 
+  rom_flags_type(0x0036C478, flags_type_arm_word); //  0x3F3F3F00 - ???. 
+  rom_flags_type(0x0036C47C, flags_type_arm_word); //  0x7E3F3F00 - ~??. 
+  rom_flags_type(0x0036C480, flags_type_arm_word); //  0x007E3F00 - .~?. 
+  rom_flags_type(0x0036C484, flags_type_arm_word); //  0x3F7E3F00 - ?~?. 
+  rom_flags_type(0x0036C488, flags_type_arm_word); //  0x3F7E3F00 - ?~?. 
+  rom_flags_type(0x0036C48C, flags_type_arm_word); //  0x7E7E3F00 - ~~?. 
+  rom_flags_type(0x0036C490, flags_type_arm_word); //  0x00007E00 - ..~. 
+  rom_flags_type(0x0036C494, flags_type_arm_word); //  0x3F007E00 - ?.~. 
+  rom_flags_type(0x0036C498, flags_type_arm_word); //  0x3F007E00 - ?.~. 
+  rom_flags_type(0x0036C49C, flags_type_arm_word); //  0x7E007E00 - ~.~. 
+  rom_flags_type(0x0036C4A0, flags_type_arm_word); //  0x003F7E00 - .?~. 
+  rom_flags_type(0x0036C4A4, flags_type_arm_word); //  0x3F3F7E00 - ??~. 
+  rom_flags_type(0x0036C4A8, flags_type_arm_word); //  0x3F3F7E00 - ??~. 
+  rom_flags_type(0x0036C4AC, flags_type_arm_word); //  0x7E3F7E00 - ~?~. 
+  rom_flags_type(0x0036C4B0, flags_type_arm_word); //  0x003F7E00 - .?~. 
+  rom_flags_type(0x0036C4B4, flags_type_arm_word); //  0x3F3F7E00 - ??~. 
+  rom_flags_type(0x0036C4B8, flags_type_arm_word); //  0x3F3F7E00 - ??~. 
+  rom_flags_type(0x0036C4BC, flags_type_arm_word); //  0x7E3F7E00 - ~?~. 
+  rom_flags_type(0x0036C4C0, flags_type_arm_word); //  0x007E7E00 - .~~. 
+  rom_flags_type(0x0036C4C4, flags_type_arm_word); //  0x3F7E7E00 - ?~~. 
+  rom_flags_type(0x0036C4C8, flags_type_arm_word); //  0x3F7E7E00 - ?~~. 
+  rom_flags_type(0x0036C4CC, flags_type_arm_word); //  0x7E7E7E00 - ~~~. 
+  rom_flags_type(0x0036C4D0, flags_type_arm_word); //  0x0000003F - ...? 
+  rom_flags_type(0x0036C4D4, flags_type_arm_word); //  0x3F00003F - ?..? 
+  rom_flags_type(0x0036C4D8, flags_type_arm_word); //  0x3F00003F - ?..? 
+  rom_flags_type(0x0036C4DC, flags_type_arm_word); //  0x7E00003F - ~..? 
+  rom_flags_type(0x0036C4E0, flags_type_arm_word); //  0x003F003F - .?.? 
+  rom_flags_type(0x0036C4E4, flags_type_arm_word); //  0x3F3F003F - ??.? 
+  rom_flags_type(0x0036C4E8, flags_type_arm_word); //  0x3F3F003F - ??.? 
+  rom_flags_type(0x0036C4EC, flags_type_arm_word); //  0x7E3F003F - ~?.? 
+  rom_flags_type(0x0036C4F0, flags_type_arm_word); //  0x003F003F - .?.? 
+  rom_flags_type(0x0036C4F4, flags_type_arm_word); //  0x3F3F003F - ??.? 
+  rom_flags_type(0x0036C4F8, flags_type_arm_word); //  0x3F3F003F - ??.? 
+  rom_flags_type(0x0036C4FC, flags_type_arm_word); //  0x7E3F003F - ~?.? 
+  rom_flags_type(0x0036C500, flags_type_arm_word); //  0x007E003F - .~.? 
+  rom_flags_type(0x0036C504, flags_type_arm_word); //  0x3F7E003F - ?~.? 
+  rom_flags_type(0x0036C508, flags_type_arm_word); //  0x3F7E003F - ?~.? 
+  rom_flags_type(0x0036C50C, flags_type_arm_word); //  0x7E7E003F - ~~.? 
+  rom_flags_type(0x0036C510, flags_type_arm_word); //  0x00003F3F - ..?? 
+  rom_flags_type(0x0036C514, flags_type_arm_word); //  0x3F003F3F - ?.?? 
+  rom_flags_type(0x0036C518, flags_type_arm_word); //  0x3F003F3F - ?.?? 
+  rom_flags_type(0x0036C51C, flags_type_arm_word); //  0x7E003F3F - ~.?? 
+  rom_flags_type(0x0036C520, flags_type_arm_word); //  0x003F3F3F - .??? 
+  rom_flags_type(0x0036C524, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C528, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C52C, flags_type_arm_word); //  0x7E3F3F3F - ~??? 
+  rom_flags_type(0x0036C530, flags_type_arm_word); //  0x003F3F3F - .??? 
+  rom_flags_type(0x0036C534, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C538, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C53C, flags_type_arm_word); //  0x7E3F3F3F - ~??? 
+  rom_flags_type(0x0036C540, flags_type_arm_word); //  0x007E3F3F - .~?? 
+  rom_flags_type(0x0036C544, flags_type_arm_word); //  0x3F7E3F3F - ?~?? 
+  rom_flags_type(0x0036C548, flags_type_arm_word); //  0x3F7E3F3F - ?~?? 
+  rom_flags_type(0x0036C54C, flags_type_arm_word); //  0x7E7E3F3F - ~~?? 
+  rom_flags_type(0x0036C550, flags_type_arm_word); //  0x00003F3F - ..?? 
+  rom_flags_type(0x0036C554, flags_type_arm_word); //  0x3F003F3F - ?.?? 
+  rom_flags_type(0x0036C558, flags_type_arm_word); //  0x3F003F3F - ?.?? 
+  rom_flags_type(0x0036C55C, flags_type_arm_word); //  0x7E003F3F - ~.?? 
+  rom_flags_type(0x0036C560, flags_type_arm_word); //  0x003F3F3F - .??? 
+  rom_flags_type(0x0036C564, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C568, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C56C, flags_type_arm_word); //  0x7E3F3F3F - ~??? 
+  rom_flags_type(0x0036C570, flags_type_arm_word); //  0x003F3F3F - .??? 
+  rom_flags_type(0x0036C574, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C578, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C57C, flags_type_arm_word); //  0x7E3F3F3F - ~??? 
+  rom_flags_type(0x0036C580, flags_type_arm_word); //  0x007E3F3F - .~?? 
+  rom_flags_type(0x0036C584, flags_type_arm_word); //  0x3F7E3F3F - ?~?? 
+  rom_flags_type(0x0036C588, flags_type_arm_word); //  0x3F7E3F3F - ?~?? 
+  rom_flags_type(0x0036C58C, flags_type_arm_word); //  0x7E7E3F3F - ~~?? 
+  rom_flags_type(0x0036C590, flags_type_arm_word); //  0x00007E3F - ..~? 
+  rom_flags_type(0x0036C594, flags_type_arm_word); //  0x3F007E3F - ?.~? 
+  rom_flags_type(0x0036C598, flags_type_arm_word); //  0x3F007E3F - ?.~? 
+  rom_flags_type(0x0036C59C, flags_type_arm_word); //  0x7E007E3F - ~.~? 
+  rom_flags_type(0x0036C5A0, flags_type_arm_word); //  0x003F7E3F - .?~? 
+  rom_flags_type(0x0036C5A4, flags_type_arm_word); //  0x3F3F7E3F - ??~? 
+  rom_flags_type(0x0036C5A8, flags_type_arm_word); //  0x3F3F7E3F - ??~? 
+  rom_flags_type(0x0036C5AC, flags_type_arm_word); //  0x7E3F7E3F - ~?~? 
+  rom_flags_type(0x0036C5B0, flags_type_arm_word); //  0x003F7E3F - .?~? 
+  rom_flags_type(0x0036C5B4, flags_type_arm_word); //  0x3F3F7E3F - ??~? 
+  rom_flags_type(0x0036C5B8, flags_type_arm_word); //  0x3F3F7E3F - ??~? 
+  rom_flags_type(0x0036C5BC, flags_type_arm_word); //  0x7E3F7E3F - ~?~? 
+  rom_flags_type(0x0036C5C0, flags_type_arm_word); //  0x007E7E3F - .~~? 
+  rom_flags_type(0x0036C5C4, flags_type_arm_word); //  0x3F7E7E3F - ?~~? 
+  rom_flags_type(0x0036C5C8, flags_type_arm_word); //  0x3F7E7E3F - ?~~? 
+  rom_flags_type(0x0036C5CC, flags_type_arm_word); //  0x7E7E7E3F - ~~~? 
+  rom_flags_type(0x0036C5D0, flags_type_arm_word); //  0x0000003F - ...? 
+  rom_flags_type(0x0036C5D4, flags_type_arm_word); //  0x3F00003F - ?..? 
+  rom_flags_type(0x0036C5D8, flags_type_arm_word); //  0x3F00003F - ?..? 
+  rom_flags_type(0x0036C5DC, flags_type_arm_word); //  0x7E00003F - ~..? 
+  rom_flags_type(0x0036C5E0, flags_type_arm_word); //  0x003F003F - .?.? 
+  rom_flags_type(0x0036C5E4, flags_type_arm_word); //  0x3F3F003F - ??.? 
+  rom_flags_type(0x0036C5E8, flags_type_arm_word); //  0x3F3F003F - ??.? 
+  rom_flags_type(0x0036C5EC, flags_type_arm_word); //  0x7E3F003F - ~?.? 
+  rom_flags_type(0x0036C5F0, flags_type_arm_word); //  0x003F003F - .?.? 
+  rom_flags_type(0x0036C5F4, flags_type_arm_word); //  0x3F3F003F - ??.? 
+  rom_flags_type(0x0036C5F8, flags_type_arm_word); //  0x3F3F003F - ??.? 
+  rom_flags_type(0x0036C5FC, flags_type_arm_word); //  0x7E3F003F - ~?.? 
+  rom_flags_type(0x0036C600, flags_type_arm_word); //  0x007E003F - .~.? 
+  rom_flags_type(0x0036C604, flags_type_arm_word); //  0x3F7E003F - ?~.? 
+  rom_flags_type(0x0036C608, flags_type_arm_word); //  0x3F7E003F - ?~.? 
+  rom_flags_type(0x0036C60C, flags_type_arm_word); //  0x7E7E003F - ~~.? 
+  rom_flags_type(0x0036C610, flags_type_arm_word); //  0x00003F3F - ..?? 
+  rom_flags_type(0x0036C614, flags_type_arm_word); //  0x3F003F3F - ?.?? 
+  rom_flags_type(0x0036C618, flags_type_arm_word); //  0x3F003F3F - ?.?? 
+  rom_flags_type(0x0036C61C, flags_type_arm_word); //  0x7E003F3F - ~.?? 
+  rom_flags_type(0x0036C620, flags_type_arm_word); //  0x003F3F3F - .??? 
+  rom_flags_type(0x0036C624, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C628, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C62C, flags_type_arm_word); //  0x7E3F3F3F - ~??? 
+  rom_flags_type(0x0036C630, flags_type_arm_word); //  0x003F3F3F - .??? 
+  rom_flags_type(0x0036C634, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C638, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C63C, flags_type_arm_word); //  0x7E3F3F3F - ~??? 
+  rom_flags_type(0x0036C640, flags_type_arm_word); //  0x007E3F3F - .~?? 
+  rom_flags_type(0x0036C644, flags_type_arm_word); //  0x3F7E3F3F - ?~?? 
+  rom_flags_type(0x0036C648, flags_type_arm_word); //  0x3F7E3F3F - ?~?? 
+  rom_flags_type(0x0036C64C, flags_type_arm_word); //  0x7E7E3F3F - ~~?? 
+  rom_flags_type(0x0036C650, flags_type_arm_word); //  0x00003F3F - ..?? 
+  rom_flags_type(0x0036C654, flags_type_arm_word); //  0x3F003F3F - ?.?? 
+  rom_flags_type(0x0036C658, flags_type_arm_word); //  0x3F003F3F - ?.?? 
+  rom_flags_type(0x0036C65C, flags_type_arm_word); //  0x7E003F3F - ~.?? 
+  rom_flags_type(0x0036C660, flags_type_arm_word); //  0x003F3F3F - .??? 
+  rom_flags_type(0x0036C664, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C668, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C66C, flags_type_arm_word); //  0x7E3F3F3F - ~??? 
+  rom_flags_type(0x0036C670, flags_type_arm_word); //  0x003F3F3F - .??? 
+  rom_flags_type(0x0036C674, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C678, flags_type_arm_word); //  0x3F3F3F3F - ???? 
+  rom_flags_type(0x0036C67C, flags_type_arm_word); //  0x7E3F3F3F - ~??? 
+  rom_flags_type(0x0036C680, flags_type_arm_word); //  0x007E3F3F - .~?? 
+  rom_flags_type(0x0036C684, flags_type_arm_word); //  0x3F7E3F3F - ?~?? 
+  rom_flags_type(0x0036C688, flags_type_arm_word); //  0x3F7E3F3F - ?~?? 
+  rom_flags_type(0x0036C68C, flags_type_arm_word); //  0x7E7E3F3F - ~~?? 
+  rom_flags_type(0x0036C690, flags_type_arm_word); //  0x00007E3F - ..~? 
+  rom_flags_type(0x0036C694, flags_type_arm_word); //  0x3F007E3F - ?.~? 
+  rom_flags_type(0x0036C698, flags_type_arm_word); //  0x3F007E3F - ?.~? 
+  rom_flags_type(0x0036C69C, flags_type_arm_word); //  0x7E007E3F - ~.~? 
+  rom_flags_type(0x0036C6A0, flags_type_arm_word); //  0x003F7E3F - .?~? 
+  rom_flags_type(0x0036C6A4, flags_type_arm_word); //  0x3F3F7E3F - ??~? 
+  rom_flags_type(0x0036C6A8, flags_type_arm_word); //  0x3F3F7E3F - ??~? 
+  rom_flags_type(0x0036C6AC, flags_type_arm_word); //  0x7E3F7E3F - ~?~? 
+  rom_flags_type(0x0036C6B0, flags_type_arm_word); //  0x003F7E3F - .?~? 
+  rom_flags_type(0x0036C6B4, flags_type_arm_word); //  0x3F3F7E3F - ??~? 
+  rom_flags_type(0x0036C6B8, flags_type_arm_word); //  0x3F3F7E3F - ??~? 
+  rom_flags_type(0x0036C6BC, flags_type_arm_word); //  0x7E3F7E3F - ~?~? 
+  rom_flags_type(0x0036C6C0, flags_type_arm_word); //  0x007E7E3F - .~~? 
+  rom_flags_type(0x0036C6C4, flags_type_arm_word); //  0x3F7E7E3F - ?~~? 
+  rom_flags_type(0x0036C6C8, flags_type_arm_word); //  0x3F7E7E3F - ?~~? 
+  rom_flags_type(0x0036C6CC, flags_type_arm_word); //  0x7E7E7E3F - ~~~? 
+  rom_flags_type(0x0036C6D0, flags_type_arm_word); //  0x0000007E - ...~ 
+  rom_flags_type(0x0036C6D4, flags_type_arm_word); //  0x3F00007E - ?..~ 
+  rom_flags_type(0x0036C6D8, flags_type_arm_word); //  0x3F00007E - ?..~ 
+  rom_flags_type(0x0036C6DC, flags_type_arm_word); //  0x7E00007E - ~..~ 
+  rom_flags_type(0x0036C6E0, flags_type_arm_word); //  0x003F007E - .?.~ 
+  rom_flags_type(0x0036C6E4, flags_type_arm_word); //  0x3F3F007E - ??.~ 
+  rom_flags_type(0x0036C6E8, flags_type_arm_word); //  0x3F3F007E - ??.~ 
+  rom_flags_type(0x0036C6EC, flags_type_arm_word); //  0x7E3F007E - ~?.~ 
+  rom_flags_type(0x0036C6F0, flags_type_arm_word); //  0x003F007E - .?.~ 
+  rom_flags_type(0x0036C6F4, flags_type_arm_word); //  0x3F3F007E - ??.~ 
+  rom_flags_type(0x0036C6F8, flags_type_arm_word); //  0x3F3F007E - ??.~ 
+  rom_flags_type(0x0036C6FC, flags_type_arm_word); //  0x7E3F007E - ~?.~ 
+  rom_flags_type(0x0036C700, flags_type_arm_word); //  0x007E007E - .~.~ 
+  rom_flags_type(0x0036C704, flags_type_arm_word); //  0x3F7E007E - ?~.~ 
+  rom_flags_type(0x0036C708, flags_type_arm_word); //  0x3F7E007E - ?~.~ 
+  rom_flags_type(0x0036C70C, flags_type_arm_word); //  0x7E7E007E - ~~.~ 
+  rom_flags_type(0x0036C710, flags_type_arm_word); //  0x00003F7E - ..?~ 
+  rom_flags_type(0x0036C714, flags_type_arm_word); //  0x3F003F7E - ?.?~ 
+  rom_flags_type(0x0036C718, flags_type_arm_word); //  0x3F003F7E - ?.?~ 
+  rom_flags_type(0x0036C71C, flags_type_arm_word); //  0x7E003F7E - ~.?~ 
+  rom_flags_type(0x0036C720, flags_type_arm_word); //  0x003F3F7E - .??~ 
+  rom_flags_type(0x0036C724, flags_type_arm_word); //  0x3F3F3F7E - ???~ 
+  rom_flags_type(0x0036C728, flags_type_arm_word); //  0x3F3F3F7E - ???~ 
+  rom_flags_type(0x0036C72C, flags_type_arm_word); //  0x7E3F3F7E - ~??~ 
+  rom_flags_type(0x0036C730, flags_type_arm_word); //  0x003F3F7E - .??~ 
+  rom_flags_type(0x0036C734, flags_type_arm_word); //  0x3F3F3F7E - ???~ 
+  rom_flags_type(0x0036C738, flags_type_arm_word); //  0x3F3F3F7E - ???~ 
+  rom_flags_type(0x0036C73C, flags_type_arm_word); //  0x7E3F3F7E - ~??~ 
+  rom_flags_type(0x0036C740, flags_type_arm_word); //  0x007E3F7E - .~?~ 
+  rom_flags_type(0x0036C744, flags_type_arm_word); //  0x3F7E3F7E - ?~?~ 
+  rom_flags_type(0x0036C748, flags_type_arm_word); //  0x3F7E3F7E - ?~?~ 
+  rom_flags_type(0x0036C74C, flags_type_arm_word); //  0x7E7E3F7E - ~~?~ 
+  rom_flags_type(0x0036C750, flags_type_arm_word); //  0x00003F7E - ..?~ 
+  rom_flags_type(0x0036C754, flags_type_arm_word); //  0x3F003F7E - ?.?~ 
+  rom_flags_type(0x0036C758, flags_type_arm_word); //  0x3F003F7E - ?.?~ 
+  rom_flags_type(0x0036C75C, flags_type_arm_word); //  0x7E003F7E - ~.?~ 
+  rom_flags_type(0x0036C760, flags_type_arm_word); //  0x003F3F7E - .??~ 
+  rom_flags_type(0x0036C764, flags_type_arm_word); //  0x3F3F3F7E - ???~ 
+  rom_flags_type(0x0036C768, flags_type_arm_word); //  0x3F3F3F7E - ???~ 
+  rom_flags_type(0x0036C76C, flags_type_arm_word); //  0x7E3F3F7E - ~??~ 
+  rom_flags_type(0x0036C770, flags_type_arm_word); //  0x003F3F7E - .??~ 
+  rom_flags_type(0x0036C774, flags_type_arm_word); //  0x3F3F3F7E - ???~ 
+  rom_flags_type(0x0036C778, flags_type_arm_word); //  0x3F3F3F7E - ???~ 
+  rom_flags_type(0x0036C77C, flags_type_arm_word); //  0x7E3F3F7E - ~??~ 
+  rom_flags_type(0x0036C780, flags_type_arm_word); //  0x007E3F7E - .~?~ 
+  rom_flags_type(0x0036C784, flags_type_arm_word); //  0x3F7E3F7E - ?~?~ 
+  rom_flags_type(0x0036C788, flags_type_arm_word); //  0x3F7E3F7E - ?~?~ 
+  rom_flags_type(0x0036C78C, flags_type_arm_word); //  0x7E7E3F7E - ~~?~ 
+  rom_flags_type(0x0036C790, flags_type_arm_word); //  0x00007E7E - ..~~ 
+  rom_flags_type(0x0036C794, flags_type_arm_word); //  0x3F007E7E - ?.~~ 
+  rom_flags_type(0x0036C798, flags_type_arm_word); //  0x3F007E7E - ?.~~ 
+  rom_flags_type(0x0036C79C, flags_type_arm_word); //  0x7E007E7E - ~.~~ 
+  rom_flags_type(0x0036C7A0, flags_type_arm_word); //  0x003F7E7E - .?~~ 
+  rom_flags_type(0x0036C7A4, flags_type_arm_word); //  0x3F3F7E7E - ??~~ 
+  rom_flags_type(0x0036C7A8, flags_type_arm_word); //  0x3F3F7E7E - ??~~ 
+  rom_flags_type(0x0036C7AC, flags_type_arm_word); //  0x7E3F7E7E - ~?~~ 
+  rom_flags_type(0x0036C7B0, flags_type_arm_word); //  0x003F7E7E - .?~~ 
+  rom_flags_type(0x0036C7B4, flags_type_arm_word); //  0x3F3F7E7E - ??~~ 
+  rom_flags_type(0x0036C7B8, flags_type_arm_word); //  0x3F3F7E7E - ??~~ 
+  rom_flags_type(0x0036C7BC, flags_type_arm_word); //  0x7E3F7E7E - ~?~~ 
+  rom_flags_type(0x0036C7C0, flags_type_arm_word); //  0x007E7E7E - .~~~ 
+  rom_flags_type(0x0036C7C4, flags_type_arm_word); //  0x3F7E7E7E - ?~~~ 
+  rom_flags_type(0x0036C7C8, flags_type_arm_word); //  0x3F7E7E7E - ?~~~ 
+  rom_flags_type(0x0036C7CC, flags_type_arm_word); //  0x7E7E7E7E - ~~~~ 
+  rom_flags_type(0x0036C7D0, 0x0036CBD4 , flags_type_data); //  0x00000002 - .... rat1
+  rom_flags_type(0x0036CBD4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0036CBD8, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036CBDC, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036CBE0, flags_type_arm_word); //  0x1E000000 - .... 
+  rom_flags_type(0x0036CBE4, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036CBE8, flags_type_arm_word); //  0x1E000000 - .... 
+  rom_flags_type(0x0036CBEC, flags_type_arm_word); //  0x1E000000 - .... 
+  rom_flags_type(0x0036CBF0, flags_type_arm_word); //  0x2D000000 - -... 
+  rom_flags_type(0x0036CBF4, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036CBF8, flags_type_arm_word); //  0x1E000000 - .... 
+  rom_flags_type(0x0036CBFC, flags_type_arm_word); //  0x1E000000 - .... 
+  rom_flags_type(0x0036CC00, flags_type_arm_word); //  0x2D000000 - -... 
+  rom_flags_type(0x0036CC04, flags_type_arm_word); //  0x1E000000 - .... 
+  rom_flags_type(0x0036CC08, flags_type_arm_word); //  0x2D000000 - -... 
+  rom_flags_type(0x0036CC0C, flags_type_arm_word); //  0x2D000000 - -... 
+  rom_flags_type(0x0036CC10, flags_type_arm_word); //  0x3C000000 - <... 
+  rom_flags_type(0x0036CC14, flags_type_arm_word); //  0x000F0000 - .... 
+  rom_flags_type(0x0036CC18, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CC1C, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CC20, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC24, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CC28, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC2C, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC30, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CC34, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CC38, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC3C, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC40, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CC44, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC48, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CC4C, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CC50, flags_type_arm_word); //  0x3C0F0000 - <... 
+  rom_flags_type(0x0036CC54, flags_type_arm_word); //  0x000F0000 - .... 
+  rom_flags_type(0x0036CC58, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CC5C, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CC60, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC64, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CC68, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC6C, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC70, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CC74, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CC78, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC7C, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC80, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CC84, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CC88, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CC8C, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CC90, flags_type_arm_word); //  0x3C0F0000 - <... 
+  rom_flags_type(0x0036CC94, flags_type_arm_word); //  0x001E0000 - .... 
+  rom_flags_type(0x0036CC98, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CC9C, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CCA0, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CCA4, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CCA8, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CCAC, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CCB0, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CCB4, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CCB8, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CCBC, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CCC0, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CCC4, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CCC8, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CCCC, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CCD0, flags_type_arm_word); //  0x3C1E0000 - <... 
+  rom_flags_type(0x0036CCD4, flags_type_arm_word); //  0x000F0000 - .... 
+  rom_flags_type(0x0036CCD8, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CCDC, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CCE0, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CCE4, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CCE8, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CCEC, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CCF0, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CCF4, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CCF8, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CCFC, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CD00, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CD04, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CD08, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CD0C, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CD10, flags_type_arm_word); //  0x3C0F0000 - <... 
+  rom_flags_type(0x0036CD14, flags_type_arm_word); //  0x001E0000 - .... 
+  rom_flags_type(0x0036CD18, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CD1C, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CD20, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD24, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CD28, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD2C, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD30, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CD34, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CD38, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD3C, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD40, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CD44, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD48, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CD4C, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CD50, flags_type_arm_word); //  0x3C1E0000 - <... 
+  rom_flags_type(0x0036CD54, flags_type_arm_word); //  0x001E0000 - .... 
+  rom_flags_type(0x0036CD58, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CD5C, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CD60, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD64, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CD68, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD6C, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD70, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CD74, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CD78, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD7C, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD80, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CD84, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CD88, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CD8C, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CD90, flags_type_arm_word); //  0x3C1E0000 - <... 
+  rom_flags_type(0x0036CD94, flags_type_arm_word); //  0x002D0000 - .-.. 
+  rom_flags_type(0x0036CD98, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CD9C, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CDA0, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CDA4, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CDA8, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CDAC, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CDB0, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CDB4, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CDB8, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CDBC, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CDC0, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CDC4, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CDC8, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CDCC, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CDD0, flags_type_arm_word); //  0x3C2D0000 - <-.. 
+  rom_flags_type(0x0036CDD4, flags_type_arm_word); //  0x000F0000 - .... 
+  rom_flags_type(0x0036CDD8, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CDDC, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CDE0, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CDE4, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CDE8, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CDEC, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CDF0, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CDF4, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0036CDF8, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CDFC, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CE00, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CE04, flags_type_arm_word); //  0x1E0F0000 - .... 
+  rom_flags_type(0x0036CE08, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CE0C, flags_type_arm_word); //  0x2D0F0000 - -... 
+  rom_flags_type(0x0036CE10, flags_type_arm_word); //  0x3C0F0000 - <... 
+  rom_flags_type(0x0036CE14, flags_type_arm_word); //  0x001E0000 - .... 
+  rom_flags_type(0x0036CE18, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CE1C, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CE20, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE24, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CE28, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE2C, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE30, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CE34, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CE38, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE3C, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE40, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CE44, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE48, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CE4C, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CE50, flags_type_arm_word); //  0x3C1E0000 - <... 
+  rom_flags_type(0x0036CE54, flags_type_arm_word); //  0x001E0000 - .... 
+  rom_flags_type(0x0036CE58, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CE5C, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CE60, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE64, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CE68, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE6C, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE70, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CE74, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CE78, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE7C, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE80, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CE84, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CE88, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CE8C, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CE90, flags_type_arm_word); //  0x3C1E0000 - <... 
+  rom_flags_type(0x0036CE94, flags_type_arm_word); //  0x002D0000 - .-.. 
+  rom_flags_type(0x0036CE98, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CE9C, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CEA0, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CEA4, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CEA8, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CEAC, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CEB0, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CEB4, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CEB8, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CEBC, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CEC0, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CEC4, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CEC8, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CECC, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CED0, flags_type_arm_word); //  0x3C2D0000 - <-.. 
+  rom_flags_type(0x0036CED4, flags_type_arm_word); //  0x001E0000 - .... 
+  rom_flags_type(0x0036CED8, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CEDC, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CEE0, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CEE4, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CEE8, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CEEC, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CEF0, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CEF4, flags_type_arm_word); //  0x0F1E0000 - .... 
+  rom_flags_type(0x0036CEF8, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CEFC, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CF00, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CF04, flags_type_arm_word); //  0x1E1E0000 - .... 
+  rom_flags_type(0x0036CF08, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CF0C, flags_type_arm_word); //  0x2D1E0000 - -... 
+  rom_flags_type(0x0036CF10, flags_type_arm_word); //  0x3C1E0000 - <... 
+  rom_flags_type(0x0036CF14, flags_type_arm_word); //  0x002D0000 - .-.. 
+  rom_flags_type(0x0036CF18, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CF1C, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CF20, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF24, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CF28, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF2C, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF30, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CF34, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CF38, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF3C, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF40, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CF44, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF48, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CF4C, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CF50, flags_type_arm_word); //  0x3C2D0000 - <-.. 
+  rom_flags_type(0x0036CF54, flags_type_arm_word); //  0x002D0000 - .-.. 
+  rom_flags_type(0x0036CF58, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CF5C, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CF60, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF64, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CF68, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF6C, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF70, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CF74, flags_type_arm_word); //  0x0F2D0000 - .-.. 
+  rom_flags_type(0x0036CF78, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF7C, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF80, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CF84, flags_type_arm_word); //  0x1E2D0000 - .-.. 
+  rom_flags_type(0x0036CF88, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CF8C, flags_type_arm_word); //  0x2D2D0000 - --.. 
+  rom_flags_type(0x0036CF90, flags_type_arm_word); //  0x3C2D0000 - <-.. 
+  rom_flags_type(0x0036CF94, flags_type_arm_word); //  0x003C0000 - .<.. 
+  rom_flags_type(0x0036CF98, flags_type_arm_word); //  0x0F3C0000 - .<.. 
+  rom_flags_type(0x0036CF9C, flags_type_arm_word); //  0x0F3C0000 - .<.. 
+  rom_flags_type(0x0036CFA0, flags_type_arm_word); //  0x1E3C0000 - .<.. 
+  rom_flags_type(0x0036CFA4, flags_type_arm_word); //  0x0F3C0000 - .<.. 
+  rom_flags_type(0x0036CFA8, flags_type_arm_word); //  0x1E3C0000 - .<.. 
+  rom_flags_type(0x0036CFAC, flags_type_arm_word); //  0x1E3C0000 - .<.. 
+  rom_flags_type(0x0036CFB0, flags_type_arm_word); //  0x2D3C0000 - -<.. 
+  rom_flags_type(0x0036CFB4, flags_type_arm_word); //  0x0F3C0000 - .<.. 
+  rom_flags_type(0x0036CFB8, flags_type_arm_word); //  0x1E3C0000 - .<.. 
+  rom_flags_type(0x0036CFBC, flags_type_arm_word); //  0x1E3C0000 - .<.. 
+  rom_flags_type(0x0036CFC0, flags_type_arm_word); //  0x2D3C0000 - -<.. 
+  rom_flags_type(0x0036CFC4, flags_type_arm_word); //  0x1E3C0000 - .<.. 
+  rom_flags_type(0x0036CFC8, flags_type_arm_word); //  0x2D3C0000 - -<.. 
+  rom_flags_type(0x0036CFCC, flags_type_arm_word); //  0x2D3C0000 - -<.. 
+  rom_flags_type(0x0036CFD0, flags_type_arm_word); //  0x3C3C0000 - <<.. 
+  rom_flags_type(0x0036CFD4, 0x0036D3D8 , flags_type_data); //  0x00000001 - .... rat2
+  rom_flags_type(0x0036D3D8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0036D3DC, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x0036D3E0, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x0036D3E4, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D3E8, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x0036D3EC, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D3F0, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D3F4, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D3F8, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x0036D3FC, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D400, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D404, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D408, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D40C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D410, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D414, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D418, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x0036D41C, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D420, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D424, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D428, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D42C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D430, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D434, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D438, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D43C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D440, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D444, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D448, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D44C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D450, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D454, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D458, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x0036D45C, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D460, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D464, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D468, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D46C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D470, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D474, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D478, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D47C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D480, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D484, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D488, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D48C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D490, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D494, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D498, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D49C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D4A0, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D4A4, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D4A8, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D4AC, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D4B0, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D4B4, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D4B8, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D4BC, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D4C0, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D4C4, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D4C8, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D4CC, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D4D0, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D4D4, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D4D8, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x0036D4DC, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D4E0, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D4E4, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D4E8, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D4EC, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D4F0, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D4F4, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D4F8, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D4FC, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D500, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D504, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D508, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D50C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D510, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D514, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D518, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D51C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D520, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D524, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D528, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D52C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D530, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D534, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D538, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D53C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D540, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D544, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D548, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D54C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D550, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D554, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D558, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D55C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D560, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D564, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D568, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D56C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D570, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D574, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D578, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D57C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D580, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D584, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D588, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D58C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D590, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D594, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D598, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D59C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D5A0, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D5A4, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D5A8, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D5AC, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D5B0, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D5B4, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D5B8, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D5BC, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D5C0, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D5C4, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D5C8, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D5CC, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D5D0, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D5D4, flags_type_arm_word); //  0x15000000 - .... 
+  rom_flags_type(0x0036D5D8, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x0036D5DC, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D5E0, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D5E4, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D5E8, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D5EC, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D5F0, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D5F4, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D5F8, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D5FC, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D600, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D604, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D608, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D60C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D610, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D614, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D618, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D61C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D620, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D624, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D628, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D62C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D630, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D634, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D638, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D63C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D640, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D644, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D648, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D64C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D650, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D654, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D658, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D65C, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D660, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D664, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D668, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D66C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D670, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D674, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D678, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D67C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D680, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D684, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D688, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D68C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D690, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D694, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D698, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D69C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D6A0, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D6A4, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D6A8, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D6AC, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D6B0, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D6B4, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D6B8, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D6BC, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D6C0, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D6C4, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D6C8, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D6CC, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D6D0, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D6D4, flags_type_arm_word); //  0x15000000 - .... 
+  rom_flags_type(0x0036D6D8, flags_type_arm_word); //  0x06000000 - .... 
+  rom_flags_type(0x0036D6DC, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D6E0, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D6E4, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D6E8, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D6EC, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D6F0, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D6F4, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D6F8, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D6FC, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D700, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D704, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D708, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D70C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D710, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D714, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D718, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D71C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D720, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D724, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D728, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D72C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D730, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D734, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D738, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D73C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D740, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D744, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D748, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D74C, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D750, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D754, flags_type_arm_word); //  0x15000000 - .... 
+  rom_flags_type(0x0036D758, flags_type_arm_word); //  0x09000000 - .... 
+  rom_flags_type(0x0036D75C, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D760, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D764, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D768, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D76C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D770, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D774, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D778, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D77C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D780, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D784, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D788, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D78C, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D790, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D794, flags_type_arm_word); //  0x15000000 - .... 
+  rom_flags_type(0x0036D798, flags_type_arm_word); //  0x0C000000 - .... 
+  rom_flags_type(0x0036D79C, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D7A0, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D7A4, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D7A8, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D7AC, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D7B0, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D7B4, flags_type_arm_word); //  0x15000000 - .... 
+  rom_flags_type(0x0036D7B8, flags_type_arm_word); //  0x0F000000 - .... 
+  rom_flags_type(0x0036D7BC, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D7C0, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D7C4, flags_type_arm_word); //  0x15000000 - .... 
+  rom_flags_type(0x0036D7C8, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036D7CC, flags_type_arm_word); //  0x15000000 - .... 
+  rom_flags_type(0x0036D7D0, flags_type_arm_word); //  0x15000000 - .... 
+  rom_flags_type(0x0036D7D4, flags_type_arm_word); //  0x18000000 - .... 
+  rom_flags_type(0x0036D7D8, 0x0036DBDC , flags_type_data); //  0x00000000 - .... rat3
+  rom_flags_type(0x0036DBDC, 0x0036DBEC , flags_type_data); //  0x0036BFCC - .6.. AAtables
+  rom_flags_type(0x0036DBEC, 0x0036E0C0 , flags_type_data); //  0x00080008 - .... numConnectRanges
+  rom_flags_type(0x0036E0C0, 0x0036E1A4 , flags_type_data); //  0x3E4CCCCD - >L.. bpParam
+  rom_flags_type(0x0036E1A4, 0x0036E288 , flags_type_data); //  0x00003333 - ..33 arBPParam
+  rom_flags_type(0x0036E288, 0x0036E308 , flags_type_data); //  0x000E000E - .... bpNGS
+  rom_flags_type(0x0036E308, 0x0036E608 , flags_type_data); //  0x00000008 - .... bpCSS
+  rom_flags_type(0x0036E608, 0x0036E618 , flags_type_data); //  0x00056B44 - ..kD inputType
+  rom_flags_type(0x0036E618, 0x0036E69C , flags_type_data); //  0x00010003 - .... bpNet
+  rom_flags_type(0x0036E69C, flags_type_arm_word); //  0x01000000 - .... 
+  rom_flags_type(0x0036E6A0, 0x0036E6AC , flags_type_data); //  0x00000001 - .... raw100
+  rom_flags_type(0x0036E6AC, flags_type_arm_word); //  0x02000000 - .... 
+  rom_flags_type(0x0036E6B0, 0x0036E6BC , flags_type_data); //  0x00000001 - .... raw101
+  rom_flags_type(0x0036E6BC, flags_type_arm_word); //  0x04000000 - .... 
+  rom_flags_type(0x0036E6C0, 0x0036E6CC , flags_type_data); //  0x00000001 - .... raw102
+  rom_flags_type(0x0036E6CC, flags_type_arm_word); //  0x08000000 - .... 
+  rom_flags_type(0x0036E6D0, 0x0036E6DC , flags_type_data); //  0x00000001 - .... raw103
+  rom_flags_type(0x0036E6DC, flags_type_arm_word); //  0x10000000 - .... 
+  rom_flags_type(0x0036E6E0, 0x0036E6EC , flags_type_data); //  0x00000001 - .... raw104
+  rom_flags_type(0x0036E6EC, flags_type_arm_word); //  0x20000000 - .... 
+  rom_flags_type(0x0036E6F0, 0x0036E6FC , flags_type_data); //  0x00000001 - .... raw105
+  rom_flags_type(0x0036E6FC, flags_type_arm_word); //  0x40000000 - @... 
+  rom_flags_type(0x0036E700, 0x0036E70C , flags_type_data); //  0x00000001 - .... raw106
+  rom_flags_type(0x0036E70C, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0036E710, 0x0036E71C , flags_type_data); //  0x00000001 - .... raw107
+  rom_flags_type(0x0036E71C, 0x0036E73C , flags_type_data); //  0x0036E6A0 - .6.. raw1
+  rom_flags_type(0x0036E73C, flags_type_arm_word); //  0x03030000 - .... 
+  rom_flags_type(0x0036E740, 0x0036E74C , flags_type_data); //  0x00000001 - .... raw200
+  rom_flags_type(0x0036E74C, flags_type_arm_word); //  0x06060000 - .... 
+  rom_flags_type(0x0036E750, 0x0036E75C , flags_type_data); //  0x00000001 - .... raw201
+  rom_flags_type(0x0036E75C, flags_type_arm_word); //  0x0C0C0000 - .... 
+  rom_flags_type(0x0036E760, 0x0036E76C , flags_type_data); //  0x00000001 - .... raw202
+  rom_flags_type(0x0036E76C, flags_type_arm_word); //  0x18180000 - .... 
+  rom_flags_type(0x0036E770, 0x0036E77C , flags_type_data); //  0x00000001 - .... raw203
+  rom_flags_type(0x0036E77C, flags_type_arm_word); //  0x30300000 - 00.. 
+  rom_flags_type(0x0036E780, 0x0036E78C , flags_type_data); //  0x00000001 - .... raw204
+  rom_flags_type(0x0036E78C, flags_type_arm_word); //  0x60600000 - ``.. 
+  rom_flags_type(0x0036E790, 0x0036E79C , flags_type_data); //  0x00000001 - .... raw205
+  rom_flags_type(0x0036E79C, flags_type_arm_word); //  0xC0C00000 - .... 
+  rom_flags_type(0x0036E7A0, 0x0036E7AC , flags_type_data); //  0x00000001 - .... raw206
+  rom_flags_type(0x0036E7AC, flags_type_arm_word); //  0x80018001 - .... 
+  rom_flags_type(0x0036E7B0, 0x0036E7BC , flags_type_data); //  0x00000002 - .... raw207
+  rom_flags_type(0x0036E7BC, 0x0036E7DC , flags_type_data); //  0x0036E740 - .6.@ raw2
+  rom_flags_type(0x0036E7DC, flags_type_arm_word); //  0x060F0F06 - .... 
+  rom_flags_type(0x0036E7E0, 0x0036E7EC , flags_type_data); //  0x00000001 - .... raw400
+  rom_flags_type(0x0036E7EC, flags_type_arm_word); //  0x0C1E1E0C - .... 
+  rom_flags_type(0x0036E7F0, 0x0036E7FC , flags_type_data); //  0x00000001 - .... raw401
+  rom_flags_type(0x0036E7FC, flags_type_arm_word); //  0x183C3C18 - .<<. 
+  rom_flags_type(0x0036E800, 0x0036E80C , flags_type_data); //  0x00000001 - .... raw402
+  rom_flags_type(0x0036E80C, flags_type_arm_word); //  0x30787830 - 0xx0 
+  rom_flags_type(0x0036E810, 0x0036E81C , flags_type_data); //  0x00000001 - .... raw403
+  rom_flags_type(0x0036E81C, flags_type_arm_word); //  0x60F0F060 - `..` 
+  rom_flags_type(0x0036E820, 0x0036E82C , flags_type_data); //  0x00000001 - .... raw404
+  rom_flags_type(0x0036E82C, 0x0036E834 , flags_type_data); //  0xC000E001 - .... rawImg405
+  rom_flags_type(0x0036E834, 0x0036E840 , flags_type_data); //  0x00000002 - .... raw405
+  rom_flags_type(0x0036E840, 0x0036E848 , flags_type_data); //  0x8001C003 - .... rawImg406
+  rom_flags_type(0x0036E848, 0x0036E854 , flags_type_data); //  0x00000002 - .... raw406
+  rom_flags_type(0x0036E854, 0x0036E85C , flags_type_data); //  0x00038007 - .... rawImg407
+  rom_flags_type(0x0036E85C, 0x0036E868 , flags_type_data); //  0x00000002 - .... raw407
+  rom_flags_type(0x0036E868, 0x0036E888 , flags_type_data); //  0x0036E7E0 - .6.. raw4
+  rom_flags_type(0x0036E888, 0x0036E890 , flags_type_data); //  0x3C7EFFFF - <~.. rawImg800
+  rom_flags_type(0x0036E890, 0x0036E89C , flags_type_data); //  0x00000001 - .... raw800
+  rom_flags_type(0x0036E89C, 0x0036E8AC , flags_type_data); //  0x7800FC00 - x... rawImg801
+  rom_flags_type(0x0036E8AC, 0x0036E8B8 , flags_type_data); //  0x00000002 - .... raw801
+  rom_flags_type(0x0036E8B8, 0x0036E8C8 , flags_type_data); //  0xF000F801 - .... rawImg802
+  rom_flags_type(0x0036E8C8, 0x0036E8D4 , flags_type_data); //  0x00000002 - .... raw802
+  rom_flags_type(0x0036E8D4, 0x0036E8E4 , flags_type_data); //  0xE001F003 - .... rawImg803
+  rom_flags_type(0x0036E8E4, 0x0036E8F0 , flags_type_data); //  0x00000002 - .... raw803
+  rom_flags_type(0x0036E8F0, 0x0036E900 , flags_type_data); //  0xC003E007 - .... rawImg804
+  rom_flags_type(0x0036E900, 0x0036E90C , flags_type_data); //  0x00000002 - .... raw804
+  rom_flags_type(0x0036E90C, 0x0036E91C , flags_type_data); //  0x8007C00F - .... rawImg805
+  rom_flags_type(0x0036E91C, 0x0036E928 , flags_type_data); //  0x00000002 - .... raw805
+  rom_flags_type(0x0036E928, 0x0036E938 , flags_type_data); //  0x000F801F - .... rawImg806
+  rom_flags_type(0x0036E938, 0x0036E944 , flags_type_data); //  0x00000002 - .... raw806
+  rom_flags_type(0x0036E944, 0x0036E954 , flags_type_data); //  0x001E003F - ...? rawImg807
+  rom_flags_type(0x0036E954, 0x0036E960 , flags_type_data); //  0x00000002 - .... raw807
+  rom_flags_type(0x0036E960, 0x0036E980 , flags_type_data); //  0x0036E890 - .6.. raw8
+  rom_flags_type(0x0036E980, 0x0036E9A0 , flags_type_data); //  0xE007F81F - .... rawImg1600
+  rom_flags_type(0x0036E9A0, 0x0036E9AC , flags_type_data); //  0x00000002 - .... raw1600
+  rom_flags_type(0x0036E9AC, 0x0036E9DC , flags_type_data); //  0xC00F00F0 - .... rawImg1601
+  rom_flags_type(0x0036E9DC, 0x0036E9E8 , flags_type_data); //  0x00000003 - .... raw1601
+  rom_flags_type(0x0036E9E8, 0x0036EA18 , flags_type_data); //  0x801F00E0 - .... rawImg1602
+  rom_flags_type(0x0036EA18, 0x0036EA24 , flags_type_data); //  0x00000003 - .... raw1602
+  rom_flags_type(0x0036EA24, 0x0036EA54 , flags_type_data); //  0x003F00C0 - .?.. rawImg1603
+  rom_flags_type(0x0036EA54, 0x0036EA60 , flags_type_data); //  0x00000003 - .... raw1603
+  rom_flags_type(0x0036EA60, 0x0036EA90 , flags_type_data); //  0x007E0080 - .~.. rawImg1604
+  rom_flags_type(0x0036EA90, 0x0036EA9C , flags_type_data); //  0x00000003 - .... raw1604
+  rom_flags_type(0x0036EA9C, 0x0036EACC , flags_type_data); //  0x00FC0000 - .... rawImg1605
+  rom_flags_type(0x0036EACC, 0x0036EAD8 , flags_type_data); //  0x00000003 - .... raw1605
+  rom_flags_type(0x0036EAD8, 0x0036EB08 , flags_type_data); //  0x00F80100 - .... rawImg1606
+  rom_flags_type(0x0036EB08, 0x0036EB14 , flags_type_data); //  0x00000003 - .... raw1606
+  rom_flags_type(0x0036EB14, 0x0036EB44 , flags_type_data); //  0x00F00300 - .... rawImg1607
+  rom_flags_type(0x0036EB44, 0x0036EB50 , flags_type_data); //  0x00000003 - .... raw1607
+  rom_flags_type(0x0036EB50, 0x0036EB70 , flags_type_data); //  0x0036E9A0 - .6.. raw16
+  rom_flags_type(0x0036EB70, 0x0036EBF0 , flags_type_data); //  0x00F00F00 - .... rawImg3200
+  rom_flags_type(0x0036EBF0, 0x0036EBFC , flags_type_data); //  0x00000004 - .... raw3200
+  rom_flags_type(0x0036EBFC, 0x0036EC9C , flags_type_data); //  0x00E01F00 - .... rawImg3201
+  rom_flags_type(0x0036EC9C, 0x0036ECA8 , flags_type_data); //  0x00000005 - .... raw3201
+  rom_flags_type(0x0036ECA8, 0x0036ED48 , flags_type_data); //  0x00C03F00 - ..?. rawImg3202
+  rom_flags_type(0x0036ED48, 0x0036ED54 , flags_type_data); //  0x00000005 - .... raw3202
+  rom_flags_type(0x0036ED54, 0x0036EDF4 , flags_type_data); //  0x00807F00 - ... rawImg3203
+  rom_flags_type(0x0036EDF4, 0x0036EE00 , flags_type_data); //  0x00000005 - .... raw3203
+  rom_flags_type(0x0036EE00, 0x0036EEA0 , flags_type_data); //  0x0000FF00 - .... rawImg3204
+  rom_flags_type(0x0036EEA0, 0x0036EEAC , flags_type_data); //  0x00000005 - .... raw3204
+  rom_flags_type(0x0036EEAC, 0x0036EF4C , flags_type_data); //  0x0000FE01 - .... rawImg3205
+  rom_flags_type(0x0036EF4C, 0x0036EF58 , flags_type_data); //  0x00000005 - .... raw3205
+  rom_flags_type(0x0036EF58, 0x0036EFF8 , flags_type_data); //  0x0000FC03 - .... rawImg3206
+  rom_flags_type(0x0036EFF8, 0x0036F004 , flags_type_data); //  0x00000005 - .... raw3206
+  rom_flags_type(0x0036F004, 0x0036F0A4 , flags_type_data); //  0x0000F807 - .... rawImg3207
+  rom_flags_type(0x0036F0A4, 0x0036F0B0 , flags_type_data); //  0x00000005 - .... raw3207
+  rom_flags_type(0x0036F0B0, 0x0036F0D0 , flags_type_data); //  0x0036EBF0 - .6.. raw32
+  rom_flags_type(0x0036F0D0, 0x0036F174 , flags_type_data); //  0x00000000 - .... xDotStencils
+  rom_flags_type(0x0036F174, 0x0036F974 , flags_type_data); //  0x00000000 - .... CharHeight
+  rom_flags_type(0x0036F974, flags_type_arm_word); //  0x11000000 - .... 
+  rom_flags_type(0x0036F978, flags_type_arm_word); //  0x12000000 - .... 
+  rom_flags_type(0x0036F97C, flags_type_arm_word); //  0x41540000 - AT.. 
+  rom_flags_type(0x0036F980, flags_type_arm_word); //  0x0D000000 - .... 
+  rom_flags_type(0x0036F984, flags_type_arm_word); //  0x2B2B2B00 - +++. 
+  rom_flags_type(0x0036F988, flags_type_arm_word); //  0x53000000 - S... 
+  rom_flags_type(0x0036F98C, flags_type_arm_word); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036F990, flags_type_arm_word); //  0x3D000000 - =... 
+  rom_flags_type(0x0036F994, 0x0036F99C , flags_type_data); //  0x26464530 - &FE0 cmdRecallFactorySettings
+  rom_flags_type(0x0036F99C, flags_type_arm_word); //  0x49300000 - I0.. 
+  rom_flags_type(0x0036F9A0, flags_type_arm_word); //  0x49330000 - I3.. 
+  rom_flags_type(0x0036F9A4, flags_type_arm_word); //  0x49340000 - I4.. 
+  rom_flags_type(0x0036F9A8, flags_type_arm_word); //  0x49350000 - I5.. 
+  rom_flags_type(0x0036F9AC, flags_type_arm_word); //  0x4D310000 - M1.. 
+  rom_flags_type(0x0036F9B0, flags_type_arm_word); //  0x4D300000 - M0.. 
+  rom_flags_type(0x0036F9B4, flags_type_arm_word); //  0x4C000000 - L... 
+  rom_flags_type(0x0036F9B8, flags_type_arm_word); //  0x45000000 - E... 
+  rom_flags_type(0x0036F9BC, 0x0036F9C8 , flags_type_data); //  0x254A2650 - %J&P cmdSecondaryDefaults
+  rom_flags_type(0x0036F9C8, flags_type_arm_word); //  0x44540000 - DT.. 
+  rom_flags_type(0x0036F9CC, flags_type_arm_word); //  0x44500000 - DP.. 
+  rom_flags_type(0x0036F9D0, flags_type_arm_word); //  0x48300000 - H0.. 
+  rom_flags_type(0x0036F9D4, flags_type_arm_word); //  0x41000000 - A... 
+  rom_flags_type(0x0036F9D8, flags_type_arm_word); //  0x4F300000 - O0.. 
+  rom_flags_type(0x0036F9DC, 0x0036F9E4 , flags_type_data); //  0x58314831 - X1H1 cmdTAPIOffHook
+  rom_flags_type(0x0036F9E4, flags_type_arm_word); //  0x48305800 - H0X. 
+  rom_flags_type(0x0036F9E8, flags_type_arm_word); //  0x58310000 - X1.. 
+  rom_flags_type(0x0036F9EC, flags_type_arm_word); //  0x54000000 - T... 
+  rom_flags_type(0x0036F9F0, flags_type_arm_word); //  0x50000000 - P... 
+  rom_flags_type(0x0036F9F4, flags_type_arm_word); //  0x52000000 - R... 
+  rom_flags_type(0x0036F9F8, flags_type_arm_word); //  0x57000000 - W... 
+  rom_flags_type(0x0036F9FC, flags_type_arm_word); //  0x3B000000 - ;... 
+  rom_flags_type(0x0036FA00, flags_type_arm_word); //  0x40000000 - @... 
+  rom_flags_type(0x0036FA04, flags_type_arm_word); //  0x2C000000 - ,... 
+  rom_flags_type(0x0036FA08, 0x0036FA14 , flags_type_data); //  0x2B46434C - +FCL cmdFClass
+  rom_flags_type(0x0036FA14, 0x0036FA20 , flags_type_data); //  0x2B46434C - +FCL cmdGetFClass
+  rom_flags_type(0x0036FA20, 0x0036FA28 , flags_type_data); //  0x2B465453 - +FTS cmdC1FTS
+  rom_flags_type(0x0036FA28, 0x0036FA30 , flags_type_data); //  0x2B465253 - +FRS cmdC1FRS
+  rom_flags_type(0x0036FA30, 0x0036FA38 , flags_type_data); //  0x2B46544D - +FTM cmdC1FTM
+  rom_flags_type(0x0036FA38, 0x0036FA40 , flags_type_data); //  0x2B46524D - +FRM cmdC1FRM
+  rom_flags_type(0x0036FA40, 0x0036FA48 , flags_type_data); //  0x2B465448 - +FTH cmdC1FTH
+  rom_flags_type(0x0036FA48, 0x0036FA50 , flags_type_data); //  0x2B465248 - +FRH cmdC1FRH
+  rom_flags_type(0x0036FA50, flags_type_arm_word); //  0x33000000 - 3... 
+  rom_flags_type(0x0036FA54, flags_type_arm_word); //  0x32340000 - 24.. 
+  rom_flags_type(0x0036FA58, flags_type_arm_word); //  0x34380000 - 48.. 
+  rom_flags_type(0x0036FA5C, flags_type_arm_word); //  0x37320000 - 72.. 
+  rom_flags_type(0x0036FA60, flags_type_arm_word); //  0x37330000 - 73.. 
+  rom_flags_type(0x0036FA64, flags_type_arm_word); //  0x37340000 - 74.. 
+  rom_flags_type(0x0036FA68, flags_type_arm_word); //  0x39360000 - 96.. 
+  rom_flags_type(0x0036FA6C, flags_type_arm_word); //  0x39370000 - 97.. 
+  rom_flags_type(0x0036FA70, flags_type_arm_word); //  0x39380000 - 98.. 
+  rom_flags_type(0x0036FA74, flags_type_arm_word); //  0x31323100 - 121. 
+  rom_flags_type(0x0036FA78, flags_type_arm_text); //  0x31323200 - 122. 
+  rom_flags_type(0x0036FA7C, flags_type_arm_text); //  0x31343500 - 145. 
+  rom_flags_type(0x0036FA80, flags_type_arm_text); //  0x31343600 - 146. 
+  rom_flags_type(0x0036FA84, flags_type_arm_text); //  0x2B464D46 - +FMF 
+  rom_flags_type(0x0036FA88, flags_type_arm_text); //  0x523F0000 - R?.. 
+  rom_flags_type(0x0036FA8C, flags_type_arm_text); //  0x2B464D44 - +FMD 
+  rom_flags_type(0x0036FA90, flags_type_arm_text); //  0x4C3F0000 - L?.. 
+  rom_flags_type(0x0036FA94, flags_type_arm_text); //  0x2B465245 - +FRE 
+  rom_flags_type(0x0036FA98, flags_type_arm_text); //  0x563F0000 - V?.. 
+  rom_flags_type(0x0036FA9C, flags_type_arm_text); //  0x2B464443 - +FDC 
+  rom_flags_type(0x0036FAA0, flags_type_arm_text); //  0x433D3F00 - C=?. 
+  rom_flags_type(0x0036FAA4, flags_type_arm_text); //  0x2B464352 - +FCR 
+  rom_flags_type(0x0036FAA8, flags_type_arm_text); //  0x3D3F0000 - =?.. 
+  rom_flags_type(0x0036FAAC, flags_type_arm_text); //  0x2B464C50 - +FLP 
+  rom_flags_type(0x0036FAB0, flags_type_arm_text); //  0x4C3D3F00 - L=?. 
+  rom_flags_type(0x0036FAB4, flags_type_arm_text); //  0x2B464543 - +FEC 
+  rom_flags_type(0x0036FAB8, flags_type_arm_text); //  0x4D3D3F00 - M=?. 
+  rom_flags_type(0x0036FABC, flags_type_arm_text); //  0x2B464351 - +FCQ 
+  rom_flags_type(0x0036FAC0, flags_type_arm_text); //  0x3D3F0000 - =?.. 
+  rom_flags_type(0x0036FAC4, flags_type_arm_text); //  0x2B465652 - +FVR 
+  rom_flags_type(0x0036FAC8, flags_type_arm_text); //  0x46433D3F - FC=? 
+  rom_flags_type(0x0036FACC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FAD0, flags_type_arm_text); //  0x2B464446 - +FDF 
+  rom_flags_type(0x0036FAD4, flags_type_arm_text); //  0x46433D3F - FC=? 
+  rom_flags_type(0x0036FAD8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FADC, flags_type_arm_text); //  0x2B464C4E - +FLN 
+  rom_flags_type(0x0036FAE0, flags_type_arm_text); //  0x46433D3F - FC=? 
+  rom_flags_type(0x0036FAE4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FAE8, flags_type_arm_text); //  0x2B465744 - +FWD 
+  rom_flags_type(0x0036FAEC, flags_type_arm_text); //  0x46433D3F - FC=? 
+  rom_flags_type(0x0036FAF0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FAF4, flags_type_arm_text); //  0x2B465245 - +FRE 
+  rom_flags_type(0x0036FAF8, flags_type_arm_text); //  0x4C3D3F00 - L=?. 
+  rom_flags_type(0x0036FAFC, flags_type_arm_text); //  0x2B46424F - +FBO 
+  rom_flags_type(0x0036FB00, flags_type_arm_text); //  0x523D0000 - R=.. 
+  rom_flags_type(0x0036FB04, flags_type_arm_text); //  0x2B464349 - +FCI 
+  rom_flags_type(0x0036FB08, flags_type_arm_text); //  0x473D2225 - G="% 
+  rom_flags_type(0x0036FB0C, flags_type_arm_text); //  0x73220000 - s".. 
+  rom_flags_type(0x0036FB10, flags_type_arm_text); //  0x2B464443 - +FDC 
+  rom_flags_type(0x0036FB14, flags_type_arm_text); //  0x433D2563 - C=%c 
+  rom_flags_type(0x0036FB18, flags_type_arm_text); //  0x2C25632C - ,%c, 
+  rom_flags_type(0x0036FB1C, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FB20, flags_type_arm_text); //  0x632C2563 - c,%c 
+  rom_flags_type(0x0036FB24, flags_type_arm_text); //  0x2C25632C - ,%c, 
+  rom_flags_type(0x0036FB28, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FB2C, flags_type_arm_text); //  0x63000000 - c... 
+  rom_flags_type(0x0036FB30, flags_type_arm_text); //  0x2B464449 - +FDI 
+  rom_flags_type(0x0036FB34, flags_type_arm_text); //  0x533D2563 - S=%c 
+  rom_flags_type(0x0036FB38, flags_type_arm_text); //  0x2C25632C - ,%c, 
+  rom_flags_type(0x0036FB3C, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FB40, flags_type_arm_text); //  0x632C2563 - c,%c 
+  rom_flags_type(0x0036FB44, flags_type_arm_text); //  0x2C25632C - ,%c, 
+  rom_flags_type(0x0036FB48, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FB4C, flags_type_arm_text); //  0x63000000 - c... 
+  rom_flags_type(0x0036FB50, flags_type_arm_text); //  0x2B464543 - +FEC 
+  rom_flags_type(0x0036FB54, flags_type_arm_text); //  0x4D3D0000 - M=.. 
+  rom_flags_type(0x0036FB58, flags_type_arm_text); //  0x2B464B00 - +FK. 
+  rom_flags_type(0x0036FB5C, flags_type_arm_text); //  0x2B464C49 - +FLI 
+  rom_flags_type(0x0036FB60, flags_type_arm_text); //  0x443D2225 - D="% 
+  rom_flags_type(0x0036FB64, flags_type_arm_text); //  0x73220000 - s".. 
+  rom_flags_type(0x0036FB68, flags_type_arm_text); //  0x2B464C4E - +FLN 
+  rom_flags_type(0x0036FB6C, flags_type_arm_text); //  0x46433D00 - FC=. 
+  rom_flags_type(0x0036FB70, flags_type_arm_text); //  0x2B464C50 - +FLP 
+  rom_flags_type(0x0036FB74, flags_type_arm_text); //  0x4C3D0000 - L=.. 
+  rom_flags_type(0x0036FB78, flags_type_arm_text); //  0x2B464D49 - +FMI 
+  rom_flags_type(0x0036FB7C, flags_type_arm_text); //  0x4E53503D - NSP= 
+  rom_flags_type(0x0036FB80, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FB84, flags_type_arm_text); //  0x2B465054 - +FPT 
+  rom_flags_type(0x0036FB88, flags_type_arm_text); //  0x533D0000 - S=.. 
+  rom_flags_type(0x0036FB8C, flags_type_arm_text); //  0x2B465245 - +FRE 
+  rom_flags_type(0x0036FB90, flags_type_arm_text); //  0x4C3D0000 - L=.. 
+  rom_flags_type(0x0036FB94, flags_type_arm_text); //  0x2B465350 - +FSP 
+  rom_flags_type(0x0036FB98, flags_type_arm_text); //  0x4C3D0000 - L=.. 
+  rom_flags_type(0x0036FB9C, flags_type_arm_text); //  0x2B465652 - +FVR 
+  rom_flags_type(0x0036FBA0, flags_type_arm_text); //  0x46433D00 - FC=. 
+  rom_flags_type(0x0036FBA4, flags_type_arm_text); //  0x2B465744 - +FWD 
+  rom_flags_type(0x0036FBA8, flags_type_arm_text); //  0x46433D00 - FC=. 
+  rom_flags_type(0x0036FBAC, flags_type_arm_text); //  0x2B464446 - +FDF 
+  rom_flags_type(0x0036FBB0, flags_type_arm_text); //  0x46433D00 - FC=. 
+  rom_flags_type(0x0036FBB4, flags_type_arm_text); //  0x2B464141 - +FAA 
+  rom_flags_type(0x0036FBB8, flags_type_arm_text); //  0x3D300000 - =0.. 
+  rom_flags_type(0x0036FBBC, flags_type_arm_text); //  0x2B464351 - +FCQ 
+  rom_flags_type(0x0036FBC0, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FBC4, flags_type_arm_text); //  0x2B464352 - +FCR 
+  rom_flags_type(0x0036FBC8, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FBCC, flags_type_arm_text); //  0x2B464452 - +FDR 
+  rom_flags_type(0x0036FBD0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FBD4, flags_type_arm_text); //  0x2B464454 - +FDT 
+  rom_flags_type(0x0036FBD8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FBDC, flags_type_arm_text); //  0x2B464554 - +FET 
+  rom_flags_type(0x0036FBE0, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FBE4, flags_type_arm_text); //  0x2B464454 - +FDT 
+  rom_flags_type(0x0036FBE8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FBEC, flags_type_arm_text); //  0x2B464452 - +FDR 
+  rom_flags_type(0x0036FBF0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FBF4, flags_type_arm_text); //  0x2B464B53 - +FKS 
+  rom_flags_type(0x0036FBF8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FBFC, flags_type_arm_text); //  0x2B464950 - +FIP 
+  rom_flags_type(0x0036FC00, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FC04, flags_type_arm_text); //  0x2B464D49 - +FMI 
+  rom_flags_type(0x0036FC08, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FC0C, flags_type_arm_text); //  0x2B464D4D - +FMM 
+  rom_flags_type(0x0036FC10, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FC14, flags_type_arm_text); //  0x2B464D52 - +FMR 
+  rom_flags_type(0x0036FC18, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FC1C, flags_type_arm_text); //  0x2B464343 - +FCC 
+  rom_flags_type(0x0036FC20, flags_type_arm_text); //  0x3D25632C - =%c, 
+  rom_flags_type(0x0036FC24, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FC28, flags_type_arm_text); //  0x632C2563 - c,%c 
+  rom_flags_type(0x0036FC2C, flags_type_arm_text); //  0x2C25632C - ,%c, 
+  rom_flags_type(0x0036FC30, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FC34, flags_type_arm_text); //  0x632C2563 - c,%c 
+  rom_flags_type(0x0036FC38, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FC3C, flags_type_arm_text); //  0x2B464343 - +FCC 
+  rom_flags_type(0x0036FC40, flags_type_arm_text); //  0x3D3F0000 - =?.. 
+  rom_flags_type(0x0036FC44, flags_type_arm_text); //  0x2B464953 - +FIS 
+  rom_flags_type(0x0036FC48, flags_type_arm_text); //  0x3D25632C - =%c, 
+  rom_flags_type(0x0036FC4C, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FC50, flags_type_arm_text); //  0x632C2563 - c,%c 
+  rom_flags_type(0x0036FC54, flags_type_arm_text); //  0x2C25632C - ,%c, 
+  rom_flags_type(0x0036FC58, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FC5C, flags_type_arm_text); //  0x632C2563 - c,%c 
+  rom_flags_type(0x0036FC60, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FC64, flags_type_arm_text); //  0x2B464353 - +FCS 
+  rom_flags_type(0x0036FC68, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FC6C, flags_type_arm_text); //  0x2B464C49 - +FLI 
+  rom_flags_type(0x0036FC70, flags_type_arm_text); //  0x3D222573 - ="%s 
+  rom_flags_type(0x0036FC74, flags_type_arm_text); //  0x22000000 - "... 
+  rom_flags_type(0x0036FC78, flags_type_arm_text); //  0x2B465049 - +FPI 
+  rom_flags_type(0x0036FC7C, flags_type_arm_text); //  0x3D222573 - ="%s 
+  rom_flags_type(0x0036FC80, flags_type_arm_text); //  0x22000000 - "... 
+  rom_flags_type(0x0036FC84, flags_type_arm_text); //  0x2B464C50 - +FLP 
+  rom_flags_type(0x0036FC88, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FC8C, flags_type_arm_text); //  0x2B464C50 - +FLP 
+  rom_flags_type(0x0036FC90, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FC94, flags_type_arm_text); //  0x2B465350 - +FSP 
+  rom_flags_type(0x0036FC98, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FC9C, flags_type_arm_text); //  0x2B465350 - +FSP 
+  rom_flags_type(0x0036FCA0, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FCA4, flags_type_arm_text); //  0x2B464E52 - +FNR 
+  rom_flags_type(0x0036FCA8, flags_type_arm_text); //  0x3D25632C - =%c, 
+  rom_flags_type(0x0036FCAC, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FCB0, flags_type_arm_text); //  0x632C2563 - c,%c 
+  rom_flags_type(0x0036FCB4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FCB8, flags_type_arm_text); //  0x2B464945 - +FIE 
+  rom_flags_type(0x0036FCBC, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FCC0, flags_type_arm_text); //  0x2B465053 - +FPS 
+  rom_flags_type(0x0036FCC4, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FCC8, flags_type_arm_text); //  0x2B464351 - +FCQ 
+  rom_flags_type(0x0036FCCC, flags_type_arm_text); //  0x3D256300 - =%c. 
+  rom_flags_type(0x0036FCD0, flags_type_arm_text); //  0x2B464351 - +FCQ 
+  rom_flags_type(0x0036FCD4, flags_type_arm_text); //  0x3D25632C - =%c, 
+  rom_flags_type(0x0036FCD8, flags_type_arm_text); //  0x25630000 - %c.. 
+  rom_flags_type(0x0036FCDC, flags_type_arm_text); //  0x2B464351 - +FCQ 
+  rom_flags_type(0x0036FCE0, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FCE4, flags_type_arm_text); //  0x2B464C4F - +FLO 
+  rom_flags_type(0x0036FCE8, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FCEC, flags_type_arm_text); //  0x2B465052 - +FPR 
+  rom_flags_type(0x0036FCF0, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FCF4, flags_type_arm_text); //  0x2B465050 - +FPP 
+  rom_flags_type(0x0036FCF8, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FCFC, flags_type_arm_text); //  0x2B46424F - +FBO 
+  rom_flags_type(0x0036FD00, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FD04, flags_type_arm_text); //  0x2B464541 - +FEA 
+  rom_flags_type(0x0036FD08, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FD0C, flags_type_arm_text); //  0x2B464E53 - +FNS 
+  rom_flags_type(0x0036FD10, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FD14, flags_type_arm_text); //  0x2B464352 - +FCR 
+  rom_flags_type(0x0036FD18, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FD1C, flags_type_arm_text); //  0x2B464352 - +FCR 
+  rom_flags_type(0x0036FD20, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FD24, flags_type_arm_text); //  0x2B464255 - +FBU 
+  rom_flags_type(0x0036FD28, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FD2C, flags_type_arm_text); //  0x2B465251 - +FRQ 
+  rom_flags_type(0x0036FD30, flags_type_arm_text); //  0x3D25632C - =%c, 
+  rom_flags_type(0x0036FD34, flags_type_arm_text); //  0x25630000 - %c.. 
+  rom_flags_type(0x0036FD38, flags_type_arm_text); //  0x2B464141 - +FAA 
+  rom_flags_type(0x0036FD3C, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FD40, flags_type_arm_text); //  0x2B464354 - +FCT 
+  rom_flags_type(0x0036FD44, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FD48, flags_type_arm_text); //  0x2B464853 - +FHS 
+  rom_flags_type(0x0036FD4C, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FD50, flags_type_arm_text); //  0x2B465259 - +FRY 
+  rom_flags_type(0x0036FD54, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FD58, flags_type_arm_text); //  0x2B464D53 - +FMS 
+  rom_flags_type(0x0036FD5C, flags_type_arm_text); //  0x3D000000 - =... 
+  rom_flags_type(0x0036FD60, flags_type_arm_text); //  0x2B464643 - +FFC 
+  rom_flags_type(0x0036FD64, flags_type_arm_text); //  0x3D25632C - =%c, 
+  rom_flags_type(0x0036FD68, flags_type_arm_text); //  0x25632C25 - %c,% 
+  rom_flags_type(0x0036FD6C, flags_type_arm_text); //  0x632C2563 - c,%c 
+  rom_flags_type(0x0036FD70, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FD74, flags_type_arm_text); //  0x2B464253 - +FBS 
+  rom_flags_type(0x0036FD78, flags_type_arm_text); //  0x3F000000 - ?... 
+  rom_flags_type(0x0036FD7C, flags_type_arm_text); //  0x4F4B0000 - OK.. 
+  rom_flags_type(0x0036FD80, flags_type_arm_text); //  0x434F4E4E - CONN 
+  rom_flags_type(0x0036FD84, flags_type_arm_text); //  0x45435400 - ECT. 
+  rom_flags_type(0x0036FD88, flags_type_arm_text); //  0x52494E47 - RING 
+  rom_flags_type(0x0036FD8C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FD90, flags_type_arm_text); //  0x4E4F2043 - NO.C 
+  rom_flags_type(0x0036FD94, flags_type_arm_text); //  0x41525249 - ARRI 
+  rom_flags_type(0x0036FD98, flags_type_arm_text); //  0x45520000 - ER.. 
+  rom_flags_type(0x0036FD9C, flags_type_arm_text); //  0x4552524F - ERRO 
+  rom_flags_type(0x0036FDA0, flags_type_arm_text); //  0x52000000 - R... 
+  rom_flags_type(0x0036FDA4, flags_type_arm_text); //  0x4E4F2044 - NO.D 
+  rom_flags_type(0x0036FDA8, flags_type_arm_text); //  0x49414C54 - IALT 
+  rom_flags_type(0x0036FDAC, flags_type_arm_text); //  0x4F4E4500 - ONE. 
+  rom_flags_type(0x0036FDB0, flags_type_arm_text); //  0x42555359 - BUSY 
+  rom_flags_type(0x0036FDB4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FDB8, flags_type_arm_text); //  0x4E4F2041 - NO.A 
+  rom_flags_type(0x0036FDBC, flags_type_arm_text); //  0x4E535745 - NSWE 
+  rom_flags_type(0x0036FDC0, flags_type_arm_text); //  0x52000000 - R... 
+  rom_flags_type(0x0036FDC4, flags_type_arm_text); //  0x2B464345 - +FCE 
+  rom_flags_type(0x0036FDC8, flags_type_arm_text); //  0x52524F52 - RROR 
+  rom_flags_type(0x0036FDCC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FDD0, flags_type_arm_text); //  0x44415441 - DATA 
+  rom_flags_type(0x0036FDD4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FDD8, flags_type_arm_text); //  0x46415800 - FAX. 
+  rom_flags_type(0x0036FDDC, flags_type_arm_text); //  0x434F4E4E - CONN 
+  rom_flags_type(0x0036FDE0, flags_type_arm_text); //  0x45435420 - ECT. 
+  rom_flags_type(0x0036FDE4, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FDE8, flags_type_arm_text); //  0x4C435300 - LCS. 
+  rom_flags_type(0x0036FDEC, flags_type_arm_text); //  0x2B464349 - +FCI 
+  rom_flags_type(0x0036FDF0, flags_type_arm_text); //  0x473A0000 - G:.. 
+  rom_flags_type(0x0036FDF4, flags_type_arm_text); //  0x2B464346 - +FCF 
+  rom_flags_type(0x0036FDF8, flags_type_arm_text); //  0x52000000 - R... 
+  rom_flags_type(0x0036FDFC, flags_type_arm_text); //  0x2B46434F - +FCO 
+  rom_flags_type(0x0036FE00, flags_type_arm_text); //  0x4E000000 - N... 
+  rom_flags_type(0x0036FE04, flags_type_arm_text); //  0x2B464353 - +FCS 
+  rom_flags_type(0x0036FE08, flags_type_arm_text); //  0x493A0000 - I:.. 
+  rom_flags_type(0x0036FE0C, flags_type_arm_text); //  0x2B464443 - +FDC 
+  rom_flags_type(0x0036FE10, flags_type_arm_text); //  0x533A0000 - S:.. 
+  rom_flags_type(0x0036FE14, flags_type_arm_text); //  0x2B464449 - +FDI 
+  rom_flags_type(0x0036FE18, flags_type_arm_text); //  0x533A0000 - S:.. 
+  rom_flags_type(0x0036FE1C, flags_type_arm_text); //  0x2B464454 - +FDT 
+  rom_flags_type(0x0036FE20, flags_type_arm_text); //  0x433A0000 - C:.. 
+  rom_flags_type(0x0036FE24, flags_type_arm_text); //  0x2B464554 - +FET 
+  rom_flags_type(0x0036FE28, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FE2C, flags_type_arm_text); //  0x2B46484E - +FHN 
+  rom_flags_type(0x0036FE30, flags_type_arm_text); //  0x473A0000 - G:.. 
+  rom_flags_type(0x0036FE34, flags_type_arm_text); //  0x2B464852 - +FHR 
+  rom_flags_type(0x0036FE38, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FE3C, flags_type_arm_text); //  0x2B464854 - +FHT 
+  rom_flags_type(0x0036FE40, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FE44, flags_type_arm_text); //  0x2B464E53 - +FNS 
+  rom_flags_type(0x0036FE48, flags_type_arm_text); //  0x433A0000 - C:.. 
+  rom_flags_type(0x0036FE4C, flags_type_arm_text); //  0x2B464E53 - +FNS 
+  rom_flags_type(0x0036FE50, flags_type_arm_text); //  0x463A0000 - F:.. 
+  rom_flags_type(0x0036FE54, flags_type_arm_text); //  0x2B464E53 - +FNS 
+  rom_flags_type(0x0036FE58, flags_type_arm_text); //  0x533A0000 - S:.. 
+  rom_flags_type(0x0036FE5C, flags_type_arm_text); //  0x2B46504F - +FPO 
+  rom_flags_type(0x0036FE60, flags_type_arm_text); //  0x4C4C0000 - LL.. 
+  rom_flags_type(0x0036FE64, flags_type_arm_text); //  0x2B465050 - +FPP 
+  rom_flags_type(0x0036FE68, flags_type_arm_text); //  0x523A0000 - R:.. 
+  rom_flags_type(0x0036FE6C, flags_type_arm_text); //  0x2B465054 - +FPT 
+  rom_flags_type(0x0036FE70, flags_type_arm_text); //  0x533A0000 - S:.. 
+  rom_flags_type(0x0036FE74, flags_type_arm_text); //  0x2B465242 - +FRB 
+  rom_flags_type(0x0036FE78, flags_type_arm_text); //  0x433A0000 - C:.. 
+  rom_flags_type(0x0036FE7C, flags_type_arm_text); //  0x2B465453 - +FTS 
+  rom_flags_type(0x0036FE80, flags_type_arm_text); //  0x493A0000 - I:.. 
+  rom_flags_type(0x0036FE84, flags_type_arm_text); //  0x2B46564F - +FVO 
+  rom_flags_type(0x0036FE88, flags_type_arm_text); //  0x49434500 - ICE. 
+  rom_flags_type(0x0036FE8C, flags_type_arm_text); //  0x2B46434F - +FCO 
+  rom_flags_type(0x0036FE90, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FE94, flags_type_arm_text); //  0x2B46564F - +FVO 
+  rom_flags_type(0x0036FE98, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FE9C, flags_type_arm_text); //  0x2B46444D - +FDM 
+  rom_flags_type(0x0036FEA0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FEA4, flags_type_arm_text); //  0x2B464853 - +FHS 
+  rom_flags_type(0x0036FEA8, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FEAC, flags_type_arm_text); //  0x2B464353 - +FCS 
+  rom_flags_type(0x0036FEB0, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FEB4, flags_type_arm_text); //  0x2B464953 - +FIS 
+  rom_flags_type(0x0036FEB8, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FEBC, flags_type_arm_text); //  0x2B465443 - +FTC 
+  rom_flags_type(0x0036FEC0, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FEC4, flags_type_arm_text); //  0x2B46504F - +FPO 
+  rom_flags_type(0x0036FEC8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FECC, flags_type_arm_text); //  0x2B465449 - +FTI 
+  rom_flags_type(0x0036FED0, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FED4, flags_type_arm_text); //  0x2B464349 - +FCI 
+  rom_flags_type(0x0036FED8, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FEDC, flags_type_arm_text); //  0x2B465049 - +FPI 
+  rom_flags_type(0x0036FEE0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FEE4, flags_type_arm_text); //  0x2B464E46 - +FNF 
+  rom_flags_type(0x0036FEE8, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FEEC, flags_type_arm_text); //  0x2B464E53 - +FNS 
+  rom_flags_type(0x0036FEF0, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FEF4, flags_type_arm_text); //  0x2B464E43 - +FNC 
+  rom_flags_type(0x0036FEF8, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FEFC, flags_type_arm_text); //  0x2B464554 - +FET 
+  rom_flags_type(0x0036FF00, flags_type_arm_text); //  0x3A000000 - :... 
+  rom_flags_type(0x0036FF04, flags_type_arm_text); //  0x2B465053 - +FPS 
+  rom_flags_type(0x0036FF08, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FF0C, flags_type_arm_text); //  0x2B464854 - +FHT 
+  rom_flags_type(0x0036FF10, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FF14, flags_type_arm_text); //  0x2B464852 - +FHR 
+  rom_flags_type(0x0036FF18, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FF1C, flags_type_arm_text); //  0x32343200 - 242. 
+  rom_flags_type(0x0036FF20, flags_type_arm_text); //  0x43323530 - C250 
+  rom_flags_type(0x0036FF24, flags_type_arm_text); //  0x312D4830 - 1-H0 
+  rom_flags_type(0x0036FF28, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0036FF2C, flags_type_arm_text); //  0x52433936 - RC96 
+  rom_flags_type(0x0036FF30, flags_type_arm_text); //  0x56323441 - V24A 
+  rom_flags_type(0x0036FF34, flags_type_arm_text); //  0x432D4320 - C-C. 
+  rom_flags_type(0x0036FF38, flags_type_arm_text); //  0x21212100 - !!!. 
+  rom_flags_type(0x0036FF3C, flags_type_arm_text); //  0x52433936 - RC96 
+  rom_flags_type(0x0036FF40, flags_type_arm_text); //  0x56323441 - V24A 
+  rom_flags_type(0x0036FF44, flags_type_arm_text); //  0x43202121 - C.!! 
+  rom_flags_type(0x0036FF48, flags_type_arm_text); //  0x21210000 - !!.. 
+  rom_flags_type(0x0036FF4C, flags_type_arm_text); //  0x52433936 - RC96 
+  rom_flags_type(0x0036FF50, flags_type_arm_text); //  0x56323441 - V24A 
+  rom_flags_type(0x0036FF54, flags_type_arm_text); //  0x432D5720 - C-W. 
+  rom_flags_type(0x0036FF58, flags_type_arm_text); //  0x21212100 - !!!. 
+  rom_flags_type(0x0036FF5C, flags_type_arm_text); //  0x52433936 - RC96 
+  rom_flags_type(0x0036FF60, flags_type_arm_text); //  0x56323441 - V24A 
+  rom_flags_type(0x0036FF64, flags_type_arm_text); //  0x43532021 - CS.! 
+  rom_flags_type(0x0036FF68, flags_type_arm_text); //  0x21210000 - !!.. 
+  rom_flags_type(0x0036FF6C, flags_type_arm_text); //  0x52433936 - RC96 
+  rom_flags_type(0x0036FF70, flags_type_arm_text); //  0x32344143 - 24AC 
+  rom_flags_type(0x0036FF74, flags_type_arm_text); //  0x2D573221 - -W2! 
+  rom_flags_type(0x0036FF78, flags_type_arm_text); //  0x21212100 - !!!. 
+  rom_flags_type(0x0036FF7C, flags_type_arm_text); //  0x52433332 - RC32 
+  rom_flags_type(0x0036FF80, flags_type_arm_text); //  0x41434C00 - ACL. 
+  rom_flags_type(0x0036FF84, flags_type_arm_text); //  0x4D696372 - Micr 
+  rom_flags_type(0x0036FF88, flags_type_arm_text); //  0x6F4C696E - oLin 
+  rom_flags_type(0x0036FF8C, flags_type_arm_text); //  0x6B203234 - k.24 
+  rom_flags_type(0x0036FF90, flags_type_arm_text); //  0x36300000 - 60.. 
+  rom_flags_type(0x0036FF94, flags_type_arm_text); //  0x4E455754 - NEWT 
+  rom_flags_type(0x0036FF98, flags_type_arm_text); //  0x20492048 - .I.H 
+  rom_flags_type(0x0036FF9C, flags_type_arm_text); //  0x53205553 - S.US 
+  rom_flags_type(0x0036FFA0, flags_type_arm_text); //  0x41000000 - A... 
+  rom_flags_type(0x0036FFA4, flags_type_arm_text); //  0x556E6B6E - Unkn 
+  rom_flags_type(0x0036FFA8, flags_type_arm_text); //  0x6F776E00 - own. 
+  rom_flags_type(0x0036FFAC, flags_type_arm_text); //  0x41544631 - ATF1 
+  rom_flags_type(0x0036FFB0, flags_type_arm_text); //  0x300D0000 - 0... 
+  rom_flags_type(0x0036FFB4, flags_type_arm_text); //  0x41544630 - ATF0 
+  rom_flags_type(0x0036FFB8, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x0036FFBC, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x0036FFC0, flags_type_arm_text); //  0x5331323D - S12= 
+  rom_flags_type(0x0036FFC4, flags_type_arm_text); //  0x31320D00 - 12.. 
+  rom_flags_type(0x0036FFC8, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x0036FFCC, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x0036FFD0, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x0036FFD4, flags_type_arm_text); //  0x320D0000 - 2... 
+  rom_flags_type(0x0036FFD8, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x0036FFDC, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x0036FFE0, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x0036FFE4, flags_type_arm_text); //  0x32573226 - 2W2& 
+  rom_flags_type(0x0036FFE8, flags_type_arm_text); //  0x4B342651 - K4&Q 
+  rom_flags_type(0x0036FFEC, flags_type_arm_text); //  0x360D0000 - 6... 
+  rom_flags_type(0x0036FFF0, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x0036FFF4, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x0036FFF8, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x0036FFFC, flags_type_arm_text); //  0x32573226 - 2W2& 
+  rom_flags_type(0x00370000, flags_type_arm_text); //  0x4B332651 - K3&Q 
+  rom_flags_type(0x00370004, flags_type_arm_text); //  0x360D0000 - 6... 
+  rom_flags_type(0x00370008, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x0037000C, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x00370010, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370014, flags_type_arm_text); //  0x32573226 - 2W2& 
+  rom_flags_type(0x00370018, flags_type_arm_text); //  0x4B332651 - K3&Q 
+  rom_flags_type(0x0037001C, flags_type_arm_text); //  0x35533336 - 5S36 
+  rom_flags_type(0x00370020, flags_type_arm_text); //  0x3D340D00 - =4.. 
+  rom_flags_type(0x00370024, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370028, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x0037002C, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370030, flags_type_arm_text); //  0x32573226 - 2W2& 
+  rom_flags_type(0x00370034, flags_type_arm_text); //  0x4B332651 - K3&Q 
+  rom_flags_type(0x00370038, flags_type_arm_text); //  0x350D0000 - 5... 
+  rom_flags_type(0x0037003C, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370040, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x00370044, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370048, flags_type_arm_text); //  0x32573226 - 2W2& 
+  rom_flags_type(0x0037004C, flags_type_arm_text); //  0x4B302651 - K0&Q 
+  rom_flags_type(0x00370050, flags_type_arm_text); //  0x300D0000 - 0... 
+  rom_flags_type(0x00370054, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370058, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x0037005C, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370060, flags_type_arm_text); //  0x32573225 - 2W2% 
+  rom_flags_type(0x00370064, flags_type_arm_text); //  0x4531294D - E1)M 
+  rom_flags_type(0x00370068, flags_type_arm_text); //  0x310D0000 - 1... 
+  rom_flags_type(0x0037006C, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370070, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x00370074, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370078, flags_type_arm_text); //  0x325C5133 - 2\Q3 
+  rom_flags_type(0x0037007C, flags_type_arm_text); //  0x5C4E300D - \N0. 
+  rom_flags_type(0x00370080, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00370084, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370088, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x0037008C, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370090, flags_type_arm_text); //  0x325C5133 - 2\Q3 
+  rom_flags_type(0x00370094, flags_type_arm_text); //  0x5C4E360D - \N6. 
+  rom_flags_type(0x00370098, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0037009C, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x003700A0, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x003700A4, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x003700A8, flags_type_arm_text); //  0x325C5133 - 2\Q3 
+  rom_flags_type(0x003700AC, flags_type_arm_text); //  0x5C4E330D - \N3. 
+  rom_flags_type(0x003700B0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003700B4, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x003700B8, flags_type_arm_text); //  0x26433153 - &C1S 
+  rom_flags_type(0x003700BC, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x003700C0, flags_type_arm_text); //  0x325C5130 - 2\Q0 
+  rom_flags_type(0x003700C4, flags_type_arm_text); //  0x5C4E310D - \N1. 
+  rom_flags_type(0x003700C8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003700CC, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x003700D0, flags_type_arm_text); //  0x5C563026 - \V0& 
+  rom_flags_type(0x003700D4, flags_type_arm_text); //  0x43305331 - C0S1 
+  rom_flags_type(0x003700D8, flags_type_arm_text); //  0x323D3132 - 2=12 
+  rom_flags_type(0x003700DC, flags_type_arm_text); //  0x5C4E300D - \N0. 
+  rom_flags_type(0x003700E0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003700E4, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x003700E8, flags_type_arm_text); //  0x5C563026 - \V0& 
+  rom_flags_type(0x003700EC, flags_type_arm_text); //  0x43305331 - C0S1 
+  rom_flags_type(0x003700F0, flags_type_arm_text); //  0x323D3132 - 2=12 
+  rom_flags_type(0x003700F4, flags_type_arm_text); //  0x5C4E350D - \N5. 
+  rom_flags_type(0x003700F8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003700FC, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370100, flags_type_arm_text); //  0x5C563026 - \V0& 
+  rom_flags_type(0x00370104, flags_type_arm_text); //  0x43305331 - C0S1 
+  rom_flags_type(0x00370108, flags_type_arm_text); //  0x323D3132 - 2=12 
+  rom_flags_type(0x0037010C, flags_type_arm_text); //  0x5C4E360D - \N6. 
+  rom_flags_type(0x00370110, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00370114, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370118, flags_type_arm_text); //  0x5C563026 - \V0& 
+  rom_flags_type(0x0037011C, flags_type_arm_text); //  0x43305331 - C0S1 
+  rom_flags_type(0x00370120, flags_type_arm_text); //  0x323D3132 - 2=12 
+  rom_flags_type(0x00370124, flags_type_arm_text); //  0x5C51305C - \Q0\ 
+  rom_flags_type(0x00370128, flags_type_arm_text); //  0x4E310D00 - N1.. 
+  rom_flags_type(0x0037012C, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370130, flags_type_arm_text); //  0x5C563053 - \V0S 
+  rom_flags_type(0x00370134, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370138, flags_type_arm_text); //  0x325C4E30 - 2\N0 
+  rom_flags_type(0x0037013C, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x00370140, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370144, flags_type_arm_text); //  0x5C563053 - \V0S 
+  rom_flags_type(0x00370148, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x0037014C, flags_type_arm_text); //  0x325C4E35 - 2\N5 
+  rom_flags_type(0x00370150, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x00370154, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x00370158, flags_type_arm_text); //  0x5C563053 - \V0S 
+  rom_flags_type(0x0037015C, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370160, flags_type_arm_text); //  0x325C4E36 - 2\N6 
+  rom_flags_type(0x00370164, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x00370168, flags_type_arm_text); //  0x41544530 - ATE0 
+  rom_flags_type(0x0037016C, flags_type_arm_text); //  0x5C563053 - \V0S 
+  rom_flags_type(0x00370170, flags_type_arm_text); //  0x31323D31 - 12=1 
+  rom_flags_type(0x00370174, flags_type_arm_text); //  0x325C5130 - 2\Q0 
+  rom_flags_type(0x00370178, flags_type_arm_text); //  0x5C4E310D - \N1. 
+  rom_flags_type(0x0037017C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00370180, flags_type_arm_text); //  0x41544D31 - ATM1 
+  rom_flags_type(0x00370184, flags_type_arm_text); //  0x4C325834 - L2X4 
+  rom_flags_type(0x00370188, flags_type_arm_text); //  0x53373D30 - S7=0 
+  rom_flags_type(0x0037018C, flags_type_arm_text); //  0x36305338 - 60S8 
+  rom_flags_type(0x00370190, flags_type_arm_text); //  0x3D303031 - =001 
+  rom_flags_type(0x00370194, flags_type_arm_text); //  0x53363D30 - S6=0 
+  rom_flags_type(0x00370198, flags_type_arm_text); //  0x30335330 - 03S0 
+  rom_flags_type(0x0037019C, flags_type_arm_text); //  0x3D303030 - =000 
+  rom_flags_type(0x003701A0, flags_type_arm_text); //  0x0D000000 - .... 
+  rom_flags_type(0x003701A4, 0x00370408 , flags_type_data); //  0x0036FD7C - .6.| modemRspParseTable
+  rom_flags_type(0x00370408, 0x0037044C , flags_type_data); //  0x18381030 - .8.0 DESIPInvTbl
+  rom_flags_type(0x0037044C, 0x00370488 , flags_type_data); //  0x070F171F - .... DESPC1Tbl
+  rom_flags_type(0x00370488, 0x003704BC , flags_type_data); //  0x322F3528 - 2/5( DESPC2Tbl
+  rom_flags_type(0x003704BC, 0x003704E0 , flags_type_data); //  0x10190C0B - .... DESPTbl
+  rom_flags_type(0x003704E0, 0x00370744 , flags_type_data); //  0x0D01020F - .... DESSBoxes
+  rom_flags_type(0x00370744, 0x003712A0 , flags_type_data); //  0x00000000 - .... quarterSineWaveTable
+  rom_flags_type(0x003712A0, flags_type_arm_word); //  0x000AFD64 - ...d 
+  rom_flags_type(0x003712A4, flags_type_arm_word); //  0x000AFD68 - ...h 
+  rom_flags_type(0x003712A8, flags_type_arm_word); //  0x000AFD70 - ...p 
+  rom_flags_type(0x003712AC, flags_type_arm_word); //  0x000AFD7C - ...| 
+  rom_flags_type(0x003712B0, flags_type_arm_word); //  0x000AFD88 - .... 
+  rom_flags_type(0x003712B4, flags_type_arm_word); //  0x000AFD94 - .... 
+  rom_flags_type(0x003712B8, flags_type_arm_word); //  0x000AFDA0 - .... 
+  rom_flags_type(0x003712BC, flags_type_arm_word); //  0x000AFDB0 - .... 
+  rom_flags_type(0x003712C0, flags_type_arm_word); //  0x000AFDC4 - .... 
+  rom_flags_type(0x003712C4, flags_type_arm_word); //  0x000AFDD8 - .... 
+  rom_flags_type(0x003712C8, flags_type_arm_word); //  0x000AFDE8 - .... 
+  rom_flags_type(0x003712CC, flags_type_arm_word); //  0x000AFDF8 - .... 
+  rom_flags_type(0x003712D0, flags_type_arm_word); //  0x000AFE0C - .... 
+  rom_flags_type(0x003712D4, flags_type_arm_word); //  0x000AFE20 - .... 
+  rom_flags_type(0x003712D8, flags_type_arm_word); //  0x000AFE30 - ...0 
+  rom_flags_type(0x003712DC, flags_type_arm_word); //  0x000AFE44 - ...D 
+  rom_flags_type(0x003712E0, flags_type_arm_word); //  0x000AFE50 - ...P 
+  rom_flags_type(0x003712E4, flags_type_arm_word); //  0x000AFE5C - ...\ 
+  rom_flags_type(0x003712E8, flags_type_arm_word); //  0x000AFE68 - ...h 
+  rom_flags_type(0x003712EC, flags_type_arm_word); //  0x000AFE70 - ...p 
+  rom_flags_type(0x003712F0, flags_type_arm_word); //  0x000AFE80 - .... 
+  rom_flags_type(0x003712F4, flags_type_arm_word); //  0x000AFE88 - .... 
+  rom_flags_type(0x003712F8, flags_type_arm_word); //  0x000AFE98 - .... 
+  rom_flags_type(0x003712FC, flags_type_arm_word); //  0x000AFEB8 - .... 
+  rom_flags_type(0x00371300, flags_type_arm_word); //  0x000AFEC8 - .... 
+  rom_flags_type(0x00371304, flags_type_arm_word); //  0x000AFED8 - .... 
+  rom_flags_type(0x00371308, flags_type_arm_word); //  0x000AFEF8 - .... 
+  rom_flags_type(0x0037130C, flags_type_arm_word); //  0x000AFF04 - .... 
+  rom_flags_type(0x00371310, flags_type_arm_word); //  0x000AFF20 - .... 
+  rom_flags_type(0x00371314, flags_type_arm_word); //  0x000AFF30 - ...0 
+  rom_flags_type(0x00371318, flags_type_arm_word); //  0x000AFF50 - ...P 
+  rom_flags_type(0x0037131C, flags_type_arm_word); //  0x000AFF60 - ...` 
+  rom_flags_type(0x00371320, flags_type_arm_word); //  0x000AFF70 - ...p 
+  rom_flags_type(0x00371324, flags_type_arm_word); //  0x000AFF7C - ...| 
+  rom_flags_type(0x00371328, 0x0037142C , flags_type_data); //  0x000AFF88 - .... exTranslatorException
+  rom_flags_type(0x0037142C, 0x0037143C , flags_type_data); //  0x00280848 - .(.H gObjectStateToTransBits
+  rom_flags_type(0x0037143C, 0x00371758 , flags_type_data); //  0x090B000C - .... gObjectTransBitsToState
+  rom_flags_type(0x00371758, flags_type_arm_word); //  0x00300000 - .0.. 
+  rom_flags_type(0x0037175C, flags_type_arm_word); //  0x005E0000 - .^.. 
+  rom_flags_type(0x00371760, flags_type_arm_text); //  0x44657669 - Devi 
+  rom_flags_type(0x00371764, flags_type_arm_text); //  0x63650000 - ce.. 
+  rom_flags_type(0x00371768, flags_type_arm_text); //  0x44657669 - Devi 
+  rom_flags_type(0x0037176C, flags_type_arm_text); //  0x63654E61 - ceNa 
+  rom_flags_type(0x00371770, flags_type_arm_text); //  0x6D650000 - me.. 
+  rom_flags_type(0x00371774, flags_type_arm_text); //  0x49724C4D - IrLM 
+  rom_flags_type(0x00371778, flags_type_arm_text); //  0x50537570 - PSup 
+  rom_flags_type(0x0037177C, flags_type_arm_text); //  0x706F7274 - port 
+  rom_flags_type(0x00371780, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00371784, flags_type_arm_text); //  0x4E657774 - Newt 
+  rom_flags_type(0x00371788, flags_type_arm_text); //  0x6F6E0000 - on.. 
+  rom_flags_type(0x0037178C, 0x003717A0 , flags_type_data); //  0x00002580 - ..%. IrBaudRateTable
+  rom_flags_type(0x003717A0, 0x003717A8 , flags_type_data); //  0x30180C06 - 0... IrExtraBOFsTable
+  rom_flags_type(0x003717A8, 0x003717B8 , flags_type_data); //  0x001C1F38 - ...8 IrMaxTurnTimeTable
+  rom_flags_type(0x003717B8, 0x003717D8 , flags_type_data); //  0x00008FFC - .... IrMinTurnTimeTable
+  rom_flags_type(0x003717D8, 0x003717F8 , flags_type_data); //  0x00A8C000 - .... IrLinkDiscThreshold
+  rom_flags_type(0x003717F8, 0x00371820 , flags_type_data); //  0x0A050100 - .... IrMinTurnInBytesTable
+  rom_flags_type(0x00371820, 0x00371830 , flags_type_data); //  0x00000190 - .... IrMaxLineCapacityTable1
+  rom_flags_type(0x00371830, 0x00371840 , flags_type_data); //  0x000012C0 - .... IrMaxLineCapacityTable2
+  rom_flags_type(0x00371840, flags_type_arm_word); //  0x01060810 - .... 
+  rom_flags_type(0x00371844, 0x00371A4C , flags_type_data); //  0x00001189 - .... IrCRCLookupTable
+  rom_flags_type(0x00371A4C, flags_type_arm_word); //  0x00000001 - .... 
+  rom_flags_type(0x00371A50, flags_type_arm_word); //  0x00000040 - ...@ 
+  rom_flags_type(0x00371A54, flags_type_arm_word); //  0x00000400 - .... 
+  rom_flags_type(0x00371A58, flags_type_arm_word); //  0x00000003 - .... 
+  rom_flags_type(0x00371A5C, flags_type_arm_word); //  0x00001B58 - ...X 
+  rom_flags_type(0x00371A60, 0x00371A6C , flags_type_data); //  0x00000007 - .... O10
+  rom_flags_type(0x00371A6C, 0x00371A7C , flags_type_data); //  0x0000000C - .... O9
+  rom_flags_type(0x00371A7C, 0x00371A90 , flags_type_data); //  0x00000016 - .... O8
+  rom_flags_type(0x00371A90, 0x00371AA8 , flags_type_data); //  0x0000002A - ...* O7
+  rom_flags_type(0x00371AA8, 0x00371AC4 , flags_type_data); //  0x00000052 - ...R O6
+  rom_flags_type(0x00371AC4, 0x00371AE4 , flags_type_data); //  0x000000A2 - .... O5
+  rom_flags_type(0x00371AE4, 0x00371B08 , flags_type_data); //  0x00000142 - ...B O4
+  rom_flags_type(0x00371B08, 0x00371B30 , flags_type_data); //  0x00000282 - .... O3
+  rom_flags_type(0x00371B30, 0x00371B5C , flags_type_data); //  0x00000502 - .... O2
+  rom_flags_type(0x00371B5C, 0x00371B8C , flags_type_data); //  0x00000A02 - .... O1
+  rom_flags_type(0x00371B8C, 0x00371BB8 , flags_type_data); //  0x00000004 - .... CL2
+  rom_flags_type(0x00371BB8, 0x00371BE4 , flags_type_data); //  0x00000007 - .... CL2Base
+  rom_flags_type(0x00371BE4, 0x00371C10 , flags_type_data); //  0x00000004 - .... CL2B
+  rom_flags_type(0x00371C10, 0x00371C28 , flags_type_data); //  0x00000004 - .... CL
+  rom_flags_type(0x00371C28, 0x00371C40 , flags_type_data); //  0x00000007 - .... CLBase
+  rom_flags_type(0x00371C40, 0x00371C58 , flags_type_data); //  0x00000004 - .... CLB
+  rom_flags_type(0x00371C58, 0x00371C6C , flags_type_data); //  0x00000003 - .... LL
+  rom_flags_type(0x00371C6C, 0x00371C80 , flags_type_data); //  0x00000003 - .... LLB
+  rom_flags_type(0x00371C80, 0x00371C94 , flags_type_data); //  0x00000002 - .... LLBase
+  rom_flags_type(0x00371C94, 0x00371D94 , flags_type_data); //  0x00000000 - .... CopyValue
+  rom_flags_type(0x00371D94, 0x00371E94 , flags_type_data); //  0x02020202 - .... LZCopyBits
+  rom_flags_type(0x00371E94, flags_type_arm_word); //  0x00000103 - .... 
+  rom_flags_type(0x00371E98, 0x00371F98 , flags_type_data); //  0x00000000 - .... FiveBitASCII_Adobe
+  rom_flags_type(0x00371F98, 0x00372198 , flags_type_data); //  0x00000080 - .... kToken_table
+  rom_flags_type(0x00372198, 0x003721A0 , flags_type_data); //  0x30000031 - 0..1 rom_cmp
+  rom_flags_type(0x003721A0, 0x003721A8 , flags_type_data); //  0x00000078 - ...x rom_ncells
+  rom_flags_type(0x003721A8, 0x00372570 , flags_type_data); //  0x000000A0 - .... rom_matrix
+  rom_flags_type(0x00372570, 0x00374004 , flags_type_data); //  0x000009FC - .... rom_cell
+  rom_flags_type(0x00374004, 0x00374028 , flags_type_data); //  0x00132004 - .... NetPatternImageT
+  rom_flags_type(0x00374028, 0x0037404C , flags_type_data); //  0x00132518 - ..%. NetPatternMultiT
+  rom_flags_type(0x0037404C, 0x00374070 , flags_type_data); //  0x00132990 - ..). NetPatternAspectNormT
+  rom_flags_type(0x00374070, 0x00374094 , flags_type_data); //  0x001329A8 - ..). NetPatternHeightT
+  rom_flags_type(0x00374094, 0x003740B8 , flags_type_data); //  0x001329B8 - ..). NetPatternCapHeightT
+  rom_flags_type(0x003740B8, 0x003740DC , flags_type_data); //  0x001329C8 - ..). NetPatternBaseT
+  rom_flags_type(0x003740DC, 0x00374100 , flags_type_data); //  0x001329D4 - ..). NetPatternCountT
+  rom_flags_type(0x00374100, 0x0037414C , flags_type_data); //  0x001330A0 - ..0. NetPatternStrokePUDT
+  rom_flags_type(0x0037414C, 0x0037415C , flags_type_data); //  0x00008281 - .... _2C8
+  rom_flags_type(0x0037415C, 0x0037417C , flags_type_data); //  0x0000809E - .... _2C16
+  rom_flags_type(0x0037417C, 0x003741BC , flags_type_data); //  0x00008027 - ...' _2C32
+  rom_flags_type(0x003741BC, 0x003741F0 , flags_type_data); //  0x00000000 - .... P3InitPacket
+  rom_flags_type(0x003741F0, 0x003742F0 , flags_type_data); //  0x00000001 - .... sqrtab
+  rom_flags_type(0x003742F0, 0x00374370 , flags_type_data); //  0x00000001 - .... bit
+  rom_flags_type(0x00374370, 0x003743F0 , flags_type_data); //  0x00000001 - .... quad
+  rom_flags_type(0x003743F0, 0x00374470 , flags_type_data); //  0x00000000 - .... eps0
+  rom_flags_type(0x00374470, 0x003744F0 , flags_type_data); //  0x00000000 - .... eps1
+  rom_flags_type(0x003744F0, 0x00374570 , flags_type_data); //  0x00000001 - .... eps2
+  rom_flags_type(0x00374570, 0x003745F0 , flags_type_data); //  0x0009001B - .... eps3
+  rom_flags_type(0x003745F0, flags_type_arm_word); //  0x000A0000 - .... 
+  rom_flags_type(0x003745F4, flags_type_arm_word); //  0x005F0000 - ._.. 
+  rom_flags_type(0x003745F8, flags_type_arm_word); //  0x00020000 - .... 
+  rom_flags_type(0x003745FC, 0x00374630 , flags_type_data); //  0x000A0004 - .... const1
+  rom_flags_type(0x00374630, 0x00374730 , flags_type_data); //  0x0011171C - .... SQRTa
+  rom_flags_type(0x00374730, 0x00374B5C , flags_type_data); //  0x00000000 - .... SQRTb
+  rom_flags_type(0x00374B5C, 0x00374C24 , flags_type_data); //  0x0037FFFE - .7.. maxA_H_end
+  rom_flags_type(0x00374C24, 0x00374CEC , flags_type_data); //  0x0014FFFE - .... maxCR_H_end
+  rom_flags_type(0x00374CEC, 0x00374DB4 , flags_type_data); //  0x001CFFFE - .... minL_H_end
+  rom_flags_type(0x00374DB4, 0x00374E7C , flags_type_data); //  0x0023FFFE - .#.. maxX_H_end
+  rom_flags_type(0x00374E7C, 0x00374F44 , flags_type_data); //  0x001EFFFE - .... maxY_H_end
+  rom_flags_type(0x00374F44, 0x00374F74 , flags_type_data); //  0x00000023 - ...# TG1
+  rom_flags_type(0x00374F74, 0x00374FA4 , flags_type_data); //  0x00000023 - ...# TG2
+  rom_flags_type(0x00374FA4, 0x00374FD4 , flags_type_data); //  0x00000022 - ..." H1
+  rom_flags_type(0x00374FD4, 0x00375004 , flags_type_data); //  0x00000030 - ...0 H2
+  rom_flags_type(0x00375004, flags_type_arm_word); //  0x00000050 - ...P 
+  rom_flags_type(0x00375008, flags_type_arm_text); //  0x61626364 - abcd 
+  rom_flags_type(0x0037500C, flags_type_arm_text); //  0x65666768 - efgh 
+  rom_flags_type(0x00375010, flags_type_arm_text); //  0x696A6B6C - ijkl 
+  rom_flags_type(0x00375014, flags_type_arm_text); //  0x6D6E6F70 - mnop 
+  rom_flags_type(0x00375018, flags_type_arm_text); //  0x71727374 - qrst 
+  rom_flags_type(0x0037501C, flags_type_arm_text); //  0x75767778 - uvwx 
+  rom_flags_type(0x00375020, flags_type_arm_text); //  0x797A2700 - yz'. 
+  rom_flags_type(0x00375024, flags_type_arm_text); //  0x61626364 - abcd 
+  rom_flags_type(0x00375028, flags_type_arm_text); //  0x65666768 - efgh 
+  rom_flags_type(0x0037502C, flags_type_arm_text); //  0x696A6B6C - ijkl 
+  rom_flags_type(0x00375030, flags_type_arm_text); //  0x6D6E6F70 - mnop 
+  rom_flags_type(0x00375034, flags_type_arm_text); //  0x71727374 - qrst 
+  rom_flags_type(0x00375038, flags_type_arm_text); //  0x75767778 - uvwx 
+  rom_flags_type(0x0037503C, flags_type_arm_text); //  0x797A8A8C - yz.. 
+  rom_flags_type(0x00375040, flags_type_arm_text); //  0x9A270000 - .'.. 
+  rom_flags_type(0x00375044, flags_type_arm_text); //  0x61626364 - abcd 
+  rom_flags_type(0x00375048, flags_type_arm_text); //  0x65666768 - efgh 
+  rom_flags_type(0x0037504C, flags_type_arm_text); //  0x696A6B6C - ijkl 
+  rom_flags_type(0x00375050, flags_type_arm_text); //  0x6D6E6F70 - mnop 
+  rom_flags_type(0x00375054, flags_type_arm_text); //  0x71727374 - qrst 
+  rom_flags_type(0x00375058, flags_type_arm_text); //  0x75767778 - uvwx 
+  rom_flags_type(0x0037505C, flags_type_arm_text); //  0x797AA78D - yz.. 
+  rom_flags_type(0x00375060, flags_type_arm_text); //  0x27000000 - '... 
+  rom_flags_type(0x00375064, flags_type_arm_text); //  0x27222D28 - '"-( 
+  rom_flags_type(0x00375068, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0037506C, flags_type_arm_text); //  0x27222E2C - '"., 
+  rom_flags_type(0x00375070, flags_type_arm_text); //  0x212D3F3A - !-?: 
+  rom_flags_type(0x00375074, flags_type_arm_text); //  0x295F3B00 - )_;. 
+  rom_flags_type(0x00375078, flags_type_arm_text); //  0x3A2E2D25 - :.-% 
+  rom_flags_type(0x0037507C, flags_type_arm_text); //  0x2C2B2A3D - ,+*= 
+  rom_flags_type(0x00375080, flags_type_arm_text); //  0x24402326 - $@#& 
+  rom_flags_type(0x00375084, flags_type_arm_text); //  0xA35F2F00 - ._/. 
+  rom_flags_type(0x00375088, flags_type_arm_text); //  0x30313233 - 0123 
+  rom_flags_type(0x0037508C, flags_type_arm_text); //  0x34353637 - 4567 
+  rom_flags_type(0x00375090, flags_type_arm_text); //  0x38390000 - 89.. 
+  rom_flags_type(0x00375094, flags_type_arm_text); //  0x2B2D3D28 - +-=( 
+  rom_flags_type(0x00375098, flags_type_arm_text); //  0x2924252A - )$%* 
+  rom_flags_type(0x0037509C, flags_type_arm_text); //  0x2F2E2C00 - /.,. 
+  rom_flags_type(0x003750A0, 0x003750AC , flags_type_data); //  0x283C3C46 - (<<F bd_xrws_v
+  rom_flags_type(0x003750AC, 0x003750B8 , flags_type_data); //  0x0A0A1414 - .... ts_xrws_v
+  rom_flags_type(0x003750B8, 0x003750C4 , flags_type_data); //  0x1E283C3C - .(<< bd_xrlws
+  rom_flags_type(0x003750C4, 0x003750D0 , flags_type_data); //  0x050A0A12 - .... ts_xrlws
+  rom_flags_type(0x003750D0, 0x003750DC , flags_type_data); //  0x14283C50 - .(<P bd_xrspl
+  rom_flags_type(0x003750DC, 0x003750E8 , flags_type_data); //  0x0A141E28 - ...( ts_xrspl
+  rom_flags_type(0x003750E8, 0x003750F4 , flags_type_data); //  0x14283C50 - .(<P bd_xrws_nv
+  rom_flags_type(0x003750F4, 0x00375100 , flags_type_data); //  0x02020303 - .... ts_xrws_nv
+  rom_flags_type(0x00375100, 0x00375304 , flags_type_data); //  0x00001000 - .... COS_12_TAB
+  rom_flags_type(0x00375304, 0x00375604 , flags_type_data); //  0xFFFFFFFF - .... DefaultVexMapTable
+  rom_flags_type(0x00375604, 0x00375904 , flags_type_data); //  0xFFFFFFFF - .... BlockVexMapTable
+  rom_flags_type(0x00375904, 0x00375C04 , flags_type_data); //  0xFFFFFFFF - .... PalmerVexMapTable
+  rom_flags_type(0x00375C04, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x00375C08, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x00375C0C, flags_type_arm_word); //  0x03000000 - .... 
+  rom_flags_type(0x00375C10, 0x0037669C , flags_type_data); //  0x0016877C - ...| Functions
+  rom_flags_type(0x0037669C, flags_type_arm_word); //  0x0000004A - ...J 
+  rom_flags_type(0x003766A0, 0x0037679C , flags_type_data); //  0x00550001 - .U.. xReject
+  rom_flags_type(0x0037679C, 0x003767DC , flags_type_data); //  0x00060404 - .... penlDefX
+  rom_flags_type(0x003767DC, 0x003767EC , flags_type_data); //  0x00040402 - .... penlDefH
+  rom_flags_type(0x003767EC, flags_type_arm_text); //  0x6264686C - bdhl 
+  rom_flags_type(0x003767F0, flags_type_arm_text); //  0x74000000 - t... 
+  rom_flags_type(0x003767F4, flags_type_arm_text); //  0x676A7071 - gjpq 
+  rom_flags_type(0x003767F8, flags_type_arm_text); //  0x797A0000 - yz.. 
+  rom_flags_type(0x003767FC, flags_type_arm_text); //  0x66000000 - f... 
+  rom_flags_type(0x00376800, flags_type_arm_text); //  0x6163656D - acem 
+  rom_flags_type(0x00376804, flags_type_arm_text); //  0x6E6F7273 - nors 
+  rom_flags_type(0x00376808, flags_type_arm_text); //  0x75777678 - uwvx 
+  rom_flags_type(0x0037680C, flags_type_arm_text); //  0x8183A100 - .... 
+  rom_flags_type(0x00376810, 0x00376818 , flags_type_data); //  0x01020304 - .... xrsToSkipInDidgits
+  rom_flags_type(0x00376818, 0x00376824 , flags_type_data); //  0x01020304 - .... xrsToSkip
+  rom_flags_type(0x00376824, 0x0037683C , flags_type_data); //  0x06070809 - .... xrsToSkipAsFirst
+  rom_flags_type(0x0037683C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00376840, flags_type_arm_text); //  0x46664B6B - FfKk 
+  rom_flags_type(0x00376844, flags_type_arm_text); //  0x54740000 - Tt.. 
+  rom_flags_type(0x00376848, flags_type_arm_text); //  0x41614262 - AaBb 
+  rom_flags_type(0x0037684C, flags_type_arm_text); //  0x43634464 - CcDd 
+  rom_flags_type(0x00376850, flags_type_arm_text); //  0x46486849 - FHhI 
+  rom_flags_type(0x00376854, flags_type_arm_text); //  0x4B6B4D6D - KkMm 
+  rom_flags_type(0x00376858, flags_type_arm_text); //  0x4E6E4F6F - NnOo 
+  rom_flags_type(0x0037685C, flags_type_arm_text); //  0x50515253 - PQRS 
+  rom_flags_type(0x00376860, flags_type_arm_text); //  0x73547455 - sTtU 
+  rom_flags_type(0x00376864, flags_type_arm_text); //  0x75567657 - uVvW 
+  rom_flags_type(0x00376868, flags_type_arm_text); //  0x7758785A - wXxZ 
+  rom_flags_type(0x0037686C, flags_type_arm_text); //  0x80818283 - .... 
+  rom_flags_type(0x00376870, flags_type_arm_text); //  0xA0A10000 - .... 
+  rom_flags_type(0x00376874, flags_type_arm_text); //  0x73537A5A - sSzZ 
+  rom_flags_type(0x00376878, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0037687C, 0x00376884 , flags_type_data); //  0x80402010 - .@.. pdfMaskArray
+  rom_flags_type(0x00376884, 0x003768C4 , flags_type_data); //  0x00000002 - .... globalSizeArray
+  rom_flags_type(0x003768C4, flags_type_arm_text); //  0x6C4C7454 - lLtT 
+  rom_flags_type(0x003768C8, flags_type_arm_text); //  0x66460000 - fF.. 
+  rom_flags_type(0x003768CC, flags_type_arm_text); //  0x343B0000 - 4;.. 
+  rom_flags_type(0x003768D0, 0x003768F8 , flags_type_data); //  0x696A3B3A - ij;: szPtLet
+  rom_flags_type(0x003768F8, 0x00376904 , flags_type_data); //  0x22848580 - "... szPtLet2
+  rom_flags_type(0x00376904, flags_type_arm_text); //  0x2B000000 - +... 
+  rom_flags_type(0x00376908, flags_type_arm_text); //  0x4A595A66 - JYZf 
+  rom_flags_type(0x0037690C, flags_type_arm_text); //  0x676A7079 - gjpy 
+  rom_flags_type(0x00376910, flags_type_arm_text); //  0x7A000000 - z... 
+  rom_flags_type(0x00376914, flags_type_arm_text); //  0x343A3B00 - 4:;. 
+  rom_flags_type(0x00376918, flags_type_arm_text); //  0x36000000 - 6... 
+  rom_flags_type(0x0037691C, 0x00376940 , flags_type_data); //  0x696A3B3A - ij;: szPtLike
+  rom_flags_type(0x00376940, 0x00376A40 , flags_type_data); //  0x00000000 - .... triads_mapping
+  rom_flags_type(0x00376A40, 0x00376AC0 , flags_type_data); //  0xA37F8080 - ... os_rec_ctbl_intl
+  rom_flags_type(0x00376AC0, 0x00376B40 , flags_type_data); //  0xA37F8041 - ..A os_rec_ctbl_eng
+  rom_flags_type(0x00376B40, 0x00376B54 , flags_type_data); //  0x00000001 - .... xrwd_src_ids
+  rom_flags_type(0x00376B54, 0x00376BD4 , flags_type_data); //  0x00010203 - .... let_stat
+  rom_flags_type(0x00376BD4, 0x00376CD4 , flags_type_data); //  0x00202020 - .... _xctype
+  rom_flags_type(0x00376CD4, 0x00376D54 , flags_type_data); //  0x80818283 - .... _xupper
+  rom_flags_type(0x00376D54, 0x00376DD4 , flags_type_data); //  0x8A8C8D8E - .... _xlower
+  rom_flags_type(0x00376DD4, 0x00376EDC , flags_type_data); //  0x0F010F00 - .... DefaultSmall2Cap
+  rom_flags_type(0x00376EDC, 0x00376FE4 , flags_type_data); //  0x0F010F0F - .... PalmerSmall2Cap
+  rom_flags_type(0x00376FE4, 0x003770EC , flags_type_data); //  0x0F010F00 - .... BlockSmall2Cap
+  rom_flags_type(0x003770EC, 0x00377120 , flags_type_data); //  0x88898F8E - .... DiacriticsLetter
+  rom_flags_type(0x00377120, 0x00377154 , flags_type_data); //  0x00000202 - .... IndexDiacriticsLetter
+  rom_flags_type(0x00377154, flags_type_arm_word); //  0x3A343B00 - :4;. 
+  rom_flags_type(0x00377158, 0x003772E0 , flags_type_data); //  0x00000000 - .... DiacrPresence
+  rom_flags_type(0x003772E0, 0x00377360 , flags_type_data); //  0x00400040 - .@.@ xr_type_merits
+  rom_flags_type(0x00377360, 0x003773D4 , flags_type_data); //  0x0000000A - .... ratio_to_angle
+  rom_flags_type(0x003773D4, flags_type_arm_text); //  0x7061636B - pack 
+  rom_flags_type(0x003773D8, flags_type_arm_text); //  0x61676500 - age. 
+  rom_flags_type(0x003773DC, flags_type_arm_text); //  0x30310000 - 01.. 
+  rom_flags_type(0x003773E0, 0x00377464 , flags_type_data); //  0x00199814 - .... gRDPHandlers
+  rom_flags_type(0x00377464, 0x003774C8 , flags_type_data); //  0x00000000 - .... displayAngle
+  rom_flags_type(0x003774C8, flags_type_arm_word); //  0x574F5244 - WORD 
+  rom_flags_type(0x003774CC, flags_type_arm_word); //  0x58525752 - XRWR 
+  rom_flags_type(0x003774D0, flags_type_arm_word); //  0x4B414E4A - KANJ 
+  rom_flags_type(0x003774D4, flags_type_arm_word); //  0x47534850 - GSHP 
+  rom_flags_type(0x003774D8, flags_type_arm_word); //  0x53435242 - SCRB 
+  rom_flags_type(0x003774DC, flags_type_arm_word); //  0x43414C43 - CALC 
+  rom_flags_type(0x003774E0, flags_type_arm_word); //  0x434C4D4E - CLMN 
+  rom_flags_type(0x003774E4, flags_type_arm_word); //  0x5752504C - WRPL 
+  rom_flags_type(0x003774E8, flags_type_arm_word); //  0x434C494B - CLIK 
+  rom_flags_type(0x003774EC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003774F0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003774F4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003774F8, 0x0037772C , flags_type_data); //  0x001B7110 - ..q. exRosetta
+  rom_flags_type(0x0037772C, flags_type_arm_word); //  0x001D9958 - ...X 
+  rom_flags_type(0x00377730, 0x00377740 , flags_type_data); //  0x00000000 - .... gSCCResetRegs
+  rom_flags_type(0x00377740, 0x00377750 , flags_type_data); //  0x0024FFFE - .$.. gSCCResetChanClearMasks
+  rom_flags_type(0x00377750, 0x00377760 , flags_type_data); //  0x00000000 - .... gSCCResetChanSetMasks
+  rom_flags_type(0x00377760, 0x00377770 , flags_type_data); //  0xFF64FFFE - .d.. gSCCMask1Regs
+  rom_flags_type(0x00377770, 0x00377780 , flags_type_data); //  0x007600C1 - .v.. gSCCAsyncIRToolSetup
+  rom_flags_type(0x00377780, flags_type_arm_word); //  0x1F7F3FFF - .?. 
+  rom_flags_type(0x00377784, 0x00377794 , flags_type_data); //  0x10040503 - .... gSCCSpeedChangeSequence
+  rom_flags_type(0x00377794, 0x003777B0 , flags_type_data); //  0x10040102 - .... gSCCInitSequence
+  rom_flags_type(0x003777B0, 0x003777CC , flags_type_data); //  0x10040A06 - .... gSCCInitLocalTalkSequence
+  rom_flags_type(0x003777CC, 0x003777DC , flags_type_data); //  0x00010305 - .... gMicGains
+  rom_flags_type(0x003777DC, 0x00377C1C , flags_type_data); //  0x00010203 - .... gLineGains
+  rom_flags_type(0x00377C1C, 0x00377D40 , flags_type_data); //  0xFFFFFFFF - .... kWhite_0
+  rom_flags_type(0x00377D40, 0x00377D60 , flags_type_data); //  0xFFFFFFFF - .... kWhite_1
+  rom_flags_type(0x00377D60, 0x00377D80 , flags_type_data); //  0xFFFFFFFF - .... kWhite_2
+  rom_flags_type(0x00377D80, 0x00377D9C , flags_type_data); //  0xFFFFFF0A - .... kWhite_3
+  rom_flags_type(0x00377D9C, 0x00377DDC , flags_type_data); //  0xFFFF0BFF - .... kWhite_4
+  rom_flags_type(0x00377DDC, 0x00377DFC , flags_type_data); //  0xFFFFFFFF - .... kWhite_5
+  rom_flags_type(0x00377DFC, 0x00377E3C , flags_type_data); //  0xFFFFFFFF - .... kWhite_6
+  rom_flags_type(0x00377E3C, flags_type_arm_word); //  0xFF02FE00 - .... 
+  rom_flags_type(0x00377E40, flags_type_arm_word); //  0xFF03FE00 - .... 
+  rom_flags_type(0x00377E44, 0x00377E4C , flags_type_data); //  0xFFFF4108 - ..A. kWhite_9
+  rom_flags_type(0x00377E4C, 0x00377E58 , flags_type_data); //  0xFFFF09FF - .... kWhite_a
+  rom_flags_type(0x00377E58, flags_type_arm_word); //  0xFF04FE00 - .... 
+  rom_flags_type(0x00377E5C, flags_type_arm_word); //  0xFF05FE00 - .... 
+  rom_flags_type(0x00377E60, 0x00377E68 , flags_type_data); //  0xFFFFFF40 - ...@ kWhite_d
+  rom_flags_type(0x00377E68, flags_type_arm_word); //  0xFF06FE00 - .... 
+  rom_flags_type(0x00377E6C, flags_type_arm_word); //  0xFF07FE00 - .... 
+  rom_flags_type(0x00377E70, 0x00377EB0 , flags_type_data); //  0x00377C1C - .7|. kMajorIndexWhite
+  rom_flags_type(0x00377EB0, 0x0037802C , flags_type_data); //  0xFFFFFFFF - .... kBlack_0
+  rom_flags_type(0x0037802C, 0x0037810C , flags_type_data); //  0xFFFFFFFF - .... kBlack_1
+  rom_flags_type(0x0037810C, 0x00378114 , flags_type_data); //  0xFFFF0908 - .... kBlack_2
+  rom_flags_type(0x00378114, flags_type_arm_word); //  0xFF07FE00 - .... 
+  rom_flags_type(0x00378118, 0x00378128 , flags_type_data); //  0x00377EB0 - .7~. kMajorIndexBlack
+  rom_flags_type(0x00378128, 0x00378228 , flags_type_data); //  0x000800AC - .... whiteCompleteTbl
+  rom_flags_type(0x00378228, 0x0037829C , flags_type_data); //  0x00010000 - .... whiteMakeupTbl
+  rom_flags_type(0x0037829C, 0x0037839C , flags_type_data); //  0x000A03B0 - .... blackCompleteTbl
+  rom_flags_type(0x0037839C, 0x00378410 , flags_type_data); //  0x00000000 - .... blackMakeupTbl
+  rom_flags_type(0x00378410, 0x00378C20 , flags_type_data); //  0x010000FE - .... EXP_TABL
+  rom_flags_type(0x00378C20, 0x00378C98 , flags_type_data); //  0xFFFF541A - ..T. gPSStatusStrings
+  rom_flags_type(0x00378C98, flags_type_arm_word); //  0x00378C98 - .7.. 
+  rom_flags_type(0x00378C9C, 0x00379A4C , flags_type_arm_text); //  0x2525436F - %%Co gPostscriptHeader
+  rom_flags_type(0x003079A4, 0x0037A3BC , flags_type_arm_text); // C 0x73797374 - syst gPostscriptHeader2
+  rom_flags_type(0x0037A3BC, 0x0037A424 , flags_type_arm_text); //  0x25254265 - %%Be gOpenPageHeader
+  rom_flags_type(0x0037A424, flags_type_arm_text); //  0x20393020 - .90. 
+  rom_flags_type(0x0037A428, flags_type_arm_text); //  0x726F7461 - rota 
+  rom_flags_type(0x0037A42C, flags_type_arm_text); //  0x74650D00 - te.. 
+  rom_flags_type(0x0037A430, flags_type_arm_text); //  0x67726573 - gres 
+  rom_flags_type(0x0037A434, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x0037A438, flags_type_arm_text); //  0x0D706753 - .pgS 
+  rom_flags_type(0x0037A43C, flags_type_arm_text); //  0x61766520 - ave. 
+  rom_flags_type(0x0037A440, flags_type_arm_text); //  0x72657374 - rest 
+  rom_flags_type(0x0037A444, flags_type_arm_text); //  0x6F72650D - ore. 
+  rom_flags_type(0x0037A448, flags_type_arm_text); //  0x73686F77 - show 
+  rom_flags_type(0x0037A44C, flags_type_arm_text); //  0x70616765 - page 
+  rom_flags_type(0x0037A450, flags_type_arm_text); //  0x0D252550 - .%%P 
+  rom_flags_type(0x0037A454, flags_type_arm_text); //  0x61676554 - ageT 
+  rom_flags_type(0x0037A458, flags_type_arm_text); //  0x7261696C - rail 
+  rom_flags_type(0x0037A45C, flags_type_arm_text); //  0x65720D00 - er.. 
+  rom_flags_type(0x0037A460, flags_type_arm_text); //  0x25215053 - %!PS 
+  rom_flags_type(0x0037A464, flags_type_arm_text); //  0x2D41646F - -Ado 
+  rom_flags_type(0x0037A468, flags_type_arm_text); //  0x62652D33 - be-3 
+  rom_flags_type(0x0037A46C, flags_type_arm_text); //  0x2E302051 - .0.Q 
+  rom_flags_type(0x0037A470, flags_type_arm_text); //  0x75657279 - uery 
+  rom_flags_type(0x0037A474, flags_type_arm_text); //  0x0D25253F - .%%? 
+  rom_flags_type(0x0037A478, flags_type_arm_text); //  0x42656769 - Begi 
+  rom_flags_type(0x0037A47C, flags_type_arm_text); //  0x6E517565 - nQue 
+  rom_flags_type(0x0037A480, flags_type_arm_text); //  0x72793A20 - ry:. 
+  rom_flags_type(0x0037A484, flags_type_arm_text); //  0x4C657665 - Leve 
+  rom_flags_type(0x0037A488, flags_type_arm_text); //  0x6C0D2F6C - l./l 
+  rom_flags_type(0x0037A48C, flags_type_arm_text); //  0x616E6775 - angu 
+  rom_flags_type(0x0037A490, flags_type_arm_text); //  0x6167656C - agel 
+  rom_flags_type(0x0037A494, flags_type_arm_text); //  0x6576656C - evel 
+  rom_flags_type(0x0037A498, flags_type_arm_text); //  0x20776865 - .whe 
+  rom_flags_type(0x0037A49C, flags_type_arm_text); //  0x72650D7B - re.{ 
+  rom_flags_type(0x0037A4A0, flags_type_arm_text); //  0x706F7020 - pop. 
+  rom_flags_type(0x0037A4A4, flags_type_arm_text); //  0x6C616E67 - lang 
+  rom_flags_type(0x0037A4A8, flags_type_arm_text); //  0x75616765 - uage 
+  rom_flags_type(0x0037A4AC, flags_type_arm_text); //  0x6C657665 - leve 
+  rom_flags_type(0x0037A4B0, flags_type_arm_text); //  0x6C7D0D7B - l}.{ 
+  rom_flags_type(0x0037A4B4, flags_type_arm_text); //  0x317D0D69 - 1}.i 
+  rom_flags_type(0x0037A4B8, flags_type_arm_text); //  0x66656C73 - fels 
+  rom_flags_type(0x0037A4BC, flags_type_arm_text); //  0x65203D20 - e.=. 
+  rom_flags_type(0x0037A4C0, flags_type_arm_text); //  0x666C7573 - flus 
+  rom_flags_type(0x0037A4C4, flags_type_arm_text); //  0x680D2525 - h.%% 
+  rom_flags_type(0x0037A4C8, flags_type_arm_text); //  0x3F456E64 - ?End 
+  rom_flags_type(0x0037A4CC, flags_type_arm_text); //  0x51756572 - Quer 
+  rom_flags_type(0x0037A4D0, flags_type_arm_text); //  0x793A2031 - y:.1 
+  rom_flags_type(0x0037A4D4, flags_type_arm_text); //  0x0D252545 - .%%E 
+  rom_flags_type(0x0037A4D8, flags_type_arm_text); //  0x4F460D00 - OF.. 
+  rom_flags_type(0x0037A4DC, flags_type_arm_text); //  0x30303031 - 0001 
+  rom_flags_type(0x0037A4E0, flags_type_arm_text); //  0x30323033 - 0203 
+  rom_flags_type(0x0037A4E4, flags_type_arm_text); //  0x30343035 - 0405 
+  rom_flags_type(0x0037A4E8, flags_type_arm_text); //  0x30363037 - 0607 
+  rom_flags_type(0x0037A4EC, flags_type_arm_text); //  0x30383039 - 0809 
+  rom_flags_type(0x0037A4F0, flags_type_arm_text); //  0x30413042 - 0A0B 
+  rom_flags_type(0x0037A4F4, flags_type_arm_text); //  0x30433044 - 0C0D 
+  rom_flags_type(0x0037A4F8, flags_type_arm_text); //  0x30453046 - 0E0F 
+  rom_flags_type(0x0037A4FC, flags_type_arm_text); //  0x31303131 - 1011 
+  rom_flags_type(0x0037A500, flags_type_arm_text); //  0x31323133 - 1213 
+  rom_flags_type(0x0037A504, flags_type_arm_text); //  0x31343135 - 1415 
+  rom_flags_type(0x0037A508, flags_type_arm_text); //  0x31363137 - 1617 
+  rom_flags_type(0x0037A50C, flags_type_arm_text); //  0x31383139 - 1819 
+  rom_flags_type(0x0037A510, flags_type_arm_text); //  0x31413142 - 1A1B 
+  rom_flags_type(0x0037A514, flags_type_arm_text); //  0x31433144 - 1C1D 
+  rom_flags_type(0x0037A518, flags_type_arm_text); //  0x31453146 - 1E1F 
+  rom_flags_type(0x0037A51C, flags_type_arm_text); //  0x32303231 - 2021 
+  rom_flags_type(0x0037A520, flags_type_arm_text); //  0x32323233 - 2223 
+  rom_flags_type(0x0037A524, flags_type_arm_text); //  0x32343235 - 2425 
+  rom_flags_type(0x0037A528, flags_type_arm_text); //  0x32363237 - 2627 
+  rom_flags_type(0x0037A52C, flags_type_arm_text); //  0x32383239 - 2829 
+  rom_flags_type(0x0037A530, flags_type_arm_text); //  0x32413242 - 2A2B 
+  rom_flags_type(0x0037A534, flags_type_arm_text); //  0x32433244 - 2C2D 
+  rom_flags_type(0x0037A538, flags_type_arm_text); //  0x32453246 - 2E2F 
+  rom_flags_type(0x0037A53C, flags_type_arm_text); //  0x33303331 - 3031 
+  rom_flags_type(0x0037A540, flags_type_arm_text); //  0x33323333 - 3233 
+  rom_flags_type(0x0037A544, flags_type_arm_text); //  0x33343335 - 3435 
+  rom_flags_type(0x0037A548, flags_type_arm_text); //  0x33363337 - 3637 
+  rom_flags_type(0x0037A54C, flags_type_arm_text); //  0x33383339 - 3839 
+  rom_flags_type(0x0037A550, flags_type_arm_text); //  0x33413342 - 3A3B 
+  rom_flags_type(0x0037A554, flags_type_arm_text); //  0x33433344 - 3C3D 
+  rom_flags_type(0x0037A558, flags_type_arm_text); //  0x33453346 - 3E3F 
+  rom_flags_type(0x0037A55C, flags_type_arm_text); //  0x34303431 - 4041 
+  rom_flags_type(0x0037A560, flags_type_arm_text); //  0x34323433 - 4243 
+  rom_flags_type(0x0037A564, flags_type_arm_text); //  0x34343435 - 4445 
+  rom_flags_type(0x0037A568, flags_type_arm_text); //  0x34363437 - 4647 
+  rom_flags_type(0x0037A56C, flags_type_arm_text); //  0x34383439 - 4849 
+  rom_flags_type(0x0037A570, flags_type_arm_text); //  0x34413442 - 4A4B 
+  rom_flags_type(0x0037A574, flags_type_arm_text); //  0x34433444 - 4C4D 
+  rom_flags_type(0x0037A578, flags_type_arm_text); //  0x34453446 - 4E4F 
+  rom_flags_type(0x0037A57C, flags_type_arm_text); //  0x35303531 - 5051 
+  rom_flags_type(0x0037A580, flags_type_arm_text); //  0x35323533 - 5253 
+  rom_flags_type(0x0037A584, flags_type_arm_text); //  0x35343535 - 5455 
+  rom_flags_type(0x0037A588, flags_type_arm_text); //  0x35363537 - 5657 
+  rom_flags_type(0x0037A58C, flags_type_arm_text); //  0x35383539 - 5859 
+  rom_flags_type(0x0037A590, flags_type_arm_text); //  0x35413542 - 5A5B 
+  rom_flags_type(0x0037A594, flags_type_arm_text); //  0x35433544 - 5C5D 
+  rom_flags_type(0x0037A598, flags_type_arm_text); //  0x35453546 - 5E5F 
+  rom_flags_type(0x0037A59C, flags_type_arm_text); //  0x36303631 - 6061 
+  rom_flags_type(0x0037A5A0, flags_type_arm_text); //  0x36323633 - 6263 
+  rom_flags_type(0x0037A5A4, flags_type_arm_text); //  0x36343635 - 6465 
+  rom_flags_type(0x0037A5A8, flags_type_arm_text); //  0x36363637 - 6667 
+  rom_flags_type(0x0037A5AC, flags_type_arm_text); //  0x36383639 - 6869 
+  rom_flags_type(0x0037A5B0, flags_type_arm_text); //  0x36413642 - 6A6B 
+  rom_flags_type(0x0037A5B4, flags_type_arm_text); //  0x36433644 - 6C6D 
+  rom_flags_type(0x0037A5B8, flags_type_arm_text); //  0x36453646 - 6E6F 
+  rom_flags_type(0x0037A5BC, flags_type_arm_text); //  0x37303731 - 7071 
+  rom_flags_type(0x0037A5C0, flags_type_arm_text); //  0x37323733 - 7273 
+  rom_flags_type(0x0037A5C4, flags_type_arm_text); //  0x37343735 - 7475 
+  rom_flags_type(0x0037A5C8, flags_type_arm_text); //  0x37363737 - 7677 
+  rom_flags_type(0x0037A5CC, flags_type_arm_text); //  0x37383739 - 7879 
+  rom_flags_type(0x0037A5D0, flags_type_arm_text); //  0x37413742 - 7A7B 
+  rom_flags_type(0x0037A5D4, flags_type_arm_text); //  0x37433744 - 7C7D 
+  rom_flags_type(0x0037A5D8, flags_type_arm_text); //  0x37453746 - 7E7F 
+  rom_flags_type(0x0037A5DC, flags_type_arm_text); //  0x38303831 - 8081 
+  rom_flags_type(0x0037A5E0, flags_type_arm_text); //  0x38323833 - 8283 
+  rom_flags_type(0x0037A5E4, flags_type_arm_text); //  0x38343835 - 8485 
+  rom_flags_type(0x0037A5E8, flags_type_arm_text); //  0x38363837 - 8687 
+  rom_flags_type(0x0037A5EC, flags_type_arm_text); //  0x38383839 - 8889 
+  rom_flags_type(0x0037A5F0, flags_type_arm_text); //  0x38413842 - 8A8B 
+  rom_flags_type(0x0037A5F4, flags_type_arm_text); //  0x38433844 - 8C8D 
+  rom_flags_type(0x0037A5F8, flags_type_arm_text); //  0x38453846 - 8E8F 
+  rom_flags_type(0x0037A5FC, flags_type_arm_text); //  0x39303931 - 9091 
+  rom_flags_type(0x0037A600, flags_type_arm_text); //  0x39323933 - 9293 
+  rom_flags_type(0x0037A604, flags_type_arm_text); //  0x39343935 - 9495 
+  rom_flags_type(0x0037A608, flags_type_arm_text); //  0x39363937 - 9697 
+  rom_flags_type(0x0037A60C, flags_type_arm_text); //  0x39383939 - 9899 
+  rom_flags_type(0x0037A610, flags_type_arm_text); //  0x39413942 - 9A9B 
+  rom_flags_type(0x0037A614, flags_type_arm_text); //  0x39433944 - 9C9D 
+  rom_flags_type(0x0037A618, flags_type_arm_text); //  0x39453946 - 9E9F 
+  rom_flags_type(0x0037A61C, flags_type_arm_text); //  0x41304131 - A0A1 
+  rom_flags_type(0x0037A620, flags_type_arm_text); //  0x41324133 - A2A3 
+  rom_flags_type(0x0037A624, flags_type_arm_text); //  0x41344135 - A4A5 
+  rom_flags_type(0x0037A628, flags_type_arm_text); //  0x41364137 - A6A7 
+  rom_flags_type(0x0037A62C, flags_type_arm_text); //  0x41384139 - A8A9 
+  rom_flags_type(0x0037A630, flags_type_arm_text); //  0x41414142 - AAAB 
+  rom_flags_type(0x0037A634, flags_type_arm_text); //  0x41434144 - ACAD 
+  rom_flags_type(0x0037A638, flags_type_arm_text); //  0x41454146 - AEAF 
+  rom_flags_type(0x0037A63C, flags_type_arm_text); //  0x42304231 - B0B1 
+  rom_flags_type(0x0037A640, flags_type_arm_text); //  0x42324233 - B2B3 
+  rom_flags_type(0x0037A644, flags_type_arm_text); //  0x42344235 - B4B5 
+  rom_flags_type(0x0037A648, flags_type_arm_text); //  0x42364237 - B6B7 
+  rom_flags_type(0x0037A64C, flags_type_arm_text); //  0x42384239 - B8B9 
+  rom_flags_type(0x0037A650, flags_type_arm_text); //  0x42414242 - BABB 
+  rom_flags_type(0x0037A654, flags_type_arm_text); //  0x42434244 - BCBD 
+  rom_flags_type(0x0037A658, flags_type_arm_text); //  0x42454246 - BEBF 
+  rom_flags_type(0x0037A65C, flags_type_arm_text); //  0x43304331 - C0C1 
+  rom_flags_type(0x0037A660, flags_type_arm_text); //  0x43324333 - C2C3 
+  rom_flags_type(0x0037A664, flags_type_arm_text); //  0x43344335 - C4C5 
+  rom_flags_type(0x0037A668, flags_type_arm_text); //  0x43364337 - C6C7 
+  rom_flags_type(0x0037A66C, flags_type_arm_text); //  0x43384339 - C8C9 
+  rom_flags_type(0x0037A670, flags_type_arm_text); //  0x43414342 - CACB 
+  rom_flags_type(0x0037A674, flags_type_arm_text); //  0x43434344 - CCCD 
+  rom_flags_type(0x0037A678, flags_type_arm_text); //  0x43454346 - CECF 
+  rom_flags_type(0x0037A67C, flags_type_arm_text); //  0x44304431 - D0D1 
+  rom_flags_type(0x0037A680, flags_type_arm_text); //  0x44324433 - D2D3 
+  rom_flags_type(0x0037A684, flags_type_arm_text); //  0x44344435 - D4D5 
+  rom_flags_type(0x0037A688, flags_type_arm_text); //  0x44364437 - D6D7 
+  rom_flags_type(0x0037A68C, flags_type_arm_text); //  0x44384439 - D8D9 
+  rom_flags_type(0x0037A690, flags_type_arm_text); //  0x44414442 - DADB 
+  rom_flags_type(0x0037A694, flags_type_arm_text); //  0x44434444 - DCDD 
+  rom_flags_type(0x0037A698, flags_type_arm_text); //  0x44454446 - DEDF 
+  rom_flags_type(0x0037A69C, flags_type_arm_text); //  0x45304531 - E0E1 
+  rom_flags_type(0x0037A6A0, flags_type_arm_text); //  0x45324533 - E2E3 
+  rom_flags_type(0x0037A6A4, flags_type_arm_text); //  0x45344535 - E4E5 
+  rom_flags_type(0x0037A6A8, flags_type_arm_text); //  0x45364537 - E6E7 
+  rom_flags_type(0x0037A6AC, flags_type_arm_text); //  0x45384539 - E8E9 
+  rom_flags_type(0x0037A6B0, flags_type_arm_text); //  0x45414542 - EAEB 
+  rom_flags_type(0x0037A6B4, flags_type_arm_text); //  0x45434544 - ECED 
+  rom_flags_type(0x0037A6B8, flags_type_arm_text); //  0x45454546 - EEEF 
+  rom_flags_type(0x0037A6BC, flags_type_arm_text); //  0x46304631 - F0F1 
+  rom_flags_type(0x0037A6C0, flags_type_arm_text); //  0x46324633 - F2F3 
+  rom_flags_type(0x0037A6C4, flags_type_arm_text); //  0x46344635 - F4F5 
+  rom_flags_type(0x0037A6C8, flags_type_arm_text); //  0x46364637 - F6F7 
+  rom_flags_type(0x0037A6CC, flags_type_arm_text); //  0x46384639 - F8F9 
+  rom_flags_type(0x0037A6D0, flags_type_arm_text); //  0x46414642 - FAFB 
+  rom_flags_type(0x0037A6D4, flags_type_arm_text); //  0x46434644 - FCFD 
+  rom_flags_type(0x0037A6D8, flags_type_arm_text); //  0x46454646 - FEFF 
+  rom_flags_type(0x0037A6DC, flags_type_arm_word); //  0x00000005 - .... 
+  rom_flags_type(0x0037A6E0, flags_type_arm_word); //  0x00000028 - ...( 
+  rom_flags_type(0x0037A6E4, flags_type_arm_word); //  0x00010000 - .... 
+  rom_flags_type(0x0037A6E8, flags_type_arm_word); //  0x01680000 - .h.. 
+  rom_flags_type(0x0037A6EC, flags_type_arm_word); //  0x01680000 - .h.. 
+  rom_flags_type(0x0037A6F0, flags_type_arm_word); //  0x0EB00B40 - ...@ 
+  rom_flags_type(0x0037A6F4, flags_type_arm_word); //  0x01680000 - .h.. 
+  rom_flags_type(0x0037A6F8, flags_type_arm_word); //  0x01680000 - .h.. 
+  rom_flags_type(0x0037A6FC, flags_type_arm_word); //  0x0F900AE0 - .... 
+  rom_flags_type(0x0037A700, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x0037A704, flags_type_arm_word); //  0x002A0000 - .*.. 
+  rom_flags_type(0x0037A708, flags_type_arm_word); //  0x002A0000 - .*.. 
+  rom_flags_type(0x0037A70C, flags_type_arm_text); //  0x596F7572 - Your 
+  rom_flags_type(0x0037A710, flags_type_arm_text); //  0x204E6577 - .New 
+  rom_flags_type(0x0037A714, flags_type_arm_text); //  0x746F6E20 - ton. 
+  rom_flags_type(0x0037A718, flags_type_arm_text); //  0x64657669 - devi 
+  rom_flags_type(0x0037A71C, flags_type_arm_text); //  0x6365206E - ce.n 
+  rom_flags_type(0x0037A720, flags_type_arm_text); //  0x65656473 - eeds 
+  rom_flags_type(0x0037A724, flags_type_arm_text); //  0x20746F20 - .to. 
+  rom_flags_type(0x0037A728, flags_type_arm_text); //  0x62652063 - be.c 
+  rom_flags_type(0x0037A72C, flags_type_arm_text); //  0x616C6962 - alib 
+  rom_flags_type(0x0037A730, flags_type_arm_text); //  0x72617465 - rate 
+  rom_flags_type(0x0037A734, flags_type_arm_text); //  0x64000000 - d... 
+  rom_flags_type(0x0037A738, flags_type_arm_text); //  0x746F2074 - to.t 
+  rom_flags_type(0x0037A73C, flags_type_arm_text); //  0x68652077 - he.w 
+  rom_flags_type(0x0037A740, flags_type_arm_text); //  0x61792079 - ay.y 
+  rom_flags_type(0x0037A744, flags_type_arm_text); //  0x6F75206E - ou.n 
+  rom_flags_type(0x0037A748, flags_type_arm_text); //  0x61747572 - atur 
+  rom_flags_type(0x0037A74C, flags_type_arm_text); //  0x616C6C79 - ally 
+  rom_flags_type(0x0037A750, flags_type_arm_text); //  0x20686F6C - .hol 
+  rom_flags_type(0x0037A754, flags_type_arm_text); //  0x64206120 - d.a. 
+  rom_flags_type(0x0037A758, flags_type_arm_text); //  0x70656E2E - pen. 
+  rom_flags_type(0x0037A75C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0037A760, flags_type_arm_text); //  0x486F6C64 - Hold 
+  rom_flags_type(0x0037A764, flags_type_arm_text); //  0x20746865 - .the 
+  rom_flags_type(0x0037A768, flags_type_arm_text); //  0x204E6577 - .New 
+  rom_flags_type(0x0037A76C, flags_type_arm_text); //  0x746F6E20 - ton. 
+  rom_flags_type(0x0037A770, flags_type_arm_text); //  0x70656E20 - pen. 
+  rom_flags_type(0x0037A774, flags_type_arm_text); //  0x6F6E2074 - on.t 
+  rom_flags_type(0x0037A778, flags_type_arm_text); //  0x68652063 - he.c 
+  rom_flags_type(0x0037A77C, flags_type_arm_text); //  0x656E7465 - ente 
+  rom_flags_type(0x0037A780, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x0037A784, flags_type_arm_text); //  0x6F662074 - of.t 
+  rom_flags_type(0x0037A788, flags_type_arm_text); //  0x68652058 - he.X 
+  rom_flags_type(0x0037A78C, flags_type_arm_text); //  0x20696E20 - .in. 
+  rom_flags_type(0x0037A790, flags_type_arm_text); //  0x74686520 - the. 
+  rom_flags_type(0x0037A794, flags_type_arm_text); //  0x636F726E - corn 
+  rom_flags_type(0x0037A798, flags_type_arm_text); //  0x65722061 - er.a 
+  rom_flags_type(0x0037A79C, flags_type_arm_text); //  0x626F7665 - bove 
+  rom_flags_type(0x0037A7A0, flags_type_arm_text); //  0x20756E74 - .unt 
+  rom_flags_type(0x0037A7A4, flags_type_arm_text); //  0x696C2069 - il.i 
+  rom_flags_type(0x0037A7A8, flags_type_arm_text); //  0x74000000 - t... 
+  rom_flags_type(0x0037A7AC, flags_type_arm_text); //  0x6461726B - dark 
+  rom_flags_type(0x0037A7B0, flags_type_arm_text); //  0x656E7320 - ens. 
+  rom_flags_type(0x0037A7B4, flags_type_arm_text); //  0x616E6420 - and. 
+  rom_flags_type(0x0037A7B8, flags_type_arm_text); //  0x7468656E - then 
+  rom_flags_type(0x0037A7BC, flags_type_arm_text); //  0x206C6966 - .lif 
+  rom_flags_type(0x0037A7C0, flags_type_arm_text); //  0x74207468 - t.th 
+  rom_flags_type(0x0037A7C4, flags_type_arm_text); //  0x65207065 - e.pe 
+  rom_flags_type(0x0037A7C8, flags_type_arm_text); //  0x6E2E0000 - n... 
+  rom_flags_type(0x0037A7CC, flags_type_arm_text); //  0x4E6F7720 - Now. 
+  rom_flags_type(0x0037A7D0, flags_type_arm_text); //  0x72657065 - repe 
+  rom_flags_type(0x0037A7D4, flags_type_arm_text); //  0x6174206F - at.o 
+  rom_flags_type(0x0037A7D8, flags_type_arm_text); //  0x6E207468 - n.th 
+  rom_flags_type(0x0037A7DC, flags_type_arm_text); //  0x65206365 - e.ce 
+  rom_flags_type(0x0037A7E0, flags_type_arm_text); //  0x6E746572 - nter 
+  rom_flags_type(0x0037A7E4, flags_type_arm_text); //  0x206F6620 - .of. 
+  rom_flags_type(0x0037A7E8, flags_type_arm_text); //  0x74686520 - the. 
+  rom_flags_type(0x0037A7EC, flags_type_arm_text); //  0x58000000 - X... 
+  rom_flags_type(0x0037A7F0, flags_type_arm_text); //  0x696E2074 - in.t 
+  rom_flags_type(0x0037A7F4, flags_type_arm_text); //  0x68652063 - he.c 
+  rom_flags_type(0x0037A7F8, flags_type_arm_text); //  0x6F726E65 - orne 
+  rom_flags_type(0x0037A7FC, flags_type_arm_text); //  0x72206265 - r.be 
+  rom_flags_type(0x0037A800, flags_type_arm_text); //  0x6C6F772E - low. 
+  rom_flags_type(0x0037A804, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0037A808, flags_type_arm_text); //  0x546F2063 - To.c 
+  rom_flags_type(0x0037A80C, flags_type_arm_text); //  0x6F6E6669 - onfi 
+  rom_flags_type(0x0037A810, flags_type_arm_text); //  0x726D2074 - rm.t 
+  rom_flags_type(0x0037A814, flags_type_arm_text); //  0x68652070 - he.p 
+  rom_flags_type(0x0037A818, flags_type_arm_text); //  0x656E2069 - en.i 
+  rom_flags_type(0x0037A81C, flags_type_arm_text); //  0x7320636F - s.co 
+  rom_flags_type(0x0037A820, flags_type_arm_text); //  0x72726563 - rrec 
+  rom_flags_type(0x0037A824, flags_type_arm_text); //  0x746C7900 - tly. 
+  rom_flags_type(0x0037A828, flags_type_arm_text); //  0x616C6967 - alig 
+  rom_flags_type(0x0037A82C, flags_type_arm_text); //  0x6E65642C - ned, 
+  rom_flags_type(0x0037A830, flags_type_arm_text); //  0x20686F6C - .hol 
+  rom_flags_type(0x0037A834, flags_type_arm_text); //  0x64207468 - d.th 
+  rom_flags_type(0x0037A838, flags_type_arm_text); //  0x65207065 - e.pe 
+  rom_flags_type(0x0037A83C, flags_type_arm_text); //  0x6E206F6E - n.on 
+  rom_flags_type(0x0037A840, flags_type_arm_text); //  0x20746865 - .the 
+  rom_flags_type(0x0037A844, flags_type_arm_text); //  0x2063656E - .cen 
+  rom_flags_type(0x0037A848, flags_type_arm_text); //  0x74657200 - ter. 
+  rom_flags_type(0x0037A84C, flags_type_arm_text); //  0x6F662074 - of.t 
+  rom_flags_type(0x0037A850, flags_type_arm_text); //  0x68697320 - his. 
+  rom_flags_type(0x0037A854, flags_type_arm_text); //  0x6C617374 - last 
+  rom_flags_type(0x0037A858, flags_type_arm_text); //  0x20582E00 - .X.. 
+  rom_flags_type(0x0037A85C, 0x0037AA5C , flags_type_data); //  0x00000000 - .... blast4bits
+  rom_flags_type(0x0037AA5C, 0x0037AB5C , flags_type_data); //  0x00000000 - .... blast2bits
+  rom_flags_type(0x0037AB5C, 0x0037AC18 , flags_type_data); //  0x00000000 - .... blastbits
+  rom_flags_type(0x0037AC18, 0x0037ACDC , flags_type_data); //  0xBE7E8000 - .~.. gUnicodeLookupTable
+  rom_flags_type(0x0037ACDC, 0x0037AECC , flags_type_data); //  0x00272720 - .''. FailureString
+  rom_flags_type(0x0037AECC, flags_type_arm_word); //  0x00000001 - .... 
+  rom_flags_type(0x0037AED0, 0x0037B000 , flags_type_data); //  0xFFFF0000 - .... yylhs
+  rom_flags_type(0x0037B000, 0x0037B130 , flags_type_data); //  0x00020000 - .... yylen
+  rom_flags_type(0x0037B130, 0x0037B398 , flags_type_data); //  0x0000002F - .../ yydefred
+  rom_flags_type(0x0037B398, 0x0037B3F4 , flags_type_data); //  0x001F0020 - .... yydgoto
+  rom_flags_type(0x0037B3F4, 0x0037B65C , flags_type_data); //  0x0EF70000 - .... yysindex
+  rom_flags_type(0x0037B65C, 0x0037B8C4 , flags_type_data); //  0x00F80000 - .... yyrindex
+  rom_flags_type(0x0037B8C4, 0x0037B920 , flags_type_data); //  0x00000000 - .... yygindex
+  rom_flags_type(0x0037B920, 0x0037DB84 , flags_type_data); //  0x008B0034 - ...4 yytable
+  rom_flags_type(0x0037DB84, 0x0037FDE8 , flags_type_data); //  0x00280000 - .(.. yycheck
+  rom_flags_type(0x0037FDE8, 0x003802CC , flags_type_data); //  0x002C22C0 - .,". yyname
+  rom_flags_type(0x003802CC, 0x0038053C , flags_type_data); //  0x002C25E0 - .,%. yyrule
+  rom_flags_type(0x0038053C, 0x00380798 , flags_type_data); //  0x40404040 - @@@@ __ctype
+  rom_flags_type(0x00380798, 0x00380880 , flags_type_data); //  0x400921FB - @.!. pi
+  rom_flags_type(0x00380880, 0x00380A94 , flags_type_data); //  0x002F56FC - ./V. exRefException
+  rom_flags_type(0x00380A94, 0x00380A9C , flags_type_data); //  0x7FEFFFFF - ... __huge_val
+  rom_flags_type(0x00380A9C, 0x00380B00 , flags_type_data); //  0x01B58C7C - ...| OpcodeProcs
+  rom_flags_type(0x00380B00, flags_type_arm_word); //  0x0C107D88 - ..}. 
+  rom_flags_type(0x00380B04, 0x00380B0C , flags_type_data); //  0x00000000 - .... whitePatternData
+  rom_flags_type(0x00380B0C, 0x00380B28 , flags_type_data); //  0x00380B04 - .8.. whitePattern
+  rom_flags_type(0x00380B28, flags_type_arm_word); //  0x00380B0C - .8.. 
+  rom_flags_type(0x00380B2C, 0x00380B34 , flags_type_data); //  0x88228822 - ."." ltGrayPatternData
+  rom_flags_type(0x00380B34, 0x00380B50 , flags_type_data); //  0x00380B2C - .8., ltGrayPattern
+  rom_flags_type(0x00380B50, flags_type_arm_word); //  0x00380B34 - .8.4 
+  rom_flags_type(0x00380B54, 0x00380B5C , flags_type_data); //  0xAA55AA55 - .U.U grayPatternData
+  rom_flags_type(0x00380B5C, 0x00380B78 , flags_type_data); //  0x00380B54 - .8.T grayPattern
+  rom_flags_type(0x00380B78, flags_type_arm_word); //  0x00380B5C - .8.\ 
+  rom_flags_type(0x00380B7C, flags_type_arm_word); //  0x77DD77DD - w.w. 
+  rom_flags_type(0x00380B80, flags_type_arm_word); //  0x77DD77DD - w.w. 
+  rom_flags_type(0x00380B84, 0x00380BA0 , flags_type_data); //  0x00380B7C - .8.| dkGrayPattern
+  rom_flags_type(0x00380BA0, flags_type_arm_word); //  0x00380B84 - .8.. 
+  rom_flags_type(0x00380BA4, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x00380BA8, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x00380BAC, flags_type_arm_word); //  0x00380BA4 - .8.. 
+  rom_flags_type(0x00380BB0, flags_type_arm_word); //  0x00010000 - .... 
+  rom_flags_type(0x00380BB4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00380BB8, flags_type_arm_word); //  0x00080008 - .... 
+  rom_flags_type(0x00380BBC, flags_type_arm_word); //  0x40000001 - @... 
+  rom_flags_type(0x00380BC0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00380BC4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00380BC8, flags_type_arm_word); //  0x00380BAC - .8.. 
+  rom_flags_type(0x00380BCC, 0x00380F94 , flags_type_data); //  0x01B54A38 - ..J8 qdConstants
+  rom_flags_type(0x00380F94, 0x00381094 , flags_type_data); //  0x008040C0 - ..@. bitFlip
+  rom_flags_type(0x00381094, 0x00381294 , flags_type_data); //  0x00000003 - .... gTwoBitTable
+  rom_flags_type(0x00381294, 0x003816B0 , flags_type_data); //  0x00000000 - .... gFourBitTable
+  rom_flags_type(0x003816B0, 0x00382324 , flags_type_data); //  0x003816A4 - .8.. wideMaster
+  rom_flags_type(0x003823A8, flags_type_arm_word); //  0xFFEFFFFF - .... 
+  rom_flags_type(0x003823AC, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x003823B0, flags_type_arm_word); //  0xE3A00002 - .... 
+  rom_flags_type(0x003823B4, flags_type_arm_word); //  0xEE008188 - .... 
+  rom_flags_type(0x003823B8, flags_type_arm_word); //  0xEA000007 - .... 
+  rom_flags_type(0x003823BC, flags_type_arm_word); //  0xE3A00002 - .... 
+  rom_flags_type(0x003823C0, flags_type_arm_word); //  0xED9F8100 - .... 
+  rom_flags_type(0x003823C4, flags_type_arm_word); //  0xEA000004 - .... 
+  rom_flags_type(0x003823C8, flags_type_arm_word); //  0x7FEFFFFF - ... 
+  rom_flags_type(0x003823CC, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x003823D0, flags_type_arm_word); //  0xE3A00002 - .... 
+  rom_flags_type(0x003823D4, flags_type_arm_word); //  0xED1F810D - .... 
+  rom_flags_type(0x003823D8, flags_type_arm_word); //  0xEAFFFFFF - .... 
+  rom_flags_type(0x0038298C, flags_type_arm_text); //  0x54434D53 - TCMS 
+  rom_flags_type(0x00382990, flags_type_arm_text); //  0x65727669 - ervi 
+  rom_flags_type(0x00382994, flags_type_arm_text); //  0x63650000 - ce.. 
+  rom_flags_type(0x00382A00, flags_type_arm_text); //  0x54456E64 - TEnd 
+  rom_flags_type(0x00382A04, flags_type_arm_text); //  0x706F696E - poin 
+  rom_flags_type(0x00382A08, flags_type_arm_text); //  0x74000000 - t... 
+  rom_flags_type(0x00383438, flags_type_arm_text); //  0x54436F6D - TCom 
+  rom_flags_type(0x0038343C, flags_type_arm_text); //  0x6D546F6F - mToo 
+  rom_flags_type(0x00383440, flags_type_arm_text); //  0x6C50726F - lPro 
+  rom_flags_type(0x00383444, flags_type_arm_text); //  0x746F636F - toco 
+  rom_flags_type(0x00383448, flags_type_arm_text); //  0x6C000000 - l... 
+  rom_flags_type(0x0038376C, flags_type_arm_text); //  0x50436F6E - PCon 
+  rom_flags_type(0x00383770, flags_type_arm_text); //  0x6E656374 - nect 
+  rom_flags_type(0x00383774, flags_type_arm_text); //  0x696F6E45 - ionE 
+  rom_flags_type(0x00383778, flags_type_arm_text); //  0x6E640000 - nd.. 
+  rom_flags_type(0x00383940, flags_type_arm_text); //  0x504D7578 - PMux 
+  rom_flags_type(0x00383944, flags_type_arm_text); //  0x43616C6C - Call 
+  rom_flags_type(0x00383948, flags_type_arm_text); //  0x4261636B - Back 
+  rom_flags_type(0x0038394C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00383AB0, flags_type_arm_text); //  0x504D7578 - PMux 
+  rom_flags_type(0x00383AB4, flags_type_arm_text); //  0x53657276 - Serv 
+  rom_flags_type(0x00383AB8, flags_type_arm_text); //  0x69636500 - ice. 
+  rom_flags_type(0x00383B98, flags_type_arm_text); //  0x504D7578 - PMux 
+  rom_flags_type(0x00383B9C, flags_type_arm_text); //  0x546F6F6C - Tool 
+  rom_flags_type(0x00383BA0, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00383C60, flags_type_arm_text); //  0x50434543 - PCEC 
+  rom_flags_type(0x00383C64, flags_type_arm_text); //  0x616C6C42 - allB 
+  rom_flags_type(0x00383C68, flags_type_arm_text); //  0x61636B00 - ack. 
+  rom_flags_type(0x00384098, flags_type_arm_text); //  0x544B7962 - TKyb 
+  rom_flags_type(0x0038409C, flags_type_arm_text); //  0x64457874 - dExt 
+  rom_flags_type(0x003840A0, flags_type_arm_text); //  0x656E7369 - ensi 
+  rom_flags_type(0x003840A4, flags_type_arm_text); //  0x6F6E0000 - on.. 
+  rom_flags_type(0x0038472C, flags_type_arm_text); //  0x54466C61 - TFla 
+  rom_flags_type(0x00384730, flags_type_arm_text); //  0x73684472 - shDr 
+  rom_flags_type(0x00384734, flags_type_arm_text); //  0x69766572 - iver 
+  rom_flags_type(0x00384738, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00384B00, flags_type_arm_text); //  0x54536572 - TSer 
+  rom_flags_type(0x00384B04, flags_type_arm_text); //  0x69616C43 - ialC 
+  rom_flags_type(0x00384B08, flags_type_arm_text); //  0x68697000 - hip. 
+  rom_flags_type(0x00384E20, flags_type_arm_text); //  0x50536572 - PSer 
+  rom_flags_type(0x00384E24, flags_type_arm_text); //  0x69616C43 - ialC 
+  rom_flags_type(0x00384E28, flags_type_arm_text); //  0x68697052 - hipR 
+  rom_flags_type(0x00384E2C, flags_type_arm_text); //  0x65676973 - egis 
+  rom_flags_type(0x00384E30, flags_type_arm_text); //  0x74727900 - try. 
+  rom_flags_type(0x00385050, flags_type_arm_text); //  0x54536572 - TSer 
+  rom_flags_type(0x00385054, flags_type_arm_text); //  0x69616C44 - ialD 
+  rom_flags_type(0x00385058, flags_type_arm_text); //  0x65627567 - ebug 
+  rom_flags_type(0x0038505C, flags_type_arm_text); //  0x4C696E6B - Link 
+  rom_flags_type(0x00385060, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0038541C, flags_type_arm_text); //  0x504C696E - PLin 
+  rom_flags_type(0x00385420, flags_type_arm_text); //  0x6B000000 - k... 
+  rom_flags_type(0x00385570, flags_type_arm_text); //  0x50415453 - PATS 
+  rom_flags_type(0x00385574, flags_type_arm_text); //  0x7461636B - tack 
+  rom_flags_type(0x00385578, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003857A4, flags_type_arm_text); //  0x54566572 - TVer 
+  rom_flags_type(0x003857A8, flags_type_arm_text); //  0x73696F6E - sion 
+  rom_flags_type(0x003857AC, flags_type_arm_text); //  0x53747269 - Stri 
+  rom_flags_type(0x003857B0, flags_type_arm_text); //  0x6E670000 - ng.. 
+  rom_flags_type(0x00385810, flags_type_arm_text); //  0x5453706C - TSpl 
+  rom_flags_type(0x00385814, flags_type_arm_text); //  0x61736853 - ashS 
+  rom_flags_type(0x00385818, flags_type_arm_text); //  0x63726565 - cree 
+  rom_flags_type(0x0038581C, flags_type_arm_text); //  0x6E496E66 - nInf 
+  rom_flags_type(0x00385820, flags_type_arm_text); //  0x6F000000 - o... 
+  rom_flags_type(0x00385B04, flags_type_arm_text); //  0x54457874 - TExt 
+  rom_flags_type(0x00385B08, flags_type_arm_text); //  0x65726E61 - erna 
+  rom_flags_type(0x00385B0C, flags_type_arm_text); //  0x6C4E6577 - lNew 
+  rom_flags_type(0x00385B10, flags_type_arm_text); //  0x74457665 - tEve 
+  rom_flags_type(0x00385B14, flags_type_arm_text); //  0x6E744861 - ntHa 
+  rom_flags_type(0x00385B18, flags_type_arm_text); //  0x6E646C65 - ndle 
+  rom_flags_type(0x00385B1C, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x00385B7C, flags_type_arm_text); //  0x54546162 - TTab 
+  rom_flags_type(0x00385B80, flags_type_arm_text); //  0x6C657444 - letD 
+  rom_flags_type(0x00385B84, flags_type_arm_text); //  0x72697665 - rive 
+  rom_flags_type(0x00385B88, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x00385D88, flags_type_arm_text); //  0x50426174 - PBat 
+  rom_flags_type(0x00385D8C, flags_type_arm_text); //  0x74657279 - tery 
+  rom_flags_type(0x00385D90, flags_type_arm_text); //  0x44726976 - Driv 
+  rom_flags_type(0x00385D94, flags_type_arm_text); //  0x65720000 - er.. 
+  rom_flags_type(0x00385F3C, flags_type_arm_text); //  0x6576742E - evt. 
+  rom_flags_type(0x00385F40, flags_type_arm_text); //  0x65782E6D - ex.m 
+  rom_flags_type(0x00385F44, flags_type_arm_text); //  0x6F6E6361 - onca 
+  rom_flags_type(0x00385F48, flags_type_arm_text); //  0x6C6C0000 - ll.. 
+  rom_flags_type(0x00385F54, flags_type_arm_text); //  0x54436C61 - TCla 
+  rom_flags_type(0x00385F58, flags_type_arm_text); //  0x7373496E - ssIn 
+  rom_flags_type(0x00385F5C, flags_type_arm_text); //  0x666F5265 - foRe 
+  rom_flags_type(0x00385F60, flags_type_arm_text); //  0x67697374 - gist 
+  rom_flags_type(0x00385F64, flags_type_arm_text); //  0x72790000 - ry.. 
+  rom_flags_type(0x003861EC, flags_type_arm_word); //  0x54537461 - TSta 
+  rom_flags_type(0x003861F0, flags_type_arm_word); //  0x72747570 - rtup 
+  rom_flags_type(0x003861F4, flags_type_arm_word); //  0x44726976 - Driv 
+  rom_flags_type(0x003861F8, flags_type_arm_word); //  0x65720000 - er.. 
+  rom_flags_type(0x00386210, flags_type_arm_text); //  0x54415441 - TATA 
+  rom_flags_type(0x00386214, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0038634C, flags_type_arm_text); //  0x54436172 - TCar 
+  rom_flags_type(0x00386350, flags_type_arm_text); //  0x6448616E - dHan 
+  rom_flags_type(0x00386354, flags_type_arm_text); //  0x646C6572 - dler 
+  rom_flags_type(0x00386358, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x0038646C, flags_type_arm_text); //  0x54466C61 - TFla 
+  rom_flags_type(0x00386470, flags_type_arm_text); //  0x73680000 - sh.. 
+  rom_flags_type(0x00386A00, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x00386A04, flags_type_arm_text); //  0x72650000 - re.. 
+  rom_flags_type(0x00386C80, flags_type_arm_text); //  0x6576742E - evt. 
+  rom_flags_type(0x00386C84, flags_type_arm_text); //  0x65782E6D - ex.m 
+  rom_flags_type(0x00386C88, flags_type_arm_text); //  0x6F6E6361 - onca 
+  rom_flags_type(0x00386C8C, flags_type_arm_text); //  0x6C6C0000 - ll.. 
+  rom_flags_type(0x00386C98, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x00386C9C, flags_type_arm_text); //  0x72654D6F - reMo 
+  rom_flags_type(0x00386CA0, flags_type_arm_text); //  0x6E69746F - nito 
+  rom_flags_type(0x00386CA4, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x003872D0, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x003872D4, flags_type_arm_text); //  0x72654465 - reDe 
+  rom_flags_type(0x003872D8, flags_type_arm_text); //  0x636F6D70 - comp 
+  rom_flags_type(0x003872DC, flags_type_arm_text); //  0x72657373 - ress 
+  rom_flags_type(0x003872E0, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x0038734C, flags_type_arm_text); //  0x5453746F - TSto 
+  rom_flags_type(0x00387350, flags_type_arm_text); //  0x7265436F - reCo 
+  rom_flags_type(0x00387354, flags_type_arm_text); //  0x6D70616E - mpan 
+  rom_flags_type(0x00387358, flags_type_arm_text); //  0x64657200 - der. 
+  rom_flags_type(0x003873F4, flags_type_arm_text); //  0x544C7267 - TLrg 
+  rom_flags_type(0x003873F8, flags_type_arm_text); //  0x4F626A53 - ObjS 
+  rom_flags_type(0x003873FC, flags_type_arm_text); //  0x746F7265 - tore 
+  rom_flags_type(0x00387400, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00387ABC, flags_type_arm_text); //  0x5456616C - TVal 
+  rom_flags_type(0x00387AC0, flags_type_arm_text); //  0x69646174 - idat 
+  rom_flags_type(0x00387AC4, flags_type_arm_text); //  0x65506163 - ePac 
+  rom_flags_type(0x00387AC8, flags_type_arm_text); //  0x6B616765 - kage 
+  rom_flags_type(0x00387ACC, flags_type_arm_text); //  0x44726976 - Driv 
+  rom_flags_type(0x00387AD0, flags_type_arm_text); //  0x65720000 - er.. 
+  rom_flags_type(0x00387DE8, flags_type_arm_text); //  0x54506C61 - TPla 
+  rom_flags_type(0x00387DEC, flags_type_arm_text); //  0x74666F72 - tfor 
+  rom_flags_type(0x00387DF0, flags_type_arm_text); //  0x6D447269 - mDri 
+  rom_flags_type(0x00387DF4, flags_type_arm_text); //  0x76657200 - ver. 
+  rom_flags_type(0x00387F20, flags_type_arm_text); //  0x54507269 - TPri 
+  rom_flags_type(0x00387F24, flags_type_arm_text); //  0x6E746572 - nter 
+  rom_flags_type(0x00387F28, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00388060, flags_type_arm_text); //  0x54446F74 - TDot 
+  rom_flags_type(0x00388064, flags_type_arm_text); //  0x5072696E - Prin 
+  rom_flags_type(0x00388068, flags_type_arm_text); //  0x74657244 - terD 
+  rom_flags_type(0x0038806C, flags_type_arm_text); //  0x72697665 - rive 
+  rom_flags_type(0x00388070, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x003881A8, flags_type_arm_text); //  0x54505350 - TPSP 
+  rom_flags_type(0x003881AC, flags_type_arm_text); //  0x72696E74 - rint 
+  rom_flags_type(0x003881B0, flags_type_arm_text); //  0x65724472 - erDr 
+  rom_flags_type(0x003881B4, flags_type_arm_text); //  0x69766572 - iver 
+  rom_flags_type(0x003881B8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00388590, flags_type_arm_text); //  0x54536372 - TScr 
+  rom_flags_type(0x00388594, flags_type_arm_text); //  0x65656E44 - eenD 
+  rom_flags_type(0x00388598, flags_type_arm_text); //  0x72697665 - rive 
+  rom_flags_type(0x0038859C, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x00388B20, flags_type_arm_text); //  0x54506978 - TPix 
+  rom_flags_type(0x00388B24, flags_type_arm_text); //  0x656C4D61 - elMa 
+  rom_flags_type(0x00388B28, flags_type_arm_text); //  0x70416E74 - pAnt 
+  rom_flags_type(0x00388B2C, flags_type_arm_text); //  0x69616C69 - iali 
+  rom_flags_type(0x00388B30, flags_type_arm_text); //  0x61730000 - as.. 
+  rom_flags_type(0x00388BC0, flags_type_arm_text); //  0x54575265 - TWRe 
+  rom_flags_type(0x00388BC4, flags_type_arm_text); //  0x636F676E - cogn 
+  rom_flags_type(0x00388BC8, flags_type_arm_text); //  0x697A6572 - izer 
+  rom_flags_type(0x00388BCC, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00388D9C, flags_type_arm_text); //  0x54536F75 - TSou 
+  rom_flags_type(0x00388DA0, flags_type_arm_text); //  0x6E64436F - ndCo 
+  rom_flags_type(0x00388DA4, flags_type_arm_text); //  0x64656300 - dec. 
+  rom_flags_type(0x00389090, flags_type_arm_text); //  0x50536F75 - PSou 
+  rom_flags_type(0x00389094, flags_type_arm_text); //  0x6E644472 - ndDr 
+  rom_flags_type(0x00389098, flags_type_arm_text); //  0x69766572 - iver 
+  rom_flags_type(0x0038909C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00389348, flags_type_arm_text); //  0x54546573 - TTes 
+  rom_flags_type(0x0038934C, flags_type_arm_text); //  0x74436173 - tCas 
+  rom_flags_type(0x00389350, flags_type_arm_text); //  0x65000000 - e... 
+  rom_flags_type(0x00389550, flags_type_arm_text); //  0x54436F6D - TCom 
+  rom_flags_type(0x00389554, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x00389558, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x003895D0, flags_type_arm_text); //  0x5443616C - TCal 
+  rom_flags_type(0x003895D4, flags_type_arm_text); //  0x6C626163 - lbac 
+  rom_flags_type(0x003895D8, flags_type_arm_text); //  0x6B436F6D - kCom 
+  rom_flags_type(0x003895DC, flags_type_arm_text); //  0x70726573 - pres 
+  rom_flags_type(0x003895E0, flags_type_arm_text); //  0x736F7200 - sor. 
+  rom_flags_type(0x00389664, flags_type_arm_text); //  0x54446563 - TDec 
+  rom_flags_type(0x00389668, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x0038966C, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x00389670, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x003896DC, flags_type_arm_text); //  0x5443616C - TCal 
+  rom_flags_type(0x003896E0, flags_type_arm_text); //  0x6C626163 - lbac 
+  rom_flags_type(0x003896E4, flags_type_arm_text); //  0x6B446563 - kDec 
+  rom_flags_type(0x003896E8, flags_type_arm_text); //  0x6F6D7072 - ompr 
+  rom_flags_type(0x003896EC, flags_type_arm_text); //  0x6573736F - esso 
+  rom_flags_type(0x003896F0, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x00389C44, flags_type_arm_text); //  0x54457665 - TEve 
+  rom_flags_type(0x00389C48, flags_type_arm_text); //  0x6E74436F - ntCo 
+  rom_flags_type(0x00389C4C, flags_type_arm_text); //  0x6C6C6563 - llec 
+  rom_flags_type(0x00389C50, flags_type_arm_text); //  0x746F7200 - tor. 
+  rom_flags_type(0x00389D94, flags_type_arm_text); //  0x50496E54 - PInT 
+  rom_flags_type(0x00389D98, flags_type_arm_text); //  0x72616E73 - rans 
+  rom_flags_type(0x00389D9C, flags_type_arm_text); //  0x6C61746F - lato 
+  rom_flags_type(0x00389DA0, flags_type_arm_text); //  0x72000000 - r... 
+  rom_flags_type(0x00389E24, flags_type_arm_text); //  0x504F7574 - POut 
+  rom_flags_type(0x00389E28, flags_type_arm_text); //  0x5472616E - Tran 
+  rom_flags_type(0x00389E2C, flags_type_arm_text); //  0x736C6174 - slat 
+  rom_flags_type(0x00389E30, flags_type_arm_text); //  0x6F720000 - or.. 
+  rom_flags_type(0x00389F08, flags_type_arm_text); //  0x50467261 - PFra 
+  rom_flags_type(0x00389F0C, flags_type_arm_text); //  0x6D65536F - meSo 
+  rom_flags_type(0x00389F10, flags_type_arm_text); //  0x75726365 - urce 
+  rom_flags_type(0x00389F14, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00389F74, flags_type_arm_text); //  0x50467261 - PFra 
+  rom_flags_type(0x00389F78, flags_type_arm_text); //  0x6D655369 - meSi 
+  rom_flags_type(0x00389F7C, flags_type_arm_text); //  0x6E6B0000 - nk.. 
+  rom_flags_type(0x0038A744, 0x0038A7A0 , flags_type_data); //  0x0038A4A4 - .8.. C
+  rom_flags_type(0x0038A940, 0x0038A974 , flags_type_data); //  0x0038A7A0 - .8.. C
+  rom_flags_type(0x0038AAEC, flags_type_arm_text); //  0x436C6173 - Clas 
+  rom_flags_type(0x0038AAF0, flags_type_arm_text); //  0x73204F6E - s.On 
+  rom_flags_type(0x0038AAF4, flags_type_arm_text); //  0x65204D6F - e.Mo 
+  rom_flags_type(0x0038AAF8, flags_type_arm_text); //  0x64656D00 - dem. 
+  rom_flags_type(0x0038C884, flags_type_arm_text); //  0x5F205F20 - _._. 
+  rom_flags_type(0x0038C888, flags_type_arm_text); //  0x6D61696E - main 
+  rom_flags_type(0x0038C88C, flags_type_arm_text); //  0x20212100 - .!!. 
+  rom_flags_type(0x0038C890, flags_type_arm_text); //  0x5F206D61 - _.ma 
+  rom_flags_type(0x0038C894, flags_type_arm_text); //  0x696E2021 - in.! 
+  rom_flags_type(0x0038C898, flags_type_arm_text); //  0x21000000 - !... 
+  rom_flags_type(0x0038CBA4, flags_type_arm_word); //  0x0C105A54 - ..ZT 
+  rom_flags_type(0x0038CBA8, flags_type_arm_word); //  0x0C105A58 - ..ZX 
+  rom_flags_type(0x0038D22C, flags_type_arm_word); //  0xDEADBEEF - .... 
+  rom_flags_type(0x0038D230, flags_type_arm_word); //  0x0038D430 - .8.0 
+  rom_flags_type(0x0038D234, flags_type_arm_word); //  0x0038D288 - .8.. 
+  rom_flags_type(0x0038D238, flags_type_arm_word); //  0x0038D290 - .8.. 
+  rom_flags_type(0x0038D23C, flags_type_arm_word); //  0x0038D298 - .8.. 
+  rom_flags_type(0x0038D240, flags_type_arm_word); //  0x0038D2A4 - .8.. 
+  rom_flags_type(0x0038D244, flags_type_arm_word); //  0x0038D2AC - .8.. 
+  rom_flags_type(0x0038D248, flags_type_arm_word); //  0x0038D2CC - .8.. 
+  rom_flags_type(0x0038D24C, flags_type_arm_word); //  0x0038D274 - .8.t 
+  rom_flags_type(0x0038D250, flags_type_arm_word); //  0x0038D41C - .8.. 
+  rom_flags_type(0x0038D254, flags_type_arm_word); //  0x0038D274 - .8.t 
+  rom_flags_type(0x0038D258, flags_type_arm_word); //  0x0038D274 - .8.t 
+  rom_flags_type(0x0038D25C, flags_type_arm_word); //  0x0038D2EC - .8.. 
+  rom_flags_type(0x0038D260, flags_type_arm_word); //  0x0038D33C - .8.< 
+  rom_flags_type(0x0038D264, flags_type_arm_word); //  0x0038D274 - .8.t 
+  rom_flags_type(0x0038D268, flags_type_arm_word); //  0x0038D348 - .8.H 
+  rom_flags_type(0x0038D26C, flags_type_arm_word); //  0x0038D274 - .8.t 
+  rom_flags_type(0x0038D270, flags_type_arm_word); //  0x0038D3D8 - .8.. 
+  rom_flags_type(0x0038D6A8, flags_type_arm_word); //  0x00000100 - .... 
+  rom_flags_type(0x0038D6AC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D6EC, flags_type_arm_word); //  0x0038D6AC - .8.. 
+  rom_flags_type(0x0038D6F0, flags_type_arm_word); //  0x0F184800 - ..H. 
+  rom_flags_type(0x0038D6F4, flags_type_arm_word); //  0x0F110400 - .... 
+  rom_flags_type(0x0038D798, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D79C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D864, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D868, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D86C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D8C8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D8CC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D8D0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D8D4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D8D8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038D9A8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E858, flags_type_arm_word); //  0x00003F81 - ..?. 
+  rom_flags_type(0x0038E85C, flags_type_arm_word); //  0x0000407E - ..@~ 
+  rom_flags_type(0x0038E860, flags_type_arm_word); //  0x00003F81 - ..?. 
+  rom_flags_type(0x0038E864, flags_type_arm_word); //  0x0000407E - ..@~ 
+  rom_flags_type(0x0038E868, flags_type_arm_word); //  0x00003F81 - ..?. 
+  rom_flags_type(0x0038E86C, flags_type_arm_word); //  0x0000407E - ..@~ 
+  rom_flags_type(0x0038E870, flags_type_arm_word); //  0x00003F81 - ..?. 
+  rom_flags_type(0x0038E874, flags_type_arm_word); //  0x0000407E - ..@~ 
+  rom_flags_type(0x0038E878, flags_type_arm_word); //  0x00003C01 - ..<. 
+  rom_flags_type(0x0038E87C, flags_type_arm_word); //  0x000043FE - ..C. 
+  rom_flags_type(0x0038E880, flags_type_arm_word); //  0x00003C01 - ..<. 
+  rom_flags_type(0x0038E884, flags_type_arm_word); //  0x000043FE - ..C. 
+  rom_flags_type(0x0038E888, flags_type_arm_word); //  0x00003C01 - ..<. 
+  rom_flags_type(0x0038E88C, flags_type_arm_word); //  0x000043FE - ..C. 
+  rom_flags_type(0x0038E890, flags_type_arm_word); //  0x00003C01 - ..<. 
+  rom_flags_type(0x0038E894, flags_type_arm_word); //  0x000043FE - ..C. 
+  rom_flags_type(0x0038E898, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E89C, flags_type_arm_word); //  0x00007FFE - ... 
+  rom_flags_type(0x0038E8A0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8A4, flags_type_arm_word); //  0x00007FFE - ... 
+  rom_flags_type(0x0038E8A8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8AC, flags_type_arm_word); //  0x00007FFE - ... 
+  rom_flags_type(0x0038E8B0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8B4, flags_type_arm_word); //  0x00007FFE - ... 
+  rom_flags_type(0x0038E8B8, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8BC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8C0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8C4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8C8, flags_type_arm_word); //  0x00003FFF - ..?. 
+  rom_flags_type(0x0038E8CC, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0038E8D0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8D4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8D8, flags_type_arm_word); //  0x00004000 - ..@. 
+  rom_flags_type(0x0038E8DC, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0038E8E0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8E4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8E8, flags_type_arm_word); //  0x00004000 - ..@. 
+  rom_flags_type(0x0038E8EC, flags_type_arm_word); //  0xC0000000 - .... 
+  rom_flags_type(0x0038E8F0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8F4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E8F8, flags_type_arm_word); //  0x00004001 - ..@. 
+  rom_flags_type(0x0038E8FC, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0038E900, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E904, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E908, flags_type_arm_word); //  0x00004001 - ..@. 
+  rom_flags_type(0x0038E90C, flags_type_arm_word); //  0xA0000000 - .... 
+  rom_flags_type(0x0038E910, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E914, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E918, flags_type_arm_word); //  0x00003FFE - ..?. 
+  rom_flags_type(0x0038E91C, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0038E920, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E924, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E928, flags_type_arm_word); //  0x00004002 - ..@. 
+  rom_flags_type(0x0038E92C, flags_type_arm_word); //  0xA0000000 - .... 
+  rom_flags_type(0x0038E930, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E934, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E980, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038E9E4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038EA30, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038EC9C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038EFE8, flags_type_arm_word); //  0x0F0F0000 - .... 
+  rom_flags_type(0x0038EFEC, flags_type_arm_word); //  0xF0F00000 - .... 
+  rom_flags_type(0x0038EFF0, flags_type_arm_word); //  0x33330000 - 33.. 
+  rom_flags_type(0x0038EFF4, flags_type_arm_word); //  0xCCCC0000 - .... 
+  rom_flags_type(0x0038EFF8, flags_type_arm_word); //  0x00FF0000 - .... 
+  rom_flags_type(0x0038EFFC, flags_type_arm_word); //  0xFF000000 - .... 
+  rom_flags_type(0x0038F000, flags_type_arm_word); //  0x55550000 - UU.. 
+  rom_flags_type(0x0038F004, flags_type_arm_word); //  0xAAAA0000 - .... 
+  rom_flags_type(0x0038F008, flags_type_arm_word); //  0x30300000 - 00.. 
+  rom_flags_type(0x0038F00C, flags_type_arm_word); //  0xCFCF0000 - .... 
+  rom_flags_type(0x0038F010, flags_type_arm_word); //  0xAA550000 - .U.. 
+  rom_flags_type(0x0038F014, flags_type_arm_word); //  0x55AA0000 - U... 
+  rom_flags_type(0x0038F018, flags_type_arm_word); //  0xA0500000 - .P.. 
+  rom_flags_type(0x0038F01C, flags_type_arm_word); //  0x5FAF0000 - _... 
+  rom_flags_type(0x0038F020, flags_type_arm_word); //  0xFFFF0000 - .... 
+  rom_flags_type(0x0038F024, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F38C, flags_type_arm_word); //  0x00003F81 - ..?. 
+  rom_flags_type(0x0038F390, flags_type_arm_word); //  0x0000407E - ..@~ 
+  rom_flags_type(0x0038F394, flags_type_arm_word); //  0x00003C01 - ..<. 
+  rom_flags_type(0x0038F398, flags_type_arm_word); //  0x000043FE - ..C. 
+  rom_flags_type(0x0038F514, flags_type_arm_word); //  0x00003FFE - ..?. 
+  rom_flags_type(0x0038F518, flags_type_arm_word); //  0x00013441 - ..4A 
+  rom_flags_type(0x0038F864, flags_type_arm_word); //  0x00003FFF - ..?. 
+  rom_flags_type(0x0038F868, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0038F86C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F870, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F874, flags_type_arm_word); //  0x00004002 - ..@. 
+  rom_flags_type(0x0038F878, flags_type_arm_word); //  0xA0000000 - .... 
+  rom_flags_type(0x0038F87C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F880, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F884, flags_type_arm_word); //  0x00004005 - ..@. 
+  rom_flags_type(0x0038F888, flags_type_arm_word); //  0xC8000000 - .... 
+  rom_flags_type(0x0038F88C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F890, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F894, flags_type_arm_word); //  0x00004008 - ..@. 
+  rom_flags_type(0x0038F898, flags_type_arm_word); //  0xFA000000 - .... 
+  rom_flags_type(0x0038F89C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8A0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8A4, flags_type_arm_word); //  0x0000400C - ..@. 
+  rom_flags_type(0x0038F8A8, flags_type_arm_word); //  0x9C400000 - .@.. 
+  rom_flags_type(0x0038F8AC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8B0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8B4, flags_type_arm_word); //  0x0000400F - ..@. 
+  rom_flags_type(0x0038F8B8, flags_type_arm_word); //  0xC3500000 - .P.. 
+  rom_flags_type(0x0038F8BC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8C0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8C4, flags_type_arm_word); //  0x00004012 - ..@. 
+  rom_flags_type(0x0038F8C8, flags_type_arm_word); //  0xF4240000 - .$.. 
+  rom_flags_type(0x0038F8CC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8D0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8D4, flags_type_arm_word); //  0x00004016 - ..@. 
+  rom_flags_type(0x0038F8D8, flags_type_arm_word); //  0x98968000 - .... 
+  rom_flags_type(0x0038F8DC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8E0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8E4, flags_type_arm_word); //  0x00004019 - ..@. 
+  rom_flags_type(0x0038F8E8, flags_type_arm_word); //  0xBEBC2000 - .... 
+  rom_flags_type(0x0038F8EC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8F0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F8F4, flags_type_arm_word); //  0x0000401C - ..@. 
+  rom_flags_type(0x0038F8F8, flags_type_arm_word); //  0xEE6B2800 - .k(. 
+  rom_flags_type(0x0038F8FC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F900, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F904, flags_type_arm_word); //  0x00004020 - ..@. 
+  rom_flags_type(0x0038F908, flags_type_arm_word); //  0x9502F900 - .... 
+  rom_flags_type(0x0038F90C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F910, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F914, flags_type_arm_word); //  0x00004023 - ..@# 
+  rom_flags_type(0x0038F918, flags_type_arm_word); //  0xBA43B740 - .C.@ 
+  rom_flags_type(0x0038F91C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F920, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F924, flags_type_arm_word); //  0x00004026 - ..@& 
+  rom_flags_type(0x0038F928, flags_type_arm_word); //  0xE8D4A510 - .... 
+  rom_flags_type(0x0038F92C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F930, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F934, flags_type_arm_word); //  0x0000402A - ..@* 
+  rom_flags_type(0x0038F938, flags_type_arm_word); //  0x9184E72A - ...* 
+  rom_flags_type(0x0038F93C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F940, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F944, flags_type_arm_word); //  0x0000402D - ..@- 
+  rom_flags_type(0x0038F948, flags_type_arm_word); //  0xB5E620F4 - .... 
+  rom_flags_type(0x0038F94C, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0038F950, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F954, flags_type_arm_word); //  0x00004030 - ..@0 
+  rom_flags_type(0x0038F958, flags_type_arm_word); //  0xE35FA931 - ._.1 
+  rom_flags_type(0x0038F95C, flags_type_arm_word); //  0xA0000000 - .... 
+  rom_flags_type(0x0038F960, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F964, flags_type_arm_word); //  0x00004034 - ..@4 
+  rom_flags_type(0x0038F968, flags_type_arm_word); //  0x8E1BC9BF - .... 
+  rom_flags_type(0x0038F96C, flags_type_arm_word); //  0x04000000 - .... 
+  rom_flags_type(0x0038F970, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F974, flags_type_arm_word); //  0x00004037 - ..@7 
+  rom_flags_type(0x0038F978, flags_type_arm_word); //  0xB1A2BC2E - .... 
+  rom_flags_type(0x0038F97C, flags_type_arm_word); //  0xC5000000 - .... 
+  rom_flags_type(0x0038F980, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F984, flags_type_arm_word); //  0x0000403A - ..@: 
+  rom_flags_type(0x0038F988, flags_type_arm_word); //  0xDE0B6B3A - ..k: 
+  rom_flags_type(0x0038F98C, flags_type_arm_word); //  0x76400000 - v@.. 
+  rom_flags_type(0x0038F990, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F994, flags_type_arm_word); //  0x0000403E - ..@> 
+  rom_flags_type(0x0038F998, flags_type_arm_word); //  0x8AC72304 - ..#. 
+  rom_flags_type(0x0038F99C, flags_type_arm_word); //  0x89E80000 - .... 
+  rom_flags_type(0x0038F9A0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F9A4, flags_type_arm_word); //  0x00004041 - ..@A 
+  rom_flags_type(0x0038F9A8, flags_type_arm_word); //  0xAD78EBC5 - .x.. 
+  rom_flags_type(0x0038F9AC, flags_type_arm_word); //  0xAC620000 - .b.. 
+  rom_flags_type(0x0038F9B0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F9B4, flags_type_arm_word); //  0x00004044 - ..@D 
+  rom_flags_type(0x0038F9B8, flags_type_arm_word); //  0xD8D726B7 - ..&. 
+  rom_flags_type(0x0038F9BC, flags_type_arm_word); //  0x177A8000 - .z.. 
+  rom_flags_type(0x0038F9C0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F9C4, flags_type_arm_word); //  0x00004048 - ..@H 
+  rom_flags_type(0x0038F9C8, flags_type_arm_word); //  0x87867832 - ..x2 
+  rom_flags_type(0x0038F9CC, flags_type_arm_word); //  0x6EAC9000 - n... 
+  rom_flags_type(0x0038F9D0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F9D4, flags_type_arm_word); //  0x0000404B - ..@K 
+  rom_flags_type(0x0038F9D8, flags_type_arm_word); //  0xA968163F - .h.? 
+  rom_flags_type(0x0038F9DC, flags_type_arm_word); //  0x0A57B400 - .W.. 
+  rom_flags_type(0x0038F9E0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F9E4, flags_type_arm_word); //  0x0000404E - ..@N 
+  rom_flags_type(0x0038F9E8, flags_type_arm_word); //  0xD3C21BCE - .... 
+  rom_flags_type(0x0038F9EC, flags_type_arm_word); //  0xCCEDA100 - .... 
+  rom_flags_type(0x0038F9F0, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038F9F4, flags_type_arm_word); //  0x00004052 - ..@R 
+  rom_flags_type(0x0038F9F8, flags_type_arm_word); //  0x84595161 - .YQa 
+  rom_flags_type(0x0038F9FC, flags_type_arm_word); //  0x401484A0 - @... 
+  rom_flags_type(0x0038FA00, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038FA04, flags_type_arm_word); //  0x00004055 - ..@U 
+  rom_flags_type(0x0038FA08, flags_type_arm_word); //  0xA56FA5B9 - .o.. 
+  rom_flags_type(0x0038FA0C, flags_type_arm_word); //  0x9019A5C8 - .... 
+  rom_flags_type(0x0038FA10, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038FA14, flags_type_arm_word); //  0x00004058 - ..@X 
+  rom_flags_type(0x0038FA18, flags_type_arm_word); //  0xCECB8F27 - ...' 
+  rom_flags_type(0x0038FA1C, flags_type_arm_word); //  0xF4200F3A - ...: 
+  rom_flags_type(0x0038FA20, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038FF04, flags_type_arm_word); //  0x00000FFF - .... 
+  rom_flags_type(0x0038FF08, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0038FF0C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038FF10, flags_type_arm_word); //  0x00006FFF - ..o. 
+  rom_flags_type(0x0038FF14, flags_type_arm_word); //  0x80000000 - .... 
+  rom_flags_type(0x0038FF18, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0038FF1C, flags_type_arm_word); //  0x6F05B59D - o... 
+  rom_flags_type(0x0038FF20, flags_type_arm_word); //  0x3B200000 - ;... 
+  rom_flags_type(0x0038FF24, flags_type_arm_word); //  0x16EF0A57 - ...W 
+  rom_flags_type(0x0038FF28, flags_type_arm_word); //  0xB4000000 - .... 
+  rom_flags_type(0x003900C0, flags_type_arm_word); //  0x0000FEFE - .... 
+  rom_flags_type(0x003900C4, flags_type_arm_word); //  0xFE030303 - .... 
+  rom_flags_type(0x003900C8, flags_type_arm_word); //  0x0000FEFE - .... 
+  rom_flags_type(0x003900CC, flags_type_arm_word); //  0xFE030303 - .... 
+  rom_flags_type(0x003900D0, flags_type_arm_word); //  0x00000303 - .... 
+  rom_flags_type(0x003900D4, flags_type_arm_word); //  0x03030303 - .... 
+  rom_flags_type(0x003900D8, flags_type_arm_word); //  0x0000FEFE - .... 
+  rom_flags_type(0x003900DC, flags_type_arm_word); //  0xFEFEFEFE - .... 
+  rom_flags_type(0x003900E0, flags_type_arm_word); //  0x0000FEFE - .... 
+  rom_flags_type(0x003900E4, flags_type_arm_word); //  0xFEFEFEFE - .... 
+  rom_flags_type(0x003900E8, flags_type_arm_word); //  0x00000303 - .... 
+  rom_flags_type(0x003900EC, flags_type_arm_word); //  0x03030303 - .... 
+  rom_flags_type(0x003900F0, flags_type_arm_word); //  0x0000FEFE - .... 
+  rom_flags_type(0x003900F4, flags_type_arm_word); //  0xFEFEFEFE - .... 
+  rom_flags_type(0x003900F8, flags_type_arm_word); //  0x0000FEFE - .... 
+  rom_flags_type(0x003900FC, flags_type_arm_word); //  0xFEFEFEFE - .... 
+  rom_flags_type(0x00390100, flags_type_arm_word); //  0x40007FFF - @.. 
+  rom_flags_type(0x00390104, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00390108, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0039010C, flags_type_arm_word); //  0x0000407E - ..@~ 
+  rom_flags_type(0x00390110, flags_type_arm_word); //  0xFFFFFF00 - .... 
+  rom_flags_type(0x00390114, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00390118, flags_type_arm_word); //  0x000043FE - ..C. 
+  rom_flags_type(0x0039011C, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x00390120, flags_type_arm_word); //  0xFFFFF800 - .... 
+  rom_flags_type(0x00390124, flags_type_arm_word); //  0x00007FFE - ... 
+  rom_flags_type(0x00390128, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x0039012C, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x00390130, flags_type_arm_word); //  0xC0007FFF - ... 
+  rom_flags_type(0x00390134, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00390138, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0039013C, flags_type_arm_word); //  0x8000407E - ..@~ 
+  rom_flags_type(0x00390140, flags_type_arm_word); //  0xFFFFFF00 - .... 
+  rom_flags_type(0x00390144, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00390148, flags_type_arm_word); //  0x800043FE - ..C. 
+  rom_flags_type(0x0039014C, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x00390150, flags_type_arm_word); //  0xFFFFF800 - .... 
+  rom_flags_type(0x00390154, flags_type_arm_word); //  0x80007FFE - ... 
+  rom_flags_type(0x00390158, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x0039015C, flags_type_arm_word); //  0xFFFFFFFF - .... 
+  rom_flags_type(0x00390160, flags_type_arm_word); //  0x00000030 - ...0 
+  rom_flags_type(0x00390164, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00390168, flags_type_arm_word); //  0x0000003C - ...< 
+  rom_flags_type(0x0039016C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00390170, flags_type_arm_word); //  0x00000030 - ...0 
+  rom_flags_type(0x00390174, flags_type_arm_word); //  0x0000000C - .... 
+  rom_flags_type(0x00390178, flags_type_arm_word); //  0x0000003C - ...< 
+  rom_flags_type(0x0039017C, flags_type_arm_word); //  0x0000000C - .... 
+  rom_flags_type(0x00390180, flags_type_arm_word); //  0x00000030 - ...0 
+  rom_flags_type(0x00390184, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00390188, flags_type_arm_word); //  0x00000048 - ...H 
+  rom_flags_type(0x0039018C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00390190, flags_type_arm_word); //  0x00000030 - ...0 
+  rom_flags_type(0x00390194, flags_type_arm_word); //  0x00000018 - .... 
+  rom_flags_type(0x00390198, flags_type_arm_word); //  0x00000048 - ...H 
+  rom_flags_type(0x0039019C, flags_type_arm_word); //  0x00000018 - .... 
+  rom_flags_type(0x003901A0, flags_type_arm_word); //  0x00000030 - ...0 
+  rom_flags_type(0x003901A4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003901A8, flags_type_arm_word); //  0x00000054 - ...T 
+  rom_flags_type(0x003901AC, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003901B0, flags_type_arm_word); //  0x00000030 - ...0 
+  rom_flags_type(0x003901B4, flags_type_arm_word); //  0x00000024 - ...$ 
+  rom_flags_type(0x003901B8, flags_type_arm_word); //  0x00000054 - ...T 
+  rom_flags_type(0x003901BC, flags_type_arm_word); //  0x00000024 - ...$ 
+  rom_flags_type(0x0039035C, flags_type_arm_word); //  0x40007FFF - @.. 
+  rom_flags_type(0x00390360, flags_type_arm_word); //  0x40000200 - @... 
+  rom_flags_type(0x00390364, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003904CC, flags_type_arm_word); //  0x40007FFF - @.. 
+  rom_flags_type(0x003904D0, flags_type_arm_word); //  0x40000300 - @... 
+  rom_flags_type(0x003904D4, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00392540, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00392544, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00392548, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x0039254C, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00392550, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00392554, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x00392758, flags_type_arm_word); //  0x00000000 - .... 
+  rom_flags_type(0x003928D8, flags_type_arm_word); //  0x00FFFFFF - .... 
+  rom_flags_type(0x003928DC, flags_type_arm_text); //  0x496E6974 - Init 
+  rom_flags_type(0x003928E0, flags_type_arm_text); //  0x69616C69 - iali 
+  rom_flags_type(0x003928E4, flags_type_arm_text); //  0x73617469 - sati 
+  rom_flags_type(0x003928E8, flags_type_arm_text); //  0x6F6E2066 - on.f 
+  rom_flags_type(0x003928EC, flags_type_arm_text); //  0x61696C75 - ailu 
+  rom_flags_type(0x003928F0, flags_type_arm_text); //  0x72653A20 - re:. 
+  rom_flags_type(0x003928F4, flags_type_arm_text); //  0x756E6B6E - unkn 
+  rom_flags_type(0x003928F8, flags_type_arm_text); //  0x6F776E20 - own. 
+  rom_flags_type(0x003928FC, flags_type_arm_text); //  0x68617264 - hard 
+  rom_flags_type(0x00392900, flags_type_arm_text); //  0x77617265 - ware 
+  rom_flags_type(0x00392904, flags_type_arm_text); //  0x206F7220 - .or. 
+  rom_flags_type(0x00392908, flags_type_arm_text); //  0x6E6F2068 - no.h 
+  rom_flags_type(0x0039290C, flags_type_arm_text); //  0x61726477 - ardw 
+  rom_flags_type(0x00392910, flags_type_arm_text); //  0x61726520 - are. 
+  rom_flags_type(0x00392914, flags_type_arm_text); //  0x666F756E - foun 
+  rom_flags_type(0x00392918, flags_type_arm_text); //  0x64000000 - d... 
+  rom_flags_type(0x0039297C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00392980, flags_type_arm_word); //  0x80000204 - .... 
+  rom_flags_type(0x00392984, flags_type_arm_text); //  0x466C6F61 - Floa 
+  rom_flags_type(0x00392988, flags_type_arm_text); //  0x74696E67 - ting 
+  rom_flags_type(0x0039298C, flags_type_arm_text); //  0x20506F69 - .Poi 
+  rom_flags_type(0x00392990, flags_type_arm_text); //  0x6E742045 - nt.E 
+  rom_flags_type(0x00392994, flags_type_arm_text); //  0x78636570 - xcep 
+  rom_flags_type(0x00392998, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x0039299C, flags_type_arm_text); //  0x203A2049 - .:.I 
+  rom_flags_type(0x003929A0, flags_type_arm_text); //  0x6E657861 - nexa 
+  rom_flags_type(0x003929A4, flags_type_arm_text); //  0x63742052 - ct.R 
+  rom_flags_type(0x003929A8, flags_type_arm_text); //  0x6573756C - esul 
+  rom_flags_type(0x003929AC, flags_type_arm_text); //  0x74000000 - t... 
+  rom_flags_type(0x003929B0, flags_type_arm_word); //  0x80000203 - .... 
+  rom_flags_type(0x003929B4, flags_type_arm_text); //  0x466C6F61 - Floa 
+  rom_flags_type(0x003929B8, flags_type_arm_text); //  0x74696E67 - ting 
+  rom_flags_type(0x003929BC, flags_type_arm_text); //  0x20506F69 - .Poi 
+  rom_flags_type(0x003929C0, flags_type_arm_text); //  0x6E742045 - nt.E 
+  rom_flags_type(0x003929C4, flags_type_arm_text); //  0x78636570 - xcep 
+  rom_flags_type(0x003929C8, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x003929CC, flags_type_arm_text); //  0x203A2055 - .:.U 
+  rom_flags_type(0x003929D0, flags_type_arm_text); //  0x6E646572 - nder 
+  rom_flags_type(0x003929D4, flags_type_arm_text); //  0x666C6F77 - flow 
+  rom_flags_type(0x003929D8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x003929DC, flags_type_arm_word); //  0x80000202 - .... 
+  rom_flags_type(0x003929E0, flags_type_arm_text); //  0x466C6F61 - Floa 
+  rom_flags_type(0x003929E4, flags_type_arm_text); //  0x74696E67 - ting 
+  rom_flags_type(0x003929E8, flags_type_arm_text); //  0x20506F69 - .Poi 
+  rom_flags_type(0x003929EC, flags_type_arm_text); //  0x6E742045 - nt.E 
+  rom_flags_type(0x003929F0, flags_type_arm_text); //  0x78636570 - xcep 
+  rom_flags_type(0x003929F4, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x003929F8, flags_type_arm_text); //  0x203A2044 - .:.D 
+  rom_flags_type(0x003929FC, flags_type_arm_text); //  0x69766964 - ivid 
+  rom_flags_type(0x00392A00, flags_type_arm_text); //  0x65204279 - e.By 
+  rom_flags_type(0x00392A04, flags_type_arm_text); //  0x205A6572 - .Zer 
+  rom_flags_type(0x00392A08, flags_type_arm_text); //  0x6F000000 - o... 
+  rom_flags_type(0x00392A0C, flags_type_arm_word); //  0x80000201 - .... 
+  rom_flags_type(0x00392A10, flags_type_arm_text); //  0x466C6F61 - Floa 
+  rom_flags_type(0x00392A14, flags_type_arm_text); //  0x74696E67 - ting 
+  rom_flags_type(0x00392A18, flags_type_arm_text); //  0x20506F69 - .Poi 
+  rom_flags_type(0x00392A1C, flags_type_arm_text); //  0x6E742045 - nt.E 
+  rom_flags_type(0x00392A20, flags_type_arm_text); //  0x78636570 - xcep 
+  rom_flags_type(0x00392A24, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x00392A28, flags_type_arm_text); //  0x203A204F - .:.O 
+  rom_flags_type(0x00392A2C, flags_type_arm_text); //  0x76657266 - verf 
+  rom_flags_type(0x00392A30, flags_type_arm_text); //  0x6C6F7700 - low. 
+  rom_flags_type(0x00392A34, flags_type_arm_word); //  0x80000200 - .... 
+  rom_flags_type(0x00392A38, flags_type_arm_text); //  0x466C6F61 - Floa 
+  rom_flags_type(0x00392A3C, flags_type_arm_text); //  0x74696E67 - ting 
+  rom_flags_type(0x00392A40, flags_type_arm_text); //  0x20506F69 - .Poi 
+  rom_flags_type(0x00392A44, flags_type_arm_text); //  0x6E742045 - nt.E 
+  rom_flags_type(0x00392A48, flags_type_arm_text); //  0x78636570 - xcep 
+  rom_flags_type(0x00392A4C, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x00392A50, flags_type_arm_text); //  0x203A2049 - .:.I 
+  rom_flags_type(0x00392A54, flags_type_arm_text); //  0x6E76616C - nval 
+  rom_flags_type(0x00392A58, flags_type_arm_text); //  0x6964204F - id.O 
+  rom_flags_type(0x00392A5C, flags_type_arm_text); //  0x70657261 - pera 
+  rom_flags_type(0x00392A60, flags_type_arm_text); //  0x74696F6E - tion 
+  rom_flags_type(0x00392A64, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00392A68, flags_type_arm_word); //  0x80000280 - .... 
+  rom_flags_type(0x00392A6C, flags_type_arm_text); //  0x46504520 - FPE. 
+  rom_flags_type(0x00392A70, flags_type_arm_text); //  0x496E7465 - Inte 
+  rom_flags_type(0x00392A74, flags_type_arm_text); //  0x726E616C - rnal 
+  rom_flags_type(0x00392A78, flags_type_arm_text); //  0x20457272 - .Err 
+  rom_flags_type(0x00392A7C, flags_type_arm_text); //  0x6F72203A - or.: 
+  rom_flags_type(0x00392A80, flags_type_arm_text); //  0x20436F72 - .Cor 
+  rom_flags_type(0x00392A84, flags_type_arm_text); //  0x65204661 - e.Fa 
+  rom_flags_type(0x00392A88, flags_type_arm_text); //  0x756C7479 - ulty 
+  rom_flags_type(0x00392A8C, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00392A90, flags_type_arm_word); //  0x80000281 - .... 
+  rom_flags_type(0x00392A94, flags_type_arm_text); //  0x46504520 - FPE. 
+  rom_flags_type(0x00392A98, flags_type_arm_text); //  0x496E7465 - Inte 
+  rom_flags_type(0x00392A9C, flags_type_arm_text); //  0x726E616C - rnal 
+  rom_flags_type(0x00392AA0, flags_type_arm_text); //  0x20457272 - .Err 
+  rom_flags_type(0x00392AA4, flags_type_arm_text); //  0x6F72203A - or.: 
+  rom_flags_type(0x00392AA8, flags_type_arm_text); //  0x20436F72 - .Cor 
+  rom_flags_type(0x00392AAC, flags_type_arm_text); //  0x65204469 - e.Di 
+  rom_flags_type(0x00392AB0, flags_type_arm_text); //  0x7361626C - sabl 
+  rom_flags_type(0x00392AB4, flags_type_arm_text); //  0x65640000 - ed.. 
+  rom_flags_type(0x00392AB8, flags_type_arm_text); //  0x00000000 - .... 
+  rom_flags_type(0x00392ABC, flags_type_arm_text); //  0x00000000 - .... 
