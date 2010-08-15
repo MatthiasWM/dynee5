@@ -1353,6 +1353,7 @@ int main(int argc, char **argv)
         case flags_type_ns_ref:     break; type="NSRef"; break;
         case flags_type_dict:       break; type="dict"; break;
         case flags_type_classinfo:  type="Class"; break;
+        case flags_type_data:       type="data"; break;
         default:                    type="???"; break; 
       }
       sprintf(buf, "%s                  ", type);
@@ -1407,3 +1408,5 @@ int main(int argc, char **argv)
 // So 15 aug 2010, 09:45:  94.499% of ROM words covered (1981780 of 2097152)
 //                 13:50:  94.885% of ROM words covered (1989887 of 2097152)
 //                 15:04:  96.456% of ROM words covered (2022828 of 2097152) +more functions found
+//                 20:37:  98.305% of ROM words covered (2061610 of 2097152)
+
