@@ -72,6 +72,9 @@
 		8D1107320486CEB800E47090 /* Albert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Albert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95C2DBB1211B98100C87B33 /* disarm_c.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disarm_c.cpp; path = tools/disarm_c.cpp; sourceTree = "<group>"; };
 		C95C2DBC1211B98100C87B33 /* disarm_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = disarm_c.h; path = tools/disarm_c.h; sourceTree = "<group>"; };
+		C95C357112217F4C00C87B33 /* classinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = classinfo.h; path = tools/classinfo.h; sourceTree = "<group>"; };
+		C95C357212217F4C00C87B33 /* db_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = db_cpp.h; path = tools/db_cpp.h; sourceTree = "<group>"; };
+		C95C357312217FB000C87B33 /* manual_checks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = manual_checks.h; path = tools/manual_checks.h; sourceTree = "<group>"; };
 		C9601DCB10B1FA890018BADE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		C9601DCC10B1FA890018BADE /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		C9601DD410B1FA9C0018BADE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -355,6 +358,8 @@
 		C9F6EA0610C5C56B007C848E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				C95C357112217F4C00C87B33 /* classinfo.h */,
+				C95C357212217F4C00C87B33 /* db_cpp.h */,
 				C95C2DBB1211B98100C87B33 /* disarm_c.cpp */,
 				C95C2DBC1211B98100C87B33 /* disarm_c.h */,
 				C9F6EA0B10C5C56B007C848E /* disarm.cpp */,
@@ -363,6 +368,7 @@
 				C9F6EA0710C5C56B007C848E /* sym2db.h */,
 				C9F6EA0A10C5C56B007C848E /* db2src.cpp */,
 				C9F6EA0910C5C56B007C848E /* db2src.h */,
+				C95C357312217FB000C87B33 /* manual_checks.h */,
 			);
 			name = Tools;
 			sourceTree = "<group>";

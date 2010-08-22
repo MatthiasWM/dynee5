@@ -28,7 +28,7 @@ end
 begin class
   # analysed ::sizeof() and ::new()
   sym TADSPEndpoint
-  base FIXME
+  base TEndpoint
   size 48
   datac FIXME
   data 16 word
@@ -183,7 +183,7 @@ end
 
 begin class
   sym TATASimple
-  base FIXME
+  base TATA
   size FIXME
   datac FIXME
 end
@@ -386,14 +386,14 @@ end
 
 begin class
   sym TAppleTalkService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PAppleTalkStack
-  base FIXME
+  base PATStack
   size FIXME
   datac FIXME
 end
@@ -414,14 +414,14 @@ end
 
 begin class
   sym TArithmeticCompressor
-  base FIXME
+  base TCallbackCompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TArithmeticDecompressor
-  base FIXME
+  base TCallbackDecompressor
   size FIXME
   datac FIXME
 end
@@ -435,7 +435,7 @@ end
 
 begin class
   sym TAsyncDebugLink
-  base FIXME
+  base TSerialDebugLink
   size FIXME
   datac FIXME
 end
@@ -456,7 +456,7 @@ end
 
 begin class
   sym TAsyncService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -561,7 +561,7 @@ end
 
 begin class
   sym TCHMemModem
-  base FIXME
+  base TCardHandler
   size FIXME
   datac FIXME
 end
@@ -869,21 +869,21 @@ end
 
 begin class
   sym PCirrusBatteryDriver
-  base FIXME
+  base PBatteryDriver
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PCirrusSoundDriver
-  base FIXME
+  base PSoundDriver
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TResistiveTablet
-  base FIXME
+  base TTabletDriver
   size FIXME
   datac FIXME
 end
@@ -901,7 +901,7 @@ end
 
 begin class
   sym TClassInfoRegistryImpl
-  base FIXME
+  base TClassInfoRegistry
   size FIXME
   datac FIXME
 end
@@ -1299,8 +1299,8 @@ begin class
 end
 
 begin class
-  file Frames/objects
   sym RefVar
+  file Frames/objects
   size 4
   datac 1
   data RefHandle */h
@@ -1350,7 +1350,7 @@ end
 
 begin class
   sym TDTMFCodec
-  base FIXME
+  base TSoundCodec
   size FIXME
   datac FIXME
 end
@@ -1679,7 +1679,7 @@ end
 
 begin class
   sym TFaxService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -1693,7 +1693,7 @@ end
 
 begin class
   sym TFlashAMD
-  base FIXME
+  base TFlash
   size FIXME
   datac FIXME
 end
@@ -1707,7 +1707,7 @@ end
 
 begin class
   sym TFlashStore
-  base FIXME
+  base TStore
   size FIXME
   datac FIXME
 end
@@ -1756,7 +1756,7 @@ end
 
 begin class
   sym TFlashSeries2
-  base FIXME
+  base TFlash
   size FIXME
   datac FIXME
 end
@@ -1805,14 +1805,14 @@ end
 
 begin class
   sym PFlattenPtr
-  base FIXME
+  base PFrameSink
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PFlattenRef
-  base FIXME
+  base PFrameSink
   size FIXME
   datac FIXME
 end
@@ -1924,7 +1924,7 @@ end
 
 begin class
   sym TFramedAsyncService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -1945,14 +1945,14 @@ end
 
 begin class
   sym TGSMCodec
-  base FIXME
+  base TSoundCodec
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TGeoPortDebugLink
-  base FIXME
+  base TSerialDebugLink
   size FIXME
   datac FIXME
 end
@@ -1966,7 +1966,7 @@ end
 
 begin class
   sym TGrayShrink
-  base FIXME
+  base TPixelMapAntialias
   size FIXME
   datac FIXME
 end
@@ -2022,28 +2022,28 @@ end
 
 begin class
   sym PHammerInTranslator
-  base FIXME
+  base PInTranslation
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PHammerOutTranslator
-  base FIXME
+  base POutTranslator
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TIMACodec
-  base FIXME
+  base TSoundCodec
   size FIXME
   datac FIXME
 end
 
 begin class
   sym IRProbeService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -2057,14 +2057,14 @@ end
 
 begin class
   sym TIRService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
 
 begin class
   sym IRSniffService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -2106,7 +2106,7 @@ end
 
 begin class
   sym TIrDAService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -2267,7 +2267,7 @@ end
 
 begin class
   sym TKeyboardService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -2344,21 +2344,21 @@ end
 
 begin class
   sym TLZCompressor
-  base FIXME
+  base TCompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TLZCallbackCompressor
-  base FIXME
+  base TCallbackCompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TLZDecompressor
-  base FIXME
+  base TDecompressor
   size FIXME
   datac FIXME
 end
@@ -2372,7 +2372,7 @@ end
 
 begin class
   sym TLOPackageStore
-  base FIXME
+  base TLrgObjStore
   size FIXME
   datac FIXME
 end
@@ -2386,7 +2386,7 @@ end
 
 begin class
   sym TLaserWriterLSDriver
-  base FIXME
+  base TDotPrinterDriver
   size FIXME
   datac FIXME
 end
@@ -2427,10 +2427,10 @@ begin class
 end
 
 begin class
+  sym CList
   # from C++ include files
   # no members except CDynamicArray
   file UtilityClasses/List
-  sym CList
   base CDynamicArray
   size 24
   datac 0
@@ -2473,14 +2473,14 @@ end
 
 begin class
   sym PLocalTalkLink
-  base FIXME
+  base PLink
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TLocalTalkService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -2557,7 +2557,7 @@ end
 
 begin class
   sym TMNPService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -2746,7 +2746,7 @@ end
 
 begin class
   sym TModemService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -2767,21 +2767,21 @@ end
 
 begin class
   sym TMuLawCodec
-  base FIXME
+  base TSoundCodeTSoundCodec
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TMuxStore
-  base FIXME
+  base TStore
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TMuxStoreMonitor
-  base FIXME
+  base TStoreMonitor
   size FIXME
   datac FIXME
 end
@@ -2949,14 +2949,14 @@ end
 
 begin class
   sym PNTKInTranslator
-  base FIXME
+  base PInTranslator
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PNTKOutTranslator
-  base FIXME
+  base POutTranslator
   size FIXME
   datac FIXME
 end
@@ -3180,7 +3180,7 @@ end
 
 begin class
   sym TNewInternalFlash
-  base FIXME
+  base TFlash
   size FIXME
   datac FIXME
 end
@@ -3292,14 +3292,14 @@ end
 
 begin class
   sym PNullInTranslator
-  base FIXME
+  base PInTranslator
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PNullOutTranslator
-  base FIXME
+  base POutTranslater
   size FIXME
   datac FIXME
 end
@@ -3376,14 +3376,14 @@ end
 
 begin class
   sym POptionDataIn
-  base FIXME
+  base PFrameSource
   size FIXME
   datac FIXME
 end
 
 begin class
   sym POptionDataOut
-  base FIXME
+  base PFrameSink
   size FIXME
   datac FIXME
 end
@@ -3411,7 +3411,7 @@ end
 
 begin class
   sym TP3Service
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -3460,7 +3460,7 @@ end
 
 begin class
   sym PCECallBackWrapper
-  base FIXME
+  base PCECallBack
   size FIXME
   datac FIXME
 end
@@ -3474,14 +3474,14 @@ end
 
 begin class
   sym PMuxCallBackWrapper
-  base FIXME
+  base PMuxCallback
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PMuxServiceStarter
-  base FIXME
+  base PMuxService
   size FIXME
   datac FIXME
 end
@@ -3523,7 +3523,7 @@ end
 
 begin class
   sym TPSPrinter
-  base FIXME
+  base TPrinter
   size FIXME
   datac FIXME
 end
@@ -3677,7 +3677,7 @@ end
 
 begin class
   sym TPackageStore
-  base FIXME
+  base TStore
   size FIXME
   datac FIXME
 end
@@ -3837,8 +3837,8 @@ begin class
 end
 
 begin class
-  sym TPinPad
-  base FIXME
+  sym 
+  base TDrawInterface
   size FIXME
   datac FIXME
 end
@@ -3859,7 +3859,7 @@ end
 
 begin class
   sym TPixelMapCompander
-  base FIXME
+  base TStoreCompandeTStoreCompander
   size FIXME
   datac FIXME
 end
@@ -3950,7 +3950,7 @@ end
 
 begin class
   sym TQDLibraryDriver
-  base FIXME
+  base TQDLibrary
   size FIXME
   datac FIXME
 end
@@ -4244,7 +4244,7 @@ end
 
 begin class
   sym TRosRecognizer
-  base FIXME
+  base TWRecognizer
   size FIXME
   datac FIXME
 end
@@ -4335,14 +4335,14 @@ end
 
 begin class
   sym PScriptDataIn
-  base FIXME
+  base PFrameSource
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PScriptDataOut
-  base FIXME
+  base PFrameSink
   size FIXME
   datac FIXME
 end
@@ -4370,14 +4370,14 @@ end
 
 begin class
   sym TSerialChip16450
-  base FIXME
+  base TSerialChip
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PTheSerChipRegistry
-  base FIXME
+  base TSerialChipRegistry
   size FIXME
   datac FIXME
 end
@@ -4391,7 +4391,7 @@ end
 
 begin class
   sym TSerialChipVoyager
-  base FIXME
+  base TSerialChip
   size FIXME
   datac FIXME
 end
@@ -4405,7 +4405,7 @@ end
 
 begin class
   sym TSerialEndpoint
-  base FIXME
+  base TEndPoint
   size FIXME
   datac FIXME
 end
@@ -4482,7 +4482,7 @@ end
 
 begin class
   sym PSerialInTranslator
-  base FIXME
+  base PInTranslator
   size FIXME
   datac FIXME
 end
@@ -4755,7 +4755,7 @@ end
 
 begin class
   sym PSerialOutTranslator
-  base FIXME
+  base POutTranslator
   size FIXME
   datac FIXME
 end
@@ -4902,14 +4902,14 @@ end
 
 begin class
   sym PStdioInTranslator
-  base FIXME
+  base PInTranslator
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PStdioOutTranslator
-  base FIXME
+  base POutTranslator
   size FIXME
   datac FIXME
 end
@@ -4923,63 +4923,63 @@ end
 
 begin class
   sym TLZStoreDecompressor
-  base FIXME
+  base TStoreDecompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TLZRelocStoreDecompressor
-  base FIXME
+  base TStoreDecompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TSimpleRelocStoreDecompressor
-  base FIXME
+  base TStoreDecompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TLZStoreCompander
-  base FIXME
+  base TStoreCompander
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TSimpleStoreCompander
-  base FIXME
+  base TStoreCompander
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TStoreCompanderWrapper
-  base FIXME
+  base TStoreCompander
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TSimpleStoreDecompressor
-  base FIXME
+  base TStoreDecompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TZippyRelocStoreDecompressor
-  base FIXME
+  base TStoreDecompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TZippyStoreDecompressor
-  base FIXME
+  base TStoreDecompressor
   size FIXME
   datac FIXME
 end
@@ -5000,21 +5000,21 @@ end
 
 begin class
   sym PStreamInRef
-  base FIXME
+  base PFrameSource
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PStreamOutRef
-  base FIXME
+  base PFrameSink
   size FIXME
   datac FIXME
 end
 
 begin class
   sym T28F016_SA_SVDriver
-  base FIXME
+  base TFlashDriver
   size FIXME
   datac FIXME
 end
@@ -5175,7 +5175,7 @@ end
 
 begin class
   sym TDotPrinter
-  base FIXME
+  base TPrinter
   size FIXME
   datac FIXME
 end
@@ -5196,7 +5196,7 @@ end
 
 begin class
   sym TFaxDriver
-  base FIXME
+  base TDotPrinterDriver
   size FIXME
   datac FIXME
 end
@@ -5252,7 +5252,7 @@ end
 
 begin class
   sym TPSPAPDriver
-  base FIXME
+  base TPSPrinterDriver
   size FIXME
   datac FIXME
 end
@@ -5294,7 +5294,7 @@ end
 
 begin class
   sym TSWGroupDriver
-  base FIXME
+  base TDotPrinterDriver
   size FIXME
   datac FIXME
 end
@@ -5497,7 +5497,7 @@ end
 
 begin class
   sym TVRemoteService
-  base FIXME
+  base TCMService
   size FIXME
   datac FIXME
 end
@@ -6204,28 +6204,28 @@ end
 
 begin class
   sym PUnFlattenPtr
-  base FIXME
+  base PFrameSource
   size FIXME
   datac FIXME
 end
 
 begin class
   sym PUnFlattenRef
-  base FIXME
+  base PFrameSource
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TUnicodeCompressor
-  base FIXME
+  base TCallbackCompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TUnicodeDecompressor
-  base FIXME
+  base TCallbackDecompressor
   size FIXME
   datac FIXME
 end
@@ -6506,14 +6506,14 @@ end
 
 begin class
   sym TVoyagerMiscIntfImpl
-  base FIXME
+  base TVoyagerMiscIntf
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TVoyagerPlatform
-  base FIXME
+  base TPlatformDriver
   size FIXME
   datac FIXME
 end
@@ -6576,7 +6576,7 @@ end
 
 begin class
   sym TXIPPackageStore
-  base FIXME
+  base TLrgObjStore
   size FIXME
   datac FIXME
 end
@@ -6618,7 +6618,7 @@ end
 
 begin class
   sym TXIPStoreCompander
-  base FIXME
+  base TStoreCompander
   size FIXME
   datac FIXME
 end
@@ -6646,21 +6646,21 @@ end
 
 begin class
   sym TZippyCompressor
-  base FIXME
+  base TCompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TZippyCallbackCompressor
-  base FIXME
+  base TCallbackCompressor
   size FIXME
   datac FIXME
 end
 
 begin class
   sym TZippyDecompressor
-  base FIXME
+  base TDecompressor
   size FIXME
   datac FIXME
 end
@@ -6791,7 +6791,7 @@ end
 
 begin class
   sym THistoryCollector
-  base FIXME
+  base TEventCollector
   size FIXME
   datac FIXME
 end
@@ -6882,7 +6882,7 @@ end
 
 begin class
   sym ThpPCL
-  base FIXME
+  base TDotPrinterDriver
   size FIXME
   datac FIXME
 end
@@ -7022,9 +7022,9 @@ begin class
   data 4 RefStruct/fTag
   data 8 RefStruct/fValue
   data 12 RefStruct/fObj
-  #data 3 int/fIncludeSiblings
-  #data 4 long/fIndex
-  #data 5 long/fLength
+  # data 3 int/fIncludeSiblings
+  # data 4 long/fIndex
+  # data 5 long/fLength
   data 28 RefStruct/fMapRef// NILREF indicates an Array iterator
   data 32 word
   data 40 word

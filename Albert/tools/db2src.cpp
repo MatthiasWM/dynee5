@@ -50,6 +50,7 @@ const char *db_path = "/Users/matt/dev/Albert/";
 const char *src_path = "/Users/matt/dev/Albert/src/"; 
 const char *c_path = "/Users/matt/dev/Albert/src/"; 
 const char *cpp_path = "/Users/matt/dev/Albert/src/"; 
+const char *os_path = "/Users/matt/dev/Albert/NewtonOS/"; 
 
 const unsigned int flags_type_mask          = 0x000000ff;
 
@@ -70,7 +71,28 @@ const unsigned int flags_type_classinfo     = 0x0000000d;
 const unsigned int flags_type_arm_wtext     = 0x0000000e;
 const unsigned int flags_type_data          = 0x0000000f;
 
+const unsigned int flags_is_function        = 0x30000000;
 const unsigned int flags_is_target          = 0x10000000;
+
+
+const char *type_lut[] = {
+  "flags_type_unknown",
+  "flags_type_arm_code",
+  "flags_type_arm_byte",
+  "flags_type_arm_word",
+  "flags_type_arm_text",
+  "flags_type_patch_table",
+  "flags_type_jump_table",
+  "flags_type_unused",
+  "flags_type_rex",
+  "flags_type_ns",
+  "flags_type_ns_obj",
+  "flags_type_ns_ref",
+  "flags_type_dict",
+  "flags_type_classinfo",
+  "flags_type_arm_wtext",
+  "flags_type_data",
+};
 
 unsigned char ROM[0x00800000];
 unsigned int ROM_flags[0x00200000];
@@ -80,10 +102,37 @@ unsigned int ROM_flags[0x00200000];
  */
 unsigned int rom_w(unsigned int addr)
 {
-  if (addr>=0x00800000-4)
+  if (addr>=0x00800000)
     return 0;
   else
     return (ROM[addr]<<24)|(ROM[addr+1]<<16)|(ROM[addr+2]<<8)|ROM[addr+3];
+}
+
+/**
+ * Return a 8-byte real (double prcision floating point) in rom
+ */
+double rom_real(unsigned int addr)
+{
+  union { unsigned char c[8]; double v; };
+  if (addr>=0x00800000)
+    return 0.0;
+  else {
+    int i;
+    for (i=0; i<8; i++)
+      c[7-i] = ROM[addr+i];
+    return v;
+  }
+}
+
+/**
+ * Return a 8-byte double form a fixed decimal point 4 byte variable
+ */
+double rom_fixed(unsigned int addr)
+{
+  int si = (signed int)rom_w(addr);
+  double d = si;
+  d = d/65536.0;
+  return d;
 }
 
 /**
@@ -142,7 +191,7 @@ class AlArg;
 class AlMemberFunction;
 
 typedef std::map < unsigned int, const char* > AlSymbolList;
-AlSymbolList symbolList;
+AlSymbolList symbolList, plainSymbolList;
 
 const char *get_symbol_at(unsigned int addr)
 {
@@ -151,11 +200,18 @@ const char *get_symbol_at(unsigned int addr)
   return s->second;
 }
 
-void readSymbols(const char *filename)
+const char *get_plain_symbol_at(unsigned int addr)
 {
-  FILE *f = fopen(filename, "rb");
+  AlSymbolList::iterator s = plainSymbolList.find(addr);
+  if (s==plainSymbolList.end()) return 0L;
+  return s->second;
+}
+
+void readSymbols(const char *cpp_filename, const char *plain_filename)
+{
+  FILE *f = fopen(cpp_filename, "rb");
   if (!f) {
-    puts("ERROR opening symbol file");
+    puts("ERROR opening cpp symbol file");
     return;
   }
   for (;;) {
@@ -164,7 +220,28 @@ void readSymbols(const char *filename)
     char *s = fgets(buf, 80, f);
     if (!s) break;
     int n = sscanf(s, "0x%08x %[^\n]\n", &addr, sym);
-    if (n==2) symbolList.insert(std::make_pair(addr, strdup(sym)));
+    if (n==2) {
+      if (addr==0x0006CF0C) strcat(sym, "_DUP");
+      if (addr==0x000AC670) strcat(sym, "_DUP");
+      symbolList.insert(std::make_pair(addr, strdup(sym)));
+    }
+  }
+  f = fopen(plain_filename, "rb");
+  if (!f) {
+    puts("ERROR opening plain symbol file");
+    return;
+  }
+  for (;;) {
+    char buf[80], sym[80];
+    unsigned int addr;
+    char *s = fgets(buf, 80, f);
+    if (!s) break;
+    int n = sscanf(s, "0x%08x %[^\n]\n", &addr, sym);
+    if (n==2) {
+      if (addr==0x0006CF0C) strcat(sym, "_DUP");
+      if (addr==0x000AC670) strcat(sym, "_DUP");
+      plainSymbolList.insert(std::make_pair(addr, strdup(sym)));
+    }
   }
 }
 
@@ -348,6 +425,7 @@ public:
   static AlClass **pClass;
   static int pn, pN;
   const char *pSym;
+  const char *pBaseClass;
   AlMemberFunction *pFn[200];
   int pnf;
 public:
@@ -365,6 +443,35 @@ public:
     pClass[pn++] = c;
     return c;
   }
+  static void load(FILE *f) {
+    AlClass *ac = 0L;
+    for (;;) {
+      char buf[256], cmd[32], arg[256];
+      char *s = fgets(buf, 256, f);
+      if (*s==0) break;
+      s = skipSpace(s);
+      if (sscanf(s, "%s", cmd)==0) continue;
+      if (strcmp(cmd, "end")==0) {
+        break;
+      } else if (strcmp(cmd, "sym")==0) {
+        sscanf(s, "%s %s", cmd, arg);
+        ac = find(arg);
+      } else if (strcmp(cmd, "base")==0) {
+        sscanf(s, "%s %s", cmd, arg);
+        if (strcmp(arg, "FIXME")!=0) {
+          if (ac) ac->base_class(arg);
+        }        
+      } else if (strcmp(cmd, "size")==0) {
+      } else if (strcmp(cmd, "datac")==0) {
+      } else if (strcmp(cmd, "data")==0) {
+      } else if (strcmp(cmd, "file")==0) {
+      } else if (strcmp(cmd, "//")==0) {
+      } else if (strcmp(cmd, "#")==0) {
+      } else {
+        printf("WARNING: unsupported member function attribute '%s'\n", cmd);
+      }
+    }
+  }
   static void write_all(char const *path) {
     int i;
     for (i=0; i<pn; i++) {
@@ -373,6 +480,7 @@ public:
   }
   void init() {
     pSym = 0;
+    pBaseClass = 0;
     pnf = 0;
   }
   AlClass(char const *sym) {
@@ -382,6 +490,12 @@ public:
   void add(AlMemberFunction *fn) {
     if (pnf>=200) puts("Out of bounds!");
     pFn[pnf++] = fn;
+  }
+  void base_class(const char *name) {
+    pBaseClass = strdup(name);
+  }
+  const char *base_class() {
+    return pBaseClass;
   }
   void write_h(char const *path);
   void write_cpp(char const *path);
@@ -606,7 +720,10 @@ void AlClass::write_h(char const *path) {
   fprintf(f, "// This file was automatically generated by Albert\n\n");
   fprintf(f, "#ifndef %s_H\n#define %s_H\n\n", pSym, pSym);
   fprintf(f, "#include \"albert/types.h\"\n\n");
-  fprintf(f, "class %s\n{\npublic:\n", pSym);
+  if (pBaseClass)
+    fprintf(f, "class %s : public %s\n{\npublic:\n", pSym, pBaseClass);
+  else
+    fprintf(f, "class %s\n{\npublic:\n", pSym);
   int i;
   for (i=0; i<pnf; i++) {
     pFn[i]->write_h(f);
@@ -660,7 +777,7 @@ void load_db(char const *path, char const *filename)
         // create a cpp member function and read it
         new AlMemberFunction(f);
       } else if (strcmp(arg, "class")==0) {
-        goto skip; // FIXME:
+        AlClass::load(f);
       } else if (strcmp(arg, "file")==0) {
         goto skip; // FIXME:
       } else if (strcmp(arg, "c_file")==0) {
@@ -726,7 +843,7 @@ unsigned int branch_address(unsigned int addr, unsigned int cmd=0xffffffff)
   }
 }
 
-void check_code_coverage(unsigned int addr);
+void check_code_coverage(unsigned int addr, unsigned int flags=0);
 
 void check_switch_case(unsigned int addr, int n_case) 
 {
@@ -734,16 +851,16 @@ void check_switch_case(unsigned int addr, int n_case)
   printf("Switch/Case statement with %d cases starting at %08x\n", n_case, addr);
   for (i=0; i<n_case; i++) { // nuber of cases plus default case
     VERB4 printf("case %d at %08x\n", i, addr+4*i);
-    check_code_coverage(addr+4*i);
+    check_code_coverage(addr+4*i, 0);
   }
 }
 
 // recursively dive into the ARM code from this point on and follow all possible
 // execution paths
-void check_code_coverage(unsigned int addr)
+void check_code_coverage(unsigned int addr, unsigned int flags)
 {
   // mark this as jump target
-  if (addr<0x00800000) rom_flags_set(addr, flags_is_target); // mark this as a jump target
+  if (addr<0x00800000 && flags) rom_flags_set(addr, flags); // mark this as a jump target
 
   for(;;) {
     
@@ -808,21 +925,24 @@ void check_code_coverage(unsigned int addr)
         if ( (cmd&0xf0000000) == 0xe0000000) { // unconditional
           VERB3 printf("%08x: unconditional jump to %08x\n", addr, branch_address(addr));
           addr = branch_address(addr);
+          rom_flags_set(addr, flags_is_target);
           continue;
         } else { // conditional, follow both branches (finsih-thread-first recursion)
           unsigned int next = branch_address(addr);
           VERB3 printf("%08x: conditional jump to %08x, follow later\n", addr, next);
-          check_code_coverage(addr+4);
+          check_code_coverage(addr+4, 0);
           VERB3 printf("%08x: following up on conditional jump to %08x\n", addr, next);
           addr = next; 
+          rom_flags_set(addr, flags_is_target);
           continue;
         }
       } else if ( (cmd&0x0f000000) == 0x0b000000) { // branch instruction, follow both branches
         unsigned int next = branch_address(addr);
         VERB3 printf("%08x: subroutine call to %08x, follow later\n", addr, next);
-        check_code_coverage(addr+4);
+        check_code_coverage(addr+4, 0);
         VERB3 printf("%08x: following up on subroutine call to %08x\n", addr, next);
         addr = next;
+        rom_flags_set(addr, flags_is_target);
         continue;
       } else if ( (cmd&0x0db6f000) == 0x0120f000) { // msr command does not modifiy pc
       } else if ( (cmd&0x0c000000) == 0x00000000) { // data processing, only important if pc is changed
@@ -835,7 +955,7 @@ void check_code_coverage(unsigned int addr)
             addr+=4;
             for (i=0; i<=n_case; i++) { // nuber of cases plus default case
               VERB4 printf("case %d at %08x\n", i-1, addr+4*i);
-              check_code_coverage(addr+4*i);
+              check_code_coverage(addr+4*i, 0);
             }
             return;
           }
@@ -930,60 +1050,6 @@ void preset_rom_use()
   for (i=0x006853dc; i<0x0071a95c; i++ ) {
     rom_flags_type(i, flags_type_dict);
   }
-  // kEntriesPerSlot
-  rom_flags_type(0x00000020, 0x00000034, flags_type_arm_word);
-  // gInitHardware
-  rom_flags_type(0x00000034, 0x0000003c, flags_type_arm_word);
-  // gPackageStart
-  rom_flags_type(0x0000003c, flags_type_arm_word);
-  // DataAreaTable
-  rom_flags_type(0x00000040, 0x00000100, flags_type_arm_word);
-  
-  // g8MegContinuousTableStart
-  rom_flags_type(0x00000100, 0x00000174, flags_type_arm_word);
-  // g8MegContinuousTableStartFor4MbK
-  rom_flags_type(0x00000174, 0x00000400, flags_type_arm_word);
-  // kEntriesPerPage
-  rom_flags_type(0x00000400, 0x00001000, flags_type_arm_word);
-  // gParamBlock
-  rom_flags_type(0x00001000, 0x000013D4, flags_type_arm_word);
-  // some filler data?
-  rom_flags_type(0x0001A0F0, 0x0001A0FC, flags_type_arm_word);
-  
-  rom_flags_type(0x000013D4, flags_type_arm_word); //  gOldCheckSumC
-  
-  rom_flags_type(0x000013D4, flags_type_arm_word); //  gOldCheckSumC
-  rom_flags_type(0x000013D8, flags_type_arm_word); //  gOldCheckSumD
-  rom_flags_type(0x000013DC, flags_type_arm_word); //  gROMVersion
-  rom_flags_type(0x000013E0, flags_type_arm_word); //  gROMStage
-  rom_flags_type(0x000013E4, flags_type_arm_word); //  gOldCheckSumA
-  rom_flags_type(0x000013E8, flags_type_arm_word); //  gOldCheckSumB
-  rom_flags_type(0x000013EC, flags_type_arm_word); //  gHardwareType
-  rom_flags_type(0x000013F0, flags_type_arm_word); //  gROMManufacturer
-  rom_flags_type(0x000013F4, flags_type_arm_word); //  gDebuggerBits
-  rom_flags_type(0x000013F8, flags_type_arm_word); //  gNewtTests
-  rom_flags_type(0x000013FC, 0x00002000, flags_type_arm_word); //  gNewtConfig
-  rom_flags_type(0x0001285C, 0x00013000, flags_type_unused); //  space for alignment
-  rom_flags_type(0x00015E0C, 0x00016000, flags_type_unused); //  space for alignment
-  rom_flags_type(0x00016000, 0x00018000, flags_type_arm_word); //  gROMPatchTablePageTable
-  rom_flags_type(0x00018000, 0x00018400, flags_type_arm_word); //  gROMPublicJumpTablePageTable
-  rom_flags_type(0x0001841C, flags_type_arm_word); //  gInitialCPUMode
-  rom_flags_type(0x00018420, flags_type_arm_word); //  gDiagCheckTag1
-  rom_flags_type(0x00018424, flags_type_arm_word); //  gDiagCheckTag2
-  rom_flags_type(0x00018428, flags_type_arm_word); //  gDiagCheckTag3
-  rom_flags_type(0x0001842C, flags_type_arm_word); //  gDiagType
-  rom_flags_type(0x00018430, flags_type_arm_word); //  gPhysROMAcsum
-  rom_flags_type(0x00018434, flags_type_arm_word); //  gPhysROMBcsum
-  rom_flags_type(0x00018438, flags_type_arm_word); //  gPhysROMCcsum
-  rom_flags_type(0x0001843C, flags_type_arm_word); //  gPhysROMDcsum
-  rom_flags_type(0x00018440, flags_type_arm_word); //  gPhysROMEcsum
-  rom_flags_type(0x00018444, flags_type_arm_word); //  gPhysROMFcsum
-  rom_flags_type(0x00018448, flags_type_arm_word); //  gPhysROMGcsum
-  rom_flags_type(0x0001844C, flags_type_arm_word); //  gPhysROMHcsum
-
-  // texts
-  rom_flags_type(0x00032688, 0x00032696, flags_type_arm_text);
-  rom_flags_type(0x00032A80, 0x00032A8a, flags_type_arm_text);
 }
 
 
@@ -1001,13 +1067,13 @@ void check_classinfo(unsigned int addr)
   unsigned int vtbl_start = rom_w(base+16)+base+16;
   unsigned int vtbl_end   = rom_w(base+20)+base+20;
   for (i=vtbl_start; i<vtbl_end; i+=4) {
-    if (rom_w(i)) check_code_coverage(i);
+    if (rom_w(i)) check_code_coverage(i, flags_is_function);
   }
-  if (rom_w(base+24)) check_code_coverage(base+24); // sizeof
-  if (rom_w(base+28)) check_code_coverage(base+28); // ??
-  if (rom_w(base+32)) check_code_coverage(base+32); // ??
-  if (rom_w(base+36)) check_code_coverage(base+36); // ctor
-  if (rom_w(base+40)) check_code_coverage(base+40); // dtor
+  if (rom_w(base+24)) check_code_coverage(base+24, flags_is_function); // sizeof
+  if (rom_w(base+28)) check_code_coverage(base+28, flags_is_function); // ??
+  if (rom_w(base+32)) check_code_coverage(base+32, flags_is_function); // ??
+  if (rom_w(base+36)) check_code_coverage(base+36, flags_is_function); // ctor
+  if (rom_w(base+40)) check_code_coverage(base+40, flags_is_function); // dtor
   for (i=base; i<vtbl_end; i+=4) {
     if (!rom_flags_type(i)) rom_flags_type(i, flags_type_classinfo);
   }
@@ -1037,56 +1103,29 @@ void check_all_code_coverage()
   // all ::CLassInfo functions and structures
   check_all_classinfos();
   // system vectors
-  check_code_coverage(0x00000000);
-  check_code_coverage(0x00000004);
-  check_code_coverage(0x00000008);
-  check_code_coverage(0x0000000c);
-  check_code_coverage(0x00000010);
-  check_code_coverage(0x00000014);
-  check_code_coverage(0x00000018);
-  check_code_coverage(0x0000001c);
+  check_code_coverage(0x00000000, flags_is_function);
+  check_code_coverage(0x00000004, flags_is_function);
+  check_code_coverage(0x00000008, flags_is_function);
+  check_code_coverage(0x0000000c, flags_is_function);
+  check_code_coverage(0x00000010, flags_is_function);
+  check_code_coverage(0x00000014, flags_is_function);
+  check_code_coverage(0x00000018, flags_is_function);
+  check_code_coverage(0x0000001c, flags_is_function);
   // known entry points (C++ functions)
   for (i=0; i<sizeof(db_cpp)/sizeof(unsigned int); i++) {
-    check_code_coverage(db_cpp[i]);
+    check_code_coverage(db_cpp[i], flags_is_function);
   }
   // ROMBoot unclear positions
-  check_code_coverage(0x000188d0);
+  check_code_coverage(0x000188d0, 0);
   // ROMPublicJumpTable
   for (i=0x00013000; i<0x00015e0c; i+=4 ) {
-    check_code_coverage(i);
+    check_code_coverage(i, flags_is_function);
   }  
   // some jump vector table we found. These jumps all go into the ROM patch table
   for (i=0x0001a618; i<0x00021438; i+=4 ) {
-    check_code_coverage(i);
+    check_code_coverage(i, 0);
   }  
-  // some places that are not reached via static analysis
-  check_code_coverage(0x000189C8);  // CleanPageInIandDCacheSWIGlue
-  check_code_coverage(0x00018A3C);  // CleanDCandFlushICSWIGlue
-  check_code_coverage(0x00018A78);  // CleanPageInDCSWIGlue
-  check_code_coverage(0x00018D1C);  // LoadPhysicalByte
-  check_code_coverage(0x00018D58);  // StorePhysicalByte
-  check_code_coverage(0x00018EE0);  // SafeTouchCard
-  check_code_coverage(0x00021ED4);  // TADC::SampleMachine
-  check_code_coverage(0x0002C60C);  // DeletePrefix
-
-  check_code_coverage(0x000353EC);  // PrepRecConfig
-  check_code_coverage(0x0003540C);  // FBuildRecConfig
-  check_code_coverage(0x00036938);  // FRecognize
-  check_code_coverage(0x0003B6D4);  // StartIRSniffing
-  check_code_coverage(0x0003C38C);  // StopIRSniffing
-  check_code_coverage(0x0003D598);  // FOpenRemote
-  check_code_coverage(0x0003D640);  // FCloseRemote
-  check_code_coverage(0x0003D698);  // FSendCode
-  check_code_coverage(0x0003D818);  // ZapSend
-  check_code_coverage(0x0003D9B4);  // ZapReceive
-  check_code_coverage(0x0003DAC4);  // ZapCancel
-  check_code_coverage(0x0003E85C);  // FCopyBits
-  check_code_coverage(0x0003EC94);  // FGrayShrink
-  check_code_coverage(0x0003F074);  // FViewIntoBitmap
-  check_code_coverage(0x00041D94);  // FGetBitmapInfo
-  check_code_coverage(0x00053CCC);  // FGetCardInfo
-  check_code_coverage(0x000D8A64);  // GenericSWIHandler
-  
+  // some places that are not reached via static analysis  
 #include "manual_checks.h"
 }
 
@@ -1120,14 +1159,13 @@ void ns_print_binary(unsigned int addr, unsigned int size)
 }
 
 
-void check_ns_ref(unsigned int addr)
+void check_ns_ref(unsigned int addr, char target=1)
 {
   if (rom_flags_type(addr)) return;
   rom_flags_type(addr, flags_type_ns_ref);
-  rom_flags_set(addr, flags_is_target);
+  if (target) rom_flags_set(addr, flags_is_target);
   unsigned int val = rom_w(addr);
-  if ( (val&0xfff0000f) == 0x0000000a ) { // Character
-  } else if ( (val&0x00000003) == 0x00000000 ) { // Integer
+  if ( (val&0x00000003) == 0x00000000 ) { // Integer
     int v = (int)val;
     VERB3 printf("NSRef: Integer %d at %08x: %08x\n", v/4, addr, val);
     // top 30 bit are a (small) integer
@@ -1144,6 +1182,8 @@ void check_ns_ref(unsigned int addr)
       VERB3 printf("NSRef: symbol definition at %08x\n", addr);
     } else if (val==0x32) {
       VERB3 printf("NSRef: native function (?) at %08x\n", addr);
+    } else if ((val&0xfff0000f) == 0x0000000a ) { // Character
+      VERB1 printf("NSRef: Unicode Char 0x%04x at %08x\n", val, addr);
     } else {
       VERB3 printf("NSRef: unknown special at %08x: %08x\n", addr, val);
       ABORT_SCAN;
@@ -1173,7 +1213,7 @@ unsigned int check_ns_obj(unsigned int addr)
   if ( (val&0x00000003) == 0x00000000 ) {
     // binary object
     VERB3 printf("NS Binary Object at %08x (%d bytes):\n", addr, size);
-    check_ns_ref(addr+8);
+    check_ns_ref(addr+8, 0);
     // mark the binary part as checked
     for (i=12; i<size; i+=4) rom_flags_type(addr+i, flags_type_ns);
     VERB4 ns_print_binary(addr, size);
@@ -1186,7 +1226,7 @@ unsigned int check_ns_obj(unsigned int addr)
       VERB3 printf("%5d: %08x\n", i/4-3, rom_w(addr+i));
     }
     for (i=8; i<size; i+=4) {
-      check_ns_ref(addr+i);
+      check_ns_ref(addr+i, 0);
     }
   } else if ( (val&0x00000003) == 0x00000003 ) {
     // frame
@@ -1196,7 +1236,7 @@ unsigned int check_ns_obj(unsigned int addr)
       VERB3 printf("%5d: %08x\n", i/4-3, rom_w(addr+i));
     }
     for (i=8; i<size; i+=4) {
-      check_ns_ref(addr+i);          
+      check_ns_ref(addr+i, 0);
     }
   } else {
     VERB1 printf("ERROR: unsupported NS object at %08x: %08x\n", addr, val);
@@ -1207,7 +1247,22 @@ unsigned int check_ns_obj(unsigned int addr)
 
 void check_all_ns_coverage()
 {
-  int i, n_magic = rom_w(0x003af000);
+  int i;
+  // 0x0068068C
+  
+  // array of asm/NS pointers. Why are they ordered like this?
+  // these are always two words: 
+  //   the first word, Rlabel, is a NSRef
+  //   the second word, RSlabel, is always an asm pointer to the previous word
+  for (i=0x0067fa44; i<0x00681c9c; i+=8) {
+    check_ns_ref(i);
+  } 
+  // simple pointers, but what are they used for?
+  for (i=0x00681c9c; i<0x006853dc; i+=8) {
+    check_ns_ref(i);
+  }
+
+  int n_magic = rom_w(0x003af000);  
   for (i=0; i<n_magic; i++) {
     check_ns_ref(0x003af004+4*i);
   }
@@ -1221,14 +1276,7 @@ void check_all_ns_coverage()
       ABORT_SCAN;
     }
   }
-  // simple pointers, but what are they used for?
-  for (i=0x00681c9c; i<0x006853dc; i+=8) {
-    check_ns_ref(i);
-  }
-  // simple pointers, but what are they used for?
-  for (i=0x0067fa44; i<0x00681c9c; i+=8) {
-    check_ns_ref(i);
-  }  
+  
 }
 
 // Dictionaries starting at 0x006853DC (InitROMDictionaryData)
@@ -1241,7 +1289,10 @@ int main(int argc, char **argv)
 {
   int i;
   
-  readSymbols("/Users/matt/dev/Albert/data/717006.symbols");
+  readSymbols(
+              "/Users/matt/dev/Albert/data/717006.cppsymbols.txt",
+              "/Users/matt/dev/Albert/data/717006.symbols.txt"              
+              );
   
   FILE *rom = fopen("/Users/matt/dev/Albert/data/717006", "rb");
   if (!rom) {
@@ -1252,7 +1303,6 @@ int main(int argc, char **argv)
   fclose(rom);
 
 #if 1
-  FILE *rom_flags;
   memset(ROM_flags, 0, 0x00200000*sizeof(int));
 #else
   FILE *rom_flags = fopen("/Users/matt/dev/Albert/data/flags", "rb");
@@ -1267,10 +1317,20 @@ int main(int argc, char **argv)
   
   load_db(db_path, "symbols.txt");
   
-#if 1
   preset_rom_use();
+
+#if 1
+  printf("\n====> Checking Newton ROM use for ARM assembler code\n\n");
   try {
     check_all_code_coverage();
+  } catch(char *err) {
+    puts(err);
+  }
+#endif
+  
+#if 1
+  printf("\n====> Checking Newton ROM use for NewtonScript code\n\n");
+  try {
     check_all_ns_coverage();
   } catch(char *err) {
     puts(err);
@@ -1278,7 +1338,7 @@ int main(int argc, char **argv)
 #endif
   
 #if 0
-  
+  printf("\n====> Writing Newton ROM in pseudo C++ code (C++ methods only)\n\n");
   AlClass::write_all(cpp_path);
   
   FILE *f;
@@ -1296,6 +1356,7 @@ int main(int argc, char **argv)
 #endif
   
 #if 0
+  printf("\n====> Writing binary Newton ROM usage map\n\n");
   rom_flags = fopen("/Users/matt/dev/Albert/data/flags", "wb");
   if (!rom_flags) {
     puts("Can't write ROM flags!");
@@ -1303,7 +1364,9 @@ int main(int argc, char **argv)
   fwrite(ROM_flags, 0x00200000, sizeof(int), rom_flags);
   fclose(rom_flags);
 #endif
-#if 1
+  
+#if 0
+  printf("\n====> Writing Newton ROM usage map as RGB pixel stream\n\n");
   rom_flags = fopen("/Users/matt/dev/Albert/data/flags.rgb", "wb");
   if (!rom_flags) {
     puts("Can't write ROM flags!");
@@ -1330,7 +1393,8 @@ int main(int argc, char **argv)
   fclose(rom_flags);
 #endif
 
-#if 1
+#if 0
+  printf("\n====> Writing Newton ROM layout per word\n\n");
   FILE *code = fopen("/Users/matt/dev/Albert/data/code.a", "wb");
   if (!code) {
     puts("Can't write code!");
@@ -1346,7 +1410,7 @@ int main(int argc, char **argv)
         case flags_type_arm_text:   type="arm_text"; break;
         case flags_type_patch_table:type="patch_table"; break;
         case flags_type_jump_table: type="jump_table"; break;
-        case flags_type_unused:     type="unused"; continue;
+        case flags_type_unused:     type="unused"; break;
         case flags_type_rex:        type="rex"; break;
         case flags_type_ns:         type="NS"; break;
         case flags_type_ns_obj:     type="NSObj"; break;
@@ -1370,6 +1434,220 @@ int main(int argc, char **argv)
     fclose(code);
   }
 #endif
+
+#if 0
+  printf("\n====> Writing all Newton ROM ASCII text entries\n\n");
+  FILE *text = fopen("/Users/matt/dev/Albert/data/text.txt", "wb");
+  if (!code) {
+    puts("Can't write text!");
+  } else {
+    int j, n = 0;
+    for (i=0; i<0x00800000; i+=4) {
+      if (rom_flags_type(i)==flags_type_arm_text) {
+        for (j=0; j<4; j++) {
+          if (n==0) {
+            fprintf(text, "0x%08x: \"", i+j);
+            n = 1;
+          }
+          char c = ROM[i+j];
+          if (c==0) {
+            fprintf(text, "\\0\"\n");
+            n = 0;
+          } else if (c<' ') {
+            fprintf(text, "\\%c", c+96); // FIXME: lookup table needed
+          } else if (c>=127) {
+            fprintf(text, "\\x%2x", c);            
+          } else {
+            fputc(c, text);
+          }        
+        }
+      }
+    }
+    fclose(code);
+  }
+#endif
+  
+#if 1
+  printf("\n====> Writing Newton ROM in ARM assembler code\n\n");
+  FILE *newt = fopen("/Users/matt/dev/Albert/NewtonOS/newtonos.s", "wb");
+  if (!newt) {
+    puts("Can't write NewtonOS!");
+  } else {
+    unsigned int n_unused, unused_filler;
+    fprintf(newt, "\n\t.include\t\"macros.s\"\n\n\t.text\n\t.org\t0\n\n");
+    fprintf(newt, "\t.global\t_start\n_start:\n");
+    for (i=0; i<0x00800000; i+=4) {
+      unsigned int val = rom_w(i);
+      const char *sym = get_symbol_at(i);
+      const char *psym = get_plain_symbol_at(i);
+      if (psym && sym) {
+        fprintf(newt, "\n%s:\t\t\t@ 0x%08X: %s\n", psym, i, sym);
+      } else if (psym) {
+        fprintf(newt, "\n%s:\n", psym);
+      } else if (sym) {
+        fprintf(newt, "L%08X:\t\t\t@ %s\n", i, sym);
+      } else if (rom_flags_is_set(i, flags_is_target)) {
+        fprintf(newt, "L%08X:\n", i);
+      }
+      switch (rom_flags_type(i)) {
+        case flags_type_unused:
+          if (!n_unused) unused_filler = rom_w(i);
+          n_unused++; 
+          if (  (i+4)>=0x00800000 
+              || rom_flags_type(i+4)!=flags_type_unused
+              || rom_w(i+4)!=unused_filler) {
+            fprintf(newt, "\t.fill\t%d, %d, 0x%08x\n", n_unused, 4, unused_filler);
+            n_unused = 0;
+          }
+          break;
+        case flags_type_ns_ref:
+          if ( (val&0x00000003) == 0x00000000 ) { // Integer
+            int v = (int)val;
+            fprintf(newt, "\tNSInt\t%d\n", v/4, i);
+          } else if ( (val&0x00000003) == 0x00000001 ) { // Pointer
+            const char *sym = get_plain_symbol_at(val&0xfffffffe);
+            if (sym)
+              fprintf(newt, "\tNSPtr\t%s\t\t@ -> 0x%08X\n", sym, val&0xfffffffe);
+            else if (rom_flags_is_set(val&0xfffffffe, flags_is_target))
+              fprintf(newt, "\tNSPtr\tL%08X\n", val&0xfffffffe);
+            else
+              fprintf(newt, "\tNSPtr\t0x%08X\n", val&0xfffffffe);
+          } else if ( (val&0x00000003) == 0x00000002 ) { // Special
+            switch (val) {
+              case 0x00000002: fprintf(newt, "\tNSNil\n"); break;
+              case 0x0000001a: fprintf(newt, "\tNSTrue\n"); break;
+              case 0x00055552: {
+                //int n = strlen((const char*)ROM+i+8);
+                fprintf(newt, "\tNSSymbol\t0x%08X, \"%s\"\n", rom_w(i+4), ROM+i+8); 
+                // TODO: calculate those offsets!
+                for (i+=8;;i++) {
+                  char c = ROM[i]; if (c==0) break;
+                }
+                for(i++;(i&3);i++) {
+                }
+                i-=4;
+              } break;
+              default: 
+                if ( (val&0xfff0000f) == 0x0000000a ) { // Character
+                  unsigned int c = (val>>4)&0xffff;
+                  if (c>31 && c<127) 
+                    fprintf(newt, "\tNSChar\t0x%04X\t\t@ (NSRef UniChar = %c)\n", c, c);
+                  else
+                    fprintf(newt, "\tNSChar\t0x%04X\t\t@ (NSRef UniChar)\n", c);
+                } else {
+                  fprintf(newt, "\t.word\t0x%08X\t\t@ 0x%08X (Unknown NSRef Special)\n", rom_w(i), i); 
+                }
+                break;
+            }
+          } else if ( (val&0x00000003) == 0x00000003 ) { // Magic Pointer
+            // printf("NSRef: Magic %d:%d at %08x: %08x\n", (val&0xffffc000)>>14, (val&0x00003ffc)>>2, addr, val);
+            unsigned int table = val>>14;
+            unsigned int index = (val>>2)&0x00000fff;
+            fprintf(newt, "\tNSMagic\t%d, %d\n", table, index, i, table, index);
+          }
+          break;
+        case flags_type_ns_obj: {
+          unsigned int size = val>>8, j, n;
+          if ((val&0x0000007f)==0x00000040) { // --- Binary Object
+            char decoded[128] = "";
+            switch (rom_w(i+8)) {
+              case 0x00055552: // Symbol
+                break;
+              case 0x003C13A5: // String
+                fprintf(newt, "\t@ String: \"");
+                for (j=i+12, n=i+size-2; j<n; j+=2) {
+                  unsigned short c = ROM[j+1] + (ROM[j]<<8);
+                  if (c>=32 && c<127) 
+                    fputc(c, newt);
+                  else
+                    fprintf(newt, "\\0x%04x", c);
+                }
+                fprintf(newt, "\"\n");
+                break;
+              case 0x003B6859: // Real
+                sprintf(decoded, "\t\t\t@ Real: %g", rom_real(i+12));
+                break;
+              case 0x003BD889: // Fixed
+                sprintf(decoded, "\t\t\t@ Fixed: %g", rom_fixed(i+12));
+                break;
+              default:
+                strcpy(decoded, "\t\t\t@ (undecoded)");
+            }
+            if ((val&0x000000ff)==0x00000040) {
+              fprintf(newt, "\tNSObjBin\t%d%s\n", size-12, decoded); i+=4;
+            } else if ((val&0x000000ff)==0x000000C0) {
+              fprintf(newt, "\tNSObjXBin\t%d%s\n", size-12, decoded); i+=4;
+            }
+          } else if ((val&0x0000007f)==0x00000041) { // --- Array
+            if ((val&0x000000ff)==0x00000041) {
+              fprintf(newt, "\tNSObjArray\t%d\n", (size/4)-3); i+=4;
+            } else if ((val&0x000000ff)==0x000000C1) {
+              fprintf(newt, "\tNSObjXArray\t%d\n", (size/4)-3); i+=4;
+            }
+          } else if ((val&0x0000007f)==0x00000043) { // --- Frame
+                                                     //unsigned int size = val>>8, j, n;
+            char decoded[128] = "";
+            switch (rom_w(i+8)) {
+              case 0x003D45E5: // Sound
+                sprintf(decoded, "\t\t\t@ Sound: %d bit, %d samples", rom_w(i+24)>>2, rom_w(i+28)>>2);
+                /*
+                 NSObjXFrame     9
+                 NSPtr   L003D45E4
+                 NSPtr   SYMcodec                @ -> 0x003C57C4
+                 NSPtr   L00478F28
+                 NSPtr   L004249F0
+                 NSInt   16
+                 NSInt   10240
+                 NSInt   4
+                 NSInt   6
+                 NSPtr   L00424AB8
+                 NSPtr   L00478B40
+                 
+                 NSPtr   SYMsndframetype         @ -> 0x003C1044
+                 NSPtr   SYMsamplingrate         @ -> 0x003C0A7C
+                 NSPtr   SYMcodecname            @ -> 0x003C57DC
+                 NSPtr   SYMdatatype             @ -> 0x003C57A8
+                 NSPtr   SYMbuffersize           @ -> 0x003C2FEC
+                 NSPtr   SYMbuffercount          @ -> 0x003C57F8
+                 NSPtr   SYMcompressiontype              @ -> 0x003BC598
+                 NSPtr   SYMcompressionratio             @ -> 0x003C5814
+                 NSPtr   SYMsamples              @ -> 0x003C0A48
+                 */
+                break;
+              default:
+                strcpy(decoded, "\t\t\t@ (undecoded)");
+            }
+            if ((val&0x000000ff)==0x00000043) {
+              fprintf(newt, "\tNSObjFrame\t%d %s\n", (size/4)-3, decoded); i+=4;
+            } else if ((val&0x000000ff)==0x000000C3) {
+              fprintf(newt, "\tNSObjXFrame\t%d %s\n", (size/4)-3, decoded); i+=4;
+            }
+          } else {
+            fprintf(newt, "\t.word\t0x%08X\t\t@ 0x%08X (unknown NewtonScript object)\n", val, i);
+          }
+        } break;
+        case flags_type_unknown:
+        case flags_type_arm_code:
+        case flags_type_arm_byte:
+        case flags_type_arm_word:
+        case flags_type_arm_text:
+        case flags_type_patch_table:
+        case flags_type_jump_table:
+        case flags_type_rex:
+        case flags_type_ns:
+        case flags_type_dict:
+        case flags_type_classinfo:
+        case flags_type_data:
+        default:
+          fprintf(newt, "\t.word\t0x%08X\t\t@ 0x%08X (%s)\n", val, i, type_lut[rom_flags_type(i)]);
+          break;
+      }
+    }
+    fprintf(newt, "\n\t.end\n\n");
+    fclose(newt);
+  }
+#endif
+  
   
   int n=0;
   for (i=0; i<0x00200000; i++) {
@@ -1391,6 +1669,9 @@ int main(int argc, char **argv)
 :map <f6> kmbjjf;llyw'af,lpj0V'bd/unknown<cr>
 */
 
+// FIXME: there is a big goof at 0x0032E1B4 (and before and after) where tons of code is set to "text"
+// FIXME: differentiate between text and bytes!
+
 // Di 10 aug 2010, 15:05:   0.649% of ROM words covered (13604 of 2097152)
 //                 15:17:   1.106% of ROM words covered (23196 of 2097152)
 //                 20:12:  34.491% of ROM words covered (723334 of 2097152) ARM
@@ -1411,5 +1692,5 @@ int main(int argc, char **argv)
 //                 20:37:  98.305% of ROM words covered (2061610 of 2097152)
 //                 21:13:  99.591% of ROM words covered (2088566 of 2097152)
 //                 21:44:  99.987% of ROM words covered (2096871 of 2097152)
-//                 21:59: 100.000% of ROM words covered (2097152 of 2097152) PARTY!
+//                 21:59: 100.000% of ROM words covered (2097152 of 2097152) PARTY!!
 
