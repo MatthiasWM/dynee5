@@ -1585,34 +1585,10 @@ int main(int argc, char **argv)
               fprintf(newt, "\tNSObjXArray\t%d\n", (size/4)-3); i+=4;
             }
           } else if ((val&0x0000007f)==0x00000043) { // --- Frame
-                                                     //unsigned int size = val>>8, j, n;
             char decoded[128] = "";
             switch (rom_w(i+8)) {
               case 0x003D45E5: // Sound
-                sprintf(decoded, "\t\t\t@ Sound: %d bit, %d samples", rom_w(i+24)>>2, rom_w(i+28)>>2);
-                /*
-                 NSObjXFrame     9
-                 NSPtr   L003D45E4
-                 NSPtr   SYMcodec                @ -> 0x003C57C4
-                 NSPtr   L00478F28
-                 NSPtr   L004249F0
-                 NSInt   16
-                 NSInt   10240
-                 NSInt   4
-                 NSInt   6
-                 NSPtr   L00424AB8
-                 NSPtr   L00478B40
-                 
-                 NSPtr   SYMsndframetype         @ -> 0x003C1044
-                 NSPtr   SYMsamplingrate         @ -> 0x003C0A7C
-                 NSPtr   SYMcodecname            @ -> 0x003C57DC
-                 NSPtr   SYMdatatype             @ -> 0x003C57A8
-                 NSPtr   SYMbuffersize           @ -> 0x003C2FEC
-                 NSPtr   SYMbuffercount          @ -> 0x003C57F8
-                 NSPtr   SYMcompressiontype              @ -> 0x003BC598
-                 NSPtr   SYMcompressionratio             @ -> 0x003C5814
-                 NSPtr   SYMsamples              @ -> 0x003C0A48
-                 */
+                sprintf(decoded, "\t\t\t@ Sound");
                 break;
               default:
                 strcpy(decoded, "\t\t\t@ (undecoded)");

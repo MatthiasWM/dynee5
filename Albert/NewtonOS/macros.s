@@ -105,7 +105,7 @@
 @	NSObjArray	4
 @
 .macro  NSObjFrame        entries
-        .word   0x00000041|((\entries+3)<<10)
+        .word   0x00000043|((\entries+3)<<10)
         .word   0
         .endm
 
@@ -115,7 +115,7 @@
 @	NSObjXArray	4
 @
 .macro  NSObjXFrame        entries
-        .word   0x000000C1|((\entries+3)<<10)
+        .word   0x000000C3|((\entries+3)<<10)
         .word   0
         .endm
 
