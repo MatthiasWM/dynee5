@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		C95C2DBD1211B98100C87B33 /* disarm_c.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C95C2DBB1211B98100C87B33 /* disarm_c.cpp */; };
+		C95C36A01221BD4900C87B33 /* nsDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C95C369F1221BD4900C87B33 /* nsDecode.cpp */; };
 		C9601DD510B1FA9C0018BADE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601DD410B1FA9C0018BADE /* Carbon.framework */; };
 		C9601EA810B1FB5B0018BADE /* libfltk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601EA210B1FB5A0018BADE /* libfltk.a */; };
 		C99F6ECC10C7ECB0003DEBD6 /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99F6ECB10C7ECB0003DEBD6 /* types.cpp */; };
@@ -75,6 +76,7 @@
 		C95C357112217F4C00C87B33 /* classinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = classinfo.h; path = tools/classinfo.h; sourceTree = "<group>"; };
 		C95C357212217F4C00C87B33 /* db_cpp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = db_cpp.h; path = tools/db_cpp.h; sourceTree = "<group>"; };
 		C95C357312217FB000C87B33 /* manual_checks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = manual_checks.h; path = tools/manual_checks.h; sourceTree = "<group>"; };
+		C95C369F1221BD4900C87B33 /* nsDecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = nsDecode.cpp; path = tools/nsDecode.cpp; sourceTree = "<group>"; };
 		C9601DCB10B1FA890018BADE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		C9601DCC10B1FA890018BADE /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		C9601DD410B1FA9C0018BADE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				C95C357112217F4C00C87B33 /* classinfo.h */,
+				C95C357312217FB000C87B33 /* manual_checks.h */,
 				C95C357212217F4C00C87B33 /* db_cpp.h */,
 				C95C2DBB1211B98100C87B33 /* disarm_c.cpp */,
 				C95C2DBC1211B98100C87B33 /* disarm_c.h */,
@@ -368,7 +371,7 @@
 				C9F6EA0710C5C56B007C848E /* sym2db.h */,
 				C9F6EA0A10C5C56B007C848E /* db2src.cpp */,
 				C9F6EA0910C5C56B007C848E /* db2src.h */,
-				C95C357312217FB000C87B33 /* manual_checks.h */,
+				C95C369F1221BD4900C87B33 /* nsDecode.cpp */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				C9F6EA1810C5C5A5007C848E /* db2src.cpp in Sources */,
 				C9F6EA1910C5C5A5007C848E /* disarm.cpp in Sources */,
 				C95C2DBD1211B98100C87B33 /* disarm_c.cpp in Sources */,
+				C95C36A01221BD4900C87B33 /* nsDecode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

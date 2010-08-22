@@ -1281,6 +1281,74 @@ void check_all_ns_coverage()
 
 // Dictionaries starting at 0x006853DC (InitROMDictionaryData)
 
+void writeLabel(FILE *newt, unsigned int i)
+{
+  const char *sym = get_symbol_at(i);
+  const char *psym = get_plain_symbol_at(i);
+  if (psym && sym) {
+    fprintf(newt, "\n%s:\t\t\t@ 0x%08X: %s\n", psym, i, sym);
+  } else if (psym) {
+    fprintf(newt, "\n%s:\n", psym);
+  } else if (sym) {
+    fprintf(newt, "L%08X:\t\t\t@ %s\n", i, sym);
+  } else if (rom_flags_is_set(i, flags_is_target)) {
+    fprintf(newt, "L%08X:\n", i);
+  }
+}
+
+
+void writeNewtonROM() 
+{
+  printf("\n====> Writing Newton ROM in ARM assembler code\n\n");
+  unsigned int i;
+  FILE *newt = fopen("/Users/matt/dev/Albert/NewtonOS/newtonos.s", "wb");
+  if (!newt) {
+    puts("Can't write NewtonOS!");
+  } else {
+    unsigned int n_unused = 0, unused_filler = 0;
+    fprintf(newt, "\n\t.include\t\"macros.s\"\n\n\t.text\n\t.org\t0\n\n");
+    fprintf(newt, "\t.global\t_start\n_start:\n");
+    for (i=0; i<0x00800000; i+=4) {
+      unsigned int val = rom_w(i);
+      writeLabel(newt, i);
+      switch (rom_flags_type(i)) {
+        case flags_type_unused:
+          if (!n_unused) unused_filler = rom_w(i);
+          n_unused++; 
+          if (  (i+4)>=0x00800000 
+              || rom_flags_type(i+4)!=flags_type_unused
+              || rom_w(i+4)!=unused_filler) {
+            fprintf(newt, "\t.fill\t%d, %d, 0x%08x\n", n_unused, 4, unused_filler);
+            n_unused = 0;
+          }
+          break;
+        case flags_type_ns_ref:
+          i = decodeNSRef(newt, i);
+          break;
+        case flags_type_ns_obj: 
+          i = decodeNSObj(newt, i);
+          break;
+        case flags_type_unknown:
+        case flags_type_arm_code:
+        case flags_type_arm_byte:
+        case flags_type_arm_word:
+        case flags_type_arm_text:
+        case flags_type_patch_table:
+        case flags_type_jump_table:
+        case flags_type_rex:
+        case flags_type_ns:
+        case flags_type_dict:
+        case flags_type_classinfo:
+        case flags_type_data:
+        default:
+          fprintf(newt, "\t.word\t0x%08X\t\t@ 0x%08X (%s)\n", val, i, type_lut[rom_flags_type(i)]);
+          break;
+      }
+    }
+    fprintf(newt, "\n\t.end\n\n");
+    fclose(newt);
+  }
+}
 
 /**
  * Convert the data base into a bunch of (pseudo) C and C++ source files
@@ -1468,160 +1536,7 @@ int main(int argc, char **argv)
 #endif
   
 #if 1
-  printf("\n====> Writing Newton ROM in ARM assembler code\n\n");
-  FILE *newt = fopen("/Users/matt/dev/Albert/NewtonOS/newtonos.s", "wb");
-  if (!newt) {
-    puts("Can't write NewtonOS!");
-  } else {
-    unsigned int n_unused, unused_filler;
-    fprintf(newt, "\n\t.include\t\"macros.s\"\n\n\t.text\n\t.org\t0\n\n");
-    fprintf(newt, "\t.global\t_start\n_start:\n");
-    for (i=0; i<0x00800000; i+=4) {
-      unsigned int val = rom_w(i);
-      const char *sym = get_symbol_at(i);
-      const char *psym = get_plain_symbol_at(i);
-      if (psym && sym) {
-        fprintf(newt, "\n%s:\t\t\t@ 0x%08X: %s\n", psym, i, sym);
-      } else if (psym) {
-        fprintf(newt, "\n%s:\n", psym);
-      } else if (sym) {
-        fprintf(newt, "L%08X:\t\t\t@ %s\n", i, sym);
-      } else if (rom_flags_is_set(i, flags_is_target)) {
-        fprintf(newt, "L%08X:\n", i);
-      }
-      switch (rom_flags_type(i)) {
-        case flags_type_unused:
-          if (!n_unused) unused_filler = rom_w(i);
-          n_unused++; 
-          if (  (i+4)>=0x00800000 
-              || rom_flags_type(i+4)!=flags_type_unused
-              || rom_w(i+4)!=unused_filler) {
-            fprintf(newt, "\t.fill\t%d, %d, 0x%08x\n", n_unused, 4, unused_filler);
-            n_unused = 0;
-          }
-          break;
-        case flags_type_ns_ref:
-          if ( (val&0x00000003) == 0x00000000 ) { // Integer
-            int v = (int)val;
-            fprintf(newt, "\tNSInt\t%d\n", v/4, i);
-          } else if ( (val&0x00000003) == 0x00000001 ) { // Pointer
-            const char *sym = get_plain_symbol_at(val&0xfffffffe);
-            if (sym)
-              fprintf(newt, "\tNSPtr\t%s\t\t@ -> 0x%08X\n", sym, val&0xfffffffe);
-            else if (rom_flags_is_set(val&0xfffffffe, flags_is_target))
-              fprintf(newt, "\tNSPtr\tL%08X\n", val&0xfffffffe);
-            else
-              fprintf(newt, "\tNSPtr\t0x%08X\n", val&0xfffffffe);
-          } else if ( (val&0x00000003) == 0x00000002 ) { // Special
-            switch (val) {
-              case 0x00000002: fprintf(newt, "\tNSNil\n"); break;
-              case 0x0000001a: fprintf(newt, "\tNSTrue\n"); break;
-              case 0x00055552: {
-                //int n = strlen((const char*)ROM+i+8);
-                fprintf(newt, "\tNSSymbol\t0x%08X, \"%s\"\n", rom_w(i+4), ROM+i+8); 
-                // TODO: calculate those offsets!
-                for (i+=8;;i++) {
-                  char c = ROM[i]; if (c==0) break;
-                }
-                for(i++;(i&3);i++) {
-                }
-                i-=4;
-              } break;
-              default: 
-                if ( (val&0xfff0000f) == 0x0000000a ) { // Character
-                  unsigned int c = (val>>4)&0xffff;
-                  if (c>31 && c<127) 
-                    fprintf(newt, "\tNSChar\t0x%04X\t\t@ (NSRef UniChar = %c)\n", c, c);
-                  else
-                    fprintf(newt, "\tNSChar\t0x%04X\t\t@ (NSRef UniChar)\n", c);
-                } else {
-                  fprintf(newt, "\t.word\t0x%08X\t\t@ 0x%08X (Unknown NSRef Special)\n", rom_w(i), i); 
-                }
-                break;
-            }
-          } else if ( (val&0x00000003) == 0x00000003 ) { // Magic Pointer
-            // printf("NSRef: Magic %d:%d at %08x: %08x\n", (val&0xffffc000)>>14, (val&0x00003ffc)>>2, addr, val);
-            unsigned int table = val>>14;
-            unsigned int index = (val>>2)&0x00000fff;
-            fprintf(newt, "\tNSMagic\t%d, %d\n", table, index, i, table, index);
-          }
-          break;
-        case flags_type_ns_obj: {
-          unsigned int size = val>>8, j, n;
-          if ((val&0x0000007f)==0x00000040) { // --- Binary Object
-            char decoded[128] = "";
-            switch (rom_w(i+8)) {
-              case 0x00055552: // Symbol
-                break;
-              case 0x003C13A5: // String
-                fprintf(newt, "\t@ String: \"");
-                for (j=i+12, n=i+size-2; j<n; j+=2) {
-                  unsigned short c = ROM[j+1] + (ROM[j]<<8);
-                  if (c>=32 && c<127) 
-                    fputc(c, newt);
-                  else
-                    fprintf(newt, "\\0x%04x", c);
-                }
-                fprintf(newt, "\"\n");
-                break;
-              case 0x003B6859: // Real
-                sprintf(decoded, "\t\t\t@ Real: %g", rom_real(i+12));
-                break;
-              case 0x003BD889: // Fixed
-                sprintf(decoded, "\t\t\t@ Fixed: %g", rom_fixed(i+12));
-                break;
-              default:
-                strcpy(decoded, "\t\t\t@ (undecoded)");
-            }
-            if ((val&0x000000ff)==0x00000040) {
-              fprintf(newt, "\tNSObjBin\t%d%s\n", size-12, decoded); i+=4;
-            } else if ((val&0x000000ff)==0x000000C0) {
-              fprintf(newt, "\tNSObjXBin\t%d%s\n", size-12, decoded); i+=4;
-            }
-          } else if ((val&0x0000007f)==0x00000041) { // --- Array
-            if ((val&0x000000ff)==0x00000041) {
-              fprintf(newt, "\tNSObjArray\t%d\n", (size/4)-3); i+=4;
-            } else if ((val&0x000000ff)==0x000000C1) {
-              fprintf(newt, "\tNSObjXArray\t%d\n", (size/4)-3); i+=4;
-            }
-          } else if ((val&0x0000007f)==0x00000043) { // --- Frame
-            char decoded[128] = "";
-            switch (rom_w(i+8)) {
-              case 0x003D45E5: // Sound
-                sprintf(decoded, "\t\t\t@ Sound");
-                break;
-              default:
-                strcpy(decoded, "\t\t\t@ (undecoded)");
-            }
-            if ((val&0x000000ff)==0x00000043) {
-              fprintf(newt, "\tNSObjFrame\t%d %s\n", (size/4)-3, decoded); i+=4;
-            } else if ((val&0x000000ff)==0x000000C3) {
-              fprintf(newt, "\tNSObjXFrame\t%d %s\n", (size/4)-3, decoded); i+=4;
-            }
-          } else {
-            fprintf(newt, "\t.word\t0x%08X\t\t@ 0x%08X (unknown NewtonScript object)\n", val, i);
-          }
-        } break;
-        case flags_type_unknown:
-        case flags_type_arm_code:
-        case flags_type_arm_byte:
-        case flags_type_arm_word:
-        case flags_type_arm_text:
-        case flags_type_patch_table:
-        case flags_type_jump_table:
-        case flags_type_rex:
-        case flags_type_ns:
-        case flags_type_dict:
-        case flags_type_classinfo:
-        case flags_type_data:
-        default:
-          fprintf(newt, "\t.word\t0x%08X\t\t@ 0x%08X (%s)\n", val, i, type_lut[rom_flags_type(i)]);
-          break;
-      }
-    }
-    fprintf(newt, "\n\t.end\n\n");
-    fclose(newt);
-  }
+  writeNewtonROM();
 #endif
   
   
