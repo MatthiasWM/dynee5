@@ -86,7 +86,9 @@ unsigned int decodeNSObj(FILE *newt, unsigned int i) {
         fprintf(newt, "\"\n");
         break;
       case 0x003B6859: // Real
-        sprintf(decoded, "\t\t\t@ Real: %g", rom_real(i+12));
+        sprintf(decoded, "\t\t\t@ Real: %f", rom_real(i+12));
+        //fprintf(newt, "\tNSObjReal\t%g\n", rom_real(i+12)); i+=16;
+        //decode = 0;
         break;
       case 0x003BD889: // Fixed
         sprintf(decoded, "\t\t\t@ Fixed: %g", rom_fixed(i+12));

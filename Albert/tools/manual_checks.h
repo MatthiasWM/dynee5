@@ -3891,7 +3891,10 @@
   rom_flags_type(0x00153098, flags_type_arm_text); //  0x00000000 - .... 
   rom_flags_type(0x00153128, flags_type_arm_text); //  0x63746976 - ctiv 
   rom_flags_type(0x0015312C, flags_type_arm_text); //  0x00000000 - .... 
-  rom_flags_type(0x00154E94, flags_type_arm_text); //  0x5453746F - TSto 
+
+rom_flags_type(0x001547D4, 0x001547E0, flags_type_arm_text); //  XXXXX
+
+rom_flags_type(0x00154E94, flags_type_arm_text); //  0x5453746F - TSto 
   rom_flags_type(0x00154E98, flags_type_arm_text); //  0x72650000 - re.. 
   rom_flags_type(0x00154E9C, flags_type_arm_text); //  0x544D7578 - TMux 
   rom_flags_type(0x00154EA0, flags_type_arm_text); //  0x53746F72 - Stor 

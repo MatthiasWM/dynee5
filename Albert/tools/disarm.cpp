@@ -123,7 +123,7 @@ static int print_insn_arm(unsigned int pc,
                     int offset = given & 0xfff;
                     if (offset)
                     {
-                      sprintf(tmpStr, ", %s#%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
+                      sprintf(tmpStr, ", #%s%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
                       str = strcat(str, tmpStr);
                     }
                   }
@@ -144,7 +144,7 @@ static int print_insn_arm(unsigned int pc,
                     int offset = given & 0xfff;
                     if (offset)
                     {
-                      sprintf(tmpStr, "], %s#%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
+                      sprintf(tmpStr, "], #%s%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
                       str = strcat(str, tmpStr);
                     }
                     else
@@ -183,7 +183,7 @@ static int print_insn_arm(unsigned int pc,
                     int offset = ((given & 0xf00) >> 4) | (given & 0xf);
                     if (offset)
                     {
-                      sprintf(tmpStr, ", %s#%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
+                      sprintf(tmpStr, ", #%s%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
                       str = strcat(str, tmpStr);
                     }
                   }
@@ -206,7 +206,7 @@ static int print_insn_arm(unsigned int pc,
                     int offset = ((given & 0xf00) >> 4) | (given & 0xf);
                     if (offset)
                     {
-                      sprintf(tmpStr, "], %s#%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
+                      sprintf(tmpStr, "], #%s%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
                       str = strcat(str, tmpStr);
                     }
                     else
@@ -336,7 +336,7 @@ static int print_insn_arm(unsigned int pc,
                 int offset = given & 0xff;
                 if (offset)
                 {
-                  sprintf(tmpStr, ", %s#%d]%s", ((given & 0x00800000) == 0 ? "-" : ""), offset * 4, ((given & 0x00200000) != 0 ? "!" : ""));
+                  sprintf(tmpStr, ", #%s%d]%s", ((given & 0x00800000) == 0 ? "-" : ""), offset * 4, ((given & 0x00200000) != 0 ? "!" : ""));
                   str = strcat(str, tmpStr);
                 }
                 else
@@ -347,7 +347,7 @@ static int print_insn_arm(unsigned int pc,
                 int offset = given & 0xff;
                 if (offset)
                 {
-                  sprintf(tmpStr, "], %s#%d", ((given & 0x00800000) == 0 ? "-" : ""), offset * 4);
+                  sprintf(tmpStr, "], #%s%d", ((given & 0x00800000) == 0 ? "-" : ""), offset * 4);
                   str = strcat(str, tmpStr);
                 }
                 else

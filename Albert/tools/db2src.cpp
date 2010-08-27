@@ -1281,6 +1281,42 @@ void check_all_ns_coverage()
 
 // Dictionaries starting at 0x006853DC (InitROMDictionaryData)
 
+
+void writeNewtonROMTexts()
+{  
+  printf("\n====> Writing all Newton ROM ASCII text entries\n\n");
+  unsigned int i;
+  FILE *text = fopen("/Users/matt/dev/Albert/data/text.txt", "wb");
+  if (!text) {
+    puts("Can't write text!");
+  } else {
+    int j, n = 0;
+    for (i=0; i<0x00800000; i+=4) {
+      if (rom_flags_type(i)==flags_type_arm_text) {
+        for (j=0; j<4; j++) {
+          if (n==0) {
+            fprintf(text, "0x%08x: \"", i+j);
+            n = 1;
+          }
+          char c = ROM[i+j];
+          if (c==0) {
+            fprintf(text, "\\0\"\n");
+            n = 0;
+          } else if (c<' ') {
+            fprintf(text, "\\%c", c+96); // FIXME: lookup table needed
+          } else if (c>=127) {
+            fprintf(text, "\\x%2x", c);            
+          } else {
+            fputc(c, text);
+          }        
+        }
+      }
+    }
+    fclose(text);
+  }
+}
+
+
 void writeLabel(FILE *newt, unsigned int i)
 {
   const char *sym = get_symbol_at(i);
@@ -1305,6 +1341,10 @@ void writeNewtonROM()
   if (!newt) {
     puts("Can't write NewtonOS!");
   } else {
+    
+    rom_flags_type(0x003AE204, flags_type_arm_word); // will create illegal instructions!
+    rom_flags_type(0x003AE20C, flags_type_arm_word);
+    
     unsigned int n_unused = 0, unused_filler = 0;
     fprintf(newt, "\n\t.include\t\"macros.s\"\n\n\t.text\n\t.org\t0\n\n");
     fprintf(newt, "\t.global\t_start\n_start:\n");
@@ -1328,8 +1368,16 @@ void writeNewtonROM()
         case flags_type_ns_obj: 
           i = decodeNSObj(newt, i);
           break;
+        case flags_type_arm_code: {
+          char buf[256];
+          disarm(buf, i, rom_w(i));
+          char *cmt = strchr(buf, ';');
+          if (cmt) *cmt = '@';
+          fprintf(newt, "\t%s\n", buf);
+          break; }
+          // mcr p15, 0, r8, c1, c0, 2
+          // mrc p15, 0, r0, c1, c0, 0
         case flags_type_unknown:
-        case flags_type_arm_code:
         case flags_type_arm_byte:
         case flags_type_arm_word:
         case flags_type_arm_text:
@@ -1504,35 +1552,7 @@ int main(int argc, char **argv)
 #endif
 
 #if 0
-  printf("\n====> Writing all Newton ROM ASCII text entries\n\n");
-  FILE *text = fopen("/Users/matt/dev/Albert/data/text.txt", "wb");
-  if (!code) {
-    puts("Can't write text!");
-  } else {
-    int j, n = 0;
-    for (i=0; i<0x00800000; i+=4) {
-      if (rom_flags_type(i)==flags_type_arm_text) {
-        for (j=0; j<4; j++) {
-          if (n==0) {
-            fprintf(text, "0x%08x: \"", i+j);
-            n = 1;
-          }
-          char c = ROM[i+j];
-          if (c==0) {
-            fprintf(text, "\\0\"\n");
-            n = 0;
-          } else if (c<' ') {
-            fprintf(text, "\\%c", c+96); // FIXME: lookup table needed
-          } else if (c>=127) {
-            fprintf(text, "\\x%2x", c);            
-          } else {
-            fputc(c, text);
-          }        
-        }
-      }
-    }
-    fclose(code);
-  }
+  writeNewtonROMTexts();
 #endif
   
 #if 1

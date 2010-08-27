@@ -101,7 +101,8 @@ static struct arm_opcode arm_opcodes[] = {
     {0x04000000, 0x0e100000, "str%c%22'b%t\t%12-15r, %a"},
     {0x06000000, 0x0e100ff0, "str%c%22'b%t\t%12-15r, %a"},
     {0x04000000, 0x0c100010, "str%c%22'b%t\t%12-15r, %a"},
-    {0x06000010, 0x0e000010, "undefined"},
+    {0x06000010, 0x0e000010, ".word\t%0-31x"},
+  //{0x06000010, 0x0e000010, "undefined"},
     {0x04100000, 0x0c100000, "ldr%c%22'b%t\t%12-15r, %a"},
     {0x08000000, 0x0e100000, "stm%c%23?id%24?ba\t%16-19r%21'!, %m%22'^"},
     {0x08100000, 0x0e100000, "ldm%c%23?id%24?ba\t%16-19r%21'!, %m%22'^"},
@@ -155,13 +156,13 @@ static struct arm_opcode arm_opcodes[] = {
 
     /* Generic coprocessor instructions */
     {0x0e000000, 0x0f000010, "cdp%c\t%8-11d, %20-23d, cr%12-15d, cr%16-19d, cr%0-3d, {%5-7d}"},
-    {0x0e100010, 0x0f100010, "mrc%c\t%8-11d, %21-23d, %12-15r, cr%16-19d, cr%0-3d, {%5-7d}"},
-    {0x0e000010, 0x0f100010, "mcr%c\t%8-11d, %21-23d, %12-15r, cr%16-19d, cr%0-3d, {%5-7d}"},
+    {0x0e100010, 0x0f100010, "mrc%c\t%8-11d, %21-23d, %12-15r, cr%16-19d, cr%0-3d, %5-7d"},
+    {0x0e000010, 0x0f100010, "mcr%c\t%8-11d, %21-23d, %12-15r, cr%16-19d, cr%0-3d, %5-7d"},
     {0x0c000000, 0x0e100000, "stc%c%22'l\t%8-11d, cr%12-15d, %A"},
     {0x0c100000, 0x0e100000, "ldc%c%22'l\t%8-11d, cr%12-15d, %A"},
   
     /* the rest */
-    {0x0fffffff, 0x06000010, "throw%c\tSystemBoot"},
+  {0x0fffffff, 0x06000010, "throw%c\tSystemBoot"}, // mask and value are swapped. Also, the 'undefined' test above will keep this from ever beeing executed!
     {0x0fffffff, 0x06000110, "throw%\tExitToShell"},
     {0x0fffffff, 0x06000210, "throw%\tDebugger"},
     {0x0fffffff, 0x06000310, "throw%\tDebugStr"},

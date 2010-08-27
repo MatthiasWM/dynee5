@@ -119,4 +119,14 @@
         .word   0
         .endm
 
+@
+@ Create a binary object representing a "double" or "real"
+@
+.macro	NSObjReal	val
+	NSObjBin	8
+	NSPtr		SYMreal
+	.double		\val
+	.endm
+
+
 
