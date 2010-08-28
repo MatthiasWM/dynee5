@@ -59,6 +59,8 @@ unsigned int rom_flags_type(unsigned int addr);
 const char *get_symbol_at(unsigned int addr);
 const char *get_plain_symbol_at(unsigned int addr);
 
+const char *get_symbol_at(unsigned int addr);
+const char *get_plain_symbol_at(unsigned int addr);
 
 unsigned int decodeNSRef(FILE *newt, unsigned int i);
 unsigned int decodeNSObj(FILE *newt, unsigned int i);

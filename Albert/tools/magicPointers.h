@@ -9,35 +9,20 @@
 
 // Index / Name (v2 if avail, else v1) / ROM version / opt. comment
 
-{ 0, "ROM_action_list", 1 },
-{ 1, "ROM_addresseeSlip", 1 },
-{ 2, "protoPeriodicAlarmEditor", 2 },
-{ 3, "ROM_alarmQuerySpec", 1 },
-{ 4, "ROM_alarmWakeup", 2, "Sound" },
+{   0, "ROM_action_list", 10 },
+{   1, "ROM_addresseeSlip", 10 },
+{   2, "protoPeriodicAlarmEditor", 20 },
+{   3, "ROM_alarmQuerySpec", 10 },
+{   4, "ROM_alarmWakeup", 20, "Sound" },
+{   5, "protoAnalogClock", 20 },
+{   6, "ROM_asciiBreak", 10 },
+{   7, "ROM_asciiShift", 10 },
+{   8, "ROM_assistFrames", 10 },
+{   9, "ROM_backupSlip", 10 },
+{  10, "protoPasswordSlip", 21 },
 
 #if 0
 /*
-      protoAnalogClock:			protoAnalogClock,			//  @5
-      //  @6 ?
-      //  @7 ?
-      //  @8 ?
-      //  @9 ?
-      //protoPasswordSlip:		protoPasswordSlip,			// @10 protoNOS2 -- 2.1 only
-      }
-      
-      ROM_analogClock:			ROM_analogClock,			//  @5
-      ROM_asciiBreak:				ROM_asciiBreak,				//  @6
-      ROM_asciiShift:				ROM_asciiShift,				//  @7
-      ROM_assistFrames:			ROM_assistFrames,			//  @8
-      ROM_backupSlip:				ROM_backupSlip,				//  @9
-      ROM_badAddressMessage:		ROM_badAddressMessage,		// @10
-      });
-      
-      // ===== 11-20
-      
-      call kAppendFrame with (partData,
-      if kBuild20
-      then { // 2.0
       ROM_checkBitmaps:			ROM_checkBitmaps,			// @11 [bitmap]
       ROM_priorityItems:			ROM_priorityItems,			// @12
       // @13 ?
@@ -62,8 +47,10 @@
       ROM_calendar:				ROM_calendar,				// @18
       ROM_calendarList:			ROM_calendarList,			// @19
       ROM_calendarMailSlip:		ROM_calendarMailSlip,		// @20
-      });
-      
+
+ 
+ 
+ 
       // ===== 21-30
       Print('rom30);
 

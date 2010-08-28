@@ -128,5 +128,44 @@
 	.double		\val
 	.endm
 
+@
+.macro	throwSystemBoot
+	.word	0xE6000010
+	.endm
+
+@
+.macro	throwExitToShell
+	.word	0xE6000110
+	.endm
+
+@
+.macro	throwDebugger
+	.word	0xE6000210
+	.endm
+
+@
+.macro	throwDebugStr
+	.word	0xE6000310
+	.endm
+
+@
+.macro	throwPublicFiller
+	.word	0xE6000410
+	.endm
+
+@
+.macro	throwSystemPanic
+	.word	0xE6000510
+	.endm
+
+@
+.macro	throwSendTestResults
+	.word	0xE6000710
+	.endm
+
+@
+.macro	throwTapFileCntl
+	.word	0xE6000810
+	.endm
 
 

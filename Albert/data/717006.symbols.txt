@@ -1,4 +1,11 @@
 0x00000000 Reset
+0x00000004 _UndefinedInstruction
+0x00000008 _SoftwareInterrupt
+0x0000000c _AbortPrefetch
+0x00000010 _AbortData
+0x00000014 _not_used
+0x00000018 _IRQ
+0x0000001c _FIQ
 0x00000020 kEntriesPerSlot
 0x00000020 kSlotsPerPage
 0x00000034 gInitHardware

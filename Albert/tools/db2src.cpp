@@ -97,6 +97,12 @@ const char *type_lut[] = {
 unsigned char ROM[0x00800000];
 unsigned int ROM_flags[0x00200000];
 
+
+unsigned long rotate_right(unsigned long n, unsigned long i)
+{
+  return (n >> i) | (n << (32 - i));
+}
+
 /**
  * Return the 4-byte word in rom
  */
@@ -215,14 +221,14 @@ void readSymbols(const char *cpp_filename, const char *plain_filename)
     return;
   }
   for (;;) {
-    char buf[80], sym[80];
+    char buf[1024], sym[1024];
     unsigned int addr;
-    char *s = fgets(buf, 80, f);
+    char *s = fgets(buf, 1024, f);
     if (!s) break;
     int n = sscanf(s, "0x%08x %[^\n]\n", &addr, sym);
     if (n==2) {
-      if (addr==0x0006CF0C) strcat(sym, "_DUP");
-      if (addr==0x000AC670) strcat(sym, "_DUP");
+      //if (addr==0x0006CF0C) strcat(sym, "_DUP");
+      //if (addr==0x000AC670) strcat(sym, "_DUP");
       symbolList.insert(std::make_pair(addr, strdup(sym)));
     }
   }
@@ -232,14 +238,14 @@ void readSymbols(const char *cpp_filename, const char *plain_filename)
     return;
   }
   for (;;) {
-    char buf[80], sym[80];
+    char buf[1024], sym[1024];
     unsigned int addr;
-    char *s = fgets(buf, 80, f);
+    char *s = fgets(buf, 1024, f);
     if (!s) break;
     int n = sscanf(s, "0x%08x %[^\n]\n", &addr, sym);
     if (n==2) {
-      if (addr==0x0006CF0C) strcat(sym, "_DUP");
-      if (addr==0x000AC670) strcat(sym, "_DUP");
+      //if (addr==0x0006CF0C) strcat(sym, "_DUP");
+      //if (addr==0x000AC670) strcat(sym, "_DUP");
       plainSymbolList.insert(std::make_pair(addr, strdup(sym)));
     }
   }
@@ -843,6 +849,17 @@ unsigned int branch_address(unsigned int addr, unsigned int cmd=0xffffffff)
   }
 }
 
+void tagOffset(unsigned int addr, unsigned int cmd, unsigned int flags)
+{
+  if (((cmd & 0x000f0000) == 0x000f0000) && ((cmd & 0x02000000) == 0))
+  {
+    int offset = cmd & 0xfff;
+    if ((cmd & 0x00800000) == 0)
+      offset = -offset;
+    rom_flags_set(offset+addr+8, flags);
+  }
+}
+
 void check_code_coverage(unsigned int addr, unsigned int flags=0);
 
 void check_switch_case(unsigned int addr, int n_case) 
@@ -1013,6 +1030,7 @@ void check_code_coverage(unsigned int addr, unsigned int flags)
             addr += 4; continue;
           }
         }
+        tagOffset(addr, cmd, flags_is_target);
       } else if ( (cmd&0x0f000000) == 0x0f000000) { // swi (software interrupt)
       } else if ( (cmd&0x0e000000) == 0x0c000000) { // (coprocessor dat transfer) FIXME: may actuall tfer to pc?!
       } else if ( (cmd&0x0e100000) == 0x08000000) { // stm (store multiple to memory)
@@ -1264,7 +1282,7 @@ void check_all_ns_coverage()
 
   int n_magic = rom_w(0x003af000);  
   for (i=0; i<n_magic; i++) {
-    check_ns_ref(0x003af004+4*i);
+    check_ns_ref(0x003af004+4*i, 0);
   }
   // 0x003afda8 gROMSoupData to 0x0067FA40 gROMSoupDataSize
   for (i=0x003afda8; i<0x0067fa40; ) {
@@ -1393,6 +1411,18 @@ void writeNewtonROM()
           break;
       }
     }
+    // write all symbols that are not within the ROM area, but are called from ROM
+    fprintf(newt, "\n\n@\n@ Symbols outside of the ROM\n@\n\n");
+    AlSymbolList::iterator s = plainSymbolList.begin();
+    while (s!=plainSymbolList.end()) {
+      unsigned int addr = s->first;
+      if (addr>=0x00800000) { // beyond ROM
+        const char *sym = s->second;
+        fprintf(newt, "\t.org\t0x%08X\nVEC_%s:\n\n", addr, sym);
+      }
+      ++s;
+    }
+    
     fprintf(newt, "\n\t.end\n\n");
     fclose(newt);
   }

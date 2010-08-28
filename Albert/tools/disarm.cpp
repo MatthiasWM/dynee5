@@ -24,6 +24,11 @@
 
 #include "disarm.h"
 
+
+const char *get_symbol_at(unsigned int addr);
+const char *get_plain_symbol_at(unsigned int addr);
+
+
 static const char* arm_conditional[] = {
   "eq", "ne", "cs", "cc", "mi", "pl", "vs", "vc", "hi", "ls", "ge", "lt", "gt", "le", "", "nv"};
 
@@ -109,7 +114,12 @@ static int print_insn_arm(unsigned int pc,
                 int offset = given & 0xfff;
                 if ((given & 0x00800000) == 0)
                   offset = -offset;
-                sprintf(tmpStr, "0x%.8X", offset + pc + 8);
+                unsigned int addr = offset + pc + 8;
+                const char *sym = get_plain_symbol_at(addr);
+                if (sym) 
+                  sprintf(tmpStr, "%s", sym);
+                else
+                  sprintf(tmpStr, "L%.8X", addr);
                 str = strcat(str, tmpStr);
               }
               else
@@ -223,9 +233,23 @@ static int print_insn_arm(unsigned int pc,
               }
               break;
               
-            case 'b':
-              sprintf(tmpStr, "0x%.8X", BDISP(given) * 4 + pc + 8);
+            case 'b': 
+            {
+              unsigned int dst = BDISP(given) * 4 + pc + 8;
+              const char *sym = get_plain_symbol_at(dst);
+              if (sym) {
+                if (dst<0x00800000)
+                  sprintf(tmpStr, "%s", sym);
+                else
+                  sprintf(tmpStr, "VEC_%s", sym);
+              } else {
+                if (dst<0x00800000)
+                  sprintf(tmpStr, "L%08X", dst);
+                else
+                  sprintf(tmpStr, "0x%08X", dst); // FIXME: wrong offset!
+              }
               str = strcat(str, tmpStr);
+            }
               break;
               
             case 'c':

@@ -13,5 +13,8 @@ newtonos.o: newtonos.s macros.s Makefile
 
 clean:
 	rm newtonos.*
+	rm newtonos
+	rm *~
+	rm a b
 	rm ROM
 

@@ -72,6 +72,14 @@ Thumb specific format options:
 static struct arm_opcode arm_opcodes[] = {
     /* ARM instructions */
     {0xe1a00000, 0xffffffff, "nop"},
+    {0xe6000010, 0xffffffff, "throwSystemBoot"}, 
+    {0xe6000110, 0xffffffff, "throwExitToShell"},
+    {0xe6000210, 0xffffffff, "throwDebugger"},
+    {0xe6000310, 0xffffffff, "throwDebugStr"},
+    {0xe6000410, 0xffffffff, "throwPublicFiller"},
+    {0xe6000510, 0xffffffff, "throwSystemPanic"},
+    {0xe6000710, 0xffffffff, "throwSendTestResults"},
+    {0xe6000810, 0xffffffff, "throwTapFileCntl"},
     {0x012FFF10, 0x0ffffff0, "bx%c\t%0-3r"},
     {0x00000090, 0x0fe000f0, "mul%c%20's\t%16-19r, %0-3r, %8-11r"},
     {0x00200090, 0x0fe000f0, "mla%c%20's\t%16-19r, %0-3r, %8-11r, %12-15r"},
@@ -101,8 +109,7 @@ static struct arm_opcode arm_opcodes[] = {
     {0x04000000, 0x0e100000, "str%c%22'b%t\t%12-15r, %a"},
     {0x06000000, 0x0e100ff0, "str%c%22'b%t\t%12-15r, %a"},
     {0x04000000, 0x0c100010, "str%c%22'b%t\t%12-15r, %a"},
-    {0x06000010, 0x0e000010, ".word\t%0-31x"},
-  //{0x06000010, 0x0e000010, "undefined"},
+    {0x06000010, 0x0e000010, "undefined"},
     {0x04100000, 0x0c100000, "ldr%c%22'b%t\t%12-15r, %a"},
     {0x08000000, 0x0e100000, "stm%c%23?id%24?ba\t%16-19r%21'!, %m%22'^"},
     {0x08100000, 0x0e100000, "ldm%c%23?id%24?ba\t%16-19r%21'!, %m%22'^"},
@@ -162,14 +169,6 @@ static struct arm_opcode arm_opcodes[] = {
     {0x0c100000, 0x0e100000, "ldc%c%22'l\t%8-11d, cr%12-15d, %A"},
   
     /* the rest */
-  {0x0fffffff, 0x06000010, "throw%c\tSystemBoot"}, // mask and value are swapped. Also, the 'undefined' test above will keep this from ever beeing executed!
-    {0x0fffffff, 0x06000110, "throw%\tExitToShell"},
-    {0x0fffffff, 0x06000210, "throw%\tDebugger"},
-    {0x0fffffff, 0x06000310, "throw%\tDebugStr"},
-    {0x0fffffff, 0x06000410, "throw%\tPublicFiller"},
-    {0x0fffffff, 0x06000510, "throw%\tSystemPanic"},
-    {0x0fffffff, 0x06000710, "throw%\tSendTestResults"},
-    {0x0fffffff, 0x06000810, "throw%\tTapFileCntl"},
     {0x00000000, 0x00000000, "undefined instruction %0-31x"},
     {0x00000000, 0x00000000, 0}
 };
