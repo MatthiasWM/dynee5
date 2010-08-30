@@ -227,8 +227,6 @@ void readSymbols(const char *cpp_filename, const char *plain_filename)
     if (!s) break;
     int n = sscanf(s, "0x%08x %[^\n]\n", &addr, sym);
     if (n==2) {
-      //if (addr==0x0006CF0C) strcat(sym, "_DUP");
-      //if (addr==0x000AC670) strcat(sym, "_DUP");
       symbolList.insert(std::make_pair(addr, strdup(sym)));
     }
   }
@@ -244,8 +242,6 @@ void readSymbols(const char *cpp_filename, const char *plain_filename)
     if (!s) break;
     int n = sscanf(s, "0x%08x %[^\n]\n", &addr, sym);
     if (n==2) {
-      //if (addr==0x0006CF0C) strcat(sym, "_DUP");
-      //if (addr==0x000AC670) strcat(sym, "_DUP");
       plainSymbolList.insert(std::make_pair(addr, strdup(sym)));
     }
   }
@@ -1418,7 +1414,8 @@ void writeNewtonROM()
       unsigned int addr = s->first;
       if (addr>=0x00800000) { // beyond ROM
         const char *sym = s->second;
-        fprintf(newt, "\t.org\t0x%08X\nVEC_%s:\n\n", addr, sym);
+        //fprintf(newt, "\t.org\t0x%08X\nVEC_%s:\n\n", addr, sym);
+        fprintf(newt, "\t.equ\tVEC_%s, _start+0x%08X\n", sym, addr);
       }
       ++s;
     }
