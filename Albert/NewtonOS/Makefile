@@ -3,7 +3,7 @@ all: ROM
 
 ROM: newtonos
 	strongarm-elf-objcopy -Obinary newtonos ROM
-	diff ROM ../data/717006
+	../build/Debug/armdiff
 
 newtonos: newtonos.o
 	strongarm-elf-ld -EB -Ttext 0 -o newtonos newtonos.o

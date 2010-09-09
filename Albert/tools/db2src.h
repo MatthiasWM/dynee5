@@ -46,6 +46,8 @@ extern const char *type_lut[];
 extern unsigned char ROM[0x00800000];
 extern unsigned int ROM_flags[0x00200000];
 
+void AsmPrintf(FILE *f, const char *pat, ...);
+
 unsigned int rom_w(unsigned int addr);
 double rom_real(unsigned int addr);
 double rom_fixed(unsigned int addr);

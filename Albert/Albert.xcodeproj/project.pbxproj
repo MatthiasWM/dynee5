@@ -12,6 +12,7 @@
 		C95C36A01221BD4900C87B33 /* nsDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C95C369F1221BD4900C87B33 /* nsDecode.cpp */; };
 		C9601DD510B1FA9C0018BADE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601DD410B1FA9C0018BADE /* Carbon.framework */; };
 		C9601EA810B1FB5B0018BADE /* libfltk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601EA210B1FB5A0018BADE /* libfltk.a */; };
+		C961487212376DD30007725F /* armdiff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C961487112376DD30007725F /* armdiff.cpp */; };
 		C99F6ECC10C7ECB0003DEBD6 /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99F6ECB10C7ECB0003DEBD6 /* types.cpp */; };
 		C9F6E58F10C55881007C848E /* CArrayIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5810C5587F007C848E /* CArrayIterator.cpp */; };
 		C9F6E59010C55881007C848E /* CBaseRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5A10C5587F007C848E /* CBaseRingBuffer.cpp */; };
@@ -88,6 +89,8 @@
 		C9601EA110B1FB5A0018BADE /* libfltk_png.a */ = {isa = PBXFileReference; lastKnownFileType = compiled.win32.library; name = libfltk_png.a; path = /usr/local/lib/libfltk_png.a; sourceTree = "<absolute>"; };
 		C9601EA210B1FB5A0018BADE /* libfltk.a */ = {isa = PBXFileReference; lastKnownFileType = compiled.win32.library; name = libfltk.a; path = /usr/local/lib/libfltk.a; sourceTree = "<absolute>"; };
 		C9601EB910B1FC150018BADE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = /usr/lib/libz.dylib; sourceTree = "<absolute>"; };
+		C961486912376D330007725F /* armdiff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = armdiff; sourceTree = BUILT_PRODUCTS_DIR; };
+		C961487112376DD30007725F /* armdiff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = armdiff.cpp; path = tools/armdiff.cpp; sourceTree = "<group>"; };
 		C99F6ECA10C7ECB0003DEBD6 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = src/albert/types.h; sourceTree = "<group>"; };
 		C99F6ECB10C7ECB0003DEBD6 /* types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = types.cpp; path = src/albert/types.cpp; sourceTree = "<group>"; };
 		C9F6DD5810C5587F007C848E /* CArrayIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CArrayIterator.cpp; path = src/CArrayIterator.cpp; sourceTree = "<group>"; };
@@ -177,6 +180,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C961486512376D330007725F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C9F6EA0010C5C55A007C848E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -217,6 +227,7 @@
 				8D1107320486CEB800E47090 /* Albert.app */,
 				C9F6EA0210C5C55A007C848E /* sym2db */,
 				C9F6EA1410C5C582007C848E /* db2src */,
+				C961486912376D330007725F /* armdiff */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -361,6 +372,7 @@
 		C9F6EA0610C5C56B007C848E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				C961487112376DD30007725F /* armdiff.cpp */,
 				C95C357112217F4C00C87B33 /* classinfo.h */,
 				C95C357312217FB000C87B33 /* manual_checks.h */,
 				C95C357212217F4C00C87B33 /* db_cpp.h */,
@@ -399,6 +411,22 @@
 			productName = Albert;
 			productReference = 8D1107320486CEB800E47090 /* Albert.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C961485F12376D330007725F /* armdiff */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C961486612376D330007725F /* Build configuration list for PBXNativeTarget "armdiff" */;
+			buildPhases = (
+				C961486012376D330007725F /* Sources */,
+				C961486512376D330007725F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = armdiff;
+			productName = db2src;
+			productReference = C961486912376D330007725F /* armdiff */;
+			productType = "com.apple.product-type.tool";
 		};
 		C9F6EA0110C5C55A007C848E /* sym2db */ = {
 			isa = PBXNativeTarget;
@@ -447,6 +475,7 @@
 				8D1107260486CEB800E47090 /* Albert */,
 				C9F6EA0110C5C55A007C848E /* sym2db */,
 				C9F6EA1310C5C582007C848E /* db2src */,
+				C961485F12376D330007725F /* armdiff */,
 			);
 		};
 /* End PBXProject section */
@@ -502,6 +531,14 @@
 				C9F6E5AE10C55881007C848E /* CTaskPipe.cpp in Sources */,
 				C9F6EA9710C5C979007C848E /* main.cpp in Sources */,
 				C99F6ECC10C7ECB0003DEBD6 /* types.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C961486012376D330007725F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C961487212376DD30007725F /* armdiff.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +662,36 @@
 			};
 			name = Release;
 		};
+		C961486712376D330007725F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = armdiff;
+			};
+			name = Debug;
+		};
+		C961486812376D330007725F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = armdiff;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C9F6EA0410C5C55B007C848E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -702,6 +769,15 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C961486612376D330007725F /* Build configuration list for PBXNativeTarget "armdiff" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C961486712376D330007725F /* Debug */,
+				C961486812376D330007725F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

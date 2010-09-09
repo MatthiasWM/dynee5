@@ -98,6 +98,60 @@ unsigned char ROM[0x00800000];
 unsigned int ROM_flags[0x00200000];
 
 
+void AsmFlush(FILE *f, const char *buf)
+{
+  char dbuf[2048];
+  // manipulate the buffer so that all comments are either starting at column 0
+  // or at column 48 if possible
+  const char *s = buf;
+  char *d = dbuf;
+  int col=0, t=0, x=0; 
+  // walk to the comment character
+  for (;;) {
+    char c = *s;
+    switch (c) {
+      case 0: *d=0; x=1; break;
+      case '@': x=1; break;
+      case '\t': *d++=c; col = (col+8) & 0xfff8; s++; break;
+      case ' ': *d++=c; col++; s++; break;
+      default: *d++=c; col++; t=1; s++; break;
+    }
+    if (x) break;
+  }
+  // handle a comment if there is one
+  if (*s=='@') {
+    if (t) {
+      // we have text, set the comment at col 48
+      while (col<48) {
+        *d++ = '\t';
+        col = (col+8) & 0xfff8;
+      }
+      strcpy(d, s); // append the comment to the line
+    } else {
+      // no text yet: move the comment to the start
+      strcpy(dbuf, s); // simply move the text to the start of the line
+    }
+  }
+  fputs(dbuf, f);
+}
+
+void AsmPrintf(FILE *f, const char *pat, ...) 
+{
+  static char buf[2048];
+  static char *dst = buf;
+  // concatenate segments until we can flush an entire line
+  va_list va;
+  va_start(va, pat);
+  vsnprintf(dst, 2048, pat, va);
+  va_end(va);
+  dst = buf + strlen(buf);
+  if (strchr(buf, '\n')) {
+    AsmFlush(f, buf);
+    dst = buf; buf[0] = 0;
+  }
+}
+
+
 unsigned long rotate_right(unsigned long n, unsigned long i)
 {
   return (n >> i) | (n << (32 - i));
@@ -1336,13 +1390,15 @@ void writeLabel(FILE *newt, unsigned int i)
   const char *sym = get_symbol_at(i);
   const char *psym = get_plain_symbol_at(i);
   if (psym && sym) {
-    fprintf(newt, "\n%s:\t\t\t@ 0x%08X: %s\n", psym, i, sym);
+    AsmPrintf(newt, "\n");
+    AsmPrintf(newt, "%s:\t@ 0x%08X: %s\n", psym, i, sym);
   } else if (psym) {
-    fprintf(newt, "\n%s:\n", psym);
+    AsmPrintf(newt, "\n");
+    AsmPrintf(newt, "%s:\n", psym);
   } else if (sym) {
-    fprintf(newt, "L%08X:\t\t\t@ %s\n", i, sym);
+    AsmPrintf(newt, "L%08X:\t@ %s\n", i, sym);
   } else if (rom_flags_is_set(i, flags_is_target)) {
-    fprintf(newt, "L%08X:\n", i);
+    AsmPrintf(newt, "L%08X:\n", i);
   }
 }
 
@@ -1372,7 +1428,7 @@ void writeNewtonROM()
           if (  (i+4)>=0x00800000 
               || rom_flags_type(i+4)!=flags_type_unused
               || rom_w(i+4)!=unused_filler) {
-            fprintf(newt, "\t.fill\t%d, %d, 0x%08x\n", n_unused, 4, unused_filler);
+            AsmPrintf(newt, "\t.fill\t%d, %d, 0x%08x\n", n_unused, 4, unused_filler);
             n_unused = 0;
           }
           break;
@@ -1387,7 +1443,7 @@ void writeNewtonROM()
           disarm(buf, i, rom_w(i));
           char *cmt = strchr(buf, ';');
           if (cmt) *cmt = '@';
-          fprintf(newt, "\t%s\n", buf);
+          AsmPrintf(newt, "\t%s\n", buf);
           break; }
           // mcr p15, 0, r8, c1, c0, 2
           // mrc p15, 0, r0, c1, c0, 0
@@ -1403,7 +1459,7 @@ void writeNewtonROM()
         case flags_type_classinfo:
         case flags_type_data:
         default:
-          fprintf(newt, "\t.word\t0x%08X\t\t@ 0x%08X (%s)\n", val, i, type_lut[rom_flags_type(i)]);
+          AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X (%s)\n", val, i, type_lut[rom_flags_type(i)]);
           break;
       }
     }
@@ -1414,8 +1470,11 @@ void writeNewtonROM()
       unsigned int addr = s->first;
       if (addr>=0x00800000) { // beyond ROM
         const char *sym = s->second;
-        //fprintf(newt, "\t.org\t0x%08X\nVEC_%s:\n\n", addr, sym);
-        fprintf(newt, "\t.equ\tVEC_%s, _start+0x%08X\n", sym, addr);
+        const char *cppsym = get_symbol_at(addr);
+        if (cppsym)
+          fprintf(newt, "\t.equ\tVEC_%s, _start+0x%08X\t@ %s\n", sym, addr, cppsym);
+        else
+          fprintf(newt, "\t.equ\tVEC_%s, _start+0x%08X\n", sym, addr);
       }
       ++s;
     }
@@ -1500,7 +1559,7 @@ int main(int argc, char **argv)
   
 #if 0
   printf("\n====> Writing binary Newton ROM usage map\n\n");
-  rom_flags = fopen("/Users/matt/dev/Albert/data/flags", "wb");
+  FILE *rom_flags = fopen("/Users/matt/dev/Albert/data/flags", "wb");
   if (!rom_flags) {
     puts("Can't write ROM flags!");
   }
