@@ -14,6 +14,7 @@
 		C9601EA810B1FB5B0018BADE /* libfltk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601EA210B1FB5A0018BADE /* libfltk.a */; };
 		C961487212376DD30007725F /* armdiff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C961487112376DD30007725F /* armdiff.cpp */; };
 		C99F6ECC10C7ECB0003DEBD6 /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99F6ECB10C7ECB0003DEBD6 /* types.cpp */; };
+		C9BC1603123A366200A4094E /* EasyBMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9BC1601123A366200A4094E /* EasyBMP.cpp */; };
 		C9F6E58F10C55881007C848E /* CArrayIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5810C5587F007C848E /* CArrayIterator.cpp */; };
 		C9F6E59010C55881007C848E /* CBaseRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5A10C5587F007C848E /* CBaseRingBuffer.cpp */; };
 		C9F6E59110C55881007C848E /* CBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5C10C5587F007C848E /* CBuffer.cpp */; };
@@ -72,6 +73,8 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Albert-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Albert-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Albert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Albert.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C95323A8123AD9C9002B65C6 /* magics2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = magics2.h; path = tools/magics2.h; sourceTree = "<group>"; };
+		C95323C0123ADD14002B65C6 /* magics1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = magics1.h; path = tools/magics1.h; sourceTree = "<group>"; };
 		C95C2DBB1211B98100C87B33 /* disarm_c.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disarm_c.cpp; path = tools/disarm_c.cpp; sourceTree = "<group>"; };
 		C95C2DBC1211B98100C87B33 /* disarm_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = disarm_c.h; path = tools/disarm_c.h; sourceTree = "<group>"; };
 		C95C357112217F4C00C87B33 /* classinfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = classinfo.h; path = tools/classinfo.h; sourceTree = "<group>"; };
@@ -93,6 +96,11 @@
 		C961487112376DD30007725F /* armdiff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = armdiff.cpp; path = tools/armdiff.cpp; sourceTree = "<group>"; };
 		C99F6ECA10C7ECB0003DEBD6 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = src/albert/types.h; sourceTree = "<group>"; };
 		C99F6ECB10C7ECB0003DEBD6 /* types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = types.cpp; path = src/albert/types.cpp; sourceTree = "<group>"; };
+		C9BC15FE123A366100A4094E /* EasyBMP_BMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_BMP.h; path = tools/EasyBMP/EasyBMP_BMP.h; sourceTree = "<group>"; };
+		C9BC15FF123A366200A4094E /* EasyBMP_DataStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_DataStructures.h; path = tools/EasyBMP/EasyBMP_DataStructures.h; sourceTree = "<group>"; };
+		C9BC1600123A366200A4094E /* EasyBMP_VariousBMPutilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_VariousBMPutilities.h; path = tools/EasyBMP/EasyBMP_VariousBMPutilities.h; sourceTree = "<group>"; };
+		C9BC1601123A366200A4094E /* EasyBMP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EasyBMP.cpp; path = tools/EasyBMP/EasyBMP.cpp; sourceTree = "<group>"; };
+		C9BC1602123A366200A4094E /* EasyBMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP.h; path = tools/EasyBMP/EasyBMP.h; sourceTree = "<group>"; };
 		C9F6DD5810C5587F007C848E /* CArrayIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CArrayIterator.cpp; path = src/CArrayIterator.cpp; sourceTree = "<group>"; };
 		C9F6DD5910C5587F007C848E /* CArrayIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CArrayIterator.h; path = src/CArrayIterator.h; sourceTree = "<group>"; };
 		C9F6DD5A10C5587F007C848E /* CBaseRingBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CBaseRingBuffer.cpp; path = src/CBaseRingBuffer.cpp; sourceTree = "<group>"; };
@@ -277,6 +285,18 @@
 			name = libs;
 			sourceTree = "<group>";
 		};
+		C9BC15FC123A364700A4094E /* EasyBMP */ = {
+			isa = PBXGroup;
+			children = (
+				C9BC15FE123A366100A4094E /* EasyBMP_BMP.h */,
+				C9BC15FF123A366200A4094E /* EasyBMP_DataStructures.h */,
+				C9BC1600123A366200A4094E /* EasyBMP_VariousBMPutilities.h */,
+				C9BC1601123A366200A4094E /* EasyBMP.cpp */,
+				C9BC1602123A366200A4094E /* EasyBMP.h */,
+			);
+			name = EasyBMP;
+			sourceTree = "<group>";
+		};
 		C9F6DD4310C557C8007C848E /* Albert */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +392,7 @@
 		C9F6EA0610C5C56B007C848E /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				C9BC15FC123A364700A4094E /* EasyBMP */,
 				C961487112376DD30007725F /* armdiff.cpp */,
 				C95C357112217F4C00C87B33 /* classinfo.h */,
 				C95C357312217FB000C87B33 /* manual_checks.h */,
@@ -385,6 +406,8 @@
 				C9F6EA0A10C5C56B007C848E /* db2src.cpp */,
 				C9F6EA0910C5C56B007C848E /* db2src.h */,
 				C95C369F1221BD4900C87B33 /* nsDecode.cpp */,
+				C95323C0123ADD14002B65C6 /* magics1.h */,
+				C95323A8123AD9C9002B65C6 /* magics2.h */,
 				C95C377A1227B37300C87B33 /* magicPointers.h */,
 			);
 			name = Tools;
@@ -558,6 +581,7 @@
 				C9F6EA1910C5C5A5007C848E /* disarm.cpp in Sources */,
 				C95C2DBD1211B98100C87B33 /* disarm_c.cpp in Sources */,
 				C95C36A01221BD4900C87B33 /* nsDecode.cpp in Sources */,
+				C9BC1603123A366200A4094E /* EasyBMP.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

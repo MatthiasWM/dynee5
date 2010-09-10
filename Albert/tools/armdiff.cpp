@@ -114,9 +114,9 @@ int main(int argc, char **argv)
     return 1;
   } else {
     if (id)
-      printf("ROM files are identical!\n");
+      printf("ROM files are identical. Perfect!\n");
     else
-      printf("ROM files are equal, but not identical!\n");
+      printf("ROM files are equal, but not identical. That's good.\n");
     return 0;
   }
 }

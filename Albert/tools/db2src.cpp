@@ -97,6 +97,7 @@ const char *type_lut[] = {
 unsigned char ROM[0x00800000];
 unsigned int ROM_flags[0x00200000];
 
+unsigned char printable(unsigned char c) { return (c>32&&c<127)?c:'.'; }
 
 void AsmFlush(FILE *f, const char *buf)
 {
@@ -267,8 +268,22 @@ const char *get_plain_symbol_at(unsigned int addr)
   return s->second;
 }
 
+typedef struct { const char *key; unsigned int addr; } MagicSym;
+MagicSym magicSym[] = {
+#include "magics1.h"
+#include "magics2.h"
+};
+
 void readSymbols(const char *cpp_filename, const char *plain_filename)
 {
+  // magic pointers
+  int i;
+  for (i=0; magicSym[i].key; i++) {
+    unsigned int maddr = rom_w(0x003AF004+4*magicSym[i].addr) & 0xfffffffc;
+    plainSymbolList.insert(std::make_pair(maddr, strdup(magicSym[i].key)));
+    symbolList.insert(std::make_pair(maddr, strdup(magicSym[i].key)));
+  }
+  // more from files
   FILE *f = fopen(cpp_filename, "rb");
   if (!f) {
     puts("ERROR opening cpp symbol file");
@@ -1459,7 +1474,9 @@ void writeNewtonROM()
         case flags_type_classinfo:
         case flags_type_data:
         default:
-          AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X (%s)\n", val, i, type_lut[rom_flags_type(i)]);
+          AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X %c%c%c%c (%s)\n", val, i, 
+                    printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]), 
+                    type_lut[rom_flags_type(i)]);
           break;
       }
     }
@@ -1491,11 +1508,6 @@ int main(int argc, char **argv)
 {
   int i;
   
-  readSymbols(
-              "/Users/matt/dev/Albert/data/717006.cppsymbols.txt",
-              "/Users/matt/dev/Albert/data/717006.symbols.txt"              
-              );
-  
   FILE *rom = fopen("/Users/matt/dev/Albert/data/717006", "rb");
   if (!rom) {
     puts("Can't read ROM!");
@@ -1503,6 +1515,11 @@ int main(int argc, char **argv)
   }
   fread(ROM, 0x00800000, 1, rom);
   fclose(rom);
+
+  readSymbols(
+              "/Users/matt/dev/Albert/data/717006.cppsymbols.txt",
+              "/Users/matt/dev/Albert/data/717006.symbols.txt"              
+              );
 
 #if 1
   memset(ROM_flags, 0, 0x00200000*sizeof(int));
