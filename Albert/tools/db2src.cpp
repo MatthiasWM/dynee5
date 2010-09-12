@@ -280,8 +280,8 @@ void readSymbols(const char *cpp_filename, const char *plain_filename)
   int i;
   for (i=0; magicSym[i].key; i++) {
     unsigned int maddr = rom_w(0x003AF004+4*magicSym[i].addr) & 0xfffffffc;
-    plainSymbolList.insert(std::make_pair(maddr, strdup(magicSym[i].key)));
-    symbolList.insert(std::make_pair(maddr, strdup(magicSym[i].key)));
+    plainSymbolList.insert(std::make_pair(maddr, magicSym[i].key));
+    symbolList.insert(std::make_pair(maddr, magicSym[i].key));
   }
   // more from files
   FILE *f = fopen(cpp_filename, "rb");
@@ -314,6 +314,24 @@ void readSymbols(const char *cpp_filename, const char *plain_filename)
       plainSymbolList.insert(std::make_pair(addr, strdup(sym)));
     }
   }
+}
+
+void writeSymbolStatistics(const char *filename)
+{
+  FILE *st = fopen(filename, "wb");
+  unsigned int i, pi = 0;
+  const char *pSym = get_plain_symbol_at(0);
+  for (i=4; i<0x00800000; i+=4) {
+    const char *sym = get_symbol_at(i);
+    if (!sym)
+      sym = get_plain_symbol_at(i);
+    if (sym) {
+      fprintf(st, "%10d - %s\n", i-pi, pSym);
+      pSym = sym;
+      pi = i;
+    }
+  }
+  fclose(st);
 }
 
 char *gComment = 0;
@@ -1520,6 +1538,10 @@ int main(int argc, char **argv)
               "/Users/matt/dev/Albert/data/717006.cppsymbols.txt",
               "/Users/matt/dev/Albert/data/717006.symbols.txt"              
               );
+  
+#if 1
+  writeSymbolStatistics("/Users/matt/dev/Albert/symbysize.txt");
+#endif
 
 #if 1
   memset(ROM_flags, 0, 0x00200000*sizeof(int));
@@ -1662,6 +1684,9 @@ int main(int argc, char **argv)
   writeNewtonROM();
 #endif
   
+#if 1
+  extractStencils();
+#endif
   
   int n=0;
   for (i=0; i<0x00200000; i++) {
@@ -1685,6 +1710,11 @@ int main(int argc, char **argv)
 
 // FIXME: there is a big goof at 0x0032E1B4 (and before and after) where tons of code is set to "text"
 // FIXME: differentiate between text and bytes!
+// TODO: there seems to be image rata: raw1..raw32: raw100: rawImg100:...
+//  raw1 contains pointers at raw1xx
+//  raw101 has three words: width in bytes, height, adress of binary data
+//  xDotStencils: has 41 entries pointing at the raw# lists, entries are at 1, 2, 4, 8, 16 and 32!
+//  raw1: 8, raw2: 8, 
 
 // Di 10 aug 2010, 15:05:   0.649% of ROM words covered (13604 of 2097152)
 //                 15:17:   1.106% of ROM words covered (23196 of 2097152)

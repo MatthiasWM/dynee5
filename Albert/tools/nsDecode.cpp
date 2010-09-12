@@ -300,7 +300,49 @@ char extractPicture(unsigned int bits)
   return 1;
 }
 
+void extractStencil(unsigned int s)
+{
+  unsigned int x, wdt = rom_w(s)*8;
+  unsigned int y, hgt = rom_w(s+4);
+  unsigned int bits = rom_w(s+8);
+  unsigned int bpr = rom_w(s);
+  BMP bmp;
+  bmp.SetSize(wdt, hgt);
+  bmp.SetBitDepth(24);
+  RGBApixel black = { 0, 0, 0, 0 };
+  RGBApixel white = { 255, 255, 255, 0 };
+  for (y=0; y<hgt; y++) {
+    unsigned int row = bits + y*bpr;
+    for (x=0; x<wdt; x++) {
+      unsigned char v = ROM[row+x/8];
+      char set = v & (1<<(x&7));
+      bmp.SetPixel(x, y, set?black:white);
+    }
+  }
+  // write to file
+  char buf[2048];
+  sprintf(buf, "/Users/matt/dev/Albert/NewtonOS/images/RAW_%08X.bmp", s);
+  bmp.WriteToFile(buf);
+}
 
+void extractStencils(unsigned int base)
+{
+  unsigned int i;
+  for (i=0; i<8; i++) {
+    extractStencil(rom_w(base+4*i));
+  }
+}
+
+void extractStencils()
+{
+  unsigned int stencils = 0x0036F0D0;
+  extractStencils(rom_w(stencils+ 1*4));
+  extractStencils(rom_w(stencils+ 2*4));
+  extractStencils(rom_w(stencils+ 4*4));
+  extractStencils(rom_w(stencils+ 8*4));
+  extractStencils(rom_w(stencils+16*4));
+  extractStencils(rom_w(stencils+32*4));
+}
 
 // TODO: extract pictures
 

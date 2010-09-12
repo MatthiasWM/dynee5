@@ -64,6 +64,43 @@ Thumb specific format options:
    %<bitfield>W         print (bitfield * 4) as a decimal
    %<bitfield>H         print (bitfield * 2) as a decimal
    %<bitfield>a         print (bitfield * 4) as a pc-rel offset + decoded symbol
+ 
+ 
+ 00      GetPortSWI
+ 01      PortSendSWI
+ 02      PortReceiveSWI
+ 03      EnterAtomicSWI
+ 04      ExitAtomicSWI
+ 05      GenericSWI
+ 06      GenerateMessageIRQ
+ 07      PurgeMMUTBLEntry
+ 08      FlushMMU
+ 09      FlushCache
+ 0a      GetCPUVersion
+ 0b      SemaphoreOpGlue
+ 0c      SetDomainRegister
+ 0d      SMemSetBufferSWI
+ 0e      SMemGetSizeSWI
+ 0f      SMemCopyToSharedSWI
+ 10      SMemCopyFromSharedSWI
+ 11      SMemMsgSetTimerParmsSWI
+ 12      SMemMsgSetMsgAvailPortSWI
+ 13      SMemMsgGetSenderTaskIdSWI
+ 14      SMemMsgSetUserRefConSWI
+ 15      SMemMsgGetUserRefConSWI
+ 16      SMemMsgCheckForDoneSWI
+ 17      SMemMsgMsgDoneSWI
+ 18      TurnOffCache
+ 19      TurnOnCache
+ 1b      MonitorDispatchSWI
+ 1c      MonitorExitSWI
+ 1d      MonitorThrowSWI
+ 1e      EnterFIQAtomicSWI
+ 1f      ExitFIQAtomicSWI
+ 20      MonitorFlushSWI
+ 21      PortResetFilterSWI
+ 22      DoSchedulerSWI
+ 
 */
 
 /* Note: There is a partial ordering in this table - it must be searched from

@@ -66,4 +66,5 @@ const char *get_plain_symbol_at(unsigned int addr);
 
 unsigned int decodeNSRef(FILE *newt, unsigned int i);
 unsigned int decodeNSObj(FILE *newt, unsigned int i);
+void extractStencils();
   

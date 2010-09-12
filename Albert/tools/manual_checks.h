@@ -1,3 +1,7 @@
+
+
+check_code_coverage(0x003AD244);  // TCountXrAsm
+
   check_code_coverage(0x000189C8);  // CleanPageInIandDCacheSWIGlue
   check_code_coverage(0x00018A3C);  // CleanDCandFlushICSWIGlue
   check_code_coverage(0x00018A78);  // CleanPageInDCSWIGlue
@@ -10521,7 +10525,7 @@ rom_flags_type(0x00154E94, flags_type_arm_text); //  0x5453746F - TSto
   rom_flags_type(0x003948EC, flags_type_arm_word); //  0x00000000 - .... 
   rom_flags_type(0x003948F0, 0x003AACE4 , flags_type_data); //  0xDD937466 - ..tf bpWeight
   rom_flags_type(0x003AACE4, 0x003AD244, flags_type_data); //  0x0000FFF4 - .... newtConnects
-  rom_flags_type(0x003AD244, 0x003AD290 , flags_type_data); //  0xE92D47F0 - .-G. TCountXrAsm
+                                                           //  rom_flags_type(0x003AD244, 0x003AD290 , flags_type_data); //  0xE92D47F0 - .-G. TCountXrAsm
   rom_flags_type(0x003AD56C, flags_type_arm_word); //  0x003ADD3C - .:.< 
   rom_flags_type(0x003AD570, flags_type_arm_word); //  0x003ADFAC - .:.. 
   rom_flags_type(0x003AD574, flags_type_arm_word); //  0x003AE070 - .:.p 
