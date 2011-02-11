@@ -44,6 +44,8 @@
 
 extern int disarm(char *dst, unsigned int addr, unsigned int cmd);
 extern int disarm_c(char *dst, unsigned int addr, unsigned int cmd);
+extern const char *getSymbol(unsigned int i);
+extern const char *getSafeSymbol(unsigned int i);
 
 
 const char *db_path = "/Users/matt/dev/Albert/";
@@ -276,6 +278,25 @@ MagicSym magicSym[] = {
 
 void readSymbols(const char *cpp_filename, const char *plain_filename)
 {
+  // we can find many NewtonScript labels by checking Rbuiltinfunctions
+  // do this first so that the values may be overridden later
+  {
+    unsigned int frame = 0x00639580;
+    unsigned int symlist = rom_w(frame+8)&~3;
+    unsigned int i, n = (rom_w(frame)>>10)-3;
+    for (i=0; i<n; i++) {
+      unsigned int addr = rom_w(frame+12+4*i);
+      unsigned int sym = rom_w(symlist+16+4*i);
+      if ((addr&3)==1 && (sym&3)==1) {
+        const char *str = getSafeSymbol(symlist+16+4*i);
+        if (str) {
+          char buf[256];
+          sprintf(buf, "NSFn_%s", str);
+          plainSymbolList.insert(std::make_pair(addr&~3, strdup(buf)));
+        }
+      }
+    }
+  }
   // magic pointers
   int i;
   for (i=0; magicSym[i].key; i++) {
@@ -1480,21 +1501,31 @@ void writeNewtonROM()
           break; }
           // mcr p15, 0, r8, c1, c0, 2
           // mrc p15, 0, r0, c1, c0, 0
-        case flags_type_unknown:
-        case flags_type_arm_byte:
-        case flags_type_arm_word:
-        case flags_type_arm_text:
         case flags_type_patch_table:
         case flags_type_jump_table:
+          // TODO: these are jump tables! Find out how to calculate the offsets!
+        case flags_type_arm_byte:
+        case flags_type_arm_text:
         case flags_type_rex:
         case flags_type_ns:
         case flags_type_dict:
         case flags_type_classinfo:
-        case flags_type_data:
-        default:
           AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X %c%c%c%c (%s)\n", val, i, 
                     printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]), 
                     type_lut[rom_flags_type(i)]);
+          break;
+        case flags_type_data:
+        case flags_type_unknown:
+        case flags_type_arm_word:
+        default:
+        {
+          const char *sym = 0L;
+          if (val) sym = get_symbol_at(val);
+          if (!sym) sym = "";
+          AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X %c%c%c%c (%s) %s?\n", val, i, 
+                    printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]), 
+                    type_lut[rom_flags_type(i)], sym);
+        }
           break;
       }
     }
@@ -1708,13 +1739,7 @@ int main(int argc, char **argv)
 :map <f6> kmbjjf;llyw'af,lpj0V'bd/unknown<cr>
 */
 
-// FIXME: there is a big goof at 0x0032E1B4 (and before and after) where tons of code is set to "text"
 // FIXME: differentiate between text and bytes!
-// TODO: there seems to be image rata: raw1..raw32: raw100: rawImg100:...
-//  raw1 contains pointers at raw1xx
-//  raw101 has three words: width in bytes, height, adress of binary data
-//  xDotStencils: has 41 entries pointing at the raw# lists, entries are at 1, 2, 4, 8, 16 and 32!
-//  raw1: 8, raw2: 8, 
 
 // Di 10 aug 2010, 15:05:   0.649% of ROM words covered (13604 of 2097152)
 //                 15:17:   1.106% of ROM words covered (23196 of 2097152)
@@ -1737,4 +1762,9 @@ int main(int argc, char **argv)
 //                 21:13:  99.591% of ROM words covered (2088566 of 2097152)
 //                 21:44:  99.987% of ROM words covered (2096871 of 2097152)
 //                 21:59: 100.000% of ROM words covered (2097152 of 2097152) PARTY!!
+
+// compressed tables (Dictionary) at gEnum80DaysMonths (0x006853DC) and following!
+// where are the graphics that are shown after cold boot?
+// how are the REXes handled?
+
 
