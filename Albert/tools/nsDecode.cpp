@@ -555,7 +555,7 @@ L0062AA24:
  BCMakeArray     3                       @ 0213: BCMakeArray 3  @
  BCStringer                              @ 0307: BCStringer     @ concatenate array into string
  BCPush  3                               @ 0033: BCPush 3       @ 'undocumented
- BCPush  4                               @ 0034: BCPush 4       @ 'badwickednaughtynoot (tsk tsk)
+ BCPush  4                               @ 0034: BCPush 4       @ 'badwickednaughtynoot
  BCCall  2                               @ 0052: BCCall 2       @ call badwickednaughtynoot(string, 'undocumented)
  BCPop                                   @ 0000: BCPop          @ throw away the result
  BCGetVar        3                       @ 0173: BCGetVar 3     @ arg0

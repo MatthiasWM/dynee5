@@ -93,6 +93,7 @@
 		C9601EB910B1FC150018BADE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = /usr/lib/libz.dylib; sourceTree = "<absolute>"; };
 		C961486912376D330007725F /* armdiff */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = armdiff; sourceTree = BUILT_PRODUCTS_DIR; };
 		C961487112376DD30007725F /* armdiff.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = armdiff.cpp; path = tools/armdiff.cpp; sourceTree = "<group>"; };
+		C9791FA0130869A800C91800 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		C99F6ECA10C7ECB0003DEBD6 /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = types.h; path = src/albert/types.h; sourceTree = "<group>"; };
 		C99F6ECB10C7ECB0003DEBD6 /* types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = types.cpp; path = src/albert/types.cpp; sourceTree = "<group>"; };
 		C9BC15FE123A366100A4094E /* EasyBMP_BMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_BMP.h; path = tools/EasyBMP/EasyBMP_BMP.h; sourceTree = "<group>"; };
@@ -242,6 +243,7 @@
 		29B97314FDCFA39411CA2CEA /* Albert */ = {
 			isa = PBXGroup;
 			children = (
+				C9791FA0130869A800C91800 /* README.txt */,
 				C9F6DD4310C557C8007C848E /* Albert */,
 				C9F6EA0610C5C56B007C848E /* Tools */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
