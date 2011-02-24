@@ -21,10 +21,13 @@
 #include "EasyBMP/EasyBMP.h"
 
 
-char extractBitmap(unsigned int addr);
+char writeBitmap(unsigned int addr);
 char extractColorBitmap(unsigned int bits);
-char extractPicture(unsigned int addr);
+char writePICT(unsigned int addr, unsigned int size);
+
+unsigned int extractBitmap(FILE *newt, unsigned int addr, int n);
 unsigned int extractBytecode(FILE *newt, unsigned int addr, int n);
+unsigned int extractUnicodeString(FILE *newt, unsigned int i, unsigned int size);
 
 unsigned int currentObj = 0;
 unsigned int currentObjType = 0;
@@ -101,7 +104,14 @@ unsigned int decodeNSRef(FILE *newt, unsigned int i) {
   }
   
   if ( (val&0x00000003) == 0x00000000 ) { // Integer
-    AsmPrintf(newt, "\tNSInt\t%d\t@%s\n", toInt(val), extraInfo);
+    if (rom_w(i-4)==0x00000132 && strcmp(extraInfo, " [funcPtr]")==0 && get_plain_symbol_at(4*toInt(val))) {
+      if (4*toInt(val) >= 0x00800000)
+        AsmPrintf(newt, "\tNSNativePtr\tVEC_%s\t@%s\n", get_plain_symbol_at(4*toInt(val)), extraInfo);
+      else
+        AsmPrintf(newt, "\tNSNativePtr\t%s\t@%s\n", get_plain_symbol_at(4*toInt(val)), extraInfo);
+    } else {
+      AsmPrintf(newt, "\tNSInt\t%d\t@%s\n", toInt(val), extraInfo);
+    }
   } else if ( (val&0x00000003) == 0x00000001 ) { // Pointer
     const char *sym = get_plain_symbol_at(val&0xfffffffe);
     if (sym)
@@ -114,6 +124,8 @@ unsigned int decodeNSRef(FILE *newt, unsigned int i) {
     switch (val) {
       case 0x00000002: AsmPrintf(newt, "\tNSNil\t@%s\n", extraInfo); break;
       case 0x0000001a: AsmPrintf(newt, "\tNSTrue\t@%s\n", extraInfo); break;
+      case 0x00000032: AsmPrintf(newt, "\tNSFunc\t@%s\n", extraInfo); break;
+      case 0x00000132: AsmPrintf(newt, "\tNSNativeFunc\t@%s\n", extraInfo); break;
       case 0x00055552: {
         //int n = strlen((const char*)ROM+i+8);
         AsmPrintf(newt, "\tNSSymbol\t0x%08X, \"%s\"\n", rom_w(i+4), ROM+i+8); 
@@ -123,7 +135,9 @@ unsigned int decodeNSRef(FILE *newt, unsigned int i) {
         i-=4;
       } break;
       default: 
-        if ( (val&0xfff0000f) == 0x0000000a ) { // Character
+        //if ( (val&0xfff0000f) == 0x0000000a ) {
+        if ( (val&0xfff0000f) == 0x00000006 ) { // Character
+          // TODO: this is a unicode character!
           unsigned int c = (val>>4)&0xffff;
           if (c>31 && c<127) 
             AsmPrintf(newt, "\tNSChar\t0x%04X\t\t@%s (NSRef UniChar = %c)\n", c, extraInfo, c);
@@ -145,7 +159,7 @@ unsigned int decodeNSRef(FILE *newt, unsigned int i) {
 
 unsigned int decodeNSObj(FILE *newt, unsigned int i) {
   unsigned int val = rom_w(i);  
-  unsigned int size = val>>8, j, n;
+  unsigned int size = val>>8; //, j, n;
   currentObj = i;
   currentObjType = NS_OBJ_NONE;
   if ((val&0x0000007f)==0x00000040) { // --- Binary Object
@@ -156,33 +170,48 @@ unsigned int decodeNSObj(FILE *newt, unsigned int i) {
     } else if (sym==0) {
       strcpy(decoded, "\t\t\t@ (no symbol)");
     } else if (strcmp(sym, "string")==0 || strcmp(sym, "string.noData")==0) {
-      AsmPrintf(newt, "\t@ String: \"");
-      for (j=i+12, n=i+size-2; j<n; j+=2) {
-        unsigned short c = ROM[j+1] + (ROM[j]<<8);
-        if (c>=32 && c<127) 
-          AsmPrintf(newt, "%c", c);
-        else
-          AsmPrintf(newt, "\\0x%04x", c);
-      }
-      AsmPrintf(newt, "\"\n");
+      i = extractUnicodeString(newt, i, size);
+      decode = 0;
     } else if (strcmp(sym, "Real")==0) {
       sprintf(decoded, "\t\t\t@ Real: %f", rom_real(i+12));
+      if ((val&0x000000ff)==0x00000040) {
+        AsmPrintf(newt, "\tNSObjBin\t%d%s\n", size-12, decoded);
+      } else if ((val&0x000000ff)==0x000000C0) {
+        AsmPrintf(newt, "\tNSObjXBin\t%d%s\n", size-12, decoded);
+      }
+      decodeNSRef(newt, i+8);
+      AsmPrintf(newt, "\tNSRealAsBin\t0x%08x%08x\n", rom_w(i+12), rom_w(i+16));
       //AsmPrintf(newt, "\tNSObjReal\t%g\n", rom_real(i+12)); i+=16;
-      //decode = 0;
+      i+=16; decode = 0;
     } else if (strcmp(sym, "fixed")==0) {
       sprintf(decoded, "\t\t\t@ fixed: %g", rom_fixed(i+12));
     } else if (strcmp(sym, "bits")==0 ) {
       strcpy(decoded, "\t\t\t@ B&W Bitmap");
-      //extractBitmap(i);
+      if ((val&0x000000ff)==0x00000040) {
+        AsmPrintf(newt, "\tNSObjBin\t%d%s\n", size-12, decoded);
+      } else if ((val&0x000000ff)==0x000000C0) {
+        AsmPrintf(newt, "\tNSObjXBin\t%d%s\n", size-12, decoded);
+      }
+      //writeBitmap(i);
+      i = extractBitmap(newt, i, size);
+      decode = 0;
     } else if (strcmp(sym, "mask")==0) {
       strcpy(decoded, "\t\t\t@ Transparency Mask");
-      //extractBitmap(i);
+      strcpy(decoded, "\t\t\t@ B&W Bitmap");
+      if ((val&0x000000ff)==0x00000040) {
+        AsmPrintf(newt, "\tNSObjBin\t%d%s\n", size-12, decoded);
+      } else if ((val&0x000000ff)==0x000000C0) {
+        AsmPrintf(newt, "\tNSObjXBin\t%d%s\n", size-12, decoded);
+      }
+      //writeBitmap(i);
+      i = extractBitmap(newt, i, size);
+      decode = 0;
     } else if (strcmp(sym, "cbits")==0) {
       strcpy(decoded, "\t\t\t@ Color Bitmap");
       //extractColorBitmap(i);
     } else if (strcmp(sym, "picture")==0) {
       strcpy(decoded, "\t\t\t@ Picture");
-      //extractPicture(i);
+      //writePICT(i+12, size-12);
     } else if (strcmp(sym, "instructions")==0) {
       i = extractBytecode(newt, i, size-12);
       decode = 0;
@@ -246,6 +275,52 @@ unsigned int decodeNSObj(FILE *newt, unsigned int i) {
   }
   return i;
 }
+
+
+unsigned int extractUnicodeString(FILE *newt, unsigned int i, unsigned int size)
+{
+  unsigned int j, n, val = rom_w(i);
+  // first, print the string as a long comment
+  AsmPrintf(newt, "\t@ String: \"");
+  for (j=i+12, n=i+size-2; j<n; j+=2) {
+    unsigned short c = ROM[j+1] + (ROM[j]<<8);
+    if (c>=32 && c<127) 
+      AsmPrintf(newt, "%c", c);
+    else
+      AsmPrintf(newt, "\\x%04x", c);
+  }
+  AsmPrintf(newt, "\"\n");
+  // print binary object
+  if ((val&0x000000ff)==0x00000040) {
+    AsmPrintf(newt, "\tNSObjBin\t%d\n", size-12);
+  } else if ((val&0x000000ff)==0x000000C0) {
+    AsmPrintf(newt, "\tNSObjXBin\t%d\n", size-12);
+  }
+  decodeNSRef(newt, i+8);
+  // now print the macro
+  char curr = 0;
+  for (j=i+12, n=i+size; j<n; j+=2) {
+    unsigned short c = ROM[j+1] + (ROM[j]<<8);
+    if (c>=32 && c<127 && c!='\\' && c!='"' && c!='@') {
+      if (curr!=1) {
+        AsmPrintf(newt, "\tNSUniString\t\"");
+        curr = 1;
+      }
+      AsmPrintf(newt, "%c", c);
+    } else {
+      if (curr==1) AsmPrintf(newt, "\"\n");
+      curr = 2;
+      AsmPrintf(newt, "\tNSUniChar\t0x%04x\n", c);
+    }
+  }
+  if (curr==1) AsmPrintf(newt, "\"\n");
+  while (j&3) {
+    AsmPrintf(newt, "\t.byte\t0x%02x\t@ unused\n", ROM[j]); // .align would be better!
+    j++;
+  }
+  return j-4;
+}
+
 
 void writeFreqFuncBytecode(FILE *newt, unsigned int &addr, unsigned char cmd, int val)
 {
@@ -384,7 +459,36 @@ unsigned int extractBytecode(FILE *newt, unsigned int addr, int n)
   return next-4;
 }
 
-char extractBitmap(unsigned int bits) 
+int writeShort(FILE *newt, unsigned int i, const char *comment)
+{
+  signed short x = ((ROM[i]<<8)|(ROM[i+1]));
+  AsmPrintf(newt, "\t.short\t%d\t@ (0x%04x) %s\n", x, x, comment);
+  return x;
+}
+
+unsigned int extractBitmap(FILE *newt, unsigned int bits, int size) 
+{
+  unsigned int end = bits+size;
+  decodeNSRef(newt, bits+8);
+  AsmPrintf(newt, "\t.int\t0x%08x\t@ \n", rom_w(bits+12));
+  int x, bpr = writeShort(newt, bits+16, "bytes per row");
+  writeShort(newt, bits+18, "...");
+  writeShort(newt, bits+20, "top");
+  writeShort(newt, bits+22, "left");
+  writeShort(newt, bits+24, "bottom");
+  writeShort(newt, bits+26, "right");
+  
+  for (bits+=28; bits<end; ) {
+    AsmPrintf(newt, "\t.byte\t");
+    for (x=0; x<bpr; x++, bits++) {
+      AsmPrintf(newt, "0x%02x%s", ROM[bits], (x<bpr-1)?", ":"");
+    }
+    AsmPrintf(newt, "\t@ bitmap row\n");
+  }
+  return end - 4;
+}
+
+char writeBitmap(unsigned int bits) 
 {
   // create the BMP
   int x, wdt = ((ROM[bits+26]<<8)|(ROM[bits+27])) - ((ROM[bits+22]<<8)|(ROM[bits+23]));
@@ -458,42 +562,17 @@ unsigned int rom_s(unsigned int i) {
   return ((ROM[i]<<8)|(ROM[i+1]));
 }
 
-// TODO: I do not understand this format yet!
-char extractPicture(unsigned int bits) 
+/*
+ The format is quite complex. Just write the pure binary data and hope that an
+ image reader can read them (3 out of 7 for OS X Finder)
+ */ 
+char writePICT(unsigned int bits, unsigned int size) 
 {
-  unsigned int i = bits;
-  printf("Picture:\n");
-  printf("  %d %d\n", rom_s(i+12), rom_s(i+14));
-  printf("  %d %d\n", rom_s(i+16), rom_s(i+18));
-  printf("  %d %d\n", rom_s(i+20), rom_s(i+22));
-  printf("  %d %d\n", rom_s(i+24), rom_s(i+26));
-  printf("  %d %d\n", rom_s(i+28), rom_s(i+30));
-  printf("  %d %d\n", rom_s(i+32), rom_s(i+34));
-  printf("  %d %d\n", rom_s(i+36), rom_s(i+38));
-  printf("  %d %d\n", rom_s(i+40), rom_s(i+42));
-  
-  // create the BMP
-  int x, wdt = rom_s(i+20)-rom_s(i+16);
-  int y, hgt = rom_s(i+18)-rom_s(i+14);
-  int bpr = (wdt+7)/8;//ROM[bits+17];
-  BMP bmp;
-  bmp.SetSize(wdt, hgt);
-  bmp.SetBitDepth(24);
-  // copy all bits over
-  RGBApixel black = { 0, 0, 0, 0 };
-  RGBApixel white = { 255, 255, 255, 0 };
-  for (y=0; y<hgt; y++) {
-    unsigned int row = bits + 28 + y*bpr;
-    for (x=0; x<wdt; x++) {
-      unsigned char v = ROM[row+x/8];
-      char set = v & (128>>(x&7));
-      bmp.SetPixel(x, y, set?black:white);
-    }
-  }
-  // write to file
   char buf[2048];
-  sprintf(buf, "/Users/matt/dev/Albert/NewtonOS/images/IMG_%08X.bmp", bits);
-  bmp.WriteToFile(buf);
+  sprintf(buf, "/Users/matt/dev/Albert/NewtonOS/images/IMG_%08X.pict", bits);
+  FILE *f = fopen(buf, "wb");
+  fwrite(ROM+bits, 1, size, f);
+  fclose(f);
   return 1;
 }
 

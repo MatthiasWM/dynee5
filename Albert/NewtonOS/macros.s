@@ -12,7 +12,8 @@
 @	NSChar	0x2345
 @
 .macro  NSChar  val
-        .word   (\val<<4)|0x0000000a
+        @.word   (\val<<4)|0x0000000a
+        .word   (\val<<4)|0x00000006
         .endm
 
 @
@@ -126,6 +127,37 @@
 	NSObjBin	8
 	NSPtr		SYMreal
 	.double		\val
+	.endm
+
+.macro	NSRealAsBin	iVal
+	.quad		\iVal
+	.endm
+
+@
+.macro	NSUniChar	c
+	.short		\c
+	.endm
+
+@
+.macro	NSUniString	str
+	.irpc		param, "\str"
+	.ascii  	"\000\param"	@ big endian only!
+	.endr
+	.endm
+
+@
+.macro	NSFunc
+	.word	0x00000032
+	.endm
+
+@
+.macro	NSNativeFunc
+	.word	0x00000132
+	.endm
+
+@
+.macro	NSNativePtr	addr
+	.word	\addr
 	.endm
 
 @

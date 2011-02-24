@@ -101,6 +101,27 @@ unsigned int ROM_flags[0x00200000];
 
 unsigned char printable(unsigned char c) { return (c>32&&c<127)?c:'.'; }
 
+const char *p_ascii(unsigned char c) 
+{ 
+  static char buf[8];
+  switch (c) {
+    case    8: return "\\b";
+    case    9: return "\\t";
+    case   10: return "\\n";
+    case   12: return "\\bf";
+    case   13: return "\\r";
+    case  '"': return "\\\"";
+    case  '@': return "\\x40";
+    case '\\': return "\\\\";
+  }
+  // 48:16 56:8 60:4 62:2
+  if (c>=' ' && c<=126) {
+    buf[0] = c; buf[1] = 0; return buf;
+  }
+  sprintf(buf, "\\%03o", c);
+  return buf;
+}
+
 void AsmFlush(FILE *f, const char *buf)
 {
   char dbuf[2048];
@@ -1438,6 +1459,19 @@ void writeNewtonROMTexts()
   }
 }
 
+char hasLabel(unsigned int i)
+{
+  if (rom_flags_is_set(i, flags_is_target)) {
+    return 1;
+  }  
+  if (get_plain_symbol_at(i)) {
+    return 1;
+  }
+  if (get_symbol_at(i)) {
+    return 1;
+  }
+  return 0;
+}
 
 void writeLabel(FILE *newt, unsigned int i)
 {
@@ -1501,30 +1535,48 @@ void writeNewtonROM()
           break; }
           // mcr p15, 0, r8, c1, c0, 2
           // mrc p15, 0, r0, c1, c0, 0
+        case flags_type_arm_text: {
+          int n = 0;
+          AsmPrintf(newt, "\t.ascii\t\"");
+          i -= 4;
+          do {
+            i += 4; n++;
+            AsmPrintf(newt, "%s", p_ascii(ROM[i]));
+            AsmPrintf(newt, "%s", p_ascii(ROM[i+1]));
+            AsmPrintf(newt, "%s", p_ascii(ROM[i+2]));
+            AsmPrintf(newt, "%s", p_ascii(ROM[i+3]));
+          } while (
+                      rom_flags_type(i+4)==flags_type_arm_text
+                   && ROM[i] && ROM[i+1] && ROM[i+2] && ROM[i+3] 
+                   && !hasLabel(i+4) 
+                   && n<16);
+          AsmPrintf(newt, "\"\n");
+          break; }
         case flags_type_patch_table:
-        case flags_type_jump_table:
-          // TODO: these are jump tables! Find out how to calculate the offsets!
-        case flags_type_arm_byte:
-        case flags_type_arm_text:
-        case flags_type_rex:
+        case flags_type_jump_table: // TODO: these are jump tables! Find out how to calculate the offsets!
+        case flags_type_arm_byte:   // TODO: currently not used
+        case flags_type_rex:        // TODO: interprete the contents
         case flags_type_ns:
         case flags_type_dict:
-        case flags_type_classinfo:
-          AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X %c%c%c%c (%s)\n", val, i, 
+        case flags_type_classinfo:  // TODO: differentiate this
+          AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X \"%c%c%c%c\" %d (%s)\n", val, i, 
                     printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]), 
-                    type_lut[rom_flags_type(i)]);
+                    rom_w(i), type_lut[rom_flags_type(i)]);
           break;
         case flags_type_data:
         case flags_type_unknown:
         case flags_type_arm_word:
         default:
         {
+          // if it matches a label, is it a pointer?
+          // if all bytes are ASCII, is it an ID?
+          // if it is a negative number, is it an error message?
           const char *sym = 0L;
           if (val) sym = get_symbol_at(val);
           if (!sym) sym = "";
-          AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X %c%c%c%c (%s) %s?\n", val, i, 
+          AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X \"%c%c%c%c\" %d (%s) %s?\n", val, i, 
                     printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]), 
-                    type_lut[rom_flags_type(i)], sym);
+                    rom_w(i), type_lut[rom_flags_type(i)], sym);
         }
           break;
       }
@@ -1715,7 +1767,7 @@ int main(int argc, char **argv)
   writeNewtonROM();
 #endif
   
-#if 1
+#if 0
   extractStencils();
 #endif
   
@@ -1763,8 +1815,17 @@ int main(int argc, char **argv)
 //                 21:44:  99.987% of ROM words covered (2096871 of 2097152)
 //                 21:59: 100.000% of ROM words covered (2097152 of 2097152) PARTY!!
 
+// So 13 feb 2011, 21:10: 731,205 unknown words, 209,643 of those are in the REX
+//                 22:04: 719,163 unknown words: ASCII text concatenating
+// Mo 14 feb 2011, 01:52: 689,304 unknown words: Unicode text 
+//                 02:32: 682,173 unknown words: Newton Script native function calls
+//                 02:54: 681,763 unknown words: Newton Script unichar encoding
+//                 17:45: 681,623 unknown words: Newton Script real encoding
+//                 21:11: 664,123 unknown words: Newton Script bitmaps
+
 // compressed tables (Dictionary) at gEnum80DaysMonths (0x006853DC) and following!
 // where are the graphics that are shown after cold boot?
-// how are the REXes handled?
+// how are the REXes handled? Starting at 0x0071FC4C to 0x007EC7FC
+// there are a few "funny" .fill instructions at the end of the ROM
 
 
