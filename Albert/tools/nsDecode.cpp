@@ -718,6 +718,10 @@ L0062AA40:
       NSPtr   SYMclass                        @ -> 0x003C31CC
       NSPtr   SYMfuncptr                      @ -> 0x00419564
       NSPtr   SYMnumargs                      @ -> 0x0041957C
+
+This vi macro will copy ID addresses into an array at the end of the file
+ :map <f1> mayyGpdf@xwhi, //<esc>8ld$i,<esc>'ajn
+ /"[a-zA-Z\.][a-zA-Z\.][a-zA-Z\.][a-zA-Z\.]".*flags_type_arm_word
  
 */
 
