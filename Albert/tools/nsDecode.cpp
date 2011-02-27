@@ -457,6 +457,42 @@ unsigned int extractBytecode(FILE *newt, unsigned int addr, int n)
     AsmPrintf(newt, "\t.byte\t0x%02x\t@ unused\n", cmd);
   }
   return next-4;
+/*
+ .ascii  "unary1\000\000"
+ .ascii  "unary2\000\000"
+ .ascii  "unary3\000\000"
+ .ascii  "push\000\000\000\000"
+ .ascii  "push-constant\000\000\000"
+ .ascii  "call\000\000\000\000"
+ .ascii  "invoke\000\000"
+ .ascii  "send\000\000\000\000"
+ .ascii  "send-if-defined\000"
+ .ascii  "resend\000\000"
+ .ascii  "resend-if-defined\000\000\000"
+ .ascii  "branch\000\000"
+ .ascii  "branch-t\000\000\000\000"
+ .ascii  "branch-f\000\000\000\000"
+ .ascii  "find-var\000\000\000\000"
+ .ascii  "get-var\000"
+ .ascii  "make-frame\000\000"
+ .ascii  "make-array\000\000"
+ .ascii  "get-path\000\000\000\000"
+ .ascii  "set-path\000\000\000\000"
+ .ascii  "set-var\000"
+ .ascii  "set-find-var\000\000\000\000"
+ .ascii  "incr-var\000\000\000\000"
+ .ascii  "branch-if-loop-not-done\000"
+ .ascii  "freq-func\000\000\000"
+ .ascii  "new-handlers\000\000\000\000"
+ .ascii  "pop\000"
+ .ascii  "dup\000"
+ .ascii  "return\000\000"
+ .ascii  "push-self\000\000\000"
+ .ascii  "set-lex-scope\000\000\000"
+ .ascii  "iter-next\000\000\000"
+ .ascii  "iter-done\000\000\000"
+ .ascii  "pop-handlers\000\000\000\000"
+*/
 }
 
 int writeShort(FILE *newt, unsigned int i, const char *comment)

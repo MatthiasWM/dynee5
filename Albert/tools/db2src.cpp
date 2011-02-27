@@ -48,11 +48,11 @@ extern const char *getSymbol(unsigned int i);
 extern const char *getSafeSymbol(unsigned int i);
 
 
-const char *db_path = "/Users/matt/dev/Albert/";
-const char *src_path = "/Users/matt/dev/Albert/src/"; 
-const char *c_path = "/Users/matt/dev/Albert/src/"; 
-const char *cpp_path = "/Users/matt/dev/Albert/src/"; 
-const char *os_path = "/Users/matt/dev/Albert/NewtonOS/"; 
+const char *db_path = "./";
+const char *src_path = "src/"; 
+const char *c_path = "src/"; 
+const char *cpp_path = "src/"; 
+const char *os_path = "NewtonOS/"; 
 
 const unsigned int flags_type_mask          = 0x000000ff;
 
@@ -1429,7 +1429,7 @@ void writeNewtonROMTexts()
 {  
   printf("\n====> Writing all Newton ROM ASCII text entries\n\n");
   unsigned int i;
-  FILE *text = fopen("/Users/matt/dev/Albert/data/text.txt", "wb");
+  FILE *text = fopen("data/text.txt", "wb");
   if (!text) {
     puts("Can't write text!");
   } else {
@@ -1495,7 +1495,7 @@ void writeNewtonROM()
 {
   printf("\n====> Writing Newton ROM in ARM assembler code\n\n");
   unsigned int i;
-  FILE *newt = fopen("/Users/matt/dev/Albert/NewtonOS/newtonos.s", "wb");
+  FILE *newt = fopen("NewtonOS/newtonos.s", "wb");
   if (!newt) {
     puts("Can't write NewtonOS!");
   } else {
@@ -1608,6 +1608,10 @@ void writeNewtonROM()
 int main(int argc, char **argv) 
 {
   int i;
+  
+  char buf[1024];
+  getcwd(buf, 1024);
+  puts(buf);
   
   FILE *rom = fopen("/Users/matt/dev/Albert/data/717006", "rb");
   if (!rom) {

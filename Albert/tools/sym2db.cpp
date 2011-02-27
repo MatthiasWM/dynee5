@@ -378,7 +378,7 @@ void convert(const char *s, unsigned int next)
  */
 int main(int argc, char **argv) 
 {
-  FILE *rom = fopen("/Users/matt/dev/Albert/data/717006", "rb");
+  FILE *rom = fopen("data/717006", "rb");
   if (!rom) {
     puts("Can't read ROM!");
     return -1;
@@ -386,12 +386,12 @@ int main(int argc, char **argv)
   fread(ROM, 0x00800000, 1, rom);
   fclose(rom);
   
-  in = fopen("/Users/matt/dev/Albert/data/717006.symbols", "rb");
+  in = fopen("data/717006.symbols", "rb");
   if (!in) {
     puts("Can't open Symbol file for reading.");
     return -1;
   }
-  out = fopen("/Users/matt/dev/Albert/symbols.txt", "wb");
+  out = fopen("symbols.txt", "wb");
   if (!out) {
     puts("Can't open Database file for writing.");
     fclose(in);
@@ -419,7 +419,7 @@ int main(int argc, char **argv)
   fclose(in);
   fclose(out);
   
-  out = fopen("/Users/matt/dev/Albert/classes.txt", "wb");
+  out = fopen("classes.txt", "wb");
   if (!out) {
     puts("Can't open class database file for writing.");
     return -1;
