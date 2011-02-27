@@ -3,11 +3,30 @@
  =============
  
 
+  0. QUICKSTART
   1. What is this?
   2. What does it do?
   3. What's so difficult then? (Are we there yet?)
   4. What will be added?
   
+  
+ QUICKSTART
+------------
+
+ * Copy the Newton ROM to data/717006
+ * Compile and launch sym2db
+ * Compile and launch db2src
+ * Compile armdiff, don't launch
+ * The source code will be in NewtonOS/newtonos.s
+ * Install GNU assembler for StrongARM from gnu.org
+     - build binutils from scratch for strongarm-elf
+     - I used  ../gcc-4.2.3/configure --target=strongarm-elf 
+               --prefix=/usr/local/crossgcc/ --with-gnu-as 
+               --with-gnu-ld --enable-languages=c,c++
+     - update the path so that strongarm-elf-as and friends are available
+ * In the shell, go into NewtonOS, type "make"
+ * You may get a few warnings, but in the end, the ROM files should be equal
+
   
  What is this?
 ---------------
@@ -49,6 +68,9 @@ information and comments throughout, which can then be recompiled back into the
 original ROM code using the GNU assembler for ARM. A second toll, armdiff,
 verifies that the original ROM and the generated ROM are the same.
 
+The text file is so large that Xcode is painfully slow when editing it. I like 
+to use "vim" from the command line - it's extremely cryptic though.
+
 Albert can also output a group of pseudo C++ code files. They will not compile,
 but should be sufficient to be analysed by Doxygen and onther C++ code analysis
 tools to genrate call graphs and other interesting information.
@@ -62,8 +84,8 @@ and the compilition will still generate a valid ROM.
 
 The biggest problem on the way there is to correctly identify sybolic 
 information. Only if all address pointers in the ROM are correctly identified
-and replced with a symbolic pointer, changes in code position will still
-generate correct code.
+and replaced with a symbolic pointer, changes in code position will generate 
+correct code, even if the size of code blocks changes.
 
 The only way to do this is to analyse all data word and find out if they are
 pointers, numeric data (integer or floating point), ASCII text, Unicode text,
