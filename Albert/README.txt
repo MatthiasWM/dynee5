@@ -65,7 +65,7 @@ labes.
 
 The output is a pretty huge ARM assembler code file containing symbolic 
 information and comments throughout, which can then be recompiled back into the 
-original ROM code using the GNU assembler for ARM. A second toll, armdiff,
+original ROM code using the GNU assembler for ARM. A second tool, armdiff,
 verifies that the original ROM and the generated ROM are the same.
 
 The text file is so large that Xcode is painfully slow when editing it. I like 

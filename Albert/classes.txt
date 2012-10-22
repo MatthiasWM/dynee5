@@ -23,6 +23,25 @@ begin class
   data 59 byte
   data 68 word
   data 72 word
+  # there are 8 blocks of 32 byte each following this pattern:
+  data 116 word
+  data 144 byte
+  # end repeat
+  data 148 word
+  data 176 byte
+  data 180 word
+  data 208 byte
+  data 212 word
+  data 240 byte
+  data 244 word
+  data 272 byte
+  data 276 word
+  data 304 byte
+  data 308 word
+  data 336 byte
+  data 340 word
+  data 368 byte
+  # loop filled
 end
 
 begin class
@@ -107,11 +126,13 @@ begin class
   # analysed ctor
   sym TAEP
   base FIXME
-  size FIXME
+  size 24
   datac FIXME
+  data 0 TStackObject
 end
 
 begin class
+  # ctor just returns! (Actually, all TIdleTimer calls simply return)
   sym TIdleTimer
   base FIXME
   size FIXME
@@ -119,69 +140,99 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym TAEHandlerComparer
   base FIXME
-  size FIXME
+  size 12
   datac FIXME
+  data 0 CItemComparer
 end
 
 begin class
+  # analysed ctor
   sym TAEHandlerIterator
   base FIXME
-  size FIXME
+  size 12
   datac FIXME
+  data 0 TAEventHandler*
+  data 4 TAEventHandler*
+  data 8 TAEventHandler*
 end
 
 begin class
+  # analysed ctor
   sym TAEventHandler
-  base FIXME
-  size FIXME
+  base base
+  size 20
   datac FIXME
+  data 0 vtable
+  data 4 word
+  data 8 word
+  data 12 word
+  data 16 word
 end
 
 begin class
+  # analysed ctor
   sym TSystemEventHandler
-  base FIXME
-  size FIXME
+  base TAEventHandler
+  size 24
   datac FIXME
+  data 0 vtable
+  data 20 byte
 end
 
 begin class
+  # analysed ctor
   sym TAEIdleTimer
-  base FIXME
-  size FIXME
+  base TTimerElement
+  size 32
   datac FIXME
+  data 0 vtable
+  data 24 TAEventHandler*
+  data 28 word
 end
 
 begin class
+  # analysed ctor
   sym TAEvent
   base FIXME
-  size FIXME
+  size 8
   datac FIXME
+  data 0 fourcc
 end
 
 begin class
+  # analysed ctor
   sym TAESystemEvent
   base FIXME
-  size FIXME
+  size 12
   datac FIXME
+  data 0 TAEvent
+  data 8 word
 end
 
 begin class
+  # analysed ctor
   sym TPowerEvent
   base FIXME
-  size FIXME
+  size 16
   datac FIXME
+  data 0 TAESystemEvent
+  data 12 word
 end
 
 begin class
+  # analysed ctor
   sym TAEventComparer
-  base FIXME
-  size FIXME
+  base CItemComparer
+  size 12
   datac FIXME
+  data 0 
 end
 
 begin class
+  # no ctor found!
   sym TATASimple
   base TATA
   size FIXME
@@ -189,13 +240,16 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym TATPHeader
   base FIXME
-  size FIXME
+  size 4
   datac FIXME
+  data 0 word
 end
 
 begin class
+  # no ctor found
   sym TTransactionResponseBuffer
   base FIXME
   size FIXME
@@ -203,6 +257,7 @@ begin class
 end
 
 begin class
+  # no ctor found
   sym TATPInterface
   base FIXME
   size FIXME
@@ -210,90 +265,155 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym TTransaction
   base FIXME
-  size FIXME
+  size 308
   datac FIXME
+  data 12 TMemoryObject
+  data 48 TTransactionResponses
+  data 160 TMessageTimer
+  data 220 TATPHeader
+  data 224 TAddress
+  data 236 TCompletion
+  data 264 TUAsyncMessage
+  data 280 TAEvent
 end
 
 begin class
+  # analysed ctor
   sym TTransactionResponses
   base FIXME
-  size FIXME
+  size 108
   datac FIXME
+  data 0 TMemoryObject
+  data 104 word
 end
 
 begin class
+  # analysed ctor
   sym TTransactionManager
-  base FIXME
-  size FIXME
+  base base
+  size 8
   datac FIXME
+  data 0 vtable
+  data 4 word
 end
 
 begin class
+  # analysed ctor
   sym TATP
-  base FIXME
-  size FIXME
+  base TStackObject
+  size 40
   datac FIXME
+  data 0 TStackObject
+  data 24 TTransactionManager
+  data 32 TResponseManager
 end
 
 begin class
+  # analysed ctor
   sym TAddress
   base FIXME
-  size FIXME
+  size 12
   datac FIXME
+  data 0 byte
+  data 1 byte
+  data 4 word
+  data 8 byte
+  data 9 byte
+  data 10 byte
+  data 11 byte
 end
 
 begin class
+  # analysed ctor
   sym TAirusIterator
   base FIXME
-  size FIXME
+  size 144
   datac FIXME
+  data 0 word
+  data 4 byte
+  data 68 byte
+  data 132 word
+  data 136 byte
+  data 140 word
 end
 
 begin class
+  # analysed ctor
   sym TAlertItem
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 byte
+  data 1 byte
+  data 2 byte
+  data 3 byte
+  data 4 byte
+  data 5 byte
+  data 6 byte
+  data 7 byte
+  data 8 word
 end
 
 begin class
+  # analysed ctor
   sym TAlertDialog
   base FIXME
-  size FIXME
+  size 40
   datac FIXME
+  data 8 word
+  data 12 word
+  data 16 word
+  data 20 word
+  data 24 word
+  data 28 word
+  data 32 word
+  data 36 word
 end
 
 begin class
+  # analysed ctor
   sym TOSErrorAlertDialog
   base FIXME
-  size FIXME
+  size 80
   datac FIXME
+  data 0 TAlertDialog
+  # FIXME ...and a lot more that can be analysed from the ctor!
 end
 
 begin class
   sym TErasePersistentDataAlert
   base FIXME
-  size FIXME
+  size 100
   datac FIXME
+  data 0 TAlertDialog
 end
 
 begin class
+  # analysed ctor
   sym TAlertGlyph
   base FIXME
-  size FIXME
+  size 48
   datac FIXME
 end
 
 begin class
+  # analysed ctor
   sym TAlertEvent
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 TAEvent
+  data 4 fourcc
+  data 8 word
+  data 12 word
+  data 16 word
 end
 
 begin class
+  # ctor not found
   sym TAlertEventHandler
   base FIXME
   size FIXME
@@ -301,6 +421,7 @@ begin class
 end
 
 begin class
+  # ctor not found
   sym TAlertManager
   base FIXME
   size FIXME
@@ -308,6 +429,7 @@ begin class
 end
 
 begin class
+  # ctor not found
   sym TNoReuseAllocator
   base FIXME
   size FIXME
@@ -315,6 +437,7 @@ begin class
 end
 
 begin class
+  # ctor not found
   sym THeapAllocator
   base FIXME
   size FIXME
@@ -322,69 +445,122 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym TAppWorld
-  base FIXME
-  size FIXME
+  base TForkWorld
+  size 112
   datac FIXME
+  data 0 TForkWorld
+  data 48 word
+  data 52 word
+  data 56 word
+  data 60 CItemComparer
+  data 72 TAEventComparer
+  data 84 TAEHandlerComparer
+  data 96 word
+  data 100 word
+  data 104 fourcc
+  data 108 fourcc
 end
 
 begin class
+  # analysed ctor
   sym TAppWorldState
   base FIXME
-  size FIXME
+  size 308
   datac FIXME
+  data 0 word
+  data 8 word
+  data 12 word
+  data 16 word
+  data 20 word
+  data 24 word
+  data 28 word
+  data 36 word
+  data 40 byte
+  data 41 byte
+  data 42 byte
+  data 44 word
+  data 48 word
 end
 
 begin class
+  # analysed ctor
   sym TATAsyncMsg
   base FIXME
-  size FIXME
+  size 280
   datac FIXME
+  data 256 byte
+  data 260 TUAsyncMessage
+  data 276 word
 end
 
 begin class
+  # analysed ctor
   sym TAppleTalkStack
-  base FIXME
-  size FIXME
+  base TStackObject
+  size 24
   datac FIXME
+  data 0 TStackObject
 end
 
 begin class
+  # analysed ctor
   sym TAppleTalkWorld
-  base FIXME
-  size FIXME
+  base TAppWorld
+  size 1520
   datac FIXME
+  data 0 TAppWorld
 end
 
 begin class
+  # analysed ctor
   sym TCMOAppleTalkLink
   base FIXME
-  size FIXME
+  size 16
   datac FIXME
+  data 0 TOption
+  data 4 word
+  data 12 fourcc
 end
 
 begin class
+  # analysed ctor
   sym TCMOSystemName
   base FIXME
-  size FIXME
+  size 212
   datac FIXME
+  data 0 TOption
+  data 4 word
+  data 12 byte
+  data 13 byte
 end
 
 begin class
+  # analysed ctor
   sym TCMOAppleTalkPart
   base FIXME
-  size FIXME
+  size 16
   datac FIXME
+  data 0 TOption
+  data 4 word
+  data 12 word
 end
 
 begin class
+  # analysed ctor
   sym TCMOAppleTalkBuffer
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 TOption
+  data 4 word
+  data 12 word
+  data 16 word
 end
 
 begin class
+  # ctor not found
   sym TAppleTalkService
   base TCMService
   size FIXME
@@ -392,6 +568,7 @@ begin class
 end
 
 begin class
+  # ctor not found
   sym PAppleTalkStack
   base PATStack
   size FIXME
@@ -399,6 +576,8 @@ begin class
 end
 
 begin class
+  # ctor not found
+  # what about Constructor__12TApplication ?
   sym TApplication
   base FIXME
   size FIXME
@@ -406,6 +585,7 @@ begin class
 end
 
 begin class
+  # ctor not found
   sym TView
   base FIXME
   size FIXME
@@ -413,6 +593,7 @@ begin class
 end
 
 begin class
+  # ctor not found
   sym TArithmeticCompressor
   base TCallbackCompressor
   size FIXME
@@ -420,6 +601,7 @@ begin class
 end
 
 begin class
+  # ctor not found
   sym TArithmeticDecompressor
   base TCallbackDecompressor
   size FIXME
@@ -427,13 +609,15 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym CArrayIterator
   base FIXME
-  size FIXME
+  size 28
   datac FIXME
 end
 
 begin class
+  # ctor not found
   sym TAsyncDebugLink
   base TSerialDebugLink
   size FIXME
@@ -441,20 +625,37 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym TAsyncEvent
   base FIXME
-  size FIXME
+  size 28
   datac FIXME
+  data 0 TUAsyncMessage
+  data 16 word
+  data 20 word
+  data 24 word
 end
 
 begin class
+  # analysed ctor
   sym TAsyncSerTool
-  base FIXME
-  size FIXME
+  base TSerTool
+  size 1200
   datac FIXME
+  data 0 TSerTool
+  data 900 TCircleBuffer
+  data 940 TCircleBuffer
+  data 980 TCMOSerialBuffers
+  data 1012 TCMOOutputFlowControlParms
+  data 1032 TCMOInputFlowControlParms
+  data 1052 TCMOSerialIOStats
+  data 1084 TCMOBreakFraming
+  data 1112 TCMOSerialEventEnables
+  data 1136 TCMOSerialMiscConfig
 end
 
 begin class
+  # ctor not found
   sym TAsyncService
   base TCMService
   size FIXME
@@ -462,6 +663,7 @@ begin class
 end
 
 begin class
+  # ctor not found
   sym TBankControlRegister
   base FIXME
   size FIXME
@@ -469,20 +671,35 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym CBaseRingBuffer
-  base FIXME
-  size FIXME
+  base CMinBuffer
+  size 4
   datac FIXME
+  data 0 CMinBuffer
 end
 
 begin class
+  # analysed ctor
   sym TBeamer
   base FIXME
-  size FIXME
+  size 64
   datac FIXME
+  data 4 word
+  data 8 word
+  data 12 word
+  data 16 word
+  data 20 word
+  data 24 word
+  data 28 word
+  data 40 PipeCallBack
+  data 52 word
+  data 56 word
+  data 60 word
 end
 
 begin class
+  # ctor not found
   sym TBeamerCallback
   base FIXME
   size FIXME
@@ -490,20 +707,34 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym TPixelObj
   base FIXME
-  size FIXME
+  size 52
   datac FIXME
+  data 0 word
+  data 40 word
+  data 44 word
+  data 48 byte
+  data 32 word
 end
 
 begin class
+  # analysed ctor
   sym TBits
   base FIXME
-  size FIXME
+  size 52
   datac FIXME
+  data 0 word
+  data 28 word
+  data 32 byte
+  data 36 word
+  data 44 word
+  data 48 word
 end
 
 begin class
+  # no ctor found
   sym TBitsPort
   base FIXME
   size FIXME
@@ -511,55 +742,121 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym DragBits
   base FIXME
-  size FIXME
+  size 128
   datac FIXME
+  data 0 RegionStruct
+  data 4 TBits
+  data 56 TBits
 end
 
 begin class
+  # analysed ctor
   sym TAnimate
   base FIXME
-  size FIXME
+  size 188
   datac FIXME
+  data 0 TBits
+  data 52 TSaveScreenBits
+  data 96 TRegionStruct
+  data 160 word
 end
 
 begin class
+  # analysed ctor
   sym CBuffer
-  base FIXME
-  size FIXME
+  base CMinBufer
+  size 4
   datac FIXME
+  vtable 0x0001FB1C
+  data 0 CMinBuffer
 end
 
 begin class
+  # analysed ctor
   sym CBufferList
-  base FIXME
-  size FIXME
+  base CBuffer
+  size 32
   datac FIXME
+  vtable 0x0001B038
+  data 0 CBuffer
+  data 4 word
+  data 8 word
+  data 12 word
+  data 16 word
+  data 20 word
+  data 24 word
+  data 28 byte
+  data 29 byte
 end
 
 begin class
+  # analysed ctor
   sym CBufferPipe
-  base FIXME
-  size FIXME
+  base CPipe
+  size 16
   datac FIXME
+  vtable 0x0001B078
+  data 0 CPipe
+  data 4 word
+  data 8 word
+  data 12 byte
+  data 13 byte
 end
 
 begin class
+  # analysed ctor
   sym CBufferSegment
-  base FIXME
-  size FIXME
+  base CBuffer
+  size 40
   datac FIXME
+  vtable 0x0001D3A8
+  data 0 CBuffer
+  data 4 word
+  data 8 word
+  data 12 word
+  data 16 word
+  data 20 word
+  data 24 word
+  data 28 word
+  data 32 byte
+  data 36 byte
+  data 37 byte
 end
 
 begin class
+  # analysed ctor
   sym TCHDeviceInfo
   base FIXME
-  size FIXME
+  size 48
   datac FIXME
+  data 0 word
+  data 4 word
+  data 8 word
+  data 12 word
+  data 16 word
+  data 20 byte
+  data 21 byte
+  data 22 byte
+  data 23 byte
+  data 24 word
+  data 28 word
+  data 32 word
+  data 36 word
+  data 40 byte
+  data 41 byte
+  data 42 byte
+  data 43 byte
+  data 44 byte
+  data 45 byte
+  data 46 byte
+  data 47 byte
 end
 
 begin class
+  # no ctor found
   sym TCHMemModem
   base TCardHandler
   size FIXME
@@ -567,90 +864,124 @@ begin class
 end
 
 begin class
+  # analysed ctor
   sym TAsyncServiceMessage
   base FIXME
-  size FIXME
+  size 28
   datac FIXME
+  data 0 word
+  data 4 TUAsyncMessage
+  data 20 word
+  data 24 word
 end
 
 begin class
+  # analysed ctor
   sym TCPEOMTuple
   base FIXME
-  size FIXME
+  size 8
   datac FIXME
+  data 0 fourcc
+  data 4 word
 end
 
 begin class
+  # analysed ctor
   sym TCPRequestIdTuple
   base FIXME
-  size FIXME
+  size 8
   datac FIXME
+  data 0 fourcc
+  data 4 word
 end
 
 begin class
+  # analysed ctor
   sym TCPAbortTuple
   base FIXME
-  size FIXME
+  size 12
   datac FIXME
+  data 0 fourcc
+  data 4 word
 end
 
 begin class
+  # analysed ctor
   sym TCPReadMessage
   base FIXME
-  size FIXME
+  size 12
   datac FIXME
+  data 0 word
+  data 8 word
 end
 
 begin class
+  # analysed ctor
   sym TCPNewtonIdTuple
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 fourcc
+  data 4 word
+  data 8 word
+  data 12 word
+  data 16 word
 end
 
 begin class
+  # analysed ctor
   sym TCPWriteMessage
   base FIXME
-  size FIXME
+  size 4
   datac FIXME
+  data 0 TEndpointPipe*
 end
 
 begin class
   sym TCPDeviceIdTuple
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 fourcc
+  data 4 word
 end
 
 begin class
   sym TCPServiceInfoRequestTuple
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 fourcc
+  data 12 word
+  data 16 word
 end
 
 begin class
   sym TCPServiceInfoResponseTuple
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 fourcc
 end
 
 begin class
   sym TCPRequestServiceTuple
   base FIXME
-  size FIXME
+  size 14
   datac FIXME
+  data 0 fourcc
 end
 
 begin class
   sym TCPChangeSpeedRequestTuple
   base FIXME
-  size FIXME
+  size 12
   datac FIXME
+  data 0 fourcc
 end
 
 begin class
+  # no ctor found
   sym TCRC16
   base FIXME
   size FIXME
@@ -660,53 +991,81 @@ end
 begin class
   sym TCRelocationGenerator
   base FIXME
-  size FIXME
+  size 24
   datac FIXME
+  data 0 word
+  data 12 byte
+  data 13 byte
+  data 20 word
 end
 
 begin class
   sym TSimpleCRelocator
-  base FIXME
-  size FIXME
+  base base
+  size 308
   datac FIXME
+  vtable 0x0001E964
+  data 0 vtable
+  data 4 word
+  data 8 word
+  data 16 byte
+  data 17 byte
 end
 
 begin class
   sym TCardATALoader
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 word
+  data 4 word
+  data 8 word
+  data 12 word
+  data 16 word
 end
 
 begin class
   sym TATAPartitionInfo
   base FIXME
-  size FIXME
+  size 32
   datac FIXME
+  data 12 word
+  data 20 word
+  data 24 word
+  data 28 word
 end
 
 begin class
   sym TATABootParamBlock
   base FIXME
-  size FIXME
+  size 20
   datac FIXME
+  data 0 word
+  data 4 word
+  data 8 word
+  data 12 word
+  data 16 word
 end
 
 begin class
   sym TCardAlertDialog
   base FIXME
-  size FIXME
+  size 80
   datac FIXME
+  data 0 TAlertDialog
 end
 
 begin class
   sym TCardAlertEvent
   base FIXME
-  size FIXME
+  size 100
   datac FIXME
+  data 0 TAlertEvent
+  data 20 TCardAlertDialog
 end
 
 begin class
+  # ctor not found
   sym TCardReinsertAlertDialog
   base FIXME
   size FIXME
@@ -716,116 +1075,178 @@ end
 begin class
   sym TCardAsyncMsg
   base FIXME
-  size FIXME
+  size 204
   datac FIXME
+  data 0 TCardMessage
+  data 188 TUAsyncMessage
 end
 
 begin class
   sym TNewCardAsyncMsg
   base FIXME
-  size FIXME
+  size 240
   datac FIXME
+  data 0 TCardMessage
+  data 184 TUAsyncMessage
+  data 200 TSystemEvent
+  data 220 TSysEventRequest
 end
 
 begin class
   sym TCardCISIterator
   base FIXME
-  size FIXME
+  size 72
   datac FIXME
 end
 
 begin class
   sym TPCMCIA20Parser
   base FIXME
-  size FIXME
+  size 44
   datac FIXME
+  data 4 word
+  data 8 word
+  data 12 TCardLongLink
+  data 20 word
 end
 
 begin class
   sym TCardDomains
   base FIXME
-  size FIXME
+  size 4
   datac FIXME
 end
 
 begin class
   sym TCardEventHandler
-  base FIXME
-  size FIXME
+  base TAEventHandler
+  size 24
   datac FIXME
+  vtable 0x0001E784
+  data 0 TAEventHandler
 end
 
 begin class
   sym TCardSystemEventHandler
-  base FIXME
-  size FIXME
+  base TSystemEventHandler
+  size 56
   datac FIXME
+  vtable 0x0001F21C
+  data 0 TSystemEventHandler
+  data 28 word
+  data 32 word
+  data 36 word
+  data 40 word
 end
 
 begin class
   sym TCardProcessorEventHandler
-  base FIXME
-  size FIXME
+  base TAEventHandler
+  size 20
   datac FIXME
+  vtable 0x0001F328
+  data 0 TAEventHandler
 end
 
 begin class
   sym TCardMessage
   base FIXME
-  size FIXME
+  size 184
   datac FIXME
+  data 0 TAEvent
+  data 4 fourcc
+  data 46 byte
+  data 47 byte
+  data 48 word
+  data 52 word
 end
 
 begin class
   sym TCardDevice
   base FIXME
-  size FIXME
+  size 32
   datac FIXME
 end
 
 begin class
   sym TCardPackage
   base FIXME
-  size FIXME
+  size 28
   datac FIXME
+  data 0 word
+  data 4 word
+  data 8 word
+  data 12 byte
+  data 13 byte
+  data 14 byte
+  data 15 byte
+  data 16 word
+  data 20 word
+  data 24 word
 end
 
 begin class
   sym TCardLongLink
   base FIXME
-  size FIXME
+  size 8
   datac FIXME
 end
 
 begin class
   sym TCardFunction
   base FIXME
-  size FIXME
+  size 32
   datac FIXME
+  data 0 byte
+  data 1 byte
+  data 2 byte
+  data 3 byte
+  data 4 byte
+  data 8 CList
+  
 end
 
 begin class
   sym TCardPCMCIA
   base FIXME
-  size FIXME
+  size 224
   datac FIXME
+  data 48 char* fManufacturerName
+  data 52 char* fProductName
+  data 56 char* fV1String3
+  data 60 char* fV1String4
+  data 64 char* fV2Vendor
+  data 68 char* fV2Info
+  data 72 CList fPackages
+  data 96 CList fDevices
+  data 120 CList fConfigurations
+  data 144 CList* fCISs
+  data 148 CList fDeviceOCs
+  data 172 CList fDeviceOAs
+  data 196 CList fCardFunctions
+  data 220 UChar fCurrentCISNumber
+  data 221 UChar fV1Major
+  data 222 UChar fV1Minor
 end
 
 begin class
   sym TCardConfiguration
   base FIXME
-  size FIXME
+  size 348
   datac FIXME
 end
 
 begin class
   sym TCardPartHandler
-  base FIXME
-  size FIXME
+  base TPartHandler
+  size 60
   datac FIXME
+  vtable 0x0001E404
+  data 0 TPartHandler
 end
 
 begin class
+  # no ctor found
   sym TCardPipe
   base FIXME
   size FIXME
@@ -835,39 +1256,50 @@ end
 begin class
   sym TCardSocketState
   base FIXME
-  size FIXME
+  size 872
   datac FIXME
+  data 88 TCardAsyncMsg
+  data 292 TCardAsyncMsg
+  data 572 TCardAsyncMsg
+  data 788 TATAPartitionInfo
+  data 820 ATABootParamBlock
+  data 840 TCardATALoader
 end
 
 begin class
   sym TCardProcessor
-  base FIXME
-  size FIXME
+  base TAppWorld
+  size 132
   datac FIXME
+  vtable 0x0001D440
+  data 0 TAppWorld
 end
 
 begin class
   sym TCardServer
-  base FIXME
-  size FIXME
+  base TAppWorld
+  size 10728
   datac FIXME
+  vtable 0x0001B150
+  data 0 TAppWorld
 end
 
 begin class
   sym TCardSocket
   base FIXME
-  size FIXME
+  size 132
   datac FIXME
 end
 
 begin class
   sym TCircleBuf
   base FIXME
-  size FIXME
+  size 40
   datac FIXME
 end
 
 begin class
+  # no ctor found
   sym PCirrusBatteryDriver
   base PBatteryDriver
   size FIXME
@@ -875,6 +1307,7 @@ begin class
 end
 
 begin class
+  # no ctor found
   sym PCirrusSoundDriver
   base PSoundDriver
   size FIXME
@@ -882,6 +1315,7 @@ begin class
 end
 
 begin class
+  # no ctor found
   sym TResistiveTablet
   base TTabletDriver
   size FIXME
@@ -891,15 +1325,16 @@ end
 begin class
   sym TProtocol
   base NONE
-  size FIXME
+  size 16
   datac 4
-  data 0 void*/fRuntime// runtime usage (e.g. Throw() cleanup of autos for exceptions)
-  data 4 const TProtocol*/fRealThis// -> true "this" for auto instances
-  data 8 const void**/fBTable// -> dispatch table
-  data 12 TObjectId/fMonitorId// for monitors, the monitor id
+  data 0 void* fRuntime // runtime usage (e.g. Throw() cleanup of autos for exceptions)
+  data 4 TProtocol* fRealThis // -> true "this" for auto instances
+  data 8 void** fBTable // -> dispatch table
+  data 12 TObjectId fMonitorId // for monitors, the monitor id
 end
 
 begin class
+  # no ctor found
   sym TClassInfoRegistryImpl
   base TClassInfoRegistry
   size FIXME
@@ -907,6 +1342,7 @@ begin class
 end
 
 begin class
+  # no ctor found
   sym TClassInfoComparator
   base FIXME
   size FIXME
@@ -914,6 +1350,7 @@ begin class
 end
 
 begin class
+  # no ctor found
   sym TClassInfo
   base FIXME
   size FIXME
@@ -923,23 +1360,27 @@ end
 begin class
   sym TClassOneModemCmdReply
   base FIXME
-  size FIXME
+  size 60
   datac FIXME
+  data 0 TCommToolReply
 end
 
 begin class
   sym TClassOneModem
   base FIXME
-  size FIXME
+  size 2980
   datac FIXME
 end
 
 begin class
+  # no ctor found
   sym TClipper
   base FIXME
   size FIXME
   datac FIXME
 end
+
+# continue here
 
 begin class
   sym TCMARouteAddress

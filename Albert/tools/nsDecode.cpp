@@ -721,7 +721,123 @@ L0062AA40:
 
 This vi macro will copy ID addresses into an array at the end of the file
  :map <f1> mayyGpdf@xwhi, //<esc>8ld$i,<esc>'ajn
- /"[a-zA-Z\.][a-zA-Z\.][a-zA-Z\.][a-zA-Z\.]".*flags_type_arm_word
+ /"[a-zA-Z ][a-zA-Z\.][a-zA-Z\.][a-zA-Z\.]".*flags_type_arm_word
+
+ 0x0004FFA4 ASCII
+ 
+MMU Stuff:
+ 0x0001892C: FlushTheMMU <- InitCGlobals, PersistentRecovery, MakePrimaryMMUTable, DordpROMBkpt
+    ChangePRangeAccessibility(unsigned long, unsigned long, EPhysChangeType)
+    ChangeVRangeAccessibility(unsigned long, unsigned long, unsigned long, unsigned long, EPhysChangeType)
+    AllocatePatchRAM(unsigned long, unsigned long)
+    MakeTemporaryMapArea(void)
+ 0x0004590C: MakePrimaryMMUTable
+ 0x00045B28: InitTheMMUTables
+ 0x0011EFA8: GetPrimaryTablePhysBaseMMUOff
+ 0x0015A574: AddNewSecPNJTMMUWithOff(unsigned long, unsigned long, unsigned long, Perm, unsigned char, SGlobalsThatLiveAcrossReboot *)
+ 0x003AD620: _PurgeMMUTLBEntry (SWI 7)
+ 0x003AD628: _FlushMMU (SWI 8)
+ 0x0011E938: GetPrimaryTablePhysBaseAfterGlobalsInitied
+ 0x0015AC10: AddPgPerm(unsigned long, Perm)
+ etc. (search for gPrimaryTable)
+ 
+ A big chunk of "C" and "C++" footprint MMU related functions start here:
+ 0x0015A0AC: InitPgPerms(void) to 0x0015BE7C
+ @ 0x0015A0AC: InitPgPerms(void)
+ @ 0x0015A0DC: InitPTable(void)
+ @ 0x0015A0E0: ClientReadable(Perm, unsigned char, unsigned long)
+ @ 0x0015A110: Readable
+ @ 0x0015A268: CheckVAddrRange(unsigned long, unsigned long)
+ @ 0x0015A2D0: VToDomain(unsigned long)
+ @ 0x0015A310: PrimSetDomainRange(unsigned long, unsigned long, unsigned long)
+ @ 0x0015A378: PrimSetDomainRangeWithPageTable(unsigned long, unsigned long, unsigned long, unsigned long)
+ @ 0x0015A3CC: ComputePermUnit(unsigned long, unsigned long)
+ @ 0x0015A424: PrimClearDomainRange(unsigned long, unsigned long)
+ @ 0x0015A484: AddPTable(unsigned long, unsigned long, unsigned char)
+ @ 0x0015A4EC: AddPTableWithPageTable(unsigned long, unsigned long, unsigned long)
+ @ 0x0015A52C: RemovePTable(unsigned long)
+ @ 0x0015A574: AddNewSecPNJTMMUWithOff(unsigned long, unsigned long, unsigned long, Perm, unsigned char, SGlobalsThatLiveAcrossReboot *)
+ @ 0x0015A5DC: AddNewSecPNJT(unsigned long, unsigned long, unsigned long, Perm, unsigned char)
+ @ 0x0015A640: AddSecP(unsigned long, unsigned long, unsigned char)
+ @ 0x0015A6B8: AddBigPgP(unsigned long, unsigned long, unsigned char)
+ @ 0x0015A780: AddPgP(unsigned long, unsigned long, unsigned char)
+ @ 0x0015A81C: AddPgPAndPermWithPageTable(unsigned long, unsigned long, unsigned long, unsigned long, unsigned char)
+ @ 0x0015A8A8: ComputePhysUnit(unsigned long, unsigned long, unsigned long)
+ @ 0x0015A8F0: AddPgPAndPerm(unsigned long, unsigned long, unsigned long, unsigned char)
+ @ 0x0015A98C: RemoveSecP(unsigned long)
+ @ 0x0015A9D4: RemoveBigPgP(unsigned long)
+ @ 0x0015AA5C: RemovePgP(unsigned long)
+ @ 0x0015AAC8: RemovePgPAndPerm(unsigned long)
+ @ 0x0015AB3C: AddSecPerm(unsigned long, Perm)
+ @ 0x0015AB8C: AddSubPgPerm(unsigned long, Perm)
+ @ 0x0015AC10: AddPgPerm(unsigned long, Perm)
+ @ 0x0015AC90: AddBigSubPgPerm(unsigned long, Perm)
+ @ 0x0015AD34: AddBigPgPerm(unsigned long, Perm)
+ @ 0x0015ADCC: ChangePRangeAccessibility(unsigned long, unsigned long, EPhysChangeType)
+ @ 0x0015B094: RemoveSecPerm(unsigned long)
+ @ 0x0015B0DC: RemovePgPerm(unsigned long)
+ @ 0x0015B148: RemoveBigSubPgPerm(unsigned long)
+ @ 0x0015B1E0: RemoveBigPgPerm(unsigned long)
+ @ 0x0015B268: RemoveSubPgPerm(unsigned long)
+ @ 0x0015B2E4: CopySectionIntoPageTable(unsigned long, unsigned long)
+ @ 0x0015B3A8: CanUseBigPage(unsigned long)
+ @ 0x0015B430: TransformBigPageToPages(unsigned long)
+ @ 0x0015B528: PageMappedInRange(unsigned long, unsigned long *, unsigned long, unsigned long)
+ @ 0x0015B610: PrimRemovePMappings(unsigned long, unsigned long)
+ @ 0x0015B664: ChangeVRangeAccessibility(unsigned long, unsigned long, unsigned long, unsigned long, EPhysChangeType)
+ @ 0x0015B8A4: CopyPhysicalPage(unsigned long, unsigned long, unsigned long)
+ @ 0x0015B914: CopyPhysicalPageDuringFIQAtomic(unsigned long, unsigned long, unsigned long)
+ @ 0x0015B958: ReleasePageTable(unsigned long)
+ @ 0x0015B990: GetPrimaryPageTableEntry(unsigned long)
+ @ 0x0015B9A8: ChangePrimaryMappingToPages(unsigned long, unsigned long)
+ @ 0x0015BA7C: RestorePrimaryMapping(unsigned long, unsigned long)
+ @ 0x0015BAB4: GetSecondaryPageTableEntry(unsigned long)
+ @ 0x0015BB14: ChangePageMapping(unsigned long, unsigned long)
+ @ 0x0015BBA0: RestorePageMapping(unsigned long, unsigned long)
+ @ 0x0015BC30: VToUnit(unsigned long)
+ @ 0x0015BCC8: PrimVToP(unsigned long)
+ @ 0x0015BD84: VToSizeWithP(unsigned long, unsigned long &)
+ 
+ 
+ Primary translation table is at 0x04000000 (phys) (gPrimaryTable = 0x0C1016D8?)
+ 
+ Level 1: 1MB per block, 4096 entries @ 32bits = 16kBytes for the table
+ Level 2a: 64kB per block, 256 entries @ 32bits = 1kByte per table
+ Level 2b:  4kB per block
+ Simulator for 4kB blocks = 4GB/4kB = 1048576 entries (1 MB)
+ 
+ Level 1 entries:
+   xxxxxxxx xxxxxxxx xxxxxxxx xxxxxx00 = Fault
+                            x       01 = Page Table
+                                 iii   = IMP
+                              ddd      = Domain
+   aaaaaaaa aaaaaaaa aaaaaaa           = Page Table Base Address
+                     xxx    x       10 = Section
+                                   b   = b
+                                  c    = c 
+                                 i     = imp
+                              ddd      = Domain
+                          aa           = AP
+   ssssssss ssssssss                   = Section Base Address
+ 
+ Level 2 entries:
+   xxxxxxxx xxxxxxxx xxxxxxxx xxxxxx00 = Fault
+                     xxxx           01 = Large Page
+                                   b   = b
+                                  c    = c 
+                                00     = ap0
+                              11       = ap1
+                           22          = ap2
+                         33            = ap3
+   aaaaaaaa aaaaaaaa                   = Large Page Address
+                                    10 = Small Page
+                                   b   = b
+                                  c    = c 
+                                00     = ap0
+                              11       = ap1
+                           22          = ap2
+                         33            = ap3
+   aaaaaaaa aaaaaaaa aaaa              = Small Page Address
  
 */
 
