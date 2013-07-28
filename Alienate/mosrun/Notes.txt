@@ -1,5 +1,70 @@
 
 
+================================================================================
+    mosrun
+================================================================================
+
+mosrun, short for "MacOS runtime environment", is a program that will run 
+arbitray MPW tools on Mac OS X, Linux, and MSWindows. The main purpose is to 
+run the Apple Newton developer tools, such as the cross compiler and the Rex 
+builder, natively and as part of a build chain. But other MPW tools will
+likely run well without modification.
+
+mosrun is a simulator for a MacOS 7.6.6 environment, paired with a Motorola
+68020 emulator that will make the binaries run on other machines. Only the
+first few kBytes of RAM are emulated to provide better access to MacOS global 
+variables. The rest of the RAM is used directly, requiring the MPW Tools to
+be linked in 'far' mode (32 bit vs. 24 bit). The host needs to run in 32 bit
+mode as well.
+
+The emulator is a copy of Musashi's m68k. It runs perfectly for what I need,
+providing a simple clean interface.
+
+The simulator part is based on Inside Macintosh I-III and what ever other 
+documentation I could gather from the 'net. It is currently an utter mess as
+this project is still in the proof-of-concept stage.
+
+The MPW interface is not documented. File handling uses a Unix/BSD style 
+interface, but is still based on a lot of reverse engineering and guess work.
+
+No Apple ROMs are needed.
+
+
+As of July 28th, 2013:
+
+1. the code basically works. There is still a lot that wants to be implemented
+   and fixed, but the idea has proven to work. ARM6asm launches, opens files,
+   writes text, and (almost) reads files. If no parameters are given, it 
+   finishes without crashing. Yay!
+   
+2. the code itself is an utter mess though. As soon as I get mosrun to 
+   completely run ARM6asm, I will need to reeingineer and document the code.
+   
+3. Usage is 'mosrun ARM6asm'. If ARM6asm was correctly copied from MacOS,
+   keeping the resource fork intact (that's where the code lives!), it should
+   output the m68k code as it is executed, and the ARM6asm Usage text.
+
+
+Alternatives:
+
+BasiliskII, Mini VMac, and other emulators: 
+  this requires to set up an entire MacOS system with MPW and tools. It is not
+  (easily) possible to launch tools inside MPW from the host computer though.
+Executor:
+  Does what mosrun does for graphical MacOS applications. It seems to be lacking 
+  the MPW interface, plus I could not get it to compile.
+Classix:
+  Very similar to mosrun, but focusses on PPC. Some of the Newton tools are not
+  available in PPC though, only in m68k.
+
+
+No warranties, no claim, enjoy.
+
+
+================================================================================
+EVERYTHING BELOW IS JUST AN UNSORTED COLLECTION OF SCARPS
+================================================================================
+
 How to send Keystrokes to BasiliskII and MPW:
 
 /*
