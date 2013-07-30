@@ -3,6 +3,7 @@
 ================================================================================
     mosrun
 ================================================================================
+http://code.google.com/p/dynee5/source/browse/#svn%2Ftrunk%2FAlienate
 
 mosrun, short for "MacOS runtime environment", is a program that will run 
 arbitray MPW tools on Mac OS X, Linux, and MSWindows. The main purpose is to 
@@ -670,3 +671,13 @@ struct ttysize {
 #define	EAUTH		80		/* Authentication error */
 #define	ENEEDAUTH	81		/* Need authenticator */
 #define	ELAST		81		/* Must be equal largest errno */
+
+
+ *            O_RDONLY      0      Open for read
+ *            O_WRONLY      1      Open for write
+ *            O_RDWR        2      Open for read and write
+ *            O_CREAT       4      Create file if it doesn't exist
+ *            O_EXCL        8      With O_CREAT, fail if file already exists
+ *            O_TRUNC      16      Truncate file upon open
+ *            O_APPEND     32      All writes happen at EOF (optional feature)
+

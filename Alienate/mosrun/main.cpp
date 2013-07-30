@@ -980,6 +980,16 @@ int runApp()
   return 0;
 }
 
+
+void printFile(unsigned int file, char printText=1)
+{
+  unsigned int txt = m68k_read_memory_32(file+16);
+  printf("  Buffer at 0x%08X\n", txt);
+  printf("  Size: %d\n", m68k_read_memory_32(file+12));
+  if (printText && txt)
+    puts((char*)txt);
+}
+
 /** Open a file.
  * Stack
  *   +00.l = return address
@@ -991,12 +1001,7 @@ void trapSyFAccess(unsigned short) {
   printf("TODO: trapSyFAccess\n");
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
-  printf("File at 0x%08X\n", file);
-  unsigned int txt = m68k_read_memory_32(file+16);
-  printf("  Buffer at 0x%08X\n", txt);
-  printf("  Size: %d\n", m68k_read_memory_32(file+12));
-  if (txt)
-    puts((char*)txt);
+  printFile(file, 0);
 }
 
 // stack: // FIXME: This is Close()
@@ -1006,11 +1011,7 @@ void trapSyClose(unsigned short) {
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
   printf("File at 0x%08X\n", file);
-  unsigned int txt = m68k_read_memory_32(file+16);
-  printf("  Buffer at 0x%08X\n", txt);
-  printf("  Size: %d\n", m68k_read_memory_32(file+12));
-  if (txt)
-    puts((char*)txt);
+  printFile(file, 0);
 }
 
 void trapSyRead(unsigned short) {
@@ -1019,41 +1020,34 @@ void trapSyRead(unsigned short) {
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
   printf("File at 0x%08X\n", file);
-  unsigned int txt = m68k_read_memory_32(file+16);
-  printf("  Buffer at 0x%08X\n", txt);
-  printf("  Size: %d\n", m68k_read_memory_32(file+12));
-  if (txt)
-    puts((char*)txt);
+  printFile(file, 0);
 }
 
 // stack: // FIXME: this seems to be the write() call!
 //   fileptr.l
 void trapSyWrite(unsigned short) {
-  printf("TODO: trapSyWrite\n");
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
-  printf("File at 0x%08X\n", file);
-  unsigned int txt = m68k_read_memory_32(file+16);
-  printf("  Buffer at 0x%08X\n", txt);
-  printf("  Size: %d\n", m68k_read_memory_32(file+12));
-  if (txt)
-    puts((char*)txt);
+  printf("Write file at 0x%08X\n", file);
+  printFile(file);
 }
 
 // stack: // ioctl
 //   0.l
 //   0x6601.w = FIOCLEX _IO('f', 1) /* set exclusive use on fd */
 //   fileptr.l
+//
+// 0x6600 'f'+0
+// 0x6601 'f'+1 FIOCLEX   set exclusive use on fd
+// 0x6602 'f'+2 FIONCLEX  end exclusive use on fd
 void trapSyIoctl(unsigned short) {
-  printf("TODO: trapSyIoctl\n");
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
-  printf("File at 0x%08X\n", file);
-  unsigned int txt = m68k_read_memory_32(file+16);
-  printf("  Buffer at 0x%08X\n", txt);
-  printf("  Size: %d\n", m68k_read_memory_32(file+12));
-  if (txt)
-    puts((char*)txt);
+  unsigned int cmd = m68k_read_memory_32(sp+8);
+  unsigned int param = m68k_read_memory_32(sp+12);
+  printf("IOCTL of file at 0x%08X, cmd=0x%04X = '%c'<<8+%d, param=%d (0x%08X)\n",
+         file, cmd, (cmd>>8)&0xff, cmd&0xff, param, param);
+  printFile(file, 0);
 }
 
 
@@ -1095,8 +1089,15 @@ const char *gArgv0 = "m68kAsm";
 const char *gArgv1 = "Unix:test.s:";
 
 unsigned int gArgv[] = {
-  htonl((unsigned int)(&gArgv0)),
-  htonl((unsigned int)(&gArgv1)),
+  htonl((unsigned int)(gArgv0)),
+  htonl((unsigned int)(gArgv1)),
+  0x00000000
+};
+
+const char *gEnvp0 = "mosrun\0true";
+
+unsigned int gEnvp[] = {
+  htonl((unsigned int)(gEnvp0)),
   0x00000000
 };
 
@@ -1116,8 +1117,8 @@ struct MPWMem {
 struct MPWMem gMPWMem = {
   htons(0x5348),
   htonl(2),
-  htonl((unsigned int)(&gArgv)),
-  0, // envp
+  htonl((unsigned int)(gArgv)),
+  htonl((unsigned int)(gEnvp)),
   0, // null
   0, // ptr
   0, // ptr
@@ -1329,6 +1330,9 @@ int main(int argc, const char * argv[])
 //  addBreakpoint(7, 0x000004BA, "Pre BlockMove in _initIOPtable");
 //  addBreakpoint(7, 0x000004F2, "_initIOPtable");
 //  addBreakpoint(7, 0x00000838, "_faccess");
+  addBreakpoint(7, 0x00000026, "open");
+  addBreakpoint(7, 0x0000003C, "open2");
+  addBreakpoint(7, 0x0000005A, "open3");
   
 //  addBreakpoint(1, 0x00003E70, "Usage");
   
