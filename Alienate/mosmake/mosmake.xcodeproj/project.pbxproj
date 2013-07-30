@@ -1,0 +1,219 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C99DC7DE17A80F9B009AEECF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7DC17A80F9B009AEECF /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C99DC7CE17A80F24009AEECF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		C99DC7D017A80F24009AEECF /* mosmake */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mosmake; sourceTree = BUILT_PRODUCTS_DIR; };
+		C99DC7DC17A80F9B009AEECF /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		C99DC7DD17A80F9B009AEECF /* mosmake.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = mosmake.1; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C99DC7CD17A80F24009AEECF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C99DC7C717A80F24009AEECF = {
+			isa = PBXGroup;
+			children = (
+				C99DC7D217A80F24009AEECF /* mosmake */,
+				C99DC7D117A80F24009AEECF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C99DC7D117A80F24009AEECF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C99DC7D017A80F24009AEECF /* mosmake */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C99DC7D217A80F24009AEECF /* mosmake */ = {
+			isa = PBXGroup;
+			children = (
+				C99DC7DC17A80F9B009AEECF /* main.cpp */,
+				C99DC7DD17A80F9B009AEECF /* mosmake.1 */,
+			);
+			path = mosmake;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C99DC7CF17A80F24009AEECF /* mosmake */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C99DC7D917A80F24009AEECF /* Build configuration list for PBXNativeTarget "mosmake" */;
+			buildPhases = (
+				C99DC7CC17A80F24009AEECF /* Sources */,
+				C99DC7CD17A80F24009AEECF /* Frameworks */,
+				C99DC7CE17A80F24009AEECF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mosmake;
+			productName = mosmake;
+			productReference = C99DC7D017A80F24009AEECF /* mosmake */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C99DC7C817A80F24009AEECF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Matthias Melcher";
+			};
+			buildConfigurationList = C99DC7CB17A80F24009AEECF /* Build configuration list for PBXProject "mosmake" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C99DC7C717A80F24009AEECF;
+			productRefGroup = C99DC7D117A80F24009AEECF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C99DC7CF17A80F24009AEECF /* mosmake */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C99DC7CC17A80F24009AEECF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C99DC7DE17A80F9B009AEECF /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C99DC7D717A80F24009AEECF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C99DC7D817A80F24009AEECF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C99DC7DA17A80F24009AEECF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C99DC7DB17A80F24009AEECF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C99DC7CB17A80F24009AEECF /* Build configuration list for PBXProject "mosmake" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C99DC7D717A80F24009AEECF /* Debug */,
+				C99DC7D817A80F24009AEECF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C99DC7D917A80F24009AEECF /* Build configuration list for PBXNativeTarget "mosmake" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C99DC7DA17A80F24009AEECF /* Debug */,
+				C99DC7DB17A80F24009AEECF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C99DC7C817A80F24009AEECF /* Project object */;
+}

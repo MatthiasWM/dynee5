@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:mosmake/mosmake.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:mosrun/mosrun.xcodeproj">
    </FileRef>
 </Workspace>

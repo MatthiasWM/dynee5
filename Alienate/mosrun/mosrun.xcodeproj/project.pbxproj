@@ -14,6 +14,8 @@
 		C91C085F1792DF23001FD72A /* m68kopnz.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C085A1792DF23001FD72A /* m68kopnz.c */; };
 		C91C08601792DF23001FD72A /* m68kops.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C085B1792DF23001FD72A /* m68kops.c */; };
 		C91C08611792E16C001FD72A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C91C08561792DCA2001FD72A /* main.cpp */; };
+		C99DC7C417A7F84A009AEECF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7C217A7F84A009AEECF /* log.cpp */; };
+		C99DC7E117A81043009AEECF /* rsrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7DF17A81043009AEECF /* rsrc.cpp */; };
 		C9B669291797ED4100A4AC9B /* names.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B669281797ED4100A4AC9B /* names.cpp */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,12 @@
 		C91C085A1792DF23001FD72A /* m68kopnz.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = m68kopnz.c; sourceTree = "<group>"; };
 		C91C085B1792DF23001FD72A /* m68kops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = m68kops.c; sourceTree = "<group>"; };
 		C91C085C1792DF23001FD72A /* m68kops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m68kops.h; sourceTree = "<group>"; };
+		C99DC7C217A7F84A009AEECF /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = SOURCE_ROOT; };
+		C99DC7C317A7F84A009AEECF /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = SOURCE_ROOT; };
+		C99DC7C517A7FA36009AEECF /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = SOURCE_ROOT; };
+		C99DC7C617A7FA68009AEECF /* names.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = names.h; sourceTree = SOURCE_ROOT; };
+		C99DC7DF17A81043009AEECF /* rsrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rsrc.cpp; sourceTree = SOURCE_ROOT; };
+		C99DC7E017A81043009AEECF /* rsrc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsrc.h; sourceTree = SOURCE_ROOT; };
 		C9B669281797ED4100A4AC9B /* names.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = names.cpp; sourceTree = SOURCE_ROOT; };
 		C9F202B817A40CCF00B16ABA /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -81,7 +89,13 @@
 			children = (
 				C9F202B817A40CCF00B16ABA /* Notes.txt */,
 				C91C08561792DCA2001FD72A /* main.cpp */,
+				C99DC7C517A7FA36009AEECF /* main.h */,
 				C9B669281797ED4100A4AC9B /* names.cpp */,
+				C99DC7C617A7FA68009AEECF /* names.h */,
+				C99DC7C217A7F84A009AEECF /* log.cpp */,
+				C99DC7C317A7F84A009AEECF /* log.h */,
+				C99DC7DF17A81043009AEECF /* rsrc.cpp */,
+				C99DC7E017A81043009AEECF /* rsrc.h */,
 				C91C08571792DCA2001FD72A /* mosrun.1 */,
 				C91C083F1792DC5B001FD72A /* musashi331 */,
 			);
@@ -166,6 +180,8 @@
 				C91C08601792DF23001FD72A /* m68kops.c in Sources */,
 				C91C08611792E16C001FD72A /* main.cpp in Sources */,
 				C9B669291797ED4100A4AC9B /* names.cpp in Sources */,
+				C99DC7C417A7F84A009AEECF /* log.cpp in Sources */,
+				C99DC7E117A81043009AEECF /* rsrc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

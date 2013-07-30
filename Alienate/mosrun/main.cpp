@@ -6,23 +6,88 @@
 //  Copyright (c) 2013 Matthias Melcher. All rights reserved.
 //
 
+//
+// 30/Jul/2013:
+//    ARM6asm seems to run
+//    ARM6c crashes in an infinite loop
+//    ARMCFront misses traps
+//      ERROR: unimplemented trap 0x0000A994: _CurResFile
+//      ERROR: unimplemented trap 0x0000A9A4: _HomeResFile
+//      ERROR: unimplemented trap 0x0000A80D: _Count1Resources
+//      ERROR: unimplemented trap 0x0000A80E: _Get1IxResource
+//      ERROR: unimplemented trap 0x0000A04A: _HNoPurge
+//    ARMCpp seems to run but misses traps:
+//      ERROR: unimplemented trap 0x0000A049: _HPurge
+//      ERROR: unimplemented trap 0x0000A9A3: _ReleaseResource
+//      ERROR: unimplemented trap 0x0000A23C: _CmpStringMarks
+//    ARMLink seems to run but misses traps:
+//      ERROR: unimplemented trap 0x0000A049: _HPurge
+//      ERROR: unimplemented trap 0x0000A9A3: _ReleaseResource
+//    DumpAIF seems to run
+//    DumpAOF seems to run
+//    Makemake seems to run but misses traps:
+//      ERROR: unimplemented trap 0x0000A049: _HPurge
+//      ERROR: unimplemented trap 0x0000A9A3: _ReleaseResource
+//    Rex fails due to missing traps:
+//      ERROR: unimplemented trap 0x0000A994: _CurResFile
+//      ERROR: unimplemented trap 0x0000A9A4: _HomeResFile
+//      ERROR: unimplemented trap 0x0000A122: _NewHandle
+//
+
+// TODO: missing traps:
+//    UInt32 CmpStringMarks(BytePtr textPtrA, BytePtr textPtrB, UInt32 lengthAB) ??
+//    int CountResources(theType: ResType) Given the type, return the number of resources of that type accessable in ALL open maps.
+//    int CurResFile() : Returns the reference number of the current resource file.
+//    Get1IxResource not documented
+//    void HNoPurge(handle h) : make a resource unpurgeable!
+//    int HomeResFile(theResource: Handle) : Given a handle, returns the refnum of the resource file that the resource lives in.
+//    void HPurge(handle h) : make a resource purgeable but don;t purge it!
+//    handle NewHandle() : allocate memory and a master pointer to it
+//    void ReleaseResource(handle) : Given handle, releases the resource and disposes of the handle.
+
+/*
+ Mac Path Names:
+  - separator is a ':'
+  - path names starting with a ':' are relative to the current directory
+  - path names without a ':' are absolute - the first word is the disk name
+  - starting with a '::' sets the parent directory, more ":" go further up the tree
+  - if there are no ":" at all in the name, it is a leaf name and it is relative
+  - test.c => test.c
+  - :test.c => ./test.c
+  - ;;test.c => ../test.c
+  - :::test.c => ../../test.c
+  - :Emaples: => ./Examples/
+  - Examples: => /Examples/
+  - Examples => would not refer to a directory, but a file "./Examples"
+*/
+
+// Inlcude all the required system headers
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 #include <sys/xattr.h>
+#include <fcntl.h>
 
-#include <MacTypes.h>
+// Include our own interfaces
+
+#include "main.h"
+#include "names.h"
+#include "log.h"
+#include "rsrc.h"
+
+// Inlcude Musahi's m68k emulator
 
 extern "C" {
 #include "musashi331/m68k.h"
 #include "musashi331/m68kcpu.h"
+#include "musashi331/m68kops.h"
 }
-extern "C" void m68k_op_tst_16_d();
-extern "C" void m68k_op_1010();
 
-extern const char *trapName(unsigned int id);
-extern const char *gvarName(unsigned int id, const char ** description);
+
 
 void installBreakpoints(unsigned int segment, unsigned int segAddr);
 const char *printAddr(unsigned int addr);
@@ -68,24 +133,24 @@ void hexDump(unsigned int a, unsigned int n)
 {
   int i;
   for (;;) {
-    printf("%08X: ", a);
+    mosLog("%08X: ", a);
     for (i=0; i<16; i++) {
       if (i<n) {
         byte b = *((byte*)a+i);
-        printf("%02X ", b);
+        mosLog("%02X ", b);
       } else {
-        printf("   ");
+        mosLog("   ");
       }
     }
     for (i=0; i<16; i++) {
       if (i<n) {
         byte b = *((byte*)a+i);
-        printf("%c", (b>=32 && b<127)?b:'.');
+        mosLog("%c", (b>=32 && b<127)?b:'.');
       } else {
-        printf(" ");
+        mosLog(" ");
       }
     }
-    printf("\n");
+    mosLog("\n");
     fflush(stdout);
     if (n<=16) break;
     a += 16;
@@ -93,8 +158,9 @@ void hexDump(unsigned int a, unsigned int n)
   }
 }
 
-void setupSystem()
+void setupSystem(int argc, const char **argv, const char **envp)
 {
+  // TODO: copy argv and envp into the simulation
   gMosCurrentStackBase = (unsigned int)malloc(0x8000) + 0x8000;
   // push a pointer to an instruction onto the stack that allows the software to exit nicely
 }
@@ -108,11 +174,11 @@ void dumpResourceMap()
   unsigned int rsrcMapTypeList = m68k_read_memory_16((unsigned int)(theRsrc+24));
   // ------ resource map type list
   unsigned int rsrcMapTypeListSize = m68k_read_memory_16((unsigned int)(theRsrc+rsrcMapTypeList)) + 1;
-  printf("  Rsrc Type list at 0x%08X with %d types.\n", rsrcMapTypeList, rsrcMapTypeListSize);
+  mosLog("  Rsrc Type list at 0x%08X with %d types.\n", rsrcMapTypeList, rsrcMapTypeListSize);
   for (i=0; i<rsrcMapTypeListSize; i++) {
     unsigned int nRes = m68k_read_memory_16((unsigned int)(theRsrc+rsrcMapTypeList+8*i+6)) + 1;
     unsigned int resTable = m68k_read_memory_16((unsigned int)(theRsrc+rsrcMapTypeList+8*i+8)) + rsrcMapTypeList;
-    printf("    %d: Rsrc type '%c%c%c%c' has %d resouces listed at 0x%08X\n",
+    mosLog("    %d: Rsrc type '%c%c%c%c' has %d resouces listed at 0x%08X\n",
            i,
            m68k_read_memory_8((unsigned int)(theRsrc+rsrcMapTypeList+8*i+2)),
            m68k_read_memory_8((unsigned int)(theRsrc+rsrcMapTypeList+8*i+3)),
@@ -122,7 +188,7 @@ void dumpResourceMap()
            );
     for (j=0; j<nRes; j++) {
       unsigned int data = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
-      printf("      %d: ID=%d, name@%d, data=0x%08x, loaded=0x%0X, flags=0x%02X, %d bytes\n", j,
+      mosLog("      %d: ID=%d, name@%d, data=0x%08x, loaded=0x%0X, flags=0x%02X, %d bytes\n", j,
              m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+0)),
              m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+2)),
              data,
@@ -167,14 +233,14 @@ mosHandle GetResource(unsigned int myResType, unsigned short myId)
           unsigned int handle = m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+8));
           if (handle) {
             // resource is already in RAM
-            printf("Resource already loaded\n");
+            mosLog("Resource already loaded\n");
             return handle;
           } else {
             // resource must be copied from the file into memory
             if (gMosResLoad==0) {
-              printf("WARNING: Automatic Resource loading is disabled!\n");
+              mosLog("WARNING: Automatic Resource loading is disabled!\n");
             }
-            printf("Resource found, loading...\n");
+            mosLog("Resource found, loading...\n");
             unsigned int rsrcOffset = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
             unsigned int rsrcData = m68k_read_memory_32((unsigned int)(theApp));
             unsigned int rsrcSize = m68k_read_memory_32((unsigned int)(theApp+rsrcData+rsrcOffset));
@@ -200,7 +266,7 @@ mosHandle GetResource(unsigned int myResType, unsigned short myId)
                 gResourceStart[myId] = (unsigned int)(newPtr+8+4);
                 gResourceEnd[myId] = (unsigned int)(newPtr+8+4) + rsrcSize;
               }
-              printf("Resource %d from 0x%08X to 0x%08X\n", myId, gResourceStart[myId], gResourceEnd[myId]);
+              mosLog("Resource %d from 0x%08X to 0x%08X\n", myId, gResourceStart[myId], gResourceEnd[myId]);
             }
             return (mosHandle)(newPtr);
           }
@@ -208,7 +274,7 @@ mosHandle GetResource(unsigned int myResType, unsigned short myId)
       }
     }
   }
-  printf("ERROR: Resource not found!\n");
+  mosLog("ERROR: Resource not found!\n");
   return 0;
 }
 
@@ -235,20 +301,20 @@ mosHandle GetNamedResource(unsigned int myResType, const byte *pName)
         unsigned short rsrcNameOffset = m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+2));
         if (rsrcNameOffset==0xffff) continue; // unnamed resource
         byte* rsrcName = theRsrc+rsrcMapNameList+rsrcNameOffset;
-        fprintf(stderr, "%*s\n", rsrcName[0], rsrcName+1);
+        mosLog("%*s\n", rsrcName[0], rsrcName+1);
         if (memcmp(pName, rsrcName, pName[0]+1)==0) {
           unsigned int handle = m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+8));
           unsigned int id = m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+0));
           if (handle) {
             // resource is already in RAM
-            printf("Resource already loaded\n");
+            mosLog("Resource already loaded\n");
             return handle;
           } else {
             // resource must be copied from the file into memory
             if (gMosResLoad==0) {
-              printf("WARNING: Automatic Resource loading is disabled!\n");
+              mosLog("WARNING: Automatic Resource loading is disabled!\n");
             }
-            printf("Resource found, loading...\n");
+            mosLog("Resource found, loading...\n");
             unsigned int rsrcOffset = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
             unsigned int rsrcData = m68k_read_memory_32((unsigned int)(theApp));
             unsigned int rsrcSize = m68k_read_memory_32((unsigned int)(theApp+rsrcData+rsrcOffset));
@@ -275,7 +341,7 @@ mosHandle GetNamedResource(unsigned int myResType, const byte *pName)
       }
     }
   }
-  printf("ERROR: Resource not found!\n");
+  mosLog("ERROR: Resource not found!\n");
   return 0;
 }
 
@@ -303,7 +369,7 @@ void readResourceMap()
 {
   unsigned int rsrcMap = m68k_read_memory_32((unsigned int)(theApp+4));
   unsigned int rsrcMapSize = m68k_read_memory_32((unsigned int)(theApp+12));
-  printf("Rsrc Map %d bytes at 0x%08X\n", rsrcMapSize, rsrcMap);
+  mosLog("Rsrc Map %d bytes at 0x%08X\n", rsrcMapSize, rsrcMap);
   theRsrc = (byte*)malloc(rsrcMapSize);
   theRsrcSize = rsrcMapSize;
   memcpy(theRsrc, theApp+rsrcMap, rsrcMapSize);
@@ -323,17 +389,36 @@ int loadApp(const char *aName)
   if (ret==-1) {
     return 0;
   }
-  printf("%s has a %ld byte resource fork\n", aName, size);  
+  mosLog("%s has a %ld byte resource fork\n", aName, size);  
   readResourceMap();
   mosHandle code0 = GetResource('CODE', 0);
   if (code0==0) {
-    fprintf(stderr, "CODE 0 not found\n");
+    mosLog("CODE 0 not found\n");
     return 0;
   }
   gMosCurrentA5 = createA5World(code0);
   return 1;
 }
 
+
+int loadInternalApp()
+{
+  if (gAppResource) {
+    theAppSize = gAppResourceSize;
+    theApp = (byte*)malloc(theAppSize);
+    memcpy(theApp, gAppResource, gAppResourceSize);
+    readResourceMap();
+    mosHandle code0 = GetResource('CODE', 0);
+    if (code0==0) {
+      mosLog("CODE 0 not found\n");
+      return 0;
+    }
+    gMosCurrentA5 = createA5World(code0);
+    return 1;
+  } else {
+    return 0;
+  }
+}
 
 // ----- Breakpoint management
 
@@ -417,7 +502,7 @@ void trapGetResource(unsigned short instr)
   unsigned int stack_ret = m68k_read_memory_32(sp); sp += 4;
   unsigned int id   = m68k_read_memory_16(sp); sp+=2;
   unsigned int rsrc = m68k_read_memory_32(sp); sp+=4;
-  fprintf(stderr, "            GetResource('%c%c%c%c', %d)\n",
+  mosLog("            GetResource('%c%c%c%c', %d)\n",
           rsrc>>24, rsrc>>16, rsrc>>8, rsrc,
           id);
   unsigned int hdl = (unsigned int)GetResource(rsrc, id);
@@ -440,7 +525,7 @@ void trapGetNamedResource(unsigned short instr)
   unsigned int stack_ret = m68k_read_memory_32(sp); sp += 4;
   unsigned int name = m68k_read_memory_32(sp); sp+=4;
   unsigned int rsrc = m68k_read_memory_32(sp); sp+=4;
-  fprintf(stderr, "            GetNamedResource('%c%c%c%c', %*s)\n",
+  mosLog("            GetNamedResource('%c%c%c%c', %*s)\n",
           rsrc>>24, rsrc>>16, rsrc>>8, rsrc,
           m68k_read_memory_8(name), (char*)(name+1));
   unsigned int hdl = (unsigned int)GetNamedResource(rsrc, (byte*)name);
@@ -462,7 +547,7 @@ void trapSizeResource(unsigned short instr)
   unsigned int hdl = m68k_read_memory_32(sp); sp+=4;
   
   unsigned int size = m68k_read_memory_32(hdl+4);
-  fprintf(stderr, "            SizeResource(0x%08X) = %d\n", hdl, size);
+  mosLog("            SizeResource(0x%08X) = %d\n", hdl, size);
   
   m68k_set_reg(M68K_REG_D0, 0);
   m68k_write_memory_32(sp, size);
@@ -475,7 +560,7 @@ void trapSizeResource(unsigned short instr)
 void trapNewPtrClear(unsigned short) {
   unsigned int size = m68k_get_reg(0L, M68K_REG_D0);
   
-  fprintf(stderr, "            NewPtrClear(%d)\n", size);
+  mosLog("            NewPtrClear(%d)\n", size);
   
   unsigned int ptr = (unsigned int)calloc(1, size+4);
   m68k_write_memory_32(ptr, size);
@@ -488,7 +573,7 @@ void trapNewPtrClear(unsigned short) {
 void trapNewPtr(unsigned short) {
   unsigned int size = m68k_get_reg(0L, M68K_REG_D0);
   
-  fprintf(stderr, "            NewPtr(%d)\n", size);
+  mosLog("            NewPtr(%d)\n", size);
   
   unsigned int ptr = (unsigned int)malloc(size+4);
   m68k_write_memory_32(ptr, size);
@@ -498,10 +583,54 @@ void trapNewPtr(unsigned short) {
 }
 
 
+void trapNewHandle(unsigned short) {
+  unsigned int size = m68k_get_reg(0L, M68K_REG_D0);
+  unsigned int ptr = 0;
+  unsigned int handle = 0;
+  
+  mosLog("            NewHandle(%d)\n", size);
+  
+  if (size) {
+    ptr = (unsigned int)malloc(size+4);
+    m68k_write_memory_32(ptr, size);
+    handle = (unsigned int)malloc(4);
+    m68k_write_memory_32(handle, ptr+4);
+  } else {
+    handle = (unsigned int)malloc(4);
+    m68k_write_memory_32(handle, 0);
+  }
+
+  m68k_set_reg(M68K_REG_A0, handle);
+  m68k_set_reg(M68K_REG_D0, 0);
+}
+
+
+/** Find the Maste Pointer that points t some memory location and return a handle to it.
+ * FIXME: this one single silly call requires that I keep track of every silly memory allocation. Sigh!
+ */
+void trapRecoverHandle(unsigned short) {
+  unsigned int ptr = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int hdl = 0;
+  mosLog("            RecoverHandle(0x%08X)=0x%08X\n", ptr, hdl);
+  m68k_set_reg(M68K_REG_A0, hdl);
+  // FIXME: set Memerr, but do not set D0!
+}
+
+
 void trapDisposePtr(unsigned short) {
   unsigned int ptr = m68k_get_reg(0L, M68K_REG_A0);
-  fprintf(stderr, "            DisposePtr(0x%08X)\n", ptr);
+  mosLog("            DisposePtr(0x%08X)\n", ptr);
   free((void*)(ptr-4));
+  m68k_set_reg(M68K_REG_D0, 0);
+}
+
+
+void trapDisposeHandle(unsigned short) {
+  unsigned int hdl = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int ptr = hdl?m68k_read_memory_32(hdl):0;
+  mosLog("            DisposeHandle(0x%08X(->0x%08X))\n", hdl, ptr);
+  //free((void*)(ptr-4));
+  // FIXME: implement this
   m68k_set_reg(M68K_REG_D0, 0);
 }
 
@@ -517,9 +646,9 @@ void trapBlockMove(unsigned short) {
   unsigned int dst = m68k_get_reg(0L, M68K_REG_A1);
   unsigned int size = m68k_get_reg(0L, M68K_REG_D0);
   
-  fprintf(stderr, "            BlockMove(src:%s, dst:%s, %d)\n", printAddr(src), printAddr(dst), size);
+  mosLog("            BlockMove(src:%s, dst:%s, %d)\n", printAddr(src), printAddr(dst), size);
   if (src<0x1000 || dst<0x1000) {
-    fprintf(stderr, "WARNING: the addresses seem highly unlikely\n");
+    mosLog("WARNING: the addresses seem highly unlikely\n");
 
   }
   memmove((void*)dst, (void*)src, size);
@@ -531,7 +660,7 @@ void trapBlockMove(unsigned short) {
 void trapGetTrapAddress(unsigned short) {
   unsigned int trap = m68k_get_reg(0L, M68K_REG_D0);
   unsigned int addr = (unsigned int)tncTable[trap&0x0fff];
-  fprintf(stderr, "            GetTrapAddress(0x%04X=%s) = 0x%08X\n", trap, trapName(trap), addr);
+  mosLog("            GetTrapAddress(0x%04X=%s) = 0x%08X\n", trap, trapName(trap), addr);
   m68k_set_reg(M68K_REG_A0, addr);
 }
 
@@ -541,7 +670,7 @@ void trapSetToolBoxTrapAddress(unsigned short) {
   unsigned int addr = m68k_get_reg(0L, M68K_REG_A0);
   // 1010.1a0x.xxxx.xxxx: Toolbox call: x = trap #, if a is set, pop the extra return address from the stack
   trap = (trap & 0x0dff) | 0xa800;
-  fprintf(stderr, "            SetToolBoxTrapAddress(0x%04X=%s, 0x%08X)\n", trap, trapName(trap), addr);
+  mosLog("            SetToolBoxTrapAddress(0x%04X=%s, 0x%08X)\n", trap, trapName(trap), addr);
   tncTable[trap&0x0fff] = (TrapNativeCall*)addr;
   m68k_set_reg(M68K_REG_A0, addr);
 }
@@ -554,11 +683,11 @@ void trapLoadSeg(unsigned short instr) {
   // pop the ID from the stack
   unsigned int id = m68k_read_memory_16(sp);
   sp += 2;
-  fprintf(stderr, "            LoadSeg(%d)\n", id);
+  mosLog("            LoadSeg(%d)\n", id);
   // now load the resource
   mosHandle hCode = GetResource('CODE', id);
   if (!hCode) {
-    fprintf(stderr, "Code Resource %d not found!\n", id);
+    mosLog("Code Resource %d not found!\n", id);
   } else {
     unsigned int code = m68k_read_memory_32(hCode);
     // fix the jump table entry
@@ -582,6 +711,7 @@ void trapHGetState(unsigned short instr) {
 
 void trapUninmplemented(unsigned short instr) {
   // FIXME: $a01f; opcode 1010 (_DisposePtr)
+  mosLog("ERROR: unimplemented trap 0x%08X: %s\n", gCurrentTrap, trapName(gCurrentTrap));
   fprintf(stderr, "ERROR: unimplemented trap 0x%08X: %s\n", gCurrentTrap, trapName(gCurrentTrap));
 }
 
@@ -622,7 +752,7 @@ void trapOSDispatch(unsigned short instr) {
   unsigned short selector = m68k_read_memory_16(sp); sp += 2;
   
   switch (selector) {
-    case 0x1d: { // mfTempNewHandleSel // FIXME: FIRST: new *handle*, Dude, not new ptr!
+    case 0x1d: { // mfTempNewHandleSel
       unsigned int resultCodePtr = m68k_read_memory_32(sp); sp += 4;
       unsigned int size = m68k_read_memory_32(sp); sp += 4;
       unsigned int handle = 0;
@@ -634,22 +764,30 @@ void trapOSDispatch(unsigned short instr) {
       } else {
         ptr = (unsigned int)malloc(size+4) + 4;
         m68k_write_memory_32(ptr-4, size);
-        printf("Allocated %d bytes at 0x%08X\n", size, ptr);
+        mosLog("Allocated %d bytes at 0x%08X\n", size, ptr);
       }
       m68k_write_memory_32(handle, ptr);
-      printf("Allocated a master pointer at 0x%08X\n", handle);
-      if (resultCodePtr) m68k_write_memory_16(resultCodePtr, 0);      
+      mosLog("Allocated a master pointer at 0x%08X\n", handle);
+      if (resultCodePtr) m68k_write_memory_16(resultCodePtr, 0);
+      m68k_write_memory_32(sp, handle);
+      break; }
+    case 0x20: { // mfTempDisposHandleSel
+      unsigned int resultCodePtr = m68k_read_memory_32(sp); sp += 4;
+      unsigned int handle = m68k_read_memory_32(sp); sp += 4;
+      unsigned int ptr = handle?m68k_read_memory_32(handle):0;
+      mosLog("TempDisposeHandle(0x%08X(->0x%08X))\n", handle, ptr);
+      // FIXME: implement this!
+      if (resultCodePtr) m68k_write_memory_16(resultCodePtr, 0);
       m68k_write_memory_32(sp, handle);
       break; }
     default:
-      fprintf(stderr, "ERROR: unimplemented OSDispatch 0x%02X\n", selector);
+      mosLog("ERROR: unimplemented OSDispatch 0x%02X\n", selector);
       return;
   }
 
   sp -= 4; m68k_write_memory_32(sp, stack_ret);
   m68k_set_reg(M68K_REG_SP, sp);
 }
-
 
 TrapNativeCall tncNewPtrClear = { htons(0xAFFF), &trapNewPtrClear, htons(0x4E75) };
 TrapNativeCall tncNewPtr = { htons(0xAFFF), &trapNewPtr, htons(0x4E75) };
@@ -667,6 +805,9 @@ TrapNativeCall tncGetNamedResource = { htons(0xAFFF), &trapGetNamedResource, hto
 TrapNativeCall tncBlockMove = { htons(0xAFFF), &trapBlockMove, htons(0x4E75) };
 TrapNativeCall tncOSDispatch = { htons(0xAFFF), &trapOSDispatch, htons(0x4E75) };
 TrapNativeCall tncDisposePtr = { htons(0xAFFF), &trapDisposePtr, htons(0x4E75) };
+TrapNativeCall tncRecoverHandle = { htons(0xAFFF), &trapRecoverHandle, htons(0x4E75) };
+TrapNativeCall tncDisposeHandle = { htons(0xAFFF), &trapDisposeHandle, htons(0x4E75) };
+TrapNativeCall tncNewHandle = { htons(0xAFFF), &trapNewHandle, htons(0x4E75) };
 
 #define TNCUREF     &tncUnimplemented,
 #define TNCUREF16   TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
@@ -682,7 +823,7 @@ TrapNativeCall *tncTable[0x1000] = {
   /*     A010 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
   /*     A018 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncDisposePtr,
   /*   A020 */ //TNCUREF16
-  /*     A020 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
+  /*     A020 */ TNCUREF TNCUREF TNCUREF &tncDisposeHandle, TNCUREF TNCUREF TNCUREF TNCUREF
   /*     A028 */ TNCUREF &tncHLock, TNCUREF TNCUREF TNCUREF TNCUREF &tncBlockMove, TNCUREF
   /*   A030 */ TNCUREF16
   /*   A040 */ TNCUREF16
@@ -706,7 +847,9 @@ TrapNativeCall *tncTable[0x1000] = {
   /*   A110 */ //TNCUREF16
   /*     A110 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
   /*     A118 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncNewPtr, TNCUREF
-  /*   A120 */ TNCUREF16
+  /*   A120 */ //TNCUREF16
+  /*     A120 */ TNCUREF TNCUREF &tncNewHandle, TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
+  /*     A128 */ &tncRecoverHandle, TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
   /*   A130 */ TNCUREF16
   /*   A140 */ TNCUREF16
   /*   A150 */ TNCUREF16
@@ -848,10 +991,10 @@ void trapBreakpoint(unsigned short instr) {
   unsigned int pc = m68k_get_reg(0L, M68K_REG_PC);
   Breakpoint *bp = findBreakpoint(pc);
   if (bp) {
-    printf("BREAKPOINT: %s\n", bp->text);
+    mosLog("BREAKPOINT: %s\n", bp->text);
     gPendingBreakpoint = bp;
   } else {
-    printf("BREAKPOINT UNLISTED!\n");
+    mosLog("BREAKPOINT UNLISTED!\n");
   }
   bp = 0;
 }
@@ -911,8 +1054,8 @@ void m68k_instruction_hook()
     unsigned int pc = m68k_get_reg(0L, M68K_REG_PC);
     m68k_disassemble(buf, pc, M68K_CPU_TYPE_68000);
     unsigned short instr = m68k_read_memory_16(pc);
-//    printf("\n");
-//    printf("D0:%08X D1:%08X D2:%08X D3:%08X D4:%08X D5:%08X D6:%08X D7:%08X\n",
+//    mosLog("\n");
+//    mosLog("D0:%08X D1:%08X D2:%08X D3:%08X D4:%08X D5:%08X D6:%08X D7:%08X\n",
 //           m68k_get_reg(0L, M68K_REG_D0),
 //           m68k_get_reg(0L, M68K_REG_D1),
 //           m68k_get_reg(0L, M68K_REG_D2),
@@ -922,7 +1065,7 @@ void m68k_instruction_hook()
 //           m68k_get_reg(0L, M68K_REG_D6),
 //           m68k_get_reg(0L, M68K_REG_D7)
 //           );
-//    printf("A0:%08X A1:%08X A2:%08X A3:%08X A4:%08X A5:%08X A6:%08X A7:%08X\n",
+//    mosLog("A0:%08X A1:%08X A2:%08X A3:%08X A4:%08X A5:%08X A6:%08X A7:%08X\n",
 //           m68k_get_reg(0L, M68K_REG_A0),
 //           m68k_get_reg(0L, M68K_REG_A1),
 //           m68k_get_reg(0L, M68K_REG_A2),
@@ -933,9 +1076,9 @@ void m68k_instruction_hook()
 //           m68k_get_reg(0L, M68K_REG_A7)
 //           );
     if ( (instr & 0xf000) == 0xa000 ) {
-      printf("0x%s: %s (%s)\n", printAddr(pc), buf, trapName(instr));
+      mosLog("0x%s: %s (%s)\n", printAddr(pc), buf, trapName(instr));
     } else {
-      printf("0x%s: %s\n", printAddr(pc), buf);
+      mosLog("0x%s: %s\n", printAddr(pc), buf);
     } // if/else
 // ---> space for command breakpoint ;-)
     if ( (instr & 0xf000) == 0xa000 ) {
@@ -944,7 +1087,7 @@ void m68k_instruction_hook()
       // 1010.0ffa.xxxx.xxxx: OS call: x = trap #, ff are extra flags that can be used by the traps
       // 01f3 = a9f3
       switch (instr) {
-        case 0xaffc: printf("End Of Emulation\n"); exit(m68k_get_reg(0, M68K_REG_D0)); break;
+        case 0xaffc: mosLog("End Of Emulation\n"); exit(m68k_get_reg(0, M68K_REG_D0)); break;
         case 0xaffd: trapDispatch(instr); break;
         case 0xaffe: trapBreakpoint(instr); goto afterBreakpoint;
         case 0xafff: trapGoNative(instr); break; // TODO: unverified
@@ -964,7 +1107,6 @@ int runApp()
 {
   m68k_set_cpu_type(M68K_CPU_TYPE_68020);
   m68k_pulse_reset();
-  m68k_set_cpu_type(M68K_CPU_TYPE_68020);
   m68k_set_reg(M68K_REG_PC, gMosCurrentA5 + gMosCurJTOffset + 2);
   m68k_write_memory_32(gMosCurrentStackBase-4, (unsigned int)(&trapExitApp)); // end of app
   m68k_set_reg(M68K_REG_SP, gMosCurrentStackBase-4);
@@ -981,14 +1123,21 @@ int runApp()
 }
 
 
-void printFile(unsigned int file, char printText=1)
+typedef struct
 {
-  unsigned int txt = m68k_read_memory_32(file+16);
-  printf("  Buffer at 0x%08X\n", txt);
-  printf("  Size: %d\n", m68k_read_memory_32(file+12));
-  if (printText && txt)
-    puts((char*)txt);
-}
+  int fd;
+  const char *filename;
+  bool open;
+  bool allocated;
+} MosFile;
+
+
+MosFile stdFiles[] = {
+  { STDIN_FILENO,  "/dev/stdin", true, false },
+  { STDOUT_FILENO, "/dev/stdout", true, false },
+  { STDERR_FILENO, "/dev/stderr", true, false }
+};
+
 
 /** Open a file.
  * Stack
@@ -998,29 +1147,77 @@ void printFile(unsigned int file, char printText=1)
  *   +0c.l = ptr to return value?
  */
 void trapSyFAccess(unsigned short) {
-  printf("TODO: trapSyFAccess\n");
+  mosLog("TODO: trapSyFAccess\n");
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
-  unsigned int file = m68k_read_memory_32(sp+4);
-  printFile(file, 0);
+  const char *filename = (char*)m68k_read_memory_32(sp+4);
+  unsigned int flags = m68k_read_memory_8(sp+10);
+  unsigned int file = m68k_read_memory_32(sp+12);
+  mosLog("Opening file '%s', flags=0x%02X, arg=0x%08X\n", filename, flags, file);
+  // TODO: convert filename and path from Mac Format to Unix Format
+  char *uxFilename = (char*)malloc(strlen(filename)+2);
+  const char *src = filename;
+  char *dst = uxFilename;
+  if (*src!=':') *dst++='/';
+  for (;;) {
+    char c = *src++;
+    if (c==':') c = '/'; // TODO: what about the trailing ':'
+    *dst++ = c;
+    if (c==0) break;
+  }
+  // TODO: add our MosFile reference for internal data management
+  // TODO: find the actual file and open it
+  // open the file
+  // TODO: what if the file is already open?
+  int fd = ::open(uxFilename, flags & 0x3f);
+  if (fd==-1) { // error
+    m68k_set_reg(M68K_REG_D0, errno); // just return the error code
+    free(uxFilename);
+  } else {
+    MosFile *mf = (MosFile*)calloc(1, sizeof(MosFile));
+    m68k_write_memory_32(file+8, (unsigned int)mf);
+    mf->fd = fd;
+    mf->filename = uxFilename;
+    mf->open = true;
+    mf->allocated = true;
+    m68k_set_reg(M68K_REG_D0, 0); // no error
+  }
 }
 
 // stack: // FIXME: This is Close()
 //   fileptr.l
 void trapSyClose(unsigned short) {
-  printf("TODO: trapSyClose\n");
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
-  printf("File at 0x%08X\n", file);
-  printFile(file, 0);
+  MosFile *mosFile = (MosFile*)m68k_read_memory_32(file+8);
+  int ret = close(mosFile->fd);
+  if (ret==-1) {
+    m68k_set_reg(M68K_REG_D0, errno);
+  } else {
+    m68k_set_reg(M68K_REG_D0, 0);
+  }
+  if (mosFile->allocated) {
+    m68k_write_memory_32(file+8, 0);
+    if (mosFile->filename) {
+      free((char*)mosFile->filename);
+    }
+    free(mosFile);
+  }
 }
 
 void trapSyRead(unsigned short) {
   // file identifier is on the stack
-  printf("TODO: trapSyRead\n");
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
-  printf("File at 0x%08X\n", file);
-  printFile(file, 0);
+  MosFile *mosFile = (MosFile*)m68k_read_memory_32(file+8);
+  void *buffer = (void*)m68k_read_memory_32(file+16);
+  unsigned int size = m68k_read_memory_32(file+12);
+  int ret = read(mosFile->fd, buffer, size);
+  if (ret==-1) {
+    m68k_set_reg(M68K_REG_D0, errno);
+  } else {
+    m68k_write_memory_32(file+12, size-ret);
+    m68k_set_reg(M68K_REG_D0, 0); // no error
+  }
 }
 
 // stack: // FIXME: this seems to be the write() call!
@@ -1028,8 +1225,16 @@ void trapSyRead(unsigned short) {
 void trapSyWrite(unsigned short) {
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
-  printf("Write file at 0x%08X\n", file);
-  printFile(file);
+  MosFile *mosFile = (MosFile*)m68k_read_memory_32(file+8);
+  void *buffer = (void*)m68k_read_memory_32(file+16);
+  unsigned int size = m68k_read_memory_32(file+12);
+  int ret = write(mosFile->fd, buffer, size);
+  if (ret==-1) {
+    m68k_set_reg(M68K_REG_D0, errno);
+  } else {
+    m68k_write_memory_32(file+12, size-ret);
+    m68k_set_reg(M68K_REG_D0, 0); // no error
+  }
 }
 
 // stack: // ioctl
@@ -1037,17 +1242,54 @@ void trapSyWrite(unsigned short) {
 //   0x6601.w = FIOCLEX _IO('f', 1) /* set exclusive use on fd */
 //   fileptr.l
 //
-// 0x6600 'f'+0
-// 0x6601 'f'+1 FIOCLEX   set exclusive use on fd
-// 0x6602 'f'+2 FIONCLEX  end exclusive use on fd
 void trapSyIoctl(unsigned short) {
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
   unsigned int cmd = m68k_read_memory_32(sp+8);
   unsigned int param = m68k_read_memory_32(sp+12);
-  printf("IOCTL of file at 0x%08X, cmd=0x%04X = '%c'<<8+%d, param=%d (0x%08X)\n",
+  MosFile *mosFile = (MosFile*)m68k_read_memory_32(file+8);
+  mosLog("IOCTL of file at 0x%08X, cmd=0x%04X = '%c'<<8+%d, param=%d (0x%08X)\n",
          file, cmd, (cmd>>8)&0xff, cmd&0xff, param, param);
-  printFile(file, 0);
+  switch (cmd) {
+    case 0x6600: { // FIOLSEEK
+      // Parameter points to two longs, the first is the offset type, the second is the offset itself
+      // SEEK_SET=0 SEEK_CUR=1 SEEK_END=2
+      // lseek returns -1 on fail and the previous position on success
+      // ioctl return erroro in D0, and result in A6-4 (where the offset was originally)
+      // TODO: more error checking
+      unsigned int whence = m68k_read_memory_32(param);
+      unsigned int offset = m68k_read_memory_32(param+4);
+      int ret = (unsigned int)lseek(mosFile->fd, offset, whence);
+      if (ret==-1) {
+        m68k_set_reg(M68K_REG_D0, errno);
+      } else {
+        m68k_write_memory_32(param+4, ret);
+        m68k_set_reg(M68K_REG_D0, 0); // no error
+      }
+      break; }
+    case 0x6601: // FIODUPFD
+      // TODO: more error checking
+      // param is 0 in my tests
+      // file is the current fd
+      // TODO: I do not know what we must return here! Do I need to write the code to allocate a new fileStruct? Probably not!
+      m68k_set_reg(M68K_REG_D0, 0); // no error
+      break;
+    case 0x6602: // FIOINTERACTIVE, return if device is interactive
+      // TODO: more error checking
+      m68k_set_reg(M68K_REG_D0, 0); // no error
+      break;
+    case 0x6603: // FIOBUFSIZE, Return optimal buffer size
+      m68k_write_memory_16(param+2, 4096); // random value
+      m68k_set_reg(M68K_REG_D0, 0); // no error
+      break;
+    case 0x6604: // FIOFNAME, Return filename
+    case 0x6605: // FIOREFNUM, Return fs refnum
+    case 0x6606: // FIOSETEOF, Set file length
+    default:
+      mosLog("ERROR: unsupported ioctrl on file operation\n");
+      m68k_set_reg(M68K_REG_D0, EINVAL);
+      break;
+  }
 }
 
 
@@ -1056,6 +1298,7 @@ TrapNativeCall tncSyClose   = { htons(0xAFFF), &trapSyClose,   htons(0x4E75) };
 TrapNativeCall tncSyRead    = { htons(0xAFFF), &trapSyRead,    htons(0x4E75) };
 TrapNativeCall tncSyWrite   = { htons(0xAFFF), &trapSyWrite,   htons(0x4E75) };
 TrapNativeCall tncSyIoctl   = { htons(0xAFFF), &trapSyIoctl,   htons(0x4E75) };
+
 
 unsigned int gSomeTable20[] =
 { //    access       close (long)       Read               Write              Ioctl              FAccess
@@ -1078,15 +1321,16 @@ unsigned int gSomeTable1c[] =
               //  htonl(0xdeaf0000), htonl(0xdeaf0001), htonl(0xdeaf0002), htonl(0xdeaf0003), htonl(0xdeaf0004), // stdin
               //  htonl(0xdeaf0000), htonl(0xdeaf0001), htonl(0xdeaf0002), htonl(0xdeaf0003), htonl(0xdeaf0004), // stdout
               //  htonl(0xdeaf0000), htonl(0xdeaf0001), htonl(0xdeaf0002), htonl(0xdeaf0003), htonl(0xdeaf0004)  // stderr
-  htonl(0x00010000), htonl((unsigned int)(&gSomeTable20[0])), 0 /* ptr */, 0, 0,
-  htonl(0x00020000), htonl((unsigned int)(&gSomeTable20[0])), 0 /* ptr */, 0, 0,
-  htonl(0x00020000), htonl((unsigned int)(&gSomeTable20[0])), 0 /* ptr */, 0, 0,
+  htonl(0x00010000), htonl((unsigned int)(&gSomeTable20[0])), htonl((unsigned int)(&stdFiles[0])), 0, 0,
+  htonl(0x00020000), htonl((unsigned int)(&gSomeTable20[0])), htonl((unsigned int)(&stdFiles[1])), 0, 0,
+  htonl(0x00020000), htonl((unsigned int)(&gSomeTable20[0])), htonl((unsigned int)(&stdFiles[2])), 0, 0,
 };
 
 
 
 const char *gArgv0 = "m68kAsm";
-const char *gArgv1 = "Unix:test.s:";
+//const char *gArgv1 = "Unix:test.s:";
+const char *gArgv1 = "/Users/matt/dev/Alienate/ARM6asm/test.s";
 
 unsigned int gArgv[] = {
   htonl((unsigned int)(gArgv0)),
@@ -1146,12 +1390,12 @@ unsigned int m68k_read_memory_8(unsigned int address)
   if (address<0x1e00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    fprintf(stdout, "Read.b 0x%04x: %s %s\n", address, var, rem);
+    mosLog("Read.b 0x%04x: %s %s\n", address, var, rem);
   }
   switch (address) {
     case 0x012d: return 0; // LoadTrap [GLOBAL VAR]  trap before launch? [byte]
     default:
-      fprintf(stderr, "Accessing unsupported RAM.b address 0x%08X\n", address);
+      mosLog("Accessing unsupported RAM.b address 0x%08X\n", address);
       break;
   }
   return 0;
@@ -1167,7 +1411,7 @@ unsigned int m68k_read_memory_16(unsigned int address)
   if (address<0x1e00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    fprintf(stdout, "Read.w 0x%04x: %s %s\n", address, var, rem);
+    mosLog("Read.w 0x%04x: %s %s\n", address, var, rem);
   }
   switch (address) {
     case 0x0070: return 0xa9f4; // ExitToShell() -> debug trap quite the app
@@ -1178,6 +1422,7 @@ unsigned int m68k_read_memory_16(unsigned int address)
     // Read.w 0x0220: MemErr [GLOBAL VAR]  last memory manager error [word]
     case 0x0930: return 0; // FIXME: SaveSegHandle [GLOBAL VAR]  seg 0 handle [handle]
     default:
+      mosLog("Accessing unsupported RAM.w address 0x%08X\n", address);
       fprintf(stderr, "Accessing unsupported RAM.w address 0x%08X\n", address);
       break;
   }
@@ -1188,24 +1433,12 @@ unsigned int m68k_read_memory_32(unsigned int address)
 {
   if (address>=0x1000) {
     unsigned int v = ntohl(*((unsigned long*)address));
-    if (v==0xdeadbeef) {
-      puts("DEADBEEF found");
-    }
-    if (address==m68k_get_reg(0, M68K_REG_A5)-0x0294) {
-      puts("Reading ARGC");
-    }
-    if (address==m68k_get_reg(0, M68K_REG_A5)-0x0290) {
-      puts("Reading ARGC");
-    }
-    if (address==m68k_get_reg(0, M68K_REG_A5)-0x028c) {
-      puts("Reading ARGC");
-    }
     return v;
   }
   if (address<0x1e00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    fprintf(stdout, "Read.l 0x%04x: %s %s\n", address, var, rem);
+    mosLog("Read.l 0x%04x: %s %s\n", address, var, rem);
   }
   switch (address) {
     case 0: return 0;
@@ -1223,7 +1456,7 @@ unsigned int m68k_read_memory_32(unsigned int address)
     case 0x092c:
       return 0;
     default:
-      fprintf(stderr, "Accessing unsupported RAM.l address 0x%08X\n", address);
+      mosLog("Accessing unsupported RAM.l address 0x%08X\n", address);
       break;
   }
   return 0;
@@ -1253,12 +1486,12 @@ void m68k_write_memory_8(unsigned int address, unsigned int value)
   if (address<0x1e00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    fprintf(stdout, "Write.b 0x%04x = 0x%02X: %s %s\n", address, value & 0xff, var, rem);
+    mosLog("Write.b 0x%04x = 0x%02X: %s %s\n", address, value & 0xff, var, rem);
   }
   switch (address) {
     case 0x0a5e: gMosResLoad = value; break; // ResLoad       0A5E  word  Auto-load feature
     default:
-      fprintf(stderr, "Writing unsupported RAM.b address 0x%08X\n", address);
+      mosLog("Writing unsupported RAM.b address 0x%08X\n", address);
       break;
   }
 }
@@ -1272,11 +1505,11 @@ void m68k_write_memory_16(unsigned int address, unsigned int value)
   if (address<0x1e00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    fprintf(stdout, "Write.w 0x%04x = 0x%04X: %s %s\n", address, value & 0xffff, var, rem);
+    mosLog("Write.w 0x%04x = 0x%04X: %s %s\n", address, value & 0xffff, var, rem);
   }
   switch (address) {
     default:
-      fprintf(stderr, "Writing unsupported RAM.w address 0x%08X\n", address);
+      mosLog("Writing unsupported RAM.w address 0x%08X\n", address);
       break;
   }
 }
@@ -1284,63 +1517,81 @@ void m68k_write_memory_16(unsigned int address, unsigned int value)
 void m68k_write_memory_32(unsigned int address, unsigned int value)
 {
   if (address>=0x1000) {
-    if (address==m68k_get_reg(0, M68K_REG_A5)-0x0294) {
-      puts("Writing ARGC");
-    }
-    if (address==m68k_get_reg(0, M68K_REG_A5)-0x0290) {
-      puts("Writing ARGC");
-    }
-    if (address==m68k_get_reg(0, M68K_REG_A5)-0x028c) {
-      puts("Writing ARGC");
-    }
     *((unsigned long*)address) = htonl(value);
     return;
   }
   if (address<0x1e00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    fprintf(stdout, "Write.l 0x%04x = 0x%08X: %s %s\n", address, value, var, rem);
+    mosLog("Write.l 0x%04x = 0x%08X: %s %s\n", address, value, var, rem);
   }
   switch (address) {
     default:
-      fprintf(stderr, "Writing unsupported RAM.l address 0x%08X\n", address);
+      mosLog("Writing unsupported RAM.l address 0x%08X\n", address);
       break;
   }
 }
   
 
-
-
-int main(int argc, const char * argv[])
+void setBreakpoints()
 {
-  setupSystem();
+  // Breakpoints for ARM6asm only
+  //  addBreakpoint(2, 0x0000003C, "SADEV: _coWrite");
+  //  addBreakpoint(2, 0x000000B2, "SADEV: _fsWrite");
+  //  addBreakpoint(2, 0x00000116, "SADEV: _syWrite");
+  //  addBreakpoint(4, 0x00000185, "STDIO print");
+  //  addBreakpoint(1, 0x0001DC14, "RTInit");
+  //  addBreakpoint(8, 0x000002AE, "Patched LoadSeg");
+  //  addBreakpoint(8, 0x0000032A, "Just before Load_Code");
+  //  addBreakpoint(8, 0x00000004);
   
-  // SADEV stubs
-//  addBreakpoint(2, 0x0000003C, "SADEV: _coWrite");
-//  addBreakpoint(2, 0x000000B2, "SADEV: _fsWrite");
-//  addBreakpoint(2, 0x00000116, "SADEV: _syWrite");
-//  addBreakpoint(4, 0x00000185, "STDIO print");
-//  addBreakpoint(1, 0x0001DC14, "RTInit");
-//  addBreakpoint(8, 0x000002AE, "Patched LoadSeg");
-//  addBreakpoint(8, 0x0000032A, "Just before Load_Code");
-//  addBreakpoint(8, 0x00000004);
+  //  addBreakpoint(7, 0x000007E6, "_faccess()");
+  //  addBreakpoint(7, 0x00000000, "faccess()");
+  //  addBreakpoint(7, 0x000004BA, "Pre BlockMove in _initIOPtable");
+  //  addBreakpoint(7, 0x000004F2, "_initIOPtable");
+  //  addBreakpoint(7, 0x00000838, "_faccess");
+  //  addBreakpoint(7, 0x00000026, "open");
+  //  addBreakpoint(7, 0x0000003C, "open2");
+  //  addBreakpoint(7, 0x0000005A, "open3");
   
-//  addBreakpoint(7, 0x000007E6, "_faccess()");
-//  addBreakpoint(7, 0x00000000, "faccess()");
-//  addBreakpoint(7, 0x000004BA, "Pre BlockMove in _initIOPtable");
-//  addBreakpoint(7, 0x000004F2, "_initIOPtable");
-//  addBreakpoint(7, 0x00000838, "_faccess");
-  addBreakpoint(7, 0x00000026, "open");
-  addBreakpoint(7, 0x0000003C, "open2");
-  addBreakpoint(7, 0x0000005A, "open3");
+  //  addBreakpoint(1, 0x00003E70, "Usage");
+  //  addBreakpoint(7, 0x000000DA, "Exit");
+}
+
+
+// TODO: forward argc and argv to the app we are loading
+// TODO: run stdout through a Mac-to-Unix filter
+// TODO: TripleDash arguments?   ARM6asm ---unix2mac myFile.s -o ---mac2unix myFile.o ---stdout2unix ---stderr2unix
+int main(int argc, const char **argv, const char **envp)
+{
+  FILE *logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
+  if (logFile)
+    mosLogTo(logFile);
   
-//  addBreakpoint(1, 0x00003E70, "Usage");
+  setBreakpoints();
   
-  if (loadApp(argv[1])) {
-    runApp();
-  } else {
-    fprintf(stderr, "Failed to load program: %s\n", strerror(errno));
+  setupSystem(argc, argv, envp);
+  
+  int appLoaded = 0;
+  
+  if (!appLoaded) {
+    appLoaded = loadInternalApp();
   }
+  
+  if (!appLoaded) {
+    appLoaded = loadApp(argv[1]);
+  }
+  
+  if (!appLoaded) {
+    fprintf(stderr, "MOSRUN - FATAL ERROR: can't find application data\n");
+    exit(9);
+  }
+  
+  runApp();
+
+  if (logFile)
+    fclose(logFile);
+  
   return 0;
 }
 
