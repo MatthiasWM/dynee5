@@ -1004,8 +1004,8 @@ void trapSyFAccess(unsigned short) {
     mosError("Open File %s: no resource fork support yet!\n", uxFilename);
     errno = 2;
   } else if ( flags & MOS_O_ALIAS ) {
-      mosError("Open File %s: no alias support yet!\n", uxFilename);
-      errno = 2;
+    mosError("Open File %s: no alias support yet!\n", uxFilename);
+    errno = 2;
   } else {
     fd = ::open(uxFilename, mode, 0644);
   }
@@ -1085,10 +1085,6 @@ void trapSyWrite(unsigned short) {
 }
 
 // stack: // ioctl
-//   0.l
-//   0x6601.w = FIOCLEX _IO('f', 1) /* set exclusive use on fd */
-//   fileptr.l
-//
 
 //# define FIOLSEEK               (('f'<<8)|0x00)  /* Apple internal use only */
 //# define FIODUPFD               (('f'<<8)|0x01)  /* Apple internal use only */
@@ -1125,6 +1121,11 @@ void trapSyIoctl(unsigned short) {
       // TODO: more error checking
       unsigned int whence = m68k_read_memory_32(param);
       unsigned int offset = m68k_read_memory_32(param+4);
+      switch (whence) {
+        case MOS_SEEK_SET: whence = SEEK_SET; break;
+        case MOS_SEEK_CUR: whence = SEEK_CUR; break;
+        case MOS_SEEK_END: whence = SEEK_END; break;
+      }
       int ret = (unsigned int)lseek(mosFile->fd, offset, whence);
       if (ret==-1) {
         m68k_set_reg(M68K_REG_D0, errno);
@@ -1145,7 +1146,7 @@ void trapSyIoctl(unsigned short) {
       m68k_set_reg(M68K_REG_D0, 0); // no error
       break;
     case 0x6603: // FIOBUFSIZE, Return optimal buffer size
-      m68k_write_memory_16(param+2, 4096); // random value
+      m68k_write_memory_16(param+2, 4096); // random value // FIXME: this looks like the wrong address to me!
       m68k_set_reg(M68K_REG_D0, 0); // no error
       break;
     case 0x6604: // FIOFNAME, Return filename

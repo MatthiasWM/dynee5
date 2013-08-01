@@ -24,6 +24,9 @@
 #define MOS_O_BINARY     0x800      /* Open as a binary stream.          */
 #define MOS_O_NRESOLVE  0x4000      /* Don't resolve any aliases.        */
 
+#define MOS_SEEK_CUR        1
+#define MOS_SEEK_END        2
+#define MOS_SEEK_SET        0
 
 typedef unsigned int mosPtr;
 
