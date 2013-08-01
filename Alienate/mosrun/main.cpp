@@ -1275,21 +1275,29 @@ void setupSystem(int argc, const char **argv, const char **envp)
   mosWrite32(fdEntries+0x0028+0x0010, 0); // transfer buffer address
   
   // create the argv array
-  // FIXME: do this dynamically
-  mosPtr argv0 = mosNewPtr("ARM6asm");
-  mosPtr argv1 = mosNewPtr("/Users/matt/dev/Alienate/ARM6asm/test.s");
-  mosPtr mpwArgv = mosNewPtr(12);
-  mosWrite32(mpwArgv+0, argv0);
-  mosWrite32(mpwArgv+4, argv1);
-  mosWrite32(mpwArgv+8, 0);
+  const char **srcArgv = argv;
+  int srcArgc = argc;
+  if (!gAppResource) {
+    srcArgv++;
+    srcArgc--;
+  }
+  
+  mosPtr vArgv = mosNewPtr((srcArgc+1)*4);
+  for (i=0; i<srcArgc; i++) {
+    const char *arg = srcArgv[i];
+    // TODO: spot tripple-dash commands and take them off the list
+    // TODO: argv[0] should only be the filename (MacOS has a 32 byte limt here!
+    // TODO: spot path names and convert them to Mac format if they are in Unix/OSX format
+    mosWrite32(vArgv+4*i, mosNewPtr(arg));
+  }
   
   // TODO: envp support
   
   // create the MPW memory table that allows tools to connect back to MPW
   mosPtr mpwMem = mosNewPtr(0x0028);
   mosWrite16(mpwMem+0x0000, 0x5348);
-  mosWrite32(mpwMem+0x0002, 2); // argc
-  mosWrite32(mpwMem+0x0006, mpwArgv); // argv
+  mosWrite32(mpwMem+0x0002, srcArgc); // argc
+  mosWrite32(mpwMem+0x0006, vArgv); // argv
   mosWrite32(mpwMem+0x000A, 0); // envp
   mosWrite32(mpwMem+0x000E, 0); // NULL
   mosWrite32(mpwMem+0x0012, 0); // unknown
