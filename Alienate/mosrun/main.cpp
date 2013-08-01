@@ -78,6 +78,7 @@
 #include "names.h"
 #include "log.h"
 #include "rsrc.h"
+#include "memory.h"
 
 // Inlcude Musahi's m68k emulator
 
@@ -98,10 +99,14 @@ typedef unsigned int mosHandle;
 typedef unsigned int mosResType;
 typedef int mosInteger;
 
+
+const int MOS_STACK_SIZE = 0x8000;
+
+
 byte *theApp = 0;
-ssize_t theAppSize;
+ssize_t theAppSize = 0;
 byte *theRsrc = 0;
-ssize_t theRsrcSize;
+ssize_t theRsrcSize = 0;
 byte *theJumpTable = 0;
 
 unsigned int gMosCurrentA5 = 0;
@@ -110,6 +115,7 @@ unsigned int gMosCurJTOffset = 0;
 unsigned int gMosResLoad = 1;
 unsigned int gMosResErr = 0;
 unsigned int gMosMemErr = 0;
+unsigned int gMosMPWHandle = 0;
 
 const unsigned int kMosApplLimit      = 0x0130;  // Application heap limit
 const unsigned int kMosApplZone       = 0x02aa;  // Address of application heap zone
@@ -129,9 +135,13 @@ const unsigned int kMosMBarHeight     = 0x0BAA;  // height of menu bar (integer)
 unsigned int gResourceStart[20] = { 0 };
 unsigned int gResourceEnd[20] = { 0 };
 
+unsigned int trapDispatchTrap = 0;
+unsigned int trapExitApp = 0;
+
+
 void hexDump(unsigned int a, unsigned int n)
 {
-  int i;
+  int i = 0;
   for (;;) {
     mosLog("%08X: ", a);
     for (i=0; i<16; i++) {
@@ -158,17 +168,10 @@ void hexDump(unsigned int a, unsigned int n)
   }
 }
 
-void setupSystem(int argc, const char **argv, const char **envp)
-{
-  // TODO: copy argv and envp into the simulation
-  gMosCurrentStackBase = (unsigned int)malloc(0x8000) + 0x8000;
-  // push a pointer to an instruction onto the stack that allows the software to exit nicely
-}
-
 
 void dumpResourceMap()
 {
-  unsigned int i, j;
+  unsigned int i = 0, j = 0;
   unsigned int rsrcData = m68k_read_memory_32((unsigned int)(theApp));
   // ---- read the map
   unsigned int rsrcMapTypeList = m68k_read_memory_16((unsigned int)(theRsrc+24));
@@ -217,7 +220,7 @@ void dumpResourceMap()
 //   Content: n bytes
 mosHandle GetResource(unsigned int myResType, unsigned short myId)
 {
-  unsigned int i, j;
+  unsigned int i = 0, j = 0;
   // ---- read the map
   unsigned int rsrcMapTypeList = m68k_read_memory_16((unsigned int)(theRsrc+24));
   // ------ resource map type list
@@ -244,31 +247,26 @@ mosHandle GetResource(unsigned int myResType, unsigned short myId)
             unsigned int rsrcOffset = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
             unsigned int rsrcData = m68k_read_memory_32((unsigned int)(theApp));
             unsigned int rsrcSize = m68k_read_memory_32((unsigned int)(theApp+rsrcData+rsrcOffset));
-            // the first four bytes of the memory location become the master pointer,
-            // foloowed by the size of the resource and the remainder is the resource itself
-            byte *newPtr = (byte*)malloc(rsrcSize+4+4);
-            // make the mmaster pointer point to the resource
-            m68k_write_memory_32((unsigned int)(newPtr), (unsigned int)(newPtr+8));
-            // remember the size of the resource here
-            m68k_write_memory_32((unsigned int)(newPtr+4), rsrcSize);
-            // copy the resource at offset 8
-            memcpy(newPtr+8, theApp+rsrcData+rsrcOffset+4, rsrcSize);
+            
+            mosHandle hdl = mosNewHandle(rsrcSize);
+            mosPtr ptr = mosRead32(hdl);
+            memcpy((void*)ptr, theApp+rsrcData+rsrcOffset+4, rsrcSize);
             // make the resource map point to the resource handle
-            m68k_write_memory_32((unsigned int)(theRsrc+resTable+12*j+8), (unsigned int)(newPtr));
+            m68k_write_memory_32((unsigned int)(theRsrc+resTable+12*j+8), hdl);
             // set breakpoints
             if (myResType=='CODE') {
               if (m68k_read_memory_16((unsigned int)(theApp+rsrcData+rsrcOffset+4))==0xffff) {
-                installBreakpoints(myId, (unsigned int)(newPtr+8+4+0x24)); // 0x24
-                gResourceStart[myId] = (unsigned int)(newPtr+8+4+0x24);
-                gResourceEnd[myId] = (unsigned int)(newPtr+8+4) + rsrcSize;
+                installBreakpoints(myId, (unsigned int)(ptr+4+0x24)); // 0x24
+                gResourceStart[myId] = (unsigned int)(ptr+4+0x24);
+                gResourceEnd[myId] = (unsigned int)(ptr+4) + rsrcSize;
               } else {
-                installBreakpoints(myId, (unsigned int)(newPtr+8+4)); // 0x24
-                gResourceStart[myId] = (unsigned int)(newPtr+8+4);
-                gResourceEnd[myId] = (unsigned int)(newPtr+8+4) + rsrcSize;
+                installBreakpoints(myId, (unsigned int)(ptr+4)); // 0x24
+                gResourceStart[myId] = (unsigned int)(ptr+4);
+                gResourceEnd[myId] = (unsigned int)(ptr+4) + rsrcSize;
               }
               mosLog("Resource %d from 0x%08X to 0x%08X\n", myId, gResourceStart[myId], gResourceEnd[myId]);
             }
-            return (mosHandle)(newPtr);
+            return hdl;
           }
         }
       }
@@ -286,7 +284,7 @@ mosHandle GetResource(unsigned int myResType, unsigned short myId)
 //   Content: n bytes
 mosHandle GetNamedResource(unsigned int myResType, const byte *pName)
 {
-  unsigned int i, j;
+  unsigned int i = 0, j = 0;
   // ---- read the map
   unsigned int rsrcMapTypeList = m68k_read_memory_16((unsigned int)(theRsrc+24));
   unsigned int rsrcMapNameList = m68k_read_memory_16((unsigned int)(theRsrc+26));
@@ -318,24 +316,26 @@ mosHandle GetNamedResource(unsigned int myResType, const byte *pName)
             unsigned int rsrcOffset = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
             unsigned int rsrcData = m68k_read_memory_32((unsigned int)(theApp));
             unsigned int rsrcSize = m68k_read_memory_32((unsigned int)(theApp+rsrcData+rsrcOffset));
-            // the first four bytes of the memory location become the master pointer,
-            // foloowed by the size of the resource and the remainder is the resource itself
-            byte *newPtr = (byte*)malloc(rsrcSize+4+4);
-            // make the mmaster pointer point to the resource
-            m68k_write_memory_32((unsigned int)(newPtr), (unsigned int)(newPtr+8));
-            // remember the size of the resource here
-            m68k_write_memory_32((unsigned int)(newPtr+4), rsrcSize);
-            // copy the resource at offset 8
-            memcpy(newPtr+8, theApp+rsrcData+rsrcOffset+4, rsrcSize);
+            
+            mosHandle hdl = mosNewHandle(rsrcSize);
+            mosPtr ptr = mosRead32(hdl);
+            memcpy((void*)ptr, theApp+rsrcData+rsrcOffset+4, rsrcSize);
             // make the resource map point to the resource handle
-            m68k_write_memory_32((unsigned int)(theRsrc+resTable+12*j+8), (unsigned int)(newPtr));
+            m68k_write_memory_32((unsigned int)(theRsrc+resTable+12*j+8), hdl);
             // set breakpoints
             if (myResType=='CODE') {
-              installBreakpoints(id, (unsigned int)(newPtr+8+4));
-              gResourceStart[id] = (unsigned int)(newPtr+8+4);
-              gResourceEnd[id] = (unsigned int)(newPtr+8+4) + rsrcSize;
+              if (m68k_read_memory_16((unsigned int)(theApp+rsrcData+rsrcOffset+4))==0xffff) {
+                installBreakpoints(id, (unsigned int)(ptr+4+0x24)); // 0x24
+                gResourceStart[id] = (unsigned int)(ptr+4+0x24);
+                gResourceEnd[id] = (unsigned int)(ptr+4) + rsrcSize;
+              } else {
+                installBreakpoints(id, (unsigned int)(ptr+4)); // 0x24
+                gResourceStart[id] = (unsigned int)(ptr+4);
+                gResourceEnd[id] = (unsigned int)(ptr+4) + rsrcSize;
+              }
+              mosLog("Resource %d from 0x%08X to 0x%08X\n", id, gResourceStart[id], gResourceEnd[id]);
             }
-            return (mosHandle)(newPtr);
+            return hdl;
           }
         }
       }
@@ -356,7 +356,7 @@ unsigned int createA5World(mosHandle hCode0)
   unsigned int length  = m68k_read_memory_32(code0 +  8);
   unsigned int offset  = m68k_read_memory_32(code0 + 12);
   // create jump table
-  theJumpTable = (byte*)calloc(1, aboveA5+belowA5);
+  theJumpTable = (byte*)mosNewPtr(aboveA5+belowA5);
   gMosCurJTOffset = offset;
   memcpy(theJumpTable+belowA5+offset, (byte*)(code0+16), length);
   gResourceStart[19] = (unsigned int)(theJumpTable + belowA5);
@@ -370,7 +370,7 @@ void readResourceMap()
   unsigned int rsrcMap = m68k_read_memory_32((unsigned int)(theApp+4));
   unsigned int rsrcMapSize = m68k_read_memory_32((unsigned int)(theApp+12));
   mosLog("Rsrc Map %d bytes at 0x%08X\n", rsrcMapSize, rsrcMap);
-  theRsrc = (byte*)malloc(rsrcMapSize);
+  theRsrc = (byte*)mosNewPtr(rsrcMapSize);
   theRsrcSize = rsrcMapSize;
   memcpy(theRsrc, theApp+rsrcMap, rsrcMapSize);
   dumpResourceMap();
@@ -384,7 +384,7 @@ int loadApp(const char *aName)
     return 0;
   }
   theAppSize = size;
-  theApp = (byte*)calloc(1, size);
+  theApp = (byte*)mosNewPtr(size);
   ssize_t ret = getxattr(aName, "com.apple.ResourceFork", theApp, size, 0, 0);
   if (ret==-1) {
     return 0;
@@ -405,7 +405,7 @@ int loadInternalApp()
 {
   if (gAppResource) {
     theAppSize = gAppResourceSize;
-    theApp = (byte*)malloc(theAppSize);
+    theApp = (byte*)mosNewPtr(theAppSize);
     memcpy(theApp, gAppResource, gAppResourceSize);
     readResourceMap();
     mosHandle code0 = GetResource('CODE', 0);
@@ -487,7 +487,8 @@ typedef struct {
 
 
 unsigned short gCurrentTrap = 0;
-extern TrapNativeCall *tncTable[0x1000];
+//extern TrapNativeCall *tncTable[0x1000];
+TrapNativeCall **tncTable = 0;
 
 
 // Load a resource using a fourCC code
@@ -545,8 +546,9 @@ void trapSizeResource(unsigned short instr)
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int stack_ret = m68k_read_memory_32(sp); sp += 4;
   unsigned int hdl = m68k_read_memory_32(sp); sp+=4;
+  unsigned int ptr = m68k_read_memory_32(hdl);
+  unsigned int size = mosPtrSize(ptr);
   
-  unsigned int size = m68k_read_memory_32(hdl+4);
   mosLog("            SizeResource(0x%08X) = %d\n", hdl, size);
   
   m68k_set_reg(M68K_REG_D0, 0);
@@ -562,10 +564,9 @@ void trapNewPtrClear(unsigned short) {
   
   mosLog("            NewPtrClear(%d)\n", size);
   
-  unsigned int ptr = (unsigned int)calloc(1, size+4);
-  m68k_write_memory_32(ptr, size);
+  unsigned int ptr = mosNewPtr(size);
   
-  m68k_set_reg(M68K_REG_A0, ptr+4);
+  m68k_set_reg(M68K_REG_A0, ptr);
   m68k_set_reg(M68K_REG_D0, 0);
 }
 
@@ -575,32 +576,22 @@ void trapNewPtr(unsigned short) {
   
   mosLog("            NewPtr(%d)\n", size);
   
-  unsigned int ptr = (unsigned int)malloc(size+4);
-  m68k_write_memory_32(ptr, size);
+  unsigned int ptr = mosNewPtr(size);
   
-  m68k_set_reg(M68K_REG_A0, ptr+4);
+  m68k_set_reg(M68K_REG_A0, ptr);
   m68k_set_reg(M68K_REG_D0, 0);
 }
 
 
 void trapNewHandle(unsigned short) {
   unsigned int size = m68k_get_reg(0L, M68K_REG_D0);
-  unsigned int ptr = 0;
-  unsigned int handle = 0;
+  unsigned int hdl = 0;
   
   mosLog("            NewHandle(%d)\n", size);
-  
-  if (size) {
-    ptr = (unsigned int)malloc(size+4);
-    m68k_write_memory_32(ptr, size);
-    handle = (unsigned int)malloc(4);
-    m68k_write_memory_32(handle, ptr+4);
-  } else {
-    handle = (unsigned int)malloc(4);
-    m68k_write_memory_32(handle, 0);
-  }
 
-  m68k_set_reg(M68K_REG_A0, handle);
+  hdl = mosNewHandle(size);
+
+  m68k_set_reg(M68K_REG_A0, hdl);
   m68k_set_reg(M68K_REG_D0, 0);
 }
 
@@ -620,7 +611,7 @@ void trapRecoverHandle(unsigned short) {
 void trapDisposePtr(unsigned short) {
   unsigned int ptr = m68k_get_reg(0L, M68K_REG_A0);
   mosLog("            DisposePtr(0x%08X)\n", ptr);
-  free((void*)(ptr-4));
+  mosDisposePtr(ptr);
   m68k_set_reg(M68K_REG_D0, 0);
 }
 
@@ -629,8 +620,7 @@ void trapDisposeHandle(unsigned short) {
   unsigned int hdl = m68k_get_reg(0L, M68K_REG_A0);
   unsigned int ptr = hdl?m68k_read_memory_32(hdl):0;
   mosLog("            DisposeHandle(0x%08X(->0x%08X))\n", hdl, ptr);
-  //free((void*)(ptr-4));
-  // FIXME: implement this
+  mosDisposeHandle(hdl);
   m68k_set_reg(M68K_REG_D0, 0);
 }
 
@@ -750,23 +740,16 @@ void trapOSDispatch(unsigned short instr) {
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int stack_ret = m68k_read_memory_32(sp); sp += 4;
   unsigned short selector = m68k_read_memory_16(sp); sp += 2;
+  mosLog("trapOSDispatch: %d (0x%04x)\n", selector);
   
   switch (selector) {
     case 0x1d: { // mfTempNewHandleSel
       unsigned int resultCodePtr = m68k_read_memory_32(sp); sp += 4;
       unsigned int size = m68k_read_memory_32(sp); sp += 4;
       unsigned int handle = 0;
-      unsigned int ptr = 0;
       
-      handle = (unsigned int)malloc(4);
-      if (size==0) {
-        ptr = 0;
-      } else {
-        ptr = (unsigned int)malloc(size+4) + 4;
-        m68k_write_memory_32(ptr-4, size);
-        mosLog("Allocated %d bytes at 0x%08X\n", size, ptr);
-      }
-      m68k_write_memory_32(handle, ptr);
+      handle = mosNewHandle(size);
+      
       mosLog("Allocated a master pointer at 0x%08X\n", handle);
       if (resultCodePtr) m68k_write_memory_16(resultCodePtr, 0);
       m68k_write_memory_32(sp, handle);
@@ -774,11 +757,11 @@ void trapOSDispatch(unsigned short instr) {
     case 0x20: { // mfTempDisposHandleSel
       unsigned int resultCodePtr = m68k_read_memory_32(sp); sp += 4;
       unsigned int handle = m68k_read_memory_32(sp); sp += 4;
-      unsigned int ptr = handle?m68k_read_memory_32(handle):0;
-      mosLog("TempDisposeHandle(0x%08X(->0x%08X))\n", handle, ptr);
-      // FIXME: implement this!
+      mosLog("TempDisposeHandle(0x%08X)\n", handle);
+      
+      mosDisposeHandle(handle);
+      
       if (resultCodePtr) m68k_write_memory_16(resultCodePtr, 0);
-      m68k_write_memory_32(sp, handle);
       break; }
     default:
       mosLog("ERROR: unimplemented OSDispatch 0x%02X\n", selector);
@@ -789,192 +772,6 @@ void trapOSDispatch(unsigned short instr) {
   m68k_set_reg(M68K_REG_SP, sp);
 }
 
-TrapNativeCall tncNewPtrClear = { htons(0xAFFF), &trapNewPtrClear, htons(0x4E75) };
-TrapNativeCall tncNewPtr = { htons(0xAFFF), &trapNewPtr, htons(0x4E75) };
-TrapNativeCall tncGetTrapAddress = { htons(0xAFFF), &trapGetTrapAddress, htons(0x4E75) };
-TrapNativeCall tncSetToolBoxTrapAddress = { htons(0xAFFF), &trapSetToolBoxTrapAddress, htons(0x4E75) };
-TrapNativeCall tncLoadSeg = { htons(0xAFFF), &trapLoadSeg, htons(0x4E75) };
-TrapNativeCall tncHGetState = { htons(0xAFFF), &trapHGetState, htons(0x4E75) };
-TrapNativeCall tncHLock = { htons(0xAFFF), &trapHLock, htons(0x4E75) };
-TrapNativeCall tncMoveHHi = { htons(0xAFFF), &trapMoveHHi, htons(0x4E75) };
-TrapNativeCall tncStripAddress = { htons(0xAFFF), &trapStripAddress, htons(0x4E75) };
-TrapNativeCall tncUnimplemented = { htons(0xAFFF), &trapUninmplemented, htons(0x4E75) };
-TrapNativeCall tncGetResource = { htons(0xAFFF), &trapGetResource, htons(0x4E75) };
-TrapNativeCall tncSizeResource = { htons(0xAFFF), &trapSizeResource, htons(0x4E75) };
-TrapNativeCall tncGetNamedResource = { htons(0xAFFF), &trapGetNamedResource, htons(0x4E75) };
-TrapNativeCall tncBlockMove = { htons(0xAFFF), &trapBlockMove, htons(0x4E75) };
-TrapNativeCall tncOSDispatch = { htons(0xAFFF), &trapOSDispatch, htons(0x4E75) };
-TrapNativeCall tncDisposePtr = { htons(0xAFFF), &trapDisposePtr, htons(0x4E75) };
-TrapNativeCall tncRecoverHandle = { htons(0xAFFF), &trapRecoverHandle, htons(0x4E75) };
-TrapNativeCall tncDisposeHandle = { htons(0xAFFF), &trapDisposeHandle, htons(0x4E75) };
-TrapNativeCall tncNewHandle = { htons(0xAFFF), &trapNewHandle, htons(0x4E75) };
-
-#define TNCUREF     &tncUnimplemented,
-#define TNCUREF16   TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-#define TNCUREF256  TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16 TNCUREF16
-
-//        case 0xa820: mosTrapGetNamedResource(instr); break; // TODO: unverified
-
-
-TrapNativeCall *tncTable[0x1000] = {
-  /* A000 */ //TNCUREF256
-  /*   A000 */ TNCUREF16
-  /*   A010 */ //TNCUREF16
-  /*     A010 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*     A018 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncDisposePtr,
-  /*   A020 */ //TNCUREF16
-  /*     A020 */ TNCUREF TNCUREF TNCUREF &tncDisposeHandle, TNCUREF TNCUREF TNCUREF TNCUREF
-  /*     A028 */ TNCUREF &tncHLock, TNCUREF TNCUREF TNCUREF TNCUREF &tncBlockMove, TNCUREF
-  /*   A030 */ TNCUREF16
-  /*   A040 */ TNCUREF16
-  /*   A050 */ //TNCUREF16
-  /*     A050 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncStripAddress, TNCUREF TNCUREF
-  /*     A058 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*   A060 */ //TNCUREF16
-  /*     A060 */ TNCUREF TNCUREF TNCUREF TNCUREF &tncMoveHHi, TNCUREF TNCUREF TNCUREF
-  /*     A068 */ TNCUREF &tncHGetState, TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*   A070 */ TNCUREF16
-  /*   A080 */ TNCUREF16
-  /*   A090 */ TNCUREF16
-  /*   A0A0 */ TNCUREF16
-  /*   A0B0 */ TNCUREF16
-  /*   A0C0 */ TNCUREF16
-  /*   A0D0 */ TNCUREF16
-  /*   A0E0 */ TNCUREF16
-  /*   A0F0 */ TNCUREF16
-  /* A100 */ //TNCUREF256
-  /*   A100 */ TNCUREF16
-  /*   A110 */ //TNCUREF16
-  /*     A110 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*     A118 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncNewPtr, TNCUREF
-  /*   A120 */ //TNCUREF16
-  /*     A120 */ TNCUREF TNCUREF &tncNewHandle, TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*     A128 */ &tncRecoverHandle, TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*   A130 */ TNCUREF16
-  /*   A140 */ TNCUREF16
-  /*   A150 */ TNCUREF16
-  /*   A160 */ TNCUREF16
-  /*   A170 */ TNCUREF16
-  /*   A180 */ TNCUREF16
-  /*   A190 */ TNCUREF16
-  /*   A1a0 */ TNCUREF16
-  /*   A1b0 */ TNCUREF16
-  /*   A1c0 */ TNCUREF16
-  /*   A1d0 */ TNCUREF16
-  /*   A1e0 */ TNCUREF16
-  /*   A1f0 */ TNCUREF16
-  /* A200 */ TNCUREF256
-  /* A300 */ // TNCUREF256
-  /*   A300 */ TNCUREF16
-  /*   A310 */ // TNCUREF16
-  /*     A310 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*     A318 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncNewPtrClear, TNCUREF
-  /*   A320 */ TNCUREF16
-  /*   A330 */ TNCUREF16
-  /*   A340 */ //TNCUREF16
-  /*     A340 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncGetTrapAddress, TNCUREF
-  /*     A348 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*   A350 */ TNCUREF16
-  /*   A360 */ TNCUREF16
-  /*   A370 */ TNCUREF16
-  /*   A380 */ TNCUREF16
-  /*   A390 */ TNCUREF16
-  /*   A3A0 */ TNCUREF16
-  /*   A3B0 */ TNCUREF16
-  /*   A3C0 */ TNCUREF16
-  /*   A3D0 */ TNCUREF16
-  /*   A3E0 */ TNCUREF16
-  /*   A3F0 */ TNCUREF16
-  /* A400 */ TNCUREF256
-  /* A500 */ TNCUREF256
-  /* A600 */ //TNCUREF256
-  /*   A600 */ TNCUREF16
-  /*   A610 */ TNCUREF16
-  /*   A620 */ TNCUREF16
-  /*   A630 */ TNCUREF16
-  /*   A640 */ //TNCUREF16
-  /*     A640 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncSetToolBoxTrapAddress,
-  /*     A648 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*   A650 */ TNCUREF16
-  /*   A660 */ TNCUREF16
-  /*   A670 */ TNCUREF16
-  /*   A680 */ TNCUREF16
-  /*   A690 */ TNCUREF16
-  /*   A6A0 */ TNCUREF16
-  /*   A6B0 */ TNCUREF16
-  /*   A6C0 */ TNCUREF16
-  /*   A6D0 */ TNCUREF16
-  /*   A6E0 */ TNCUREF16
-  /*   A6F0 */ TNCUREF16
-  /* A700 */ //TNCUREF256
-  /*   A700 */ TNCUREF16
-  /*   A710 */ TNCUREF16
-  /*   A720 */ TNCUREF16
-  /*   A730 */ TNCUREF16
-  /*   A740 */ //TNCUREF16
-  /*     A740 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncGetTrapAddress, TNCUREF
-  /*     A748 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*   A750 */ TNCUREF16
-  /*   A760 */ TNCUREF16
-  /*   A770 */ TNCUREF16
-  /*   A780 */ TNCUREF16
-  /*   A790 */ TNCUREF16
-  /*   A7A0 */ TNCUREF16
-  /*   A7B0 */ TNCUREF16
-  /*   A7C0 */ TNCUREF16
-  /*   A7D0 */ TNCUREF16
-  /*   A7E0 */ TNCUREF16
-  /*   A7F0 */ TNCUREF16
-  /* A800 */ //TNCUREF256
-  /*   A800 */ TNCUREF16
-  /*   A810 */ TNCUREF16
-  /*   A820 */ //TNCUREF16 
-  /*     A820 */ &tncGetNamedResource, TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*     A828 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*   A830 */ TNCUREF16
-  /*   A840 */ TNCUREF16
-  /*   A850 */ TNCUREF16
-  /*   A860 */ TNCUREF16
-  /*   A870 */ TNCUREF16
-  /*   A880 */ //TNCUREF16
-  /*     A880 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*     A888 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF &tncOSDispatch,
-  /*   A890 */ TNCUREF16
-  /*   A8A0 */ TNCUREF16
-  /*   A8B0 */ TNCUREF16
-  /*   A8C0 */ TNCUREF16
-  /*   A8D0 */ TNCUREF16
-  /*   A8E0 */ TNCUREF16
-  /*   A8F0 */ TNCUREF16
-  /* A900 */ //TNCUREF256
-  /*   A900 */ TNCUREF16
-  /*   A910 */ TNCUREF16
-  /*   A920 */ TNCUREF16
-  /*   A930 */ TNCUREF16
-  /*   A940 */ TNCUREF16
-  /*   A950 */ TNCUREF16
-  /*   A960 */ TNCUREF16
-  /*   A970 */ TNCUREF16
-  /*   A980 */ TNCUREF16
-  /*   A990 */ TNCUREF16
-  /*   A9A0 */ //TNCUREF16
-  /*     A9A0 */ &tncGetResource, TNCUREF TNCUREF TNCUREF TNCUREF &tncSizeResource, TNCUREF TNCUREF
-  /*     A9A8 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*   A9B0 */ TNCUREF16
-  /*   A9C0 */ TNCUREF16
-  /*   A9D0 */ TNCUREF16
-  /*   A9E0 */ TNCUREF16
-  /*   A9F0 */ //TNCUREF16
-  /*     A9F0 */ &tncLoadSeg, TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /*     A9F8 */ TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF TNCUREF
-  /* AA00 */ TNCUREF256
-  /* AB00 */ TNCUREF256
-  /* AC00 */ TNCUREF256
-  /* AD00 */ TNCUREF256
-  /* AE00 */ TNCUREF256
-  /* AF00 */ TNCUREF256
-  //TNCUREF
-};
 
 
 void trapGoNative(unsigned short instr) {
@@ -998,9 +795,6 @@ void trapBreakpoint(unsigned short instr) {
   }
   bp = 0;
 }
-
-unsigned short trapDispatchTrap = htons(0xaffd);
-unsigned short trapExitApp = htons(0xaffc);
 
 void trapDispatch(unsigned short)
 {
@@ -1026,14 +820,14 @@ void trapDispatch(unsigned short)
 
 const char *printAddr(unsigned int addr)
 {
-  static char buf[8][32];
+  static char buf[8][32] = { 0 };
   static int currBuf = 0;
   
   // use the next buffer
   currBuf = (currBuf+1) & 7;
   char *dst = buf[currBuf];
   
-  int i;
+  int i = 0;
   for (i=0; i<20; i++) {
     if (addr>=gResourceStart[i] && addr<gResourceEnd[i]) {
       sprintf(dst, "%02d.%05X", i, addr-gResourceStart[i]);
@@ -1052,7 +846,6 @@ void m68k_instruction_hook()
     gPendingBreakpoint = 0L;
   afterBreakpoint:
     unsigned int pc = m68k_get_reg(0L, M68K_REG_PC);
-    m68k_disassemble(buf, pc, M68K_CPU_TYPE_68000);
     unsigned short instr = m68k_read_memory_16(pc);
 //    mosLog("\n");
 //    mosLog("D0:%08X D1:%08X D2:%08X D3:%08X D4:%08X D5:%08X D6:%08X D7:%08X\n",
@@ -1075,6 +868,7 @@ void m68k_instruction_hook()
 //           m68k_get_reg(0L, M68K_REG_A6),
 //           m68k_get_reg(0L, M68K_REG_A7)
 //           );
+    m68k_disassemble(buf, pc, M68K_CPU_TYPE_68020);
     if ( (instr & 0xf000) == 0xa000 ) {
       mosLog("0x%s: %s (%s)\n", printAddr(pc), buf, trapName(instr));
     } else {
@@ -1107,8 +901,9 @@ int runApp()
 {
   m68k_set_cpu_type(M68K_CPU_TYPE_68020);
   m68k_pulse_reset();
+  m68k_set_cpu_type(M68K_CPU_TYPE_68020);
   m68k_set_reg(M68K_REG_PC, gMosCurrentA5 + gMosCurJTOffset + 2);
-  m68k_write_memory_32(gMosCurrentStackBase-4, (unsigned int)(&trapExitApp)); // end of app
+  m68k_write_memory_32(gMosCurrentStackBase-4, trapExitApp); // end of app
   m68k_set_reg(M68K_REG_SP, gMosCurrentStackBase-4);
   m68k_set_reg(M68K_REG_A5, gMosCurrentA5);
   m68k_set_instr_hook_callback(m68k_instruction_hook);
@@ -1154,7 +949,7 @@ void trapSyFAccess(unsigned short) {
   unsigned int file = m68k_read_memory_32(sp+12);
   mosLog("Opening file '%s', flags=0x%02X, arg=0x%08X\n", filename, flags, file);
   // TODO: convert filename and path from Mac Format to Unix Format
-  char *uxFilename = (char*)malloc(strlen(filename)+2);
+  char *uxFilename = (char*)calloc(1, strlen(filename)+2);
   const char *src = filename;
   char *dst = uxFilename;
   if (*src!=':') *dst++='/';
@@ -1293,100 +1088,159 @@ void trapSyIoctl(unsigned short) {
 }
 
 
-TrapNativeCall tncSyFAccess = { htons(0xAFFF), &trapSyFAccess, htons(0x4E75) };
-TrapNativeCall tncSyClose   = { htons(0xAFFF), &trapSyClose,   htons(0x4E75) };
-TrapNativeCall tncSyRead    = { htons(0xAFFF), &trapSyRead,    htons(0x4E75) };
-TrapNativeCall tncSyWrite   = { htons(0xAFFF), &trapSyWrite,   htons(0x4E75) };
-TrapNativeCall tncSyIoctl   = { htons(0xAFFF), &trapSyIoctl,   htons(0x4E75) };
+mosPtr createGlue(mosTrap trap, unsigned short index = 0)
+{
+  // FIXME: unaligned format
+  mosPtr p = mosNewPtr(12);
+  mosWrite16(p,   0xAFFF);              // trap native
+  *((unsigned int*)(p+4)) = (unsigned int)trap;  // function pointer
+  mosWrite16(p+8, 0x4E75);              // rts
+  
+  if (index) {
+    tncTable[index&0x0FFF] = (TrapNativeCall*)p;
+  }
+  
+  return p;
+}
 
 
-unsigned int gSomeTable20[] =
-{ //    access       close (long)       Read               Write              Ioctl              FAccess
-  // NEW:            Open(?)            Close(!)           Read(!)            Write(!)           IoCtl(!)
-  // 'FSYS'          0x00289e1a         0x00289e22         0x00289e2a         0x00289e32         0x00289e3a
-  //                 fsClose            fsRead             fsWrite            fsIoctl            syFAccess (huh?)
-  htonl('FSYS'), htonl((unsigned int)(&tncSyFAccess)), htonl((unsigned int)(&tncSyClose)), htonl((unsigned int)(&tncSyRead)), htonl((unsigned int)(&tncSyWrite)), htonl((unsigned int)(&tncSyIoctl)), // 'FSYS' co   file jump table?
-  // 'CONS'          00 28 9d ea        00 28 9d f2        00 28 9d fa        00 28 9e 02        00 28 9e 0a
-  htonl('CONS'), htonl((unsigned int)(&tncSyFAccess)), htonl((unsigned int)(&tncSyClose)), htonl((unsigned int)(&tncSyRead)), htonl((unsigned int)(&tncSyWrite)), htonl((unsigned int)(&tncSyIoctl)), // 'CONS' fs
-  // 'SYST'          00 28 9e 42        00 28 9e 4a        00 28 9e 52        00 28 9e 5a        00 28 9e 62
-  htonl('SYST'), htonl((unsigned int)(&tncSyFAccess)), htonl((unsigned int)(&tncSyClose)), htonl((unsigned int)(&tncSyRead)), htonl((unsigned int)(&tncSyWrite)), htonl((unsigned int)(&tncSyIoctl)), // 'SYST' sy
-  htonl(0x00000000), htonl(0x00000000), htonl(0x00000000), htonl(0x00000000), htonl(0x00000000), htonl(0x00000000), // ??
-  htonl(0x00000000), htonl(0x00000000), htonl(0x00000000), htonl(0x00000000), htonl(0x00000000), htonl(0x00000000)  // ??
-};
+void setupSystem(int argc, const char **argv, const char **envp)
+{
+  int i;
+  
+  // allocate a stack
+  gMosCurrentStackBase = mosNewPtr(MOS_STACK_SIZE) + MOS_STACK_SIZE;
+  
+  // create other memory that will be accessed by the emulation
+  trapDispatchTrap = mosNewPtr(2);
+  mosWrite16(trapDispatchTrap, 0xaffd);
+  trapExitApp = mosNewPtr(2);
+  mosWrite16(trapExitApp, 0xaffc);
+  
+  // create supported trap glue
+  mosPtr tncUnimplemented = createGlue(trapUninmplemented);
+  tncTable = (TrapNativeCall**)mosNewPtr(0x0fff*4);
+  for (i=0; i<0x0FFF; i++) {
+    tncTable[i] = (TrapNativeCall*)tncUnimplemented;
+  }
+  // TODO: fill the entire array!
+  createGlue(trapNewPtrClear, 0xA31E);
+  createGlue(trapNewPtr, 0xA11E);
+  createGlue(trapGetTrapAddress, 0xA146);
+  tncTable[0x0746] = tncTable[0x0146];
+  tncTable[0x0346] = tncTable[0x0146];
+  createGlue(trapSetToolBoxTrapAddress, 0xA647);
+  createGlue(trapLoadSeg, 0xA9F0);
+  createGlue(trapHGetState, 0xA069);
+  createGlue(trapHLock, 0xA029);
+  createGlue(trapMoveHHi, 0xA064);
+  createGlue(trapStripAddress, 0xA055);
+  createGlue(trapGetResource, 0xA9A0);
+  createGlue(trapSizeResource, 0xA9A5);
+  createGlue(trapGetNamedResource, 0xA9A1);
+  tncTable[0x0820] = tncTable[0x09A1];
+  createGlue(trapBlockMove, 0xA02E);
+  createGlue(trapOSDispatch, 0xA88F);
+  createGlue(trapDisposePtr, 0xA01F);
+  createGlue(trapRecoverHandle, 0xA128);
+  createGlue(trapDisposeHandle, 0xA023);
+  createGlue(trapNewHandle, 0xA122);
 
+  
+  // create native calls
+  mosPtr tncSyFAccess = createGlue(trapSyFAccess);
+  mosPtr tncSyClose   = createGlue(trapSyClose);
+  mosPtr tncSyRead    = createGlue(trapSyRead);
+  mosPtr tncSyWrite   = createGlue(trapSyWrite);
+  mosPtr tncSyIoctl   = createGlue(trapSyIoctl);
+  
+  // create the IO function table
+  mosPtr ioGlue = mosNewPtr(4*6*5); // only three entries are set, two entries are 0'd
+  //    FSYS entry
+  mosWrite32(ioGlue+0x0000+0x0000, 'FSYS');
+  mosWrite32(ioGlue+0x0000+0x0004, tncSyFAccess);
+  mosWrite32(ioGlue+0x0000+0x0008, tncSyClose);
+  mosWrite32(ioGlue+0x0000+0x000C, tncSyRead);
+  mosWrite32(ioGlue+0x0000+0x0010, tncSyWrite);
+  mosWrite32(ioGlue+0x0000+0x0014, tncSyIoctl);
+  //    CONS entry
+  mosWrite32(ioGlue+0x0018+0x0000, 'CONS');
+  mosWrite32(ioGlue+0x0018+0x0004, tncSyFAccess);
+  mosWrite32(ioGlue+0x0018+0x0008, tncSyClose);
+  mosWrite32(ioGlue+0x0018+0x000C, tncSyRead);
+  mosWrite32(ioGlue+0x0018+0x0010, tncSyWrite);
+  mosWrite32(ioGlue+0x0018+0x0014, tncSyIoctl);
+  //    SYST entry
+  mosWrite32(ioGlue+0x0030+0x0000, 'SYST');
+  mosWrite32(ioGlue+0x0030+0x0004, tncSyFAccess);
+  mosWrite32(ioGlue+0x0030+0x0008, tncSyClose);
+  mosWrite32(ioGlue+0x0030+0x000C, tncSyRead);
+  mosWrite32(ioGlue+0x0030+0x0010, tncSyWrite);
+  mosWrite32(ioGlue+0x0030+0x0014, tncSyIoctl);
+  
+  // create the file descriptor entries for stdin, stdout, and stderr
+  mosPtr fdEntries = mosNewPtr(5*4*3);
+  // stdin
+  mosWrite16(fdEntries+0x0000+0x0000, 1); // input
+  mosWrite16(fdEntries+0x0000+0x0002, 0); // status OK
+  mosWrite32(fdEntries+0x0000+0x0004, ioGlue+0x0000); // FSYS
+  mosWrite32(fdEntries+0x0000+0x0008, (unsigned int)(&stdFiles[0])); // back to host environment
+  mosWrite32(fdEntries+0x0000+0x000C, 0); // transfer size
+  mosWrite32(fdEntries+0x0000+0x0010, 0); // transfer buffer address
+  // stdout
+  mosWrite16(fdEntries+0x0014+0x0000, 2); // output
+  mosWrite16(fdEntries+0x0014+0x0002, 0); // status OK
+  mosWrite32(fdEntries+0x0014+0x0004, ioGlue+0x0000); // FSYS
+  mosWrite32(fdEntries+0x0014+0x0008, (unsigned int)(&stdFiles[1])); // back to host environment
+  mosWrite32(fdEntries+0x0014+0x000C, 0); // transfer size
+  mosWrite32(fdEntries+0x0014+0x0010, 0); // transfer buffer address
+  // stderr
+  mosWrite16(fdEntries+0x0028+0x0000, 2); // output
+  mosWrite16(fdEntries+0x0028+0x0002, 0); // status OK
+  mosWrite32(fdEntries+0x0028+0x0004, ioGlue+0x0000); // FSYS
+  mosWrite32(fdEntries+0x0028+0x0008, (unsigned int)(&stdFiles[2])); // back to host environment
+  mosWrite32(fdEntries+0x0028+0x000C, 0); // transfer size
+  mosWrite32(fdEntries+0x0028+0x0010, 0); // transfer buffer address
+  
+  // create the argv array
+  // FIXME: do this dynamically
+  mosPtr argv0 = mosNewPtr("ARM6asm");
+  mosPtr argv1 = mosNewPtr("/Users/matt/dev/Alienate/ARM6asm/test.s");
+  mosPtr mpwArgv = mosNewPtr(12);
+  mosWrite32(mpwArgv+0, argv0);
+  mosWrite32(mpwArgv+4, argv1);
+  mosWrite32(mpwArgv+8, 0);
+  
+  // TODO: envp support
+  
+  // create the MPW memory table that allows tools to connect back to MPW
+  mosPtr mpwMem = mosNewPtr(0x0028);
+  mosWrite16(mpwMem+0x0000, 0x5348);
+  mosWrite32(mpwMem+0x0002, 2); // argc
+  mosWrite32(mpwMem+0x0006, mpwArgv); // argv
+  mosWrite32(mpwMem+0x000A, 0); // envp
+  mosWrite32(mpwMem+0x000E, 0); // NULL
+  mosWrite32(mpwMem+0x0012, 0); // unknown
+  mosWrite32(mpwMem+0x0016, 0); // unknown
+  mosWrite16(mpwMem+0x001A, 400); // file table size
+  mosWrite32(mpwMem+0x001C, fdEntries); // table of file descriptor
+  mosWrite32(mpwMem+0x0020, ioGlue);    // table of file functions
+  mosWrite32(mpwMem+0x0024, 0); // unknown
+  
+  // create the MPW master pointer
+  mosPtr mpwHandle = mosNewPtr(8);
+  mosWrite32(mpwHandle+0x0000, 'MPGM'); // ID
+  mosWrite32(mpwHandle+0x0004, mpwMem); // data
+  
+  gMosMPWHandle = mpwHandle;
+}
 
-unsigned int gSomeTable1c[] =
-{ // mode   error       jump table         ???                size               src or dst buffer
-  /* stdin */ // htons(1), 0.w,    0.l,      0,
-              //  htonl(0xdeaf0000), htonl(0xdeaf0001), htonl(0xdeaf0002), htonl(0xdeaf0003), htonl(0xdeaf0004), // stdin
-              //  htonl(0xdeaf0000), htonl(0xdeaf0001), htonl(0xdeaf0002), htonl(0xdeaf0003), htonl(0xdeaf0004), // stdout
-              //  htonl(0xdeaf0000), htonl(0xdeaf0001), htonl(0xdeaf0002), htonl(0xdeaf0003), htonl(0xdeaf0004)  // stderr
-  htonl(0x00010000), htonl((unsigned int)(&gSomeTable20[0])), htonl((unsigned int)(&stdFiles[0])), 0, 0,
-  htonl(0x00020000), htonl((unsigned int)(&gSomeTable20[0])), htonl((unsigned int)(&stdFiles[1])), 0, 0,
-  htonl(0x00020000), htonl((unsigned int)(&gSomeTable20[0])), htonl((unsigned int)(&stdFiles[2])), 0, 0,
-};
-
-
-
-const char *gArgv0 = "m68kAsm";
-//const char *gArgv1 = "Unix:test.s:";
-const char *gArgv1 = "/Users/matt/dev/Alienate/ARM6asm/test.s";
-
-unsigned int gArgv[] = {
-  htonl((unsigned int)(gArgv0)),
-  htonl((unsigned int)(gArgv1)),
-  0x00000000
-};
-
-const char *gEnvp0 = "mosrun\0true";
-
-unsigned int gEnvp[] = {
-  htonl((unsigned int)(gEnvp0)),
-  0x00000000
-};
-
-struct MPWMem {
-  unsigned short notNull;
-  unsigned int argc;
-  unsigned int argv;
-  unsigned int envp;
-  unsigned int unknown0e;
-  unsigned int unknown12;
-  unsigned int unknown16;
-  unsigned short fileTablesSize;
-  unsigned int someTable1c;
-  unsigned int someTable20;
-  unsigned int unknown24;
-}  __attribute__((packed));
-struct MPWMem gMPWMem = {
-  htons(0x5348),
-  htonl(2),
-  htonl((unsigned int)(gArgv)),
-  htonl((unsigned int)(gEnvp)),
-  0, // null
-  0, // ptr
-  0, // ptr
-  htons(400),
-  htonl((unsigned int)(&gSomeTable1c)), // some table, size is 60 bytes
-  htonl((unsigned int)(&gSomeTable20)), // some Table with 5 entries, 24 bytes each (SADEV entries are 8 bytes for 16 entries, hmmmm)
-  0  // ptr
-};
-
-struct {
-  unsigned int id;
-  unsigned int mpwPtr;
-} gMacPgm = {
-  htonl('MPGM'), htonl((unsigned int)(&gMPWMem))
-};
-
-/*
- Find #include <mpw.h> and inside we should find "extern MPWBLOCK * _pMPWBlock;" 
- */
 
 unsigned int m68k_read_memory_8(unsigned int address)
 {
-  if (address>=0x1000)
-    return *((unsigned char*)address);
+  if (address>=0x1000) {
+    return mosRead8(address);
+  }
   if (address<0x1e00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
@@ -1406,8 +1260,9 @@ unsigned int m68k_read_memory_16(unsigned int address)
   if (gPendingBreakpoint && gPendingBreakpoint->address==address) {
     return gPendingBreakpoint->originalCmd;
   }
-  if (address>=0x1000)
-    return ntohs(*((unsigned short*)address));
+  if (address>=0x1000) {
+    return mosRead16(address);
+  }
   if (address<0x1e00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
@@ -1432,8 +1287,7 @@ unsigned int m68k_read_memory_16(unsigned int address)
 unsigned int m68k_read_memory_32(unsigned int address)
 {
   if (address>=0x1000) {
-    unsigned int v = ntohl(*((unsigned long*)address));
-    return v;
+    return mosRead32(address);
   }
   if (address<0x1e00) {
     const char *rem = "";
@@ -1443,9 +1297,10 @@ unsigned int m68k_read_memory_32(unsigned int address)
   switch (address) {
     case 0: return 0;
     case 4: return 0;
-    case 0x0028: return (unsigned int)(&trapDispatchTrap);
-      //    case 0x0316: return 0; // MacPgm // this is MPW memory with argc and more
-    case 0x0316: return (unsigned int)(&gMacPgm); // MacPgm // this is MPW memory with argc and more
+    case 0x0028: return trapDispatchTrap;
+    //case 0x0316: return 0; // MacPgm // this is MPW memory with argc and more
+    //case 0x0316: return (unsigned int)(&gMacPgm); // MacPgm // this is MPW memory with argc and more
+    case 0x0316: return gMosMPWHandle;
     case 0x0910: // CurApName [GLOBAL VAR] Name of current application (length byte followed by up to 31 characters) name of application [STRING[31]]
     case 0x0914:
     case 0x0918:
@@ -1480,7 +1335,7 @@ unsigned int m68k_read_disassembler_32(unsigned int address)
 void m68k_write_memory_8(unsigned int address, unsigned int value)
 {
   if (address>=0x1000) {
-    *((unsigned char*)address) = value;
+    mosWriteUnsafe8(address, value);
     return;
   }
   if (address<0x1e00) {
@@ -1499,7 +1354,7 @@ void m68k_write_memory_8(unsigned int address, unsigned int value)
 void m68k_write_memory_16(unsigned int address, unsigned int value)
 {
   if (address>=0x1000) {
-    *((unsigned short*)address) = htons(value);
+    mosWriteUnsafe16(address, value);
     return;
   }
   if (address<0x1e00) {
@@ -1517,7 +1372,7 @@ void m68k_write_memory_16(unsigned int address, unsigned int value)
 void m68k_write_memory_32(unsigned int address, unsigned int value)
 {
   if (address>=0x1000) {
-    *((unsigned long*)address) = htonl(value);
+    mosWriteUnsafe32(address, value);
     return;
   }
   if (address<0x1e00) {
@@ -1556,6 +1411,8 @@ void setBreakpoints()
   
   //  addBreakpoint(1, 0x00003E70, "Usage");
   //  addBreakpoint(7, 0x000000DA, "Exit");
+
+  //addBreakpoint(8, 0x00000000, "Launch");
 }
 
 
@@ -1564,7 +1421,14 @@ void setBreakpoints()
 // TODO: TripleDash arguments?   ARM6asm ---unix2mac myFile.s -o ---mac2unix myFile.o ---stdout2unix ---stderr2unix
 int main(int argc, const char **argv, const char **envp)
 {
-  FILE *logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
+#ifdef MOS_UNITTESTS
+  mosMemoeryUnittests();
+#else
+  
+  
+  // FILE *logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
+  FILE *logFile = stdout;
+  // FILE *logFile = 0L;
   if (logFile)
     mosLogTo(logFile);
   
@@ -1591,7 +1455,7 @@ int main(int argc, const char **argv, const char **envp)
 
   if (logFile)
     fclose(logFile);
-  
+#endif
   return 0;
 }
 

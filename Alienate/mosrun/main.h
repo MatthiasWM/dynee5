@@ -10,5 +10,15 @@
 #define mosrun_main_h
 
 
+#define MOS_BOUNDS_CHECK 1
+
+
+typedef unsigned int mosPtr;
+
+typedef unsigned int mosHandle;
+
+typedef unsigned int uint;
+
+typedef void (*mosTrap)(unsigned short);
 
 #endif

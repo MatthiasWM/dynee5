@@ -14,6 +14,18 @@
 		C91C085F1792DF23001FD72A /* m68kopnz.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C085A1792DF23001FD72A /* m68kopnz.c */; };
 		C91C08601792DF23001FD72A /* m68kops.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C085B1792DF23001FD72A /* m68kops.c */; };
 		C91C08611792E16C001FD72A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C91C08561792DCA2001FD72A /* main.cpp */; };
+		C921DB9517A92F9600E5235D /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C921DB9317A92F9600E5235D /* memory.cpp */; };
+		C921DB9817A9B4B300E5235D /* m68kcpu.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C084B1792DC5B001FD72A /* m68kcpu.c */; };
+		C921DB9917A9B4B300E5235D /* m68kdasm.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C084D1792DC5B001FD72A /* m68kdasm.c */; };
+		C921DB9A17A9B4B300E5235D /* m68kopac.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C08581792DF23001FD72A /* m68kopac.c */; };
+		C921DB9B17A9B4B300E5235D /* m68kopdm.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C08591792DF23001FD72A /* m68kopdm.c */; };
+		C921DB9C17A9B4B300E5235D /* m68kopnz.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C085A1792DF23001FD72A /* m68kopnz.c */; };
+		C921DB9D17A9B4B300E5235D /* m68kops.c in Sources */ = {isa = PBXBuildFile; fileRef = C91C085B1792DF23001FD72A /* m68kops.c */; };
+		C921DB9E17A9B4B300E5235D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C91C08561792DCA2001FD72A /* main.cpp */; };
+		C921DB9F17A9B4B300E5235D /* names.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B669281797ED4100A4AC9B /* names.cpp */; };
+		C921DBA017A9B4B300E5235D /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7C217A7F84A009AEECF /* log.cpp */; };
+		C921DBA117A9B4B300E5235D /* rsrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7DF17A81043009AEECF /* rsrc.cpp */; };
+		C921DBA217A9B4B300E5235D /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C921DB9317A92F9600E5235D /* memory.cpp */; };
 		C99DC7C417A7F84A009AEECF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7C217A7F84A009AEECF /* log.cpp */; };
 		C99DC7E117A81043009AEECF /* rsrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7DF17A81043009AEECF /* rsrc.cpp */; };
 		C9B669291797ED4100A4AC9B /* names.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B669281797ED4100A4AC9B /* names.cpp */; };
@@ -21,6 +33,15 @@
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C91C08311792DB6D001FD72A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		C921DBA417A9B4B300E5235D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -47,6 +68,9 @@
 		C91C085A1792DF23001FD72A /* m68kopnz.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = m68kopnz.c; sourceTree = "<group>"; };
 		C91C085B1792DF23001FD72A /* m68kops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = m68kops.c; sourceTree = "<group>"; };
 		C91C085C1792DF23001FD72A /* m68kops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = m68kops.h; sourceTree = "<group>"; };
+		C921DB9317A92F9600E5235D /* memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory.cpp; sourceTree = SOURCE_ROOT; };
+		C921DB9417A92F9600E5235D /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = SOURCE_ROOT; };
+		C921DBA817A9B4B300E5235D /* mosrun_unittests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mosrun_unittests; sourceTree = BUILT_PRODUCTS_DIR; };
 		C99DC7C217A7F84A009AEECF /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = SOURCE_ROOT; };
 		C99DC7C317A7F84A009AEECF /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = SOURCE_ROOT; };
 		C99DC7C517A7FA36009AEECF /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = SOURCE_ROOT; };
@@ -59,6 +83,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		C91C08301792DB6D001FD72A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C921DBA317A9B4B300E5235D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -80,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				C91C08331792DB6D001FD72A /* mosrun */,
+				C921DBA817A9B4B300E5235D /* mosrun_unittests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -96,6 +128,8 @@
 				C99DC7C317A7F84A009AEECF /* log.h */,
 				C99DC7DF17A81043009AEECF /* rsrc.cpp */,
 				C99DC7E017A81043009AEECF /* rsrc.h */,
+				C921DB9317A92F9600E5235D /* memory.cpp */,
+				C921DB9417A92F9600E5235D /* memory.h */,
 				C91C08571792DCA2001FD72A /* mosrun.1 */,
 				C91C083F1792DC5B001FD72A /* musashi331 */,
 			);
@@ -141,6 +175,23 @@
 			productReference = C91C08331792DB6D001FD72A /* mosrun */;
 			productType = "com.apple.product-type.tool";
 		};
+		C921DB9617A9B4B300E5235D /* mosrun_unittests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C921DBA517A9B4B300E5235D /* Build configuration list for PBXNativeTarget "mosrun_unittests" */;
+			buildPhases = (
+				C921DB9717A9B4B300E5235D /* Sources */,
+				C921DBA317A9B4B300E5235D /* Frameworks */,
+				C921DBA417A9B4B300E5235D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = mosrun_unittests;
+			productName = mosrun;
+			productReference = C921DBA817A9B4B300E5235D /* mosrun_unittests */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -163,6 +214,7 @@
 			projectRoot = "";
 			targets = (
 				C91C08321792DB6D001FD72A /* mosrun */,
+				C921DB9617A9B4B300E5235D /* mosrun_unittests */,
 			);
 		};
 /* End PBXProject section */
@@ -182,6 +234,25 @@
 				C9B669291797ED4100A4AC9B /* names.cpp in Sources */,
 				C99DC7C417A7F84A009AEECF /* log.cpp in Sources */,
 				C99DC7E117A81043009AEECF /* rsrc.cpp in Sources */,
+				C921DB9517A92F9600E5235D /* memory.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C921DB9717A9B4B300E5235D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C921DB9817A9B4B300E5235D /* m68kcpu.c in Sources */,
+				C921DB9917A9B4B300E5235D /* m68kdasm.c in Sources */,
+				C921DB9A17A9B4B300E5235D /* m68kopac.c in Sources */,
+				C921DB9B17A9B4B300E5235D /* m68kopdm.c in Sources */,
+				C921DB9C17A9B4B300E5235D /* m68kopnz.c in Sources */,
+				C921DB9D17A9B4B300E5235D /* m68kops.c in Sources */,
+				C921DB9E17A9B4B300E5235D /* main.cpp in Sources */,
+				C921DB9F17A9B4B300E5235D /* names.cpp in Sources */,
+				C921DBA017A9B4B300E5235D /* log.cpp in Sources */,
+				C921DBA117A9B4B300E5235D /* rsrc.cpp in Sources */,
+				C921DBA217A9B4B300E5235D /* memory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +330,25 @@
 			};
 			name = Release;
 		};
+		C921DBA617A9B4B300E5235D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MOS_UNITTESTS,
+					"DEBUG=1",
+				);
+				PRODUCT_NAME = mosrun_unittests;
+			};
+			name = Debug;
+		};
+		C921DBA717A9B4B300E5235D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = MOS_UNITTESTS;
+				PRODUCT_NAME = mosrun_unittests;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -276,6 +366,15 @@
 			buildConfigurations = (
 				C91C083D1792DB6D001FD72A /* Debug */,
 				C91C083E1792DB6D001FD72A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C921DBA517A9B4B300E5235D /* Build configuration list for PBXNativeTarget "mosrun_unittests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C921DBA617A9B4B300E5235D /* Debug */,
+				C921DBA717A9B4B300E5235D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

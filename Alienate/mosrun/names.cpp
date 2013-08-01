@@ -1766,7 +1766,6 @@ GVars gvarLUT[] = {
 
 const char *gvarName(unsigned int id, const char ** description)
 {
-  static char buf[64];
   if (description) *description = "";
   if (id>0x1e00) {
     return "NOT_A_LOCAL_VARIABLE";
