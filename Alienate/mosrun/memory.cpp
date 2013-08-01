@@ -309,6 +309,18 @@ struct MosBlock *mosToBlock(mosPtr ptr)
   return ((MosBlock*)(ptr - sizeof(MosBlock)));
 }
 
+// TDOD: verify this function
+mosHandle mosRecoverHandle(mosPtr ptr)
+{
+  MosBlock *me = gHandleList.first();
+  while (me) {
+    mosHandle hdl = mosToPtr(me);
+    if (mosRead32(hdl)==ptr)
+      return hdl;
+    me = gHandleList.next(me);
+  }
+  return 0;
+}
 
 #ifdef MOS_UNITTESTS
 void mosMemoeryUnittests()

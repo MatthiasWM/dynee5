@@ -596,12 +596,11 @@ void trapNewHandle(unsigned short) {
 }
 
 
-/** Find the Maste Pointer that points t some memory location and return a handle to it.
- * FIXME: this one single silly call requires that I keep track of every silly memory allocation. Sigh!
+/** Find the Maste Pointer that points to some memory location and return a handle to it.
  */
 void trapRecoverHandle(unsigned short) {
   unsigned int ptr = m68k_get_reg(0L, M68K_REG_A0);
-  unsigned int hdl = 0;
+  unsigned int hdl = mosRecoverHandle(ptr);
   mosLog("            RecoverHandle(0x%08X)=0x%08X\n", ptr, hdl);
   m68k_set_reg(M68K_REG_A0, hdl);
   // FIXME: set Memerr, but do not set D0!
@@ -941,13 +940,41 @@ MosFile stdFiles[] = {
  *   +08.l = command
  *   +0c.l = ptr to return value?
  */
+///* 'd' => "directory" ops */
+//#define F_DELETE        (('d'<<8)|0x01)
+//#define F_RENAME        (('d'<<8)|0x02)
+//#define F_OPEN          (('d'<<8)|0x00)     /* reserved for operating system use  */
+///* 'e' => "editor" ops */
+//#define F_GTABINFO      (('e'<<8)|0x00)     /* get tab offset for file            */
+//#define F_STABINFO      (('e'<<8)|0x01)     /* set  "   "      "   "              */
+//#define F_GFONTINFO     (('e'<<8)|0x02)     /* get font number and size for file  */
+//#define F_SFONTINFO     (('e'<<8)|0x03)     /* set  "     "     "   "    "   "    */
+//#define F_GPRINTREC     (('e'<<8)|0x04)     /* get print record for file          */
+//#define F_SPRINTREC     (('e'<<8)|0x05)     /* set   "     "     "   "            */
+//#define F_GSELINFO      (('e'<<8)|0x06)     /* get selection information for file */
+//#define F_SSELINFO      (('e'<<8)|0x07)     /* set     "          "       "   "   */
+//#define F_GWININFO      (('e'<<8)|0x08)     /* get current window position        */
+//#define F_SWININFO      (('e'<<8)|0x09)     /* set    "      "       "            */
+//#define F_GSCROLLINFO   (('e'<<8)|0x0A)     /* get scroll information             */
+//#define F_SSCROLLINFO   (('e'<<8)|0x0B)     /* set    "        "                  */
+//#define F_GMARKER       (('e'<<8)|0x0D)     /* Get Marker                         */
+//#define F_SMARKER       (('e'<<8)|0x0C)     /* Set   "                            */
+//#define F_GSAVEONCLOSE  (('e'<<8)|0x0F)     /* Get Save on close                  */
+//#define F_SSAVEONCLOSE  (('e'<<8)|0x0E)     /* Set  "   "    "                    */
+
 void trapSyFAccess(unsigned short) {
   mosLog("TODO: trapSyFAccess\n");
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   const char *filename = (char*)m68k_read_memory_32(sp+4);
-  unsigned int flags = m68k_read_memory_8(sp+10);
+  unsigned int cmd = m68k_read_memory_32(sp+8);
   unsigned int file = m68k_read_memory_32(sp+12);
-  mosLog("Opening file '%s', flags=0x%02X, arg=0x%08X\n", filename, flags, file);
+  unsigned short flags = m68k_read_memory_16(file);
+  mosLog("Opening file '%s', cmd=0x%08X, arg=0x%08X, flags=0x%04X\n", filename, cmd, file, flags);
+  if (cmd!=0x00006400) { // '..d.'
+    mosError("Unknown file access command 0x%08X\n", cmd);
+    m68k_set_reg(M68K_REG_D0, EINVAL); // no error
+    return;
+  }
   // TODO: convert filename and path from Mac Format to Unix Format
   char *uxFilename = (char*)calloc(1, strlen(filename)+2);
   const char *src = filename;
@@ -963,8 +990,27 @@ void trapSyFAccess(unsigned short) {
   // TODO: find the actual file and open it
   // open the file
   // TODO: what if the file is already open?
-  int fd = ::open(uxFilename, flags & 0x3f);
+  // FIXME: do we need to convert the flags?
+  int fd = -1;
+  unsigned short mode = ((flags&3)-1);  // convert O_RDRW, O_RDONLY and O_WRONLY
+  if ( flags & MOS_O_APPEND ) mode |= O_APPEND;
+  if ( flags & MOS_O_APPEND ) mode |= O_APPEND;
+  if ( flags & MOS_O_CREAT ) mode |= O_CREAT;
+  if ( flags & MOS_O_TRUNC ) mode |= O_TRUNC;
+  if ( flags & MOS_O_EXCL ) mode |= O_EXCL;
+  if ( flags & MOS_O_NRESOLVE ) mode |= O_NOFOLLOW;
+  // MOS_O_BINARY not tested
+  if ( flags & MOS_O_RSRC ) {
+    mosError("Open File %s: no resource fork support yet!\n", uxFilename);
+    errno = 2;
+  } else if ( flags & MOS_O_ALIAS ) {
+      mosError("Open File %s: no alias support yet!\n", uxFilename);
+      errno = 2;
+  } else {
+    fd = ::open(uxFilename, mode, 0644);
+  }
   if (fd==-1) { // error
+    fprintf(stderr, "Can't open file %s (mode 0x%04X): %s\n", uxFilename, mode, strerror(errno));
     m68k_set_reg(M68K_REG_D0, errno); // just return the error code
     free(uxFilename);
   } else {
@@ -978,8 +1024,6 @@ void trapSyFAccess(unsigned short) {
   }
 }
 
-// stack: // FIXME: This is Close()
-//   fileptr.l
 void trapSyClose(unsigned short) {
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
@@ -1023,6 +1067,14 @@ void trapSyWrite(unsigned short) {
   MosFile *mosFile = (MosFile*)m68k_read_memory_32(file+8);
   void *buffer = (void*)m68k_read_memory_32(file+16);
   unsigned int size = m68k_read_memory_32(file+12);
+  // FIXME: convert to Unix line endings
+  int i;
+  char *s = (char*)buffer;
+  for (i=size; i>0; --i) {
+    if (*s=='\r') *s = '\n';
+    s++;
+  }
+  //
   int ret = write(mosFile->fd, buffer, size);
   if (ret==-1) {
     m68k_set_reg(M68K_REG_D0, errno);
@@ -1037,6 +1089,25 @@ void trapSyWrite(unsigned short) {
 //   0x6601.w = FIOCLEX _IO('f', 1) /* set exclusive use on fd */
 //   fileptr.l
 //
+
+//# define FIOLSEEK               (('f'<<8)|0x00)  /* Apple internal use only */
+//# define FIODUPFD               (('f'<<8)|0x01)  /* Apple internal use only */
+//
+//# define FIOINTERACTIVE (('f'<<8)|0x02)  /* If device is interactive */
+//# define FIOBUFSIZE             (('f'<<8)|0x03)  /* Return optimal buffer size */
+//# define FIOFNAME               (('f'<<8)|0x04)  /* Return filename */
+//# define FIOREFNUM              (('f'<<8)|0x05)  /* Return fs refnum */
+//# define FIOSETEOF              (('f'<<8)|0x06)  /* Set file length */
+//
+///*
+// *   IOCTLs which begin with "TIO" are for TTY (i.e., console or
+// *               terminal-related) device control requests.
+// */
+//
+//# define TIOFLUSH   (('t'<<8)|0x00)             /* discard unread input.  arg is ignored */
+//# define TIOSPORT   (('t'<<8)|0x01)             /* Obsolete -- do not use */
+//# define TIOGPORT   (('t'<<8)|0x02)             /* Obsolete -- do not use */
+
 void trapSyIoctl(unsigned short) {
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   unsigned int file = m68k_read_memory_32(sp+4);
@@ -1426,9 +1497,9 @@ int main(int argc, const char **argv, const char **envp)
 #else
   
   
-  // FILE *logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
-  FILE *logFile = stdout;
-  // FILE *logFile = 0L;
+  FILE *logFile = 0L;
+  // logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
+  // logFile = stdout;
   if (logFile)
     mosLogTo(logFile);
   

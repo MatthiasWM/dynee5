@@ -41,6 +41,9 @@ unsigned int mosCheckBounds(mosPtr, unsigned int size);
 mosPtr mosToPtr(struct MosBlock *block);
 struct MosBlock *mosToBlock(mosPtr ptr);
 
+mosHandle mosRecoverHandle(mosPtr);
+
+
 #ifdef MOS_UNITTESTS
 void mosMemoeryUnittests();
 #endif
