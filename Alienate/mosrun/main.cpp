@@ -93,6 +93,7 @@
 #include "log.h"
 #include "rsrc.h"
 #include "memory.h"
+#include "filename.h"
 
 // Inlcude Musahi's m68k emulator
 
@@ -989,17 +990,7 @@ void trapSyFAccess(unsigned short) {
     m68k_set_reg(M68K_REG_D0, EINVAL); // no error
     return;
   }
-  // TODO: convert filename and path from Mac Format to Unix Format
-  char *uxFilename = (char*)calloc(1, strlen(filename)+2);
-  const char *src = filename;
-  char *dst = uxFilename;
-  if (*src!=':') *dst++='/';
-  for (;;) {
-    char c = *src++;
-    if (c==':') c = '/'; // TODO: what about the trailing ':'
-    *dst++ = c;
-    if (c==0) break;
-  }
+  char *uxFilename = strdup(mosFilenameConvertTo(filename, MOS_TYPE_UNIX));
   // TODO: add our MosFile reference for internal data management
   // TODO: find the actual file and open it
   // open the file
@@ -1301,6 +1292,12 @@ void setupSystem(int argc, const char **argv, const char **envp)
     const char *arg = srcArgv[i];
     // TODO: spot tripple-dash commands and take them off the list
     // TODO: argv[0] should only be the filename (MacOS has a 32 byte limt here!
+    if (i==0) {
+      arg = mosFilenameName(arg);
+    } else {
+      if (arg[0]!='-')
+        arg = mosFilenameConvertTo(arg, MOS_TYPE_MAC);
+    }
     // TODO: spot path names and convert them to Mac format if they are in Unix/OSX format
     mosWrite32(vArgv+4*i, mosNewPtr(arg));
   }

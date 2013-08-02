@@ -26,6 +26,7 @@
 		C921DBA017A9B4B300E5235D /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7C217A7F84A009AEECF /* log.cpp */; };
 		C921DBA117A9B4B300E5235D /* rsrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7DF17A81043009AEECF /* rsrc.cpp */; };
 		C921DBA217A9B4B300E5235D /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C921DB9317A92F9600E5235D /* memory.cpp */; };
+		C921DBAB17ABFF6D00E5235D /* filename.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C921DBA917ABFF6C00E5235D /* filename.cpp */; };
 		C99DC7C417A7F84A009AEECF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7C217A7F84A009AEECF /* log.cpp */; };
 		C99DC7E117A81043009AEECF /* rsrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99DC7DF17A81043009AEECF /* rsrc.cpp */; };
 		C9B669291797ED4100A4AC9B /* names.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9B669281797ED4100A4AC9B /* names.cpp */; };
@@ -71,6 +72,8 @@
 		C921DB9317A92F9600E5235D /* memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = memory.cpp; sourceTree = SOURCE_ROOT; };
 		C921DB9417A92F9600E5235D /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = SOURCE_ROOT; };
 		C921DBA817A9B4B300E5235D /* mosrun_unittests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = mosrun_unittests; sourceTree = BUILT_PRODUCTS_DIR; };
+		C921DBA917ABFF6C00E5235D /* filename.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filename.cpp; sourceTree = SOURCE_ROOT; };
+		C921DBAA17ABFF6C00E5235D /* filename.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filename.h; sourceTree = SOURCE_ROOT; };
 		C99DC7C217A7F84A009AEECF /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = SOURCE_ROOT; };
 		C99DC7C317A7F84A009AEECF /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = SOURCE_ROOT; };
 		C99DC7C517A7FA36009AEECF /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = SOURCE_ROOT; };
@@ -130,6 +133,8 @@
 				C99DC7E017A81043009AEECF /* rsrc.h */,
 				C921DB9317A92F9600E5235D /* memory.cpp */,
 				C921DB9417A92F9600E5235D /* memory.h */,
+				C921DBA917ABFF6C00E5235D /* filename.cpp */,
+				C921DBAA17ABFF6C00E5235D /* filename.h */,
 				C91C08571792DCA2001FD72A /* mosrun.1 */,
 				C91C083F1792DC5B001FD72A /* musashi331 */,
 			);
@@ -235,6 +240,7 @@
 				C99DC7C417A7F84A009AEECF /* log.cpp in Sources */,
 				C99DC7E117A81043009AEECF /* rsrc.cpp in Sources */,
 				C921DB9517A92F9600E5235D /* memory.cpp in Sources */,
+				C921DBAB17ABFF6D00E5235D /* filename.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
