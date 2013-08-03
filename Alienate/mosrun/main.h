@@ -41,12 +41,23 @@
 #define MOS_SEEK_END        2
 #define MOS_SEEK_SET        0
 
+
+const int MOS_STACK_SIZE = 0x8000;
+
+
 typedef unsigned int mosPtr;
-
 typedef unsigned int mosHandle;
-
 typedef unsigned int uint;
+typedef unsigned char byte;
+typedef unsigned int mosResType;
 
 typedef void (*mosTrap)(unsigned short);
+
+extern byte *theApp;
+extern unsigned int theAppSize;
+extern byte *theRsrc;
+extern unsigned int theRsrcSize;
+extern byte *theJumpTable;
+
 
 #endif

@@ -12,23 +12,45 @@ builder, natively and as part of a build chain. But other MPW tools will
 likely run well without modification.
 
 mosrun is a simulator for a MacOS 7.6.6 environment, paired with a Motorola
-68020 emulator that will make the binaries run on other machines. Only the
+68020 emulator that will make the binaries run on other CPUs. Only the
 first few kBytes of RAM are emulated to provide better access to MacOS global 
 variables. The rest of the RAM is used directly, requiring the MPW Tools to
-be linked in 'far' mode (32 bit vs. 24 bit). The host needs to run in 32 bit
-mode as well.
+be linked in 'far' mode (32 bit vs. 24 bit). The host appliction needs to run 
+in 32 bit mode as well (not in 64 bit mode!).
 
 The emulator is a copy of Musashi's m68k. It runs perfectly for what I need,
 providing a simple clean interface.
 
 The simulator part is based on Inside Macintosh I-III and what ever other 
-documentation I could gather from the 'net. It is currently an utter mess as
-this project is still in the proof-of-concept stage.
+documentation I could gather from the 'net. It is currently still quite
+messy as this project is just comming out of proof-of-concept stage.
 
 The MPW interface is not documented. File handling uses a Unix/BSD style 
 interface, but is still based on a lot of reverse engineering and guess work.
 
 No Apple ROMs are needed.
+
+
+USAGE:
+
+If mosrun was precompiled with the resource fork of an MPW tool, just rename 
+mosrun to the neame of the original tool and it will behave like that tool.
+
+Example: > ARM6asm test.s
+
+As a stand-alone tool, the first argument should be the name of the MPW tool.
+Note that MPW tools make intense use of the Resource Fork. If you did not 
+copy the tool's resource fork, mosrun will fail to run.
+
+Example: > mosrun MPWTools/ARM6asm test.s
+
+In either case, if the first argument is '---run' (triple dash option), mosrun
+will try to load the MPW tool in the following argument.
+
+Example: > mosrun ---run MPWTools/ARM6asm test.s
+
+Further triple dash options will follow, concerning the conversion of 
+file names and data streams.
 
 
 As of July 28th, 2013:
@@ -45,6 +67,17 @@ As of July 28th, 2013:
    keeping the resource fork intact (that's where the code lives!), it should
    output the m68k code as it is executed, and the ARM6asm Usage text.
 
+As of August 3rd, 2013:
+
+1. ARM6asm seems to run with no complaints. I was able to generate object code
+   from assembler files.
+
+2. I have moved memory management into its own module, giving it some very 
+   useful bounds checking and allocation tracking.
+   
+3. I have added filename-separator translation. MacRoman to UTF8 translation
+   will follow shortly.
+   
 
 Alternatives:
 
@@ -57,9 +90,18 @@ Executor:
 Classix:
   Very similar to mosrun, but focusses on PPC. Some of the Newton tools are not
   available in PPC though, only in m68k.
+mpw:
+  https://github.com/ksherlock/mpw/blob/master/README.text came online the same 
+  week that I went online. Wow!
+macloader:
+  https://github.com/lordhoto/macloader tries something similar but seems to be
+  inactive.
+and of course Carbon/Rosetta on OS X with PowerPC
+  http://www.apple.com
 
 
-No warranties, no claim, enjoy.
+mosrun is licensed under GPL V3. No warranties, no claim, enjoy.
+
 
 
 ================================================================================

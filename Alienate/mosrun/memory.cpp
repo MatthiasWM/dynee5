@@ -27,14 +27,25 @@
 #include <arpa/inet.h>
 
 
+/**
+ * This is the header for every block of simulator memory.
+ *
+ * Memory is managed in two double-linked lists. One list manages all memory
+ * allocations, one list manages all master pointers.
+ */
 typedef struct MosBlock {
+  /** next block in the list */
   struct MosBlock *hNext;
+  /** previous block in the list */
   struct MosBlock *hPrev;
   unsigned int hSize;
   unsigned int hFlags;
 } MosBlock;
 
 
+/**
+ * Manages a double-linked list of memory blocks.
+ */
 class MosBlockList
 {
 public:
@@ -56,6 +67,9 @@ MosBlockList gMemList;
 MosBlockList gHandleList;
 
 
+/**
+ * Create a new memory list.
+ */
 MosBlockList::MosBlockList()
 {
   hFirst = 0;
@@ -63,6 +77,9 @@ MosBlockList::MosBlockList()
 }
 
 
+/**
+ * Delete the list and all allocated blocks.
+ */
 MosBlockList::~MosBlockList()
 {
   MosBlock *me = first();
@@ -76,6 +93,13 @@ MosBlockList::~MosBlockList()
 }
 
 
+/**
+ * Link a block into this list.
+ *
+ * This function does not allocate anything.
+ * Do not link blocks that are already linked anywhere else, or desaster
+ * will strike.
+ */
 void MosBlockList::link(MosBlock *me)
 {
   MosBlock *prev = hLast;
@@ -93,6 +117,12 @@ void MosBlockList::link(MosBlock *me)
 }
 
 
+/**
+ * Unlink a block from this list.
+ *
+ * This function does not free any memeory.
+ * Do not unlink blocks taht are not in this list, or desaster will strike.
+ */
 void MosBlockList::unlink(MosBlock *me)
 {
   MosBlock *prev = me->hPrev;
@@ -112,6 +142,11 @@ void MosBlockList::unlink(MosBlock *me)
 }
 
 
+/**
+ * Find this block in the list.
+ *
+ * \return true if the block is actually in the list.
+ */
 bool MosBlockList::contains(MosBlock *me)
 {
   MosBlock *b = first();
@@ -123,6 +158,13 @@ bool MosBlockList::contains(MosBlock *me)
 }
 
 
+/**
+ * Find a range of memory in the list.
+ *
+ * \param start start address of the memory range
+ * \param size size of the memory range
+ * \return true if the range of memory is fully contained anywhere in the list.
+ */
 bool MosBlockList::contains(mosPtr start, unsigned int size)
 {
   MosBlock *me = first();
@@ -137,6 +179,9 @@ bool MosBlockList::contains(mosPtr start, unsigned int size)
 }
 
 
+/**
+ * Allocate and copy a text string in the memory list.
+ */
 mosPtr mosNewPtr(const char *text)
 {
   int size = strlen(text)+1;
@@ -146,6 +191,9 @@ mosPtr mosNewPtr(const char *text)
 }
 
 
+/**
+ * Allocate and clear memory in the memory list.
+ */
 mosPtr mosNewPtr(unsigned int size)
 {
   MosBlock *me = (MosBlock*)calloc(1, size+sizeof(MosBlock));
@@ -156,6 +204,9 @@ mosPtr mosNewPtr(unsigned int size)
 }
 
 
+/**
+ * Free memory and unlink it from the memory list.
+ */
 void mosDisposePtr(mosPtr ptr)
 {
   if (!ptr) return;
@@ -172,6 +223,9 @@ void mosDisposePtr(mosPtr ptr)
 }
 
 
+/**
+ * Get the allocated size of a memory block.
+ */
 unsigned int mosPtrSize(mosPtr ptr)
 {
   MosBlock *me = mosToBlock(ptr);
@@ -179,6 +233,9 @@ unsigned int mosPtrSize(mosPtr ptr)
 }
 
 
+/**
+ * Allocate memory and a master pointer and link them into the lists.
+ */
 mosHandle mosNewHandle(unsigned int size)
 {
   mosPtr ptr = 0;
@@ -195,6 +252,9 @@ mosHandle mosNewHandle(unsigned int size)
 }
 
 
+/**
+ * Free memeory and its master pointer.
+ */
 void mosDisposeHandle(mosHandle hdl)
 {
   if (!hdl) return;
@@ -215,114 +275,11 @@ void mosDisposeHandle(mosHandle hdl)
 }
 
 
-void mosWriteUnsafe32(mosPtr addr, unsigned int value)
-{
-  *((unsigned int*)(addr)) = htonl(value);
-}
-
-void mosWrite32(mosPtr addr, unsigned int value)
-{
-#if MOS_BOUNDS_CHECK
-  if (!gHandleList.contains(addr, 4) && !gMemList.contains(addr, 4)) {
-    mosError("Attempt to write 4 bytes to unknown address 0x%08X (0x%08x)!\n", addr, value);
-  }
-#endif
-  mosWriteUnsafe32(addr, value);
-}
-
-
-void mosWriteUnsafe16(mosPtr addr, unsigned short value)
-{
-  *((unsigned short*)(addr)) = htons(value);
-}
-
-void mosWrite16(mosPtr addr, unsigned short value)
-{
-#if MOS_BOUNDS_CHECK
-  if (!gHandleList.contains(addr, 2) && !gMemList.contains(addr, 2)) {
-    mosError("Attempt to write 2 bytes to unknown address 0x%08X (0x%04x)!\n", addr, value);
-  }
-#endif
-  mosWriteUnsafe16(addr, value);
-}
-
-
-void mosWriteUnsafe8(mosPtr addr, unsigned char value)
-{
-  *((unsigned char*)(addr)) = value;
-}
-
-void mosWrite8(mosPtr addr, unsigned char value)
-{
-#if MOS_BOUNDS_CHECK
-  if (!gHandleList.contains(addr, 1) && !gMemList.contains(addr, 1)) {
-    mosError("Attempt to write 1 byte to unknown address 0x%08X (0x%02x)!\n", addr, value);
-  }
-#endif
-  mosWriteUnsafe8(addr, value);
-}
-
-
-
-unsigned int mosReadUnsafe32(mosPtr addr)
-{
-  return htonl(*((unsigned int*)(addr)));
-}
-
-unsigned int mosRead32(mosPtr addr)
-{
-#if MOS_BOUNDS_CHECK
-  if (!gHandleList.contains(addr, 4) && !gMemList.contains(addr, 4)) {
-    mosError("Attempt to read 4 bytes from unknown address 0x%08X!\n", addr);
-  }
-#endif
-  return mosReadUnsafe32(addr);
-}
-
-
-unsigned short mosReadUnsafe16(mosPtr addr)
-{
-  return htons(*((unsigned short*)(addr)));
-}
-
-unsigned short mosRead16(mosPtr addr)
-{
-#if MOS_BOUNDS_CHECK
-  if (!gHandleList.contains(addr, 2) && !gMemList.contains(addr, 2)) {
-    mosError("Attempt to read 2 bytes from unknown address 0x%08X!\n", addr);
-  }
-#endif
-  return mosReadUnsafe16(addr);
-}
-
-
-unsigned char mosReadUnsafe8(mosPtr addr)
-{
-  return *((unsigned char*)(addr));
-}
-
-unsigned char mosRead8(mosPtr addr)
-{
-#if MOS_BOUNDS_CHECK
-  if (!gHandleList.contains(addr, 1) && !gMemList.contains(addr, 1)) {
-    mosError("Attempt to read 2 bytes from unknown address 0x%08X!\n", addr);
-  }
-#endif
-  return mosReadUnsafe8(addr);
-}
-
-
-mosPtr mosToPtr(struct MosBlock *block)
-{
-  return ((unsigned int)(block)) + sizeof(MosBlock);
-}
-
-struct MosBlock *mosToBlock(mosPtr ptr)
-{
-  return ((MosBlock*)(ptr - sizeof(MosBlock)));
-}
-
-// TDOD: verify this function
+/**
+ * Find the master pointer using a memory pointer.
+ *
+ * \todo this function has not been verified.
+ */
 mosHandle mosRecoverHandle(mosPtr ptr)
 {
   MosBlock *me = gHandleList.first();
@@ -335,8 +292,168 @@ mosHandle mosRecoverHandle(mosPtr ptr)
   return 0;
 }
 
+
+/**
+ * Write anywhere into allocated RAM.
+ */
+void mosWriteUnsafe32(mosPtr addr, unsigned int value)
+{
+  *((unsigned int*)(addr)) = htonl(value);
+}
+
+
+/**
+ * Verify address allocation and write into RAM.
+ */
+void mosWrite32(mosPtr addr, unsigned int value)
+{
+#if MOS_BOUNDS_CHECK
+  if (!gHandleList.contains(addr, 4) && !gMemList.contains(addr, 4)) {
+    mosError("Attempt to write 4 bytes to unknown address 0x%08X (0x%08x)!\n", addr, value);
+  }
+#endif
+  mosWriteUnsafe32(addr, value);
+}
+
+
+/**
+ * Write anywhere into allocated RAM.
+ */
+void mosWriteUnsafe16(mosPtr addr, unsigned short value)
+{
+  *((unsigned short*)(addr)) = htons(value);
+}
+
+
+/**
+ * Verify address allocation and write into RAM.
+ */
+void mosWrite16(mosPtr addr, unsigned short value)
+{
+#if MOS_BOUNDS_CHECK
+  if (!gHandleList.contains(addr, 2) && !gMemList.contains(addr, 2)) {
+    mosError("Attempt to write 2 bytes to unknown address 0x%08X (0x%04x)!\n", addr, value);
+  }
+#endif
+  mosWriteUnsafe16(addr, value);
+}
+
+
+/**
+ * Write anywhere into allocated RAM.
+ */
+void mosWriteUnsafe8(mosPtr addr, unsigned char value)
+{
+  *((unsigned char*)(addr)) = value;
+}
+
+
+/**
+ * Verify address allocation and write into RAM.
+ */
+void mosWrite8(mosPtr addr, unsigned char value)
+{
+#if MOS_BOUNDS_CHECK
+  if (!gHandleList.contains(addr, 1) && !gMemList.contains(addr, 1)) {
+    mosError("Attempt to write 1 byte to unknown address 0x%08X (0x%02x)!\n", addr, value);
+  }
+#endif
+  mosWriteUnsafe8(addr, value);
+}
+
+
+/**
+ * Read anywhere from allocated RAM.
+ */
+unsigned int mosReadUnsafe32(mosPtr addr)
+{
+  return htonl(*((unsigned int*)(addr)));
+}
+
+
+/**
+ * Verify address allocation and read from RAM.
+ */
+unsigned int mosRead32(mosPtr addr)
+{
+#if MOS_BOUNDS_CHECK
+  if (!gHandleList.contains(addr, 4) && !gMemList.contains(addr, 4)) {
+    mosError("Attempt to read 4 bytes from unknown address 0x%08X!\n", addr);
+  }
+#endif
+  return mosReadUnsafe32(addr);
+}
+
+
+/**
+ * Read anywhere from allocated RAM.
+ */
+unsigned short mosReadUnsafe16(mosPtr addr)
+{
+  return htons(*((unsigned short*)(addr)));
+}
+
+
+/**
+ * Verify address allocation and read from RAM.
+ */
+unsigned short mosRead16(mosPtr addr)
+{
+#if MOS_BOUNDS_CHECK
+  if (!gHandleList.contains(addr, 2) && !gMemList.contains(addr, 2)) {
+    mosError("Attempt to read 2 bytes from unknown address 0x%08X!\n", addr);
+  }
+#endif
+  return mosReadUnsafe16(addr);
+}
+
+
+/**
+ * Read anywhere from allocated RAM.
+ */
+unsigned char mosReadUnsafe8(mosPtr addr)
+{
+  return *((unsigned char*)(addr));
+}
+
+
+/**
+ * Verify address allocation and read from RAM.
+ */
+unsigned char mosRead8(mosPtr addr)
+{
+#if MOS_BOUNDS_CHECK
+  if (!gHandleList.contains(addr, 1) && !gMemList.contains(addr, 1)) {
+    mosError("Attempt to read 2 bytes from unknown address 0x%08X!\n", addr);
+  }
+#endif
+  return mosReadUnsafe8(addr);
+}
+
+
+/**
+ * Convert a host memory location into a simulation memory pointer.
+ */
+mosPtr mosToPtr(struct MosBlock *block)
+{
+  return ((unsigned int)(block)) + sizeof(MosBlock);
+}
+
+
+/**
+ * Convert a simulation memory pointer into a host memory location.
+ */
+struct MosBlock *mosToBlock(mosPtr ptr)
+{
+  return ((MosBlock*)(ptr - sizeof(MosBlock)));
+}
+
+
 #ifdef MOS_UNITTESTS
-void mosMemoeryUnittests()
+/**
+ * Run a few tests on memory lists and allocations.
+ */
+void mosMemoryUnittests()
 {
   mosPtr p1 = mosNewPtr(100);
   mosPtr p2 = mosNewPtr(200);

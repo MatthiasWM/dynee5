@@ -868,6 +868,10 @@ Traps trapLUT[] = {
   { 0, 0 }
 };
 
+
+/**
+ * Return the name of a trap.
+ */
 const char *trapName(unsigned int id)
 {
   static char buf[64];
@@ -1783,6 +1787,9 @@ GVars gvarLUT[] = {
 };
 
 
+/**
+ * Return the name of the system variables.
+ */
 const char *gvarName(unsigned int id, const char ** description)
 {
   if (description) *description = "";

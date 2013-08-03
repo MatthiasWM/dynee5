@@ -48,17 +48,15 @@ unsigned int mosPtrSize(mosPtr);
 
 mosHandle mosNewHandle(unsigned int size);
 void mosDisposeHandle(mosHandle);
+mosHandle mosRecoverHandle(mosPtr);
 
 unsigned int mosCheckBounds(mosPtr, unsigned int size);
 
 mosPtr mosToPtr(struct MosBlock *block);
 struct MosBlock *mosToBlock(mosPtr ptr);
 
-mosHandle mosRecoverHandle(mosPtr);
-
-
 #ifdef MOS_UNITTESTS
-void mosMemoeryUnittests();
+void mosMemoryUnittests();
 #endif
 
 #endif /* defined(__mosrun__memory__) */
