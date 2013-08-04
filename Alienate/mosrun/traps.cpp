@@ -37,6 +37,8 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
+#include <time.h>
+#include <sys/time.h>
 
 // Include our own interfaces
 
@@ -548,6 +550,96 @@ void trapOSDispatch(unsigned short instr)
 
 
 /**
+ * [a9c6] Convert the number of seconds to a date.
+ *
+ * D0 = number of seconds since midnight Jan 1, 1904
+ * A0 = pointer to DateTimeRec structure
+ */
+void trapSecondsToDate(unsigned short instr)
+{
+  unsigned int seconds = m68k_get_reg(0L, M68K_REG_D0);
+  unsigned int datetime = m68k_get_reg(0L, M68K_REG_A0);
+  
+  time_t clock = seconds - 2082844800; // plus the time in seconds between 1904 and 1970.
+  struct tm *tm = gmtime(&clock);
+  
+  // fill the struct DateTimeRec
+  m68k_write_memory_16(datetime   , tm->tm_year+1900);  // ux: +1900  mac: actual year
+  m68k_write_memory_16(datetime+2 , tm->tm_mon+1);      // ux: 0-11   mac: 1-12 ?
+  m68k_write_memory_16(datetime+4 , tm->tm_mday+1);     // ux: 1-31   mac: 1-31 ?
+  m68k_write_memory_16(datetime+6 , tm->tm_hour);       // ux: 0-23   mac: 0-23 ?
+  m68k_write_memory_16(datetime+8 , tm->tm_min);        // ux: 0-59   mac: 0-59 ?
+  m68k_write_memory_16(datetime+10, tm->tm_sec);        // ux: 0-59   mac: 0-59 ?
+  m68k_write_memory_16(datetime+12, tm->tm_wday+1);     // ux: Sun=0  mac: 1= ?
+}
+
+
+/**
+ * [a975] Return the number of ticks (60th of a second since this computer was switched on.
+ */
+void trapTickCount(unsigned short instr)
+{
+  unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
+  
+  struct timeval tp;
+  gettimeofday(&tp, 0L);  
+  unsigned int ticks = tp.tv_sec*60 + tp.tv_usec/(1000000/60);
+  
+  m68k_write_memory_32(sp+4, ticks);
+}
+
+
+/**
+ * [A049] Mark a block as purgeable.
+ *
+ * We never purge blocks in the simulation.
+ */
+void trapHPurge(unsigned short instr)
+{
+  // nothing to do here
+}
+
+
+/**
+ * [A9A3] Release a resource from memory unless it changed.
+ *
+ * We never release resources.
+ */
+void trapReleaseResource(unsigned short instr)
+{
+  unsigned int sp   = m68k_get_reg(0L, M68K_REG_SP);
+  
+  unsigned int ret  = m68k_read_memory_32(sp); sp += 4;
+  unsigned int res  = m68k_read_memory_16(sp); sp += 4;
+  
+  res = 0; // don't actually do anything
+  
+  sp -= 4; m68k_write_memory_32(sp, ret);
+  
+  m68k_set_reg(M68K_REG_SP, sp);
+}
+
+
+/**
+ * [A051] Almost entirely undocumented.
+ *
+ * A0 points to the heap, so I guess the application expects some value to be 
+ * written there.
+ * D0 seems to be some magic number, probably an index into the PRAM
+ *
+ * We return 0 in D0 and 0 in (A0) and cross our fingers.
+ */
+void trapReadXPRam(unsigned short instr)
+{
+  unsigned int resultPtr = m68k_get_reg(0L, M68K_REG_A0);
+  if (resultPtr) {
+    m68k_write_memory_8(resultPtr, 0);
+  }
+  m68k_set_reg(M68K_REG_D0, 0);
+}
+
+
+/**
  * Go here for unimplemented traps.
  *
  * This function serves two purposes. It points out unimplemented traps that
@@ -688,6 +780,11 @@ void mosSetupTrapTable()
   createGlue(trapRecoverHandle, 0xA128);
   createGlue(trapDisposeHandle, 0xA023);
   createGlue(trapNewHandle, 0xA122);
+  createGlue(trapSecondsToDate, 0xA9C6);
+  createGlue(trapTickCount, 0xA975);
+  createGlue(trapHPurge, 0xA049);
+  createGlue(trapReleaseResource, 0xA9A3);
+  createGlue(trapReadXPRam, 0xA051);
 }
 
 

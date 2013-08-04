@@ -21,31 +21,25 @@
 
 
 //
-// 3/Aug/2013:
+// 4/Aug/2013:
 //    ARM6asm runs and creates object files
-//    ARM6c runs and creates object files, needs TickCount() and SecondToData()
+//    ARM6c runs and creates object files
 //    ARMCFront misses traps
 //      ERROR: unimplemented trap 0x0000A994: _CurResFile
 //      ERROR: unimplemented trap 0x0000A9A4: _HomeResFile
 //      ERROR: unimplemented trap 0x0000A80D: _Count1Resources
 //      ERROR: unimplemented trap 0x0000A80E: _Get1IxResource
 //      ERROR: unimplemented trap 0x0000A04A: _HNoPurge
-//    ARMCpp seems to run but misses traps:
-//      ERROR: unimplemented trap 0x0000A049: _HPurge
-//      ERROR: unimplemented trap 0x0000A9A3: _ReleaseResource
-//      ERROR: unimplemented trap 0x0000A23C: _CmpStringMarks
-//    ARMLink seems to run but misses traps:
-//      ERROR: unimplemented trap 0x0000A049: _HPurge
-//      ERROR: unimplemented trap 0x0000A9A3: _ReleaseResource
+//    ARMCpp runs and creates object files
+//    ARMLink runs, probably missing some files to link and generate an executable
 //    DumpAIF seems to run
 //    DumpAOF seems to run
 //    Makemake seems to run but misses traps:
-//      ERROR: unimplemented trap 0x0000A049: _HPurge
-//      ERROR: unimplemented trap 0x0000A9A3: _ReleaseResource
+//      ERROR: unimplemented trap 0x0000A9ED: _Pack6
+//      ERROR: unimplemented trap 0x0000A00C: _GetFileInfo
 //    Rex fails due to missing traps:
 //      ERROR: unimplemented trap 0x0000A994: _CurResFile
 //      ERROR: unimplemented trap 0x0000A9A4: _HomeResFile
-//      ERROR: unimplemented trap 0x0000A122: _NewHandle
 //
 
 // Inlcude all the required system headers
@@ -356,8 +350,8 @@ int main(int argc, const char **argv, const char **envp)
 #else
   
   FILE *logFile = 0L;
-  // logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
-  logFile = stdout;
+  logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
+  // logFile = stdout;
   if (logFile)
     mosLogTo(logFile);
   

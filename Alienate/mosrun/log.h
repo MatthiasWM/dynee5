@@ -26,6 +26,7 @@
 #include <stdio.h>
 
 
+FILE *mosLogFile();
 void mosLogTo(FILE *out);
 void mosLog(const char *format, ...);
 void mosWarning(const char *format, ...);

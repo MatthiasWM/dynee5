@@ -28,6 +28,15 @@ static FILE *gMosLogFile = 0L;
 
 
 /**
+ * Return the file struct to which we log our messages.
+ */
+FILE *mosLogFile()
+{
+  return gMosLogFile;
+}
+
+
+/**
  * Set the destination file for logging.
  * This call does not create or close any file handles.
  */
