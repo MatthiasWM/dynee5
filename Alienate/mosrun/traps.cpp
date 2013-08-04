@@ -138,6 +138,29 @@ void trapGetResource(unsigned short instr)
 
 
 /**
+ * [A9A2] Load a resource using a handle.
+ *
+ * sp+4.l  = handle
+ * sp.l    = return address
+ *
+ * \todo set gMosResErr as needed
+ */
+void trapLoadResource(unsigned short instr)
+{
+  unsigned int sp   = m68k_get_reg(0L, M68K_REG_SP);
+  
+  unsigned int ret  = mosRead32(sp); sp += 4;
+  unsigned int hdl  = m68k_read_memory_32(sp); sp+=4;
+  
+  hdl = 0; // we don;t support unloaded resources, so the resource should still be in memory
+  
+  sp-=4; m68k_write_memory_32(sp, ret);
+  
+  m68k_set_reg(M68K_REG_SP, sp);
+}
+
+
+/**
  * Load a resource using a name.
  *
  * sp+12.l = return value (handle to resource)
@@ -282,6 +305,26 @@ void trapRecoverHandle(unsigned short)
   mosLog("            RecoverHandle(0x%08X)=0x%08X\n", ptr, hdl);
   
   m68k_set_reg(M68K_REG_A0, hdl);
+}
+
+
+/**
+ * [A025] Get the size of the memory allocation that we point to.
+ *
+ * A0 = handle
+ * \return size in D0 or the result code (D0<0)
+ */
+void trapGetHandleSize(unsigned short)
+{
+  unsigned int hdl = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int ret = 0;
+  
+  unsigned int ptr = m68k_read_memory_32(hdl);
+  if (ptr) {
+    ret = mosPtrSize(ptr);
+  }
+  
+  m68k_set_reg(M68K_REG_D0, ret);
 }
 
 
@@ -473,6 +516,16 @@ void trapHLock(unsigned short instr) {
 
 
 /**
+ * [A02A] Unlock mamory in position.
+ *
+ * We never move memory, so there is no reason to implement this.
+ */
+void trapHUnlock(unsigned short instr) {
+  // nothing to do here
+}
+
+
+/**
  * Convert a 32-bit number into a 24-bit address.
  *
  * This function has been obsolete since 1992.
@@ -621,6 +674,51 @@ void trapReleaseResource(unsigned short instr)
 
 
 /**
+ * [A994] Return the number of the current Resource file.
+ *
+ * We only support a single res file, so return 1.
+ */
+void trapCurResFile(unsigned short instr)
+{
+  unsigned int sp   = m68k_get_reg(0L, M68K_REG_SP);
+  
+  unsigned int ret  = m68k_read_memory_32(sp); sp += 4;
+  
+  m68k_write_memory_32(sp, 1);  // my resource ID
+  sp-=4; m68k_write_memory_32(sp, ret);
+  
+  m68k_set_reg(M68K_REG_SP, sp);
+  m68k_set_reg(M68K_REG_D0, 0);
+}
+
+
+/**
+ * [A9A4] Use this Resource file from now on.
+ * 
+ * We support only a single Resource file, so, yeah, OK.
+ */
+void trapHomeResFile(unsigned short instr)
+{
+  unsigned int sp   = m68k_get_reg(0L, M68K_REG_SP);
+  
+  unsigned int ret  = m68k_read_memory_32(sp); sp += 4;
+  unsigned int hdl = m68k_read_memory_32(sp); sp+=4;
+  
+  hdl = 0;
+  
+  m68k_write_memory_32(sp, 0);
+  sp-=4; m68k_write_memory_32(sp, ret);
+  
+  m68k_set_reg(M68K_REG_SP, sp);
+  m68k_set_reg(M68K_REG_D0, 0);
+}
+
+
+// PROCEDURE UseResFile (refNum: INTEGER);
+// ERROR: unimplemented trap 0x0000AE00: _OpenCPort (POP)
+
+
+/**
  * [A051] Almost entirely undocumented.
  *
  * A0 points to the heap, so I guess the application expects some value to be 
@@ -759,32 +857,91 @@ void mosSetupTrapTable()
   for (i=0; i<0x0FFF; i++) {
     tncTable[i] = (TrapNativeCall*)tncUnimplemented;
   }
-  createGlue(trapNewPtrClear, 0xA31E);
+  
+  // -- Initialization and Allocation
+  
+  // InitApplZone
+  // SetApplBase
+  // InitZone
+  // GetApplLimit
+  // SetAppleLimit
+  // MaxApplZone
+  // MoreMasters
+  
+  // -- Heap Zone Access
+  
+  // GetZone
+  // SetZone
+  // SystemZone
+  // ApplicZone
+  
+  // -- Allocating and Releasing Relocatable Blocks
+  
+  createGlue(trapNewHandle, 0xA122);
+  createGlue(trapDisposeHandle, 0xA023);
+  createGlue(trapGetHandleSize, 0xA025);
+  // SetHandleSize
+  // HandleZone
+  createGlue(trapRecoverHandle, 0xA128);
+  // ReallocHandle
+  
+  // -- Allocating and Releasing Nonrelocatable Blocks
+  
   createGlue(trapNewPtr, 0xA11E);
+  createGlue(trapNewPtrClear, 0xA31E);
+  createGlue(trapDisposePtr, 0xA01F);
+  // GetPtrSize
+  // SetPtrSize
+  // PtrZone
+  
+  // -- Freeing Space in the Heap
+  
+  // FreeMem
+  // MaxMem
+  // CompactMem
+  // ReservMem
+  // PurgeMem
+  // EmptyHandle
+  
+  // -- Properties of Relocatable Blocks
+  
+  createGlue(trapHLock, 0xA029);
+  createGlue(trapHUnlock, 0xA02A);
+  createGlue(trapHPurge, 0xA049);
+  // HNoPurge
+  
+  // -- Grow Zone Operations
+  
+  // SetGrowZone
+  // GZSaveHnd
+
+  // -- Misc
+  
+  createGlue(trapBlockMove, 0xA02E);
+  // TopMem
+  createGlue(trapMoveHHi, 0xA064);
+  // MemError
+
+  
   createGlue(trapGetTrapAddress, 0xA146);
   tncTable[0x0746] = tncTable[0x0146];
   tncTable[0x0346] = tncTable[0x0146];
   createGlue(trapSetTrapAddress, 0xA647);
   createGlue(trapLoadSeg, 0xA9F0);
   createGlue(trapHGetState, 0xA069);
-  createGlue(trapHLock, 0xA029);
-  createGlue(trapMoveHHi, 0xA064);
   createGlue(trapStripAddress, 0xA055);
   createGlue(trapGetResource, 0xA9A0);
+  createGlue(trapLoadResource, 0xA9A2);
   createGlue(trapSizeResource, 0xA9A5);
   createGlue(trapGetNamedResource, 0xA9A1);
   tncTable[0x0820] = tncTable[0x09A1];
-  createGlue(trapBlockMove, 0xA02E);
   createGlue(trapOSDispatch, 0xA88F);
-  createGlue(trapDisposePtr, 0xA01F);
-  createGlue(trapRecoverHandle, 0xA128);
-  createGlue(trapDisposeHandle, 0xA023);
-  createGlue(trapNewHandle, 0xA122);
   createGlue(trapSecondsToDate, 0xA9C6);
   createGlue(trapTickCount, 0xA975);
-  createGlue(trapHPurge, 0xA049);
   createGlue(trapReleaseResource, 0xA9A3);
   createGlue(trapReadXPRam, 0xA051);
+  createGlue(trapCurResFile, 0xA994);
+  createGlue(trapHomeResFile, 0xA9A4);
 }
 
 
