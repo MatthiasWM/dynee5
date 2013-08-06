@@ -42,6 +42,12 @@ As a stand-alone tool, the first argument should be the name of the MPW tool.
 Note that MPW tools make intense use of the Resource Fork. If you did not 
 copy the tool's resource fork, mosrun will fail to run.
 
+Alternate usage: If a symbolic link is created which points to mosrun, then
+mosrun will use the name of the link to search for the tool binary. If for
+example a link named ARMCpp is created which points to mosrun, then mosrun
+will search first the directory specified in the MOSRUN_PATH variable, and
+then under /usr/local/lib/mosrun/ for the binary code.
+
 Example: > mosrun MPWTools/ARM6asm test.s
 
 In either case, if the first argument is '---run' (triple dash option), mosrun
@@ -52,6 +58,13 @@ Example: > mosrun ---run MPWTools/ARM6asm test.s
 Further triple dash options will follow, concerning the conversion of 
 file names and data streams.
 
+RESOURCE FORKS AND TOOL BINARIES:
+
+On Mac OS X, mosrun will open the resource fork of the NCT tools directly.
+This is not an option on other platforms: In this case, mosrun will open the
+tool's file name and read the code directly from there. This requires that the
+tool's code is first extracted from a Mac OS X computer by copying the resource
+fork, e.g. with "cat ARMCpp/rsrc > <path to new tool>/ARMCpp".
 
 As of July 28th, 2013:
 

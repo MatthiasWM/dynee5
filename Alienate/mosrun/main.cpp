@@ -49,6 +49,10 @@
 #include <errno.h>
 #include <string.h>
 #include <sys/xattr.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <limits.h>
 
 // Include our own interfaces
 
@@ -95,23 +99,62 @@ const unsigned int kMosTicks          = 0x016A;  // ticks since last boot (unsig
 const unsigned int kMosDeskHook       = 0x0A6C;  // hook for painting desktop (pointer)
 const unsigned int kMosMBarHeight     = 0x0BAA;  // height of menu bar (integer)
 
+/**
+ * Find native tools in load path
+ */
+const char *toolPath(const char *aName)
+{
+  static char path[PATH_MAX];
+  struct stat st;
+
+  if (aName[0] == '/')
+    return aName;
+
+  path[0] = 0;
+  if (getenv("MOSRUN_PATH") != NULL) {
+    strcpy(path, getenv("MOSRUN_PATH"));
+    if (path[strlen(path) - 1] != '/') strcat(path, "/");
+    strcat(path, aName);
+  }
+  if (path[0] == 0 || stat(path, &st) != 0) {
+    strcpy(path, "/usr/local/lib/mosrun/");
+    strcat(path, aName);
+  }
+  return path;
+}
 
 /**
  * Load the executable part of a file from the resource fork.
  */
 int loadApp(const char *aName)
 {
-  ssize_t size = getxattr(aName, "com.apple.ResourceFork", 0L, 0, 0, 0);
+  const char *path;
+
+  path = toolPath(aName);
+#if defined (__APPLE__) && defined (__MACH__)
+  ssize_t size = getxattr(path, "com.apple.ResourceFork", 0L, 0, 0, 0);
   if (size==-1) {
     return 0;
   }
   theAppSize = size;
   theApp = (byte*)mosNewPtr(size);
-  ssize_t ret = getxattr(aName, "com.apple.ResourceFork", theApp, size, 0, 0);
+  ssize_t ret = getxattr(path, "com.apple.ResourceFork", theApp, size, 0, 0);
   if (ret==-1) {
     return 0;
   }
-  mosLog("%s has a %ld byte resource fork\n", aName, size);  
+  mosLog("%s has a %ld byte resource fork\n", path, size);  
+#else
+  FILE *f;
+  struct stat st;
+  f = fopen(path, "rb");
+  if (f == NULL)
+    return 0;
+  stat(path, &st);
+  theAppSize = st.st_size;
+  theApp = (byte*)mosNewPtr(theAppSize);
+  fread(theApp, 1, theAppSize, f);
+  fclose(f);
+#endif
   readResourceMap();
   mosHandle code0 = GetResource('CODE', 0);
   if (code0==0) {
@@ -348,7 +391,8 @@ int main(int argc, const char **argv, const char **envp)
 #ifdef MOS_UNITTESTS
   mosMemoryUnittests();
 #else
-  
+  const char *appName = NULL;
+
   FILE *logFile = 0L;
   logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
   // logFile = stdout;
@@ -358,11 +402,16 @@ int main(int argc, const char **argv, const char **envp)
   setBreakpoints();
   
   int runExternal = setupSystem(argc, argv, envp);
-  
+  int runAsAlias = strcmp(basename(argv[0]), "mosrun");
   int appLoaded = 0;
   
-  if (runExternal) {
-    appLoaded = loadApp(argv[2]);
+  if (runExternal || runAsAlias) {
+    if (runAsAlias)
+      appName = basename(argv[0]);
+    else
+      appName = argv[2];
+
+    appLoaded = loadApp(appName);
   }
   
   if (!appLoaded) {
