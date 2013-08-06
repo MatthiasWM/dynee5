@@ -91,45 +91,45 @@ static const unsigned short utf8LUT[] = {
 */
 int mosFilenameGuessType(const char *filename)
 {
-  int unix = 0, dos = 0, macos = 0;
+  int unixType = 0, dos = 0, macos = 0;
   if (!filename || !*filename)
     return MOS_TYPE_UNKNOWN;
   int i, n = strlen(filename)-1;
   for (i=0; i<n; i++) {
     char c = filename[i];
     if (c=='/') {
-      unix++;  // Unix filename
+      unixType++;  // Unix filename
     } else if (c==':') {
       if (i==2) dos++; else macos++;  // Mac filename
     } else if (c=='\\') {
       dos++; // DOS filename
     } else if ((c&0xE0)==0xC0 && (filename[i+1]&0xC0)==0x80) {
-      unix++; // UTF-8
+      unixType++; // UTF-8
     } else if ((c&0xF0)==0xE0
                && (filename[i+1]&0xC0)==0x80
                && (filename[i+2]&0xC0)==0x80) {
-      unix++; // UTF-8
+      unixType++; // UTF-8
     } else if ((c&0xF8)==0xF0
                && (filename[i+1]&0xC0)==0x80
                && (filename[i+2]&0xC0)==0x80
                && (filename[i+3]&0xC0)==0x80) {
-      unix++; // UTF-8
+      unixType++; // UTF-8
     } else if (c&0x80) {
       macos++; // not UTF-8, so probably MacOS
     }
   }
   
   // is there a clear winner?
-  if (unix>dos && unix>macos) return MOS_TYPE_UNIX;
-  if (macos>unix && macos>dos) return MOS_TYPE_MAC;
-//  if (dos>unix && dos>macos) return MOS_TYPE_DOS;
+  if (unixType>dos && unixType>macos) return MOS_TYPE_UNIX;
+  if (macos>unixType && macos>dos) return MOS_TYPE_MAC;
+//  if (dos>unixType && dos>macos) return MOS_TYPE_DOS;
   
   // if not, go by personal preference
-  if (macos>unix) return MOS_TYPE_MAC;
-  if (unix>macos) return MOS_TYPE_UNIX;
+  if (macos>unixType) return MOS_TYPE_MAC;
+  if (unixType>macos) return MOS_TYPE_UNIX;
   if (macos>dos) return MOS_TYPE_MAC;
-  if (unix>dos) return MOS_TYPE_UNIX;
-//  if (dos>unix) return MOS_TYPE_DOS;
+  if (unixType>dos) return MOS_TYPE_UNIX;
+//  if (dos>unixType) return MOS_TYPE_DOS;
   
   // ok, so it's undecided:
   return MOS_TYPE_UNKNOWN;
