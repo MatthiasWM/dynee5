@@ -24,9 +24,6 @@
  
  We need to conver file separators and font encodings.
  
- MS-DOS support at this point is minimal and will likely fail to produce
- anything useful if a drive ID (e.g. "C:\") is involved.
- 
  Mac Path Names:
  - separator is a ':'
  - path names starting with a ':' are relative to the current directory
@@ -35,7 +32,7 @@
  - if there are no ":" at all in the name, it is a leaf name and it is relative
  - test.c => test.c
  - :test.c => ./test.c
- - ;;test.c => ../test.c
+ - ::test.c => ../test.c
  - :::test.c => ../../test.c
  - :Emaples: => ./Examples/
  - Examples: => /Examples/
@@ -91,7 +88,7 @@ static const unsigned short utf8LUT[] = {
 */
 int mosFilenameGuessType(const char *filename)
 {
-  int unixType = 0, dosType = 0, macType = 0;
+  int unixType = 0, macType = 0;
   if (!filename || !*filename)
     return MOS_TYPE_UNKNOWN;
   int i, n = strlen(filename)-1;
@@ -100,9 +97,7 @@ int mosFilenameGuessType(const char *filename)
     if (c=='/') {
       unixType++;  // Unix filename
     } else if (c==':') {
-      if (i==2) dosType++; else macType++;  // Mac filename
-    } else if (c=='\\') {
-      dosType++; // DOS filename
+      macType++;  // Mac filename
     } else if ((c&0xE0)==0xC0 && (filename[i+1]&0xC0)==0x80) {
       unixType++; // UTF-8
     } else if ((c&0xF0)==0xE0
@@ -120,17 +115,9 @@ int mosFilenameGuessType(const char *filename)
   }
   
   // is there a clear winner?
-  if (unixType>dosType && unixType>macType) return MOS_TYPE_UNIX;
-  if (macType>unixType && macType>dosType) return MOS_TYPE_MAC;
-//  if (dos>unixType && dos>macos) return MOS_TYPE_DOS;
-  
-  // if not, go by personal preference
-  if (macType>unixType) return MOS_TYPE_MAC;
   if (unixType>macType) return MOS_TYPE_UNIX;
-  if (macType>dosType) return MOS_TYPE_MAC;
-  if (unixType>dosType) return MOS_TYPE_UNIX;
-//  if (dos>unixType) return MOS_TYPE_DOS;
-  
+  if (macType>unixType) return MOS_TYPE_MAC;
+
   // ok, so it's undecided:
   return MOS_TYPE_UNKNOWN;
 }
@@ -183,12 +170,6 @@ static void convertFromMac(const char *filename, char *buffer)
       break;
   }
 //  fprintf(stderr, "FromMac: '%s' = '%s'\n", filename, buffer);
-}
-
-
-static void convertFromDos(const char *filename, char *buffer)
-{
-  strcpy(buffer, filename); // TODO: later
 }
 
 
@@ -263,12 +244,6 @@ static void convertToMac(const char *filename, char *buffer)
 }
 
 
-static void convertToDos(const char *filename, char *buffer)
-{
-  strcpy(buffer, filename); // TODO: later
-}
-
-
 /**
  User API to converting full pathnames between formats.
  
@@ -289,12 +264,10 @@ char *mosFilenameConvertTo(const char *filename, int dstType)
   }
   switch (srcType) {
     case MOS_TYPE_MAC: convertFromMac(filename, buffer); break;
-    case MOS_TYPE_DOS: convertFromDos(filename, buffer); break;
     default: strcpy(buffer, filename); break;
   }
   switch (dstType) {
     case MOS_TYPE_MAC: tmpname = strdup(buffer); convertToMac(tmpname, buffer); free(tmpname); break;
-    case MOS_TYPE_DOS: tmpname = strdup(buffer); convertToDos(tmpname, buffer); free(tmpname); break;
     default: break; // nothing to do, Unix type filename is in the buffer
     // TODO: actually, OS X expects another UTF-8 encoding than standard Unix, so, yes, there might be work to do
   }
@@ -317,7 +290,6 @@ const char *mosFilenameName(const char *filename)
     char c = filename[n];
     if (c=='/') break;  // Unix filename
     if (c==':') break;  // Mac filename
-    if (c=='\\') break; // DOS filename
     n--;
   }
   return filename + n + 1;

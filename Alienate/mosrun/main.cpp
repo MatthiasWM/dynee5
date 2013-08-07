@@ -21,7 +21,7 @@
 
 //
 // This is a proposal for possible flags that may make life easier when using
-// mosrun in a Unix or DOS environment.
+// mosrun in a Unix environment.
 //
 // ---help
 // ---run
@@ -38,10 +38,8 @@
 //    bbb is "name":  apply a filter to the file name only
 //           "data":  apply a filter to the data in the stream or file only
 //           "file":  apply filters to the file name and file data, (default)
-//    ccc is "host":  convert from host format, default
-//           "unix":  convert from utf-8, '\n', '/'
+//    ccc is "unix":  convert from utf-8, '\n', '/'
 //           "mac":   convert from MacRom, '\r', ':'
-//           "dos":   convert from MS-DOS format, CodePage, '\r\n', '\'
 //    to is  "to":    indicates format conversion
 //           "keep":  overrides default filters with absolutely no conversion
 //    ddd    as ccc   convert ot format

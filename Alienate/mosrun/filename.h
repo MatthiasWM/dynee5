@@ -26,7 +26,6 @@
 const int MOS_TYPE_UNKNOWN = 0;
 const int MOS_TYPE_MAC = 1;
 const int MOS_TYPE_UNIX = 2;
-const int MOS_TYPE_DOS = 3;
 
 
 int mosFilenameGuessType(const char *filename);
