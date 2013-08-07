@@ -146,6 +146,7 @@ const unsigned int kMosTicks          = 0x016A;  // ticks since last boot (unsig
 const unsigned int kMosDeskHook       = 0x0A6C;  // hook for painting desktop (pointer)
 const unsigned int kMosMBarHeight     = 0x0BAA;  // height of menu bar (integer)
 
+
 /**
  * Find native tools in load path
  */
@@ -170,14 +171,14 @@ const char *toolPath(const char *aName)
   return path;
 }
 
+
 /**
  * Load the executable part of a file from the resource fork.
+ *
+ * \todo The three loader functions need cleaning, error checking, diagnostic messages, and general refactoring
  */
-int loadApp(const char *aName)
+int loadExternalApp(const char *path)
 {
-  const char *path;
-
-  path = toolPath(aName);
 #if defined (__APPLE__) && defined (__MACH__)
   ssize_t size = getxattr(path, "com.apple.ResourceFork", 0L, 0, 0, 0);
   if (size==-1) {
@@ -189,7 +190,7 @@ int loadApp(const char *aName)
   if (ret==-1) {
     return 0;
   }
-  mosLog("%s has a %ld byte resource fork\n", path, size);  
+  mosLog("%s has a %ld byte resource fork\n", path, size);
 #else
   FILE *f;
   struct stat st;
@@ -205,7 +206,50 @@ int loadApp(const char *aName)
   readResourceMap();
   mosHandle code0 = GetResource('CODE', 0);
   if (code0==0) {
-    mosLog("CODE 0 not found\n");
+    mosLog("CODE 0 not found in external app\n");
+    return 0;
+  }
+  gMosCurrentA5 = createA5World(code0);
+  return 1;
+}
+
+
+/**
+ * Load the executable part of a file from the resource fork.
+ */
+int loadAliasedApp(const char *aName)
+{
+  const char *path;
+  
+  path = toolPath(aName);
+#if defined (__APPLE__) && defined (__MACH__)
+  ssize_t size = getxattr(path, "com.apple.ResourceFork", 0L, 0, 0, 0);
+  if (size==-1) {
+    return 0;
+  }
+  theAppSize = size;
+  theApp = (byte*)mosNewPtr(size);
+  ssize_t ret = getxattr(path, "com.apple.ResourceFork", theApp, size, 0, 0);
+  if (ret==-1) {
+    return 0;
+  }
+  mosLog("%s has a %ld byte resource fork\n", path, size);
+#else
+  FILE *f;
+  struct stat st;
+  f = fopen(path, "rb");
+  if (f == NULL)
+    return 0;
+  stat(path, &st);
+  theAppSize = st.st_size;
+  theApp = (byte*)mosNewPtr(theAppSize);
+  fread(theApp, 1, theAppSize, f);
+  fclose(f);
+#endif
+  readResourceMap();
+  mosHandle code0 = GetResource('CODE', 0);
+  if (code0==0) {
+    mosLog("CODE 0 not found in aliased app\n");
     return 0;
   }
   gMosCurrentA5 = createA5World(code0);
@@ -216,7 +260,7 @@ int loadApp(const char *aName)
 /**
  * Load the executable part of a file from internal memory.
  */
-int loadInternalApp()
+int loadEmbeddedApp(const char*)
 {
   if (gAppResource) {
     theAppSize = gAppResourceSize;
@@ -225,7 +269,7 @@ int loadInternalApp()
     readResourceMap();
     mosHandle code0 = GetResource('CODE', 0);
     if (code0==0) {
-      mosLog("CODE 0 not found\n");
+      mosLog("CODE 0 not found in embedded data\n");
       return 0;
     }
     gMosCurrentA5 = createA5World(code0);
@@ -358,6 +402,7 @@ int setupSystem(int argc, const char **argv, const char **envp)
     // TODO: argv[0] should only be the filename (MacOS has a 32 byte limt here!
     if (i==0) {
       arg = mosFilenameName(arg);
+      arg = mosFilenameConvertTo(arg, MOS_TYPE_MAC);
     } else {
       if (arg[0]!='-')
         arg = mosFilenameConvertTo(arg, MOS_TYPE_MAC);
@@ -448,17 +493,21 @@ int main(int argc, const char **argv, const char **envp)
   
   setBreakpoints();
   
+  // run External is set if the ---run option was found. This has top priority
   int runExternal = setupSystem(argc, argv, envp);
-  int runAsAlias = strcmp(mosFilenameNameUnix(argv[0]), "mosrun");
+  
+  // set this if the emulated app loaded
   int appLoaded = 0;
   
-  if (runExternal || runAsAlias) {
-    if (runAsAlias)
-      appName = mosFilenameNameUnix(argv[0]);
-    else
-      appName = argv[2];
-
-    appLoaded = loadApp(appName);
+  if (runExternal) {
+    appName = argv[2];
+    appLoaded = loadExternalApp(appName);
+  } else {
+    appName = mosFilenameNameUnix(argv[0]);
+    appLoaded = loadEmbeddedApp(appName);
+    if (!appLoaded) {
+      appLoaded = loadAliasedApp(appName);
+    }
   }
   
   if (!appLoaded) {

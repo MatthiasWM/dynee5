@@ -42,13 +42,15 @@
 
 #include "filename.h"
 
+#include "main.h"
+
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 
 // TODO: not yet used. 
-static const unsigned short utf8LUT[] = {
+static const unsigned short ucLUT[] = {
   0x00C4, 0x00C5, 0x00C7, 0x00C9, 0x00D1, 0x00D6, 0x00DC, 0x00E1,
   0x00E0, 0x00E2, 0x00E4, 0x00E3, 0x00E5, 0x00E7, 0x00E9, 0x00E8,
   0x00EA, 0x00EB, 0x00ED, 0x00EC, 0x00EE, 0x00EF, 0x00F1, 0x00F3,
@@ -66,6 +68,137 @@ static const unsigned short utf8LUT[] = {
   0xF8FF, 0x00D2, 0x00DA, 0x00DB, 0x00D9, 0x0131, 0x02C6, 0x02DC,
   0x00AF, 0x02D8, 0x02D9, 0x02DA, 0x00B8, 0x02DD, 0x02DB, 0x02C7,
 };
+
+
+static char *buffer = 0;
+static int NBuffer = 0;
+
+
+/**
+ * Make sure that at least size bytes fit into the buffer.
+ */
+static void allocateBuffer(int size)
+{
+  if (size>NBuffer) {
+    NBuffer = (size+1024)&0xfffffc00;
+    if (buffer)
+      free(buffer);
+    buffer = (char*)malloc(NBuffer);
+  }
+}
+
+
+/**
+ * Convert a text block in Unix/UTF-8 encoding to MacRoman.
+ *
+ * This will fail if there is a partial UTF-8 character at the end of the 
+ * text block!
+ *
+ * \return pointer to a static buffer
+ */
+char *mosDataUnixToMac(const char *text, unsigned int &size)
+{
+  // The Mac string can nevr be longer than the Unix string
+  const char *s = text;
+  int i, count = size;
+  // now we have the size. Make sure we have space
+  allocateBuffer(count+1);
+  // copy and convert characters
+  byte *d = (byte*)buffer;
+  for (i=0;i<size;i++) {
+    byte c = (byte)*s++;
+    if (c=='\n') {
+      *d++ = '\r';
+    } else if (c<128) {
+      *d++ = c;
+    } else {
+      // UTF8 character
+      unsigned short uc = 0;
+      if ( (c&0xe0)==0xc0) {
+        uc =  ((((unsigned short)c)&0x1f)<<6);
+        uc |=  (((unsigned short)(byte)s[0])&0x3f);
+        s++; size--;
+      } else if ( (c&0xf0)==0xe0) {
+        uc =  ((((unsigned short)c)&0x1f)<<12);
+        uc |= ((((unsigned short)(byte)s[0])&0x3f)<<6);
+        uc |=  (((unsigned short)(byte)s[1])&0x3f);
+        s+=2; size-=2;
+      }
+      if (uc) {
+        int j;
+        for (j=0; j<128; j++) {
+          if (ucLUT[j]==uc) {
+            *d++ = j+128;
+            break;
+          }
+        }
+        if (j==128)
+          *d++ = '$';
+      } else {
+        *d++ = '$';
+      }
+    }
+  }
+  size = ((char*)d)-buffer;
+  return buffer;
+}
+
+
+
+/**
+ * Convert a text block in MacRoman encoding to Unix/UTF-8.
+ *
+ * \return pointer to a static buffer
+ */
+char *mosDataMacToUnix(const char *text, unsigned int &size)
+{
+  // the Unix string is potentialy longer than the Mac string, so start counting
+  const char *s = text;
+  int i, count = 0;
+  for (i=0;i<size;i++) {
+    byte c = (byte)*s++;
+    if (c<128) {
+      count++;
+    } else {
+      unsigned short uc = ucLUT[c-128];
+      if (uc<128) {
+        count++;
+      } else if (uc<0x07ff) {
+        count+=2;
+      } else if (uc<0x07ff) {
+        count+=3;
+      }
+    }
+  }
+  // now we have the size. Make sure we have space
+  allocateBuffer(count+1);
+  // copy and convert characters
+  byte *d = (byte*)buffer;
+  s = text;
+  for (i=0;i<size;i++) {
+    byte c = (byte)*s++;
+    if (c=='\r') {
+      *d++ = '\n';
+    } else if (c<128) {
+      *d++ = c;
+    } else {
+      unsigned short uc = ucLUT[c-128];
+      if (uc<128) {
+        *d++ = uc;
+      } else if (uc<0x07ff) {
+        *d++ = ((uc>>6) & 0x1f) | 0xc0;
+        *d++ = (uc & 0x3f) | 0x80;
+      } else if (uc<0x07ff) {
+        *d++ = ((uc>>12) & 0x0f) | 0xe0;
+        *d++ = ((uc>>6) & 0x3f) | 0x80;
+        *d++ = (uc & 0x3f) | 0x80;
+      }
+    }
+  }
+  size = count;
+  return buffer;
+}
+
 
 
 /**
@@ -170,6 +303,10 @@ static void convertFromMac(const char *filename, char *buffer)
       break;
   }
 //  fprintf(stderr, "FromMac: '%s' = '%s'\n", filename, buffer);
+  unsigned int size = strlen(buffer);
+  char *b2 = mosDataMacToUnix(buffer, size);
+  // FIXME: this can create an ugly overflow!œ
+  strcpy(buffer, b2);
 }
 
 
@@ -241,6 +378,10 @@ static void convertToMac(const char *filename, char *buffer)
   }
   // FIXME: when do we ned a trailing ':'
 //  fprintf(stderr, "ToMac: '%s' = '%s'\n", filename, buffer);
+  unsigned int size = strlen(buffer);
+  char *b2 = mosDataUnixToMac(buffer, size);
+  // FIXME: this can create an ugly overflow!œ
+  strcpy(buffer, b2);
 }
 
 

@@ -180,14 +180,12 @@ void trapSyWrite(unsigned short) {
   MosFile *mosFile = (MosFile*)m68k_read_memory_32(file+8);
   void *buffer = (void*)m68k_read_memory_32(file+16);
   unsigned int size = m68k_read_memory_32(file+12);
-  // FIXME: convert to Unix line endings
-  int i;
-  char *s = (char*)buffer;
-  for (i=size; i>0; --i) {
-    if (*s=='\r') *s = '\n';
-    s++;
+  
+  // convert buffer if it is not binary // FIXME: this needs a lot more work!
+  if (mosFile->fd==1 || mosFile->fd==2) {
+    buffer = (void*)mosDataMacToUnix((char*)buffer, size);
   }
-  //
+
   int ret = write(mosFile->fd, buffer, size);
   if (ret==-1) {
     m68k_set_reg(M68K_REG_D0, errno);
