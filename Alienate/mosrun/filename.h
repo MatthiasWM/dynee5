@@ -34,6 +34,9 @@ int mosFilenameGuessType(const char *filename);
 char *mosFilenameConvertTo(const char *filename, int type);
 
 const char *mosFilenameName(const char *filename);
+const char *mosFilenameNameUnix(const char *filename);
+
+char *mosDataConvertTo(const char *text, int &size, int type);
 
 
 #endif /* defined(__mosrun__filename__) */

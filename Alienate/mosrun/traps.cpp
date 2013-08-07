@@ -750,8 +750,7 @@ void trapReadXPRam(unsigned short instr)
  */
 void trapUninmplemented(unsigned short instr) {
   // FIXME: $a01f; opcode 1010 (_DisposePtr)
-  mosLog("ERROR: unimplemented trap 0x%08X: %s\n", gCurrentTrap, trapName(gCurrentTrap));
-  fprintf(stderr, "ERROR: unimplemented trap 0x%08X: %s\n", gCurrentTrap, trapName(gCurrentTrap));
+  mosError("Unimplemented trap 0x%08X: %s\n", gCurrentTrap, trapName(gCurrentTrap));
 }
 
 

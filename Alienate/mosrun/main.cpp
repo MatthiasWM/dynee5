@@ -19,6 +19,40 @@
   The latest source code can be found at http://code.google.com/p/dynee5/
  */
 
+//
+// This is a proposal for possible flags that may make life easier when using
+// mosrun in a Unix or DOS environment.
+//
+// ---help
+// ---run
+// ---aaa-bbb-ccc-to-ddd=eee
+//    aaa is "all":   all files in this command line will be treated this way
+//           "allin": all input streams will be filtered
+//           "allout":all output streams will be filtered
+//           "next":  only the next file will be treated this way, overrides all, default
+//           "regex": all files which match the following pattern, default if eee is set
+//           "stdin": apply to stdin stream (abbreviate as "in")
+//           "stdout":apply to stdout stream
+//           "stderr":apply to stderr stream
+//           "conout":apply to stdout and stderr stream
+//    bbb is "name":  apply a filter to the file name only
+//           "data":  apply a filter to the data in the stream or file only
+//           "file":  apply filters to the file name and file data, (default)
+//    ccc is "host":  convert from host format, default
+//           "unix":  convert from utf-8, '\n', '/'
+//           "mac":   convert from MacRom, '\r', ':'
+//           "dos":   convert from MS-DOS format, CodePage, '\r\n', '\'
+//    to is  "to":    indicates format conversion
+//           "keep":  overrides default filters with absolutely no conversion
+//    ddd    as ccc   convert ot format
+//    eee    "..."    optional name pattern for "regex" attribute
+//                    if regex is set, eee must be filled
+//                    if eee is set, regex is implied and no other option must be chosen
+//
+// Implied rules are ---stdin-to-mac ---conout-mac-to-host
+//
+// example: ARM6asm ---unix-to-mac test.s -o ---keep test.s.o
+//
 
 //
 // 4/Aug/2013:
@@ -37,10 +71,25 @@
 //    Makemake seems to run but misses traps:
 //      ERROR: unimplemented trap 0x0000A9ED: _Pack6
 //      ERROR: unimplemented trap 0x0000A00C: _GetFileInfo
-//    Rex fails due to missing traps:
-//      ERROR: unimplemented trap 0x0000A994: _CurResFile
-//      ERROR: unimplemented trap 0x0000A9A4: _HomeResFile
+//    Rex seems to work
 //
+
+
+//
+// Goal: compile the ROM Extension for the Newton Emulator "Einstein" on OS X
+//
+// Tools needed:
+//    ProtocolGen     -  Script: what do we do?
+//    ProtocolGenTool -  seems to be working
+//    ARMCpp          -  seems to be working
+//    ARM6Asm         -  seems to be working
+//    Rex             -  seems to be working
+//    ARMLink         -  seems to be working
+//    Packer          -  may be working, help page is rendered
+//    SetFile         ok native OS X tool
+//
+
+
 
 // Inlcude all the required system headers
 
@@ -394,7 +443,7 @@ int main(int argc, const char **argv, const char **envp)
   const char *appName = NULL;
 
   FILE *logFile = 0L;
-  logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
+  // logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
   // logFile = stdout;
   if (logFile)
     mosLogTo(logFile);
@@ -402,12 +451,12 @@ int main(int argc, const char **argv, const char **envp)
   setBreakpoints();
   
   int runExternal = setupSystem(argc, argv, envp);
-  int runAsAlias = strcmp(basename(argv[0]), "mosrun");
+  int runAsAlias = strcmp(mosFilenameNameUnix(argv[0]), "mosrun");
   int appLoaded = 0;
   
   if (runExternal || runAsAlias) {
     if (runAsAlias)
-      appName = basename(argv[0]);
+      appName = mosFilenameNameUnix(argv[0]);
     else
       appName = argv[2];
 
@@ -415,15 +464,7 @@ int main(int argc, const char **argv, const char **envp)
   }
   
   if (!appLoaded) {
-    appLoaded = loadInternalApp();
-  }
-  
-  if (!appLoaded) {
-    appLoaded = loadApp(argv[1]);
-  }
-  
-  if (!appLoaded) {
-    fprintf(stderr, "MOSRUN - FATAL ERROR: can't find application data\n");
+    mosError("Can't find application data\n");
     exit(9);
   }
   

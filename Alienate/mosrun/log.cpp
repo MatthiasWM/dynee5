@@ -54,6 +54,7 @@ void mosLog(const char *format, ...)
   if (gMosLogFile) {
     va_list va;
     va_start(va, format);
+    // TODO: vsnprintf
     vfprintf(gMosLogFile, format, va);
     va_end(va);
   }

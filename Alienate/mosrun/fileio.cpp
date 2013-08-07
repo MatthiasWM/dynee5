@@ -113,7 +113,7 @@ void trapSyFAccess(unsigned short) {
     fd = ::open(uxFilename, mode, 0644);
   }
   if (fd==-1) { // error
-    fprintf(stderr, "Can't open file %s (mode 0x%04X): %s\n", uxFilename, mode, strerror(errno));
+    mosError("Can't open file %s (mode 0x%04X): %s\n", uxFilename, mode, strerror(errno));
     m68k_set_reg(M68K_REG_D0, errno); // just return the error code
     free(uxFilename);
   } else {
