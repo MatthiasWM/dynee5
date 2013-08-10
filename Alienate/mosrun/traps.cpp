@@ -848,7 +848,7 @@ void trapClose(unsigned short instr)
   unsigned int paramBlock = m68k_get_reg(0L, M68K_REG_A0);
   unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
   
-  unsigned int ret = mosPBWrite(paramBlock, async);
+  unsigned int ret = mosPBClose(paramBlock, async);
   
   m68k_set_reg(M68K_REG_D0, ret);
 }
@@ -1057,11 +1057,11 @@ void mosSetupTrapTable()
   createGlue(0xA001, trapClose);
   createGlue(0xA002, trapRead);
   createGlue(0xA003, trapWrite);
-  createGlue(0xA00C, trapGetFileInfo);
   createGlue(0xA008, trapCreate);
+  createGlue(0xA00C, trapGetFileInfo);
   createGlue(0xA00D, trapSetFileInfo);
-  createGlue(0xA060, trapFSDispatch);
   createGlue(0xA012, trapSetEOF);
+  createGlue(0xA060, trapFSDispatch);
   
   // -- unsorted
   

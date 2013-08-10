@@ -90,7 +90,7 @@ unsigned int m68k_read_memory_8(unsigned int address)
   switch (address) {
     case 0x012d: return 0; // LoadTrap [GLOBAL VAR]  trap before launch? [byte]
     default:
-      mosWarning("Accessing unsupported RAM.b address 0x%08X\n", address);
+      mosDebug("Accessing unsupported RAM.b address 0x%08X\n", address);
       break;
   }
   return 0;
@@ -121,7 +121,7 @@ unsigned int m68k_read_memory_16(unsigned int address)
     case 0x0220: return mosGetMemError();
     case 0x0930: return 0; // FIXME: SaveSegHandle [GLOBAL VAR]  seg 0 handle [handle]
     default:
-      mosWarning("Accessing unsupported RAM.w address 0x%08X\n", address);
+      mosDebug("Accessing unsupported RAM.w address 0x%08X\n", address);
       break;
   }
   return 0;
@@ -157,7 +157,7 @@ unsigned int m68k_read_memory_32(unsigned int address)
     case 0x092c:
       return 0;
     default:
-      mosWarning("Accessing unsupported RAM.l address 0x%08X\n", address);
+      mosDebug("Accessing unsupported RAM.l address 0x%08X\n", address);
       break;
   }
   return 0;
@@ -208,7 +208,7 @@ void m68k_write_memory_8(unsigned int address, unsigned int value)
   switch (address) {
     case 0x0a5e: gMosResLoad = value; break; // ResLoad       0A5E  word  Auto-load feature
     default:
-      mosWarning("Writing unsupported RAM.b address 0x%08X\n", address);
+      mosDebug("Writing unsupported RAM.b address 0x%08X\n", address);
       break;
   }
 }
@@ -230,7 +230,7 @@ void m68k_write_memory_16(unsigned int address, unsigned int value)
   }
   switch (address) {
     default:
-      mosWarning("Writing unsupported RAM.w address 0x%08X\n", address);
+      mosDebug("Writing unsupported RAM.w address 0x%08X\n", address);
       break;
   }
 }
@@ -252,7 +252,7 @@ void m68k_write_memory_32(unsigned int address, unsigned int value)
   }
   switch (address) {
     default:
-      mosWarning("Writing unsupported RAM.l address 0x%08X\n", address);
+      mosDebug("Writing unsupported RAM.l address 0x%08X\n", address);
       break;
   }
 }
