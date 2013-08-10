@@ -139,6 +139,7 @@ char *mosDataUnixToMac(const char *text, unsigned int &size)
       }
     }
   }
+  *d = 0;
   size = ((char*)d)-buffer;
   return buffer;
 }
@@ -195,6 +196,7 @@ char *mosDataMacToUnix(const char *text, unsigned int &size)
       }
     }
   }
+  *d = 0;
   size = count;
   return buffer;
 }
@@ -261,9 +263,20 @@ static void convertFromMac(const char *filename, char *buffer)
   const char *src = filename;
   char *dst = buffer;
   
+  // just copy all leading quotes, hoping that the trailing quotes match
+  for (;;) {
+    char c = *src;
+    if (c=='"' || c=='\'' || c=='`') {
+      *dst++ = c;
+      src++;
+    } else {
+      break;
+    }
+  }
+  
   // is the filename relative or absolute?
   char isRelative = false;
-  if (filename[0]==':') {
+  if (*src==':') {
     // if the filename starts with a ':', it must be relative
     isRelative = true;
   } else if (strchr(filename, ':')) {
@@ -315,9 +328,20 @@ static void convertToMac(const char *filename, char *buffer)
   const char *src = filename;
   char *dst = buffer;
   
+  // just copy all leading quotes, hoping that the trailing quotes match
+  for (;;) {
+    char c = *src;
+    if (c=='"' || c=='\'' || c=='`') {
+      *dst++ = c;
+      src++;
+    } else {
+      break;
+    }
+  }
+  
   // is the filename relative or absolute?
   char isRelative = false;
-  if (filename[0]=='/') {
+  if (*src=='/') {
     // if the filename starts with a '/', it must be absolute
     isRelative = false;
   } else {
@@ -369,7 +393,7 @@ static void convertToMac(const char *filename, char *buffer)
         *dst++ = ':';
       }
     } else if (c>=128) {
-      *dst++ = c; // FIXME: convert UTF-8 to Mac Roman
+      *dst++ = c;
     } else {
       *dst++ = c;
     }

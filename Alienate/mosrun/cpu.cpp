@@ -51,41 +51,42 @@ extern "C" {
  */
 void m68k_instruction_hook()
 {
+//  int i; unsigned int sp;
   char buf[2048];
   for (;;) {
     gPendingBreakpoint = 0L;
   afterBreakpoint:
     unsigned int pc = m68k_get_reg(0L, M68K_REG_PC);
     unsigned short instr = m68k_read_memory_16(pc);
-    if (mosLogFile()) {
-      if (mosLogFile()!=stdout && mosLogFile()!=stderr) {
-        mosLog("\n");
-        mosLog("D0:%08X D1:%08X D2:%08X D3:%08X D4:%08X D5:%08X D6:%08X D7:%08X\n",
-               m68k_get_reg(0L, M68K_REG_D0),
-               m68k_get_reg(0L, M68K_REG_D1),
-               m68k_get_reg(0L, M68K_REG_D2),
-               m68k_get_reg(0L, M68K_REG_D3),
-               m68k_get_reg(0L, M68K_REG_D4),
-               m68k_get_reg(0L, M68K_REG_D5),
-               m68k_get_reg(0L, M68K_REG_D6),
-               m68k_get_reg(0L, M68K_REG_D7)
-               );
-        mosLog("A0:%08X A1:%08X A2:%08X A3:%08X A4:%08X A5:%08X A6:%08X A7:%08X\n",
-               m68k_get_reg(0L, M68K_REG_A0),
-               m68k_get_reg(0L, M68K_REG_A1),
-               m68k_get_reg(0L, M68K_REG_A2),
-               m68k_get_reg(0L, M68K_REG_A3),
-               m68k_get_reg(0L, M68K_REG_A4),
-               m68k_get_reg(0L, M68K_REG_A5),
-               m68k_get_reg(0L, M68K_REG_A6),
-               m68k_get_reg(0L, M68K_REG_A7)
-               );
+    if (mosLogFile() && mosLogVerbosity()>=MOS_VERBOSITY_TRACE) {
+      if (mosLogFile()!=stdout) {
+        mosTrace("\n");
+        mosTrace("D0:%08X D1:%08X D2:%08X D3:%08X D4:%08X D5:%08X D6:%08X D7:%08X\n",
+                 m68k_get_reg(0L, M68K_REG_D0),
+                 m68k_get_reg(0L, M68K_REG_D1),
+                 m68k_get_reg(0L, M68K_REG_D2),
+                 m68k_get_reg(0L, M68K_REG_D3),
+                 m68k_get_reg(0L, M68K_REG_D4),
+                 m68k_get_reg(0L, M68K_REG_D5),
+                 m68k_get_reg(0L, M68K_REG_D6),
+                 m68k_get_reg(0L, M68K_REG_D7)
+                 );
+        mosTrace("A0:%08X A1:%08X A2:%08X A3:%08X A4:%08X A5:%08X A6:%08X A7:%08X\n",
+                 m68k_get_reg(0L, M68K_REG_A0),
+                 m68k_get_reg(0L, M68K_REG_A1),
+                 m68k_get_reg(0L, M68K_REG_A2),
+                 m68k_get_reg(0L, M68K_REG_A3),
+                 m68k_get_reg(0L, M68K_REG_A4),
+                 m68k_get_reg(0L, M68K_REG_A5),
+                 m68k_get_reg(0L, M68K_REG_A6),
+                 m68k_get_reg(0L, M68K_REG_A7)
+                 );
       }
       m68k_disassemble(buf, pc, M68K_CPU_TYPE_68020);
       if ( (instr & 0xf000) == 0xa000 ) {
-        mosLog("0x%s: %s (%s)\n", printAddr(pc), buf, trapName(instr));
+        mosTrace("0x%s: %s (%s)\n", printAddr(pc), buf, trapName(instr));
       } else {
-        mosLog("0x%s: %s\n", printAddr(pc), buf);
+        mosTrace("0x%s: %s\n", printAddr(pc), buf);
       } // if/else
     }
     // ---> space for command breakpoint ;-)
@@ -95,7 +96,17 @@ void m68k_instruction_hook()
       // 1010.0ffa.xxxx.xxxx: OS call: x = trap #, ff are extra flags that can be used by the traps
       // 01f3 = a9f3
       switch (instr) {
-        case 0xaffc: mosLog("End Of Emulation\n"); exit(m68k_get_reg(0, M68K_REG_D0)); break;
+        case 0xaffc: {
+          // 0 Success
+          // 1 Command syntax error
+          // 2 Some error in processing
+          // 3 System error or insufficient resources
+          // –9 User abort
+          unsigned int mpwHandle = m68k_read_memory_32(0x0316);
+          unsigned int mpwMem = m68k_read_memory_32(mpwHandle+4);
+          unsigned int resultCode = m68k_read_memory_32(mpwMem+0x000E);
+          mosDebug("End Of Emulation (returns %d)\n", resultCode);
+          exit(resultCode); }
         case 0xaffd: trapDispatch(instr); break;
         case 0xaffe: trapBreakpoint(instr); goto afterBreakpoint;
         case 0xafff: trapGoNative(instr); break; // TODO: unverified

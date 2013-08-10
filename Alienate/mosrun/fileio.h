@@ -43,5 +43,9 @@ void trapSyRead(unsigned short);
 void trapSyWrite(unsigned short);
 void trapSyIoctl(unsigned short);
 
+int mosPBGetFInfo(unsigned int paramBlock, bool async);
+int mosPBSetFInfo(unsigned int paramBlock, bool async);
+int mosPBCreate(unsigned int paramBlock, bool async);
+int mosFSDispatch(unsigned int paramBlock, unsigned int func);
 
 #endif /* defined(__mosrun__fileio__) */

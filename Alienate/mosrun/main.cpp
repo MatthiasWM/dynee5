@@ -41,7 +41,7 @@
 //    ccc is "unix":  convert from utf-8, '\n', '/'
 //           "mac":   convert from MacRom, '\r', ':'
 //    to is  "to":    indicates format conversion
-//           "keep":  overrides default filters with absolutely no conversion
+//           "raw":   overrides default filters with absolutely no conversion
 //    ddd    as ccc   convert ot format
 //    eee    "..."    optional name pattern for "regex" attribute
 //                    if regex is set, eee must be filled
@@ -122,14 +122,7 @@ extern "C" {
   #include "musashi331/m68k.h"
 }
 
-
-// application global variables
-
-byte *theApp = 0;
-unsigned int theAppSize = 0;
-byte *theRsrc = 0;
-unsigned int theRsrcSize = 0;
-byte *theJumpTable = 0;
+// constant data
 
 const unsigned int kMosApplLimit      = 0x0130;  // Application heap limit
 const unsigned int kMosApplZone       = 0x02aa;  // Address of application heap zone
@@ -146,6 +139,28 @@ const unsigned int kMosTicks          = 0x016A;  // ticks since last boot (unsig
 const unsigned int kMosDeskHook       = 0x0A6C;  // hook for painting desktop (pointer)
 const unsigned int kMosMBarHeight     = 0x0BAA;  // height of menu bar (integer)
 
+const char *gMosHelpText =
+  "mosrun: run MacOS MPW tools on modern machines.\n\n"
+  "Usage:\n"
+  "  mosrun ---run path/to/tool tool options ...\n"
+  "  or embed an MPW tool at compile time.\n\n"
+  "Options:\n"
+  "  ---help : print thsi help page\n"
+  "  ---verbosity=xxx : set verbosity level to trace, debug, log, warn or err\n"
+  "  ---stdout-raw : do not filter stdout (default converts form Mac to Unix)\n"
+  "  ---log=filename : log all messages to a file\n"
+;
+
+// application global variables
+
+byte *theApp = 0;
+unsigned int theAppSize = 0;
+byte *theRsrc = 0;
+unsigned int theRsrcSize = 0;
+byte *theJumpTable = 0;
+
+byte gFilterStdoutDataFrom = MOS_TYPE_MAC;
+byte gFilterStdoutDataTo   = MOS_TYPE_UNIX;
 
 /**
  * Find native tools in load path
@@ -190,7 +205,7 @@ int loadExternalApp(const char *path)
   if (ret==-1) {
     return 0;
   }
-  mosLog("%s has a %ld byte resource fork\n", path, size);
+  mosTrace("%s has a %ld byte resource fork\n", path, size);
 #else
   FILE *f;
   struct stat st;
@@ -206,7 +221,7 @@ int loadExternalApp(const char *path)
   readResourceMap();
   mosHandle code0 = GetResource('CODE', 0);
   if (code0==0) {
-    mosLog("CODE 0 not found in external app\n");
+    mosError("loadExternalApp: CODE 0 not found in external app\n");
     return 0;
   }
   gMosCurrentA5 = createA5World(code0);
@@ -233,7 +248,7 @@ int loadAliasedApp(const char *aName)
   if (ret==-1) {
     return 0;
   }
-  mosLog("%s has a %ld byte resource fork\n", path, size);
+  mosTrace("%s has a %ld byte resource fork\n", path, size);
 #else
   FILE *f;
   struct stat st;
@@ -249,7 +264,7 @@ int loadAliasedApp(const char *aName)
   readResourceMap();
   mosHandle code0 = GetResource('CODE', 0);
   if (code0==0) {
-    mosLog("CODE 0 not found in aliased app\n");
+    mosError("loadAliasedApp: CODE 0 not found in aliased app\n");
     return 0;
   }
   gMosCurrentA5 = createA5World(code0);
@@ -269,7 +284,7 @@ int loadEmbeddedApp(const char*)
     readResourceMap();
     mosHandle code0 = GetResource('CODE', 0);
     if (code0==0) {
-      mosLog("CODE 0 not found in embedded data\n");
+      mosError("loadEmbeddedApp: CODE 0 not found in embedded data\n");
       return 0;
     }
     gMosCurrentA5 = createA5World(code0);
@@ -329,11 +344,11 @@ int setupSystem(int argc, const char **argv, const char **envp)
   mosSetupTrapTable();
   
   // create native calls
-  mosPtr tncSyFAccess = createGlue(trapSyFAccess);
-  mosPtr tncSyClose   = createGlue(trapSyClose);
-  mosPtr tncSyRead    = createGlue(trapSyRead);
-  mosPtr tncSyWrite   = createGlue(trapSyWrite);
-  mosPtr tncSyIoctl   = createGlue(trapSyIoctl);
+  mosPtr tncSyFAccess = createGlue(0, trapSyFAccess);
+  mosPtr tncSyClose   = createGlue(0, trapSyClose);
+  mosPtr tncSyRead    = createGlue(0, trapSyRead);
+  mosPtr tncSyWrite   = createGlue(0, trapSyWrite);
+  mosPtr tncSyIoctl   = createGlue(0, trapSyIoctl);
   
   // create the IO function table
   mosPtr ioGlue = mosNewPtr(4*6*5); // only three entries are set, two entries are 0'd
@@ -396,19 +411,61 @@ int setupSystem(int argc, const char **argv, const char **envp)
   }
   
   mosPtr vArgv = mosNewPtr((srcArgc+1)*4);
+  unsigned int di = 0;
   for (i=0; i<srcArgc; i++) {
     const char *arg = srcArgv[i];
     // TODO: spot tripple-dash commands and take them off the list
     // TODO: argv[0] should only be the filename (MacOS has a 32 byte limt here!
     if (i==0) {
+      // FIXME: 0x0910 CurApName (Str32)
       arg = mosFilenameName(arg);
       arg = mosFilenameConvertTo(arg, MOS_TYPE_MAC);
+      mosWrite32(vArgv+4*di, mosNewPtr(arg)); di++;
     } else {
-      if (arg[0]!='-')
+      if (strcmp(argv[i], "---help")==0) {
+        puts(gMosHelpText);
+        exit(0);
+      } else if (strcmp(arg, "---verbosity=trace")==0) {
+        mosLogVerbosity(MOS_VERBOSITY_TRACE);
+        mosDebug("Setting verbosity to TRACE\n");
+      } else if (strcmp(arg, "---verbosity=debug")==0) {
+        mosLogVerbosity(MOS_VERBOSITY_DEBUG);
+        mosDebug("Setting verbosity to DEBUG\n");
+      } else if (strcmp(arg, "---verbosity=log")==0) {
+        mosLogVerbosity(MOS_VERBOSITY_LOG);
+        mosDebug("Setting verbosity to LOG\n");
+      } else if (strcmp(arg, "---verbosity=warn")==0) {
+        mosLogVerbosity(MOS_VERBOSITY_WARN);
+        mosDebug("Setting verbosity to WARN\n");
+      } else if (strcmp(arg, "---verbosity=err")==0) {
+        mosLogVerbosity(MOS_VERBOSITY_ERR);
+        mosDebug("Setting verbosity to ERR\n");
+      } else if (strcmp(arg, "---stdout-raw")==0) {
+        gFilterStdoutDataTo = MOS_TYPE_RAW;
+        mosDebug("Setting stdout filter to RAW\n");
+      } else if (strncmp(arg, "---log=", 7)==0) {
+        mosDebug("Setting log file to '%s'\n", arg+7);
+        FILE *f = fopen(arg+7, "wb");
+        if (f) {
+          mosLogTo(f);
+          mosDebug("Starting log file '%s'\n", arg+7);
+        } else {
+          mosDebug("   failed: %s\n", strerror(errno));
+        }
+      } else if (strncmp(arg, "---", 3)==0) {
+        mosError("Unknown command line argument '%s'\n", arg);
+        exit(1);
+      } else if (arg[0]!='-') {
+        mosDebug("Converting argv[%d] from '%s'\n", i, arg);
         arg = mosFilenameConvertTo(arg, MOS_TYPE_MAC);
+        mosDebug("    to '%s'\n", arg);
+        // copy the arg over
+        mosWrite32(vArgv+4*di, mosNewPtr(arg)); di++;
+      } else {
+        mosDebug("Plain copy of argv[%d] = '%s'\n", i, arg);
+        mosWrite32(vArgv+4*di, mosNewPtr(arg)); di++;
+      }
     }
-    // TODO: spot path names and convert them to Mac format if they are in Unix/OSX format
-    mosWrite32(vArgv+4*i, mosNewPtr(arg));
   }
   
   // TODO: envp support
@@ -416,10 +473,10 @@ int setupSystem(int argc, const char **argv, const char **envp)
   // create the MPW memory table that allows tools to connect back to MPW
   mosPtr mpwMem = mosNewPtr(0x0028);
   mosWrite16(mpwMem+0x0000, 0x5348);
-  mosWrite32(mpwMem+0x0002, srcArgc); // argc
+  mosWrite32(mpwMem+0x0002, di); // argc
   mosWrite32(mpwMem+0x0006, vArgv); // argv
   mosWrite32(mpwMem+0x000A, 0); // envp
-  mosWrite32(mpwMem+0x000E, 0); // NULL
+  mosWrite32(mpwMem+0x000E, 0); // status, tool return value
   mosWrite32(mpwMem+0x0012, 0); // unknown
   mosWrite32(mpwMem+0x0016, 0); // unknown
   mosWrite16(mpwMem+0x001A, 400); // file table size
@@ -485,12 +542,6 @@ int main(int argc, const char **argv, const char **envp)
 #else
   const char *appName = NULL;
 
-  FILE *logFile = 0L;
-  // logFile = fopen("/Users/matt/dev/Alienate/log.txt", "wb");
-  // logFile = stdout;
-  if (logFile)
-    mosLogTo(logFile);
-  
   setBreakpoints();
   
   // run External is set if the ---run option was found. This has top priority
@@ -516,9 +567,10 @@ int main(int argc, const char **argv, const char **envp)
   }
   
   runApp();
+  
+  mosWarning("main: we should never reach tis code\nexit(");
+  mosLogClose();
 
-  if (logFile)
-    fclose(logFile);
 #endif
   return 0;
 }

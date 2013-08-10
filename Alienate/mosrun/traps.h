@@ -31,8 +31,10 @@ extern unsigned int trapExitApp;
 void trapGoNative(unsigned short instr);
 void trapBreakpoint(unsigned short instr);
 void trapDispatch(unsigned short);
-mosPtr createGlue(mosTrap trap, unsigned short index = 0);
+mosPtr createGlue(unsigned short index, mosTrap trap);
 void mosSetupTrapTable();
+
+unsigned int mosTickCount();
 
 
 #endif

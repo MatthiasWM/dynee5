@@ -23,9 +23,10 @@
 #define __mosrun__filename__
 
 
-const int MOS_TYPE_UNKNOWN = 0;
-const int MOS_TYPE_MAC = 1;
-const int MOS_TYPE_UNIX = 2;
+const int MOS_TYPE_UNKNOWN  = 0;
+const int MOS_TYPE_RAW      = 1;
+const int MOS_TYPE_MAC      = 2;
+const int MOS_TYPE_UNIX     = 3;
 
 
 int mosFilenameGuessType(const char *filename);

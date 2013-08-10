@@ -85,7 +85,7 @@ unsigned int m68k_read_memory_8(unsigned int address)
   if (address<0x1E00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    mosLog("Read.b 0x%04x: %s %s\n", address, var, rem);
+    mosTrace("Read.b 0x%04x: %s %s\n", address, var, rem);
   }
   switch (address) {
     case 0x012d: return 0; // LoadTrap [GLOBAL VAR]  trap before launch? [byte]
@@ -111,10 +111,10 @@ unsigned int m68k_read_memory_16(unsigned int address)
   if (address<0x1E00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    mosLog("Read.w 0x%04x: %s %s\n", address, var, rem);
+    mosTrace("Read.w 0x%04x: %s %s\n", address, var, rem);
   }
   switch (address) {
-    case 0x0070: return 0xa9f4; // ExitToShell() -> debug trap quite the app
+    case 0x0070: return 0xa9f4; // ExitToShell() -> debug trap: quit the app
     case 0x028e: return 0; // >0 if 128k ROM mac or later
     case 0x0934: return gMosCurJTOffset; // offset from A5 to first entry in jump table
     case 0x0a60: return gMosResErr; // Resource Manager error code
@@ -139,14 +139,13 @@ unsigned int m68k_read_memory_32(unsigned int address)
   if (address<0x1E00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    mosLog("Read.l 0x%04x: %s %s\n", address, var, rem);
+    mosTrace("Read.l 0x%04x: %s %s\n", address, var, rem);
   }
   switch (address) {
     case 0: return 0;
     case 4: return 0;
     case 0x0028: return trapDispatchTrap;
-  //case 0x0316: return 0; // MacPgm // this is MPW memory with argc and more
-  //case 0x0316: return (unsigned int)(&gMacPgm); // MacPgm // this is MPW memory with argc and more
+    case 0x020C: return mosTickCount(); /* Time */
     case 0x0316: return gMosMPWHandle;
     case 0x0910: // CurApName [GLOBAL VAR] Name of current application (length byte followed by up to 31 characters) name of application [STRING[31]]
     case 0x0914:
@@ -204,7 +203,7 @@ void m68k_write_memory_8(unsigned int address, unsigned int value)
   if (address<0x1E00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    mosLog("Write.b 0x%04x = 0x%02X: %s %s\n", address, value & 0xff, var, rem);
+    mosTrace("Write.b 0x%04x = 0x%02X: %s %s\n", address, value & 0xff, var, rem);
   }
   switch (address) {
     case 0x0a5e: gMosResLoad = value; break; // ResLoad       0A5E  word  Auto-load feature
@@ -227,7 +226,7 @@ void m68k_write_memory_16(unsigned int address, unsigned int value)
   if (address<0x1E00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    mosLog("Write.w 0x%04x = 0x%04X: %s %s\n", address, value & 0xffff, var, rem);
+    mosTrace("Write.w 0x%04x = 0x%04X: %s %s\n", address, value & 0xffff, var, rem);
   }
   switch (address) {
     default:
@@ -249,7 +248,7 @@ void m68k_write_memory_32(unsigned int address, unsigned int value)
   if (address<0x1E00) {
     const char *rem = "";
     const char *var = gvarName(address, &rem);
-    mosLog("Write.l 0x%04x = 0x%08X: %s %s\n", address, value, var, rem);
+    mosTrace("Write.l 0x%04x = 0x%08X: %s %s\n", address, value, var, rem);
   }
   switch (address) {
     default:

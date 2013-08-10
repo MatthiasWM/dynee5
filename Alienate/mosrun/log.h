@@ -26,8 +26,20 @@
 #include <stdio.h>
 
 
+const int MOS_VERBOSITY_ERR   = 0;
+const int MOS_VERBOSITY_WARN  = 1;
+const int MOS_VERBOSITY_LOG   = 2;
+const int MOS_VERBOSITY_DEBUG = 3;
+const int MOS_VERBOSITY_TRACE = 4;
+
 FILE *mosLogFile();
+void mosLogVerbosity(int v);
+int mosLogVerbosity();
 void mosLogTo(FILE *out);
+void mosLogClose();
+
+void mosTrace(const char *format, ...);
+void mosDebug(const char *format, ...);
 void mosLog(const char *format, ...);
 void mosWarning(const char *format, ...);
 void mosError(const char *format, ...);

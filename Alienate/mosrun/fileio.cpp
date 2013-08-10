@@ -32,6 +32,7 @@
 #include <sys/ioctl.h>
 #include <sys/xattr.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 
 extern "C" {
 #include "musashi331/m68k.h"
@@ -76,15 +77,14 @@ MosFile stdFiles[] = {
  *   +0c.l = ptr to return value?
  */
 void trapSyFAccess(unsigned short) {
-  mosLog("TODO: trapSyFAccess\n");
   unsigned int sp = m68k_get_reg(0L, M68K_REG_SP);
   const char *filename = (char*)m68k_read_memory_32(sp+4);
   unsigned int cmd = m68k_read_memory_32(sp+8);
   unsigned int file = m68k_read_memory_32(sp+12);
   unsigned short flags = m68k_read_memory_16(file);
-  mosLog("Opening file '%s', cmd=0x%08X, arg=0x%08X, flags=0x%04X\n", filename, cmd, file, flags);
+  mosTrace("Accessing file '%s', cmd=0x%08X, arg=0x%08X, flags=0x%04X\n", filename, cmd, file, flags);
   if (cmd!=0x00006400) { // '..d.'
-    mosError("Unknown file access command 0x%08X\n", cmd);
+    mosError("trapSyFAccess: Unknown file access command 0x%08X\n", cmd);
     m68k_set_reg(M68K_REG_D0, EINVAL); // no error
     return;
   }
@@ -113,7 +113,7 @@ void trapSyFAccess(unsigned short) {
     fd = ::open(uxFilename, mode, 0644);
   }
   if (fd==-1) { // error
-    mosError("Can't open file %s (mode 0x%04X): %s\n", uxFilename, mode, strerror(errno));
+    mosDebug("Can't open file %s (mode 0x%04X): %s\n", uxFilename, mode, strerror(errno));
     m68k_set_reg(M68K_REG_D0, errno); // just return the error code
     free(uxFilename);
   } else {
@@ -182,7 +182,10 @@ void trapSyWrite(unsigned short) {
   unsigned int size = m68k_read_memory_32(file+12);
   
   // convert buffer if it is not binary // FIXME: this needs a lot more work!
-  if (mosFile->fd==1 || mosFile->fd==2) {
+  if (mosFile->fd==1) { // stdout
+    if (gFilterStdoutDataFrom==MOS_TYPE_MAC && gFilterStdoutDataTo==MOS_TYPE_UNIX)
+      buffer = (void*)mosDataMacToUnix((char*)buffer, size);
+  } else if (mosFile->fd==2) { // stderr
     buffer = (void*)mosDataMacToUnix((char*)buffer, size);
   }
 
@@ -226,8 +229,8 @@ void trapSyIoctl(unsigned short) {
   unsigned int cmd = m68k_read_memory_32(sp+8);
   unsigned int param = m68k_read_memory_32(sp+12);
   MosFile *mosFile = (MosFile*)m68k_read_memory_32(file+8);
-  mosLog("IOCTL of file at 0x%08X, cmd=0x%04X = '%c'<<8+%d, param=%d (0x%08X)\n",
-         file, cmd, (cmd>>8)&0xff, cmd&0xff, param, param);
+  mosTrace("IOCTL of file at 0x%08X, cmd=0x%04X = '%c'<<8+%d, param=%d (0x%08X)\n",
+           file, cmd, (cmd>>8)&0xff, cmd&0xff, param, param);
   switch (cmd) {
     case 0x6600: { // FIOLSEEK
                    // Parameter points to two longs, the first is the offset type, the second is the offset itself
@@ -261,7 +264,7 @@ void trapSyIoctl(unsigned short) {
                  // TODO: more error checking
       m68k_set_reg(M68K_REG_D0, 0); // no error
       break;
-    case 0x6603: // FIOBUFSIZE, Return optimal buffer size
+    case 0x6603: // FIOBUFSIZE, Return optimal buffer size (MPW buffers 1024 bytes)
       m68k_write_memory_16(param+2, 4096); // random value // FIXME: this looks like the wrong address to me!
       m68k_set_reg(M68K_REG_D0, 0); // no error
       break;
@@ -269,9 +272,212 @@ void trapSyIoctl(unsigned short) {
     case 0x6605: // FIOREFNUM, Return fs refnum
     case 0x6606: // FIOSETEOF, Set file length
     default:
-      mosLog("ERROR: unsupported ioctrl on file operation\n");
+      mosError("trapSyIoctl: unsupported ioctl 0x%04X on file operation\n", cmd);
       m68k_set_reg(M68K_REG_D0, EINVAL);
       break;
   }
 }
+
+
+int mosPBGetFInfo(unsigned int paramBlock, bool async)
+{
+  mosTrace("mosPBGetFInfo called\n");
+
+  //mosPtr ioCompletion = m68k_read_memory_32(paramBlock+12);
+  mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
+  //unsigned int ioVRefNum = m68k_read_memory_16(paramBlock+22);
+  //unsigned int ioFVersNum = m68k_read_memory_8(paramBlock+26);
+  //int ioDirIndex = m68k_read_memory_16(paramBlock+28);
+  
+  // do we have a file name
+  if (!ioNamePtr) {
+    mosDebug("mosPBGetFInfo: no file name\n");
+    m68k_write_memory_16(paramBlock+16, mosBdNamErr);
+    return mosBdNamErr;
+  }
+  
+  unsigned int fnLen = m68k_read_memory_8(ioNamePtr);
+  if (fnLen==0) {
+    mosDebug("mosPBGetFInfo: zero length file name\n");
+    m68k_write_memory_16(paramBlock+16, mosBdNamErr);
+    return mosBdNamErr;
+  }
+  
+  char cFilename[2048];
+  memcpy(cFilename, (unsigned char*)ioNamePtr+1, fnLen);
+  cFilename[fnLen] = 0;
+  mosDebug("mosPBGetFInfo: get info for '%s'\n", cFilename);
+  
+  struct stat st;
+  int ret = stat(cFilename, &st);
+  if (ret==-1) {
+    mosDebug("mosPBGetFInfo: can't get status, return 'file not found'\n");
+    m68k_write_memory_16(paramBlock+16, mosFnfErr);
+    return mosFnfErr; // TODO: we could differentiate here a lot more!
+  }
+
+  // FIXME: ioDirIndex must be 0 or less!
+  
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  m68k_write_memory_16(paramBlock+24, -1);  // FIXME: ioRefNum  path reference number
+  m68k_write_memory_8(paramBlock+30, 0);  // FIXME: ioFlAttrib  file attributes bit0: locked
+  m68k_write_memory_8(paramBlock+31, 0);  // FIXME: ioFlVersNum  version number
+  // 32: ioFlFndrInfo, 16 bytes finder info
+  // 48.l: ioFlNum  file number
+  // 52.w: ioFlStBlk  first allocation block of data fork. 0 if no data
+  m68k_write_memory_16(paramBlock+52, 1234);
+  // 54.l: ioFlLgLen  logical end of file for data fork
+  m68k_write_memory_32(paramBlock+54, (unsigned int)st.st_size);
+  // 58.l: ioFlPyLen  physical end of file
+  m68k_write_memory_32(paramBlock+58, (unsigned int)st.st_size);
+  // 62.w: ioFlRStBlk  first allocation block of resource fork. 0 if no fork
+  m68k_write_memory_16(paramBlock+62, 0);
+  // 64.l: ioFlRLgLen  size
+  m68k_write_memory_32(paramBlock+64, 0);
+  // 68.l: ioFlRPyLen  phys size
+  m68k_write_memory_32(paramBlock+64, 0);
+  // 72.l: ioFlCrDat  date and time of creation, seconds sinc 1.1.1904
+  m68k_write_memory_32(paramBlock+72, st.st_ctimespec.tv_sec + 2082844800);
+  // 76.l: ioFlMdDat  date and time of last modification
+  m68k_write_memory_32(paramBlock+76, st.st_mtimespec.tv_sec + 2082844800);
+  
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr; // .. and check which fields are read
+}
+
+
+int mosPBSetFInfo(unsigned int paramBlock, bool async)
+{
+  mosTrace("mosPBSetFInfo called\n");
+  // FIXME: what can the user set here?
+  // "the application should call PBSetFInfo (after PBCreate) to fill in the information needed by the Finder"
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr; // .. and check which fields are read
+}
+
+
+int mosPBCreate(unsigned int paramBlock, bool async)
+{
+  mosTrace("mosPBCreate called\n");
+  
+  //mosPtr ioCompletion = m68k_read_memory_32(paramBlock+12);
+  mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
+  //unsigned int ioVRefNum = m68k_read_memory_16(paramBlock+22);
+  //unsigned int ioFVersNum = m68k_read_memory_8(paramBlock+26);
+  
+  // do we have a file name
+  if (!ioNamePtr) {
+    mosDebug("mosPBCreate: no file name\n");
+    m68k_write_memory_16(paramBlock+16, mosBdNamErr);
+    return mosBdNamErr;
+  }
+  
+  unsigned int fnLen = m68k_read_memory_8(ioNamePtr);
+  if (fnLen==0) {
+    mosDebug("mosPBCreate: zero length file name\n");
+    m68k_write_memory_16(paramBlock+16, mosBdNamErr);
+    return mosBdNamErr;
+  }
+  
+  char cFilename[2048];
+  memcpy(cFilename, (unsigned char*)ioNamePtr+1, fnLen);
+  cFilename[fnLen] = 0;
+  mosDebug("mosPBCreate: create file '%s'\n", cFilename);
+  
+  int ret = open(cFilename, O_CREAT|O_WRONLY, 0644);
+  if (ret==-1) {
+    mosDebug("mosPBCreate: can't create file\n");
+    m68k_write_memory_16(paramBlock+16, mosDupFNErr);
+    return mosDupFNErr; // TODO: we could differentiate here a lot more!
+  }
+  close(ret);
+  
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr;
+}
+
+
+/**
+ * Dispatch a single trap into multiple file system operations
+ */
+int mosFSDispatch(unsigned int paramBlock, unsigned int func)
+{
+  switch (func) {
+    case 0x001A: {
+      mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
+      unsigned int fnLen = m68k_read_memory_8(ioNamePtr);
+      char cFilename[2048];
+      memcpy(cFilename, (unsigned char*)ioNamePtr+1, fnLen);
+      cFilename[fnLen] = 0;
+      
+      byte mode = m68k_read_memory_8(paramBlock+27); // ioPermssn
+                                                     // fsCurPerm = 0
+                                                     // fsRdPerm = 1
+                                                     // fsWrPern = 2
+                                                     // fsRdWrPerm = 3
+      
+      mosDebug("mosFSDispatch: PBOpenDFSync - open file '%s' %d\n", cFilename, mode);
+      
+      int file = -1;
+      switch (mode) {
+        case 1: file = open(cFilename, O_RDONLY); break;
+        case 2: file = open(cFilename, O_WRONLY); break;
+        case 0:
+        case 3: file = open(cFilename, O_RDWR); break;
+      }
+      if (file==-1) {
+        mosError("mosFSDispatch: PBOpenDFSync - can't open file '%s', %s\n", cFilename, strerror(errno));
+        m68k_write_memory_16(paramBlock+16, mosDupFNErr);
+        return mosDupFNErr; // TODO: we could differentiate here a lot more!
+      }
+      if (file>0xffff) {
+        mosError("mosFSDispatch: PBOpenDFSync - emulation failed with unexpected file number\n");
+      }
+      m68k_write_memory_16(paramBlock+24, file); // ioRefNum
+      m68k_write_memory_16(paramBlock+16, mosNoErr);
+      return mosNoErr; }
+    case 0x002E:
+      mosError("mosFSDispatch: PBDTOpenInform not implemented\n");
+      break;
+    case 0x002F:
+      mosError("mosFSDispatch: PBDTDeleteSync not implemented\n");
+      break;
+    case 0x0060:
+      mosError("mosFSDispatch: PBGetAltAccessSync not implemented\n");
+      break;
+    case 0x0061:
+      mosError("mosFSDispatch: PBSetAltAccessSync not implemented\n");
+      break;
+    default:
+      mosError("mosFSDispatch: unknown function 0x%04X\n", func);
+      break;
+  }
+
+  m68k_write_memory_16(paramBlock+16, mosParamErr);
+  return mosParamErr;
+}
+
+// PBSetEOF: A012: _SetEOF
+// PBSetEOF sets the logical end-of-file of the open file whose access path is
+// specified by ioRefNum (24.w), to ioMisc (28.l). If you attempt to set the
+// logical end-of-file beyond the physical end-of- file, the physical
+// end-of-file is set to one byte beyond the end of the next free allocation
+// block; if there isn't enough space on the volume, no change is made, and
+// PBSetEOF returns dskFulErr as its function result. If ioMisc is 0, all
+// space occupied by the file on the volume is released.
+
+// PBWrite: A003: _Write
+
+// A200: _HOpen == PBHOpenSync
+// HOpen = FUNCTION PBOpen (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr; ?
+//       or FUNCTION PBOpenRF (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr; (Resource fork)
+
+// A002: _Read
+// Read = FUNCTION PBRead (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr; ?
+
+// FUNCTION PBClose (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
+
+// A9EE: _DECSTR68K
+
+// FUNCTION PBCreate (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
 

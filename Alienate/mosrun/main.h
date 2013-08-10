@@ -23,7 +23,7 @@
 #define mosrun_main_h
 
 
-#define MOS_BOUNDS_CHECK 1
+#define MOS_BOUNDS_CHECK 0
 
 #define MOS_O_RDONLY      0x00      /* Open for reading only.            */
 #define MOS_O_WRONLY      0x01      /* Open for writing only.            */
@@ -44,6 +44,11 @@
 
 const int MOS_STACK_SIZE = 0x8000;
 
+const int mosNoErr =         0; // success, party!
+const int mosBdNamErr =    -37; // bad file name or volume name (perhaps zero length)
+const int mosFnfErr =      -43; // file not found
+const int mosDupFNErr =    -48; // duplicate filename (rename)
+const int mosParamErr =    -50; // bad parameter passed
 
 typedef unsigned int mosPtr;
 typedef unsigned int mosHandle;
@@ -59,5 +64,7 @@ extern byte *theRsrc;
 extern unsigned int theRsrcSize;
 extern byte *theJumpTable;
 
+extern byte gFilterStdoutDataFrom;
+extern byte gFilterStdoutDataTo;
 
 #endif

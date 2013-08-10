@@ -70,11 +70,11 @@ void dumpResourceMap()
   unsigned int rsrcMapTypeList = m68k_read_memory_16((unsigned int)(theRsrc+24));
   // ------ resource map type list
   unsigned int rsrcMapTypeListSize = m68k_read_memory_16((unsigned int)(theRsrc+rsrcMapTypeList)) + 1;
-  mosLog("  Rsrc Type list at 0x%08X with %d types.\n", rsrcMapTypeList, rsrcMapTypeListSize);
+  mosTrace("  Rsrc Type list at 0x%08X with %d types.\n", rsrcMapTypeList, rsrcMapTypeListSize);
   for (i=0; i<rsrcMapTypeListSize; i++) {
     unsigned int nRes = m68k_read_memory_16((unsigned int)(theRsrc+rsrcMapTypeList+8*i+6)) + 1;
     unsigned int resTable = m68k_read_memory_16((unsigned int)(theRsrc+rsrcMapTypeList+8*i+8)) + rsrcMapTypeList;
-    mosLog("    %d: Rsrc type '%c%c%c%c' has %d resouces listed at 0x%08X\n",
+    mosTrace("    %d: Rsrc type '%c%c%c%c' has %d resouces listed at 0x%08X\n",
            i,
            m68k_read_memory_8((unsigned int)(theRsrc+rsrcMapTypeList+8*i+2)),
            m68k_read_memory_8((unsigned int)(theRsrc+rsrcMapTypeList+8*i+3)),
@@ -84,7 +84,7 @@ void dumpResourceMap()
            );
     for (j=0; j<nRes; j++) {
       unsigned int data = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
-      mosLog("      %d: ID=%d, name@%d, data=0x%08x, loaded=0x%0X, flags=0x%02X, %d bytes\n", j,
+      mosTrace("      %d: ID=%d, name@%d, data=0x%08x, loaded=0x%0X, flags=0x%02X, %d bytes\n", j,
              m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+0)),
              m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+2)),
              data,
@@ -134,14 +134,14 @@ mosHandle GetResource(unsigned int myResType, unsigned short myId)
           unsigned int handle = m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+8));
           if (handle) {
             // resource is already in RAM
-            mosLog("Resource already loaded\n");
+            mosTrace("Resource already loaded\n");
             return handle;
           } else {
             // resource must be copied from the file into memory
             if (gMosResLoad==0) {
-              mosLog("WARNING: Automatic Resource loading is disabled!\n");
+              mosDebug("WARNING: Automatic Resource loading is disabled!\n");
             }
-            mosLog("Resource found, loading...\n");
+            mosTrace("Resource found, loading...\n");
             unsigned int rsrcOffset = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
             unsigned int rsrcData = m68k_read_memory_32((unsigned int)(theApp));
             unsigned int rsrcSize = m68k_read_memory_32((unsigned int)(theApp+rsrcData+rsrcOffset));
@@ -162,7 +162,7 @@ mosHandle GetResource(unsigned int myResType, unsigned short myId)
                 gResourceStart[myId] = (unsigned int)(ptr+4);
                 gResourceEnd[myId] = (unsigned int)(ptr+4) + rsrcSize;
               }
-              mosLog("Resource %d from 0x%08X to 0x%08X\n", myId, gResourceStart[myId], gResourceEnd[myId]);
+              mosTrace("Resource %d from 0x%08X to 0x%08X\n", myId, gResourceStart[myId], gResourceEnd[myId]);
             }
             return hdl;
           }
@@ -170,7 +170,8 @@ mosHandle GetResource(unsigned int myResType, unsigned short myId)
       }
     }
   }
-  mosLog("ERROR: Resource not found!\n");
+  mosDebug("ERROR: Resource '%c%c%c%c', ID %d not found!\n",
+           myResType>>24, myResType>>16, myResType>>8, myResType, myId);
   return 0;
 }
 
@@ -198,20 +199,20 @@ mosHandle GetNamedResource(unsigned int myResType, const byte *pName)
         unsigned short rsrcNameOffset = m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+2));
         if (rsrcNameOffset==0xffff) continue; // unnamed resource
         byte* rsrcName = theRsrc+rsrcMapNameList+rsrcNameOffset;
-        mosLog("%*s\n", rsrcName[0], rsrcName+1);
+        mosTrace("%*s\n", rsrcName[0], rsrcName+1);
         if (memcmp(pName, rsrcName, pName[0]+1)==0) {
           unsigned int handle = m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+8));
           unsigned int id = m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+0));
           if (handle) {
             // resource is already in RAM
-            mosLog("Resource already loaded\n");
+            mosTrace("Resource already loaded\n");
             return handle;
           } else {
             // resource must be copied from the file into memory
             if (gMosResLoad==0) {
-              mosLog("WARNING: Automatic Resource loading is disabled!\n");
+              mosDebug("WARNING: Automatic Resource loading is disabled!\n");
             }
-            mosLog("Resource found, loading...\n");
+            mosTrace("Resource found, loading...\n");
             unsigned int rsrcOffset = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
             unsigned int rsrcData = m68k_read_memory_32((unsigned int)(theApp));
             unsigned int rsrcSize = m68k_read_memory_32((unsigned int)(theApp+rsrcData+rsrcOffset));
@@ -232,7 +233,7 @@ mosHandle GetNamedResource(unsigned int myResType, const byte *pName)
                 gResourceStart[id] = (unsigned int)(ptr+4);
                 gResourceEnd[id] = (unsigned int)(ptr+4) + rsrcSize;
               }
-              mosLog("Resource %d from 0x%08X to 0x%08X\n", id, gResourceStart[id], gResourceEnd[id]);
+              mosTrace("Resource %d from 0x%08X to 0x%08X\n", id, gResourceStart[id], gResourceEnd[id]);
             }
             return hdl;
           }
@@ -240,7 +241,8 @@ mosHandle GetNamedResource(unsigned int myResType, const byte *pName)
       }
     }
   }
-  mosLog("ERROR: Resource not found!\n");
+  mosDebug("ERROR: Resource '%c%c%c%c', name '%s' not found!\n",
+           myResType>>24, myResType>>16, myResType>>8, myResType, pName);
   return 0;
 }
 
@@ -279,7 +281,7 @@ void readResourceMap()
 {
   unsigned int rsrcMap = m68k_read_memory_32((unsigned int)(theApp+4));
   unsigned int rsrcMapSize = m68k_read_memory_32((unsigned int)(theApp+12));
-  mosLog("Rsrc Map %d bytes at 0x%08X\n", rsrcMapSize, rsrcMap);
+  mosTrace("Rsrc Map %d bytes at 0x%08X\n", rsrcMapSize, rsrcMap);
   theRsrc = (byte*)mosNewPtr(rsrcMapSize);
   theRsrcSize = rsrcMapSize;
   memcpy(theRsrc, theApp+rsrcMap, rsrcMapSize);

@@ -24,7 +24,20 @@
 #include <stdarg.h>
 
 
-static FILE *gMosLogFile = 0L;
+static FILE *gMosLogFile = stderr;
+static int gMosVerbosity = MOS_VERBOSITY_WARN;
+
+
+void mosLogVerbosity(int v)
+{
+  gMosVerbosity = v;
+}
+
+
+int mosLogVerbosity()
+{
+  return gMosVerbosity;
+}
 
 
 /**
@@ -46,11 +59,62 @@ void mosLogTo(FILE *out)
 }
 
 
-/** 
+void mosLogClose()
+{
+  if (gMosLogFile && gMosLogFile!=stdout && gMosLogFile!=stderr) {
+    fclose(gMosLogFile);
+  }
+}
+
+
+/**
  * Log text to a file using print() syntax.
+ *
+ * Use this for any and every little thing that goes on in the simulator
+ * or emulator. This option may generate megabytes of text.
+ */
+void mosTrace(const char *format, ...)
+{
+  if (gMosVerbosity<MOS_VERBOSITY_TRACE)
+    return;
+  if (gMosLogFile) {
+    va_list va;
+    va_start(va, format);
+    // TODO: vsnprintf
+    vfprintf(gMosLogFile, format, va);
+    va_end(va);
+  }
+}
+
+
+/**
+ * Log text to a file using print() syntax.
+ *
+ * Use this for any uncommon events that may be of interest for the programmer.
+ */
+void mosDebug(const char *format, ...)
+{
+  if (gMosVerbosity<MOS_VERBOSITY_DEBUG)
+    return;
+  if (gMosLogFile) {
+    va_list va;
+    va_start(va, format);
+    // TODO: vsnprintf
+    vfprintf(gMosLogFile, format, va);
+    va_end(va);
+  }
+}
+
+
+/**
+ * Log text to a file using print() syntax.
+ *
+ * Log events that mey be useful for the common user.
  */
 void mosLog(const char *format, ...)
 {
+  if (gMosVerbosity<MOS_VERBOSITY_LOG)
+    return;
   if (gMosLogFile) {
     va_list va;
     va_start(va, format);
@@ -63,27 +127,51 @@ void mosLog(const char *format, ...)
 
 /**
  * Print text to stderr about issues with the emulation.
+ *
+ * Log events that are important for the user, but not catastrophic for the 
+ * application. This is the defaul log level.
  */
 void mosWarning(const char *format, ...)
 {
-  fprintf(stderr, "MOSRUN - WARNING!\n");
+  if (gMosVerbosity<MOS_VERBOSITY_WARN)
+    return;
   va_list va;
   va_start(va, format);
-  vfprintf(stderr, format, va);
+  fprintf(gMosLogFile, "MOSRUN - WARNING!\n");
+  vfprintf(gMosLogFile, format, va);
   va_end(va);
+  
+  if (gMosLogFile!=stderr) {
+    va_start(va, format);
+    fprintf(stderr, "MOSRUN - WARNING!\n");
+    vfprintf(stderr, format, va);
+    va_end(va);
+  }
 }
 
 
 /**
  * Print text to stderr about severe errors in the meulation.
- * After calling mosError, the application should sfely exit.
+ *
+ * Log events that will abort the application immediatly, for example 
+ * unemulated traps.
+ * After calling mosError, the application should safely exit.
  */
 void mosError(const char *format, ...)
 {
-  fprintf(stderr, "MOSRUN - ERROR!\n");
+  if (gMosVerbosity<MOS_VERBOSITY_ERR)
+    return;
   va_list va;
   va_start(va, format);
-  vfprintf(stderr, format, va);
+  fprintf(gMosLogFile, "MOSRUN - ERROR!\n");
+  vfprintf(gMosLogFile, format, va);
   va_end(va);
+  
+  if (gMosLogFile!=stderr) {
+    va_start(va, format);
+    fprintf(stderr, "MOSRUN - ERROR!\n");
+    vfprintf(stderr, format, va);
+    va_end(va);
+  }
 }
 
