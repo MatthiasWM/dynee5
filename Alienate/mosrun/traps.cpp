@@ -581,6 +581,10 @@ void trapOSDispatch(unsigned short instr)
       m68k_write_memory_32(sp, handle);
       break;
     }
+    case 0x1E: // TempHLock - nothing to do
+      break;
+    case 0x1F: // TempHUnlock - nothing to do
+      break;
     case 0x20: { // mfTempDisposHandleSel
                  // Releases a relocatable block in the temporary heap.
                  // void TempDisposeHandle (Handle h, OSErr *resultCode );
@@ -791,6 +795,66 @@ void trapCreate(unsigned short instr)
 
 
 /**
+ * [A012] _SetEOF
+ * FUNCTION PBSetEOF (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
+ */
+void trapSetEOF(unsigned short instr)
+{
+  unsigned int paramBlock = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
+  
+  unsigned int ret = mosPBSetEOF(paramBlock, async);
+  
+  m68k_set_reg(M68K_REG_D0, ret);
+}
+
+
+/**
+ * [A002] _Read
+ * FUNCTION PBRead (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
+ */
+void trapRead(unsigned short instr)
+{
+  unsigned int paramBlock = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
+  
+  unsigned int ret = mosPBRead(paramBlock, async);
+  
+  m68k_set_reg(M68K_REG_D0, ret);
+}
+
+
+/**
+ * [A003] _Write
+ * FUNCTION PBWrite (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
+ */
+void trapWrite(unsigned short instr)
+{
+  unsigned int paramBlock = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
+  
+  unsigned int ret = mosPBWrite(paramBlock, async);
+  
+  m68k_set_reg(M68K_REG_D0, ret);
+}
+
+
+/**
+ * [A001] _Close
+ * FUNCTION PBClose (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
+ */
+void trapClose(unsigned short instr)
+{
+  unsigned int paramBlock = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
+  
+  unsigned int ret = mosPBWrite(paramBlock, async);
+  
+  m68k_set_reg(M68K_REG_D0, ret);
+}
+
+
+/**
  * [A060] _FSDispatch
  */
 void trapFSDispatch(unsigned short instr)
@@ -990,10 +1054,14 @@ void mosSetupTrapTable()
   
   // -- Low Level File Functions
   
+  createGlue(0xA001, trapClose);
+  createGlue(0xA002, trapRead);
+  createGlue(0xA003, trapWrite);
   createGlue(0xA00C, trapGetFileInfo);
   createGlue(0xA008, trapCreate);
   createGlue(0xA00D, trapSetFileInfo);
   createGlue(0xA060, trapFSDispatch);
+  createGlue(0xA012, trapSetEOF);
   
   // -- unsorted
   

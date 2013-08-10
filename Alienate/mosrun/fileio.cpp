@@ -281,7 +281,7 @@ void trapSyIoctl(unsigned short) {
 
 int mosPBGetFInfo(unsigned int paramBlock, bool async)
 {
-  mosTrace("mosPBGetFInfo called\n");
+  mosDebug("mosPBGetFInfo called\n");
 
   //mosPtr ioCompletion = m68k_read_memory_32(paramBlock+12);
   mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
@@ -348,7 +348,7 @@ int mosPBGetFInfo(unsigned int paramBlock, bool async)
 
 int mosPBSetFInfo(unsigned int paramBlock, bool async)
 {
-  mosTrace("mosPBSetFInfo called\n");
+  mosDebug("mosPBSetFInfo called\n");
   // FIXME: what can the user set here?
   // "the application should call PBSetFInfo (after PBCreate) to fill in the information needed by the Finder"
   m68k_write_memory_16(paramBlock+16, mosNoErr);
@@ -356,9 +356,104 @@ int mosPBSetFInfo(unsigned int paramBlock, bool async)
 }
 
 
+int mosPBSetEOF(unsigned int paramBlock, bool async)
+{
+  mosDebug("mosPBSetEOF called\n");
+  int ioRefNum = m68k_read_memory_16(paramBlock+24);
+  unsigned int ioMisc = m68k_read_memory_32(paramBlock+28);
+  
+  int ret = ftruncate(ioRefNum, ioMisc);
+  if (ret==-1) {
+    mosDebug("mosPBSetEOF %d %d failed: %s\n", ioRefNum, ioMisc, strerror(errno));
+    m68k_write_memory_16(paramBlock+16, mosFnfErr);
+    return mosFnfErr; // TODO: get more detailed here?
+  }
+  
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr; // .. and check which fields are read
+}
+
+
+int mosPBRead(unsigned int paramBlock, bool async)
+{
+  int ioRefNum = m68k_read_memory_16(paramBlock+24);
+  unsigned int ioBuffer = m68k_read_memory_32(paramBlock+32);
+  unsigned int ioReqCount = m68k_read_memory_32(paramBlock+36);
+  unsigned short ioPosMode = m68k_read_memory_16(paramBlock+44);
+  unsigned int ioPosOffset = m68k_read_memory_32(paramBlock+46);
+  mosDebug("mosPBRead called: RefNum=%d, Buffer=0x%08X, ReqCount=%d, POsMode=%d, PosOffset=%d\n",
+           ioRefNum, ioBuffer, ioReqCount, ioPosMode, ioPosOffset);
+  
+  switch (ioPosMode) {
+    case 0: break;
+    case 1: lseek(ioRefNum, ioPosOffset, SEEK_SET); break;
+    case 2: lseek(ioRefNum, ioPosOffset, SEEK_END); break;
+    case 3: lseek(ioRefNum, ioPosOffset, SEEK_CUR); break;
+  }
+  int ret = read(ioRefNum, (void*)ioBuffer, ioReqCount);
+  if (ret==-1) {
+    mosDebug("mosPBRead failed: %s\n", strerror(errno));
+    m68k_write_memory_16(paramBlock+16, mosFnfErr);
+    return mosFnfErr; // TODO: get more detailed here?
+  }
+  
+  m68k_write_memory_32(paramBlock+40, ret);
+  m68k_write_memory_32(paramBlock+46, (unsigned int)lseek(ioRefNum, 0, SEEK_CUR));
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr; // .. and check which fields are read
+}
+
+
+int mosPBWrite(unsigned int paramBlock, bool async)
+{
+  int ioRefNum = m68k_read_memory_16(paramBlock+24);
+  unsigned int ioBuffer = m68k_read_memory_32(paramBlock+32);
+  unsigned int ioReqCount = m68k_read_memory_32(paramBlock+36);
+  unsigned short ioPosMode = m68k_read_memory_16(paramBlock+44);
+  unsigned int ioPosOffset = m68k_read_memory_32(paramBlock+46);
+  mosDebug("mosPBWrite called: RefNum=%d, Buffer=0x%08X, ReqCount=%d, POsMode=%d, PosOffset=%d\n",
+           ioRefNum, ioBuffer, ioReqCount, ioPosMode, ioPosOffset);
+  
+  switch (ioPosMode) {
+    case 0: break;
+    case 1: lseek(ioRefNum, ioPosOffset, SEEK_SET); break;
+    case 2: lseek(ioRefNum, ioPosOffset, SEEK_END); break;
+    case 3: lseek(ioRefNum, ioPosOffset, SEEK_CUR); break;
+  }
+  int ret = write(ioRefNum, (void*)ioBuffer, ioReqCount);
+  if (ret==-1) {
+    mosDebug("mosPBWrite failed: %s\n", strerror(errno));
+    m68k_write_memory_16(paramBlock+16, mosFnfErr);
+    return mosFnfErr; // TODO: get more detailed here?
+  }
+  
+  m68k_write_memory_32(paramBlock+40, ret);
+  m68k_write_memory_32(paramBlock+46, (unsigned int)lseek(ioRefNum, 0, SEEK_CUR));
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr; // .. and check which fields are read
+}
+
+
+int mosPBClose(unsigned int paramBlock, bool async)
+{
+  mosDebug("mosPBClose called\n");
+  int ioRefNum = m68k_read_memory_16(paramBlock+24);
+  
+  int ret = close(ioRefNum);
+  if (ret==-1) {
+    mosDebug("mosPBClose failed: %s\n", strerror(errno));
+    m68k_write_memory_16(paramBlock+16, mosFnfErr);
+    return mosFnfErr; // TODO: get more detailed here?
+  }
+  
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr; // .. and check which fields are read
+}
+
+
 int mosPBCreate(unsigned int paramBlock, bool async)
 {
-  mosTrace("mosPBCreate called\n");
+  mosDebug("mosPBCreate called\n");
   
   //mosPtr ioCompletion = m68k_read_memory_32(paramBlock+12);
   mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
@@ -403,7 +498,7 @@ int mosPBCreate(unsigned int paramBlock, bool async)
 int mosFSDispatch(unsigned int paramBlock, unsigned int func)
 {
   switch (func) {
-    case 0x001A: {
+    case 0x001A: { // PBOpenDFSync
       mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
       unsigned int fnLen = m68k_read_memory_8(ioNamePtr);
       char cFilename[2048];
@@ -416,8 +511,6 @@ int mosFSDispatch(unsigned int paramBlock, unsigned int func)
                                                      // fsWrPern = 2
                                                      // fsRdWrPerm = 3
       
-      mosDebug("mosFSDispatch: PBOpenDFSync - open file '%s' %d\n", cFilename, mode);
-      
       int file = -1;
       switch (mode) {
         case 1: file = open(cFilename, O_RDONLY); break;
@@ -425,6 +518,7 @@ int mosFSDispatch(unsigned int paramBlock, unsigned int func)
         case 0:
         case 3: file = open(cFilename, O_RDWR); break;
       }
+      mosDebug("mosFSDispatch: PBOpenDFSync - open file '%s' mode=%d => %d\n", cFilename, mode, file);
       if (file==-1) {
         mosError("mosFSDispatch: PBOpenDFSync - can't open file '%s', %s\n", cFilename, strerror(errno));
         m68k_write_memory_16(paramBlock+16, mosDupFNErr);
