@@ -253,6 +253,30 @@ mosHandle mosNewHandle(unsigned int size)
 
 
 /**
+ * Reallocate the memory block with a new size.
+ */
+int mosSetHandleSize(mosHandle hdl, unsigned int newSize)
+{
+  // get the old allocation data
+  mosPtr oldPtr = mosRead32(hdl);
+  unsigned int oldSize = mosPtrSize(oldPtr);
+  
+  // allocate a new block
+  mosPtr newPtr = mosNewPtr(newSize);
+  mosWrite32(hdl, newPtr);
+
+  // copy the old contents over
+  unsigned int size = (newSize<oldSize)?newSize:oldSize;
+  memcpy((void*)newPtr, (void*)oldPtr, size);
+  
+  // free the old allocation
+  mosDisposePtr(oldPtr);
+  
+  return 0;
+}
+
+
+/**
  * Free memeory and its master pointer.
  */
 void mosDisposeHandle(mosHandle hdl)

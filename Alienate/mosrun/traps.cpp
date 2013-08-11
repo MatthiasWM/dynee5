@@ -330,6 +330,25 @@ void trapGetHandleSize(unsigned short)
 
 
 /**
+ * [A024] Set the size of the memory allocation that we point to.
+ *
+ * A0 = handle
+ * D0 = new size
+ * \return result code in D0
+ */
+void trapSetHandleSize(unsigned short)
+{
+  unsigned int hdl  = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int size = m68k_get_reg(0L, M68K_REG_D0);
+  unsigned int ret = 0;
+
+  ret = mosSetHandleSize(hdl, size);
+  
+  m68k_set_reg(M68K_REG_D0, ret);
+}
+
+
+/**
  * Free the memory that was allocated with NewPtr().
  *
  * A0 = pointer to allocated memory.
@@ -1010,7 +1029,7 @@ void mosSetupTrapTable()
   createGlue(0xA122, trapNewHandle);
   createGlue(0xA023, trapDisposeHandle);
   createGlue(0xA025, trapGetHandleSize);
-  // SetHandleSize
+  createGlue(0xA024, trapSetHandleSize);
   // HandleZone
   createGlue(0xA128, trapRecoverHandle);
   // ReallocHandle
