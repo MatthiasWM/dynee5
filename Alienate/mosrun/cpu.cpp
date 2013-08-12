@@ -44,6 +44,8 @@ extern "C" {
 }
 
 
+bool findFunctionName(unsigned int pc, char* outFunName);
+
 /**
  * Run a single 68020 command.
  *
@@ -53,6 +55,7 @@ void m68k_instruction_hook()
 {
 //  int i; unsigned int sp;
   char buf[2048];
+  char functionName[257];
   for (;;) {
     gPendingBreakpoint = 0L;
   afterBreakpoint:
@@ -61,6 +64,12 @@ void m68k_instruction_hook()
     if (mosLogFile() && mosLogVerbosity()>=MOS_VERBOSITY_TRACE) {
       if (mosLogFile()!=stdout) {
         mosTrace("\n");
+        bool gotFunctionName = findFunctionName(pc, functionName);
+        if (gotFunctionName) {
+          mosTrace("%s (%.8X)\n", functionName, pc);
+        } else {
+          mosTrace("? (%.8X)\n", pc);
+        }
         mosTrace("D0:%08X D1:%08X D2:%08X D3:%08X D4:%08X D5:%08X D6:%08X D7:%08X\n",
                  m68k_get_reg(0L, M68K_REG_D0),
                  m68k_get_reg(0L, M68K_REG_D1),
@@ -121,3 +130,71 @@ void m68k_instruction_hook()
   } // for
 }
 
+const unsigned short INSTR_RTS      = 0x4E75;
+const unsigned short INSTR_RTE      = 0x4E73;
+const unsigned short INSTR_RTD      = 0x4E74;
+const unsigned short INSTR_JMP_A0 = 0x4ED0;
+const unsigned short INSTR_ADDI_A7  = 0x0697;
+
+bool
+findEndOfFunction(unsigned int& pc) {
+  unsigned int max_try = 0x1000;
+  while (max_try) {
+    unsigned short instr = m68k_read_memory_16(pc);
+    pc+=2;
+        
+    if (
+      (instr == INSTR_RTS && m68k_read_memory_16(pc - 6) != INSTR_ADDI_A7) // For CW jumps
+      || instr == INSTR_RTE
+      || instr == INSTR_JMP_A0
+      || instr == INSTR_RTD) {
+      return true;
+    }
+    max_try--;
+  }
+  return false;
+}
+
+bool
+findFunctionName(unsigned int pc, char* outFunName) {
+  if (findEndOfFunction(pc)) {
+    unsigned char byte = m68k_read_memory_8(pc);
+    unsigned int str_addr;
+    unsigned int str_len;
+    char* out = outFunName;
+    if (byte < 0x20) {
+      return false;
+    } else if (byte == 0x80) {
+      str_len = m68k_read_memory_8(pc + 1);
+      str_addr = pc + 2;
+    } else if (byte > 0x80 && byte < 0xA0) {
+      str_len = byte - 0x80;
+      str_addr = pc + 1;
+    } else {
+      *out = byte & 0x7F;
+      out++;
+      byte = m68k_read_memory_8(pc + 1);
+      if (byte & 0x80) {
+        *out = byte & 0x7F;
+        out++;
+        str_len = 14;   // 16 - 2
+      } else {
+        str_len = 6;    // 8 - 2
+        *out = byte;
+        out++;
+      }
+      str_addr = pc + 2;
+    }
+    while (str_len > 0) {
+      byte = m68k_read_memory_8(str_addr);
+      str_addr++;
+      *out = byte;
+      out++;
+      str_len--;
+    }
+    *out = 0;
+    return true;
+  } else {
+    return false;
+  }
+}
