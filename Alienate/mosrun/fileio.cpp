@@ -337,9 +337,17 @@ int mosPBGetFInfo(unsigned int paramBlock, bool async)
   // 68.l: ioFlRPyLen  phys size
   m68k_write_memory_32(paramBlock+64, 0);
   // 72.l: ioFlCrDat  date and time of creation, seconds sinc 1.1.1904
+#ifndef _POSIX_SOURCE
   m68k_write_memory_32(paramBlock+72, st.st_ctimespec.tv_sec + 2082844800);
+#else
+  m68k_write_memory_32(paramBlock+72, st.st_ctime + 2082844800);
+#endif
   // 76.l: ioFlMdDat  date and time of last modification
+#ifndef _POSIX_SOURCE
   m68k_write_memory_32(paramBlock+76, st.st_mtimespec.tv_sec + 2082844800);
+#else
+  m68k_write_memory_32(paramBlock+76, st.st_mtime + 2082844800);
+#endif
   
   m68k_write_memory_16(paramBlock+16, mosNoErr);
   return mosNoErr; // .. and check which fields are read
