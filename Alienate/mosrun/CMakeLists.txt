@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (mosrun)
-add_definitions(-Wno-multichar)
+add_definitions(-Wno-multichar -Wno-unused-result)
 
 add_executable(mosrun
 ./names.cpp
@@ -23,3 +23,4 @@ add_executable(mosrun
 ./musashi331/m68kcpu.c
 ./musashi331/m68kopdm.c)
 set_target_properties(mosrun PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
+install(TARGETS mosrun RUNTIME DESTINATION bin)
