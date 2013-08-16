@@ -100,6 +100,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <limits.h>
+#include <libgen.h>
 
 // Include our own interfaces
 
@@ -186,6 +187,54 @@ const char *toolPath(const char *aName)
   return path;
 }
 
+int loadCodeFromResourceFork(const char *path)
+{
+#if defined (__APPLE__) && defined (__MACH__)
+  ssize_t size = getxattr(path, "com.apple.ResourceFork", 0L, 0, 0, 0);
+  if (size!=-1) {
+    theAppSize = size;
+    theApp = (byte*)mosNewPtr(size);
+    ssize_t ret = getxattr(path, "com.apple.ResourceFork", theApp, size, 0, 0);
+    if (ret!=-1) {
+      mosTrace("%s has a %ld byte resource fork\n", path, size);
+      return 1;
+    } else {
+      mosDisposePtr(theApp)
+    }
+  }
+#endif  
+  return 0;
+}
+
+int loadCodeFromFile(const char *path)
+{
+  FILE *f;
+  struct stat st;
+  mosTrace("Loading from %s\n", path);
+  f = fopen(path, "rb");
+  if (f != NULL) {
+    stat(path, &st);
+    theAppSize = st.st_size;
+    theApp = (byte*)mosNewPtr(theAppSize);
+    fread(theApp, 1, theAppSize, f);
+    fclose(f);
+    return 1;
+  }
+  return 0;
+}
+
+int loadCodeFromDotFile(const char *path)
+{
+  static char dotfilePath[PATH_MAX];
+  char *dir = strdup(path);
+  char *base = strdup(path);
+  strcpy(dotfilePath, dirname(dir));
+  strcat(dotfilePath, "/._");
+  strcat(dotfilePath, basename(base));
+  free(dir);
+  free(base);
+  return loadCodeFromFile(dotfilePath);
+}
 
 /**
  * Load the executable part of a file from the resource fork.
@@ -194,38 +243,17 @@ const char *toolPath(const char *aName)
  */
 int loadExternalApp(const char *path)
 {
-#if defined (__APPLE__) && defined (__MACH__)
-  ssize_t size = getxattr(path, "com.apple.ResourceFork", 0L, 0, 0, 0);
-  if (size==-1) {
-    return 0;
+  if (loadCodeFromResourceFork(path) || loadCodeFromDotFile(path) || loadCodeFromFile(path)) {
+    readResourceMap();
+    mosHandle code0 = GetResource('CODE', 0);
+    if (code0==0) {
+      mosError("loadExternalApp: CODE 0 not found in external app\n");
+      return 0;
+    }
+    gMosCurrentA5 = createA5World(code0);
+    return 1;
   }
-  theAppSize = size;
-  theApp = (byte*)mosNewPtr(size);
-  ssize_t ret = getxattr(path, "com.apple.ResourceFork", theApp, size, 0, 0);
-  if (ret==-1) {
-    return 0;
-  }
-  mosTrace("%s has a %ld byte resource fork\n", path, size);
-#else
-  FILE *f;
-  struct stat st;
-  f = fopen(path, "rb");
-  if (f == NULL)
-    return 0;
-  stat(path, &st);
-  theAppSize = st.st_size;
-  theApp = (byte*)mosNewPtr(theAppSize);
-  fread(theApp, 1, theAppSize, f);
-  fclose(f);
-#endif
-  readResourceMap();
-  mosHandle code0 = GetResource('CODE', 0);
-  if (code0==0) {
-    mosError("loadExternalApp: CODE 0 not found in external app\n");
-    return 0;
-  }
-  gMosCurrentA5 = createA5World(code0);
-  return 1;
+  return 0;
 }
 
 
@@ -234,41 +262,7 @@ int loadExternalApp(const char *path)
  */
 int loadAliasedApp(const char *aName)
 {
-  const char *path;
-  
-  path = toolPath(aName);
-#if defined (__APPLE__) && defined (__MACH__)
-  ssize_t size = getxattr(path, "com.apple.ResourceFork", 0L, 0, 0, 0);
-  if (size==-1) {
-    return 0;
-  }
-  theAppSize = size;
-  theApp = (byte*)mosNewPtr(size);
-  ssize_t ret = getxattr(path, "com.apple.ResourceFork", theApp, size, 0, 0);
-  if (ret==-1) {
-    return 0;
-  }
-  mosTrace("%s has a %ld byte resource fork\n", path, size);
-#else
-  FILE *f;
-  struct stat st;
-  f = fopen(path, "rb");
-  if (f == NULL)
-    return 0;
-  stat(path, &st);
-  theAppSize = st.st_size;
-  theApp = (byte*)mosNewPtr(theAppSize);
-  fread(theApp, 1, theAppSize, f);
-  fclose(f);
-#endif
-  readResourceMap();
-  mosHandle code0 = GetResource('CODE', 0);
-  if (code0==0) {
-    mosError("loadAliasedApp: CODE 0 not found in aliased app\n");
-    return 0;
-  }
-  gMosCurrentA5 = createA5World(code0);
-  return 1;
+  return loadExternalApp(toolPath(aName));
 }
 
 
@@ -555,9 +549,9 @@ int main(int argc, const char **argv, const char **envp)
     appLoaded = loadExternalApp(appName);
   } else {
     appName = mosFilenameNameUnix(argv[0]);
-    appLoaded = loadEmbeddedApp(appName);
+    appLoaded = loadAliasedApp(appName);
     if (!appLoaded) {
-      appLoaded = loadAliasedApp(appName);
+      appLoaded = loadEmbeddedApp(appName);
     }
   }
   
