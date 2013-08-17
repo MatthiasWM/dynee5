@@ -382,6 +382,32 @@ int mosPBSetEOF(unsigned int paramBlock, bool async)
 }
 
 
+int mosPBSetFPos(unsigned int paramBlock, bool async)
+{
+  int ioRefNum = m68k_read_memory_16(paramBlock+24);
+  unsigned short ioPosMode = m68k_read_memory_16(paramBlock+44);
+  unsigned int ioPosOffset = m68k_read_memory_32(paramBlock+46);
+  mosDebug("mosPBSetFPos called: RefNum=%d, PosMode=%d, PosOffset=%d\n",
+           ioRefNum, ioPosMode, ioPosOffset);
+  
+  int ret = 0;
+  switch (ioPosMode) {
+    case 0: break; // fsAtMark
+    case 1: ret = (int)lseek(ioRefNum, ioPosOffset, SEEK_SET); break; // fsFromStart
+    case 2: ret = (int)lseek(ioRefNum, ioPosOffset, SEEK_END); break; // fsFromLEOF
+    case 3: ret = (int)lseek(ioRefNum, ioPosOffset, SEEK_CUR); break; // fsFromMark
+  }
+  if (ret==-1) {
+    mosDebug("mosPBSetFPos failed: %s\n", strerror(errno));
+    m68k_write_memory_16(paramBlock+16, mosEofErr);
+    return mosEofErr; // TODO: get more detailed here?
+  }
+  
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr; // .. and check which fields are read
+}
+
+
 int mosPBRead(unsigned int paramBlock, bool async)
 {
   int ioRefNum = m68k_read_memory_16(paramBlock+24);
@@ -548,6 +574,46 @@ int mosPBHOpen(unsigned int paramBlock, bool async)
 }
 
 
+int mosPBDelete(unsigned int paramBlock, bool async)
+{
+  mosDebug("mosPBDelete called\n");
+  
+  //mosPtr ioCompletion = m68k_read_memory_32(paramBlock+12);
+  mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
+  //unsigned int ioVRefNum = m68k_read_memory_16(paramBlock+22);
+  //unsigned int ioFVersNum = m68k_read_memory_8(paramBlock+26);
+  
+  // do we have a file name
+  if (!ioNamePtr) {
+    mosDebug("mosPBDelete: no file name\n");
+    m68k_write_memory_16(paramBlock+16, mosBdNamErr);
+    return mosBdNamErr;
+  }
+  
+  unsigned int fnLen = m68k_read_memory_8(ioNamePtr);
+  if (fnLen==0) {
+    mosDebug("mosPBDelete: zero length file name\n");
+    m68k_write_memory_16(paramBlock+16, mosBdNamErr);
+    return mosBdNamErr;
+  }
+  
+  char cFilename[2048];
+  memcpy(cFilename, (unsigned char*)ioNamePtr+1, fnLen);
+  cFilename[fnLen] = 0;
+  
+  mosDebug("mosPBDelete: deleteing file '%s'\n", cFilename);
+  int ret = ::remove(cFilename);
+  if (ret==-1) {
+    mosError("mosPBDelete: can't remove file '%s', %s\n", cFilename, strerror(errno));
+    m68k_write_memory_16(paramBlock+16, mosDupFNErr);
+    return mosDupFNErr; // TODO: we could differentiate here a lot more!
+  }
+  
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr;
+}
+
+
 /**
  * Dispatch a single trap into multiple file system operations
  */
@@ -559,9 +625,8 @@ int mosFSDispatch(unsigned int paramBlock, unsigned int func)
     case 0x002E:
       mosError("mosFSDispatch: PBDTOpenInform not implemented\n");
       break;
-    case 0x002F:
-      mosError("mosFSDispatch: PBDTDeleteSync not implemented\n");
-      break;
+    case 0x002F: // PBDTDeleteSync
+      return mosPBDelete(paramBlock, false);
     case 0x0060:
       mosError("mosFSDispatch: PBGetAltAccessSync not implemented\n");
       break;
@@ -577,27 +642,4 @@ int mosFSDispatch(unsigned int paramBlock, unsigned int func)
   return mosParamErr;
 }
 
-// PBSetEOF: A012: _SetEOF
-// PBSetEOF sets the logical end-of-file of the open file whose access path is
-// specified by ioRefNum (24.w), to ioMisc (28.l). If you attempt to set the
-// logical end-of-file beyond the physical end-of- file, the physical
-// end-of-file is set to one byte beyond the end of the next free allocation
-// block; if there isn't enough space on the volume, no change is made, and
-// PBSetEOF returns dskFulErr as its function result. If ioMisc is 0, all
-// space occupied by the file on the volume is released.
-
-// PBWrite: A003: _Write
-
-// A200: _HOpen == PBHOpenSync
-// HOpen = FUNCTION PBOpen (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr; ?
-//       or FUNCTION PBOpenRF (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr; (Resource fork)
-
-// A002: _Read
-// Read = FUNCTION PBRead (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr; ?
-
-// FUNCTION PBClose (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
-
-// A9EE: _DECSTR68K
-
-// FUNCTION PBCreate (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
 

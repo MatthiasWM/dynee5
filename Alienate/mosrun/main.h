@@ -46,6 +46,7 @@ const int MOS_STACK_SIZE = 0x8000;
 
 const int mosNoErr =         0; // success, party!
 const int mosBdNamErr =    -37; // bad file name or volume name (perhaps zero length)
+const int mosEofErr =      -39; // error setting position beyon EOF
 const int mosFnfErr =      -43; // file not found
 const int mosDupFNErr =    -48; // duplicate filename (rename)
 const int mosParamErr =    -50; // bad parameter passed

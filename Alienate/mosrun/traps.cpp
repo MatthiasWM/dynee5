@@ -829,6 +829,21 @@ void trapSetEOF(unsigned short instr)
 
 
 /**
+ * [A012] _SetEOF
+ * FUNCTION PBSetEOF (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
+ */
+void trapSetFPos(unsigned short instr)
+{
+  unsigned int paramBlock = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
+  
+  unsigned int ret = mosPBSetFPos(paramBlock, async);
+  
+  m68k_set_reg(M68K_REG_D0, ret);
+}
+
+
+/**
  * [A002] _Read
  * FUNCTION PBRead (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
  */
@@ -868,6 +883,21 @@ void trapClose(unsigned short instr)
   unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
   
   unsigned int ret = mosPBClose(paramBlock, async);
+  
+  m68k_set_reg(M68K_REG_D0, ret);
+}
+
+
+/**
+ * [A009] _Delete
+ * FUNCTION PBClose (paramBlock: ParmBlkPtr; async: BOOLEAN) : OSErr;
+ */
+void trapDelete(unsigned short instr)
+{
+  unsigned int paramBlock = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
+  
+  unsigned int ret = mosPBDelete(paramBlock, async);
   
   m68k_set_reg(M68K_REG_D0, ret);
 }
@@ -1087,15 +1117,19 @@ void mosSetupTrapTable()
   
   // -- Low Level File Functions
   
+  createGlue(0xA000, trapHOpen);
+  tncTable[0x0200] = tncTable[0x0000];
   createGlue(0xA001, trapClose);
   createGlue(0xA002, trapRead);
   createGlue(0xA003, trapWrite);
   createGlue(0xA008, trapCreate);
+  createGlue(0xA009, trapDelete);
+  tncTable[0x0209] = tncTable[0x0009];
   createGlue(0xA00C, trapGetFileInfo);
   createGlue(0xA00D, trapSetFileInfo);
   createGlue(0xA012, trapSetEOF);
+  createGlue(0xA044, trapSetFPos);
   createGlue(0xA060, trapFSDispatch);
-  createGlue(0xA200, trapHOpen);
   
   // -- unsorted
   
