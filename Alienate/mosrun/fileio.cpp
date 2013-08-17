@@ -500,44 +500,62 @@ int mosPBCreate(unsigned int paramBlock, bool async)
 }
 
 
+int mosPBHOpen(unsigned int paramBlock, bool async)
+{
+  mosDebug("mosPBHOpen called\n");
+  
+  //mosPtr ioCompletion = m68k_read_memory_32(paramBlock+12);
+  mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
+  //unsigned int ioVRefNum = m68k_read_memory_16(paramBlock+22);
+  //unsigned int ioFVersNum = m68k_read_memory_8(paramBlock+26);
+  
+  // do we have a file name
+  if (!ioNamePtr) {
+    mosDebug("mosPBHOpen: no file name\n");
+    m68k_write_memory_16(paramBlock+16, mosBdNamErr);
+    return mosBdNamErr;
+  }
+  
+  unsigned int fnLen = m68k_read_memory_8(ioNamePtr);
+  if (fnLen==0) {
+    mosDebug("mosPBHOpen: zero length file name\n");
+    m68k_write_memory_16(paramBlock+16, mosBdNamErr);
+    return mosBdNamErr;
+  }
+  
+  char cFilename[2048];
+  memcpy(cFilename, (unsigned char*)ioNamePtr+1, fnLen);
+  cFilename[fnLen] = 0;
+  mosDebug("mosPBHOpen: open file '%s'\n", cFilename);
+  
+  int file = -1;
+  byte mode = m68k_read_memory_8(paramBlock+27); // ioPermssn
+  switch (mode) {
+    case 1: file = open(cFilename, O_RDONLY); break;  // fsRdPerm = 1
+    case 2: file = open(cFilename, O_WRONLY); break;  // fsWrPern = 2
+    case 0:                                           // fsCurPerm = 0
+    case 3: file = open(cFilename, O_RDWR); break;    // fsRdWrPerm = 3
+  }
+  mosDebug("mosPBHOpen: open file '%s' mode=%d => %d\n", cFilename, mode, file);
+  if (file==-1) {
+    mosError("mosPBHOpen: can't open file '%s', %s\n", cFilename, strerror(errno));
+    m68k_write_memory_16(paramBlock+16, mosDupFNErr);
+    return mosDupFNErr; // TODO: we could differentiate here a lot more!
+  }
+  m68k_write_memory_16(paramBlock+24, file); // ioRefNum  
+  m68k_write_memory_16(paramBlock+16, mosNoErr);
+  return mosNoErr;
+}
+
+
 /**
  * Dispatch a single trap into multiple file system operations
  */
 int mosFSDispatch(unsigned int paramBlock, unsigned int func)
 {
   switch (func) {
-    case 0x001A: { // PBOpenDFSync
-      mosPtr ioNamePtr = m68k_read_memory_32(paramBlock+18);
-      unsigned int fnLen = m68k_read_memory_8(ioNamePtr);
-      char cFilename[2048];
-      memcpy(cFilename, (unsigned char*)ioNamePtr+1, fnLen);
-      cFilename[fnLen] = 0;
-      
-      byte mode = m68k_read_memory_8(paramBlock+27); // ioPermssn
-                                                     // fsCurPerm = 0
-                                                     // fsRdPerm = 1
-                                                     // fsWrPern = 2
-                                                     // fsRdWrPerm = 3
-      
-      int file = -1;
-      switch (mode) {
-        case 1: file = open(cFilename, O_RDONLY); break;
-        case 2: file = open(cFilename, O_WRONLY); break;
-        case 0:
-        case 3: file = open(cFilename, O_RDWR); break;
-      }
-      mosDebug("mosFSDispatch: PBOpenDFSync - open file '%s' mode=%d => %d\n", cFilename, mode, file);
-      if (file==-1) {
-        mosError("mosFSDispatch: PBOpenDFSync - can't open file '%s', %s\n", cFilename, strerror(errno));
-        m68k_write_memory_16(paramBlock+16, mosDupFNErr);
-        return mosDupFNErr; // TODO: we could differentiate here a lot more!
-      }
-      if (file>0xffff) {
-        mosError("mosFSDispatch: PBOpenDFSync - emulation failed with unexpected file number\n");
-      }
-      m68k_write_memory_16(paramBlock+24, file); // ioRefNum
-      m68k_write_memory_16(paramBlock+16, mosNoErr);
-      return mosNoErr; }
+    case 0x001A: // PBOpenDFSync
+      return mosPBHOpen(paramBlock, false);
     case 0x002E:
       mosError("mosFSDispatch: PBDTOpenInform not implemented\n");
       break;

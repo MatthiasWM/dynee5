@@ -50,6 +50,7 @@ int mosPBSetEOF(unsigned int paramBlock, bool async);
 int mosPBRead(unsigned int paramBlock, bool async);
 int mosPBWrite(unsigned int paramBlock, bool async);
 int mosPBClose(unsigned int paramBlock, bool async);
+int mosPBHOpen(unsigned int paramBlock, bool async);
 int mosFSDispatch(unsigned int paramBlock, unsigned int func);
 
 #endif /* defined(__mosrun__fileio__) */

@@ -68,6 +68,7 @@ void dumpResourceMap()
   unsigned int rsrcData = m68k_read_memory_32((unsigned int)(theApp));
   // ---- read the map
   unsigned int rsrcMapTypeList = m68k_read_memory_16((unsigned int)(theRsrc+24));
+  unsigned int rsrcMapNameList = m68k_read_memory_16((unsigned int)(theRsrc+26));
   // ------ resource map type list
   unsigned int rsrcMapTypeListSize = m68k_read_memory_16((unsigned int)(theRsrc+rsrcMapTypeList)) + 1;
   mosTrace("  Rsrc Type list at 0x%08X with %d types.\n", rsrcMapTypeList, rsrcMapTypeListSize);
@@ -84,14 +85,23 @@ void dumpResourceMap()
            );
     for (j=0; j<nRes; j++) {
       unsigned int data = (m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+4)) & 0xffffff);
-      mosTrace("      %d: ID=%d, name@%d, data=0x%08x, loaded=0x%0X, flags=0x%02X, %d bytes\n", j,
+      unsigned int name = m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+2));
+      mosTrace("      %3d: ID=%d, name@%d, data=0x%08x, loaded=0x%0X, flags=0x%02X, %d bytes\n", j,
              m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+0)),
-             m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+2)),
+             name,
              data,
              m68k_read_memory_32((unsigned int)(theRsrc+resTable+12*j+8)),
              m68k_read_memory_8((unsigned int)(theRsrc+resTable+12*j+4)),
              m68k_read_memory_32((unsigned int)(theApp+rsrcData+data))
              );
+      if (name!=0xffff) {
+        unsigned short rsrcNameOffset = m68k_read_memory_16((unsigned int)(theRsrc+resTable+12*j+2));
+        if (rsrcNameOffset==0xffff) continue; // unnamed resource
+        byte* rsrcName = theRsrc+rsrcMapNameList+rsrcNameOffset;
+        char buf[256] = { 0 };
+        memcpy(buf, rsrcName+1, rsrcName[0]);
+        mosTrace("           name='%s'\n", buf);
+      }
       // 0x02: write to resource file
       // 0x04: preload (but when and how?)
       // 0x08: protected

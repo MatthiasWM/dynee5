@@ -888,6 +888,20 @@ void trapFSDispatch(unsigned short instr)
 
 
 /**
+ * [A200] _HOpen
+ */
+void trapHOpen(unsigned short instr)
+{
+  unsigned int paramBlock = m68k_get_reg(0L, M68K_REG_A0);
+  unsigned int async = 0; // If bit 10 of the instruction is set, it is async.
+  
+  unsigned int ret = mosPBHOpen(paramBlock, async);
+  
+  m68k_set_reg(M68K_REG_D0, ret);
+}
+
+
+/**
  * Go here for unimplemented traps.
  *
  * This function serves two purposes. It points out unimplemented traps that
@@ -1081,6 +1095,7 @@ void mosSetupTrapTable()
   createGlue(0xA00D, trapSetFileInfo);
   createGlue(0xA012, trapSetEOF);
   createGlue(0xA060, trapFSDispatch);
+  createGlue(0xA200, trapHOpen);
   
   // -- unsorted
   

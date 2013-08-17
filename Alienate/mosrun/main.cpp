@@ -199,7 +199,7 @@ int loadCodeFromResourceFork(const char *path)
       mosTrace("%s has a %ld byte resource fork\n", path, size);
       return 1;
     } else {
-      mosDisposePtr(theApp)
+      mosDisposePtr((mosPtr)theApp);
     }
   }
 #endif  
@@ -214,7 +214,7 @@ int loadCodeFromFile(const char *path)
   f = fopen(path, "rb");
   if (f != NULL) {
     stat(path, &st);
-    theAppSize = st.st_size;
+    theAppSize = (unsigned int)st.st_size;
     theApp = (byte*)mosNewPtr(theAppSize);
     fread(theApp, 1, theAppSize, f);
     fclose(f);
