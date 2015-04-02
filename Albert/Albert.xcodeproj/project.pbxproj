@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		C9326505149CE29300D046AA /* AlARMCode.cp in Sources */ = {isa = PBXBuildFile; fileRef = C93264F0149CE29300D046AA /* AlARMCode.cp */; };
-		C9326506149CE29300D046AA /* AlARMData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C93264F2149CE29300D046AA /* AlARMData.cpp */; };
-		C9326507149CE29300D046AA /* AlAtomicType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C93264F4149CE29300D046AA /* AlAtomicType.cpp */; };
-		C9326508149CE29300D046AA /* AlComplexType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C93264F7149CE29300D046AA /* AlComplexType.cpp */; };
 		C9326509149CE29300D046AA /* AlSymbol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C93264F9149CE29300D046AA /* AlSymbol.cpp */; };
 		C932650A149CE29300D046AA /* AlSymbolList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C93264FB149CE29300D046AA /* AlSymbolList.cpp */; };
 		C932650B149CE29300D046AA /* AlType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C93264FD149CE29300D046AA /* AlType.cpp */; };
@@ -21,84 +17,24 @@
 		C9326513149CE70100D046AA /* AlDatabaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9326511149CE70100D046AA /* AlDatabaseObject.cpp */; };
 		C95C2DBD1211B98100C87B33 /* disarm_c.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C95C2DBB1211B98100C87B33 /* disarm_c.cpp */; };
 		C95C36A01221BD4900C87B33 /* nsDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C95C369F1221BD4900C87B33 /* nsDecode.cpp */; };
-		C9601DD510B1FA9C0018BADE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601DD410B1FA9C0018BADE /* Carbon.framework */; };
-		C9601EA810B1FB5B0018BADE /* libfltk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9601EA210B1FB5A0018BADE /* libfltk.a */; };
 		C961487212376DD30007725F /* armdiff.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C961487112376DD30007725F /* armdiff.cpp */; };
 		C98D17FE1346804C002F8C16 /* decomp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C98D17FC1346804C002F8C16 /* decomp.cpp */; };
 		C98F06FF149E869E0064FF35 /* AlCMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C98F06FB149E869E0064FF35 /* AlCMethod.cpp */; };
 		C98F0700149E869E0064FF35 /* AlCPPMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C98F06FD149E869E0064FF35 /* AlCPPMethod.cpp */; };
-		C99F6ECC10C7ECB0003DEBD6 /* types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C99F6ECB10C7ECB0003DEBD6 /* types.cpp */; };
 		C9BC1603123A366200A4094E /* EasyBMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9BC1601123A366200A4094E /* EasyBMP.cpp */; };
 		C9F206A7149E433D009FA857 /* AlMemoryMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F206A1149E3128009FA857 /* AlMemoryMap.cpp */; };
 		C9F206A8149E434A009FA857 /* AlDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F206A4149E3798009FA857 /* AlDatabase.cpp */; };
 		C9F206A9149E434F009FA857 /* AlData.cp in Sources */ = {isa = PBXBuildFile; fileRef = C9F20697149DF728009FA857 /* AlData.cp */; };
-		C9F6E58F10C55881007C848E /* CArrayIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5810C5587F007C848E /* CArrayIterator.cpp */; };
-		C9F6E59010C55881007C848E /* CBaseRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5A10C5587F007C848E /* CBaseRingBuffer.cpp */; };
-		C9F6E59110C55881007C848E /* CBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5C10C5587F007C848E /* CBuffer.cpp */; };
-		C9F6E59210C55881007C848E /* CBufferList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD5E10C5587F007C848E /* CBufferList.cpp */; };
-		C9F6E59310C55881007C848E /* CBufferPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD6010C5587F007C848E /* CBufferPipe.cpp */; };
-		C9F6E59410C55881007C848E /* CBufferSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD6210C5587F007C848E /* CBufferSegment.cpp */; };
-		C9F6E59510C55881007C848E /* CDynamicArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD6410C5587F007C848E /* CDynamicArray.cpp */; };
-		C9F6E59610C55881007C848E /* CItemComparer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD6610C5587F007C848E /* CItemComparer.cpp */; };
-		C9F6E59710C55881007C848E /* CItemTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD6810C5587F007C848E /* CItemTester.cpp */; };
-		C9F6E59810C55881007C848E /* CList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD6A10C5587F007C848E /* CList.cpp */; };
-		C9F6E59910C55881007C848E /* CListIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD6C10C5587F007C848E /* CListIterator.cpp */; };
-		C9F6E59A10C55881007C848E /* CMemObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD6E10C5587F007C848E /* CMemObject.cpp */; };
-		C9F6E59B10C55881007C848E /* CMemoryPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD7010C5587F007C848E /* CMemoryPipe.cpp */; };
-		C9F6E59C10C55881007C848E /* CMinBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD7210C5587F007C848E /* CMinBuffer.cpp */; };
-		C9F6E59D10C55881007C848E /* CMPExportListNameComparer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD7410C5587F007C848E /* CMPExportListNameComparer.cpp */; };
-		C9F6E59E10C55881007C848E /* CMPExportListSourceComparer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD7610C5587F007C848E /* CMPExportListSourceComparer.cpp */; };
-		C9F6E59F10C55881007C848E /* CMPImportListSourceComparer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD7810C5587F007C848E /* CMPImportListSourceComparer.cpp */; };
-		C9F6E5A010C55881007C848E /* CMPImportListSourceTester.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD7A10C5587F007C848E /* CMPImportListSourceTester.cpp */; };
-		C9F6E5A110C55881007C848E /* CNullPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD7C10C5587F007C848E /* CNullPipe.cpp */; };
-		C9F6E5A210C55881007C848E /* CPackageArchivalPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD7E10C5587F007C848E /* CPackageArchivalPipe.cpp */; };
-		C9F6E5A310C55881007C848E /* CPackagePipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD8010C5587F007C848E /* CPackagePipe.cpp */; };
-		C9F6E5A410C55881007C848E /* CPartPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD8210C5587F007C848E /* CPartPipe.cpp */; };
-		C9F6E5A510C55881007C848E /* CPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD8410C5587F007C848E /* CPipe.cpp */; };
-		C9F6E5A610C55881007C848E /* CPtrPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD8610C5587F007C848E /* CPtrPipe.cpp */; };
-		C9F6E5A710C55881007C848E /* CRefPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD8810C5587F007C848E /* CRefPipe.cpp */; };
-		C9F6E5A810C55881007C848E /* CRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD8A10C5587F007C848E /* CRingBuffer.cpp */; };
-		C9F6E5A910C55881007C848E /* CRingPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD8C10C5587F007C848E /* CRingPipe.cpp */; };
-		C9F6E5AA10C55881007C848E /* CShadowBufferSegment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD8E10C5587F007C848E /* CShadowBufferSegment.cpp */; };
-		C9F6E5AB10C55881007C848E /* CShadowRingBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD9010C5587F007C848E /* CShadowRingBuffer.cpp */; };
-		C9F6E5AC10C55881007C848E /* CSortedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD9210C5587F007C848E /* CSortedList.cpp */; };
-		C9F6E5AD10C55881007C848E /* CStdioPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD9410C5587F007C848E /* CStdioPipe.cpp */; };
-		C9F6E5AE10C55881007C848E /* CTaskPipe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6DD9610C5587F007C848E /* CTaskPipe.cpp */; };
-		C9F6EA0D10C5C56B007C848E /* sym2db.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6EA0810C5C56B007C848E /* sym2db.cpp */; };
 		C9F6EA1810C5C5A5007C848E /* db2src.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6EA0A10C5C56B007C848E /* db2src.cpp */; };
 		C9F6EA1910C5C5A5007C848E /* disarm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6EA0B10C5C56B007C848E /* disarm.cpp */; };
-		C9F6EA9710C5C979007C848E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9F6EA9410C5C979007C848E /* main.cpp */; };
-		C9F6EA9810C5C979007C848E /* ui.fl in Resources */ = {isa = PBXBuildFile; fileRef = C9F6EA9610C5C979007C848E /* ui.fl */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXBuildRule section */
-		C9601C4B10B1F9B60018BADE /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.fl";
-			fileType = pattern.proxy;
-			isEditable = 1;
-			outputFiles = (
-				"${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.cxx",
-				"${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h",
-			);
-			script = "/usr/local/bin/fluid -c ${INPUT_FILE_NAME}";
-		};
-/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Albert-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Albert-Info.plist"; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* Albert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Albert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C93264F0149CE29300D046AA /* AlARMCode.cp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlARMCode.cp; path = tools/AlARMCode.cp; sourceTree = "<group>"; };
 		C93264F1149CE29300D046AA /* AlARMCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlARMCode.h; path = tools/AlARMCode.h; sourceTree = "<group>"; };
-		C93264F2149CE29300D046AA /* AlARMData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlARMData.cpp; path = tools/AlARMData.cpp; sourceTree = "<group>"; };
-		C93264F3149CE29300D046AA /* AlARMData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlARMData.h; path = tools/AlARMData.h; sourceTree = "<group>"; };
-		C93264F4149CE29300D046AA /* AlAtomicType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlAtomicType.cpp; path = tools/AlAtomicType.cpp; sourceTree = "<group>"; };
-		C93264F5149CE29300D046AA /* AlAtomicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlAtomicType.h; path = tools/AlAtomicType.h; sourceTree = "<group>"; };
 		C93264F6149CE29300D046AA /* Albert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Albert.h; path = tools/Albert.h; sourceTree = "<group>"; };
-		C93264F7149CE29300D046AA /* AlComplexType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlComplexType.cpp; path = tools/AlComplexType.cpp; sourceTree = "<group>"; };
-		C93264F8149CE29300D046AA /* AlComplexType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlComplexType.h; path = tools/AlComplexType.h; sourceTree = "<group>"; };
 		C93264F9149CE29300D046AA /* AlSymbol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlSymbol.cpp; path = tools/AlSymbol.cpp; sourceTree = "<group>"; };
 		C93264FA149CE29300D046AA /* AlSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlSymbol.h; path = tools/AlSymbol.h; sourceTree = "<group>"; };
 		C93264FB149CE29300D046AA /* AlSymbolList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlSymbolList.cpp; path = tools/AlSymbolList.cpp; sourceTree = "<group>"; };
@@ -221,7 +157,6 @@
 		C9F6DD9510C5587F007C848E /* CStdioPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CStdioPipe.h; path = src/CStdioPipe.h; sourceTree = "<group>"; };
 		C9F6DD9610C5587F007C848E /* CTaskPipe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CTaskPipe.cpp; path = src/CTaskPipe.cpp; sourceTree = "<group>"; };
 		C9F6DD9710C5587F007C848E /* CTaskPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTaskPipe.h; path = src/CTaskPipe.h; sourceTree = "<group>"; };
-		C9F6EA0210C5C55A007C848E /* sym2db */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sym2db; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F6EA0710C5C56B007C848E /* sym2db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sym2db.h; path = tools/sym2db.h; sourceTree = "<group>"; };
 		C9F6EA0810C5C56B007C848E /* sym2db.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sym2db.cpp; path = tools/sym2db.cpp; sourceTree = "<group>"; };
 		C9F6EA0910C5C56B007C848E /* db2src.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = db2src.h; path = tools/db2src.h; sourceTree = "<group>"; };
@@ -235,23 +170,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8D11072E0486CEB800E47090 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C9601DD510B1FA9C0018BADE /* Carbon.framework in Frameworks */,
-				C9601EA810B1FB5B0018BADE /* libfltk.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C961486512376D330007725F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C9F6EA0010C5C55A007C848E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -288,8 +207,6 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* Albert.app */,
-				C9F6EA0210C5C55A007C848E /* sym2db */,
 				C9F6EA1410C5C582007C848E /* db2src */,
 				C961486912376D330007725F /* armdiff */,
 			);
@@ -490,12 +407,6 @@
 				C98F06FC149E869E0064FF35 /* AlCMethod.h */,
 				C98F06FD149E869E0064FF35 /* AlCPPMethod.cpp */,
 				C98F06FE149E869E0064FF35 /* AlCPPMethod.h */,
-				C93264F2149CE29300D046AA /* AlARMData.cpp */,
-				C93264F3149CE29300D046AA /* AlARMData.h */,
-				C93264F4149CE29300D046AA /* AlAtomicType.cpp */,
-				C93264F5149CE29300D046AA /* AlAtomicType.h */,
-				C93264F7149CE29300D046AA /* AlComplexType.cpp */,
-				C93264F8149CE29300D046AA /* AlComplexType.h */,
 				C9326511149CE70100D046AA /* AlDatabaseObject.cpp */,
 				C9326512149CE70100D046AA /* AlDatabaseObject.h */,
 				C932650E149CE6A100D046AA /* AlObject.cpp */,
@@ -535,25 +446,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D1107260486CEB800E47090 /* Albert */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Albert" */;
-			buildPhases = (
-				8D1107290486CEB800E47090 /* Resources */,
-				8D11072C0486CEB800E47090 /* Sources */,
-				8D11072E0486CEB800E47090 /* Frameworks */,
-			);
-			buildRules = (
-				C9601C4B10B1F9B60018BADE /* PBXBuildRule */,
-			);
-			dependencies = (
-			);
-			name = Albert;
-			productInstallPath = "$(HOME)/Applications";
-			productName = Albert;
-			productReference = 8D1107320486CEB800E47090 /* Albert.app */;
-			productType = "com.apple.product-type.application";
-		};
 		C961485F12376D330007725F /* armdiff */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C961486612376D330007725F /* Build configuration list for PBXNativeTarget "armdiff" */;
@@ -568,22 +460,6 @@
 			name = armdiff;
 			productName = db2src;
 			productReference = C961486912376D330007725F /* armdiff */;
-			productType = "com.apple.product-type.tool";
-		};
-		C9F6EA0110C5C55A007C848E /* sym2db */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C9F6EA1010C5C56B007C848E /* Build configuration list for PBXNativeTarget "sym2db" */;
-			buildPhases = (
-				C9F6E9FF10C5C55A007C848E /* Sources */,
-				C9F6EA0010C5C55A007C848E /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = sym2db;
-			productName = sym2db;
-			productReference = C9F6EA0210C5C55A007C848E /* sym2db */;
 			productType = "com.apple.product-type.tool";
 		};
 		C9F6EA1310C5C582007C848E /* db2src */ = {
@@ -624,81 +500,18 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D1107260486CEB800E47090 /* Albert */,
-				C9F6EA0110C5C55A007C848E /* sym2db */,
 				C9F6EA1310C5C582007C848E /* db2src */,
 				C961485F12376D330007725F /* armdiff */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		8D1107290486CEB800E47090 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
-				C9F6EA9810C5C979007C848E /* ui.fl in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		8D11072C0486CEB800E47090 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C9F6E58F10C55881007C848E /* CArrayIterator.cpp in Sources */,
-				C9F6E59010C55881007C848E /* CBaseRingBuffer.cpp in Sources */,
-				C9F6E59110C55881007C848E /* CBuffer.cpp in Sources */,
-				C9F6E59210C55881007C848E /* CBufferList.cpp in Sources */,
-				C9F6E59310C55881007C848E /* CBufferPipe.cpp in Sources */,
-				C9F6E59410C55881007C848E /* CBufferSegment.cpp in Sources */,
-				C9F6E59510C55881007C848E /* CDynamicArray.cpp in Sources */,
-				C9F6E59610C55881007C848E /* CItemComparer.cpp in Sources */,
-				C9F6E59710C55881007C848E /* CItemTester.cpp in Sources */,
-				C9F6E59810C55881007C848E /* CList.cpp in Sources */,
-				C9F6E59910C55881007C848E /* CListIterator.cpp in Sources */,
-				C9F6E59A10C55881007C848E /* CMemObject.cpp in Sources */,
-				C9F6E59B10C55881007C848E /* CMemoryPipe.cpp in Sources */,
-				C9F6E59C10C55881007C848E /* CMinBuffer.cpp in Sources */,
-				C9F6E59D10C55881007C848E /* CMPExportListNameComparer.cpp in Sources */,
-				C9F6E59E10C55881007C848E /* CMPExportListSourceComparer.cpp in Sources */,
-				C9F6E59F10C55881007C848E /* CMPImportListSourceComparer.cpp in Sources */,
-				C9F6E5A010C55881007C848E /* CMPImportListSourceTester.cpp in Sources */,
-				C9F6E5A110C55881007C848E /* CNullPipe.cpp in Sources */,
-				C9F6E5A210C55881007C848E /* CPackageArchivalPipe.cpp in Sources */,
-				C9F6E5A310C55881007C848E /* CPackagePipe.cpp in Sources */,
-				C9F6E5A410C55881007C848E /* CPartPipe.cpp in Sources */,
-				C9F6E5A510C55881007C848E /* CPipe.cpp in Sources */,
-				C9F6E5A610C55881007C848E /* CPtrPipe.cpp in Sources */,
-				C9F6E5A710C55881007C848E /* CRefPipe.cpp in Sources */,
-				C9F6E5A810C55881007C848E /* CRingBuffer.cpp in Sources */,
-				C9F6E5A910C55881007C848E /* CRingPipe.cpp in Sources */,
-				C9F6E5AA10C55881007C848E /* CShadowBufferSegment.cpp in Sources */,
-				C9F6E5AB10C55881007C848E /* CShadowRingBuffer.cpp in Sources */,
-				C9F6E5AC10C55881007C848E /* CSortedList.cpp in Sources */,
-				C9F6E5AD10C55881007C848E /* CStdioPipe.cpp in Sources */,
-				C9F6E5AE10C55881007C848E /* CTaskPipe.cpp in Sources */,
-				C9F6EA9710C5C979007C848E /* main.cpp in Sources */,
-				C99F6ECC10C7ECB0003DEBD6 /* types.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C961486012376D330007725F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C961487212376DD30007725F /* armdiff.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C9F6E9FF10C5C55A007C848E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C9F6EA0D10C5C56B007C848E /* sym2db.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,9 +526,6 @@
 				C9BC1603123A366200A4094E /* EasyBMP.cpp in Sources */,
 				C98D17FE1346804C002F8C16 /* decomp.cpp in Sources */,
 				C9326505149CE29300D046AA /* AlARMCode.cp in Sources */,
-				C9326506149CE29300D046AA /* AlARMData.cpp in Sources */,
-				C9326507149CE29300D046AA /* AlAtomicType.cpp in Sources */,
-				C9326508149CE29300D046AA /* AlComplexType.cpp in Sources */,
 				C9326509149CE29300D046AA /* AlSymbol.cpp in Sources */,
 				C932650A149CE29300D046AA /* AlSymbolList.cpp in Sources */,
 				C932650B149CE29300D046AA /* AlType.cpp in Sources */,
@@ -745,66 +555,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C01FCF4B08A954540054247B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/usr/local/include/FL/images,
-				);
-				INFOPLIST_FILE = "Albert-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Albert;
-				SDKROOT = "";
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
-				VALID_ARCHS = i386;
-			};
-			name = Debug;
-		};
-		C01FCF4C08A954540054247B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/usr/local/include/FL/images,
-				);
-				INFOPLIST_FILE = "Albert-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = Albert;
-				SDKROOT = "";
-				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
-				VALID_ARCHS = i386;
-			};
-			name = Release;
-		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -855,32 +605,6 @@
 			};
 			name = Release;
 		};
-		C9F6EA0410C5C55B007C848E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = sym2db;
-			};
-			name = Debug;
-		};
-		C9F6EA0510C5C55B007C848E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_MODEL_TUNING = G5;
-				INSTALL_PATH = /usr/local/bin;
-				PRODUCT_NAME = sym2db;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		C9F6EA1610C5C583007C848E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -918,15 +642,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Albert" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C01FCF4B08A954540054247B /* Debug */,
-				C01FCF4C08A954540054247B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Albert" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -941,15 +656,6 @@
 			buildConfigurations = (
 				C961486712376D330007725F /* Debug */,
 				C961486812376D330007725F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C9F6EA1010C5C56B007C848E /* Build configuration list for PBXNativeTarget "sym2db" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C9F6EA0410C5C55B007C848E /* Debug */,
-				C9F6EA0510C5C55B007C848E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

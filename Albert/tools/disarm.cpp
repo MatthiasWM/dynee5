@@ -27,6 +27,7 @@
 
 const char *get_symbol_at(unsigned int addr);
 const char *get_plain_symbol_at(unsigned int addr);
+unsigned int rom_w(unsigned int addr);
 
 
 static const char* arm_conditional[] = {
@@ -43,6 +44,7 @@ static const char* arm_shift[] = {
 
 static int print_insn_arm(unsigned int,
                           int,
+                          char*,
                           char*);
 
 // ============================================================	//
@@ -88,7 +90,8 @@ static void arm_decode_shift(int given,
 
 static int print_insn_arm(unsigned int pc,
                           int given,
-                          char* str)
+                          char* str,
+                          char* cmt)
 {
   struct arm_opcode*     insn;
   char tmpStr[512];
@@ -121,6 +124,15 @@ static int print_insn_arm(unsigned int pc,
                 else
                   sprintf(tmpStr, "L%.8X", addr);
                 str = strcat(str, tmpStr);
+                if (addr<0x00800000) {
+                  unsigned int val = rom_w(addr);
+                  const char *vsym = get_plain_symbol_at(val);
+                  if (vsym) {
+                    sprintf(cmt, " [ %s (0x%08X) ]", vsym, val);
+                  } else {
+                    sprintf(cmt, " [ 0x%08X ]", val);
+                  }
+                }
               }
               else
               {
@@ -328,8 +340,11 @@ static int print_insn_arm(unsigned int pc,
               {
                 int rotate = (given & 0xf00) >> 7;
                 int immed = (given & 0xff);
-                sprintf(tmpStr, "#%d", ((immed << (32 - rotate)) | (immed >> rotate)) & 0xffffffff);
+                unsigned int val = ((immed << (32 - rotate)) | (immed >> rotate)) & 0xffffffff;
+                sprintf(tmpStr, "#%d", val);
                 str = strcat(str, tmpStr);
+                sprintf(tmpStr, " [ 0x%08X ]", val);
+                strcat(cmt, tmpStr);
               }
               else
                 arm_decode_shift(given, str);
@@ -511,7 +526,7 @@ static int print_insn_arm(unsigned int pc,
                     int reg;
                     reg = given >> bitstart;
                     reg &= (2 << (bitend - bitstart)) - 1;
-                    sprintf(tmpStr, "0x%08x", reg);
+                    sprintf(tmpStr, "0x%08X", reg);
                     str = strcat(str, tmpStr);
                   }
                     break;
@@ -583,6 +598,7 @@ int disarm(char *dst, unsigned int addr, unsigned int cmd)
   unsigned int given = cmd;
   char theString[5];
   char theDisasmLine[2048];
+  char theCommentLine[2048];
   char theChar;
   int i;
   int pc = addr;
@@ -599,7 +615,8 @@ int disarm(char *dst, unsigned int addr, unsigned int cmd)
     }
     
     theDisasmLine[0] = '\0';
-    incr = print_insn_arm(pc, given, theDisasmLine);
+    theCommentLine[0] = '\0';
+    incr = print_insn_arm(pc, given, theDisasmLine, theCommentLine);
     
     char *t = strchr(theDisasmLine, '\t');
     if (t) {
@@ -610,8 +627,7 @@ int disarm(char *dst, unsigned int addr, unsigned int cmd)
       }
       memset(t, 32, dt-(t-theDisasmLine)+1);
     }
-    
-    sprintf(dst, "%-32s  ; 0x%.8X 0x%.8X - %-5s", theDisasmLine, addr, given, theString);
+    sprintf(dst, "%-32s  ;%s 0x%.8X 0x%.8X - %-5s", theDisasmLine, theCommentLine, addr, given, theString);
   }
   return incr;
 }

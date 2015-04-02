@@ -7,8 +7,25 @@
  *
  */
 
+#ifndef DB2SRC_H
+#define DB2SRC_H
+
 #include <stdio.h>
 
+#include "Albert.h"
+
+#include "CallGraph.h"
+
+
+typedef uint32_t PAddr;
+typedef uint32_t VAddr;
+typedef uint32_t Instr;
+
+const uint32_t kInvalidAddress = 0xFFFFFFFF;
+const uint32_t kUnknownAddress = 0xFFFFFFFE;
+
+
+extern bool gCodeCoverageChecked;
 
 int disarm(char *dst, unsigned int addr, unsigned int cmd);
 int disarm_c(char *dst, unsigned int addr, unsigned int cmd);
@@ -40,6 +57,8 @@ extern const unsigned int flags_type_data;
 
 extern const unsigned int flags_is_function;
 extern const unsigned int flags_is_target;
+extern const unsigned int flags_walked;
+extern const unsigned int flags_include;
 
 extern const char *type_lut[];
 
@@ -61,10 +80,20 @@ unsigned int rom_flags_type(unsigned int addr);
 const char *get_symbol_at(unsigned int addr);
 const char *get_plain_symbol_at(unsigned int addr);
 
+inline bool isFunctionStart(PAddr addr) {
+    return (rom_flags_is_set(addr, flags_is_function));
+}
+
 const char *get_symbol_at(unsigned int addr);
 const char *get_plain_symbol_at(unsigned int addr);
 
 unsigned int decodeNSRef(FILE *newt, unsigned int i);
 unsigned int decodeNSObj(FILE *newt, unsigned int i);
 void extractStencils();
-  
+
+extern unsigned int branch_address_in_ROM(unsigned int addr, unsigned int cmd=0xffffffff);
+extern unsigned int branch_address(unsigned int addr, unsigned int cmd=0xffffffff);
+
+extern void checkCodeCoverage();
+
+#endif

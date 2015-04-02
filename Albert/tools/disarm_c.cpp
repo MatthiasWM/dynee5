@@ -21,13 +21,14 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
+#include <ctype.h>
 
 #include "disarm_c.h"
 
 
 const char *get_symbol_at(unsigned int addr);
 const char *get_plain_symbol_at(unsigned int addr);
+unsigned int rom_w(unsigned int addr);
 
 
 static const char* arm_conditional[] = {
@@ -44,6 +45,7 @@ static const char* arm_shift[] = {
 
 static int print_insn_arm(unsigned int,
                           int,
+                          char*,
                           char*);
 
 // ============================================================	//
@@ -54,10 +56,10 @@ static void arm_decode_shift(int given,
                              char* str)
 {
   char tmpStr[512];
-  sprintf(tmpStr, "%s", arm_regnames[given & 0xf]);
-  str = strcat(str, tmpStr);
-  if ((given & 0xff0) != 0)
-  {
+  if ((given & 0xff0) == 0) {
+    sprintf(tmpStr, "%s", arm_regnames[given & 0xf]);
+    str = strcat(str, tmpStr);
+  } else {
     if ((given & 0x10) == 0)
     {
       int amount = (given & 0xf80) >> 7;
@@ -66,18 +68,18 @@ static void arm_decode_shift(int given,
       {
         if (shift == 3)
         {
-          sprintf(tmpStr, ", rrx");
+          sprintf(tmpStr, "rrx(%s)", arm_regnames[given & 0xf]);
           str = strcat(str, tmpStr);
           return;
         }
         amount = 32;
       }
-      sprintf(tmpStr, ", %s #%d", arm_shift[shift], amount);
+      sprintf(tmpStr, "a_%s(%s, %d)", arm_shift[shift], arm_regnames[given & 0xf], amount);
       str = strcat(str, tmpStr);
     }
     else
     {
-      sprintf(tmpStr, ", %s %s", arm_shift[(given & 0x60) >> 5], arm_regnames[(given & 0xf00) >> 8]);
+      sprintf(tmpStr, "a_%s(%s, %s)", arm_shift[(given & 0x60) >> 5], arm_regnames[given & 0xf], arm_regnames[(given & 0xf00) >> 8]);
       str = strcat(str, tmpStr);
     }
   }
@@ -87,17 +89,22 @@ static void arm_decode_shift(int given,
 // void print_insn_arm (unsigned int, int, char*)
 // ============================================================	//
 
-static int print_insn_arm(unsigned int pc,
+static int print_insn_arm_c(unsigned int pc,
                           int given,
-                          char* str)
+                          char* str,
+                          char* cmt)
 {
-  struct arm_opcode*     insn;
+  struct arm_opcode_c*     insn;
   char tmpStr[512];
   
   for (insn = arm_opcodes_c; insn->assembler; insn++)
   {
     if ((given & insn->mask) == insn->value)
     {
+      if (((given >> 28) & 0xf)<14) {
+        sprintf(tmpStr, "if (a_%s()) ", arm_conditional[(given >> 28) & 0xf]);
+        str = strcat(str, tmpStr);
+      }
       const char* c;
       for (c = insn->assembler; *c; c++)
       {
@@ -110,7 +117,7 @@ static int print_insn_arm(unsigned int pc,
               break;
               
             case 'a':
-              if (((given & 0x000f0000) == 0x000f0000) && ((given & 0x02000000) == 0))
+              if (((given & 0x000f0000) == 0x000f0000) && ((given & 0x02000000) == 0)) // pc base access
               {
                 int offset = given & 0xfff;
                 if ((given & 0x00800000) == 0)
@@ -122,50 +129,87 @@ static int print_insn_arm(unsigned int pc,
                 else
                   sprintf(tmpStr, "L%.8X", addr);
                 str = strcat(str, tmpStr);
+                if (addr<0x00800000) {
+                  unsigned int val = rom_w(addr);
+                  const char *vsym = get_plain_symbol_at(val);
+                  if (vsym) {
+                    sprintf(cmt, " [ %s (0x%08X) ]", vsym, val);
+                  } else {
+                    sprintf(cmt, " [ 0x%08X ]", val);
+                  }
+                }
               }
-              else
+              else // non pc based access
               {
-                sprintf(tmpStr, "[%s", arm_regnames[(given >> 16) & 0xf]);
-                str = strcat(str, tmpStr);
-                if ((given & 0x01000000) != 0)
+                if ((given & 0x01000000) != 0) // possibly pre indexed
                 {
-                  if ((given & 0x02000000) == 0)
+                  if ((given & 0x00200000) == 0) // no indexing
                   {
-                    int offset = given & 0xfff;
-                    if (offset)
+                    sprintf(tmpStr, "%s", arm_regnames[(given >> 16) & 0xf]);
+                    str = strcat(str, tmpStr);
+                    if ((given & 0x02000000) == 0)
                     {
-                      sprintf(tmpStr, ", #%s%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
+                      int offset = given & 0xfff;
+                      if (offset)
+                      {
+                        sprintf(tmpStr, "%s%d", (((given & 0x00800000) == 0) ? "-" : "+"), offset);
+                        str = strcat(str, tmpStr);
+                      }
+                    }
+                    else
+                    {
+                      sprintf(tmpStr, "%s", (((given & 0x00800000) == 0) ? "-" : "+"));
                       str = strcat(str, tmpStr);
+                      arm_decode_shift(given, str);
                     }
                   }
-                  else
+                  else // pre indexing
                   {
-                    sprintf(tmpStr, ", %s", (((given & 0x00800000) == 0) ? "-" : ""));
-                    str = strcat(str, tmpStr);
-                    arm_decode_shift(given, str);
+                    if ((given & 0x02000000) == 0)
+                    {
+                      int offset = given & 0xfff;
+                      if (offset)
+                      {
+                        sprintf(tmpStr, "a_pre_index(%s, %s%d)", arm_regnames[(given >> 16) & 0xf], (((given & 0x00800000) == 0) ? "-" : ""), offset);
+                        str = strcat(str, tmpStr);
+                      }
+                      else
+                      {
+                        sprintf(tmpStr, "%s", arm_regnames[(given >> 16) & 0xf]);
+                        str = strcat(str, tmpStr);
+                      }
+                    }
+                    else
+                    {
+                      sprintf(tmpStr, "a_pre_index(%s, %s", arm_regnames[(given >> 16) & 0xf], (((given & 0x00800000) == 0) ? "-" : ""));
+                      str = strcat(str, tmpStr);
+                      arm_decode_shift(given, str);
+                      str = strcat(str, ")");
+                    }
                   }
-                  
-                  sprintf(tmpStr, "]%s", ((given & 0x00200000) != 0) ? "!" : "");
-                  str = strcat(str, tmpStr);
                 }
-                else
+                else // post indexed
                 {
                   if ((given & 0x02000000) == 0)
                   {
                     int offset = given & 0xfff;
                     if (offset)
                     {
-                      sprintf(tmpStr, "], #%s%d", (((given & 0x00800000) == 0) ? "-" : ""), offset);
+                      sprintf(tmpStr, "a_post_index(%s, %s%d)", arm_regnames[(given >> 16) & 0xf], (((given & 0x00800000) == 0) ? "-" : ""), offset);
                       str = strcat(str, tmpStr);
                     }
                     else
-                      str = strcat(str, "]");
+                    {
+                      sprintf(tmpStr, "%s", arm_regnames[(given >> 16) & 0xf]);
+                      str = strcat(str, tmpStr);
+                    }
                   }
                   else
                   {
-                    sprintf(tmpStr, "], %s", (((given & 0x00800000) == 0) ? "-" : ""));
+                    sprintf(tmpStr, "a_post_index(%s, %s", arm_regnames[(given >> 16) & 0xf], (((given & 0x00800000) == 0) ? "-" : ""));
                     str = strcat(str, tmpStr);
                     arm_decode_shift(given, str);
+                    str = strcat(str, ")");
                   }
                 }
               }
@@ -237,17 +281,36 @@ static int print_insn_arm(unsigned int pc,
             case 'b':
             {
               unsigned int dst = BDISP(given) * 4 + pc + 8;
-              const char *sym = get_plain_symbol_at(dst);
-              if (sym) {
-                if (dst<0x00800000)
-                  sprintf(tmpStr, "%s", sym);
-                else
-                  sprintf(tmpStr, "VEC_%s", sym);
+              const char *csym = get_plain_symbol_at(dst);
+              const char *dsym = get_symbol_at(dst);
+              if (dsym) {
+                sprintf(tmpStr, "return %s", dsym);
+              } else if (csym) {
+                sprintf(tmpStr, "return %s(a_reglist_t)", csym);
               } else {
                 if (dst<0x00800000)
-                  sprintf(tmpStr, "L%08X", dst);
+                  sprintf(tmpStr, "goto L%08X", dst);
                 else
-                  sprintf(tmpStr, "0x%08X", dst); // FIXME: wrong offset!
+                  sprintf(tmpStr, "goto 0x%08X", dst); // FIXME: wrong offset!
+              }
+              str = strcat(str, tmpStr);
+            }
+              break;
+              
+            case 'B':
+            {
+              unsigned int dst = BDISP(given) * 4 + pc + 8;
+              const char *csym = get_plain_symbol_at(dst);
+              const char *dsym = get_symbol_at(dst);
+              if (dsym) {
+                sprintf(tmpStr, "r0 = %s", dsym);
+              } else if (csym) {
+                sprintf(tmpStr, "r0 = %s(a_reglist_t)", csym);
+              } else {
+                if (dst<0x00800000)
+                  sprintf(tmpStr, "r0 = L%08X(a_reglist_t)", dst);
+                else
+                  sprintf(tmpStr, "r0 = 0x%08X(a_reglist_t)", dst); // FIXME: wrong offset!
               }
               str = strcat(str, tmpStr);
             }
@@ -261,66 +324,23 @@ static int print_insn_arm(unsigned int pc,
             case 'm':
             {
               int started = 0;
-              int RangeEnd = -2;
-              int RangeFirst = -2;
               int reg;
               
               // Register List.
               
-              str = strcat(str, "{");
+              str = strcat(str, "(");
               for (reg = 0; reg < 16; reg++)
                 if ((given & (1 << reg)) != 0)
                 {
-                  if (RangeEnd + 1 == reg)
-                  {
-                    // I am in a block.
-                    if (reg == 15)
-                    {
-                      // I should finish it anyway.
-                      sprintf(tmpStr, "-%s", arm_regnames[reg]);
-                      str = strcat(str, tmpStr);
-                    }
-                    else
-                    {
-                      RangeEnd++;
-                    }
-                  }
-                  else
-                  {
-                    // I am not in a block.
-                    // The block has been finished when processing the first reg out of it.
-                    if (started)
-                      str = strcat(str, ", ");
-                    started = 1;
-                    // Let's print this register & set both RangeEnd and RangeFirst.
-                    RangeEnd = RangeFirst = reg;
-                    sprintf(tmpStr, "%s", arm_regnames[reg]);
-                    str = strcat(str, tmpStr);
-                  }
-                }
-                else
-                {
-                  // This register is not here. Hence, I finish the old block.
                   if (started)
-                  {
-                    if (RangeEnd > RangeFirst)
-                    {
-                      if (RangeEnd == RangeFirst + 1)
-                      {
-                        // Two registers: I do comma.
-                        sprintf(tmpStr, ", %s", arm_regnames[RangeEnd]);
-                      }
-                      else
-                      {
-                        // More: I do dash.
-                        sprintf(tmpStr, "-%s", arm_regnames[RangeEnd]);
-                      }
-                      str = strcat(str, tmpStr);
-                    }
-                  }
-                  RangeEnd = RangeFirst = -2;
+                    str = strcat(str, "|");
+                  sprintf(tmpStr, "%s", arm_regnames[reg]);
+                  tmpStr[0] = toupper(tmpStr[0]);
+                  tmpStr[1] = toupper(tmpStr[1]);
+                  str = strcat(str, tmpStr);
+                  started = 1;
                 }
-              str = strcat(str, "}");
+              str = strcat(str, ")");
             }
               break;
               
@@ -329,8 +349,11 @@ static int print_insn_arm(unsigned int pc,
               {
                 int rotate = (given & 0xf00) >> 7;
                 int immed = (given & 0xff);
-                sprintf(tmpStr, "#%d", ((immed << (32 - rotate)) | (immed >> rotate)) & 0xffffffff);
+                unsigned int val = ((immed << (32 - rotate)) | (immed >> rotate)) & 0xffffffff;
+                sprintf(tmpStr, "%d", val);
                 str = strcat(str, tmpStr);
+                sprintf(tmpStr, " [ 0x%08X ]", val);
+                strcat(cmt, tmpStr);
               }
               else
                 arm_decode_shift(given, str);
@@ -512,7 +535,7 @@ static int print_insn_arm(unsigned int pc,
                     int reg;
                     reg = given >> bitstart;
                     reg &= (2 << (bitend - bitstart)) - 1;
-                    sprintf(tmpStr, "0x%08x", reg);
+                    sprintf(tmpStr, "0x%08X", reg);
                     str = strcat(str, tmpStr);
                   }
                     break;
@@ -548,6 +571,21 @@ static int print_insn_arm(unsigned int pc,
                     str = strcat(str, tmpStr);
                   }
                   break;
+                case '$':
+                  c++;
+                  {
+                    char *d = tmpStr;
+                    for (;;) {
+                      if (*c=='$') break;
+                      *d++ = *c++;
+                    }
+                    *d = 0;
+                  }
+                  if ((given & (1 << bitstart)) != 0)
+                  {
+                    str = strcat(str, tmpStr);
+                  }
+                  break;
                 case '?':
                   ++c;
                   if ((given & (1 << bitstart)) != 0)
@@ -579,11 +617,12 @@ static int print_insn_arm(unsigned int pc,
 }
 
 
-int disarm_c_old(char *dst, unsigned int addr, unsigned int cmd)
+int disarm_c(char *dst, unsigned int addr, unsigned int cmd)
 {
   unsigned int given = cmd;
   char theString[5];
   char theDisasmLine[2048];
+  char theCommentLine[2048];
   char theChar;
   int i;
   int pc = addr;
@@ -594,13 +633,14 @@ int disarm_c_old(char *dst, unsigned int addr, unsigned int cmd)
     for (i = 0; i < 4; i++)
     {
       theChar = ((char*) & given)[3-i];
-      if (theChar < '!')
+      if (theChar < '!' || theChar>126)
         theChar = '.';
       theString[i] = theChar;
     }
     
     theDisasmLine[0] = '\0';
-    incr = print_insn_arm(pc, given, theDisasmLine);
+    theCommentLine[0] = '\0';
+    incr = print_insn_arm_c(pc, given, theDisasmLine, theCommentLine);
     
     char *t = strchr(theDisasmLine, '\t');
     if (t) {
@@ -611,231 +651,7 @@ int disarm_c_old(char *dst, unsigned int addr, unsigned int cmd)
       }
       memset(t, 32, dt-(t-theDisasmLine)+1);
     }
-    
-    sprintf(dst, "%-32s  ; 0x%.8X 0x%.8X - %-5s", theDisasmLine, addr, given, theString);
+    sprintf(dst, "%-32s  //%s 0x%.8X 0x%.8X - %-5s", theDisasmLine, theCommentLine, addr, given, theString);
   }
   return incr;
 }
-
-const char* GetRegister(unsigned int R)
-{
-  return arm_regnames[R&15];
-}
-
-const char* GetTferSize(unsigned int B)
-{
-  return (B&1) ? "Byte" : "Word";
-}
-
-const char* GetAddSub(unsigned int U)
-{
-  return (U&1) ? "+" : "-";
-}
-
-const char* GetOffset(unsigned int I, unsigned int off, int &isZero)
-{
-  static char str[80];
-  
-  isZero = 0;
-  if (I&1) { // 0-3 = offset register, 4-11 = shift
-    const char* offsetRegister = GetRegister(off);
-    const char* shiftRegister = GetRegister(off>>8);
-    unsigned int amount = (off>>7)&0x1f;
-    switch ((off>>4)&7) {
-      case 0:
-        if (amount)
-          sprintf(str, "(%s<<%d)", offsetRegister, amount);
-        else
-          sprintf(str, "%s", offsetRegister);
-        break; // LSL n
-      case 1: sprintf(str, "(%s>>%d)", offsetRegister, amount); break; // LSR n
-      case 2: sprintf(str, "(((KSInt32)%s)>>%d)", offsetRegister, amount); break; // ASR n
-      case 3: sprintf(str, "(ROR(%s, %d))", offsetRegister, amount); break; // ROR n
-      case 4: sprintf(str, "(%s<<(%s&0xff))", offsetRegister, shiftRegister); break; // LSL n
-      case 5: sprintf(str, "(%s>>(%s&0xff))", offsetRegister, shiftRegister); break; // LSR n
-      case 6: sprintf(str, "(((KSInt32)%s)>>(%s&0xff))", offsetRegister, shiftRegister); break; // ASR n
-      case 7: sprintf(str, "(ROR(%s, (%s&0xff)))", offsetRegister, shiftRegister); break; // ROR n
-    }
-    return str;
-  } else {
-    if ((off & 0xfff)==0) isZero = 1;
-    sprintf(str, "%d", off & 0xfff);
-    return str;
-  }
-}
-
-const char *GetOp2(unsigned int I, unsigned int off)
-{
-  static char str[80];
-  if (I&1) {
-    // rot
-    unsigned int r = (off>>7) & 30;
-    unsigned int x = off & 0xff;
-    unsigned int v = (x>>r) | (x<<(32-r));
-    sprintf(str, "%d", (signed int)v);
-    return str;
-  } else {
-    // shift
-    int isZero;
-    return GetOffset(1, off, isZero);
-  }
-}
-
-int disarm_c(char *buf, unsigned int addr, unsigned int cmd)
-{
-  unsigned int cf = 0;
-  char *dst = buf;
-  
-  *dst = 0;
-  
-  if ((cmd & 0x0fc000f0)==0x00000090) { // MUL  CCCC.0000.00AS.RRRd.RRRn.RRRs.1001.RRRm
-    const char *Rd = GetRegister(cmd>>16);
-    const char *Rn = GetRegister(cmd>>12);
-    const char *Rs = GetRegister(cmd>>8);
-    const char *Rm = GetRegister(cmd>>0);
-    cf = (cmd>>20);
-    if ((cmd>>21)&1) {
-      dst += sprintf(dst, "%s = %s * %s + %s;", Rd, Rm, Rs, Rn);
-    } else {
-      dst += sprintf(dst, "%s = %s * %s;", Rd, Rm, Rs);
-    }
-  } else if ((cmd & 0x0cb00ff0)==0x01000090) { // SWP  CCCC.0001.0B00.RRRn.RRRd0000.1001.RRRm
-    const char *size = GetTferSize(cmd>>22);          // B
-    const char *Rn = GetRegister(cmd>>16);
-    const char *Rd = GetRegister(cmd>>12);
-    const char *Rm = GetRegister(cmd>>0);
-    if (strcmp(Rd, Rm)==0) {
-      dst += sprintf(dst, "{ KUInt32 tmp = NewtRead%s(%s); NewtWrite%s(%s, %s); %s = tmp; }", size, Rn, size, Rn, Rm, Rd);
-    } else {
-      dst += sprintf(dst, "%s = NewtRead%s(%s);\nNewtWrite%s(%s, %s);", Rd, size, Rn, size, Rn, Rm);
-    }
-  } else if ((cmd & 0x0c000000)==0x00000000) { // Data Processing  CCCC.00IO.OOOS.RRRn.RRRd.oooo.oooo.ooo2
-    const char *Rn = GetRegister(cmd>>16);
-    const char *Rd = GetRegister(cmd>>12);
-    const char *op2 = GetOp2(cmd>>25, cmd);
-    cf = (cmd>>20);
-    switch ((cmd>>21)&15) {
-      case  0: dst += sprintf(dst, "%s = %s & %s;", Rd, Rn, op2); break;
-      case  1: dst += sprintf(dst, "%s = %s ^ %s;", Rd, Rn, op2); break;
-      case  2: dst += sprintf(dst, "%s = %s - %s;", Rd, Rn, op2); break;
-      case  3: dst += sprintf(dst, "%s = %s - %s;", Rd, op2, Rn); break;
-      case  4: dst += sprintf(dst, "%s = %s + %s;", Rd, Rn, op2); break;
-      case  5: dst += sprintf(dst, "%s = %s + %s + carry;", Rd, Rn, op2); break;
-      case  6: dst += sprintf(dst, "%s = %s - %s + carry - 1;", Rd, Rn, op2); break;
-      case  7: dst += sprintf(dst, "%s = %s - %s + carry - 1;", Rd, op2, Rn); break;
-      case  8: dst += sprintf(dst, "cond = %s & %s;", Rn, op2); cf=1; break;
-      case  9: dst += sprintf(dst, "cond = %s ^ %s;", Rn, op2); cf=1; break;
-      case 10: dst += sprintf(dst, "cond = %s - %s;", Rn, op2); cf=1; break;
-      case 11: dst += sprintf(dst, "cond = %s + %s;", Rn, op2); cf=1; break;
-      case 12: dst += sprintf(dst, "%s = %s | %s;", Rd, Rn, op2); break;
-      case 13: dst += sprintf(dst, "%s = %s;", Rd, op2); break;
-      case 14: dst += sprintf(dst, "%s = %s & ~%s;", Rd, Rn, op2); break;
-      case 15: dst += sprintf(dst, "%s = ~%s;", Rd, op2); break;
-    }
-  } else if ((cmd & 0x0e000010)==0x06000010) {
-    dst += sprintf(dst, "undefined();");
-  } else if ((cmd & 0x0c000000)==0x04000000) { // LDR,STR  CCCC.01IP.UBWL.RRRn.RRRd.oooo.oooo.oooo
-    int isZero;
-    const char *baseRegister = GetRegister(cmd>>16);  // Rn
-    const char *dataRegister = GetRegister(cmd>>12);  // Rd
-    const char *size = GetTferSize(cmd>>22);          // B
-    const char *addSub = GetAddSub(cmd>>23);          // U
-    const char *offset = GetOffset(cmd>>25, cmd, isZero); // I
-    if (isZero) addSub = offset = "";
-    if (cmd & 0x00100000) { // LDR                    // L
-      if ((cmd>>24)&1) {                              // P
-        if ((cmd>>21)&1) {                            // W
-          // pre add, write back
-          if (!isZero) dst += sprintf(dst, "%s = %s%s%s;\n", baseRegister, baseRegister, addSub, offset);
-          dst += sprintf(dst, "%s = NewtRead%s(%s);", dataRegister, size, baseRegister);
-        } else {
-          // pre add, don't write back
-          dst += sprintf(dst, "%s = NewtRead%s(%s%s%s);", dataRegister, size, baseRegister, addSub, offset);
-        }
-      } else {
-        // post add, always write back
-        dst += sprintf(dst, "%s = NewtRead%s(%s);", dataRegister, size, baseRegister);
-        if (!isZero) dst += sprintf(dst, "\n%s = %s%s%s;", baseRegister, baseRegister, addSub, offset);
-      }
-    } else { // STR
-      if ((cmd>>24)&1) {                              // P
-        if ((cmd>>21)&1) {                            // W
-          // pre add, write back
-          if (!isZero) dst += sprintf(dst, "%s = %s%s%s;\n", baseRegister, baseRegister, addSub, offset);
-          dst += sprintf(dst, "NewtWrite%s(%s, %s);", size, baseRegister, dataRegister);
-        } else {
-          // pre add, don't write back
-          dst += sprintf(dst, "NewtWrite%s(%s%s%s, %s);", size, baseRegister, addSub, offset, dataRegister);
-        }
-      } else {
-        // post add, always write back
-        dst += sprintf(dst, "NewtWrite%s(%s, %s);", size, baseRegister, dataRegister);
-        if (!isZero) dst += sprintf(dst, "\n%s = %s%s%s;\n", baseRegister, baseRegister, addSub, offset);
-      }
-    }
-  } else if ((cmd & 0x0e000000)==0x08000000) { // block tfer  CCCC.100P.USWL.RRRn.LLLL.LLLL.LLLL.LLLL
-                                               // tfer lowest to highest
-                                               // lowest reg is always at lowest addr
-    const char *baseRegister = GetRegister(cmd>>16);  // Rn
-    const char *addSub = GetAddSub(cmd>>23);          // U
-    int i, nReg = 0, n = 0;
-    for (i=0; i<16; i++) {
-      if (cmd & (1<<i)) nReg++;
-    }
-    dst += sprintf(dst, "{\n\tKUInt32 tmp = %s;", baseRegister);
-    for (i=0; i<16; i++) {
-      if (cmd & (1<<i)) {
-        const char *dataRegister = GetRegister(i);
-        if ((cmd>>20)&1) { // LDM
-          if ((cmd>>24)&1) { // pre
-            dst += sprintf(dst, "\n\t%s = NewtReadWord(tmp%s%d);", dataRegister, addSub, 4*(n+1));
-          } else { // post
-            dst += sprintf(dst, "\n\t%s = NewtReadWord(tmp%s%d);", dataRegister, addSub, 4*n);
-          }
-        } else { // STM
-          if ((cmd>>24)&1) { // pre
-            dst += sprintf(dst, "\n\tNewtWriteWord(tmp%s%d, %s);", addSub, 4*(nReg-n), dataRegister);
-          } else { // post
-            dst += sprintf(dst, "\n\tNewtWriteWord(tmp%s%d, %s);", addSub, 4*(nReg-n-1), dataRegister);
-          }
-        }
-        n++;
-      }
-    }
-    if ((cmd>>21)&1) dst += sprintf(dst, "\n\t%s = tmp %s %d;", baseRegister, addSub, 4*n);
-    dst += sprintf(dst, "\n}");
-    if ((cmd>>22)&1) dst += sprintf(dst, "\n#warn the instructions above should force user mode");
-  } else if ((cmd & 0x0e000000)==0x0a000000) { // B, BL
-    unsigned int dstAddr = BDISP(cmd&0x00ffffff) * 4 + addr + 8;
-    const char *sym = get_plain_symbol_at(dstAddr);
-    if (sym) {
-      if ((cmd>>24)&1) { // BL
-        dst += sprintf(dst, "r0 = %s(...);", sym); // FIXME: we can improve this a lot!
-      } else { // BL
-        dst += sprintf(dst, "return %s(...);", sym);
-      }
-    } else {
-      if ((cmd>>24)&1) { // BL
-        dst += sprintf(dst, "r0 = L%08X(...);", dstAddr);
-      } else { // BL
-        dst += sprintf(dst, "goto L%08X;", dstAddr);
-      }
-    }
-  }
-  if (cf&1) dst += sprintf(dst, "\n#warn the instruction above should set condition flags");
-  
-  unsigned int cond = cmd>>28;
-  if (cond<14) {
-    char *tmp = strdup(buf);
-    dst = buf;
-    if (strchr(tmp, '\n')) { // multi line
-      dst += sprintf(dst, "if (%s) {\n%s\n}", arm_conditional[cond], tmp);
-    } else { // single line
-      dst += sprintf(dst, "if (%s) %s", arm_conditional[cond], tmp);
-    }
-    free(tmp);
-  }
-
-  return 0;
-}
-

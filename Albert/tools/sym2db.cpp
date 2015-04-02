@@ -15,6 +15,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+#include <mxml.h>
 
 FILE *in, *out;
 
@@ -262,7 +263,7 @@ void convert(const char *s, unsigned int next)
 {
   unsigned int addr;
   char sym[512];
-  int n = sscanf(s, "0x%08x", &addr);
+  int n = sscanf(s, "0x%08X", &addr);
   if (n!=1) {
     printf("Failed to convert line '%s'\n", s);
   }
@@ -408,7 +409,7 @@ int main(int argc, char **argv)
     strcpy(buf2, buf);
     char *s = fgets(buf, 1024, in);
     if (s) 
-      sscanf(s, "0x%08x", &next);
+      sscanf(s, "0x%08X", &next);
     else
       next = 0x0C107E14; // "_end"
     convert(buf2, next);

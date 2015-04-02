@@ -180,7 +180,7 @@ unsigned int decodeNSObj(FILE *newt, unsigned int i) {
         AsmPrintf(newt, "\tNSObjXBin\t%d%s\n", size-12, decoded);
       }
       decodeNSRef(newt, i+8);
-      AsmPrintf(newt, "\tNSRealAsBin\t0x%08x%08x\n", rom_w(i+12), rom_w(i+16));
+      AsmPrintf(newt, "\tNSRealAsBin\t0x%08X%08X\n", rom_w(i+12), rom_w(i+16));
       //AsmPrintf(newt, "\tNSObjReal\t%g\n", rom_real(i+12)); i+=16;
       i+=16; decode = 0;
     } else if (strcmp(sym, "fixed")==0) {
@@ -506,7 +506,7 @@ unsigned int extractBitmap(FILE *newt, unsigned int bits, int size)
 {
   unsigned int end = bits+size;
   decodeNSRef(newt, bits+8);
-  AsmPrintf(newt, "\t.int\t0x%08x\t@ \n", rom_w(bits+12));
+  AsmPrintf(newt, "\t.int\t0x%08X\t@ \n", rom_w(bits+12));
   int x, bpr = writeShort(newt, bits+16, "bytes per row");
   writeShort(newt, bits+18, "...");
   writeShort(newt, bits+20, "top");
@@ -524,8 +524,7 @@ unsigned int extractBitmap(FILE *newt, unsigned int bits, int size)
   return end - 4;
 }
 
-char writeBitmap(unsigned int bits) 
-{
+char writeBitmap(const char *filename, unsigned int bits) {
   // create the BMP
   int x, wdt = ((ROM[bits+26]<<8)|(ROM[bits+27])) - ((ROM[bits+22]<<8)|(ROM[bits+23]));
   int y, hgt = ((ROM[bits+24]<<8)|(ROM[bits+25])) - ((ROM[bits+20]<<8)|(ROM[bits+21]));
@@ -545,13 +544,19 @@ char writeBitmap(unsigned int bits)
     }
   }
   // write to file
-  char buf[2048];
-  sprintf(buf, "/Users/matt/dev/Albert/NewtonOS/images/IMG_%08X.bmp", bits);
-  bmp.WriteToFile(buf);
+  bmp.WriteToFile(filename);
   return 1;
 }
 
-char extractColorBitmap(unsigned int bits) 
+char writeBitmap(unsigned int bits)
+{
+  // write to file
+  char buf[2048];
+  sprintf(buf, "/Users/matt/dev/Albert/NewtonOS/images/IMG_%08X.bmp", bits);
+  return writeBitmap(buf, bits);
+}
+
+char extractColorBitmap(unsigned int bits)
 {
   static RGBApixel lut[] = {
     { 0x00, 0x00, 0x00 },
@@ -594,9 +599,7 @@ char extractColorBitmap(unsigned int bits)
 }
 
 
-unsigned int rom_s(unsigned int i) {
-  return ((ROM[i]<<8)|(ROM[i+1]));
-}
+extern unsigned int rom_s(unsigned int i);
 
 /*
  The format is quite complex. Just write the pure binary data and hope that an
@@ -604,10 +607,14 @@ unsigned int rom_s(unsigned int i) {
  */ 
 char writePICT(unsigned int bits, unsigned int size) 
 {
+  unsigned short zero = 0;
   char buf[2048];
-  sprintf(buf, "/Users/matt/dev/Albert/NewtonOS/images/IMG_%08X.pict", bits);
+  sprintf(buf, "/Users/matt/dev/Albert/NewtonOS/images/IMG_%08X.pict", bits-12);
   FILE *f = fopen(buf, "wb");
-  fwrite(ROM+bits, 1, size, f);
+  fwrite(ROM+bits, 1, 2, f);
+  fwrite(&zero, 1, 2, f);
+  fwrite(&zero, 1, 2, f);
+  fwrite(ROM+bits+6, 1, size-6, f);
   fclose(f);
   return 1;
 }
@@ -804,7 +811,7 @@ MMU Stuff:
  Level 1: 1MB per block, 4096 entries @ 32bits = 16kBytes for the table
  Level 2a: 64kB per block, 256 entries @ 32bits = 1kByte per table
  Level 2b:  4kB per block
- Simulator for 4kB blocks = 4GB/4kB = 1048576 entries (1 MB)
+ Simulator for 4kB blocks = 4GB/4kB = 1048576 entries (1M = 4MB)
  
  Level 1 entries:
    xxxxxxxx xxxxxxxx xxxxxxxx xxxxxx00 = Fault

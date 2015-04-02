@@ -48,15 +48,14 @@ int ARMCmp(unsigned int addr)
 
 int main(int argc, char **argv) 
 {
-  /*
-  if (argc!=4) {
-    fprintf(stderr, "Usage: %s ROM1File ROM2File ROMFlagsFile\n");
-    return -1;
+  if (argc!=3) {
+    printf("USAGE: armdiff ROM1File ROM2File\n");
+    return 20;
   }
-  */
-  const char *rom1FileName = "/Users/matt/dev/Albert/NewtonOS/ROM";
-  const char *rom2FileName = "/Users/matt/dev/Albert/data/717006";
-  const char *romFlagsFileName = "/Users/matt/dev/Albert/data/flags";
+  
+  const char *rom1FileName = argv[1]; //"/Users/matt/dev/Albert/NewtonOS/ROM";
+  const char *rom2FileName = argv[2]; //"/Users/matt/dev/Albert/data/717006";
+  //const char *romFlagsFileName = "/Users/matt/dev/Albert/data/flags";
   
   // ---- read the first ROM
   //printf("Reading ROM 1 from %s\n", rom1FileName);
@@ -86,13 +85,13 @@ int main(int argc, char **argv)
   
   // ---- read the flags, so we know what's ARM code
   //printf("Reading ROM Flags from %s\n", romFlagsFileName);
-  FILE *rom_flags = fopen(romFlagsFileName, "rb");
-  if (!rom_flags) {
-    fprintf(stderr, "Can't read ROM flags!\n");
-    return -1;
-  }
-  fread(ROM_flags, 0x00200000, sizeof(int), rom_flags);
-  fclose(rom_flags);
+//  FILE *rom_flags = fopen(romFlagsFileName, "rb");
+//  if (!rom_flags) {
+//    fprintf(stderr, "Can't read ROM flags!\n");
+//    return -1;
+//  }
+//  fread(ROM_flags, 0x00200000, sizeof(int), rom_flags);
+//  fclose(rom_flags);
   
   unsigned int i, n=0, id=1;
   

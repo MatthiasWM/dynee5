@@ -1,0 +1,4424 @@
+begin TypeList
+  begin Type
+    key 
+  end
+  begin Type
+    key ADCMuxType
+  end
+  begin Type
+    key ADSPHeader
+  end
+  begin Type
+    key ADSPOpenConnInfo
+  end
+  begin Type
+    key AddressEquiv
+  end
+  begin Type
+    key AirusAParmBlock
+  end
+  begin Type
+    key AngCluster
+  end
+  begin Type
+    key Assoc
+  end
+  begin Type
+    key BUF_DESCR
+  end
+  begin Type
+    key BatteryTable
+  end
+  begin Type
+    key BestMatch
+  end
+  begin Type
+    key Bias
+  end
+  begin Type
+    key Bilinear
+  end
+  begin Type
+    key ByteAccessor
+  end
+  begin Type
+    key CArrayIterator
+  end
+  begin Type
+    key CBaseRingBuffer
+  end
+  begin Type
+    key CBuffer
+  end
+  begin Type
+    key CBufferList
+  end
+  begin Type
+    key CBufferPipe
+  end
+  begin Type
+    key CBufferSegment
+  end
+  begin Type
+    key CDynamicArray
+  end
+  begin Type
+    key CItemComparer
+  end
+  begin Type
+    key CItemTester
+  end
+  begin Type
+    key CList
+  end
+  begin Type
+    key CListIterator
+  end
+  begin Type
+    key CMPExportListNameComparer
+  end
+  begin Type
+    key CMPExportListSourceComparer
+  end
+  begin Type
+    key CMPImportListSourceComparer
+  end
+  begin Type
+    key CMPImportListSourceTester
+  end
+  begin Type
+    key CMemObject
+  end
+  begin Type
+    key CMemoryPipe
+  end
+  begin Type
+    key CMinBuffer
+  end
+  begin Type
+    key CNullPipe
+  end
+  begin Type
+    key CPackageArchivalPipe
+  end
+  begin Type
+    key CPackagePipe
+  end
+  begin Type
+    key CPartPipe
+  end
+  begin Type
+    key CPipe
+  end
+  begin Type
+    key CPtrPipe
+  end
+  begin Type
+    key CRefPipe
+  end
+  begin Type
+    key CRingBuffer
+  end
+  begin Type
+    key CRingPipe
+  end
+  begin Type
+    key CSStrokeHeader
+  end
+  begin Type
+    key CShadowBufferSegment
+  end
+  begin Type
+    key CShadowRingBuffer
+  end
+  begin Type
+    key CSortedList
+  end
+  begin Type
+    key CStdioPipe
+  end
+  begin Type
+    key CTaskPipe
+  end
+  begin Type
+    key CValidateBackupPipe
+  end
+  begin Type
+    key CXIPObjectPipe
+  end
+  begin Type
+    key Calibration
+  end
+  begin Type
+    key CatchHeader
+  end
+  begin Type
+    key ChannelNode
+  end
+  begin Type
+    key Class1CmdResults
+  end
+  begin Type
+    key Cluster
+  end
+  begin Type
+    key CodecBlock
+  end
+  begin Type
+    key CodecState
+  end
+  begin Type
+    key CommToolChannelNumber
+  end
+  begin Type
+    key CommToolRequestType
+  end
+  begin Type
+    key CompressionType
+  end
+  begin Type
+    key ConnectionType
+  end
+  begin Type
+    key CrossInfoType
+  end
+  begin Type
+    key CursorSoupInfo
+  end
+  begin Type
+    key CursorState
+  end
+  begin Type
+    key Curve
+  end
+  begin Type
+    key DataPtr
+  end
+  begin Type
+    key DeclawingRange
+  end
+  begin Type
+    key DictWalkBlock
+  end
+  begin Type
+    key DomainInfo
+  end
+  begin Type
+    key DotPrinterPrefs
+  end
+  begin Type
+    key DrTextInfo
+  end
+  begin Type
+    key DragBits
+  end
+  begin Type
+    key DupNodeHeader
+  end
+  begin Type
+    key EBankDesignation
+  end
+  begin Type
+    key EPhysChangeType
+  end
+  begin Type
+    key EXTR
+  end
+  begin Type
+    key EntryDirtyLink
+  end
+  begin Type
+    key EnvironmentInfo
+  end
+  begin Type
+    key EqSystem
+  end
+  begin Type
+    key EventMasterListItem
+  end
+  begin Type
+    key EventTraceCauseDesc
+  end
+  begin Type
+    key Exception
+  end
+  begin Type
+    key ExtendedPartInfo
+  end
+  begin Type
+    key FIQTimer
+  end
+  begin Type
+    key FM_AddPageMappingToDomain_Parms
+  end
+  begin Type
+    key FM_Free_Parms
+  end
+  begin Type
+    key FM_GetHeapAreaInfo_Parms
+  end
+  begin Type
+    key FM_GetSystemReleaseable_Parms
+  end
+  begin Type
+    key FM_LockHeapRange_Parms
+  end
+  begin Type
+    key FM_NewHeapArea_Parms
+  end
+  begin Type
+    key FM_NewHeapDomain_Parms
+  end
+  begin Type
+    key FM_NewStack_Parms
+  end
+  begin Type
+    key FM_SetHeapLimits_Parms
+  end
+  begin Type
+    key FM_SetRemoveRoutine_Parms
+  end
+  begin Type
+    key FPoint
+  end
+  begin Type
+    key FRect
+  end
+  begin Type
+    key FastRunState
+  end
+  begin Type
+    key FaxClass2FDIS
+  end
+  begin Type
+    key FaxClass2FPTS
+  end
+  begin Type
+    key Finder
+  end
+  begin Type
+    key FontEngineInfo
+  end
+  begin Type
+    key FontInfo
+  end
+  begin Type
+    key FormType
+  end
+  begin Type
+    key FormUser
+  end
+  begin Type
+    key ForwardingObject
+  end
+  begin Type
+    key FourULongs
+  end
+  begin Type
+    key FramBitmap
+  end
+  begin Type
+    key FrameRelocationHeader
+  end
+  begin Type
+    key FramesProfilingKind
+  end
+  begin Type
+    key GCGroupParmStruct
+  end
+  begin Type
+    key GCRecResults
+  end
+  begin Type
+    key GCWordDescrType
+  end
+  begin Type
+    key GPIOIntObject
+  end
+  begin Type
+    key GSType
+  end
+  begin Type
+    key GeneralPt
+  end
+  begin Type
+    key GenericRec
+  end
+  begin Type
+    key GrafPort
+  end
+  begin Type
+    key GroupDataStruct
+  end
+  begin Type
+    key HiliteLoop
+  end
+  begin Type
+    key IMAState
+  end
+  begin Type
+    key IRCodeWord
+  end
+  begin Type
+    key IREvent
+  end
+  begin Type
+    key IRPacketType
+  end
+  begin Type
+    key IRProbeService
+  end
+  begin Type
+    key IRQTimer
+  end
+  begin Type
+    key IRSniffService
+  end
+  begin Type
+    key IndexInfo
+  end
+  begin Type
+    key IndexState
+  end
+  begin Type
+    key InkWordInfo
+  end
+  begin Type
+    key InsertRun
+  end
+  begin Type
+    key InsertRunList
+  end
+  begin Type
+    key InterruptObject
+  end
+  begin Type
+    key InterruptPriority
+  end
+  begin Type
+    key IterFilterType
+  end
+  begin Type
+    key JournalReplayHandler
+  end
+  begin Type
+    key JournalStroke
+  end
+  begin Type
+    key KernelObjectState
+  end
+  begin Type
+    key KernelTypes
+  end
+  begin Type
+    key KeyField
+  end
+  begin Type
+    key KeyboardEvent
+  end
+  begin Type
+    key KeynesIntObject
+  end
+  begin Type
+    key LBData
+  end
+  begin Type
+    key LETTERS_TO_XR
+  end
+  begin Type
+    key LILetterInfoType
+  end
+  begin Type
+    key LILetterVarType
+  end
+  begin Type
+    key LIStrokeType
+  end
+  begin Type
+    key LOTransactionHandler
+  end
+  begin Type
+    key LargeObjectRoot
+  end
+  begin Type
+    key LetterCursor
+  end
+  begin Type
+    key LineInfo
+  end
+  begin Type
+    key LineLoop
+  end
+  begin Type
+    key Linear
+  end
+  begin Type
+    key LookupType
+  end
+  begin Type
+    key MPExportItem
+  end
+  begin Type
+    key MPImportItem
+  end
+  begin Type
+    key Map
+  end
+  begin Type
+    key MarginSize
+  end
+  begin Type
+    key MemBufferPipe
+  end
+  begin Type
+    key MemObjManager
+  end
+  begin Type
+    key MemObjType
+  end
+  begin Type
+    key MemoryPipe
+  end
+  begin Type
+    key MixFunc
+  end
+  begin Type
+    key MixGradEl
+  end
+  begin Type
+    key NArray
+  end
+  begin Type
+    key NBlockComparator
+  end
+  begin Type
+    key NComparator
+  end
+  begin Type
+    key NIterator
+  end
+  begin Type
+    key NSortedArray
+  end
+  begin Type
+    key NewtGlobals
+  end
+  begin Type
+    key NodeHeader
+  end
+  begin Type
+    key NxtPrvCircle_type
+  end
+  begin Type
+    key OSCalibrationParameters
+  end
+  begin Type
+    key ObjHeader
+  end
+  begin Type
+    key Object
+  end
+  begin Type
+    key ObjectMessage
+  end
+  begin Type
+    key ObjectTypes
+  end
+  begin Type
+    key Opcode
+  end
+  begin Type
+    key Operation
+  end
+  begin Type
+    key Osokin_output
+  end
+  begin Type
+    key OvalRec
+  end
+  begin Type
+    key PATStack
+  end
+  begin Type
+    key PAppleTalkStack
+  end
+  begin Type
+    key PBatteryDriver
+  end
+  begin Type
+    key PCECallBack
+  end
+  begin Type
+    key PCECallBackWrapper
+  end
+  begin Type
+    key PCirrusBatteryDriver
+  end
+  begin Type
+    key PCirrusSoundDriver
+  end
+  begin Type
+    key PConnectionEnd
+  end
+  begin Type
+    key PDF_CHAR_HEADER
+  end
+  begin Type
+    key PDF_CONNECTION_HEADER
+  end
+  begin Type
+    key PDF_MAIN_HEADER
+  end
+  begin Type
+    key PDF_RULE_HEADER
+  end
+  begin Type
+    key PDF_VAR_HEADER
+  end
+  begin Type
+    key PFlattenPtr
+  end
+  begin Type
+    key PFlattenRef
+  end
+  begin Type
+    key PFrameSink
+  end
+  begin Type
+    key PFrameSource
+  end
+  begin Type
+    key PHammerInTranslator
+  end
+  begin Type
+    key PHammerOutTranslator
+  end
+  begin Type
+    key PInTranslator
+  end
+  begin Type
+    key PLink
+  end
+  begin Type
+    key PLocalTalkLink
+  end
+  begin Type
+    key PMMessage
+  end
+  begin Type
+    key PMuxCallBack
+  end
+  begin Type
+    key PMuxCallBackWrapper
+  end
+  begin Type
+    key PMuxService
+  end
+  begin Type
+    key PMuxServiceStarter
+  end
+  begin Type
+    key PMuxTool
+  end
+  begin Type
+    key PNTKInTranslator
+  end
+  begin Type
+    key PNTKOutTranslator
+  end
+  begin Type
+    key PNullInTranslator
+  end
+  begin Type
+    key PNullOutTranslator
+  end
+  begin Type
+    key POINTS_GROUP
+  end
+  begin Type
+    key POST_CONTROLS
+  end
+  begin Type
+    key POptionDataIn
+  end
+  begin Type
+    key POptionDataOut
+  end
+  begin Type
+    key POutTranslator
+  end
+  begin Type
+    key PSSIDMapping
+  end
+  begin Type
+    key PS_point_type
+  end
+  begin Type
+    key PScriptDataIn
+  end
+  begin Type
+    key PScriptDataOut
+  end
+  begin Type
+    key PSerialChipRegistry
+  end
+  begin Type
+    key PSerialInTranslator
+  end
+  begin Type
+    key PSerialOutTranslator
+  end
+  begin Type
+    key PSoundDriver
+  end
+  begin Type
+    key PStdioInTranslator
+  end
+  begin Type
+    key PStdioOutTranslator
+  end
+  begin Type
+    key PStreamInRef
+  end
+  begin Type
+    key PStreamOutRef
+  end
+  begin Type
+    key PTheSerChipRegistry
+  end
+  begin Type
+    key PUnFlattenPtr
+  end
+  begin Type
+    key PUnFlattenRef
+  end
+  begin Type
+    key PackageChunk
+  end
+  begin Type
+    key PackageRoot
+  end
+  begin Type
+    key PackedInkWordInfo
+  end
+  begin Type
+    key PageTableChunk
+  end
+  begin Type
+    key ParamBlock
+  end
+  begin Type
+    key PartId
+  end
+  begin Type
+    key PartInfo
+  end
+  begin Type
+    key PartSource
+  end
+  begin Type
+    key Part_of_letter
+  end
+  begin Type
+    key PenState
+  end
+  begin Type
+    key PeripheralType
+  end
+  begin Type
+    key Perm
+  end
+  begin Type
+    key PersistentDBEntry
+  end
+  begin Type
+    key PicPlay
+  end
+  begin Type
+    key PickStuff
+  end
+  begin Type
+    key Picture
+  end
+  begin Type
+    key PipeCallBack
+  end
+  begin Type
+    key PipeInfo
+  end
+  begin Type
+    key PixelMap
+  end
+  begin Type
+    key PkgPendingImport
+  end
+  begin Type
+    key Point
+  end
+  begin Type
+    key Polygon
+  end
+  begin Type
+    key PolygonShape
+  end
+  begin Type
+    key PowerMapEntry
+  end
+  begin Type
+    key PowerPlantStatus
+  end
+  begin Type
+    key PrPageInfo
+  end
+  begin Type
+    key PrintConnect
+  end
+  begin Type
+    key Pushpopper
+  end
+  begin Type
+    key QDProcs
+  end
+  begin Type
+    key QUEUE
+  end
+  begin Type
+    key RCB_inpdata_type
+  end
+  begin Type
+    key RDMParams
+  end
+  begin Type
+    key RExImport
+  end
+  begin Type
+    key RExPendingImport
+  end
+  begin Type
+    key RWG_PPD_el_type
+  end
+  begin Type
+    key RWG_type
+  end
+  begin Type
+    key RWS_type
+  end
+  begin Type
+    key RcHandlesType
+  end
+  begin Type
+    key RealTimeAlarm
+  end
+  begin Type
+    key RecGridInfo
+  end
+  begin Type
+    key RecordState
+  end
+  begin Type
+    key Rect
+  end
+  begin Type
+    key RecwordSplitInfoType
+  end
+  begin Type
+    key RefHandle
+  end
+  begin Type
+    key RefStruct
+  end
+  begin Type
+    key RefVar
+  end
+  begin Type
+    key Region
+  end
+  begin Type
+    key RelocationEntry
+  end
+  begin Type
+    key RelocationHeader
+  end
+  begin Type
+    key ReplayMetrics
+  end
+  begin Type
+    key ResampleState
+  end
+  begin Type
+    key ResponsePacket
+  end
+  begin Type
+    key RgnState
+  end
+  begin Type
+    key Run
+  end
+  begin Type
+    key SBankInfo
+  end
+  begin Type
+    key SCCChannelInts
+  end
+  begin Type
+    key SCompactState
+  end
+  begin Type
+    key SDB_TYPE
+  end
+  begin Type
+    key SDirEnt
+  end
+  begin Type
+    key SFlashBlockLogEntry
+  end
+  begin Type
+    key SFlashChipInformation
+  end
+  begin Type
+    key SFlashEraseLogEntry
+  end
+  begin Type
+    key SFlashLogEntry
+  end
+  begin Type
+    key SFlashStoreLookupCacheEntry
+  end
+  begin Type
+    key SGlobalsThatLiveAcrossReboot
+  end
+  begin Type
+    key SHighROMCookie
+  end
+  begin Type
+    key SKey
+  end
+  begin Type
+    key SObject
+  end
+  begin Type
+    key SPEC_TYPE
+  end
+  begin Type
+    key SPSSSlotInfo
+  end
+  begin Type
+    key SPSSStoreInfo
+  end
+  begin Type
+    key SProtocolEntry
+  end
+  begin Type
+    key SReservedBlockLogEntry
+  end
+  begin Type
+    key SReservedObjectHeader
+  end
+  begin Type
+    key SSafeHeapBlock
+  end
+  begin Type
+    key SSafeHeapPage
+  end
+  begin Type
+    key SSavedPatchInfo
+  end
+  begin Type
+    key STRXRPARAM
+  end
+  begin Type
+    key SWiredHeapDescr
+  end
+  begin Type
+    key SWiredHeapPage
+  end
+  begin Type
+    key SZD_FEATURES
+  end
+  begin Type
+    key SamplePt
+  end
+  begin Type
+    key SampleSpec
+  end
+  begin Type
+    key SaveLevel
+  end
+  begin Type
+    key ScreenInfo
+  end
+  begin Type
+    key SegParams
+  end
+  begin Type
+    key SegTraced
+  end
+  begin Type
+    key SemFlags
+  end
+  begin Type
+    key ShapeMetrics
+  end
+  begin Type
+    key SideMap
+  end
+  begin Type
+    key Size
+  end
+  begin Type
+    key SortStuff
+  end
+  begin Type
+    key SortedMapTag
+  end
+  begin Type
+    key SoundBlock
+  end
+  begin Type
+    key SoundNode
+  end
+  begin Type
+    key SourceType
+  end
+  begin Type
+    key SplineSeg
+  end
+  begin Type
+    key StackState
+  end
+  begin Type
+    key State
+  end
+  begin Type
+    key StoreObjectHeader
+  end
+  begin Type
+    key StoreRootData
+  end
+  begin Type
+    key StreamRefParms
+  end
+  begin Type
+    key StrokeCentral
+  end
+  begin Type
+    key StrokeHiliteState
+  end
+  begin Type
+    key StyleRecord
+  end
+  begin Type
+    key SysEventItemComparer
+  end
+  begin Type
+    key SysEventTester
+  end
+  begin Type
+    key T16BitFlashRange
+  end
+  begin Type
+    key T28F016_SA_SVDriver
+  end
+  begin Type
+    key T32BitFlashRange
+  end
+  begin Type
+    key T8BitFlashRange
+  end
+  begin Type
+    key TADC
+  end
+  begin Type
+    key TADSP
+  end
+  begin Type
+    key TADSPBuffer
+  end
+  begin Type
+    key TADSPConnection
+  end
+  begin Type
+    key TADSPEndpoint
+  end
+  begin Type
+    key TADSPEndpointChunk
+  end
+  begin Type
+    key TADSPRecvBuffer
+  end
+  begin Type
+    key TADSPRecvRequest
+  end
+  begin Type
+    key TADSPSendBuffer
+  end
+  begin Type
+    key TADSPSendRequest
+  end
+  begin Type
+    key TAEHandlerComparer
+  end
+  begin Type
+    key TAEHandlerIterator
+  end
+  begin Type
+    key TAEIdleTimer
+  end
+  begin Type
+    key TAEP
+  end
+  begin Type
+    key TAESystemEvent
+  end
+  begin Type
+    key TAEvent
+  end
+  begin Type
+    key TAEventComparer
+  end
+  begin Type
+    key TAEventHandler
+  end
+  begin Type
+    key TARMNotebook
+  end
+  begin Type
+    key TATA
+  end
+  begin Type
+    key TATABootParamBlock
+  end
+  begin Type
+    key TATADriveBasicInfo
+  end
+  begin Type
+    key TATADriveInfo
+  end
+  begin Type
+    key TATALBACommandBlock
+  end
+  begin Type
+    key TATAPartitionInfo
+  end
+  begin Type
+    key TATARegCommandBlock
+  end
+  begin Type
+    key TATARegisters
+  end
+  begin Type
+    key TATASimple
+  end
+  begin Type
+    key TATAsyncMsg
+  end
+  begin Type
+    key TATP
+  end
+  begin Type
+    key TATPHeader
+  end
+  begin Type
+    key TATPInterface
+  end
+  begin Type
+    key TATPRequestor
+  end
+  begin Type
+    key TATPResponder
+  end
+  begin Type
+    key TATSocket
+  end
+  begin Type
+    key TAbstractSoupIndex
+  end
+  begin Type
+    key TAcquireNodeAddress
+  end
+  begin Type
+    key TAddress
+  end
+  begin Type
+    key TAgentReporter
+  end
+  begin Type
+    key TAirusIterator
+  end
+  begin Type
+    key TAlarmEvent
+  end
+  begin Type
+    key TAlertDialog
+  end
+  begin Type
+    key TAlertEvent
+  end
+  begin Type
+    key TAlertEventHandler
+  end
+  begin Type
+    key TAlertGlyph
+  end
+  begin Type
+    key TAlertItem
+  end
+  begin Type
+    key TAlertManager
+  end
+  begin Type
+    key TAlertScreenInfo
+  end
+  begin Type
+    key TAnimate
+  end
+  begin Type
+    key TAppWorld
+  end
+  begin Type
+    key TAppWorldState
+  end
+  begin Type
+    key TAppleTalkMessage
+  end
+  begin Type
+    key TAppleTalkService
+  end
+  begin Type
+    key TAppleTalkStack
+  end
+  begin Type
+    key TAppleTalkWorld
+  end
+  begin Type
+    key TApplication
+  end
+  begin Type
+    key TArbiter
+  end
+  begin Type
+    key TAreaList
+  end
+  begin Type
+    key TArithmeticCompressor
+  end
+  begin Type
+    key TArithmeticDecompressor
+  end
+  begin Type
+    key TArray
+  end
+  begin Type
+    key TArrayIterator
+  end
+  begin Type
+    key TAsyncDebugLink
+  end
+  begin Type
+    key TAsyncEvent
+  end
+  begin Type
+    key TAsyncSerTool
+  end
+  begin Type
+    key TAsyncService
+  end
+  begin Type
+    key TAsyncServiceMessage
+  end
+  begin Type
+    key TAutoScriptPartHandler
+  end
+  begin Type
+    key TBIOInterface
+  end
+  begin Type
+    key TBackwardLoop
+  end
+  begin Type
+    key TBackwardViewListLoop
+  end
+  begin Type
+    key TBankControlRegister
+  end
+  begin Type
+    key TBaseRegion
+  end
+  begin Type
+    key TBeamer
+  end
+  begin Type
+    key TBeamerCallback
+  end
+  begin Type
+    key TBindCompleteEvent
+  end
+  begin Type
+    key TBits
+  end
+  begin Type
+    key TBitsPort
+  end
+  begin Type
+    key TBookPartHandler
+  end
+  begin Type
+    key TBucketArray
+  end
+  begin Type
+    key TBusyBox
+  end
+  begin Type
+    key TCHDeviceInfo
+  end
+  begin Type
+    key TCHMemModem
+  end
+  begin Type
+    key TCMAAppleTalkAddr
+  end
+  begin Type
+    key TCMANamedAppleTalkAddr
+  end
+  begin Type
+    key TCMAPhoneNumber
+  end
+  begin Type
+    key TCMARouteAddress
+  end
+  begin Type
+    key TCMEvent
+  end
+  begin Type
+    key TCMEventHandler
+  end
+  begin Type
+    key TCMOAppleTalkBuffer
+  end
+  begin Type
+    key TCMOAppleTalkLink
+  end
+  begin Type
+    key TCMOAppleTalkPart
+  end
+  begin Type
+    key TCMOBreakFraming
+  end
+  begin Type
+    key TCMOCTConnectInfo
+  end
+  begin Type
+    key TCMOEndpointName
+  end
+  begin Type
+    key TCMOFaxConfigSendBand
+  end
+  begin Type
+    key TCMOFaxDirection
+  end
+  begin Type
+    key TCMOFaxEnableProgressEvent
+  end
+  begin Type
+    key TCMOFaxEndMessage
+  end
+  begin Type
+    key TCMOFaxLocalId
+  end
+  begin Type
+    key TCMOFaxMinScanLineTime
+  end
+  begin Type
+    key TCMOFaxPageSetUp
+  end
+  begin Type
+    key TCMOFaxPassThru
+  end
+  begin Type
+    key TCMOFaxRemoteId
+  end
+  begin Type
+    key TCMOFaxSessionInfo
+  end
+  begin Type
+    key TCMOFaxStartPage
+  end
+  begin Type
+    key TCMOFlowControlParms
+  end
+  begin Type
+    key TCMOFramedAsyncStats
+  end
+  begin Type
+    key TCMOFramingParms
+  end
+  begin Type
+    key TCMOHandsetManagement
+  end
+  begin Type
+    key TCMOIdleTimer
+  end
+  begin Type
+    key TCMOInputFlowControlParms
+  end
+  begin Type
+    key TCMOIrDAConnectAttrName
+  end
+  begin Type
+    key TCMOIrDAConnectUserData
+  end
+  begin Type
+    key TCMOIrDAConnectionInfo
+  end
+  begin Type
+    key TCMOIrDADiscovery
+  end
+  begin Type
+    key TCMOIrDALinkDisconnect
+  end
+  begin Type
+    key TCMOIrDAReceiveBuffers
+  end
+  begin Type
+    key TCMOKeyboardConfig
+  end
+  begin Type
+    key TCMOListenTimer
+  end
+  begin Type
+    key TCMOLocalTalkMiscConfig
+  end
+  begin Type
+    key TCMOLocalTalkNodeID
+  end
+  begin Type
+    key TCMOLocalTalkStats
+  end
+  begin Type
+    key TCMOMNPAllocate
+  end
+  begin Type
+    key TCMOMNPCompression
+  end
+  begin Type
+    key TCMOMNPDataRate
+  end
+  begin Type
+    key TCMOMNPDebugConnect
+  end
+  begin Type
+    key TCMOMNPSpeedNegotiation
+  end
+  begin Type
+    key TCMOMNPStatistics
+  end
+  begin Type
+    key TCMOModemConnectSpeed
+  end
+  begin Type
+    key TCMOModemConnectType
+  end
+  begin Type
+    key TCMOModemDialing
+  end
+  begin Type
+    key TCMOModemECType
+  end
+  begin Type
+    key TCMOModemFaxCapabilities
+  end
+  begin Type
+    key TCMOModemFaxClass
+  end
+  begin Type
+    key TCMOModemFaxClass1Cap
+  end
+  begin Type
+    key TCMOModemFaxClassesSupported
+  end
+  begin Type
+    key TCMOModemFaxEnabledCaps
+  end
+  begin Type
+    key TCMOModemPrefs
+  end
+  begin Type
+    key TCMOModemPrefs_Ver_1
+  end
+  begin Type
+    key TCMOModemProfile
+  end
+  begin Type
+    key TCMOModemVoiceSupport
+  end
+  begin Type
+    key TCMOOutputFlowControlParms
+  end
+  begin Type
+    key TCMOPCMCIAModemSound
+  end
+  begin Type
+    key TCMOPassiveClaim
+  end
+  begin Type
+    key TCMOPassiveState
+  end
+  begin Type
+    key TCMOSerialBitRate
+  end
+  begin Type
+    key TCMOSerialBreak
+  end
+  begin Type
+    key TCMOSerialBuffers
+  end
+  begin Type
+    key TCMOSerialBytesAvailable
+  end
+  begin Type
+    key TCMOSerialChipSpec
+  end
+  begin Type
+    key TCMOSerialCircuitControl
+  end
+  begin Type
+    key TCMOSerialDTRControl
+  end
+  begin Type
+    key TCMOSerialDiscard
+  end
+  begin Type
+    key TCMOSerialEventEnables
+  end
+  begin Type
+    key TCMOSerialHWChipLoc
+  end
+  begin Type
+    key TCMOSerialHalfDuplex
+  end
+  begin Type
+    key TCMOSerialHardware
+  end
+  begin Type
+    key TCMOSerialIOParms
+  end
+  begin Type
+    key TCMOSerialIOStats
+  end
+  begin Type
+    key TCMOSerialMiscConfig
+  end
+  begin Type
+    key TCMOServiceIdentifier
+  end
+  begin Type
+    key TCMOSlowIRBitBang
+  end
+  begin Type
+    key TCMOSlowIRConnect
+  end
+  begin Type
+    key TCMOSlowIRProtocolType
+  end
+  begin Type
+    key TCMOSlowIRSniff
+  end
+  begin Type
+    key TCMOSlowIRStats
+  end
+  begin Type
+    key TCMOSystemName
+  end
+  begin Type
+    key TCMOTAPIAnswer
+  end
+  begin Type
+    key TCMOTAPIDisconnect
+  end
+  begin Type
+    key TCMOTAPIForward
+  end
+  begin Type
+    key TCMOTAPIForwardClear
+  end
+  begin Type
+    key TCMOTAPIHold
+  end
+  begin Type
+    key TCMOTAPIOutGoing
+  end
+  begin Type
+    key TCMOTAPISendDigit
+  end
+  begin Type
+    key TCMOTAPIService
+  end
+  begin Type
+    key TCMOTAPISpeaker
+  end
+  begin Type
+    key TCMOTAPITransfer
+  end
+  begin Type
+    key TCMOTAPIUnhold
+  end
+  begin Type
+    key TCMOToolSpecificOptions
+  end
+  begin Type
+    key TCMOTransportInfo
+  end
+  begin Type
+    key TCMSCPAsyncMessage
+  end
+  begin Type
+    key TCMService
+  end
+  begin Type
+    key TCMSystemEventHandler
+  end
+  begin Type
+    key TCMWorld
+  end
+  begin Type
+    key TCPAbortTuple
+  end
+  begin Type
+    key TCPChangeSpeedRequestTuple
+  end
+  begin Type
+    key TCPDeviceIdTuple
+  end
+  begin Type
+    key TCPEOMTuple
+  end
+  begin Type
+    key TCPNewtonIdTuple
+  end
+  begin Type
+    key TCPReadMessage
+  end
+  begin Type
+    key TCPRequestIdTuple
+  end
+  begin Type
+    key TCPRequestServiceTuple
+  end
+  begin Type
+    key TCPServiceInfoRequestTuple
+  end
+  begin Type
+    key TCPServiceInfoResponseTuple
+  end
+  begin Type
+    key TCPTuple
+  end
+  begin Type
+    key TCPWriteMessage
+  end
+  begin Type
+    key TCRC16
+  end
+  begin Type
+    key TCRelocationGenerator
+  end
+  begin Type
+    key TCRelocator
+  end
+  begin Type
+    key TCachedReadStore
+  end
+  begin Type
+    key TCallbackCompressor
+  end
+  begin Type
+    key TCallbackDecompressor
+  end
+  begin Type
+    key TCardATALoader
+  end
+  begin Type
+    key TCardAlertDialog
+  end
+  begin Type
+    key TCardAlertEvent
+  end
+  begin Type
+    key TCardAsyncMsg
+  end
+  begin Type
+    key TCardCISIterator
+  end
+  begin Type
+    key TCardConfiguration
+  end
+  begin Type
+    key TCardDevice
+  end
+  begin Type
+    key TCardDomains
+  end
+  begin Type
+    key TCardEventHandler
+  end
+  begin Type
+    key TCardFaultStates
+  end
+  begin Type
+    key TCardFunction
+  end
+  begin Type
+    key TCardHandler
+  end
+  begin Type
+    key TCardLongLink
+  end
+  begin Type
+    key TCardMessage
+  end
+  begin Type
+    key TCardPCMCIA
+  end
+  begin Type
+    key TCardPackage
+  end
+  begin Type
+    key TCardPartHandler
+  end
+  begin Type
+    key TCardPipe
+  end
+  begin Type
+    key TCardProcessor
+  end
+  begin Type
+    key TCardProcessorEventHandler
+  end
+  begin Type
+    key TCardReinsertAlertDialog
+  end
+  begin Type
+    key TCardReinsertionInfo
+  end
+  begin Type
+    key TCardServer
+  end
+  begin Type
+    key TCardSocket
+  end
+  begin Type
+    key TCardSocketState
+  end
+  begin Type
+    key TCardSystemEventHandler
+  end
+  begin Type
+    key TCircleBuf
+  end
+  begin Type
+    key TClassInfo
+  end
+  begin Type
+    key TClassInfoComparator
+  end
+  begin Type
+    key TClassInfoRegistry
+  end
+  begin Type
+    key TClassInfoRegistryImpl
+  end
+  begin Type
+    key TClassOneModem
+  end
+  begin Type
+    key TClassOneModemCmdReply
+  end
+  begin Type
+    key TClickEventUnit
+  end
+  begin Type
+    key TClickRecognizer
+  end
+  begin Type
+    key TClickUnit
+  end
+  begin Type
+    key TClipboard
+  end
+  begin Type
+    key TClipper
+  end
+  begin Type
+    key TCloseResponderMessage
+  end
+  begin Type
+    key TCodecChannel
+  end
+  begin Type
+    key TCollectCursor
+  end
+  begin Type
+    key TCommPartHandler
+  end
+  begin Type
+    key TCommServer
+  end
+  begin Type
+    key TCommTool
+  end
+  begin Type
+    key TCommToolAEvent
+  end
+  begin Type
+    key TCommToolAbortPB
+  end
+  begin Type
+    key TCommToolBindPB
+  end
+  begin Type
+    key TCommToolBindReply
+  end
+  begin Type
+    key TCommToolBindRequest
+  end
+  begin Type
+    key TCommToolConnectPB
+  end
+  begin Type
+    key TCommToolConnectReply
+  end
+  begin Type
+    key TCommToolConnectRequest
+  end
+  begin Type
+    key TCommToolControlPB
+  end
+  begin Type
+    key TCommToolControlRequest
+  end
+  begin Type
+    key TCommToolDisconnectPB
+  end
+  begin Type
+    key TCommToolDisconnectRequest
+  end
+  begin Type
+    key TCommToolEventPB
+  end
+  begin Type
+    key TCommToolGetEventReply
+  end
+  begin Type
+    key TCommToolGetPB
+  end
+  begin Type
+    key TCommToolGetProtAddrRequest
+  end
+  begin Type
+    key TCommToolGetReply
+  end
+  begin Type
+    key TCommToolGetRequest
+  end
+  begin Type
+    key TCommToolKillRequest
+  end
+  begin Type
+    key TCommToolMsgContainer
+  end
+  begin Type
+    key TCommToolOpenReply
+  end
+  begin Type
+    key TCommToolOpenRequest
+  end
+  begin Type
+    key TCommToolOptMgmtPB
+  end
+  begin Type
+    key TCommToolOptionInfo
+  end
+  begin Type
+    key TCommToolOptionMgmtRequest
+  end
+  begin Type
+    key TCommToolPB
+  end
+  begin Type
+    key TCommToolProtocol
+  end
+  begin Type
+    key TCommToolPutPB
+  end
+  begin Type
+    key TCommToolPutReply
+  end
+  begin Type
+    key TCommToolPutRequest
+  end
+  begin Type
+    key TCommToolReply
+  end
+  begin Type
+    key TCommToolResArbRequest
+  end
+  begin Type
+    key TCommToolStatusRequest
+  end
+  begin Type
+    key TCommand
+  end
+  begin Type
+    key TCompiler
+  end
+  begin Type
+    key TCompletion
+  end
+  begin Type
+    key TCompletionClass
+  end
+  begin Type
+    key TCompressVars
+  end
+  begin Type
+    key TCompressor
+  end
+  begin Type
+    key TConnComparer
+  end
+  begin Type
+    key TConnectCompleteEvent
+  end
+  begin Type
+    key TConnectedDevice
+  end
+  begin Type
+    key TConnectionEnd
+  end
+  begin Type
+    key TConnectionEndEntry
+  end
+  begin Type
+    key TContainerHilite
+  end
+  begin Type
+    key TContainerView
+  end
+  begin Type
+    key TController
+  end
+  begin Type
+    key TCopyPageAfterStackCollisionParams
+  end
+  begin Type
+    key TCurrentBank
+  end
+  begin Type
+    key TCursor
+  end
+  begin Type
+    key TCursorArray
+  end
+  begin Type
+    key TDArray
+  end
+  begin Type
+    key TDDP
+  end
+  begin Type
+    key TDDPPacketLong
+  end
+  begin Type
+    key TDMAChannel
+  end
+  begin Type
+    key TDMAChannelDiscriptor
+  end
+  begin Type
+    key TDMAManager
+  end
+  begin Type
+    key TDMode
+  end
+  begin Type
+    key TDTMFCodec
+  end
+  begin Type
+    key TDataView
+  end
+  begin Type
+    key TDate
+  end
+  begin Type
+    key TDecompressor
+  end
+  begin Type
+    key TDefaultEvent
+  end
+  begin Type
+    key TDelayTimer
+  end
+  begin Type
+    key TDictChain
+  end
+  begin Type
+    key TDictPartHandler
+  end
+  begin Type
+    key TDisconnectEvent
+  end
+  begin Type
+    key TDocker
+  end
+  begin Type
+    key TDockerDynArray
+  end
+  begin Type
+    key TDomain
+  end
+  begin Type
+    key TDotPrinter
+  end
+  begin Type
+    key TDotPrinterDriver
+  end
+  begin Type
+    key TDoubleQContainer
+  end
+  begin Type
+    key TDoubleQItem
+  end
+  begin Type
+    key TDragInfo
+  end
+  begin Type
+    key TDynArray
+  end
+  begin Type
+    key TEWorldClient
+  end
+  begin Type
+    key TEdgeListDomain
+  end
+  begin Type
+    key TEdgeListUnit
+  end
+  begin Type
+    key TEditView
+  end
+  begin Type
+    key TEncodingMap
+  end
+  begin Type
+    key TEndpoint
+  end
+  begin Type
+    key TEndpointClient
+  end
+  begin Type
+    key TEndpointEvent
+  end
+  begin Type
+    key TEndpointEventHandler
+  end
+  begin Type
+    key TEndpointPipe
+  end
+  begin Type
+    key TEndpointTimer
+  end
+  begin Type
+    key TEnvironment
+  end
+  begin Type
+    key TEphemeralTracker
+  end
+  begin Type
+    key TErasePersistentDataAlert
+  end
+  begin Type
+    key TEventCollector
+  end
+  begin Type
+    key TEventRecognizer
+  end
+  begin Type
+    key TExtNetworkTuple
+  end
+  begin Type
+    key TExtPageTracker
+  end
+  begin Type
+    key TExtPageTrackerMgr
+  end
+  begin Type
+    key TExternalNewtEvent
+  end
+  begin Type
+    key TExternalNewtEventHandler
+  end
+  begin Type
+    key TExternalNewtEventListHandlerTester
+  end
+  begin Type
+    key TExternalNewtEventListTypeTester
+  end
+  begin Type
+    key TEzEndpointPipe
+  end
+  begin Type
+    key TEzPipeProtocol
+  end
+  begin Type
+    key TFIQTimer
+  end
+  begin Type
+    key TFaxDriver
+  end
+  begin Type
+    key TFaxDriverData
+  end
+  begin Type
+    key TFaxLineBuf
+  end
+  begin Type
+    key TFaxService
+  end
+  begin Type
+    key TFaxTool
+  end
+  begin Type
+    key TFaxToolInterface
+  end
+  begin Type
+    key TFilter
+  end
+  begin Type
+    key TFlash
+  end
+  begin Type
+    key TFlashAMD
+  end
+  begin Type
+    key TFlashBlock
+  end
+  begin Type
+    key TFlashDriver
+  end
+  begin Type
+    key TFlashIterator
+  end
+  begin Type
+    key TFlashPhysBlock
+  end
+  begin Type
+    key TFlashRange
+  end
+  begin Type
+    key TFlashSeries2
+  end
+  begin Type
+    key TFlashStore
+  end
+  begin Type
+    key TFlashStoreLookupCache
+  end
+  begin Type
+    key TFlashTracker
+  end
+  begin Type
+    key TFontPart
+  end
+  begin Type
+    key TForkWorld
+  end
+  begin Type
+    key TFormPartHandler
+  end
+  begin Type
+    key TFramePartHandler
+  end
+  begin Type
+    key TFrameRelocationGenerator
+  end
+  begin Type
+    key TFrameSoundCallback
+  end
+  begin Type
+    key TFrameSoundChannel
+  end
+  begin Type
+    key TFramedAsyncSerTool
+  end
+  begin Type
+    key TFramedAsyncService
+  end
+  begin Type
+    key TFunctionState
+  end
+  begin Type
+    key TGCSafeList
+  end
+  begin Type
+    key TGCSafeSortedList
+  end
+  begin Type
+    key TGPIOInterface
+  end
+  begin Type
+    key TGSMCodec
+  end
+  begin Type
+    key TGaugeView
+  end
+  begin Type
+    key TGeneralShapeDomain
+  end
+  begin Type
+    key TGeneralShapeUnit
+  end
+  begin Type
+    key TGeneralizedTestFnVar
+  end
+  begin Type
+    key TGeoPortDebugLink
+  end
+  begin Type
+    key TGestaltRequest
+  end
+  begin Type
+    key TGestaltSystemInfo
+  end
+  begin Type
+    key TGetConnectionIdMessage
+  end
+  begin Type
+    key TGetProtAddrCompleteEvent
+  end
+  begin Type
+    key TGetRouterAddressReply
+  end
+  begin Type
+    key TGetZoneNameReply
+  end
+  begin Type
+    key TGrayShrink
+  end
+  begin Type
+    key THMOGeoPortDebugConfig
+  end
+  begin Type
+    key THMOHiSpeedClockOption
+  end
+  begin Type
+    key THMOSerDebugConfig
+  end
+  begin Type
+    key THMOSerIRLinkConfig
+  end
+  begin Type
+    key THMOSerialPCMCIAHardware
+  end
+  begin Type
+    key THMOSerialVoyagerHardware
+  end
+  begin Type
+    key THeapAllocator
+  end
+  begin Type
+    key THeapDomain
+  end
+  begin Type
+    key THelpOutline
+  end
+  begin Type
+    key THermesIRControl
+  end
+  begin Type
+    key THilite
+  end
+  begin Type
+    key THistoryCollector
+  end
+  begin Type
+    key TIASAttribute
+  end
+  begin Type
+    key TIASClass
+  end
+  begin Type
+    key TIASClient
+  end
+  begin Type
+    key TIASElement
+  end
+  begin Type
+    key TIASNamedList
+  end
+  begin Type
+    key TIASServer
+  end
+  begin Type
+    key TIASService
+  end
+  begin Type
+    key TICHandler
+  end
+  begin Type
+    key TICache
+  end
+  begin Type
+    key TIDServer
+  end
+  begin Type
+    key TIMACodec
+  end
+  begin Type
+    key TIRQTimer
+  end
+  begin Type
+    key TIRService
+  end
+  begin Type
+    key TIdleTimer
+  end
+  begin Type
+    key TInkWordGlyph
+  end
+  begin Type
+    key TInker
+  end
+  begin Type
+    key TInkerEventHandler
+  end
+  begin Type
+    key TInputStream
+  end
+  begin Type
+    key TInstalledPart
+  end
+  begin Type
+    key TInterConnectEvent
+  end
+  begin Type
+    key TInterpreter
+  end
+  begin Type
+    key TIntrpStack
+  end
+  begin Type
+    key TIrCRC16
+  end
+  begin Type
+    key TIrDAService
+  end
+  begin Type
+    key TIrDATool
+  end
+  begin Type
+    key TIrDataXferEvent
+  end
+  begin Type
+    key TIrDscInfo
+  end
+  begin Type
+    key TIrEvent
+  end
+  begin Type
+    key TIrGlue
+  end
+  begin Type
+    key TIrLAP
+  end
+  begin Type
+    key TIrLAPConn
+  end
+  begin Type
+    key TIrLAPPutBuffer
+  end
+  begin Type
+    key TIrLMP
+  end
+  begin Type
+    key TIrLSAPConnEvent
+  end
+  begin Type
+    key TIrProbeTool
+  end
+  begin Type
+    key TIrQOS
+  end
+  begin Type
+    key TIrSIR
+  end
+  begin Type
+    key TIrStream
+  end
+  begin Type
+    key TKDomain
+  end
+  begin Type
+    key TKernelObject
+  end
+  begin Type
+    key TKeyboardService
+  end
+  begin Type
+    key TKeyboardTool
+  end
+  begin Type
+    key TKeyboardView
+  end
+  begin Type
+    key TKillEvent
+  end
+  begin Type
+    key TKillEventHandler
+  end
+  begin Type
+    key TKybdExtension
+  end
+  begin Type
+    key TLMPDUHeader
+  end
+  begin Type
+    key TLOCallback
+  end
+  begin Type
+    key TLOCallbackInfo
+  end
+  begin Type
+    key TLOPackageStore
+  end
+  begin Type
+    key TLSAPConn
+  end
+  begin Type
+    key TLSEndpointClient
+  end
+  begin Type
+    key TLZCallbackCompressor
+  end
+  begin Type
+    key TLZCompressor
+  end
+  begin Type
+    key TLZDecompressor
+  end
+  begin Type
+    key TLZRelocStoreDecompressor
+  end
+  begin Type
+    key TLZStoreCompander
+  end
+  begin Type
+    key TLZStoreDecompressor
+  end
+  begin Type
+    key TLaserWriterLSDriver
+  end
+  begin Type
+    key TLibrarian
+  end
+  begin Type
+    key TLicenseeVAddress
+  end
+  begin Type
+    key TLink
+  end
+  begin Type
+    key TLinkComparer
+  end
+  begin Type
+    key TLinkMgr
+  end
+  begin Type
+    key TLinkPacketBuffer
+  end
+  begin Type
+    key TListLoop
+  end
+  begin Type
+    key TListView
+  end
+  begin Type
+    key TLittlePhys
+  end
+  begin Type
+    key TLiveInker
+  end
+  begin Type
+    key TLoader
+  end
+  begin Type
+    key TLocalTalkService
+  end
+  begin Type
+    key TLocalTalkTool
+  end
+  begin Type
+    key TLookupGrading
+  end
+  begin Type
+    key TLookupNames
+  end
+  begin Type
+    key TLookupNamesAgainMessage
+  end
+  begin Type
+    key TLookupNamesMessage
+  end
+  begin Type
+    key TLookupNamesRegisteringMessage
+  end
+  begin Type
+    key TLookupRetryInfo
+  end
+  begin Type
+    key TLoopState
+  end
+  begin Type
+    key TLrgObjStore
+  end
+  begin Type
+    key TMNP
+  end
+  begin Type
+    key TMNPClass5Vars
+  end
+  begin Type
+    key TMNPService
+  end
+  begin Type
+    key TMNP_CCB
+  end
+  begin Type
+    key TMathExpView
+  end
+  begin Type
+    key TMathLineView
+  end
+  begin Type
+    key TMathOpView
+  end
+  begin Type
+    key TMeetingView
+  end
+  begin Type
+    key TMemArchManager
+  end
+  begin Type
+    key TMemoryAllocator
+  end
+  begin Type
+    key TMemoryObject
+  end
+  begin Type
+    key TMessageQueue
+  end
+  begin Type
+    key TMessageTimer
+  end
+  begin Type
+    key TModemService
+  end
+  begin Type
+    key TMonitor
+  end
+  begin Type
+    key TMonthView
+  end
+  begin Type
+    key TMsg
+  end
+  begin Type
+    key TMuLawCodec
+  end
+  begin Type
+    key TMuxStore
+  end
+  begin Type
+    key TMuxStoreMonitor
+  end
+  begin Type
+    key TMuxTool
+  end
+  begin Type
+    key TNBP
+  end
+  begin Type
+    key TNBPEntityName
+  end
+  begin Type
+    key TNBPHeader
+  end
+  begin Type
+    key TNBPLookup
+  end
+  begin Type
+    key TNBPLookupEventHandler
+  end
+  begin Type
+    key TNBPLookupManager
+  end
+  begin Type
+    key TNBPName
+  end
+  begin Type
+    key TNBPNameEntry
+  end
+  begin Type
+    key TNBPNameTable
+  end
+  begin Type
+    key TNBPReplyBuffer
+  end
+  begin Type
+    key TNBPReplyItem
+  end
+  begin Type
+    key TNBPRetryInfo
+  end
+  begin Type
+    key TNBPString
+  end
+  begin Type
+    key TNBPTupleHeader
+  end
+  begin Type
+    key TNBPUpdateBuffer
+  end
+  begin Type
+    key TNBPZoneString
+  end
+  begin Type
+    key TNSConfigServer
+  end
+  begin Type
+    key TNSDebugAPI
+  end
+  begin Type
+    key TNTKEndpointClient
+  end
+  begin Type
+    key TNTKNub
+  end
+  begin Type
+    key TNTKTask
+  end
+  begin Type
+    key TNameRequest
+  end
+  begin Type
+    key TNameServer
+  end
+  begin Type
+    key TNameServerReply
+  end
+  begin Type
+    key TNameServerRequest
+  end
+  begin Type
+    key TNewCardAsyncMsg
+  end
+  begin Type
+    key TNewCardEvent
+  end
+  begin Type
+    key TNewInternalFlash
+  end
+  begin Type
+    key TNewScriptEndpointClient
+  end
+  begin Type
+    key TNewStoreEvent
+  end
+  begin Type
+    key TNewtCardEventHandler
+  end
+  begin Type
+    key TNewtEventHandler
+  end
+  begin Type
+    key TNewtTestScriptEventHandler
+  end
+  begin Type
+    key TNewtWorld
+  end
+  begin Type
+    key TNoReuseAllocator
+  end
+  begin Type
+    key TNodeCache
+  end
+  begin Type
+    key TNotebook
+  end
+  begin Type
+    key TNumberParser
+  end
+  begin Type
+    key TNumberType
+  end
+  begin Type
+    key TOSCheckSum
+  end
+  begin Type
+    key TOSErrorAlertDialog
+  end
+  begin Type
+    key TObjRef
+  end
+  begin Type
+    key TObjTextDecompressor
+  end
+  begin Type
+    key TObjectHeap
+  end
+  begin Type
+    key TObjectIterator
+  end
+  begin Type
+    key TObjectManager
+  end
+  begin Type
+    key TObjectNameEntry
+  end
+  begin Type
+    key TObjectNameList
+  end
+  begin Type
+    key TObjectPtr
+  end
+  begin Type
+    key TObjectReader
+  end
+  begin Type
+    key TObjectTable
+  end
+  begin Type
+    key TObjectTableIterator
+  end
+  begin Type
+    key TObjectWriter
+  end
+  begin Type
+    key TOldWordHintsHandler
+  end
+  begin Type
+    key TOnlineService
+  end
+  begin Type
+    key TOpenConnection
+  end
+  begin Type
+    key TOpenConnectionReply
+  end
+  begin Type
+    key TOpenResponderMessage
+  end
+  begin Type
+    key TOpenSocketMessage
+  end
+  begin Type
+    key TOptMgmtCompleteEvent
+  end
+  begin Type
+    key TOption
+  end
+  begin Type
+    key TOptionArray
+  end
+  begin Type
+    key TOptionExtended
+  end
+  begin Type
+    key TOptionIterator
+  end
+  begin Type
+    key TOutline
+  end
+  begin Type
+    key TP3OPassThru
+  end
+  begin Type
+    key TP3Packet
+  end
+  begin Type
+    key TP3Service
+  end
+  begin Type
+    key TP3Tool
+  end
+  begin Type
+    key TPAP
+  end
+  begin Type
+    key TPAPCloseConnPacket
+  end
+  begin Type
+    key TPAPInterface
+  end
+  begin Type
+    key TPAPOpenConnPacket
+  end
+  begin Type
+    key TPAPSendDataPacket
+  end
+  begin Type
+    key TPAPTimer
+  end
+  begin Type
+    key TPCMCIA20Parser
+  end
+  begin Type
+    key TPCommTool
+  end
+  begin Type
+    key TPMIterator
+  end
+  begin Type
+    key TPMReleasePagesForFaultHandling
+  end
+  begin Type
+    key TPSPAPDriver
+  end
+  begin Type
+    key TPSPrinter
+  end
+  begin Type
+    key TPSPrinterDriver
+  end
+  begin Type
+    key TPSSEventHandler
+  end
+  begin Type
+    key TPSSManager
+  end
+  begin Type
+    key TPSSSysEventHandler
+  end
+  begin Type
+    key TPackageBlock
+  end
+  begin Type
+    key TPackageEventHandler
+  end
+  begin Type
+    key TPackageIterator
+  end
+  begin Type
+    key TPackageLoader
+  end
+  begin Type
+    key TPackageLoaderEventHandler
+  end
+  begin Type
+    key TPackageManager
+  end
+  begin Type
+    key TPackageStore
+  end
+  begin Type
+    key TPackageStorePartHandler
+  end
+  begin Type
+    key TPacketBuffer
+  end
+  begin Type
+    key TPacketMessage
+  end
+  begin Type
+    key TPageListDescription
+  end
+  begin Type
+    key TPageManager
+  end
+  begin Type
+    key TPageTableManager
+  end
+  begin Type
+    key TPageTracker
+  end
+  begin Type
+    key TParagraphHilite
+  end
+  begin Type
+    key TParagraphView
+  end
+  begin Type
+    key TParseBuffer
+  end
+  begin Type
+    key TPartEventHandler
+  end
+  begin Type
+    key TPartHandler
+  end
+  begin Type
+    key TPattern
+  end
+  begin Type
+    key TPhys
+  end
+  begin Type
+    key TPickView
+  end
+  begin Type
+    key TPictureView
+  end
+  begin Type
+    key TPinPad
+  end
+  begin Type
+    key TPipeApp
+  end
+  begin Type
+    key TPipeEvent
+  end
+  begin Type
+    key TPipeEventHandler
+  end
+  begin Type
+    key TPixelMapAntialias
+  end
+  begin Type
+    key TPixelMapCompander
+  end
+  begin Type
+    key TPixelObj
+  end
+  begin Type
+    key TPkBackupEvent
+  end
+  begin Type
+    key TPkBaseEvent
+  end
+  begin Type
+    key TPkBeginLoadEvent
+  end
+  begin Type
+    key TPkPartInstallEvent
+  end
+  begin Type
+    key TPkPartInstallEventReply
+  end
+  begin Type
+    key TPkPartRemoveEvent
+  end
+  begin Type
+    key TPkRegisterEvent
+  end
+  begin Type
+    key TPkRemoveEvent
+  end
+  begin Type
+    key TPkSafeToDeactivate
+  end
+  begin Type
+    key TPkUnregisterEvent
+  end
+  begin Type
+    key TPlatformDriver
+  end
+  begin Type
+    key TPoint
+  end
+  begin Type
+    key TPolygonHilite
+  end
+  begin Type
+    key TPolygonView
+  end
+  begin Type
+    key TPort
+  end
+  begin Type
+    key TPowerEvent
+  end
+  begin Type
+    key TPowerEventHandler
+  end
+  begin Type
+    key TPowerManager
+  end
+  begin Type
+    key TPowerManagerEvent
+  end
+  begin Type
+    key TPrDriverPart
+  end
+  begin Type
+    key TPrecedentsForReading
+  end
+  begin Type
+    key TPrecedentsForWriting
+  end
+  begin Type
+    key TPrecedentsVar
+  end
+  begin Type
+    key TPrintView
+  end
+  begin Type
+    key TPrinter
+  end
+  begin Type
+    key TPrivatePackageIterator
+  end
+  begin Type
+    key TProcessorState
+  end
+  begin Type
+    key TProtoComparer
+  end
+  begin Type
+    key TProtocol
+  end
+  begin Type
+    key TProtocolHandler
+  end
+  begin Type
+    key TPseudoSyncState
+  end
+  begin Type
+    key TQDLibraryDriver
+  end
+  begin Type
+    key TQDScaler
+  end
+  begin Type
+    key TRAMTable
+  end
+  begin Type
+    key TREPEventHandler
+  end
+  begin Type
+    key TROMDomainManager1K
+  end
+  begin Type
+    key TROMREXCheckSums
+  end
+  begin Type
+    key TRPCInfo
+  end
+  begin Type
+    key TRTMP
+  end
+  begin Type
+    key TRTMPComparer
+  end
+  begin Type
+    key TRTMPHeader
+  end
+  begin Type
+    key TRTMPTableEntry
+  end
+  begin Type
+    key TRawKeyIterator
+  end
+  begin Type
+    key TRcvCompleteEvent
+  end
+  begin Type
+    key TRealTimeClock
+  end
+  begin Type
+    key TRecArea
+  end
+  begin Type
+    key TRecObject
+  end
+  begin Type
+    key TRecUnit
+  end
+  begin Type
+    key TReceiveDatagramMessage
+  end
+  begin Type
+    key TRecognitionManager
+  end
+  begin Type
+    key TRecognizer
+  end
+  begin Type
+    key TRecognizerList
+  end
+  begin Type
+    key TRect
+  end
+  begin Type
+    key TRectangularRegion
+  end
+  begin Type
+    key TRedrawScreenEvent
+  end
+  begin Type
+    key TRefStack
+  end
+  begin Type
+    key TRefStructStack
+  end
+  begin Type
+    key TRegion
+  end
+  begin Type
+    key TRegionStruct
+  end
+  begin Type
+    key TRegionVar
+  end
+  begin Type
+    key TRegisterName
+  end
+  begin Type
+    key TRegisterNameMessage
+  end
+  begin Type
+    key TRegisterPending
+  end
+  begin Type
+    key TRegistryInfo
+  end
+  begin Type
+    key TRemoteView
+  end
+  begin Type
+    key TResArbitrationInfo
+  end
+  begin Type
+    key TResArbitrationRequest
+  end
+  begin Type
+    key TResOwnerInfo
+  end
+  begin Type
+    key TReservedBlockAccessor
+  end
+  begin Type
+    key TReservedBlockHandler
+  end
+  begin Type
+    key TReservedContiguousMemory
+  end
+  begin Type
+    key TResistiveTablet
+  end
+  begin Type
+    key TResponder
+  end
+  begin Type
+    key TResponderSocket
+  end
+  begin Type
+    key TResponseManager
+  end
+  begin Type
+    key TRichString
+  end
+  begin Type
+    key TRing
+  end
+  begin Type
+    key TRootView
+  end
+  begin Type
+    key TRosRecognizer
+  end
+  begin Type
+    key TRunScriptEvent
+  end
+  begin Type
+    key TSCPEvent
+  end
+  begin Type
+    key TSCPLoader
+  end
+  begin Type
+    key TSCPLoaderEventHandler
+  end
+  begin Type
+    key TSIUnit
+  end
+  begin Type
+    key TSStroke
+  end
+  begin Type
+    key TSWGroupDriver
+  end
+  begin Type
+    key TSaveScreenBits
+  end
+  begin Type
+    key TScheduler
+  end
+  begin Type
+    key TScreenDriver
+  end
+  begin Type
+    key TScriptEndpointClient
+  end
+  begin Type
+    key TScrubRecognizer
+  end
+  begin Type
+    key TSemaphore
+  end
+  begin Type
+    key TSemaphoreGroup
+  end
+  begin Type
+    key TSemaphoreOpList
+  end
+  begin Type
+    key TSendRequestAgainMessage
+  end
+  begin Type
+    key TSendRequestMessage
+  end
+  begin Type
+    key TSendResponsesFormat
+  end
+  begin Type
+    key TSendResponsesMessage
+  end
+  begin Type
+    key TSendSystemEvent
+  end
+  begin Type
+    key TSerTool
+  end
+  begin Type
+    key TSerToolReply
+  end
+  begin Type
+    key TSerialChip
+  end
+  begin Type
+    key TSerialChip16450
+  end
+  begin Type
+    key TSerialChipVoyager
+  end
+  begin Type
+    key TSerialDMAEngine
+  end
+  begin Type
+    key TSerialDebugLink
+  end
+  begin Type
+    key TSerialEndpoint
+  end
+  begin Type
+    key TSerialNumberROM
+  end
+  begin Type
+    key TServiceInfo
+  end
+  begin Type
+    key TSetZoneNameMessage
+  end
+  begin Type
+    key TShapeRecognizer
+  end
+  begin Type
+    key TSharedMem
+  end
+  begin Type
+    key TSharedMemMsg
+  end
+  begin Type
+    key TSharedWriteElement
+  end
+  begin Type
+    key TSharpIRTool
+  end
+  begin Type
+    key TShutdownMessage
+  end
+  begin Type
+    key TSimpleCRelocator
+  end
+  begin Type
+    key TSimpleRelocStoreDecompressor
+  end
+  begin Type
+    key TSimpleStoreCompander
+  end
+  begin Type
+    key TSimpleStoreDecompressor
+  end
+  begin Type
+    key TSingleQContainer
+  end
+  begin Type
+    key TSliderView
+  end
+  begin Type
+    key TSndCompleteEvent
+  end
+  begin Type
+    key TSniffIRTool
+  end
+  begin Type
+    key TSocket
+  end
+  begin Type
+    key TSocketComparer
+  end
+  begin Type
+    key TSocketInt
+  end
+  begin Type
+    key TSocketIntFlags
+  end
+  begin Type
+    key TSocketPowerLevels
+  end
+  begin Type
+    key TSortTables
+  end
+  begin Type
+    key TSortingTable
+  end
+  begin Type
+    key TSoundChannel
+  end
+  begin Type
+    key TSoundCodec
+  end
+  begin Type
+    key TSoundDriverInfo
+  end
+  begin Type
+    key TSoundPowerHandler
+  end
+  begin Type
+    key TSoundServer
+  end
+  begin Type
+    key TSoundServerHandler
+  end
+  begin Type
+    key TSoupIndex
+  end
+  begin Type
+    key TSplashScreenInfo
+  end
+  begin Type
+    key TStack
+  end
+  begin Type
+    key TStackInfo
+  end
+  begin Type
+    key TStackManager
+  end
+  begin Type
+    key TStackObject
+  end
+  begin Type
+    key TStackPage
+  end
+  begin Type
+    key TStartInfo
+  end
+  begin Type
+    key TStartupDriver
+  end
+  begin Type
+    key TStdWordUnit
+  end
+  begin Type
+    key TStdioInputStream
+  end
+  begin Type
+    key TStore
+  end
+  begin Type
+    key TStoreCompander
+  end
+  begin Type
+    key TStoreCompanderWrapper
+  end
+  begin Type
+    key TStoreDecompressor
+  end
+  begin Type
+    key TStoreDriver
+  end
+  begin Type
+    key TStoreHashTable
+  end
+  begin Type
+    key TStoreHashTableIterator
+  end
+  begin Type
+    key TStoreMonitor
+  end
+  begin Type
+    key TStoreObjectReader
+  end
+  begin Type
+    key TStoreObjectWriter
+  end
+  begin Type
+    key TStorePackageWriter
+  end
+  begin Type
+    key TStoreReadPipe
+  end
+  begin Type
+    key TStoreWrapper
+  end
+  begin Type
+    key TStoreWritePipe
+  end
+  begin Type
+    key TStrXrDomain
+  end
+  begin Type
+    key TStrXrUnit
+  end
+  begin Type
+    key TStreamingCallBack
+  end
+  begin Type
+    key TStreamingEndpointClient
+  end
+  begin Type
+    key TString255
+  end
+  begin Type
+    key TString32
+  end
+  begin Type
+    key TStringInputStream
+  end
+  begin Type
+    key TStringToSort
+  end
+  begin Type
+    key TStroke
+  end
+  begin Type
+    key TStrokeDomain
+  end
+  begin Type
+    key TStrokePublic
+  end
+  begin Type
+    key TStrokeUnit
+  end
+  begin Type
+    key TStyleSave
+  end
+  begin Type
+    key TSubArrayOption
+  end
+  begin Type
+    key TSysEventRequest
+  end
+  begin Type
+    key TSystemEvent
+  end
+  begin Type
+    key TSystemEventHandler
+  end
+  begin Type
+    key TT30Capabilities
+  end
+  begin Type
+    key TT4FaxLine
+  end
+  begin Type
+    key TTNode
+  end
+  begin Type
+    key TTabletDriver
+  end
+  begin Type
+    key TTask
+  end
+  begin Type
+    key TTaskContainer
+  end
+  begin Type
+    key TTaskQItem
+  end
+  begin Type
+    key TTaskQueue
+  end
+  begin Type
+    key TTaskSafeRingBuffer
+  end
+  begin Type
+    key TTaskSafeRingPipe
+  end
+  begin Type
+    key TTestAgent
+  end
+  begin Type
+    key TTestAgentEvent
+  end
+  begin Type
+    key TTestAgentEventHandler
+  end
+  begin Type
+    key TTestCase
+  end
+  begin Type
+    key TTestCaseTask
+  end
+  begin Type
+    key TTestCaseTaskEvent
+  end
+  begin Type
+    key TTestCaseTaskEventHandler
+  end
+  begin Type
+    key TTestCommandQueue
+  end
+  begin Type
+    key TTestReporter
+  end
+  begin Type
+    key TTestStoreFileList
+  end
+  begin Type
+    key TTextView
+  end
+  begin Type
+    key TTile
+  end
+  begin Type
+    key TTime
+  end
+  begin Type
+    key TTimerElement
+  end
+  begin Type
+    key TTimerEngine
+  end
+  begin Type
+    key TTimerMessage
+  end
+  begin Type
+    key TTimerPort
+  end
+  begin Type
+    key TTimerQueue
+  end
+  begin Type
+    key TTransaction
+  end
+  begin Type
+    key TTransactionManager
+  end
+  begin Type
+    key TTransactionResponseBuffer
+  end
+  begin Type
+    key TTransactionResponses
+  end
+  begin Type
+    key TTransform
+  end
+  begin Type
+    key TTrend
+  end
+  begin Type
+    key TTupleEquiv
+  end
+  begin Type
+    key TTypeAssoc
+  end
+  begin Type
+    key TTypeList
+  end
+  begin Type
+    key TUAsyncMessage
+  end
+  begin Type
+    key TUCTTable
+  end
+  begin Type
+    key TUConfigServer
+  end
+  begin Type
+    key TUDomain
+  end
+  begin Type
+    key TUDomainManager
+  end
+  begin Type
+    key TUEnvironment
+  end
+  begin Type
+    key TUGestalt
+  end
+  begin Type
+    key TULockingSemaphore
+  end
+  begin Type
+    key TULockingSemaphoreGrabber
+  end
+  begin Type
+    key TUMonitor
+  end
+  begin Type
+    key TUMsgToken
+  end
+  begin Type
+    key TUNameServer
+  end
+  begin Type
+    key TUObject
+  end
+  begin Type
+    key TUPageManager
+  end
+  begin Type
+    key TUPageManagerMonitor
+  end
+  begin Type
+    key TUPhys
+  end
+  begin Type
+    key TUPort
+  end
+  begin Type
+    key TURdWrSemaphore
+  end
+  begin Type
+    key TURealTimeAlarm
+  end
+  begin Type
+    key TUSemaphoreGroup
+  end
+  begin Type
+    key TUSemaphoreOpList
+  end
+  begin Type
+    key TUSharedMem
+  end
+  begin Type
+    key TUSharedMemMsg
+  end
+  begin Type
+    key TUSoundCallback
+  end
+  begin Type
+    key TUSoundCallbackProc
+  end
+  begin Type
+    key TUSoundChannel
+  end
+  begin Type
+    key TUSoundNodeReply
+  end
+  begin Type
+    key TUSoundNodeRequest
+  end
+  begin Type
+    key TUSoundReply
+  end
+  begin Type
+    key TUTask
+  end
+  begin Type
+    key TUTaskWorld
+  end
+  begin Type
+    key TUnblockEvent
+  end
+  begin Type
+    key TUnicodeCompressor
+  end
+  begin Type
+    key TUnicodeDecompressor
+  end
+  begin Type
+    key TUnionSoupIndex
+  end
+  begin Type
+    key TUnit
+  end
+  begin Type
+    key TUnitList
+  end
+  begin Type
+    key TUnitPublic
+  end
+  begin Type
+    key TUpdateConnection
+  end
+  begin Type
+    key TUserAbortHandler
+  end
+  begin Type
+    key TVRemoteIRTool
+  end
+  begin Type
+    key TVRemoteService
+  end
+  begin Type
+    key TValidatePackageDriver
+  end
+  begin Type
+    key TVersionString
+  end
+  begin Type
+    key TView
+  end
+  begin Type
+    key TViewList
+  end
+  begin Type
+    key TVisKeyIterator
+  end
+  begin Type
+    key TVoyagerMiscIntfImpl
+  end
+  begin Type
+    key TVoyagerPlatform
+  end
+  begin Type
+    key TWRecDomain
+  end
+  begin Type
+    key TWRecRecognizer
+  end
+  begin Type
+    key TWRecUnit
+  end
+  begin Type
+    key TWRecognizer
+  end
+  begin Type
+    key TWantRequestMessage
+  end
+  begin Type
+    key TWordHintsHandler
+  end
+  begin Type
+    key TWordList
+  end
+  begin Type
+    key TWordRecognizer
+  end
+  begin Type
+    key TWordReplayUnit
+  end
+  begin Type
+    key TWriteChain
+  end
+  begin Type
+    key TWriteElement
+  end
+  begin Type
+    key TXAdvancedRuler
+  end
+  begin Type
+    key TXArray
+  end
+  begin Type
+    key TXAttrObject
+  end
+  begin Type
+    key TXAttrValues
+  end
+  begin Type
+    key TXBasicRuler
+  end
+  begin Type
+    key TXBinaryChars
+  end
+  begin Type
+    key TXBinaryStream
+  end
+  begin Type
+    key TXChars
+  end
+  begin Type
+    key TXChunkedChars
+  end
+  begin Type
+    key TXClickCommandInfo
+  end
+  begin Type
+    key TXCommand
+  end
+  begin Type
+    key TXContainer
+  end
+  begin Type
+    key TXContainerImportInfo
+  end
+  begin Type
+    key TXDisplay
+  end
+  begin Type
+    key TXDisplayChanges
+  end
+  begin Type
+    key TXDisplayHandlers
+  end
+  begin Type
+    key TXDrawEnv
+  end
+  begin Type
+    key TXEditCommand
+  end
+  begin Type
+    key TXEditInfo
+  end
+  begin Type
+    key TXFormatReflowLines
+  end
+  begin Type
+    key TXFormatter
+  end
+  begin Type
+    key TXFormattingInfo
+  end
+  begin Type
+    key TXFrameEditInfo
+  end
+  begin Type
+    key TXFrameFormatter
+  end
+  begin Type
+    key TXFrames
+  end
+  begin Type
+    key TXFramesEditInfo
+  end
+  begin Type
+    key TXGraphicsRun
+  end
+  begin Type
+    key TXHandleStream
+  end
+  begin Type
+    key TXHandlers
+  end
+  begin Type
+    key TXHilite
+  end
+  begin Type
+    key TXIDPacket
+  end
+  begin Type
+    key TXIPCRelocationGenerator
+  end
+  begin Type
+    key TXIPCRelocator
+  end
+  begin Type
+    key TXIPPackageIterator
+  end
+  begin Type
+    key TXIPPackageStore
+  end
+  begin Type
+    key TXIPStoreCompander
+  end
+  begin Type
+    key TXIPStorePackageWriter
+  end
+  begin Type
+    key TXKeyCommand
+  end
+  begin Type
+    key TXLine
+  end
+  begin Type
+    key TXLineHeightGroup
+  end
+  begin Type
+    key TXLineHeightInfo
+  end
+  begin Type
+    key TXLineHilite
+  end
+  begin Type
+    key TXLineInfo
+  end
+  begin Type
+    key TXLineRunDisplayInfo
+  end
+  begin Type
+    key TXLineRunInfo
+  end
+  begin Type
+    key TXLineSpacingCluster
+  end
+  begin Type
+    key TXLinesHeights
+  end
+  begin Type
+    key TXLocalContainer
+  end
+  begin Type
+    key TXLongPoint
+  end
+  begin Type
+    key TXLongRect
+  end
+  begin Type
+    key TXLongTagArray
+  end
+  begin Type
+    key TXMonoFrame
+  end
+  begin Type
+    key TXMonoFrameFormatter
+  end
+  begin Type
+    key TXMonoSizeFrames
+  end
+  begin Type
+    key TXMoveTextCommand
+  end
+  begin Type
+    key TXMultiFrameFormatter
+  end
+  begin Type
+    key TXNewtContainer
+  end
+  begin Type
+    key TXNewtDisplay
+  end
+  begin Type
+    key TXNewtFontFamilyInfo
+  end
+  begin Type
+    key TXNewtGraphicsRun
+  end
+  begin Type
+    key TXNewtHilite
+  end
+  begin Type
+    key TXNewtPageFrames
+  end
+  begin Type
+    key TXNewtPasteCommand
+  end
+  begin Type
+    key TXNewtPen
+  end
+  begin Type
+    key TXNewtRulerUI
+  end
+  begin Type
+    key TXNewtStreamFactory
+  end
+  begin Type
+    key TXNewtTextRun
+  end
+  begin Type
+    key TXObjectIterator
+  end
+  begin Type
+    key TXObjectRange
+  end
+  begin Type
+    key TXOffset
+  end
+  begin Type
+    key TXOffsetPair
+  end
+  begin Type
+    key TXOffsetRange
+  end
+  begin Type
+    key TXPageCell
+  end
+  begin Type
+    key TXPageFormatter
+  end
+  begin Type
+    key TXPageFrames
+  end
+  begin Type
+    key TXParagCtrlChars
+  end
+  begin Type
+    key TXPendingTab
+  end
+  begin Type
+    key TXPointingDevice
+  end
+  begin Type
+    key TXPrivateContainer
+  end
+  begin Type
+    key TXRanges
+  end
+  begin Type
+    key TXRegisteredObjects
+  end
+  begin Type
+    key TXReplaceParams
+  end
+  begin Type
+    key TXReplaceTextCommand
+  end
+  begin Type
+    key TXRuler
+  end
+  begin Type
+    key TXRulerBar
+  end
+  begin Type
+    key TXRulerBitMapCluster
+  end
+  begin Type
+    key TXRulerIconsBar
+  end
+  begin Type
+    key TXRulerPixMaps
+  end
+  begin Type
+    key TXRulerRange
+  end
+  begin Type
+    key TXRulerTabsBar
+  end
+  begin Type
+    key TXRulerUI
+  end
+  begin Type
+    key TXRulerUIData
+  end
+  begin Type
+    key TXRulerUIFocusInfo
+  end
+  begin Type
+    key TXRun
+  end
+  begin Type
+    key TXRunPositionInfo
+  end
+  begin Type
+    key TXRunRange
+  end
+  begin Type
+    key TXRunsIterator
+  end
+  begin Type
+    key TXSectFrames
+  end
+  begin Type
+    key TXSectLines
+  end
+  begin Type
+    key TXSectRanges
+  end
+  begin Type
+    key TXStdContainer
+  end
+  begin Type
+    key TXStream
+  end
+  begin Type
+    key TXStyledText
+  end
+  begin Type
+    key TXTab
+  end
+  begin Type
+    key TXTabsArray
+  end
+  begin Type
+    key TXTempLines
+  end
+  begin Type
+    key TXTempReferences
+  end
+  begin Type
+    key TXTempRegions
+  end
+  begin Type
+    key TXTempStreamFactory
+  end
+  begin Type
+    key TXTextDescriptor
+  end
+  begin Type
+    key TXVBOChars
+  end
+  begin Type
+    key TXView
+  end
+  begin Type
+    key TXVirtualObject
+  end
+  begin Type
+    key TXmitBufDscrptr
+  end
+  begin Type
+    key TXrWordDomain
+  end
+  begin Type
+    key TXrWordUnit
+  end
+  begin Type
+    key TZIPInterface
+  end
+  begin Type
+    key TZippyCallbackCompressor
+  end
+  begin Type
+    key TZippyCompressor
+  end
+  begin Type
+    key TZippyDecompressor
+  end
+  begin Type
+    key TZippyRelocStoreDecompressor
+  end
+  begin Type
+    key TZippyStoreDecompressor
+  end
+  begin Type
+    key TZoneList
+  end
+  begin Type
+    key TZoneNameComparer
+  end
+  begin Type
+    key TabPt
+  end
+  begin Type
+    key TagsBits
+  end
+  begin Type
+    key TextBoundsInfo
+  end
+  begin Type
+    key TextObjectField
+  end
+  begin Type
+    key TextOptions
+  end
+  begin Type
+    key TextWalker
+  end
+  begin Type
+    key Textension
+  end
+  begin Type
+    key ThpPCL
+  end
+  begin Type
+    key TimeUnits
+  end
+  begin Type
+    key TimerType
+  end
+  begin Type
+    key Topic
+  end
+  begin Type
+    key TrueRegion
+  end
+  begin Type
+    key TtspsPart
+  end
+  begin Type
+    key TtstpPart
+  end
+  begin Type
+    key TurnData
+  end
+  begin Type
+    key TxObject
+  end
+  begin Type
+    key UnionIndexData
+  end
+  begin Type
+    key UnitInterpretation
+  end
+  begin Type
+    key VoltageTable
+  end
+  begin Type
+    key WORD_BASELINE
+  end
+  begin Type
+    key WORD_GEOM
+  end
+  begin Type
+    key WordBaseInfo
+  end
+  begin Type
+    key WordHit
+  end
+  begin Type
+    key WordMetrics
+  end
+  begin Type
+    key WrecSamplePt
+  end
+  begin Type
+    key XIPCRelocationEntry
+  end
+  begin Type
+    key XIPParameterBlock
+  end
+  begin Type
+    key XRWORDPARAM
+  end
+  begin Type
+    key XR_TO_LETTERS
+  end
+  begin Type
+    key _ALIST
+  end
+  begin Type
+    key _ARC_TYPE
+  end
+  begin Type
+    key _ARDATA
+  end
+  begin Type
+    key _BOOKENTRY
+  end
+  begin Type
+    key _CDC
+  end
+  begin Type
+    key _CODETABLE
+  end
+  begin Type
+    key _CODEWORD
+  end
+  begin Type
+    key _DCC
+  end
+  begin Type
+    key _DPINST
+  end
+  begin Type
+    key _ENVIRONS
+  end
+  begin Type
+    key _EXPAND_PARAMS
+  end
+  begin Type
+    key _HAT_DENOM_TYPE
+  end
+  begin Type
+    key _LEARN_ARRAY_tag
+  end
+  begin Type
+    key _NWTSAMPLE
+  end
+  begin Type
+    key _ODATA
+  end
+  begin Type
+    key _ORG_P
+  end
+  begin Type
+    key _POINT
+  end
+  begin Type
+    key _POST_PARAMS
+  end
+  begin Type
+    key _RECT
+  end
+  begin Type
+    key _RPR_P
+  end
+  begin Type
+    key _SDS_CONTROL_TYPE
+  end
+  begin Type
+    key _SDS_TYPE
+  end
+  begin Type
+    key __FILE_struct
+  end
+  begin Type
+    key brack_type
+  end
+  begin Type
+    key char
+  end
+  begin Type
+    key charState
+  end
+  begin Type
+    key curve
+  end
+  begin Type
+    key dInfoRec
+  end
+  begin Type
+    key dictListEntry
+  end
+  begin Type
+    key double
+  end
+  begin Type
+    key dte_sym_header_type
+  end
+  begin Type
+    key dti_descr_type
+  end
+  begin Type
+    key eDockingState
+  end
+  begin Type
+    key eMemoryLane
+  end
+  begin Type
+    key fw_buf_type
+  end
+  begin Type
+    key gsm_state
+  end
+  begin Type
+    key int
+  end
+  begin Type
+    key lex_data_type
+  end
+  begin Type
+    key long
+  end
+  begin Type
+    key low_type
+  end
+  begin Type
+    key path
+  end
+  begin Type
+    key pathWalker
+  end
+  begin Type
+    key paths
+  end
+  begin Type
+    key ppd_type
+  end
+  begin Type
+    key rc_type
+  end
+  begin Type
+    key rec_w_type
+  end
+  begin Type
+    key sfnt_OffsetTable
+  end
+  begin Type
+    key sfnt_blocTable
+  end
+  begin Type
+    key short
+  end
+  begin Type
+    key signed char
+  end
+  begin Type
+    key spell_state
+  end
+  begin Type
+    key stroka_data
+  end
+  begin Type
+    key tagLocalStuff
+  end
+  begin Type
+    key tagNumBox
+  end
+  begin Type
+    key tag_BOX
+  end
+  begin Type
+    key tag_CHUNK
+  end
+  begin Type
+    key tag_CHUNK_STAFF
+  end
+  begin Type
+    key tag_LOWOBJ
+  end
+  begin Type
+    key tag_SKP
+  end
+  begin Type
+    key tag_STK
+  end
+  begin Type
+    key tag_WORD_TRACE
+  end
+  begin Type
+    key tag_wapx_type
+  end
+  begin Type
+    key unsigned char
+  end
+  begin Type
+    key unsigned int
+  end
+  begin Type
+    key unsigned long
+  end
+  begin Type
+    key unsigned short
+  end
+  begin Type
+    key vect_type
+  end
+  begin Type
+    key void
+  end
+  begin Type
+    key volatile
+  end
+  begin Type
+    key word_state
+  end
+  begin Type
+    key ws_control_type
+  end
+  begin Type
+    key ws_data_type
+  end
+  begin Type
+    key ws_memory_header_type
+  end
+  begin Type
+    key ws_results_type
+  end
+  begin Type
+    key ws_word_info_type
+  end
+  begin Type
+    key xrcm_type
+  end
+  begin Type
+    key xrd_el_type
+  end
+  begin Type
+    key xrdata_type
+  end
+  begin Type
+    key xrinp_type
+  end
+  begin Type
+    key xrlv_data_type
+  end
+  begin Type
+    key xrlv_var_data_type
+  end
+  begin Type
+    key xrp_type
+  end
+end
