@@ -43,10 +43,6 @@ static const char* arm_fp_const[] = {
 static const char* arm_shift[] = {
   "lsl", "lsr", "asr", "ror"};
 
-static int print_insn_arm(unsigned int,
-                          int,
-                          char*,
-                          char*);
 
 // ============================================================	//
 // void arm_decode_shift(int, char*)
