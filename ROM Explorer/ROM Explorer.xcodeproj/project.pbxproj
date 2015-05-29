@@ -36,6 +36,7 @@
 		F1AE2F941B17D83100EEFFFE /* classes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F921B17D83100EEFFFE /* classes.txt */; };
 		F1AE2F951B17D83100EEFFFE /* files.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F931B17D83100EEFFFE /* files.txt */; };
 		F1F6D90B1B17EE2800E30401 /* AddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F6D90A1B17EE2800E30401 /* AddressInfo.m */; };
+		F1F6D90E1B17F10D00E30401 /* DisassemblyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F6D90D1B17F10D00E30401 /* DisassemblyView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,8 @@
 		F1AE2F931B17D83100EEFFFE /* files.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = files.txt; path = ../../Albert/files.txt; sourceTree = "<group>"; };
 		F1F6D9091B17EE2800E30401 /* AddressInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfo.h; sourceTree = "<group>"; };
 		F1F6D90A1B17EE2800E30401 /* AddressInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfo.m; sourceTree = "<group>"; };
+		F1F6D90C1B17F10D00E30401 /* DisassemblyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisassemblyView.h; sourceTree = "<group>"; };
+		F1F6D90D1B17F10D00E30401 /* DisassemblyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisassemblyView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 				F1F6D90A1B17EE2800E30401 /* AddressInfo.m */,
 				F1AE2F321B17D18200EEFFFE /* AppDelegate.h */,
 				F1AE2F331B17D18200EEFFFE /* AppDelegate.mm */,
+				F1F6D90C1B17F10D00E30401 /* DisassemblyView.h */,
+				F1F6D90D1B17F10D00E30401 /* DisassemblyView.m */,
 				F1AE2F371B17D18200EEFFFE /* Images.xcassets */,
 				F1AE2F391B17D18200EEFFFE /* MainMenu.xib */,
 				F1AE2F8F1B17D5C900EEFFFE /* Symbols */,
@@ -354,6 +359,7 @@
 				F1AE2F801B17D43B00EEFFFE /* AlType.cpp in Sources */,
 				F1AE2F7C1B17D43B00EEFFFE /* AlMemoryMap.cpp in Sources */,
 				F1AE2F671B17D42C00EEFFFE /* AlARMCode.cp in Sources */,
+				F1F6D90E1B17F10D00E30401 /* DisassemblyView.m in Sources */,
 				F1AE2F5E1B17D41400EEFFFE /* disarm_c.cpp in Sources */,
 				F1AE2F861B17D47500EEFFFE /* EasyBMP.cpp in Sources */,
 				F1AE2F631B17D42200EEFFFE /* AlCMethod.cpp in Sources */,
