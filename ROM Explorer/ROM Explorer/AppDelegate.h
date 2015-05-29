@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+extern int disarm_no_comments(char *dst, unsigned int addr, unsigned int cmd);
+
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSTableViewDelegate, NSTableViewDataSource>
 
 @property (assign) IBOutlet NSTableView *tableView;

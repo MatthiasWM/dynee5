@@ -118,6 +118,18 @@
 		
 		addrInfo.type = rom_flags_type(i);
 		
+		if ( addrInfo.type == flags_type_arm_code )
+		{
+			char buf[4096];
+			disarm_no_comments(buf, i, rom_w(i));
+			addrInfo.assembly = [NSString stringWithCString:buf encoding:NSUTF8StringEncoding];
+		}
+		else
+		{
+			addrInfo.assembly = @"";
+		}
+
+		
 		[self.addressArray addObject:addrInfo];
 		[self.addresses setObject:addrInfo forKey:[NSString stringWithFormat:@"%08X", i]];
 		
@@ -276,26 +288,27 @@
 	{
 		result.textField.stringValue = [NSString stringWithFormat:@"0x%08X", addrInfo.value];
 	}
-	else if ( [tableColumn.identifier isEqualToString:@"SymbolView"] )
-	{
-		result.textField.stringValue = addrInfo.symbol;
-	}
 	else if ( [tableColumn.identifier isEqualToString:@"CPPSymbolView"] )
 	{
-		result.textField.stringValue = addrInfo.demangledCPPSymbol;
+		if ( ![addrInfo.demangledCPPSymbol isEqualToString:@""] )
+			result.textField.stringValue = addrInfo.demangledCPPSymbol;
+		else
+			result.textField.stringValue = addrInfo.symbol;
 	}
 	else if ( [tableColumn.identifier isEqualToString:@"FourCharView"] )
 	{
 		result.textField.stringValue = addrInfo.fourChar;
+	}
+	else if ( [tableColumn.identifier isEqualToString:@"AssemblyView"] )
+	{
+		result.textField.stringValue = addrInfo.assembly;
 	}
 	else if ( [tableColumn.identifier isEqualToString:@"TypeView"] )
 	{
 		result.textField.stringValue = [NSString stringWithCString:type_lut[addrInfo.type] encoding:NSUTF8StringEncoding];
 	}
 
-
 	return result;
- 
 }
 
 @end

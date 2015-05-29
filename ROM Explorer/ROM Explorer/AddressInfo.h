@@ -10,11 +10,12 @@
 
 @interface AddressInfo : NSObject <NSCopying>
 
-@property (copy) NSString *symbol;
+@property (assign) UInt32 address;
+@property (copy) NSString *assembly;
 @property (copy) NSString *demangledCPPSymbol;
 @property (copy) NSString *fourChar;
-@property (assign) UInt32 address;
-@property (assign) UInt32 value;
+@property (copy) NSString *symbol;
 @property (assign) UInt32 type;
+@property (assign) UInt32 value;
 
 @end

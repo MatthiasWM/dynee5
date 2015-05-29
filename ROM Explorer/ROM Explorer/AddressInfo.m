@@ -14,12 +14,13 @@
 {
 	AddressInfo *output = [[AddressInfo alloc] init];
 	
-	output.symbol = self.symbol;
-	output.value = self.value;
-	output.demangledCPPSymbol = self.demangledCPPSymbol;
 	output.address = self.address;
+	output.assembly = self.assembly;
+	output.demangledCPPSymbol = self.demangledCPPSymbol;
 	output.fourChar = self.fourChar;
+	output.symbol = self.symbol;
 	output.type = self.type;
+	output.value = self.value;
 	
 	return output;
 }
