@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Steven Frank. All rights reserved.
 //
 
+#import "AddressInfo.h"
 #import "AppDelegate.h"
 
 #include "db2src.h"
@@ -13,7 +14,7 @@
 #define ROM_PATH_KEY @"ROMPath"
 
 @interface AppDelegate ()
-
+@property (retain) NSMutableDictionary *addresses;
 @property (weak) IBOutlet NSWindow *window;
 @end
 
@@ -43,6 +44,8 @@
 		[NSApp terminate:self];
 		return;
 	}
+	
+	self.addresses = [[NSMutableDictionary alloc] init];
 	
 	[self performSelector:@selector(loadROMAtPath:) withObject:romPath afterDelay:0];
 }
@@ -88,12 +91,12 @@
 //	if (!newt) {
 //		perror("Can't write NewtonOS!");
 //	} else {
-	FILE *newt = stdout;
+//	FILE *newt = stdout;
 	
 	rom_flags_type(0x003AE204, flags_type_arm_word); // will create illegal instructions!
 	rom_flags_type(0x003AE20C, flags_type_arm_word);
 
-	unsigned int n_unused = 0, unused_filler = 0;
+//	unsigned int n_unused = 0, unused_filler = 0;
 
 	//fprintf(newt, "\n\t.include\t\"macros.s\"\n\n\t.text\n\t.org\t0\n\n");
 	//fprintf(newt, "\t.global\t_start\n_start:\n");
@@ -102,104 +105,120 @@
 	{
 		unsigned int val = rom_w(i);
 		
-		writeLabel(newt, i);
-		writeComments(newt, i);
+		AddressInfo *addrInfo = [[AddressInfo alloc] init];
+	
+		addrInfo.address = i;
+		addrInfo.value = val;
 		
-		if ( rom_flags_is_set(i, flags_include) )
-		{
-			const char *sym = 0L;
-			sym = get_plain_symbol_at(i);
-			if (sym)
-				AsmPrintf(newt, "\t.include \"%s.s\"\n", sym);
-		}
+		const char *demangledCPPSym = get_symbol_at(i);	// demangled C++ symbol
+		const char *plainSym = get_plain_symbol_at(i);	// plain symbol
+	
+		if ( plainSym != NULL )
+			addrInfo.symbol = [NSString stringWithCString:plainSym encoding:NSUTF8StringEncoding];
+
+		if ( demangledCPPSym != NULL )
+			addrInfo.demangledCPPSymbol = [NSString stringWithCString:demangledCPPSym encoding:NSUTF8StringEncoding];
 		
-		switch (rom_flags_type(i))
-		{
-			case flags_type_unused:
-				if (!n_unused) unused_filler = rom_w(i);
-				n_unused++;
-				if (  (i+4)>=0x00800000
-						|| rom_flags_type(i+4)!=flags_type_unused
-						|| rom_w(i+4)!=unused_filler)
-				{
-					AsmPrintf(newt, "\t.fill\t%d, %d, 0x%08X\n", n_unused, 4, unused_filler);
-					n_unused = 0;
-				}
-				break;
-
-			case flags_type_ns_ref:
-				i = decodeNSRef(newt, i);
-				break;
-
-			case flags_type_ns_obj:
-				i = decodeNSObj(newt, i);
-				break;
-
-			case flags_type_arm_code:
-			{
-				AlData *d = gMemoryMap.find(i);
-				if (d)
-					d->exportAsm(newt);
-				char buf[4096];
-				disarm(buf, i, rom_w(i));
-				char *cmt = strchr(buf, ';');
-				if (cmt)
-					*cmt = '@';
-				AsmPrintf(newt, "\t%s\n", buf);
-				break;
-			}
-
-			case flags_type_arm_text:
-			{
-				int n = 0;
-				writeLabelIfNone(newt, i);
-				AsmPrintf(newt, "\t.ascii\t\"");
-				i -= 4;
-				do
-				{
-					i += 4; n++;
-					AsmPrintf(newt, "%s", p_ascii(ROM[i]));
-					AsmPrintf(newt, "%s", p_ascii(ROM[i+1]));
-					AsmPrintf(newt, "%s", p_ascii(ROM[i+2]));
-					AsmPrintf(newt, "%s", p_ascii(ROM[i+3]));
-				} while ( rom_flags_type(i+4)==flags_type_arm_text
-								&& ROM[i] && ROM[i+1] && ROM[i+2] && ROM[i+3]
-								&& !hasLabel(i+4)
-								&& n<16);
-				
-				AsmPrintf(newt, "\"\n");
-				break;
-			}
-			
-			case flags_type_patch_table:
-			case flags_type_jump_table: // TODO: these are jump tables! Find out how to calculate the offsets!
-			case flags_type_arm_byte:   // TODO: currently not used
-			case flags_type_rex:        // TODO: interprete the contents
-			case flags_type_ns:
-			case flags_type_dict:
-			case flags_type_classinfo:  // TODO: differentiate this
-				AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X \"%c%c%c%c\" %d (%s)\n", val, i,
-				printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]),
-				rom_w(i), type_lut[rom_flags_type(i)]);
-				break;
-
-			case flags_type_data:
-			case flags_type_unknown:
-			case flags_type_arm_word:
-			default:
-			{
-				// if it matches a label, is it a pointer?
-				// if all bytes are ASCII, is it an ID?
-				// if it is a negative number, is it an error message?
-				const char *sym = 0L;
-				if (val)
-					sym = get_plain_symbol_at(val);
-				if (!sym)
-					sym = "";
-				AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X \"%c%c%c%c\" %d (%s) %s?\n", val, i, printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]), rom_w(i), type_lut[rom_flags_type(i)], sym);
-			}
-				break;
-		}
+		[self.addresses setObject:addrInfo forKey:[NSString stringWithFormat:@"%08X", i]];
+		
+		
+//		writeComments(newt, i);
+		
+//		if ( rom_flags_is_set(i, flags_include) )
+//		{
+//			const char *sym = 0L;
+//			sym = get_plain_symbol_at(i);
+//			if (sym)
+//				AsmPrintf(newt, "\t.include \"%s.s\"\n", sym);
+//		}
+		
+//		switch (rom_flags_type(i))
+//		{
+//			case flags_type_unused:
+//				if (!n_unused) unused_filler = rom_w(i);
+//				n_unused++;
+//				if (  (i+4)>=0x00800000
+//						|| rom_flags_type(i+4)!=flags_type_unused
+//						|| rom_w(i+4)!=unused_filler)
+//				{
+//					AsmPrintf(newt, "\t.fill\t%d, %d, 0x%08X\n", n_unused, 4, unused_filler);
+//					n_unused = 0;
+//				}
+//				break;
+//
+//			case flags_type_ns_ref:
+//				i = decodeNSRef(newt, i);
+//				break;
+//
+//			case flags_type_ns_obj:
+//				i = decodeNSObj(newt, i);
+//				break;
+//
+//			case flags_type_arm_code:
+//			{
+//				AlData *d = gMemoryMap.find(i);
+//				if (d)
+//					d->exportAsm(newt);
+//				char buf[4096];
+//				disarm(buf, i, rom_w(i));
+//				char *cmt = strchr(buf, ';');
+//				if (cmt)
+//					*cmt = '@';
+//				AsmPrintf(newt, "\t%s\n", buf);
+//				break;
+//			}
+//
+//			case flags_type_arm_text:
+//			{
+//				int n = 0;
+//				writeLabelIfNone(newt, i);
+//				AsmPrintf(newt, "\t.ascii\t\"");
+//				i -= 4;
+//				do
+//				{
+//					i += 4; n++;
+//					AsmPrintf(newt, "%s", p_ascii(ROM[i]));
+//					AsmPrintf(newt, "%s", p_ascii(ROM[i+1]));
+//					AsmPrintf(newt, "%s", p_ascii(ROM[i+2]));
+//					AsmPrintf(newt, "%s", p_ascii(ROM[i+3]));
+//				} while ( rom_flags_type(i+4)==flags_type_arm_text
+//								&& ROM[i] && ROM[i+1] && ROM[i+2] && ROM[i+3]
+//								&& !hasLabel(i+4)
+//								&& n<16);
+//				
+//				AsmPrintf(newt, "\"\n");
+//				break;
+//			}
+//			
+//			case flags_type_patch_table:
+//			case flags_type_jump_table: // TODO: these are jump tables! Find out how to calculate the offsets!
+//			case flags_type_arm_byte:   // TODO: currently not used
+//			case flags_type_rex:        // TODO: interprete the contents
+//			case flags_type_ns:
+//			case flags_type_dict:
+//			case flags_type_classinfo:  // TODO: differentiate this
+//				AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X \"%c%c%c%c\" %d (%s)\n", val, i,
+//				printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]),
+//				rom_w(i), type_lut[rom_flags_type(i)]);
+//				break;
+//
+//			case flags_type_data:
+//			case flags_type_unknown:
+//			case flags_type_arm_word:
+//			default:
+//			{
+//				// if it matches a label, is it a pointer?
+//				// if all bytes are ASCII, is it an ID?
+//				// if it is a negative number, is it an error message?
+//				const char *sym = 0L;
+//				if (val)
+//					sym = get_plain_symbol_at(val);
+//				if (!sym)
+//					sym = "";
+//				AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X \"%c%c%c%c\" %d (%s) %s?\n", val, i, printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]), rom_w(i), type_lut[rom_flags_type(i)], sym);
+//			}
+//				break;
+//		}
 	}
 	
 	// write all symbols that are not within the ROM area, but are called from ROM
@@ -228,6 +247,10 @@
 	//	fclose(newt);
 	//	}
 	printf("\n====> DONE\n\n");
+	
+	NSLog(@"%@", [self.addresses objectForKey:@"00000000"]);
+	NSLog(@"%@", [self.addresses objectForKey:@"00000004"]);
+	NSLog(@"%@", [self.addresses objectForKey:@"0001B68C"]);
 }
 
 @end

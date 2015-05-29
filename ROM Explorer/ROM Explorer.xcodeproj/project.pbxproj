@@ -35,6 +35,7 @@
 		F1AE2F911B17D77D00EEFFFE /* symbols.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F901B17D77D00EEFFFE /* symbols.txt */; };
 		F1AE2F941B17D83100EEFFFE /* classes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F921B17D83100EEFFFE /* classes.txt */; };
 		F1AE2F951B17D83100EEFFFE /* files.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F931B17D83100EEFFFE /* files.txt */; };
+		F1F6D90B1B17EE2800E30401 /* AddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F6D90A1B17EE2800E30401 /* AddressInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		F1AE2F901B17D77D00EEFFFE /* symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = symbols.txt; path = ../../Albert/symbols.txt; sourceTree = "<group>"; };
 		F1AE2F921B17D83100EEFFFE /* classes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = classes.txt; path = ../../Albert/classes.txt; sourceTree = "<group>"; };
 		F1AE2F931B17D83100EEFFFE /* files.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = files.txt; path = ../../Albert/files.txt; sourceTree = "<group>"; };
+		F1F6D9091B17EE2800E30401 /* AddressInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfo.h; sourceTree = "<group>"; };
+		F1F6D90A1B17EE2800E30401 /* AddressInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,8 @@
 		F1AE2F2F1B17D18200EEFFFE /* ROM Explorer */ = {
 			isa = PBXGroup;
 			children = (
+				F1F6D9091B17EE2800E30401 /* AddressInfo.h */,
+				F1F6D90A1B17EE2800E30401 /* AddressInfo.m */,
 				F1AE2F321B17D18200EEFFFE /* AppDelegate.h */,
 				F1AE2F331B17D18200EEFFFE /* AppDelegate.mm */,
 				F1AE2F371B17D18200EEFFFE /* Images.xcassets */,
@@ -335,6 +340,7 @@
 				F1AE2F7F1B17D43B00EEFFFE /* AlSymbolList.cpp in Sources */,
 				F1AE2F361B17D18200EEFFFE /* main.m in Sources */,
 				F1AE2F811B17D43B00EEFFFE /* AlTypeList.cpp in Sources */,
+				F1F6D90B1B17EE2800E30401 /* AddressInfo.m in Sources */,
 				F1AE2F341B17D18200EEFFFE /* AppDelegate.mm in Sources */,
 				F1AE2F821B17D43B00EEFFFE /* AlTypeRef.cpp in Sources */,
 				F1AE2F7B1B17D43B00EEFFFE /* AlDatabaseObject.cpp in Sources */,
