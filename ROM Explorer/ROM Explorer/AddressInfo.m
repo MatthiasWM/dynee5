@@ -18,6 +18,8 @@
 	output.value = self.value;
 	output.demangledCPPSymbol = self.demangledCPPSymbol;
 	output.address = self.address;
+	output.fourChar = self.fourChar;
+	output.type = self.type;
 	
 	return output;
 }

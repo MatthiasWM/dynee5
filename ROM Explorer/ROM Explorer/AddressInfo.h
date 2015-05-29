@@ -12,7 +12,9 @@
 
 @property (copy) NSString *symbol;
 @property (copy) NSString *demangledCPPSymbol;
+@property (copy) NSString *fourChar;
 @property (assign) UInt32 address;
 @property (assign) UInt32 value;
+@property (assign) UInt32 type;
 
 @end

@@ -86,24 +86,13 @@
 
 	printf("\n====> Writing Newton ROM in ARM assembler code\n\n");
 	unsigned int i;
-
-//	strcpy(filename_buffer, base_path);
-//	strcat(filename_buffer, "NewtonOS/newtonos.s");
-//	FILE *newt = fopen(filename_buffer, "wb");
-//	if (!newt) {
-//		perror("Can't write NewtonOS!");
-//	} else {
-//	FILE *newt = stdout;
 	
 	rom_flags_type(0x003AE204, flags_type_arm_word); // will create illegal instructions!
 	rom_flags_type(0x003AE20C, flags_type_arm_word);
 
 //	unsigned int n_unused = 0, unused_filler = 0;
-
-	//fprintf(newt, "\n\t.include\t\"macros.s\"\n\n\t.text\n\t.org\t0\n\n");
-	//fprintf(newt, "\t.global\t_start\n_start:\n");
 	
-	for (i=0; i<0x00800000; i+=4)
+	for ( i = 0; i < 0x00800000; i += 4 )
 	{
 		unsigned int val = rom_w(i);
 		
@@ -125,6 +114,10 @@
 		else
 			addrInfo.demangledCPPSymbol = @"";
 		
+		addrInfo.fourChar = [NSString stringWithFormat:@"%c%c%c%c", printable(ROM[i]), printable(ROM[i + 1]), printable(ROM[i + 2]), printable(ROM[i + 3])];
+		
+		addrInfo.type = rom_flags_type(i);
+		
 		[self.addressArray addObject:addrInfo];
 		[self.addresses setObject:addrInfo forKey:[NSString stringWithFormat:@"%08X", i]];
 		
@@ -139,10 +132,11 @@
 //				AsmPrintf(newt, "\t.include \"%s.s\"\n", sym);
 //		}
 		
-//		switch (rom_flags_type(i))
-//		{
-//			case flags_type_unused:
-//				if (!n_unused) unused_filler = rom_w(i);
+		switch (rom_flags_type(i))
+		{
+			case flags_type_unused:
+//				if (!n_unused)
+//					unused_filler = rom_w(i);
 //				n_unused++;
 //				if (  (i+4)>=0x00800000
 //						|| rom_flags_type(i+4)!=flags_type_unused
@@ -151,18 +145,18 @@
 //					AsmPrintf(newt, "\t.fill\t%d, %d, 0x%08X\n", n_unused, 4, unused_filler);
 //					n_unused = 0;
 //				}
-//				break;
-//
-//			case flags_type_ns_ref:
+				break;
+
+			case flags_type_ns_ref:
 //				i = decodeNSRef(newt, i);
-//				break;
-//
-//			case flags_type_ns_obj:
+				break;
+
+			case flags_type_ns_obj:
 //				i = decodeNSObj(newt, i);
-//				break;
+				break;
 //
-//			case flags_type_arm_code:
-//			{
+			case flags_type_arm_code:
+			{
 //				AlData *d = gMemoryMap.find(i);
 //				if (d)
 //					d->exportAsm(newt);
@@ -172,11 +166,11 @@
 //				if (cmt)
 //					*cmt = '@';
 //				AsmPrintf(newt, "\t%s\n", buf);
-//				break;
-//			}
-//
-//			case flags_type_arm_text:
-//			{
+				break;
+			}
+
+			case flags_type_arm_text:
+			{
 //				int n = 0;
 //				writeLabelIfNone(newt, i);
 //				AsmPrintf(newt, "\t.ascii\t\"");
@@ -194,38 +188,38 @@
 //								&& n<16);
 //				
 //				AsmPrintf(newt, "\"\n");
-//				break;
-//			}
-//			
-//			case flags_type_patch_table:
-//			case flags_type_jump_table: // TODO: these are jump tables! Find out how to calculate the offsets!
-//			case flags_type_arm_byte:   // TODO: currently not used
-//			case flags_type_rex:        // TODO: interprete the contents
-//			case flags_type_ns:
-//			case flags_type_dict:
-//			case flags_type_classinfo:  // TODO: differentiate this
+				break;
+			}
+
+			case flags_type_patch_table:
+			case flags_type_jump_table: // TODO: these are jump tables! Find out how to calculate the offsets!
+			case flags_type_arm_byte:   // TODO: currently not used
+			case flags_type_rex:        // TODO: interprete the contents
+			case flags_type_ns:
+			case flags_type_dict:
+			case flags_type_classinfo:  // TODO: differentiate this
 //				AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X \"%c%c%c%c\" %d (%s)\n", val, i,
 //				printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]),
 //				rom_w(i), type_lut[rom_flags_type(i)]);
-//				break;
-//
-//			case flags_type_data:
-//			case flags_type_unknown:
-//			case flags_type_arm_word:
-//			default:
-//			{
-//				// if it matches a label, is it a pointer?
-//				// if all bytes are ASCII, is it an ID?
-//				// if it is a negative number, is it an error message?
+				break;
+
+			case flags_type_data:
+			case flags_type_unknown:
+			case flags_type_arm_word:
+			default:
+			{
+				// if it matches a label, is it a pointer?
+				// if all bytes are ASCII, is it an ID?
+				// if it is a negative number, is it an error message?
 //				const char *sym = 0L;
 //				if (val)
 //					sym = get_plain_symbol_at(val);
 //				if (!sym)
 //					sym = "";
 //				AsmPrintf(newt, "\t.word\t0x%08X\t@ 0x%08X \"%c%c%c%c\" %d (%s) %s?\n", val, i, printable(ROM[i]), printable(ROM[i+1]), printable(ROM[i+2]), printable(ROM[i+3]), rom_w(i), type_lut[rom_flags_type(i)], sym);
-//			}
-//				break;
-//		}
+				break;
+			}
+		}
 	}
 	
 	// write all symbols that are not within the ROM area, but are called from ROM
@@ -253,7 +247,6 @@
 	//	fprintf(newt, "\n\t.end\n\n");
 	//	fclose(newt);
 	//	}
-	printf("\n====> DONE\n\n");
 	
 	[self.tableView reloadData];
 }
@@ -277,11 +270,11 @@
 	
 	if ( [tableColumn.identifier isEqualToString:@"AddressView"] )
 	{
-		result.textField.stringValue = [NSString stringWithFormat:@"%08X", addrInfo.address];
+		result.textField.stringValue = [NSString stringWithFormat:@"0x%08X", addrInfo.address];
 	}
 	else if ( [tableColumn.identifier isEqualToString:@"ValueView"] )
 	{
-		result.textField.stringValue = [NSString stringWithFormat:@"%08X", addrInfo.value];
+		result.textField.stringValue = [NSString stringWithFormat:@"0x%08X", addrInfo.value];
 	}
 	else if ( [tableColumn.identifier isEqualToString:@"SymbolView"] )
 	{
@@ -290,6 +283,14 @@
 	else if ( [tableColumn.identifier isEqualToString:@"CPPSymbolView"] )
 	{
 		result.textField.stringValue = addrInfo.demangledCPPSymbol;
+	}
+	else if ( [tableColumn.identifier isEqualToString:@"FourCharView"] )
+	{
+		result.textField.stringValue = addrInfo.fourChar;
+	}
+	else if ( [tableColumn.identifier isEqualToString:@"TypeView"] )
+	{
+		result.textField.stringValue = [NSString stringWithCString:type_lut[addrInfo.type] encoding:NSUTF8StringEncoding];
 	}
 
 
