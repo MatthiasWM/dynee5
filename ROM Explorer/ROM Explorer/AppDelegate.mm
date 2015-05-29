@@ -14,6 +14,7 @@
 #define ROM_PATH_KEY @"ROMPath"
 
 @interface AppDelegate ()
+@property (retain) NSMutableArray *addressArray;
 @property (retain) NSMutableDictionary *addresses;
 @property (weak) IBOutlet NSWindow *window;
 @end
@@ -45,6 +46,7 @@
 		return;
 	}
 	
+	self.addressArray = [[NSMutableArray alloc] init];
 	self.addresses = [[NSMutableDictionary alloc] init];
 	
 	[self performSelector:@selector(loadROMAtPath:) withObject:romPath afterDelay:0];
@@ -115,10 +117,15 @@
 	
 		if ( plainSym != NULL )
 			addrInfo.symbol = [NSString stringWithCString:plainSym encoding:NSUTF8StringEncoding];
-
+		else
+			addrInfo.symbol = @"";
+		
 		if ( demangledCPPSym != NULL )
 			addrInfo.demangledCPPSymbol = [NSString stringWithCString:demangledCPPSym encoding:NSUTF8StringEncoding];
+		else
+			addrInfo.demangledCPPSymbol = @"";
 		
+		[self.addressArray addObject:addrInfo];
 		[self.addresses setObject:addrInfo forKey:[NSString stringWithFormat:@"%08X", i]];
 		
 		
@@ -248,9 +255,46 @@
 	//	}
 	printf("\n====> DONE\n\n");
 	
-	NSLog(@"%@", [self.addresses objectForKey:@"00000000"]);
-	NSLog(@"%@", [self.addresses objectForKey:@"00000004"]);
-	NSLog(@"%@", [self.addresses objectForKey:@"0001B68C"]);
+	[self.tableView reloadData];
+}
+
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)inTableView
+{
+	NSAssert(inTableView == self.tableView, @"unexpected tableview");
+	
+	return self.addressArray.count;
+}
+
+
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	NSTableCellView *result = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+	
+	result.textField.font = [NSFont userFixedPitchFontOfSize:11.0];
+	
+	AddressInfo *addrInfo = (AddressInfo *)[self.addressArray objectAtIndex:row];
+	
+	if ( [tableColumn.identifier isEqualToString:@"AddressView"] )
+	{
+		result.textField.stringValue = [NSString stringWithFormat:@"%08X", addrInfo.address];
+	}
+	else if ( [tableColumn.identifier isEqualToString:@"ValueView"] )
+	{
+		result.textField.stringValue = [NSString stringWithFormat:@"%08X", addrInfo.value];
+	}
+	else if ( [tableColumn.identifier isEqualToString:@"SymbolView"] )
+	{
+		result.textField.stringValue = addrInfo.symbol;
+	}
+	else if ( [tableColumn.identifier isEqualToString:@"CPPSymbolView"] )
+	{
+		result.textField.stringValue = addrInfo.demangledCPPSymbol;
+	}
+
+
+	return result;
+ 
 }
 
 @end

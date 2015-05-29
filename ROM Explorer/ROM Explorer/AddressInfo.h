@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AddressInfo : NSObject
+@interface AddressInfo : NSObject <NSCopying>
 
 @property (copy) NSString *symbol;
 @property (copy) NSString *demangledCPPSymbol;
