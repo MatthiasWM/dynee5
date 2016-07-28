@@ -631,3 +631,42 @@ int disarm(char *dst, unsigned int addr, unsigned int cmd)
   }
   return incr;
 }
+
+int disarm_no_comments(char *dst, unsigned int addr, unsigned int cmd)
+{
+  unsigned int given = cmd;
+  char theString[5];
+  char theDisasmLine[2048];
+  char theCommentLine[2048];
+  char theChar;
+  int i;
+  int pc = addr;
+  int incr = 0;
+  
+  theString[4] = '\0';
+  {
+    for (i = 0; i < 4; i++)
+    {
+      theChar = ((char*) & given)[3-i];
+      if (theChar < '!')
+        theChar = '.';
+      theString[i] = theChar;
+    }
+    
+    theDisasmLine[0] = '\0';
+    theCommentLine[0] = '\0';
+    incr = print_insn_arm(pc, given, theDisasmLine, theCommentLine);
+    
+    char *t = strchr(theDisasmLine, '\t');
+    if (t) {
+      int dt = t-theDisasmLine;
+      if (dt<8) {
+        memmove(theDisasmLine+8, t+1, strlen(t));
+        dt = 7;
+      }
+      memset(t, 32, dt-(t-theDisasmLine)+1);
+    }
+    sprintf(dst, "%-32s", theDisasmLine);
+  }
+  return incr;
+}

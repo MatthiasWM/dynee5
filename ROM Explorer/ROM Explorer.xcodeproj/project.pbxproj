@@ -1,0 +1,566 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1AE2F341B17D18200EEFFFE /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F331B17D18200EEFFFE /* AppDelegate.mm */; };
+		F1AE2F361B17D18200EEFFFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F351B17D18200EEFFFE /* main.m */; };
+		F1AE2F381B17D18200EEFFFE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F371B17D18200EEFFFE /* Images.xcassets */; };
+		F1AE2F3B1B17D18200EEFFFE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F391B17D18200EEFFFE /* MainMenu.xib */; };
+		F1AE2F471B17D18200EEFFFE /* ROM_ExplorerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F461B17D18200EEFFFE /* ROM_ExplorerTests.m */; };
+		F1AE2F521B17D34900EEFFFE /* db2src.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F501B17D34900EEFFFE /* db2src.cpp */; };
+		F1AE2F551B17D3DD00EEFFFE /* nsDecode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F541B17D3DD00EEFFFE /* nsDecode.cpp */; };
+		F1AE2F581B17D3ED00EEFFFE /* disarm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F561B17D3ED00EEFFFE /* disarm.cpp */; };
+		F1AE2F5B1B17D40600EEFFFE /* AlDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F591B17D40600EEFFFE /* AlDatabase.cpp */; };
+		F1AE2F5E1B17D41400EEFFFE /* disarm_c.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F5C1B17D41400EEFFFE /* disarm_c.cpp */; };
+		F1AE2F631B17D42200EEFFFE /* AlCMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F5F1B17D42200EEFFFE /* AlCMethod.cpp */; };
+		F1AE2F641B17D42200EEFFFE /* AlCPPMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F611B17D42200EEFFFE /* AlCPPMethod.cpp */; };
+		F1AE2F671B17D42C00EEFFFE /* AlARMCode.cp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F651B17D42C00EEFFFE /* AlARMCode.cp */; };
+		F1AE2F6A1B17D43400EEFFFE /* AlData.cp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F681B17D43400EEFFFE /* AlData.cp */; };
+		F1AE2F7B1B17D43B00EEFFFE /* AlDatabaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F6B1B17D43B00EEFFFE /* AlDatabaseObject.cpp */; };
+		F1AE2F7C1B17D43B00EEFFFE /* AlMemoryMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F6D1B17D43B00EEFFFE /* AlMemoryMap.cpp */; };
+		F1AE2F7D1B17D43B00EEFFFE /* AlObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F6F1B17D43B00EEFFFE /* AlObject.cpp */; };
+		F1AE2F7E1B17D43B00EEFFFE /* AlSymbol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F711B17D43B00EEFFFE /* AlSymbol.cpp */; };
+		F1AE2F7F1B17D43B00EEFFFE /* AlSymbolList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F731B17D43B00EEFFFE /* AlSymbolList.cpp */; };
+		F1AE2F801B17D43B00EEFFFE /* AlType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F751B17D43B00EEFFFE /* AlType.cpp */; };
+		F1AE2F811B17D43B00EEFFFE /* AlTypeList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F771B17D43B00EEFFFE /* AlTypeList.cpp */; };
+		F1AE2F821B17D43B00EEFFFE /* AlTypeRef.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F791B17D43B00EEFFFE /* AlTypeRef.cpp */; };
+		F1AE2F861B17D47500EEFFFE /* EasyBMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1AE2F851B17D47500EEFFFE /* EasyBMP.cpp */; };
+		F1AE2F8D1B17D5C600EEFFFE /* 717006.cppsymbols.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F8B1B17D5C600EEFFFE /* 717006.cppsymbols.txt */; };
+		F1AE2F8E1B17D5C600EEFFFE /* 717006.symbols.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F8C1B17D5C600EEFFFE /* 717006.symbols.txt */; };
+		F1AE2F911B17D77D00EEFFFE /* symbols.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F901B17D77D00EEFFFE /* symbols.txt */; };
+		F1AE2F941B17D83100EEFFFE /* classes.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F921B17D83100EEFFFE /* classes.txt */; };
+		F1AE2F951B17D83100EEFFFE /* files.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1AE2F931B17D83100EEFFFE /* files.txt */; };
+		F1F6D90B1B17EE2800E30401 /* AddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F6D90A1B17EE2800E30401 /* AddressInfo.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1AE2F411B17D18200EEFFFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1AE2F251B17D18200EEFFFE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1AE2F2C1B17D18200EEFFFE;
+			remoteInfo = "ROM Explorer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F1AE2F2D1B17D18200EEFFFE /* ROM Explorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ROM Explorer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1AE2F311B17D18200EEFFFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1AE2F321B17D18200EEFFFE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F1AE2F331B17D18200EEFFFE /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		F1AE2F351B17D18200EEFFFE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F1AE2F371B17D18200EEFFFE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1AE2F3A1B17D18200EEFFFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F1AE2F401B17D18200EEFFFE /* ROM ExplorerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ROM ExplorerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1AE2F451B17D18200EEFFFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1AE2F461B17D18200EEFFFE /* ROM_ExplorerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ROM_ExplorerTests.m; sourceTree = "<group>"; };
+		F1AE2F501B17D34900EEFFFE /* db2src.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = db2src.cpp; path = ../Albert/tools/db2src.cpp; sourceTree = "<group>"; };
+		F1AE2F511B17D34900EEFFFE /* db2src.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = db2src.h; path = ../Albert/tools/db2src.h; sourceTree = "<group>"; };
+		F1AE2F541B17D3DD00EEFFFE /* nsDecode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = nsDecode.cpp; path = ../Albert/tools/nsDecode.cpp; sourceTree = "<group>"; };
+		F1AE2F561B17D3ED00EEFFFE /* disarm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disarm.cpp; path = ../Albert/tools/disarm.cpp; sourceTree = "<group>"; };
+		F1AE2F571B17D3ED00EEFFFE /* disarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = disarm.h; path = ../Albert/tools/disarm.h; sourceTree = "<group>"; };
+		F1AE2F591B17D40600EEFFFE /* AlDatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlDatabase.cpp; path = ../Albert/tools/AlDatabase.cpp; sourceTree = "<group>"; };
+		F1AE2F5A1B17D40600EEFFFE /* AlDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlDatabase.h; path = ../Albert/tools/AlDatabase.h; sourceTree = "<group>"; };
+		F1AE2F5C1B17D41400EEFFFE /* disarm_c.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = disarm_c.cpp; path = ../Albert/tools/disarm_c.cpp; sourceTree = "<group>"; };
+		F1AE2F5D1B17D41400EEFFFE /* disarm_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = disarm_c.h; path = ../Albert/tools/disarm_c.h; sourceTree = "<group>"; };
+		F1AE2F5F1B17D42200EEFFFE /* AlCMethod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlCMethod.cpp; path = ../Albert/tools/AlCMethod.cpp; sourceTree = "<group>"; };
+		F1AE2F601B17D42200EEFFFE /* AlCMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlCMethod.h; path = ../Albert/tools/AlCMethod.h; sourceTree = "<group>"; };
+		F1AE2F611B17D42200EEFFFE /* AlCPPMethod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlCPPMethod.cpp; path = ../Albert/tools/AlCPPMethod.cpp; sourceTree = "<group>"; };
+		F1AE2F621B17D42200EEFFFE /* AlCPPMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlCPPMethod.h; path = ../Albert/tools/AlCPPMethod.h; sourceTree = "<group>"; };
+		F1AE2F651B17D42C00EEFFFE /* AlARMCode.cp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlARMCode.cp; path = ../Albert/tools/AlARMCode.cp; sourceTree = "<group>"; };
+		F1AE2F661B17D42C00EEFFFE /* AlARMCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlARMCode.h; path = ../Albert/tools/AlARMCode.h; sourceTree = "<group>"; };
+		F1AE2F681B17D43400EEFFFE /* AlData.cp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlData.cp; path = ../Albert/tools/AlData.cp; sourceTree = "<group>"; };
+		F1AE2F691B17D43400EEFFFE /* AlData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlData.h; path = ../Albert/tools/AlData.h; sourceTree = "<group>"; };
+		F1AE2F6B1B17D43B00EEFFFE /* AlDatabaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlDatabaseObject.cpp; path = ../Albert/tools/AlDatabaseObject.cpp; sourceTree = "<group>"; };
+		F1AE2F6C1B17D43B00EEFFFE /* AlDatabaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlDatabaseObject.h; path = ../Albert/tools/AlDatabaseObject.h; sourceTree = "<group>"; };
+		F1AE2F6D1B17D43B00EEFFFE /* AlMemoryMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlMemoryMap.cpp; path = ../Albert/tools/AlMemoryMap.cpp; sourceTree = "<group>"; };
+		F1AE2F6E1B17D43B00EEFFFE /* AlMemoryMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlMemoryMap.h; path = ../Albert/tools/AlMemoryMap.h; sourceTree = "<group>"; };
+		F1AE2F6F1B17D43B00EEFFFE /* AlObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlObject.cpp; path = ../Albert/tools/AlObject.cpp; sourceTree = "<group>"; };
+		F1AE2F701B17D43B00EEFFFE /* AlObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlObject.h; path = ../Albert/tools/AlObject.h; sourceTree = "<group>"; };
+		F1AE2F711B17D43B00EEFFFE /* AlSymbol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlSymbol.cpp; path = ../Albert/tools/AlSymbol.cpp; sourceTree = "<group>"; };
+		F1AE2F721B17D43B00EEFFFE /* AlSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlSymbol.h; path = ../Albert/tools/AlSymbol.h; sourceTree = "<group>"; };
+		F1AE2F731B17D43B00EEFFFE /* AlSymbolList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlSymbolList.cpp; path = ../Albert/tools/AlSymbolList.cpp; sourceTree = "<group>"; };
+		F1AE2F741B17D43B00EEFFFE /* AlSymbolList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlSymbolList.h; path = ../Albert/tools/AlSymbolList.h; sourceTree = "<group>"; };
+		F1AE2F751B17D43B00EEFFFE /* AlType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlType.cpp; path = ../Albert/tools/AlType.cpp; sourceTree = "<group>"; };
+		F1AE2F761B17D43B00EEFFFE /* AlType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlType.h; path = ../Albert/tools/AlType.h; sourceTree = "<group>"; };
+		F1AE2F771B17D43B00EEFFFE /* AlTypeList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlTypeList.cpp; path = ../Albert/tools/AlTypeList.cpp; sourceTree = "<group>"; };
+		F1AE2F781B17D43B00EEFFFE /* AlTypeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlTypeList.h; path = ../Albert/tools/AlTypeList.h; sourceTree = "<group>"; };
+		F1AE2F791B17D43B00EEFFFE /* AlTypeRef.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlTypeRef.cpp; path = ../Albert/tools/AlTypeRef.cpp; sourceTree = "<group>"; };
+		F1AE2F7A1B17D43B00EEFFFE /* AlTypeRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlTypeRef.h; path = ../Albert/tools/AlTypeRef.h; sourceTree = "<group>"; };
+		F1AE2F851B17D47500EEFFFE /* EasyBMP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EasyBMP.cpp; path = ../Albert/tools/EasyBMP/EasyBMP.cpp; sourceTree = "<group>"; };
+		F1AE2F8B1B17D5C600EEFFFE /* 717006.cppsymbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 717006.cppsymbols.txt; path = ../../Albert/data/717006.cppsymbols.txt; sourceTree = "<group>"; };
+		F1AE2F8C1B17D5C600EEFFFE /* 717006.symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 717006.symbols.txt; path = ../../Albert/data/717006.symbols.txt; sourceTree = "<group>"; };
+		F1AE2F901B17D77D00EEFFFE /* symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = symbols.txt; path = ../../Albert/symbols.txt; sourceTree = "<group>"; };
+		F1AE2F921B17D83100EEFFFE /* classes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = classes.txt; path = ../../Albert/classes.txt; sourceTree = "<group>"; };
+		F1AE2F931B17D83100EEFFFE /* files.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = files.txt; path = ../../Albert/files.txt; sourceTree = "<group>"; };
+		F1F6D9091B17EE2800E30401 /* AddressInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressInfo.h; sourceTree = "<group>"; };
+		F1F6D90A1B17EE2800E30401 /* AddressInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressInfo.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1AE2F2A1B17D18200EEFFFE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AE2F3D1B17D18200EEFFFE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1AE2F241B17D18200EEFFFE = {
+			isa = PBXGroup;
+			children = (
+				F1AE2F2F1B17D18200EEFFFE /* ROM Explorer */,
+				F1AE2F531B17D34C00EEFFFE /* Albert */,
+				F1AE2F431B17D18200EEFFFE /* ROM ExplorerTests */,
+				F1AE2F2E1B17D18200EEFFFE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1AE2F2E1B17D18200EEFFFE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1AE2F2D1B17D18200EEFFFE /* ROM Explorer.app */,
+				F1AE2F401B17D18200EEFFFE /* ROM ExplorerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1AE2F2F1B17D18200EEFFFE /* ROM Explorer */ = {
+			isa = PBXGroup;
+			children = (
+				F1F6D9091B17EE2800E30401 /* AddressInfo.h */,
+				F1F6D90A1B17EE2800E30401 /* AddressInfo.m */,
+				F1AE2F321B17D18200EEFFFE /* AppDelegate.h */,
+				F1AE2F331B17D18200EEFFFE /* AppDelegate.mm */,
+				F1AE2F371B17D18200EEFFFE /* Images.xcassets */,
+				F1AE2F391B17D18200EEFFFE /* MainMenu.xib */,
+				F1AE2F8F1B17D5C900EEFFFE /* Symbols */,
+				F1AE2F301B17D18200EEFFFE /* Supporting Files */,
+			);
+			path = "ROM Explorer";
+			sourceTree = "<group>";
+		};
+		F1AE2F301B17D18200EEFFFE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1AE2F311B17D18200EEFFFE /* Info.plist */,
+				F1AE2F351B17D18200EEFFFE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1AE2F431B17D18200EEFFFE /* ROM ExplorerTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1AE2F461B17D18200EEFFFE /* ROM_ExplorerTests.m */,
+				F1AE2F441B17D18200EEFFFE /* Supporting Files */,
+			);
+			path = "ROM ExplorerTests";
+			sourceTree = "<group>";
+		};
+		F1AE2F441B17D18200EEFFFE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1AE2F451B17D18200EEFFFE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1AE2F531B17D34C00EEFFFE /* Albert */ = {
+			isa = PBXGroup;
+			children = (
+				F1AE2F651B17D42C00EEFFFE /* AlARMCode.cp */,
+				F1AE2F661B17D42C00EEFFFE /* AlARMCode.h */,
+				F1AE2F5F1B17D42200EEFFFE /* AlCMethod.cpp */,
+				F1AE2F601B17D42200EEFFFE /* AlCMethod.h */,
+				F1AE2F611B17D42200EEFFFE /* AlCPPMethod.cpp */,
+				F1AE2F621B17D42200EEFFFE /* AlCPPMethod.h */,
+				F1AE2F681B17D43400EEFFFE /* AlData.cp */,
+				F1AE2F691B17D43400EEFFFE /* AlData.h */,
+				F1AE2F591B17D40600EEFFFE /* AlDatabase.cpp */,
+				F1AE2F5A1B17D40600EEFFFE /* AlDatabase.h */,
+				F1AE2F6B1B17D43B00EEFFFE /* AlDatabaseObject.cpp */,
+				F1AE2F6C1B17D43B00EEFFFE /* AlDatabaseObject.h */,
+				F1AE2F6D1B17D43B00EEFFFE /* AlMemoryMap.cpp */,
+				F1AE2F6E1B17D43B00EEFFFE /* AlMemoryMap.h */,
+				F1AE2F6F1B17D43B00EEFFFE /* AlObject.cpp */,
+				F1AE2F701B17D43B00EEFFFE /* AlObject.h */,
+				F1AE2F711B17D43B00EEFFFE /* AlSymbol.cpp */,
+				F1AE2F721B17D43B00EEFFFE /* AlSymbol.h */,
+				F1AE2F731B17D43B00EEFFFE /* AlSymbolList.cpp */,
+				F1AE2F741B17D43B00EEFFFE /* AlSymbolList.h */,
+				F1AE2F751B17D43B00EEFFFE /* AlType.cpp */,
+				F1AE2F761B17D43B00EEFFFE /* AlType.h */,
+				F1AE2F771B17D43B00EEFFFE /* AlTypeList.cpp */,
+				F1AE2F781B17D43B00EEFFFE /* AlTypeList.h */,
+				F1AE2F791B17D43B00EEFFFE /* AlTypeRef.cpp */,
+				F1AE2F7A1B17D43B00EEFFFE /* AlTypeRef.h */,
+				F1AE2F501B17D34900EEFFFE /* db2src.cpp */,
+				F1AE2F511B17D34900EEFFFE /* db2src.h */,
+				F1AE2F561B17D3ED00EEFFFE /* disarm.cpp */,
+				F1AE2F571B17D3ED00EEFFFE /* disarm.h */,
+				F1AE2F5C1B17D41400EEFFFE /* disarm_c.cpp */,
+				F1AE2F5D1B17D41400EEFFFE /* disarm_c.h */,
+				F1AE2F851B17D47500EEFFFE /* EasyBMP.cpp */,
+				F1AE2F541B17D3DD00EEFFFE /* nsDecode.cpp */,
+			);
+			name = Albert;
+			sourceTree = "<group>";
+		};
+		F1AE2F8F1B17D5C900EEFFFE /* Symbols */ = {
+			isa = PBXGroup;
+			children = (
+				F1AE2F921B17D83100EEFFFE /* classes.txt */,
+				F1AE2F931B17D83100EEFFFE /* files.txt */,
+				F1AE2F901B17D77D00EEFFFE /* symbols.txt */,
+				F1AE2F8B1B17D5C600EEFFFE /* 717006.cppsymbols.txt */,
+				F1AE2F8C1B17D5C600EEFFFE /* 717006.symbols.txt */,
+			);
+			name = Symbols;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1AE2F2C1B17D18200EEFFFE /* ROM Explorer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1AE2F4A1B17D18200EEFFFE /* Build configuration list for PBXNativeTarget "ROM Explorer" */;
+			buildPhases = (
+				F1AE2F291B17D18200EEFFFE /* Sources */,
+				F1AE2F2A1B17D18200EEFFFE /* Frameworks */,
+				F1AE2F2B1B17D18200EEFFFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ROM Explorer";
+			productName = "ROM Explorer";
+			productReference = F1AE2F2D1B17D18200EEFFFE /* ROM Explorer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1AE2F3F1B17D18200EEFFFE /* ROM ExplorerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1AE2F4D1B17D18200EEFFFE /* Build configuration list for PBXNativeTarget "ROM ExplorerTests" */;
+			buildPhases = (
+				F1AE2F3C1B17D18200EEFFFE /* Sources */,
+				F1AE2F3D1B17D18200EEFFFE /* Frameworks */,
+				F1AE2F3E1B17D18200EEFFFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1AE2F421B17D18200EEFFFE /* PBXTargetDependency */,
+			);
+			name = "ROM ExplorerTests";
+			productName = "ROM ExplorerTests";
+			productReference = F1AE2F401B17D18200EEFFFE /* ROM ExplorerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1AE2F251B17D18200EEFFFE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Steven Frank";
+				TargetAttributes = {
+					F1AE2F2C1B17D18200EEFFFE = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					F1AE2F3F1B17D18200EEFFFE = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = F1AE2F2C1B17D18200EEFFFE;
+					};
+				};
+			};
+			buildConfigurationList = F1AE2F281B17D18200EEFFFE /* Build configuration list for PBXProject "ROM Explorer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1AE2F241B17D18200EEFFFE;
+			productRefGroup = F1AE2F2E1B17D18200EEFFFE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1AE2F2C1B17D18200EEFFFE /* ROM Explorer */,
+				F1AE2F3F1B17D18200EEFFFE /* ROM ExplorerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1AE2F2B1B17D18200EEFFFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1AE2F951B17D83100EEFFFE /* files.txt in Resources */,
+				F1AE2F8E1B17D5C600EEFFFE /* 717006.symbols.txt in Resources */,
+				F1AE2F8D1B17D5C600EEFFFE /* 717006.cppsymbols.txt in Resources */,
+				F1AE2F381B17D18200EEFFFE /* Images.xcassets in Resources */,
+				F1AE2F941B17D83100EEFFFE /* classes.txt in Resources */,
+				F1AE2F3B1B17D18200EEFFFE /* MainMenu.xib in Resources */,
+				F1AE2F911B17D77D00EEFFFE /* symbols.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AE2F3E1B17D18200EEFFFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1AE2F291B17D18200EEFFFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1AE2F7F1B17D43B00EEFFFE /* AlSymbolList.cpp in Sources */,
+				F1AE2F361B17D18200EEFFFE /* main.m in Sources */,
+				F1AE2F811B17D43B00EEFFFE /* AlTypeList.cpp in Sources */,
+				F1F6D90B1B17EE2800E30401 /* AddressInfo.m in Sources */,
+				F1AE2F341B17D18200EEFFFE /* AppDelegate.mm in Sources */,
+				F1AE2F821B17D43B00EEFFFE /* AlTypeRef.cpp in Sources */,
+				F1AE2F7B1B17D43B00EEFFFE /* AlDatabaseObject.cpp in Sources */,
+				F1AE2F7D1B17D43B00EEFFFE /* AlObject.cpp in Sources */,
+				F1AE2F581B17D3ED00EEFFFE /* disarm.cpp in Sources */,
+				F1AE2F6A1B17D43400EEFFFE /* AlData.cp in Sources */,
+				F1AE2F5B1B17D40600EEFFFE /* AlDatabase.cpp in Sources */,
+				F1AE2F641B17D42200EEFFFE /* AlCPPMethod.cpp in Sources */,
+				F1AE2F551B17D3DD00EEFFFE /* nsDecode.cpp in Sources */,
+				F1AE2F521B17D34900EEFFFE /* db2src.cpp in Sources */,
+				F1AE2F801B17D43B00EEFFFE /* AlType.cpp in Sources */,
+				F1AE2F7C1B17D43B00EEFFFE /* AlMemoryMap.cpp in Sources */,
+				F1AE2F671B17D42C00EEFFFE /* AlARMCode.cp in Sources */,
+				F1AE2F5E1B17D41400EEFFFE /* disarm_c.cpp in Sources */,
+				F1AE2F861B17D47500EEFFFE /* EasyBMP.cpp in Sources */,
+				F1AE2F631B17D42200EEFFFE /* AlCMethod.cpp in Sources */,
+				F1AE2F7E1B17D43B00EEFFFE /* AlSymbol.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1AE2F3C1B17D18200EEFFFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1AE2F471B17D18200EEFFFE /* ROM_ExplorerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1AE2F421B17D18200EEFFFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1AE2F2C1B17D18200EEFFFE /* ROM Explorer */;
+			targetProxy = F1AE2F411B17D18200EEFFFE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1AE2F391B17D18200EEFFFE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1AE2F3A1B17D18200EEFFFE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1AE2F481B17D18200EEFFFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F1AE2F491B17D18200EEFFFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F1AE2F4B1B17D18200EEFFFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "ROM Explorer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CFLAGS = "-DROM_EXPLORER=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F1AE2F4C1B17D18200EEFFFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "ROM Explorer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CFLAGS = "-DROM_EXPLORER=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F1AE2F4E1B17D18200EEFFFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ROM ExplorerTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ROM Explorer.app/Contents/MacOS/ROM Explorer";
+			};
+			name = Debug;
+		};
+		F1AE2F4F1B17D18200EEFFFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ROM ExplorerTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ROM Explorer.app/Contents/MacOS/ROM Explorer";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1AE2F281B17D18200EEFFFE /* Build configuration list for PBXProject "ROM Explorer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AE2F481B17D18200EEFFFE /* Debug */,
+				F1AE2F491B17D18200EEFFFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1AE2F4A1B17D18200EEFFFE /* Build configuration list for PBXNativeTarget "ROM Explorer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AE2F4B1B17D18200EEFFFE /* Debug */,
+				F1AE2F4C1B17D18200EEFFFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1AE2F4D1B17D18200EEFFFE /* Build configuration list for PBXNativeTarget "ROM ExplorerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1AE2F4E1B17D18200EEFFFE /* Debug */,
+				F1AE2F4F1B17D18200EEFFFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1AE2F251B17D18200EEFFFE /* Project object */;
+}

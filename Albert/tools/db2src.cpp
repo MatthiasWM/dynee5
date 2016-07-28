@@ -61,30 +61,6 @@ const char *c_path = "src/";
 const char *cpp_path = "src/"; 
 const char *os_path = "NewtonOS/"; 
 
-const unsigned int flags_type_mask          = 0x000000ff;
-
-const unsigned int flags_type_unknown       = 0x00000000;
-const unsigned int flags_type_arm_code      = 0x00000001;
-const unsigned int flags_type_arm_byte      = 0x00000002;
-const unsigned int flags_type_arm_word      = 0x00000003;
-const unsigned int flags_type_arm_text      = 0x00000004;
-const unsigned int flags_type_patch_table   = 0x00000005;
-const unsigned int flags_type_jump_table    = 0x00000006;
-const unsigned int flags_type_unused        = 0x00000007;
-const unsigned int flags_type_rex           = 0x00000008;
-const unsigned int flags_type_ns            = 0x00000009;
-const unsigned int flags_type_ns_obj        = 0x0000000a;
-const unsigned int flags_type_ns_ref        = 0x0000000b;
-const unsigned int flags_type_dict          = 0x0000000c;
-const unsigned int flags_type_classinfo     = 0x0000000d;
-const unsigned int flags_type_arm_wtext     = 0x0000000e;
-const unsigned int flags_type_data          = 0x0000000f;
-
-const unsigned int flags_is_function        = 0x30000000;
-const unsigned int flags_is_target          = 0x10000000;
-const unsigned int flags_walked             = 0x40000000;
-const unsigned int flags_include            = 0x80000000;
-
 
 const char *type_lut[] = {
   "flags_type_unknown",
@@ -2723,7 +2699,7 @@ void findBitmaps()
   //writeBitmap(i);
 }
 
-
+#if !ROM_EXPLORER
 int main(int argc, char **argv)
 {
   strcpy(base_path, src_file_path);
@@ -2858,7 +2834,7 @@ int main(int argc, char **argv)
   
   return 0;
 }
-
+#endif
 
 void writeImageFiles()
 {

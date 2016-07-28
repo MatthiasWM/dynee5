@@ -34,31 +34,31 @@ extern const char *db_path;
 extern const char *src_path; 
 extern const char *c_path; 
 extern const char *cpp_path; 
-extern const char *os_path; 
+extern const char *os_path;
 
-extern const unsigned int flags_type_mask;
+const unsigned int flags_type_mask          = 0x000000ff;
 
-extern const unsigned int flags_type_unknown;
-extern const unsigned int flags_type_arm_code;
-extern const unsigned int flags_type_arm_byte;
-extern const unsigned int flags_type_arm_word;
-extern const unsigned int flags_type_arm_text;
-extern const unsigned int flags_type_patch_table;
-extern const unsigned int flags_type_jump_table;
-extern const unsigned int flags_type_unused;
-extern const unsigned int flags_type_rex;
-extern const unsigned int flags_type_ns;
-extern const unsigned int flags_type_ns_obj;
-extern const unsigned int flags_type_ns_ref;
-extern const unsigned int flags_type_dict;
-extern const unsigned int flags_type_classinfo;
-extern const unsigned int flags_type_arm_wtext;
-extern const unsigned int flags_type_data;
+const unsigned int flags_type_unknown       = 0x00000000;
+const unsigned int flags_type_arm_code      = 0x00000001;
+const unsigned int flags_type_arm_byte      = 0x00000002;
+const unsigned int flags_type_arm_word      = 0x00000003;
+const unsigned int flags_type_arm_text      = 0x00000004;
+const unsigned int flags_type_patch_table   = 0x00000005;
+const unsigned int flags_type_jump_table    = 0x00000006;
+const unsigned int flags_type_unused        = 0x00000007;
+const unsigned int flags_type_rex           = 0x00000008;
+const unsigned int flags_type_ns            = 0x00000009;
+const unsigned int flags_type_ns_obj        = 0x0000000a;
+const unsigned int flags_type_ns_ref        = 0x0000000b;
+const unsigned int flags_type_dict          = 0x0000000c;
+const unsigned int flags_type_classinfo     = 0x0000000d;
+const unsigned int flags_type_arm_wtext     = 0x0000000e;
+const unsigned int flags_type_data          = 0x0000000f;
 
-extern const unsigned int flags_is_function;
-extern const unsigned int flags_is_target;
-extern const unsigned int flags_walked;
-extern const unsigned int flags_include;
+const unsigned int flags_is_function        = 0x30000000;
+const unsigned int flags_is_target          = 0x10000000;
+const unsigned int flags_walked             = 0x40000000;
+const unsigned int flags_include            = 0x80000000;
 
 extern const char *type_lut[];
 
@@ -95,5 +95,20 @@ extern unsigned int branch_address_in_ROM(unsigned int addr, unsigned int cmd=0x
 extern unsigned int branch_address(unsigned int addr, unsigned int cmd=0xffffffff);
 
 extern void checkCodeCoverage();
+
+// For ROM Explorer:
+
+extern void readSymbols(const char *cpp_filename, const char *plain_filename);
+extern void zeroFlags();
+extern void load_db(char const *path, char const *filename);
+extern void preset_rom_use();
+extern void checkScriptCoverage();
+extern void writeLabel(FILE *newt, unsigned int i);
+extern void writeComments(FILE* newt, unsigned int i);
+extern void writeLabelIfNone(FILE *newt, unsigned int i);
+extern const char *p_ascii(unsigned char c);
+extern char hasLabel(unsigned int i);
+extern unsigned char printable(unsigned char c);
+
 
 #endif
