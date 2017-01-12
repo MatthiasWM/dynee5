@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/matt/dev/Dynee5.git/DyneCC/README.txt">
+   </FileRef>
+   <FileRef
+      location = "group:NOSTranslate.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:NewtonOS.xcodeproj">
+   </FileRef>
+</Workspace>
