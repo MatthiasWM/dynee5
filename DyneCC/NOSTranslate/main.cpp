@@ -33,15 +33,26 @@
 
  */
 
+#include "main.hpp"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
+
+#include "NTMemory.hpp"
 
 
 const char *gPath = 0;
-const char *gAifFilename = 0;
-const char *gRexFilename = 0;
+const char *gAIFFilename = 0;
+const char *gREXFilename = 0;
 const char *gDestPathname = 0;
+
+bool gAIFImageFound = false;
+bool gREXImageFound = false;
+
+// access to the NewtonOS memory image
+NTMemory Mem;
 
 
 char *concat(const char *a, const char *b)
@@ -51,6 +62,72 @@ char *concat(const char *a, const char *b)
     strcpy(name, a);
     strcat(name, b);
     return name;
+}
+
+
+size_t filesize(FILE *f)
+{
+    size_t curr = fseek(f, 0, SEEK_END);
+    size_t size = fseek(f, curr, SEEK_SET);
+    return size;
+}
+
+
+bool loadAIFImage(const char *filename)
+{
+    // verify that the given filename does point to the correct AIF file
+    // tell the memory manager to load the binary data from file
+    // SIG: E1A00000E1A00000EB00000C00000000, SIZE: 9,350,173 BYTES
+    FILE *f = fopen(filename, "rb");
+    if (!f) {
+        fprintf(stderr, "Can't open AIF file '%s': %s", filename, strerror(errno));
+        return false;
+    }
+    if (filesize(f)!=9350173) {
+        fprintf(stderr, "Can't open AIF file '%s': Unexpected file size", filename);
+        return false;
+    }
+    unsigned char sig[16] = { 0xE1, 0xA0, 0x00, 0x00, 0xE1, 0xA0, 0x00, 0x00, 0xEB, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x00 };
+    unsigned char buf[16];
+    fread(buf, 16, 1, f);
+    if (memcmp(sig, buf, 16)!=0) {
+        fprintf(stderr, "Can't open AIF file '%s': Unexpected file signature", filename);
+        return false;
+    }
+    return Mem.read(0, filename, 0x00000080, 0x0071FC4C);
+}
+
+
+bool loadREXImage(const char *filename)
+{
+    // verify that the given filename does point to the correct REX file
+    // tell the memory manager to load the binary data from file
+    // SIG: 524578426C6F636B000098E600000001, SIZE: 845,149 bytes
+    FILE *f = fopen(filename, "rb");
+    if (!f) {
+        fprintf(stderr, "Can't open REX file '%s': %s", filename, strerror(errno));
+        return false;
+    }
+    if (filesize(f)!=845149) {
+        fprintf(stderr, "Can't open REX file '%s': Unexpected file size", filename);
+        return false;
+    }
+    unsigned char sig[16] = { 0x52, 0x45, 0x78, 0x42, 0x6C, 0x6F, 0x63, 0x6B, 0x00, 0x00, 0x98, 0xE6, 0x00, 0x00, 0x00, 0x01 };
+    unsigned char buf[16];
+    fread(buf, 16, 1, f);
+    if (memcmp(sig, buf, 16)!=0) {
+        fprintf(stderr, "Can't open REX file '%s': Unexpected file signature", filename);
+        return false;
+    }
+    return Mem.read(0x0071FC4C, filename, 0x00000000, 0x000CE55D);
+}
+
+
+bool loadExternalResources()
+{
+    if (loadAIFImage(gAIFFilename)==false) return false;
+    if (loadREXImage(gREXFilename)==false) return false;
+    return true;
 }
 
 
@@ -66,14 +143,14 @@ int main(int argc, const char * argv[])
                 fprintf(stderr, "ERROR: must set --path before --aif\n");
                 return 20;
             } else {
-                gAifFilename = concat(gPath, argv[++i]);
+                gAIFFilename = concat(gPath, argv[++i]);
             }
         } else if (argc>i && argv[i+1] && strcmp(arg, "--rex")==0) {
             if (!gPath) {
                 fprintf(stderr, "ERROR: must set --path before --rex\n");
                 return 20;
             } else {
-                gRexFilename = concat(gPath, argv[++i]);
+                gREXFilename = concat(gPath, argv[++i]);
             }
         } else if (argc>i && argv[i+1] && strcmp(arg, "--dest")==0) {
             if (!gPath) {
@@ -83,11 +160,11 @@ int main(int argc, const char * argv[])
                 gDestPathname = concat(gPath, argv[++i]);
             }
         } else if (strcmp(arg, "--initialize")==0) {
-            // load AIF
-            // load REX
+            loadExternalResources();
             // analyse and create monolith
             // create directories, headers, and source files
         } else if (strcmp(arg, "--merge")==0) {
+            loadExternalResources();
             // create monolith if not done yet
             // walk all files in the dest path and fill in the missing pieces from the monolith
         } else if (strcmp(arg, "--clean")==0) {

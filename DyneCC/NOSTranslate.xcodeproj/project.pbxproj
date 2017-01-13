@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C9DFC2DE1E284841008B0C1C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9DFC2DD1E284841008B0C1C /* main.cpp */; };
+		C9DFC2FF1E28FFF6008B0C1C /* NTMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9DFC2FD1E28FFF6008B0C1C /* NTMemory.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,9 @@
 /* Begin PBXFileReference section */
 		C9DFC2DA1E284841008B0C1C /* NOSTranslate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NOSTranslate; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9DFC2DD1E284841008B0C1C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C9DFC2FD1E28FFF6008B0C1C /* NTMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NTMemory.cpp; sourceTree = "<group>"; };
+		C9DFC2FE1E28FFF6008B0C1C /* NTMemory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NTMemory.hpp; sourceTree = "<group>"; };
+		C9DFC3001E2900FD008B0C1C /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,9 @@
 			isa = PBXGroup;
 			children = (
 				C9DFC2DD1E284841008B0C1C /* main.cpp */,
+				C9DFC3001E2900FD008B0C1C /* main.hpp */,
+				C9DFC2FD1E28FFF6008B0C1C /* NTMemory.cpp */,
+				C9DFC2FE1E28FFF6008B0C1C /* NTMemory.hpp */,
 			);
 			path = NOSTranslate;
 			sourceTree = "<group>";
@@ -118,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9DFC2FF1E28FFF6008B0C1C /* NTMemory.cpp in Sources */,
 				C9DFC2DE1E284841008B0C1C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
