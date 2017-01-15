@@ -19,6 +19,8 @@ public:
     NTMemory();
     ~NTMemory();
     bool read(uint addr, const char *filename, uint offset, uint size);
+private:
+    ubyte *pROMImage;
 };
 
 

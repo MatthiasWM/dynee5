@@ -67,8 +67,10 @@ char *concat(const char *a, const char *b)
 
 size_t filesize(FILE *f)
 {
-    size_t curr = fseek(f, 0, SEEK_END);
-    size_t size = fseek(f, curr, SEEK_SET);
+    size_t curr = ftell(f);
+    fseek(f, 0, SEEK_END);
+    size_t size = ftell(f);
+    fseek(f, curr, SEEK_SET);
     return size;
 }
 
@@ -80,18 +82,18 @@ bool loadAIFImage(const char *filename)
     // SIG: E1A00000E1A00000EB00000C00000000, SIZE: 9,350,173 BYTES
     FILE *f = fopen(filename, "rb");
     if (!f) {
-        fprintf(stderr, "Can't open AIF file '%s': %s", filename, strerror(errno));
+        fprintf(stderr, "Can't open AIF file '%s': %s\n", filename, strerror(errno));
         return false;
     }
-    if (filesize(f)!=9350173) {
-        fprintf(stderr, "Can't open AIF file '%s': Unexpected file size", filename);
+    if (filesize(f)!=9349820) {
+        fprintf(stderr, "Can't open AIF file '%s': Unexpected file size (expected 9349820, found %ld)\n", filename, filesize(f));
         return false;
     }
     unsigned char sig[16] = { 0xE1, 0xA0, 0x00, 0x00, 0xE1, 0xA0, 0x00, 0x00, 0xEB, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x00 };
     unsigned char buf[16];
     fread(buf, 16, 1, f);
     if (memcmp(sig, buf, 16)!=0) {
-        fprintf(stderr, "Can't open AIF file '%s': Unexpected file signature", filename);
+        fprintf(stderr, "Can't open AIF file '%s': Unexpected file signature\n", filename);
         return false;
     }
     return Mem.read(0, filename, 0x00000080, 0x0071FC4C);
@@ -105,18 +107,18 @@ bool loadREXImage(const char *filename)
     // SIG: 524578426C6F636B000098E600000001, SIZE: 845,149 bytes
     FILE *f = fopen(filename, "rb");
     if (!f) {
-        fprintf(stderr, "Can't open REX file '%s': %s", filename, strerror(errno));
+        fprintf(stderr, "Can't open REX file '%s': %s\n", filename, strerror(errno));
         return false;
     }
-    if (filesize(f)!=845149) {
-        fprintf(stderr, "Can't open REX file '%s': Unexpected file size", filename);
+    if (filesize(f)!=844796) {
+        fprintf(stderr, "Can't open REX file '%s': Unexpected file size (expected 844796, found %ld)\n", filename, filesize(f));
         return false;
     }
     unsigned char sig[16] = { 0x52, 0x45, 0x78, 0x42, 0x6C, 0x6F, 0x63, 0x6B, 0x00, 0x00, 0x98, 0xE6, 0x00, 0x00, 0x00, 0x01 };
     unsigned char buf[16];
     fread(buf, 16, 1, f);
     if (memcmp(sig, buf, 16)!=0) {
-        fprintf(stderr, "Can't open REX file '%s': Unexpected file signature", filename);
+        fprintf(stderr, "Can't open REX file '%s': Unexpected file signature\n", filename);
         return false;
     }
     return Mem.read(0x0071FC4C, filename, 0x00000000, 0x000CE55D);

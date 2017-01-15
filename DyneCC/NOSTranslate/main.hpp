@@ -11,6 +11,7 @@
 
 
 typedef unsigned int uint;
+typedef unsigned char ubyte;
 
 
 extern class NTMemory Mem;
