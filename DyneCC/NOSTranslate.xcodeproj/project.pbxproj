@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C9DFC2DE1E284841008B0C1C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9DFC2DD1E284841008B0C1C /* main.cpp */; };
 		C9DFC2FF1E28FFF6008B0C1C /* NTMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9DFC2FD1E28FFF6008B0C1C /* NTMemory.cpp */; };
+		C9DFC3031E2CF653008B0C1C /* NTAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9DFC3011E2CF653008B0C1C /* NTAddress.cpp */; };
+		C9DFC3061E2D8220008B0C1C /* NTSymbol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C9DFC3041E2D8220008B0C1C /* NTSymbol.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,10 @@
 		C9DFC2FD1E28FFF6008B0C1C /* NTMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NTMemory.cpp; sourceTree = "<group>"; };
 		C9DFC2FE1E28FFF6008B0C1C /* NTMemory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NTMemory.hpp; sourceTree = "<group>"; };
 		C9DFC3001E2900FD008B0C1C /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
+		C9DFC3011E2CF653008B0C1C /* NTAddress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NTAddress.cpp; sourceTree = "<group>"; };
+		C9DFC3021E2CF653008B0C1C /* NTAddress.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NTAddress.hpp; sourceTree = "<group>"; };
+		C9DFC3041E2D8220008B0C1C /* NTSymbol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NTSymbol.cpp; sourceTree = "<group>"; };
+		C9DFC3051E2D8220008B0C1C /* NTSymbol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NTSymbol.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +71,10 @@
 				C9DFC3001E2900FD008B0C1C /* main.hpp */,
 				C9DFC2FD1E28FFF6008B0C1C /* NTMemory.cpp */,
 				C9DFC2FE1E28FFF6008B0C1C /* NTMemory.hpp */,
+				C9DFC3011E2CF653008B0C1C /* NTAddress.cpp */,
+				C9DFC3021E2CF653008B0C1C /* NTAddress.hpp */,
+				C9DFC3041E2D8220008B0C1C /* NTSymbol.cpp */,
+				C9DFC3051E2D8220008B0C1C /* NTSymbol.hpp */,
 			);
 			path = NOSTranslate;
 			sourceTree = "<group>";
@@ -126,7 +136,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9DFC2FF1E28FFF6008B0C1C /* NTMemory.cpp in Sources */,
+				C9DFC3061E2D8220008B0C1C /* NTSymbol.cpp in Sources */,
 				C9DFC2DE1E284841008B0C1C /* main.cpp in Sources */,
+				C9DFC3031E2CF653008B0C1C /* NTAddress.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

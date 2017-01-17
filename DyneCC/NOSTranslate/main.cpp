@@ -35,12 +35,12 @@
 
 #include "main.hpp"
 
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
 
 #include "NTMemory.hpp"
+#include "NTSymbol.hpp"
 
 
 const char *gPath = 0;
@@ -53,6 +53,8 @@ bool gREXImageFound = false;
 
 // access to the NewtonOS memory image
 NTMemory Mem;
+
+NTSymbolList SymbolList;
 
 
 char *concat(const char *a, const char *b)
@@ -125,11 +127,29 @@ bool loadREXImage(const char *filename)
 }
 
 
+bool loadAIFSymbols(const char *filename)
+{
+    // TODO: load symbols, mark address space with 'hasSymbol', interprete symbols
+//    Mem.at(0x00000000).setSymbol("Reset");
+    SymbolList.readFromAIF(filename);
+    return true;
+}
+
+
 bool loadExternalResources()
 {
     if (loadAIFImage(gAIFFilename)==false) return false;
     if (loadREXImage(gREXFilename)==false) return false;
+    if (loadAIFSymbols(gAIFFilename)==false) return false;
     return true;
+}
+
+
+uint readWord(FILE *f)
+{
+    uint32_t w;
+    fread(&w, 4, 1, f);
+    return htonl(w);
 }
 
 

@@ -8,6 +8,8 @@
 
 #include "NTMemory.hpp"
 
+#include "NTAddress.hpp"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -79,5 +81,19 @@ bool NTMemory::read(uint addr, const char *filename, uint offset, uint size)
     fclose(f);
     return true;
 }
+
+
+NTAddress &NTMemory::at(uint32_t addr)
+{
+    NTMemoryMap::iterator it = pMap.find(addr);
+    if (it==pMap.end()) {
+        NTAddress *a = new NTAddress(addr);
+        pMap[addr] = a;
+        return *a;
+    } else {
+        return *it->second;
+    }
+}
+
 
 

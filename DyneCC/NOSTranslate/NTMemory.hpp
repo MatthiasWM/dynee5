@@ -12,6 +12,12 @@
 
 #include "main.hpp"
 
+#include <map>
+
+
+class NTAddress;
+typedef std::map<uint32_t, NTAddress*> NTMemoryMap;
+
 
 class NTMemory
 {
@@ -19,8 +25,10 @@ public:
     NTMemory();
     ~NTMemory();
     bool read(uint addr, const char *filename, uint offset, uint size);
+    NTAddress &at(uint32_t addr);
 private:
     ubyte *pROMImage;
+    NTMemoryMap pMap;
 };
 
 
