@@ -96,4 +96,17 @@ NTAddress &NTMemory::at(uint32_t addr)
 }
 
 
+void NTMemory::printAll()
+{
+    NTMemoryMap::iterator it = pMap.begin();
+    for ( ; it!=pMap.end(); ++it)
+    {
+        NTAddress *a = it->second;
+        printf("At 0x%08x:\n", it->first);
+        a->printAll();
+    }
+}
+
+
+
 

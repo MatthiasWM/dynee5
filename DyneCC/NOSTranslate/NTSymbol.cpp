@@ -14,6 +14,8 @@
 #include <stdlib.h>
 
 
+NTSymbol NTSymbolList::null("<NULL>");
+
 
 NTSymbolList::NTSymbolList()
 {
@@ -54,7 +56,6 @@ bool NTSymbolList::readFromAIF(const char *filename)
         fread(name, n, 1, f);
         name[n] = 0;
         //fprintf(s, "%d %08x %s\n", type, value, name);
-        //DB.addSymbol(value, name);
         if (type!=1) {
             SymbolList.addSymbol(value, name, type);
             Mem.at(value).hasSymbol(true);
@@ -76,11 +77,38 @@ bool NTSymbolList::addSymbol(uint32_t address, const char *name, ubyte type)
         pMap[address] = sym;
         sym->setType(type);
     } else {
-        fprintf(stderr, "ERROR: duplicate sybol at 0x%08X: '%s' and '%s'\n",
-                address, it->second->name(), name);
-        return false;
+        // We will encounter duplicate symbols. Which one should we keep?
+        const char *oldName = it->second->name();
+        // Difference is a leading underscor: keep the one without the underscore.
+        if (oldName[0]=='_' && strcmp(oldName+1, name)==0) {
+            it->second->setName(name);
+        } else if (name[0]=='_' && strcmp(oldName, name+1)==0) {
+            // keep the old name
+        } else if (strcmp(oldName, "memcpy")==0 && strcmp(name, "memmove")==0) {
+            it->second->setName(name); // memmove is a superset of memcpy
+        } else if (   strncmp(oldName, "PublicFiller", 12)==0
+                   || strncmp(oldName, "MP0", 3)==0) {
+            // we don't care
+        } else {
+            if (gWarnLevel>=9)
+                fprintf(stderr, "WARNING: ignoring duplicate sybol at 0x%08X: keeping '%s', discarding '%s'\n",
+                        address, it->second->name(), name);
+            return false;
+        }
     }
     return true;
+}
+
+
+NTSymbol &NTSymbolList::at(uint32_t addr)
+{
+    NTSymbolMap::iterator it = pMap.find(addr);
+    if (it==pMap.end()) {
+        return NTSymbolList::null;
+    } else {
+        return *it->second;
+    }
+
 }
 
 
@@ -98,9 +126,23 @@ NTSymbol::~NTSymbol()
 }
 
 
+void NTSymbol::printAll()
+{
+    printf("    Symbol '%s', type %d\n", pName, pType);
+}
+
+
 const char *NTSymbol::name()
 {
     return pName;
+}
+
+
+void NTSymbol::setName(const char *newName)
+{
+    if (pName) free(pName);
+    pName = 0L;
+    if (newName && *newName) pName = strdup(newName);
 }
 
 

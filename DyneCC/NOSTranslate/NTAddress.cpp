@@ -8,11 +8,22 @@
 
 #include "NTAddress.hpp"
 
+#include "NTSymbol.hpp"
+
 
 NTAddress::NTAddress(uint32_t addr)
 :   pAddr(addr),
     pHasSymbol(false)
 {
+}
+
+
+void NTAddress::printAll()
+{
+    if (hasSymbol()) {
+        printf("  has a symbol:\n");
+        SymbolList.at(pAddr).printAll();
+    }
 }
 
 

@@ -23,10 +23,13 @@ typedef std::map<uint32_t, NTSymbol*> NTSymbolMap;
 class NTSymbolList
 {
 public:
+    static NTSymbol null;
+public:
     NTSymbolList();
     ~NTSymbolList();
     bool readFromAIF(const char *filename);
     bool addSymbol(uint32_t address, const char *name, ubyte type);
+    NTSymbol &at(uint32_t address);
 private:
     NTSymbolMap pMap;
 };
@@ -37,7 +40,9 @@ class NTSymbol
 public:
     NTSymbol(const char *name);
     ~NTSymbol();
+    void printAll();
     const char *name();
+    void setName(const char *newName);
     void setType(ubyte t);
 private:
     char *pName;

@@ -43,6 +43,8 @@
 #include "NTSymbol.hpp"
 
 
+uint gWarnLevel = 8;
+
 const char *gPath = 0;
 const char *gAIFFilename = 0;
 const char *gREXFilename = 0;
@@ -153,6 +155,12 @@ uint readWord(FILE *f)
 }
 
 
+void printAllWeKnow()
+{
+    Mem.printAll();
+}
+
+
 int main(int argc, const char * argv[])
 {
     for (int i=1; i<argc; ++i) {
@@ -193,5 +201,6 @@ int main(int argc, const char * argv[])
             // walk all files in the dest path and remove intermediate code
         }
     }
+    printAllWeKnow();
     return 0;
 }

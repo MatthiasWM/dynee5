@@ -21,7 +21,11 @@ extern class NTMemory Mem;
 extern class NTSymbolList SymbolList;
 
 
+extern uint gWarnLevel;
+
+
 extern uint readWord(FILE *f);
+
 
 
 #endif /* main_h */

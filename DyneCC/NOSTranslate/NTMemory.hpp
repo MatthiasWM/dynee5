@@ -26,6 +26,7 @@ public:
     ~NTMemory();
     bool read(uint addr, const char *filename, uint offset, uint size);
     NTAddress &at(uint32_t addr);
+    void printAll();
 private:
     ubyte *pROMImage;
     NTMemoryMap pMap;

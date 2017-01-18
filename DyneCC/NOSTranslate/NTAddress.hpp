@@ -17,6 +17,7 @@ public:
     NTAddress(uint32_t a);
     bool hasSymbol();
     void hasSymbol(bool v);
+    void printAll();
     
     bool isFunction();
     bool isCFunction();
