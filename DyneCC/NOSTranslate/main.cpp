@@ -33,6 +33,36 @@
 
  */
 
+/*
+ NTMemRange(a, b);
+ +------------------------------------ 4GB ------------------------------------+ CPU Address Range
+ +--- ROM -----------+-- REX ---+   +- Patch Table -+  +-- RAM --+ +-- Flash --+
+ 
+ +-- C Function -------------------+
+ +- Intro -+-+-+-+-+-+-+- Return --+
+ +-+-+-+-+-+           +-+-+-+-+-+-+  ARM Instructions
+
+ NTMemRange
+   NTMemData
+     NTMemData_RExHeader
+   NTMemScript
+     NTMemNSComposite
+       NTMemNSRecord
+     NTMemNSValue
+       NTMemNSString...
+   NTMemCode
+     NTMemFunction
+       NTMemARMBoilerPlate
+         NTMemARMSwitchCase
+       NTMemARMInstruction
+         NTMemARM_ldm
+     NTMemJumpTable
+       NTMemARMJump
+     NTMemVTable
+       NTMemARMVJump
+
+ */
+
 #include "main.hpp"
 
 #include <string.h>
@@ -40,6 +70,7 @@
 #include <errno.h>
 
 #include "NTMemory.hpp"
+#include "NTAddress.hpp"
 #include "NTSymbol.hpp"
 
 
@@ -93,7 +124,9 @@ bool loadAIFImage(const char *filename)
         fprintf(stderr, "Can't open AIF file '%s': Unexpected file size (expected 9349820, found %ld)\n", filename, filesize(f));
         return false;
     }
-    unsigned char sig[16] = { 0xE1, 0xA0, 0x00, 0x00, 0xE1, 0xA0, 0x00, 0x00, 0xEB, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x00 };
+    unsigned char sig[16] = {
+        0xE1, 0xA0, 0x00, 0x00, 0xE1, 0xA0, 0x00, 0x00,
+        0xEB, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x00 };
     unsigned char buf[16];
     fread(buf, 16, 1, f);
     if (memcmp(sig, buf, 16)!=0) {
@@ -118,7 +151,9 @@ bool loadREXImage(const char *filename)
         fprintf(stderr, "Can't open REX file '%s': Unexpected file size (expected 844796, found %ld)\n", filename, filesize(f));
         return false;
     }
-    unsigned char sig[16] = { 0x52, 0x45, 0x78, 0x42, 0x6C, 0x6F, 0x63, 0x6B, 0x00, 0x00, 0x98, 0xE6, 0x00, 0x00, 0x00, 0x01 };
+    unsigned char sig[16] = {
+        0x52, 0x45, 0x78, 0x42, 0x6C, 0x6F, 0x63, 0x6B,
+        0x00, 0x00, 0x98, 0xE6, 0x00, 0x00, 0x00, 0x01 };
     unsigned char buf[16];
     fread(buf, 16, 1, f);
     if (memcmp(sig, buf, 16)!=0) {
@@ -147,6 +182,36 @@ bool loadExternalResources()
 }
 
 
+void addSymbol(uint32_t addr, const char *name, int type=0)
+{
+    SymbolList.addSymbol(addr, name, type);
+    Mem.at(addr).hasSymbol(true);
+}
+
+
+bool addLocalResources()
+{
+    // Additional symbols
+    addSymbol(0x00000004, "UndefinedInstruction");
+    addSymbol(0x00000008, "SoftwareInterrupt");
+    addSymbol(0x0000000C, "AbortPrefetch");
+    addSymbol(0x00000010, "AbortData");
+    addSymbol(0x00000014, "AbortCode");
+    addSymbol(0x00000018, "IRQ");
+    addSymbol(0x0000001C, "FIQ");
+    // Add CPU jump vectors
+    Mem.setJumpTable(0x00000000, 0x00000020);
+    // Add the global patch table that contains a huge number of entry points
+    Mem.setJumpTable(0x01A00000, 0x01C1085C);
+    // TODO: Find and add virtual function tables
+    // 0x0001A618 to 0x00021438
+    // TODO: Find NewtonOS style virtual function tables
+    // 0x00386140 for example. Find "SomeClass::ClassInfo()" methods
+    // switch/case instructions also use easy to find jump tables
+    return true;
+}
+
+
 uint readWord(FILE *f)
 {
     uint32_t w;
@@ -157,7 +222,10 @@ uint readWord(FILE *f)
 
 void printAllWeKnow()
 {
-    Mem.printAll();
+    char buf[1024];
+    Mem.at(0).disassemble(buf);
+    printf("%s\n", buf);
+    //Mem.printAll();
 }
 
 
@@ -191,6 +259,8 @@ int main(int argc, const char * argv[])
             }
         } else if (strcmp(arg, "--initialize")==0) {
             loadExternalResources();
+            addLocalResources();
+            // analyseCodeFlow();
             // analyse and create monolith
             // create directories, headers, and source files
         } else if (strcmp(arg, "--merge")==0) {
@@ -201,6 +271,12 @@ int main(int argc, const char * argv[])
             // walk all files in the dest path and remove intermediate code
         }
     }
-    printAllWeKnow();
+
+    NTMemChunk *ROM = (new NTMemChunk(0x00000000))->endsAt(0xFFFFFFFF);
+    ROM->add(new NTMemData_RExHeader(0x0071FC4C))->explore();
+    ROM->print();
+
+//    printAllWeKnow();
+    
     return 0;
 }

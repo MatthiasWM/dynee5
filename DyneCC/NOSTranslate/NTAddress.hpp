@@ -23,9 +23,21 @@ public:
     bool isCFunction();
     bool isCppFunction();
     bool isScript(); //...
+    void setJumpTableBranch() { pIsARMCode = 1; pIsJumpTableBranch = 1; }
+    bool isJumpTableBranch() { return pIsJumpTableBranch; }
+    void setARMCode() { pIsARMCode = 1; }
+    bool isARMCode() { return pIsARMCode; }
+    bool disassemble(char*);
+public:
+    enum {
+        kAddrDisassemble    // char[]
+    };
+    uint32_t handle(int cmd, ...);
 private:
     uint32_t pAddr;
-    int pHasSymbol:1;
+    unsigned pHasSymbol:1;
+    unsigned pIsJumpTableBranch:1;
+    unsigned pIsARMCode:1;
 };
 
 #endif /* NTAddress_hpp */
