@@ -15,7 +15,6 @@
 		C9AAFC770E006F3500A7CBAF /* Fldtk_Icon_Dropbox.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9AAFC750E006F3500A7CBAF /* Fldtk_Icon_Dropbox.cxx */; };
 		C9AAFCBB0E01BA4300A7CBAF /* Fldtk_Dialogs.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9AAFCB90E01BA4300A7CBAF /* Fldtk_Dialogs.cxx */; };
 		C9AAFFAB0E0463B200A7CBAF /* Flio_Inspector_Einstein.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9AAFFA90E0463B200A7CBAF /* Flio_Inspector_Einstein.cxx */; };
-		C9CD430F0DF83E8B0052DB5E /* doxyfile.osx.dox in Resources */ = {isa = PBXBuildFile; fileRef = C9CD430E0DF83E8B0052DB5E /* doxyfile.osx.dox */; };
 		C9FB9BF80DE352BE00026BB1 /* sandbox.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B540DE352BD00026BB1 /* sandbox.cxx */; };
 		C9FB9BF90DE352BE00026BB1 /* Dtk_Document.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B560DE352BD00026BB1 /* Dtk_Document.cxx */; };
 		C9FB9BFB0DE352BE00026BB1 /* Dtk_Document_List.cxx in Sources */ = {isa = PBXBuildFile; fileRef = C9FB9B590DE352BE00026BB1 /* Dtk_Document_List.cxx */; };
@@ -476,9 +475,15 @@
 /* Begin PBXProject section */
 		20286C28FDCF999611CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = C0E91AC908A95435008D54AB /* Build configuration list for PBXProject "DyneTK" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 20286C29FDCF999611CA2CEA /* FltkTpl */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -497,7 +502,6 @@
 				C9FF05EE0BC6267E008673DF /* toolbox_closed.xpm in Resources */,
 				C9FF05EF0BC6267E008673DF /* toolbox_inactive.xpm in Resources */,
 				C9FF05F00BC6267E008673DF /* toolbox_open.xpm in Resources */,
-				C9CD430F0DF83E8B0052DB5E /* doxyfile.osx.dox in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

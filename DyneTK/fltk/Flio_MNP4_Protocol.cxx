@@ -30,6 +30,7 @@
 #include "Flio_Serial_Port.h"
 
 #include <FL/Fl.H>
+#include <FL/Fl_Group.H>
 
 #include <stdlib.h>
 #include <stdio.h>

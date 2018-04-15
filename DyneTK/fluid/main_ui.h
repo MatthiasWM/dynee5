@@ -27,7 +27,7 @@
 #include "fluid/Fldtk_Inspector.h"
 #include "fltk/Fldtk_Document_Tabs.h"
 #include "fltk/Fldtk_Document_Browser.h"
-#include <FL/fl_ask.h>
+#include <FL/fl_ask.H>
 #include "main.h"
 #include <FL/Fl_Help_Dialog.H>
 extern Fl_Help_Dialog *wReleaseNotes; 

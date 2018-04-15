@@ -37,7 +37,7 @@
 #include "main.h"
 #include "allNewt.h"
 
-#include <FL/filename.h>
+#include <FL/filename.H>
 #include <assert.h>
 
 

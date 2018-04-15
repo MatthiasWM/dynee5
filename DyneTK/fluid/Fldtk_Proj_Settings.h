@@ -25,7 +25,7 @@
 #include "fltk/Flmm_Set_Input.h"
 #include "fltk/Flmm_Set_Check_Button.h"
 #include "fltk/Fldtk_Icon_Dropbox.h"
-#include <FL/fl_file_chooser.h>
+#include <FL/Fl_File_Chooser.H>
 void set_changed_cb(Fl_Widget*w, void*);
 #include <FL/Fl_Group.H>
 extern void set_changed_cb(Flmm_Set_Input*, void*);

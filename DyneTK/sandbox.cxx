@@ -35,7 +35,7 @@
 #include <FL/Fl_Preferences.H>
 #include <FL/Fl_Text_Editor.H>
 #include <FL/Fl_Text_Buffer.H>
-#include <FL/fl_file_chooser.h>
+#include <FL/Fl_File_Chooser.H>
 
 #include "fluid/Fldtk_Prefs.h"
 #include "fluid/Fldtk_Proj_Settings.h"
