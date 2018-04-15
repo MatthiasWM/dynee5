@@ -28,6 +28,7 @@
 #include "Flio_MNP4_Protocol.h"
 
 #include "Flio_Serial_Port.h"
+#include "Flio_Pipe.h"
 
 #include <FL/Fl.H>
 #include <FL/Fl_Group.H>
@@ -64,7 +65,8 @@ int Flio_Mnp4_Protocol::open(const char *port, int bps)
 	if (!stream_) {
 		Fl_Group *pg = Fl_Group::current();
 		Fl_Group::current(0L);
-		stream_ = new Flio_Serial_Port(this);
+//        stream_ = new Flio_Serial_Port(this);
+        stream_ = new Flio_Pipe(this);
 		Fl_Group::current(pg);
 	}
   return stream_->open(port, bps);

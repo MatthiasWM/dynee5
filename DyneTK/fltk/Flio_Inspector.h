@@ -36,6 +36,10 @@
  * common parts of the protocol between the NTK Inspector and
  * the Newton Toolbox.
  *
+ * \todo Einstein provides serial port emulation by sending data to
+ *      "/Users/matt/Library/Application Support/Einstein Emulator/ExtrSerPortSend"
+ *      and receiving data trough
+ *      "/Users/matt/Library/Application Support/Einstein Emulator/ExtrSerPortRecv"
  * \todo According to the docs, *all* communication starts with "newtntd xxxxyyyy"
  *     where xxx is the command fourcc and yyyy is the length of the command
  *     <b>which must be padded to multiples of four</b>!
@@ -44,7 +48,7 @@
  * \todo This class is still quite messy and should be separated
  *     into a Flio_Serializer and the Flio_Inspector. 
  * \todo It should not be derived from Flio_MNP4_Serial, but 
- * instead link to any block-oriented device.
+ *      instead link to any block-oriented device.
  * \todo 'fobj' - streamed object following
  * \todo 'eerr', execption error (a=??, b=size of text, 
  * \todo 'eref', a, b, text, c, fobj - execption error (a=??, b=size of text, 

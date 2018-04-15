@@ -28,94 +28,400 @@
 #pragma warning(disable : 4996)
 #endif
 
+#define DEBUG_SEND
+#define DEBUG_RECV
 
 #include "Flio_Pipe.h"
+#include "globals.h"
 
 #include <FL/Fl.H>
 #include <FL/fl_draw.H>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <string.h>
-#include <sys/stat.h>
+
+#ifdef WIN32
+# include <process.h>
+#else
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <sys/ioctl.h>
+# include <unistd.h>
+# include <termios.h>
+# include <fcntl.h>
+# include <ctype.h>
+# include <errno.h>
+#endif
 
 
 Flio_Pipe::Flio_Pipe(int X, int Y, int W, int H, const char *L)
-: Flio_Stream(X, Y, W, H, L),
-  is_client_(0),
-  send_fd_(-1),
-  recv_fd_(-1)
+: Flio_Stream(X, Y, W, H, L)
 {
+    NRing_ = 2048;
+    ring_ = (unsigned char *)malloc(NRing_);
 }
 
 
 Flio_Pipe::Flio_Pipe(Flio_Stream *super)
-: Flio_Stream(super),
-  is_client_(0),
-  send_fd_(-1),
-  recv_fd_(-1)
+: Flio_Stream(super)
 {
+    NRing_ = 2048;
+    ring_ = (unsigned char *)malloc(NRing_);
 }
 
 
 Flio_Pipe::~Flio_Pipe()
 {
-  close();
-}
-
-int Flio_Pipe::open(const char *port, int is_client)
-{
-  char c2s[128];
-  char s2c[128];
-
-  is_client_ = is_client;
-  sprintf(c2s, "%s_c2s", port);
-  sprintf(s2c, "%s_s2c", port);
- /* 
-  mknod(FIFO_FILE, S_IFIFO|0666, 0); 
-  // SIGPIPE sent, if sending, but no reader 
-  // then open with O_NONBLOCK set.
-  //   -- or --
-  send_fd_ = mkfifo(is_client?c2s:s2c, 0002);
-  recv_fd_ = mkfifo(is_client?s2c:c2s, 0004);
- */
-  if (send_fd_==-1 || recv_fd_==-1) {
     close();
-    return -1;
-  }
-  return 0;
+    if (ring_)
+        ::free(ring_);
+    if (portname_)
+        ::free(portname_);
 }
+
+
+int Flio_Pipe::open(const char *portname, int bps)
+{
+    close();
+    if (portname_) {
+        free(portname_);
+        portname_ = 0L;
+    }
+    ringHead_ = ringTail_ = 0;
+
+    if (!portname)
+        return -1;
+
+    portname_ = strdup(portname);
+
+#ifdef WIN32
+#if 0
+    port_ = CreateFile(portname, GENERIC_READ|GENERIC_WRITE,
+                       0, 0L, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, 0L );
+    if (port_ == INVALID_HANDLE_VALUE) {
+        return -1;
+    }
+    //SetupComm(port_, 2048, 2048);
+
+    DCB arg; arg.DCBlength = sizeof(DCB);
+    GetCommState(port_, &arg);
+    int speed;
+    switch (bps) {
+        case 9600: speed = CBR_9600; break;
+        case 19200: speed = CBR_19200; break;
+        case 38400: speed = CBR_38400; break;
+        default: return -1;
+    }
+    arg.BaudRate = speed;
+    arg.fBinary = TRUE;
+    arg.fParity = FALSE;
+    arg.fOutxCtsFlow = FALSE;
+    arg.fOutxDsrFlow = TRUE;
+    arg.fDtrControl = DTR_CONTROL_HANDSHAKE;
+    arg.fDsrSensitivity = TRUE;
+    arg.fRtsControl = RTS_CONTROL_DISABLE;
+    arg.fAbortOnError = FALSE;
+    arg.ByteSize = 8;
+    arg.Parity = NOPARITY;
+    arg.StopBits = ONESTOPBIT;
+    SetCommState( port_, &arg );
+
+    static COMMTIMEOUTS timeout = { MAXDWORD, 0, 0, 0, 0 };
+    SetCommTimeouts( port_, &timeout );
+    PurgeComm( port_, PURGE_TXCLEAR|PURGE_RXCLEAR );
+    ClearCommBreak(port_);
+    SetCommMask(port_, EV_RXCHAR);
+
+    //EscapeCommFunction(port_, CLRRTS);
+    //EscapeCommFunction(port_, SETDTR);
+
+    memset(&overlapped_, 0, sizeof(overlapped_));
+    event_ = CreateEvent(0, true, 0, 0);
+    overlapped_.hEvent = event_;
+
+    if (!thread_)
+        _beginthread(reader_thread_, 0, this);
+#endif
+#else
+    sendPort_ = ::open("/Users/matt/Library/Application Support/Einstein Emulator/ExtrSerPortRecv",
+                       O_WRONLY|O_NDELAY);
+    if (sendPort_==-1) {
+        perror("Can't open Einstein serial pipe for sending data:");
+        return -1;
+    }
+
+    recvPort_ = ::open("/Users/matt/Library/Application Support/Einstein Emulator/ExtrSerPortSend",
+                       O_RDONLY|O_NDELAY);
+    if (recvPort_==-1) {
+        perror("Can't open Einstein serial pipe for receiving data:");
+        return -1;
+    }
+    Fl::add_fd(recvPort_, FL_READ, reader_cb, this);
+#endif
+
+    rxActive_ = txActive_ = 0;
+    pRxActive_ = pTxActive_ = 0;
+    redraw();
+    Fl::add_timeout(0.2, lights_cb, this);
+
+#if (defined DEBUG_SEND) || (defined DEBUG_RCV)
+    printf("DEBUG: serial pipe \"%s\" at %dbps openend\n", portname, bps);
+#endif
+
+    return 0;
+}
+
+
+/**
+ * Manage blinking status lights.
+ *
+ * This function works by checking the state of the line very 1/10th
+ * of a second. If data was sent or received, the corresponding
+ * LED will be set to red for the next 1/10th of a second. If nothing
+ * was sent, it will be set to green.
+ *
+ * If the state has not changed, nothing is drawn!
+ */
+void Flio_Pipe::lights_cb(void *u)
+{
+    Flio_Pipe *This = (Flio_Pipe*)u;
+    if ((This->rxActive_!=This->pRxActive_) || (This->txActive_!=This->pTxActive_)) {
+        This->pTxActive_ = This->txActive_;
+        This->pRxActive_ = This->rxActive_;
+        This->redraw();
+    }
+    This->txActive_ = This->rxActive_ = 0;
+    Fl::repeat_timeout(0.1, lights_cb, This);
+}
+
 
 int Flio_Pipe::write(const unsigned char *data, int n)
 {
-	return -1;
+#ifdef DEBUG_SEND
+    printf("DEBUG: ---> writing %d bytes to serial port\n", n);
+    DebugDumpBuffer((uint8_t*)data, n);
+#endif
+
+    txActive_ = 1;
+#ifdef WIN32
+    DWORD result;
+    BOOL ret = WriteFile( port_, data, n, &result, &overlapped_ );
+    if (ret) {
+        return result;
+    } else {
+        return -1;
+    }
+#else
+    int ret = ::write(sendPort_, data, n);
+    return ret;
+#endif
 }
 
-int Flio_Pipe::available() 
+
+int Flio_Pipe::available()
 {
-	return -1;
+    int n = ringHead_ - ringTail_;
+    if (n<0)
+        n += NRing_;
+    return n;
 }
+
 
 int Flio_Pipe::read(unsigned char *dest, int n)
 {
-	return -1;
+    int nMax = available();
+    if (nMax==0)
+        return 0;
+    if (n>nMax)
+        n = nMax;
+    int n1 = available_to_end();
+    if (n1>=n) {
+        memcpy(dest, ring_+ringTail_, n);
+        ringTail_ += n;
+    } else {
+        memcpy(dest, ring_+ringTail_, n1);
+        memcpy(dest+n1, ring_, n-n1);
+        ringTail_ = n-n1;
+    }
+#ifdef DEBUG_RECV
+    printf("DEBUG: <<-- read %d bytes from serial port buffer\n", n);
+    DebugDumpBuffer(dest, n);
+#endif
+    return n;
 }
+
+
+int Flio_Pipe::available_to_end()
+{
+    if (ringHead_>=ringTail_) {
+        return ringHead_ - ringTail_;
+    } else {
+        return NRing_ - ringTail_;
+    }
+}
+
 
 void Flio_Pipe::close()
 {
-	/*
-  if (send_fd_!=-1)
-    ::close(send_fd_);
-  if (recv_fd_!=-1)
-    ::close(recv_fd_);
-  */
+    Fl::remove_timeout(lights_cb, this);
+#ifdef WIN32
+    if (port_ != INVALID_HANDLE_VALUE) {
+        CloseHandle(port_);
+        port_ = INVALID_HANDLE_VALUE;
+    }
+#else
+    if (sendPort_ != -1) {
+        ::close(sendPort_);
+        sendPort_ = -1;
+    }
+    if (recvPort_ != -1) {
+        Fl::remove_fd(recvPort_, FL_READ);
+        Fl::remove_fd(recvPort_);
+        ::close(recvPort_);
+        recvPort_ = -1;
+    }
+#endif
+    redraw();
 }
+
+
+int Flio_Pipe::free_to_end()
+{
+    if (ringHead_>=ringTail_) {
+        return NRing_ - ringHead_;
+    } else {
+        return ringTail_ - ringHead_ - 1;
+    }
+}
+
+#ifdef WIN32
+
+void Flio_Pipe::reader_thread()
+{
+    for(;;) {
+        DWORD nw;
+        DWORD mask;
+        WaitCommEvent(port_, &mask, &overlapped_);
+        WaitForSingleObject(event_, INFINITE);
+        // FIXME: what happens when we close the COM port?
+        // Will we ever leave the thread?
+        DWORD nc = 0, na;
+        for (;;) {
+            int n = free_to_end();
+            ReadFile(port_, ring_+ringHead_, n, &na, &overlapped_);
+            if (na==0)
+                break;
+            ringHead_ += na;
+            if (ringHead_ == NRing_)
+                ringHead_ = 0;
+            nc += na;
+        }
+        ResetEvent(event_);
+        if (nc) {
+            rxActive_ = 1;
+            Fl::awake(on_read_cb, this);
+        }
+    }
+}
+
+
+void Flio_Pipe::reader_thread_(void *u)
+{
+    Flio_Pipe *This = (Flio_Pipe*)u;
+    This->reader_thread();
+}
+
+#else
+
+void Flio_Pipe::reader_cb(int, void *u)
+{
+    Flio_Pipe *This = (Flio_Pipe*)u;
+    This->reader();
+}
+
+void Flio_Pipe::reader()
+{
+    int nc = 0;
+    for (;;) {
+        int n = free_to_end();
+        int na = ::read(recvPort_, ring_+ringHead_, n);
+        if (na<=0)
+            break;
+#ifdef DEBUG_RECV
+        else {
+            printf("DEBUG: <--- received %d bytes from serial port\n", na);
+            DebugDumpBuffer(ring_+ringHead_, na);
+        }
+#endif
+        ringHead_ += na;
+        if (ringHead_ == NRing_)
+            ringHead_ = 0;
+        nc += na;
+    }
+    if (nc) {
+        rxActive_ = 1;
+        on_read_cb(this);
+    }
+}
+
+#endif
+
+void Flio_Pipe::draw()
+{
+    Fl_Box::draw();
+    int r = (h()+2)/4, cx = x()+w()/2, cy = y()+h()/2;
+    Fl_Color rxd, txd;
+    if (is_open()) {
+        if (pRxActive_) rxd = FL_RED; else rxd = FL_GREEN;
+        if (pTxActive_) txd = FL_RED; else txd = FL_GREEN;
+    } else {
+        rxd = txd = color();
+    }
+    fl_draw_symbol("@circle", cx-2*r-2, cy-r, 2*r+1, 2*r+1, rxd);
+    fl_draw_symbol("@circle", cx+0*r+2, cy-r, 2*r+1, 2*r+1, txd);
+}
+
+
+int Flio_Pipe::on_read() {
+    if (super_)
+        return super_->on_read();
+    else
+        return 0;
+}
+
+
+int Flio_Pipe::on_read_() {
+    return on_read();
+}
+
+
+void Flio_Pipe::on_read_cb(void *u) {
+    Flio_Pipe *This = (Flio_Pipe*)u;
+    if (!This->on_read_() && This->callback()) {
+        This->do_callback();
+    }
+}
+
 
 int Flio_Pipe::is_open()
 {
-  return 0;
+#ifdef WIN32
+    return (port_!=INVALID_HANDLE_VALUE);
+#else
+    return (recvPort_!=-1);
+#endif
 }
+
+
+void Flio_Pipe::redraw()
+{
+    if (super_)
+        super_->redraw();
+    else
+        Flio_Stream::redraw();
+}
+
 
 //
 // End of "$Id$".

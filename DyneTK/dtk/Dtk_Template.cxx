@@ -117,7 +117,8 @@ int Dtk_Template::load(newtRef node)
     return -1;
   
   // set __ntObjectPointer to the address of this template
-  NewtObjSetSlot(NewtRefToPointer(node), NSSYM(__ntObjectPointer), NewtMakeInt32((uintptr_t)this));
+  //  NewtObjSetSlot(NewtRefToPointer(node), NSSYM(__ntObjectPointer), NewtMakePointer(this));
+    NewtObjSetSlot(NewtRefToPointer(node), NSSYM(__ntObjectPointer), NewtMakeInt32((uintptr_t)this));
 
   //NewtPrintObject(stdout, node);
 

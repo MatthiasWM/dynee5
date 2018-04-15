@@ -587,7 +587,7 @@
 		C0E91AC608A95435008D54AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -612,7 +612,7 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
-					"-lnewt32",
+					"-lnewt64",
 					"-liconv",
 					"-lfltk",
 					"-lfltk_images",
@@ -623,7 +623,7 @@
 				PRODUCT_NAME = DyneTK;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
-				VALID_ARCHS = i386;
+				VALID_ARCHS = "i386 x86_64";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -654,7 +654,7 @@
 				);
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
-					"-lnewt32",
+					"-lnewt64",
 					"-liconv",
 					"-lfltk",
 					"-lfltk_images",
@@ -665,7 +665,7 @@
 				PRODUCT_NAME = DyneTK;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
-				VALID_ARCHS = i386;
+				VALID_ARCHS = "i386 x86_64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
