@@ -294,7 +294,7 @@ char Flmp_Image_Target::load_image(const char *fn) {
 
 static char *dnd_filename(const char *fn) {
   static char *buf = 0L;
-  if (!fn) return "";
+  if (!fn) return (char*)"";
   if (buf) free(buf);
   if (strncmp(fn, "file://", 7)==0)
     fn += 7;

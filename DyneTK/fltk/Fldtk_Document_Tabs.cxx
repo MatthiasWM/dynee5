@@ -31,7 +31,7 @@
 #include "Fldtk_Editor.h"
 
 #include <FL/Fl.H>
-#include <FL/fl_draw.h>
+#include <FL/fl_draw.H>
 
 #include <stdio.h>
 #include <stdlib.h>

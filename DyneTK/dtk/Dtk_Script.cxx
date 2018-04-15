@@ -35,8 +35,8 @@
 #include "fluid/main_ui.h"
 #include "main.h"
 
-#include <FL/filename.h>
-#include <FL/fl_file_chooser.h>
+#include <FL/filename.H>
+#include <FL/Fl_File_Chooser.H>
 
 #include <stdio.h>
 #include <stdlib.h>

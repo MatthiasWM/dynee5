@@ -28,7 +28,7 @@
 #include <FL/x.H>
 #include <FL/Fl.H>
 #include <FL/Fl_Hold_Browser.H>
-#include <FL/fl_file_chooser.h>
+#include <FL/Fl_File_Chooser.H>
 
 #include "fluid/Fldtk_Prefs.h"
 #include "fluid/Fldtk_Proj_Settings.h"

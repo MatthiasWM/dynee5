@@ -35,7 +35,7 @@
 #include "globals.h"
 #include "allNewt.h"
 
-#include <FL/fl_ask.h>
+#include <FL/fl_ask.H>
 #include <FL/Fl_Menu_Item.H>
 
 #include <stdio.h>
@@ -599,7 +599,7 @@ int Dtk_Platform::findProto(const char *id)
       return -1;
     }
     if (strcasecmp(t, id)==0) {
-      return (int)mi->user_data();
+      return (int)(intptr_t)mi->user_data();
     }
   }
 }

@@ -587,6 +587,7 @@
 		C0E91AC608A95435008D54AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -607,11 +608,11 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					../../../newt0/build,
+					$HOME/lib,
 				);
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
-					"-lnewt",
+					"-lnewt32",
 					"-liconv",
 					"-lfltk",
 					"-lfltk_images",
@@ -622,6 +623,7 @@
 				PRODUCT_NAME = DyneTK;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				VALID_ARCHS = i386;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -630,10 +632,7 @@
 		C0E91AC708A95435008D54AB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					ppc,
-				);
+				ARCHS = i386;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -651,11 +650,11 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					../../../newt0/build,
+					$HOME/lib,
 				);
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
-					"-lnewt",
+					"-lnewt32",
 					"-liconv",
 					"-lfltk",
 					"-lfltk_images",
@@ -666,6 +665,7 @@
 				PRODUCT_NAME = DyneTK;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include;
+				VALID_ARCHS = i386;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

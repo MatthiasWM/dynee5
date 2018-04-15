@@ -35,7 +35,7 @@
 #include "globals.h"
 
 #include <FL/Fl.H>
-#include <FL/fl_draw.h>
+#include <FL/fl_draw.H>
 
 #include <stdlib.h>
 #include <stdio.h>

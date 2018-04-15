@@ -34,8 +34,8 @@
 
 /*---------------------------------------------------------------------------*/
 
-static char *widthStr = " Width: %d";
-static char *heightStr = "Height: %d";
+static const char *widthStr = " Width: %d";
+static const char *heightStr = "Height: %d";
 
 
 /*---------------------------------------------------------------------------*/

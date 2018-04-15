@@ -37,7 +37,7 @@
 #include "fluid/main_ui.h"
 #include "main.h"
 
-#include <FL/filename.h>
+#include <FL/filename.H>
 #include "fltk/Flmm_Message.H"
 #include "fluid/Fldtk_Proj_Settings.h"
 

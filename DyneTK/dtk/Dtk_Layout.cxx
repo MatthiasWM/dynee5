@@ -44,8 +44,8 @@
 #include "flnt/Flnt_Widget.h"
 #include "main.h"
 
-#include <FL/filename.h>
-#include <FL/fl_file_chooser.h>
+#include <FL/filename.H>
+#include <FL/Fl_File_Chooser.H>
 #include <FL/Fl_Hold_Browser.H>
 
 #include <stdio.h>

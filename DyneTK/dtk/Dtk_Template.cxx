@@ -117,7 +117,7 @@ int Dtk_Template::load(newtRef node)
     return -1;
   
   // set __ntObjectPointer to the address of this template
-  NewtObjSetSlot(NewtRefToPointer(node), NSSYM(__ntObjectPointer), NewtMakeInt32((uint32_t)this));
+  NewtObjSetSlot(NewtRefToPointer(node), NSSYM(__ntObjectPointer), NewtMakeInt32((uintptr_t)this));
 
   //NewtPrintObject(stdout, node);
 
@@ -325,7 +325,7 @@ const char *Dtk_Template::browserName()
     return browserName_;
   
   char *name = ntName_;
-  char *id = ntId_;
+  const char *id = ntId_;
   if (!id ||!*id)
     id = "-unknown-";
   

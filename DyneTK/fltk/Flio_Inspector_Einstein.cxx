@@ -36,7 +36,7 @@
 
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Image.H>
-#include <FL/filename.h>
+#include <FL/filename.H>
 
 #ifndef WIN32
 # define Sleep(a) sleep((a)/1000)
