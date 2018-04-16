@@ -99,7 +99,10 @@ int Flio_Inspector::sendScript(const char *script)
 		send_data_block((unsigned char*)"newt", 4);
 		send_data_block((unsigned char*)"ntp ", 4);
 		send_data_block((unsigned char*)"lscb", 4);
-		unsigned char b1[] = { size>>24, size>>16, size>>8, size };
+		unsigned char b1[] = { static_cast<unsigned char>(size>>24),
+            static_cast<unsigned char>(size>>16),
+            static_cast<unsigned char>(size>>8),
+            static_cast<unsigned char>(size) };
 		send_data_block(b1, 4);
 		send_data_block((unsigned char*)data, size);
 	}

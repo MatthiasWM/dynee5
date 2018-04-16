@@ -28,6 +28,8 @@
 
 #include "Flio_Inspector.h"
 
+#include <CoreServices/CoreServices.h>
+
 
 /**
  * Handle a subste of the Inspector protocol when dealing with Einsten.

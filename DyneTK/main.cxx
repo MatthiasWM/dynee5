@@ -29,6 +29,7 @@
 #include <FL/Fl_Tooltip.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_XPM_Image.H>
+#include <FL/Fl_Shared_Image.H>
 #include <FL/filename.H>
 
 #include "fltk/Flio_Serial_Port.h"

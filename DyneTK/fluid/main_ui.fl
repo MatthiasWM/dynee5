@@ -1,7 +1,7 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
-use_FL_COMMAND 
-header_name {.h} 
+version 1.0400
+use_FL_COMMAND
+header_name {.h}
 code_name {.cxx}
 comment {//
 // DyneTK, The Dyne Toolkit
@@ -22,36 +22,37 @@ comment {//
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //
 } {in_source in_header
-} 
+}
 
-decl {\#include "fltk/Flio_Inspector.h"} {public
-} 
+decl {\#include "fltk/Flio_Inspector.h"} {public local
+}
 
-decl {\#include "fltk/Flmm_Console.h"} {public
-} 
+decl {\#include "fltk/Flmm_Console.h"} {public local
+}
 
-decl {\#include "fluid/Fldtk_Inspector.h"} {public
-} 
+decl {\#include "fluid/Fldtk_Inspector.h"} {public local
+}
 
-decl {\#include "fltk/Fldtk_Document_Tabs.h"} {public
-} 
+decl {\#include "fltk/Fldtk_Document_Tabs.h"} {public local
+}
 
-decl {\#include "fltk/Fldtk_Document_Browser.h"} {public
-} 
+decl {\#include "fltk/Fldtk_Document_Browser.h"} {public local
+}
 
-decl {\#include "dtk/Dtk_Platform.h"} {} 
+decl {\#include "dtk/Dtk_Platform.h"} {private local
+}
 
-decl {\#include <FL/fl_ask.h>} {public
-} 
+decl {\#include <FL/fl_ask.h>} {public local
+}
 
-decl {\#include "main.h"} {public
-} 
+decl {\#include "main.h"} {public local
+}
 
-decl {\#include <FL/Fl_Help_Dialog.H>} {public
-} 
+decl {\#include <FL/Fl_Help_Dialog.H>} {public local
+}
 
-decl {Fl_Help_Dialog *wReleaseNotes;} {public
-} 
+decl {Fl_Help_Dialog *wReleaseNotes;} {public local
+}
 
 widget_class Fldtk_Main_Window {
   label {Dyne Toolkit 2.0} open
@@ -528,9 +529,17 @@ wReleaseNotes->show();}
       }
       MenuItem mHelpAbout {
         label {About Dyne Toolkit...}
-        callback {if (!wAboutDialog) 
+        callback {if (!wAboutDialog) {
+  char buf[80];
+  snprintf(buf, 80, "FLTK V%d.%d.%d (%d)", 
+    FL_MAJOR_VERSION,
+    FL_MINOR_VERSION,
+    FL_PATCH_VERSION,
+    Fl::api_version());
   create_about_dialog();
-wAboutDialog->show();}
+  wFLTKVersion->copy_label(buf);
+}
+wAboutDialog->show();} selected
         xywh {5 5 100 20} labelsize 12
       }
     }
@@ -605,7 +614,7 @@ wAboutDialog->show();}
       tooltip {Help Index} image {../images/help.png} deimage {../images/help_da.png} xywh {530 30 25 25} labelfont 1 labelsize 13 deactivate
     }
     Fl_Input {} {
-      callback {NewtAlert(atoi(o->value()));} selected
+      callback {NewtAlert(atoi(o->value()));}
       tooltip {Enter an error code here to get the error message.} image {../images/bug.png} deimage {../images/bug_da.png} xywh {585 31 50 23} type Int labelsize 11 textsize 12
     }
     Fl_Box {} {
@@ -879,7 +888,7 @@ if ( (mask & 0x00000080) == 0x00000080 ) {
   mBrowserRenameSlot->deactivate();
 }} {}
   }
-} 
+}
 
 Function {create_connect_dialog()} {open
 } {
@@ -897,16 +906,16 @@ Function {create_connect_dialog()} {open
       xywh {72 81 80 20} labelsize 12 hotspot
     }
   }
-} 
+}
 
 Function {create_about_dialog()} {open
 } {
   Fl_Window wAboutDialog {
     label {About DyneTK} open
-    xywh {390 374 326 299} type Double modal visible
+    xywh {390 374 326 306} type Double modal visible
   } {
     Fl_Group {} {open
-      xywh {5 5 315 260} box THIN_DOWN_BOX
+      xywh {5 5 315 261} box THIN_DOWN_BOX
     } {
       Fl_Box {} {
         label {Dyne Toolkit}
@@ -914,7 +923,7 @@ Function {create_about_dialog()} {open
       }
       Fl_Box {} {
         label {Version 1.7.3}
-        xywh {215 80 100 20} labelfont 1 labelsize 13 align 24
+        xywh {10 80 150 20} labelfont 1 labelsize 13 align 20
       }
       Fl_Box {} {
         label {DyneTK (c) 2007, 2008 Matthias Melcher. DyneTK is licensed under GPL. Please visit http://code.google.com/p/dynee5/ for more information.
@@ -925,19 +934,23 @@ DyneTK is based on the following GPL and LGPL licensed software:
  - libz, libpng, libjpeg
 
 Newton never dies, it just gets new tools.}
-        xywh {10 100 305 160} labelsize 11 align 148
+        xywh {10 100 305 156} labelsize 11 align 148
+      }
+      Fl_Box wFLTKVersion {
+        label {FLTK 1.3.0}
+        xywh {161 80 154 20} labelfont 1 labelsize 13 align 24
       }
     }
     Fl_Button {} {
       label Close
       callback {wAboutDialog->hide();}
-      xywh {250 270 70 20} labelsize 12
+      xywh {250 276 70 20} labelsize 12
     }
   }
-} 
+}
 
 comment {
 //
 // Copyright (C) 2007 Matthias Melcher
 //} {in_source in_header
-} 
+}

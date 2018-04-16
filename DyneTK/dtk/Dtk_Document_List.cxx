@@ -51,6 +51,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "allNewt.h"
 
@@ -162,12 +163,12 @@ Dtk_Document *Dtk_Document_List::add(const char *filename)
 /*---------------------------------------------------------------------------*/
 char *Dtk_Document_List::findFile(const char *filename)
 {
-	if (access(filename, 0004)==0) // R_OK
+    if (::access(filename, 0004)==0) // R_OK
 		return strdup(filename);
 	const char *name = fl_filename_name(filename);
 	char buf[FL_PATH_MAX];
 	fl_filename_absolute(buf, FL_PATH_MAX, name);
-	if (access(buf, 0004)==0) // R_OK
+    if (::access(buf, 0004)==0) // R_OK
 		return strdup(buf);
 	const char *user = fl_file_chooser("File not found, please search manually", 0, buf);
 	if (!user)

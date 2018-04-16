@@ -63,6 +63,7 @@
 
 #ifndef WIN32
 # define Sleep(a) sleep((a)/1000)
+# include <Carbon/Carbon.h>
 # include <arpa/inet.h>
 # include <sys/types.h>
 # include <sys/stat.h>

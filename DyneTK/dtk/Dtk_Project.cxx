@@ -46,6 +46,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 #include <sys/stat.h>
 #ifdef WIN32
 # include <winsock2.h>
@@ -673,10 +674,10 @@ void Dtk_Project::pushDir()
 		startdir_ = 0L;
 	}
   
-	const char *here = getcwd(currPath, FL_PATH_MAX);
+    const char *here = ::getcwd(currPath, FL_PATH_MAX);
 	if (here) {
 		startdir_ = strdup(here);
-		chdir(projPath);
+        ::chdir(projPath);
 	}
 } 
 
@@ -684,7 +685,7 @@ void Dtk_Project::pushDir()
 void Dtk_Project::popDir()
 {
 	if (startdir_) {
-		chdir(startdir_);
+        ::chdir(startdir_);
 	}
 }
 
@@ -804,7 +805,7 @@ int Dtk_Project::save()
 		NSSYM(copyright),			      NewtMakeString(dtkProjSettings->package->copyright->get(), true),
 		NSSYM(optimizeSpeed),		    kNewtRefTRUE,
 		NSSYM(copyProtected),		    kNewtRefNIL,
-		NSSYM(deleteOnDownload),	  dtkProjSettings->package->deleteOnDownload->get() ? kNewtRefTRUE : kNewtRefNIL,
+        NSSYM(deleteOnDownload),	  static_cast<newtRefVar>(dtkProjSettings->package->deleteOnDownload->get() ? kNewtRefTRUE : kNewtRefNIL),
 		NSSYM(dispatchOnly),		    kNewtRefNIL,
 		NSSYM(fourByteAlignment),	  kNewtRefTRUE,
 		NSSYM(zippyCompression),	  kNewtRefTRUE,
@@ -843,7 +844,7 @@ int Dtk_Project::save()
 		NSSYM(applicationSymbol),	  NewtMakeString(dtkProjSettings->app->symbol->get(), false),
 		NSSYM(partType),			      NewtMakeInt30(0),
 		NSSYM(topFrameExpression),	NewtMakeString("", false),
-		NSSYM(autoClose),			      dtkProjSettings->app->symbol->get() ? kNewtRefTRUE : kNewtRefNIL,
+        NSSYM(autoClose),			      static_cast<newtRefVar>(dtkProjSettings->app->symbol->get() ? kNewtRefTRUE : kNewtRefNIL),
 		NSSYM(customPartType),		  NewtMakeString("UNKN", false),
 		NSSYM(fasterSoups),			    kNewtRefNIL,
 		NSSYM(iconProNormal),		    iconProNormal,

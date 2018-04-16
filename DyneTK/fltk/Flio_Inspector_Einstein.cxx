@@ -42,6 +42,7 @@
 # define Sleep(a) sleep((a)/1000)
 //# define Sleep(a) usleep((a)*1000)
 # include <unistd.h>
+# include <Carbon/Carbon.h>
 #else
 # include <windows.h>
 #endif
